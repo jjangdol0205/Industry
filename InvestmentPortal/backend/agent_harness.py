@@ -33,6 +33,16 @@ def initialize_agents(db: Session):
             type="orchestrator"
         )
         db.add(orchestrator)
+
+    # Check Site Manager Agent
+    manager = db.query(models.Agent).filter(models.Agent.type == "management").first()
+    if not manager:
+        manager = models.Agent(
+            name="Site Manager Agent",
+            role="전반적인 홈페이지 관리, 깃허브 메인 브랜치 동기화 및 Render 클라우드 배포 모니터링 총괄",
+            type="management"
+        )
+        db.add(manager)
         
     # Check Industry Agents
     reports = db.query(models.IndustryReport).all()
@@ -98,6 +108,12 @@ def run_agent_simulation(db: Session):
         )
         db.add(msg)
         db.commit()
+
+    # Step 0: Site Manager Agent reports site status
+    manager_agent = db.query(models.Agent).filter(models.Agent.type == "management").first()
+    if manager_agent:
+        log_msg(manager_agent.name, "management", "Self", "홈페이지 시스템 리소스 점검 완료: 깃허브 저장소(main) 및 Render 클라우드 배포 상태 양호. 모든 API 서비스 정상 가동 중.", "thought")
+        log_msg(manager_agent.name, "management", "Alpha Orchestrator", "보고드립니다. 홈페이지 관리(깃허브 커밋/Render 배포 포함) 및 서버 리소스 모니터링이 최적화되었습니다. 리서치 시뮬레이션을 시작하셔도 좋습니다.", "message")
 
     # Step 1: Orchestrator Initiates Analysis
     log_msg("System", "system", "Alpha Orchestrator", "시뮬레이션 분석 명령을 받았습니다. 하네스를 가동합니다.", "message")
