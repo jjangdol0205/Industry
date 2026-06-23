@@ -3,6 +3,7 @@ uvicorn
 yfinance
 pandas
 google-genai
+google-generativeai
 pdfplumber
 sqlalchemy
 pydantic
