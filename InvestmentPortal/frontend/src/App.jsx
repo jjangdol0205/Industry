@@ -13,7 +13,10 @@ import {
 } from 'lucide-react';
 import './index.css';
 
-const API_BASE = 'http://localhost:8000/api';
+const BACKEND_HOST = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:8000'
+  : '';
+const API_BASE = `${BACKEND_HOST}/api`;
 
 // ── 포맷 유틸 ──────────────────────────────────────────
 const fB  = (n) => n == null ? '-' : `$${(n/1e9).toFixed(2)}B`;          // 십억 달러
@@ -223,16 +226,16 @@ function PdfLibraryView() {
                 {cat.files.map(file => (
                   <div
                     key={file.filename}
-                    onClick={() => setActivePdf({ name: file.name, url: `http://localhost:8000${file.url}` })}
+                    onClick={() => setActivePdf({ name: file.name, url: `${BACKEND_HOST}${file.url}` })}
                     style={{
                       display:'flex', alignItems:'center', gap:'8px',
                       padding:'9px 12px', borderRadius:'8px', cursor:'pointer',
                       marginBottom:'4px', fontSize:'0.88rem',
-                      background: activePdf?.url === `http://localhost:8000${file.url}`
+                      background: activePdf?.url === `${BACKEND_HOST}${file.url}`
                         ? 'rgba(99,102,241,0.18)' : 'transparent',
-                      color: activePdf?.url === `http://localhost:8000${file.url}`
+                      color: activePdf?.url === `${BACKEND_HOST}${file.url}`
                         ? 'var(--accent-blue)' : 'var(--text-primary)',
-                      borderLeft: activePdf?.url === `http://localhost:8000${file.url}`
+                      borderLeft: activePdf?.url === `${BACKEND_HOST}${file.url}`
                         ? '3px solid var(--accent-blue)' : '3px solid transparent',
                       transition: 'all 0.15s',
                     }}
