@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+yfinance
+pandas
+google-genai
+pdfplumber
+sqlalchemy
+pydantic
+python-multipart
