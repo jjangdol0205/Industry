@@ -513,6 +513,11 @@ body {
   background: rgba(57, 255, 20, 0.03);
 }
 
+.manager-node {
+  border-color: rgba(0, 242, 254, 0.3);
+  background: rgba(0, 242, 254, 0.04);
+}
+
 .ind-node {
   border-color: rgba(59, 130, 246, 0.2);
   background: rgba(59, 130, 246, 0.03);

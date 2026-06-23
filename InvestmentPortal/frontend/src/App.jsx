@@ -1108,12 +1108,14 @@ function AgentWorkspace() {
     if (isThought) return '#888888';
     if (sender === 'System') return '#00f2fe';
     if (type === 'orchestrator') return '#39ff14';
+    if (type === 'management') return '#00f2fe';
     if (type === 'industry') return '#00bfff';
     if (type === 'company') return '#bd93f9';
     return 'var(--text-primary)';
   };
 
   const orchestrator = agents.find(a => a.type === 'orchestrator');
+  const manager = agents.find(a => a.type === 'management');
   const industryAgents = agents.filter(a => a.type === 'industry');
   const companyAgents = agents.filter(a => a.type === 'company');
 
@@ -1138,15 +1140,22 @@ function AgentWorkspace() {
             <Activity size={20} /> 오케스트레이션 구성망 (Agent Tree)
           </h3>
           <div className="agent-tree">
-            {orchestrator && (
-              <div className="tree-level text-center">
+            <div className="tree-level row-layout wrap-layout" style={{ justifyContent: 'center', gap: '24px' }}>
+              {orchestrator && (
                 <div className={`agent-node orch-node ${activeAgentName===orchestrator.name?'active-glow':''}`}>
                   <div className="node-role">Orchestrator</div>
                   <div className="node-name">{orchestrator.name}</div>
                   <div className="node-desc" style={{ fontSize:'0.75rem', opacity:0.8 }}>{orchestrator.role}</div>
                 </div>
-              </div>
-            )}
+              )}
+              {manager && (
+                <div className={`agent-node manager-node ${activeAgentName===manager.name?'active-glow':''}`}>
+                  <div className="node-role">Site Manager</div>
+                  <div className="node-name">{manager.name}</div>
+                  <div className="node-desc" style={{ fontSize:'0.75rem', opacity:0.8 }}>{manager.role}</div>
+                </div>
+              )}
+            </div>
             <div className="tree-divider"></div>
             <div className="tree-level row-layout">
               {industryAgents.map(a => (
