@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrendPulse AI - 글로벌 무료 산업보고서 수집 & AI 분석 대시보드</title>
+    <meta name="description" content="글로벌 주요 싱크탱크와 연구기관의 무료 산업 보고서를 수집하고, 로컬 고성능 NLP 알고리즘 및 Gemini AI를 통해 핵심 비즈니스 인사이트를 도출하는 대시보드입니다.">
+    
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for Data Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 1. 사이드바 내비게이션 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-chart-line-up"></i>
+                    <span class="logo-glow"></span>
+                </div>
+                <h1 class="logo-text">TrendPulse <span class="accent-text">AI</span></h1>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <a href="#" class="menu-item active" data-target="view-dashboard" id="nav-dashboard">
+                    <i class="fa-solid fa-grip-vertical"></i>
+                    <span>인사이트 대시보드</span>
+                </a>
+                <a href="#" class="menu-item" data-target="view-crawler" id="nav-crawler">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>보고서 실시간 수집</span>
+                </a>
+                <a href="#" class="menu-item" data-target="view-analyzer" id="nav-analyzer">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>AI 보고서 분석기</span>
+                </a>
+                <a href="#" class="menu-item" data-target="view-comparer" id="nav-comparer">
+                    <i class="fa-solid fa-arrows-left-right-to-line"></i>
+                    <span>글로벌 리포트 비교</span>
+                </a>
+                <a href="#" class="menu-item" data-target="view-settings" id="nav-settings">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>대시보드 설정</span>
+                </a>
+            </nav>
+
+            <div class="api-status-card">
+                <div class="api-indicator offline" id="sidebar-api-indicator"></div>
+                <div class="api-info">
+                    <p class="api-title">Gemini API 연동</p>
+                    <p class="api-desc" id="sidebar-api-text">로컬 분석 모드 (무료)</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 2. 메인 콘텐츠 에어리어 -->
+        <main class="main-content">
+            <!-- 탑 헤더 -->
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="사이드바 토글">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="search-bar-container">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="global-search" placeholder="어떤 산업 트렌드나 보고서 키워드를 찾으시나요?" autocomplete="off">
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="current-time">
+                        <i class="fa-regular fa-clock"></i>
+                        <span id="live-clock">2026-05-27 13:00</span>
+                    </div>
+                    <div class="profile-avatar">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 뷰 [1]: 인사이트 대시보드 -->
+            <section class="content-view active" id="view-dashboard">
+                <!-- 히어로 배너 -->
+                <div class="hero-banner">
+                    <div class="hero-content">
+                        <h2>글로벌 무료 산업보고서 통합 탐색 플랫폼</h2>
+                        <p>기관 요약 요금 부담 없이, 로컬 TextRank 문장 정밀화 분석 및 Gemini 고도화 번역 체인으로 시장 예측과 비즈니스 시사점을 한번에 도출하세요.</p>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="visual-glow-sphere"></div>
+                    </div>
+                </div>
+
+                <!-- 통계 지표 카드 목록 -->
+                <div class="stats-grid">
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon neon-cyan">
+                            <i class="fa-solid fa-file-invoice"></i>
+                        </div>
+                        <div class="stat-data">
+                            <h3 class="stat-label">탑재된 보고서</h3>
+                            <p class="stat-value" id="stats-total-reports">8 개</p>
+                        </div>
+                        <span class="card-glow"></span>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon neon-purple">
+                            <i class="fa-solid fa-arrows-spin"></i>
+                        </div>
+                        <div class="stat-data">
+                            <h3 class="stat-label">로컬 분석 완료</h3>
+                            <p class="stat-value" id="stats-local-reports">0 개</p>
+                        </div>
+                        <span class="card-glow"></span>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon neon-gold">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div class="stat-data">
+                            <h3 class="stat-label">AI 요약 완료</h3>
+                            <p class="stat-value" id="stats-ai-reports">8 개</p>
+                        </div>
+                        <span class="card-glow"></span>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon neon-red">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <div class="stat-data">
+                            <h3 class="stat-label">API 캐시 상태</h3>
+                            <p class="stat-value" id="stats-cache-size">0.0 KB</p>
+                        </div>
+                        <span class="card-glow"></span>
+                    </div>
+                </div>
+
+                <!-- 다차원 필터링 및 탭 제어 -->
+                <div class="filter-controls">
+                    <div class="region-tabs" id="region-filter-tabs">
+                        <button class="region-tab active" data-region="all"><i class="fa-solid fa-earth-americas"></i> 글로벌 전체</button>
+                        <button class="region-tab" data-region="kr">🇰🇷 대한민국</button>
+                        <button class="region-tab" data-region="us">🇺🇸 미국/글로벌</button>
+                        <button class="region-tab" data-region="eu">🇪🇺 유럽 연합</button>
+                        <button class="region-tab" data-region="cn">🇨🇳 중국</button>
+                        <button class="region-tab" data-region="jp">🇯🇵 일본</button>
+                    </div>
+
+                    <div class="select-wrapper">
+                        <select id="industry-filter" class="styled-select" aria-label="산업군 분류">
+                            <option value="all">⚡ 모든 산업군 분류</option>
+                            <option value="인공지능 & IT">인공지능 & IT</option>
+                            <option value="반도체 & HBM">반도체 & HBM</option>
+                            <option value="미래 모빌리티">미래 모빌리티</option>
+                            <option value="친환경 & ESG">친환경 & ESG</option>
+                            <option value="거시 경제">거시 경제</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 메인 보고서 카드 그리드 -->
+                <div class="reports-grid" id="reports-grid">
+                    <!-- JavaScript로 동적 렌더링 -->
+                    <div class="loading-spinner-container">
+                        <div class="spinner"></div>
+                        <p>글로벌 보고서 목록을 로딩 중입니다...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 뷰 [2]: 보고서 실시간 수집 -->
+            <section class="content-view" id="view-crawler">
+                <div class="view-header">
+                    <h2><i class="fa-solid fa-rss glow-icon-cyan"></i> 실시간 글로벌 무료 보고서 탐색</h2>
+                    <p>국내외 공공 연구기관(SPRI, KIEP, KOTRA)의 RSS 피드와 글로벌 컨설팅 펌의 퍼블릭 아카이브 채널을 한데 모아 즉시 발견 및 가치 분석을 연계합니다.</p>
+                </div>
+
+                <div class="crawler-control-panel glass-panel">
+                    <div class="control-left">
+                        <h3>자동 수집 파이프라인 가동</h3>
+                        <p>수집 단추 클릭 시 실시간으로 RSS 엔드포인트 패킷을 조회하여 최신 배포 리포트를 감지합니다.</p>
+                    </div>
+                    <button class="btn btn-primary" id="btn-run-crawl">
+                        <i class="fa-solid fa-magnifying-glass-arrow-right"></i> 무료 보고서 감지 실행
+                    </button>
+                </div>
+
+                <div class="crawler-list-container glass-panel">
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead>
+                                <tr>
+                                    <th>발행 기관</th>
+                                    <th>국가/지역</th>
+                                    <th>보고서 제목</th>
+                                    <th>배포 일자</th>
+                                    <th>액션</th>
+                                </tr>
+                            </thead>
+                            <tbody id="crawler-results-table">
+                                <tr>
+                                    <td colspan="5" class="text-center py-4">보고서 감지 버튼을 누르시면 최신 RSS 피드가 로드됩니다.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 뷰 [3]: AI 보고서 분석기 -->
+            <section class="content-view" id="view-analyzer">
+                <div class="view-header">
+                    <h2><i class="fa-solid fa-wand-magic-sparkles glow-icon-purple"></i> 무비용 고성능 AI 보고서 분석기</h2>
+                    <p>PDF 파일을 업로드하시면 로컬 TextRank 요약 엔진과 수치/통계 Regex 스캐너가 API 소모 없이 즉각 1차 핵심 요약을 완료합니다.</p>
+                </div>
+
+                <div class="analyzer-grid">
+                    <!-- 드래그앤드롭 업로드 존 -->
+                    <div class="upload-section glass-panel">
+                        <div class="drop-zone" id="pdf-drop-zone">
+                            <div class="drop-zone-content">
+                                <i class="fa-solid fa-file-pdf pdf-upload-icon"></i>
+                                <h3>산업 분석 보고서 PDF 올리기</h3>
+                                <p>파일을 이 영역으로 끌어다 놓거나 클릭하여 탐색기 열기</p>
+                                <span class="upload-hint">오직 PDF 파일만 허용됩니다. (최대 30MB)</span>
+                            </div>
+                            <input type="file" id="pdf-file-input" accept="application/pdf" style="display: none;">
+                        </div>
+
+                        <!-- URL 분석기 바 -->
+                        <div class="url-input-container">
+                            <span class="divider-text">OR</span>
+                            <div class="url-box">
+                                <input type="url" id="report-url-input" placeholder="온라인 공개 리포트 URL 주소를 입력하세요">
+                                <button class="btn btn-secondary" id="btn-analyze-url">웹리포트 수집</button>
+                            </div>
+                        </div>
+
+                        <!-- 실시간 AI 검색 리포트 생성기 -->
+                        <div class="search-analyst-container">
+                            <span class="divider-text">OR</span>
+                            <div class="search-analyst-title">
+                                <h3><i class="fa-solid fa-circle-nodes icon-purple"></i> 실시간 AI 검색 리포트 생성기</h3>
+                                <p>인터넷의 최신 트렌드를 실시간 수집하여, Gemini 2.5 Flash가 시장 규모 차트와 메가트렌드를 담은 보고서를 동적으로 합성합니다.</p>
+                            </div>
+                            <div class="search-analyst-box">
+                                <input type="text" id="ai-search-query-input" placeholder="예: 2026년 글로벌 AI 가속기 시장 규모 전망, HBM4 로드맵">
+                                <button class="btn btn-ai-sparkle" id="btn-run-ai-search">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> AI 실시간 보고서 생성
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 분석 모니터 및 진행률 화면 -->
+                    <div class="analysis-status-panel glass-panel" id="analysis-status-panel">
+                        <div class="status-empty" id="status-empty-state">
+                            <i class="fa-solid fa-chart-simple-horizontal"></i>
+                            <h3>분석 대기 중</h3>
+                            <p>보고서 파일 또는 URL을 제출해 주시면 로컬 NLP 파싱 단계가 여기 표시됩니다.</p>
+                        </div>
+
+                        <div class="status-running" id="status-running-state" style="display: none;">
+                            <div class="spinner-large"></div>
+                            <h3 id="running-step-title">로컬 텍스트 무손실 분할 중...</h3>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" id="status-progress-fill"></div>
+                            </div>
+                            <div class="running-log" id="running-log-box">
+                                <p>[SYSTEM] 대기열 배정 완료...</p>
+                            </div>
+                        </div>
+
+                        <div class="status-success" id="status-success-state" style="display: none;">
+                            <div class="success-icon-badge">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <h3>보고서 분석 성공!</h3>
+                            <p>로컬 TextRank 요약 정보와 데이터 차트 조립이 성공했습니다.</p>
+                            <div class="success-details-box">
+                                <p><strong>추출 단어 수:</strong> <span id="success-word-count">0</span> words</p>
+                                <p><strong>도출 핵심 문장:</strong> 5 sentences (TextRank 완료)</p>
+                                <p><strong>추출 통계 수치:</strong> CAGR 및 연도별 예측 데이터 매핑 완료</p>
+                            </div>
+                            <button class="btn btn-primary w-full" id="btn-view-analyzed-report">
+                                <i class="fa-solid fa-expand"></i> 대시보드 카드 및 상세 리포트 보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 뷰 [4]: 글로벌 리포트 비교 -->
+            <section class="content-view" id="view-comparer">
+                <div class="view-header">
+                    <h2><i class="fa-solid fa-arrows-left-right-to-line glow-icon-gold"></i> 글로벌 리포트 크로스 비교 분석 콘솔</h2>
+                    <p>두 개의 보고서(예: 국내 IITP 전망 vs 글로벌 맥킨지 리포트)를 선택하여 상호 보완성 및 아젠다 차이를 논리적으로 대조 비교합니다.</p>
+                </div>
+
+                <div class="comparer-selector-grid">
+                    <!-- 리포트 A 선택 -->
+                    <div class="comparer-selector-box glass-panel">
+                        <div class="badge-role">REPORT A</div>
+                        <label for="compare-select-a">첫 번째 보고서 선택</label>
+                        <select id="compare-select-a" class="styled-select">
+                            <option value="">-- 보고서를 골라주세요 --</option>
+                        </select>
+                    </div>
+
+                    <!-- 리포트 B 선택 -->
+                    <div class="comparer-selector-box glass-panel">
+                        <div class="badge-role badge-role-purple">REPORT B</div>
+                        <label for="compare-select-b">두 번째 보고서 선택</label>
+                        <select id="compare-select-b" class="styled-select">
+                            <option value="">-- 보고서를 골라주세요 --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="comparer-action-bar">
+                    <button class="btn btn-gold" id="btn-run-comparison">
+                        <i class="fa-solid fa-rotate"></i> 두 보고서 크로스 분석 가동
+                    </button>
+                </div>
+
+                <!-- 비교 결과 리포트 패널 -->
+                <div class="comparison-result-panel" id="comparison-result-panel" style="display: none;">
+                    <div class="comparison-header glass-panel">
+                        <h3><i class="fa-solid fa-scale-balanced text-gold"></i> 크로스 오피니언 대조 결과</h3>
+                        <div class="compare-titles">
+                            <span class="title-a" id="compare-title-a-label">Report A</span>
+                            <span class="vs-badge">VS</span>
+                            <span class="title-b" id="compare-title-b-label">Report B</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-cards-grid">
+                        <!-- 타겟 분석 영역 대조 -->
+                        <div class="comparison-card glass-panel">
+                            <h4><i class="fa-solid fa-bullseye icon-cyan"></i> 분석 초점 및 커버리지 차이</h4>
+                            <div class="compare-split">
+                                <div class="split-side-a" id="compare-focus-a">Report A의 관점</div>
+                                <div class="split-side-b" id="compare-focus-b">Report B의 관점</div>
+                            </div>
+                        </div>
+
+                        <!-- 3대 트렌드 대조 -->
+                        <div class="comparison-card glass-panel">
+                            <h4><i class="fa-solid fa-fire-flame-curved icon-purple"></i> 핵심 아젠다 / 트렌드 차이</h4>
+                            <div class="compare-split">
+                                <div class="split-side-a" id="compare-trend-a">Report A 핵심 메가트렌드</div>
+                                <div class="split-side-b" id="compare-trend-b">Report B 핵심 메가트렌드</div>
+                            </div>
+                        </div>
+
+                        <!-- 권고사항 대조 -->
+                        <div class="comparison-card glass-panel">
+                            <h4><i class="fa-solid fa-lightbulb icon-gold"></i> 상호 시너지를 고려한 권장 비즈니스 액션</h4>
+                            <div class="compare-split">
+                                <div class="split-side-a" id="compare-imp-a">Report A 대응 제안</div>
+                                <div class="split-side-b" id="compare-imp-b">Report B 대응 제안</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 뷰 [5]: 대시보드 설정 -->
+            <section class="content-view" id="view-settings">
+                <div class="view-header">
+                    <h2><i class="fa-solid fa-gear glow-icon-red"></i> 대시보드 전역 설정</h2>
+                    <p>Gemini API 키를 안전하게 등록하여 고차원 AI 번역 분석 팩을 가동하거나 대시보드 작동 상태를 점검합니다.</p>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="settings-main-card glass-panel">
+                        <h3><i class="fa-solid fa-key"></i> Google Gemini API 키 설정</h3>
+                        <p class="settings-description">
+                            Gemini API를 등록하시면 <strong>로컬 NLP 요약본을 초월한 고도의 경영 전략 수사적 문장 재편집, 디테일한 비즈니스 3대 메가트렌드 매칭, 한글 정밀 전문 번역 서비스</strong>가 추가 활성화됩니다.<br>
+                            <span class="warning-highlight">* 키 값은 로컬 가상 메모리에만 저장되며 절대 무단 외부로 전송되지 않습니다.</span>
+                        </p>
+
+                        <div class="api-key-form-group">
+                            <label for="gemini-api-key-input">Gemini API Key 입력</label>
+                            <div class="input-action-row">
+                                <input type="password" id="gemini-api-key-input" placeholder="AIzaSy... 형식의 API Key를 입력하십시오" autocomplete="off">
+                                <button class="btn btn-primary" id="btn-save-api-key">API 키 연결</button>
+                            </div>
+                            <span class="help-text"><a href="https://aistudio.google.com/" target="_blank">Google AI Studio에서 무료 API Key 발급받기 <i class="fa-solid fa-arrow-up-right-from-square"></i></a></span>
+                        </div>
+
+                        <div class="settings-connection-status active" id="key-status-offline">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <div>
+                                <strong>로컬 분석 전용 엔진 구동 중 (무료 무제한)</strong>
+                                <p>현재 API 키가 등록되지 않았습니다. 대시보드에 탑재된 8대 분석 데이터와 로컬 TextRank 문장 추출기로 제한 없이 무비용으로 대시보드를 즉시 사용하실 수 있습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-connection-status success" id="key-status-online" style="display: none;">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <div>
+                                <strong>Gemini AI 엔진 연동 완료 (심층 분석 팩 활성화)</strong>
+                                <p>입력된 API Key 검증이 승인되었습니다. 신규 PDF 업로드 후 [Gemini AI 심층 분석 실행] 버튼을 눌러 최고 사양의 인사이트 리포트를 획득할 수 있습니다. 마스킹된 키: <span id="masked-key-value">AIzaSy...</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-side-card glass-panel">
+                        <h3>대시보드 라이브러리 요약</h3>
+                        <div class="library-stats-list">
+                            <div class="stat-row">
+                                <span>기본 탑재 보고서 수</span>
+                                <strong>8 개</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>사용자 추가 보고서 수</span>
+                                <strong id="settings-custom-count">0 개</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>전역 캐시 메모리 잔량</span>
+                                <strong id="settings-cache-mem">0.0 KB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>로컬 파서 구동 지연 평균</span>
+                                <strong>&lt; 1.2 초</strong>
+                            </div>
+                        </div>
+                        <div class="tech-stack-badges">
+                            <span>Python 3.13</span>
+                            <span>FastAPI</span>
+                            <span>pdfplumber</span>
+                            <span>TextRank</span>
+                            <span>Chart.js</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 3. 고해상도 리포트 상세 보기 모달 (Modal Viewer) -->
+    <div class="modal-overlay" id="report-modal">
+        <div class="modal-wrapper glass-panel">
+            <header class="modal-header-nav">
+                <div class="modal-title-area">
+                    <span class="region-badge-modal" id="modal-region-badge">US</span>
+                    <h3 id="modal-report-title">McKinsey: The State of AI in 2026</h3>
+                </div>
+                <button class="modal-close-btn" id="btn-close-modal" aria-label="모달 닫기">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </header>
+
+            <div class="modal-body-container">
+                <!-- 좌측 정보 패널 (핵심 메타 및 차트) -->
+                <div class="modal-left-column">
+                    <div class="meta-info-grid">
+                        <div class="meta-item">
+                            <span class="meta-lbl">발행 기관</span>
+                            <strong class="meta-val" id="modal-source-label">McKinsey</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-lbl">산업군 분류</span>
+                            <strong class="meta-val highlight-purple" id="modal-industry-label">인공지능 & IT</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-lbl">연평균 성장률(CAGR)</span>
+                            <strong class="meta-val text-cyan" id="modal-cagr-label">42.5%</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-lbl">판단 톤 (Sentiment)</span>
+                            <strong class="meta-val" id="modal-sentiment-label">Positive</strong>
+                        </div>
+                    </div>
+
+                    <!-- 차트 영역 -->
+                    <div class="modal-chart-box">
+                        <h4 id="modal-chart-title">핵심 시장 규모 통계</h4>
+                        <div class="canvas-container">
+                            <canvas id="modal-chart-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 우측 정보 패널 (내비 탭 구성) -->
+                <div class="modal-right-column">
+                    <div class="modal-tabs">
+                        <button class="modal-tab active" data-tab="tab-summary">핵심 요약 및 문장</button>
+                        <button class="modal-tab" data-tab="tab-megatrends">3대 메가트렌드</button>
+                        <button class="modal-tab" data-tab="tab-implications">비즈니스 시사점</button>
+                        <button class="modal-tab" data-tab="tab-original">원문 보기</button>
+                    </div>
+
+                    <div class="modal-tab-content active" id="tab-summary">
+                        <div class="summary-paragraph-box">
+                            <h5>종합 요약 (Executive Summary)</h5>
+                            <p id="modal-summary-text">보고서의 로딩 요약 내용입니다...</p>
+                        </div>
+                        <div class="key-sentences-box">
+                            <h5>주요 추출 핵심문단 Top 5</h5>
+                            <ul id="modal-key-sentences-list">
+                                <li>로딩된 핵심 문장입니다.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="modal-tab-content" id="tab-megatrends">
+                        <div class="megatrends-list-box" id="modal-megatrends-container">
+                            <!-- 동적 렌더링 -->
+                        </div>
+                    </div>
+
+                    <div class="modal-tab-content" id="tab-implications">
+                        <div class="implications-list-box">
+                            <h5>전략적 비즈니스 조언 & 행동 촉구</h5>
+                            <ul id="modal-implications-list">
+                                <!-- 동적 렌더링 -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="modal-tab-content" id="tab-original">
+                        <div class="original-text-box">
+                            <h5>보고서 추출 원본 텍스트</h5>
+                            <textarea id="modal-original-text-area" readonly></textarea>
+                            <button class="btn btn-secondary btn-sm mt-2" id="btn-copy-original-text">
+                                <i class="fa-solid fa-copy"></i> 전체 텍스트 복사
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="modal-footer-action">
+                <div class="footer-left">
+                    <!-- 로컬 분석 본일 때 노출되는 [Gemini AI 심층 분석 가동] 단추 -->
+                    <button class="btn btn-ai-sparkle" id="btn-trigger-deep-ai" style="display: none;">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI로 고급 심층분석 실행 (API 필요)
+                    </button>
+                    <span class="ai-badge-indicator" id="ai-badge-indicator">
+                        <i class="fa-solid fa-circle-check text-green"></i> AI 분석 리포트
+                    </span>
+                </div>
+                <div class="footer-right">
+                    <button class="btn btn-secondary" id="btn-export-pdf">
+                        <i class="fa-solid fa-print"></i> 인사이트 리포트 인쇄
+                    </button>
+                    <button class="btn btn-dark" id="btn-close-modal-bottom">닫기</button>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    <!-- Core Application Logic -->
+    <script src="app.js"></script>
+</body>
+</html>

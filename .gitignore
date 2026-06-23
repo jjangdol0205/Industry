@@ -1,0 +1,36 @@
+# Virtual Environments
+.venv/
+**/venv/
+venv/
+ENV/
+env/
+
+# Node dependencies
+**/node_modules/
+node_modules/
+
+# Python cache
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables & secrets
+**/.env
+.env
+**/start.ps1
+start.ps1
+
+# Frontend build outputs
+**/dist/
+dist/
+**/build/
+build/
+
+# Logs
+*.log
+**/logs/
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
