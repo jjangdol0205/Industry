@@ -25,9 +25,19 @@ app.add_middleware(
 # ─────────────────────────────────────────────
 # PDF 정적 파일 서빙 (산업 자료 PDF)
 # ─────────────────────────────────────────────
-PDF_ROOT = r"D:\Industry\산업자료"
-if os.path.exists(PDF_ROOT):
+RELATIVE_PDF_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "산업자료"))
+WINDOWS_PDF_ROOT = r"D:\Industry\산업자료"
+
+if os.path.exists(RELATIVE_PDF_ROOT):
+    PDF_ROOT = RELATIVE_PDF_ROOT
+elif os.path.exists(WINDOWS_PDF_ROOT):
+    PDF_ROOT = WINDOWS_PDF_ROOT
+else:
+    PDF_ROOT = None
+
+if PDF_ROOT:
     app.mount("/pdfs", StaticFiles(directory=PDF_ROOT), name="pdfs")
+
 
 # DeepSeek 설정 (OpenAI 호환 API)
 DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")

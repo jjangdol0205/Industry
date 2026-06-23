@@ -15,7 +15,7 @@ import './index.css';
 
 const BACKEND_HOST = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:8000'
-  : '';
+  : 'https://industry-l08j.onrender.com';
 const API_BASE = `${BACKEND_HOST}/api`;
 
 // ── 포맷 유틸 ──────────────────────────────────────────
