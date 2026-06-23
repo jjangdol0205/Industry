@@ -377,6 +377,7 @@ function AiAnalysisCard({ icon: Icon, title, color, children, span2 }) {
 }
 
 function AiAnalysisSection({ data }) {
+  const d = data;
   if (!data) return (
     <div className="glass-panel" style={{ padding:'28px', marginBottom:'32px' }}>
       <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'20px' }}>
