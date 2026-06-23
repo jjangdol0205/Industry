@@ -7,3 +7,5 @@ pdfplumber
 sqlalchemy
 pydantic
 python-multipart
+openai
+python-dotenv
