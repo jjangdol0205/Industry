@@ -12,6 +12,47 @@ from openai import OpenAI
 
 models.Base.metadata.create_all(bind=database.engine)
 
+# ─────────────────────────────────────────────
+# 시작 시 DB 마이그레이션 (Render 영구볼륨 대응)
+# ─────────────────────────────────────────────
+def run_startup_migrations():
+    import sqlite3
+    db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+    try:
+        conn = sqlite3.connect(db_path)
+        cur = conn.cursor()
+
+        # 코인 Vol.1 → 통합 리포트로 업데이트
+        cur.execute("SELECT title FROM industry_reports WHERE id=4")
+        row = cur.fetchone()
+        if row and ("Vol.1" in row[0] or "vol.1" in row[0].lower()):
+            cur.execute("""
+                UPDATE industry_reports SET
+                    title     = '코인 & 블록체인 산업 심층 분석',
+                    summary   = '비트코인·이더리움을 중심으로 한 암호화폐 생태계의 전방위 밸류체인 완전 분석. 채굴(Mining) 인프라부터 거래소, 결제 플랫폼, 기관 금융, 기업 재무전략까지 디지털 자산 산업의 5개 레이어를 심층 분석합니다. BTC 현물 ETF 승인 이후 기관 자금 유입, 반감기(Halving) 사이클, 미국 친암호화폐 정책 전환이 만드는 구조적 기회를 총 45페이지에 걸쳐 분석합니다.',
+                    file_path = '4. 코인/코인 블록체인 산업 심층 분석.pdf',
+                    tag       = '코인'
+                WHERE id = 4
+            """)
+            print("[Migration] id=4 title updated to merged coin report")
+
+        # Vol.2(id=5) 중복 리포트 삭제
+        cur.execute("SELECT id FROM industry_reports WHERE id=5 AND tag='코인'")
+        if cur.fetchone():
+            cur.execute("DELETE FROM industry_reports WHERE id=5")
+            print("[Migration] id=5 coin Vol.2 report deleted")
+
+        # 코인 industry_id=5로 잘못 등록된 기업이 있으면 4로 이동
+        cur.execute("UPDATE companies SET industry_id=4 WHERE industry_id=5")
+
+        conn.commit()
+        conn.close()
+        print("[Migration] Startup DB migration complete.")
+    except Exception as e:
+        print(f"[Migration] Warning: {e}")
+
+run_startup_migrations()
+
 app = FastAPI(title="Investment Portal API")
 
 app.add_middleware(
