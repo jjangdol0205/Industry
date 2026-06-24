@@ -108,12 +108,19 @@ def get_db():
         db.close()
 
 # ─────────────────────────────────────────────
+# Keepalive (Render 절전 방지)
+# ─────────────────────────────────────────────
+@app.get("/ping")
+def ping():
+    return {"status": "ok", "message": "pong"}
+
+# ─────────────────────────────────────────────
 # Industry Reports
 # ─────────────────────────────────────────────
-
 @app.get("/api/reports", response_model=List[schemas.IndustryReport])
 def get_reports(db: Session = Depends(get_db)):
     return db.query(models.IndustryReport).all()
+
 
 @app.get("/api/reports/{report_id}", response_model=schemas.IndustryReport)
 def get_report(report_id: int, db: Session = Depends(get_db)):
