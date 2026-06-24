@@ -42,19 +42,45 @@ function App() {
   const [companyFinancials, setCompanyFinancials] = useState(null);
   const [companyAiAnalysis, setCompanyAiAnalysis] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loadingMsg, setLoadingMsg] = useState('서버에 연결 중...');
+  const [loadingDot, setLoadingDot] = useState(0);
+  const [retryCount, setRetryCount] = useState(0);
   const [viewMode, setViewMode] = useState('research');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  useEffect(() => { fetchReports(); }, []);
+  // 로딩 점 애니메이션
+  useEffect(() => {
+    if (!loading) return;
+    const timer = setInterval(() => setLoadingDot(d => (d + 1) % 4), 500);
+    return () => clearInterval(timer);
+  }, [loading]);
 
-  const fetchReports = async () => {
+  useEffect(() => { fetchReportsWithRetry(); }, []);
+
+  // Cold Start 대응: 최대 5회 재시도, 점진적 대기
+  const fetchReportsWithRetry = async (attempt = 0) => {
+    const msgs = [
+      '서버에 연결 중...',
+      '서버를 깨우는 중... (최초 접속 시 약 30초 소요)',
+      '데이터를 불러오는 중...',
+      '거의 다 됐어요!',
+      '마지막 단계...',
+    ];
+    setLoadingMsg(msgs[Math.min(attempt, msgs.length - 1)]);
+    setRetryCount(attempt);
     try {
-      const res = await axios.get(`${API_BASE}/reports`);
+      const res = await axios.get(`${API_BASE}/reports`, { timeout: 15000 });
       setReports(res.data);
-      // 첫 번째 리포트를 홈 화면에 바로 표시
       if (res.data.length > 0) fetchReportDetails(res.data[0].id);
       setLoading(false);
-    } catch (e) { console.error(e); setLoading(false); }
+    } catch (e) {
+      if (attempt < 6) {
+        const delay = Math.min(3000 * (attempt + 1), 12000);
+        setTimeout(() => fetchReportsWithRetry(attempt + 1), delay);
+      } else {
+        setLoadingMsg('연결 실패. 페이지를 새로고침 해주세요.');
+      }
+    }
   };
 
   const fetchReportDetails = async (id) => {
@@ -65,8 +91,8 @@ function App() {
   };
 
   const fetchCompanyFull = async (id) => {
-    setCompanyAiAnalysis(null); // reset so spinner shows
-    setSidebarOpen(false); // 모바일에서 사이드바 닫기
+    setCompanyAiAnalysis(null);
+    setSidebarOpen(false);
     try {
       const [compRes, profRes, finRes] = await Promise.all([
         axios.get(`${API_BASE}/companies/${id}`),
@@ -76,7 +102,6 @@ function App() {
       setSelectedCompany(compRes.data);
       setCompanyProfile(profRes.data.profile);
       setCompanyFinancials(finRes.data.financials);
-      // AI 분석은 비동기로 로드 (시간이 더 걸림)
       axios.get(`${API_BASE}/companies/${id}/ai-analysis`)
         .then(r => setCompanyAiAnalysis(r.data))
         .catch(() => setCompanyAiAnalysis({ error: true }));
@@ -90,11 +115,76 @@ function App() {
     setCompanyFinancials(null);
     setCompanyAiAnalysis(null);
     setSidebarOpen(false);
-    // 첫 번째 리포트로 복귀
     if (reports.length > 0) fetchReportDetails(reports[0].id);
   };
 
-  if (loading) return <div className="layout"><div className="main-content" style={{display:'flex',alignItems:'center',justifyContent:'center',minHeight:'100vh'}}><div style={{textAlign:'center'}}><div className="spin" style={{display:'inline-block',width:'32px',height:'32px',border:'3px solid rgba(59,130,246,0.3)',borderTopColor:'#3b82f6',borderRadius:'50%',marginBottom:'16px'}}></div><div style={{color:'var(--text-secondary)'}}>Alpha Research 로딩 중...</div></div></div></div>;
+  // ── 스플래시 로딩 화면 ─────────────────────────────────
+  if (loading) return (
+    <div style={{
+      display: 'flex', flexDirection: 'column', alignItems: 'center',
+      justifyContent: 'center', minHeight: '100vh',
+      background: 'linear-gradient(135deg, #0a0e1a 0%, #0d1526 50%, #0a1020 100%)',
+      fontFamily: 'Inter, sans-serif',
+    }}>
+      {/* 로고 */}
+      <div style={{ marginBottom: '40px', textAlign: 'center' }}>
+        <div style={{
+          width: '72px', height: '72px', borderRadius: '20px',
+          background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          margin: '0 auto 16px', boxShadow: '0 0 40px rgba(59,130,246,0.4)',
+          animation: 'pulse 2s ease-in-out infinite',
+        }}>
+          <TrendingUp size={36} color="white" />
+        </div>
+        <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'white', letterSpacing: '-0.5px' }}>
+          Alpha Research
+        </div>
+        <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', marginTop: '4px' }}>
+          Industry Intelligence Platform
+        </div>
+      </div>
+
+      {/* 스피너 */}
+      <div style={{ position: 'relative', width: '60px', height: '60px', marginBottom: '32px' }}>
+        <div style={{
+          position: 'absolute', inset: 0,
+          border: '3px solid rgba(59,130,246,0.15)',
+          borderTopColor: '#3b82f6', borderRadius: '50%',
+          animation: 'spin 1s linear infinite',
+        }} />
+        <div style={{
+          position: 'absolute', inset: '8px',
+          border: '3px solid rgba(139,92,246,0.15)',
+          borderBottomColor: '#8b5cf6', borderRadius: '50%',
+          animation: 'spin 1.5s linear infinite reverse',
+        }} />
+      </div>
+
+      {/* 메시지 */}
+      <div style={{ textAlign: 'center', maxWidth: '320px' }}>
+        <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.95rem', marginBottom: '8px', minHeight: '24px' }}>
+          {loadingMsg}{'.'  .repeat(loadingDot)}
+        </div>
+        {retryCount >= 1 && (
+          <div style={{
+            color: 'rgba(255,255,255,0.35)', fontSize: '0.78rem',
+            background: 'rgba(255,255,255,0.05)', borderRadius: '8px',
+            padding: '8px 16px', marginTop: '12px', lineHeight: '1.6'
+          }}>
+            🔄 Render 무료 서버는 비활성 시 절전 모드로 전환됩니다.<br />
+            최초 접속 시 30~60초 소요될 수 있습니다.
+          </div>
+        )}
+      </div>
+
+      <style>{`
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%,100% { transform: scale(1); box-shadow: 0 0 40px rgba(59,130,246,0.4); }
+          50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(59,130,246,0.6); } }
+      `}</style>
+    </div>
+  );
 
   return (
     <div className="layout">
