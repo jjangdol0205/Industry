@@ -1,9 +1,9 @@
-name: Keepalive Ping (Render Cold Start 방지)
+name: Keepalive Ping (Render Cold Start 완전 방지)
 
 on:
   schedule:
-    # 매 14분마다 실행 (UTC 기준) - Render 15분 절전 방지
-    - cron: '*/14 * * * *'
+    # 매 5분마다 실행 - Render 15분 절전 방지 (여유 3배 확보)
+    - cron: '*/5 * * * *'
   workflow_dispatch: # 수동 실행 허용
 
 jobs:
@@ -13,21 +13,23 @@ jobs:
       - name: Ping Backend Server
         run: |
           echo "Pinging backend server..."
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://industry-l08j.onrender.com/ping)
+          # 첫 번째 시도
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 https://industry-l08j.onrender.com/ping || echo "000")
           echo "Backend response: $STATUS"
-          if [ "$STATUS" = "200" ]; then
-            echo "✅ Backend is awake!"
-          else
-            echo "⚠️ Backend returned $STATUS - may be waking up"
+          
+          # 서버가 깨어나지 않았으면 한 번 더 시도
+          if [ "$STATUS" != "200" ]; then
+            echo "Retrying in 10 seconds..."
+            sleep 10
+            STATUS2=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 https://industry-l08j.onrender.com/ping || echo "000")
+            echo "Backend retry response: $STATUS2"
           fi
+          
+          echo "✅ Ping complete at $(date -u)"
 
       - name: Ping Frontend Server
         run: |
           echo "Pinging frontend server..."
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://industry-frontend-y8x2.onrender.com)
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 https://industry-frontend-y8x2.onrender.com || echo "000")
           echo "Frontend response: $STATUS"
-          if [ "$STATUS" = "200" ]; then
-            echo "✅ Frontend is awake!"
-          else
-            echo "⚠️ Frontend returned $STATUS"
-          fi
+          echo "✅ Ping complete at $(date -u)"
