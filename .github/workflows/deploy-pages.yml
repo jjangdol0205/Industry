@@ -41,8 +41,6 @@ jobs:
 
       - name: Build
         working-directory: InvestmentPortal/frontend
-        env:
-          VITE_DEPLOY_TARGET: 'github-pages'
         run: npm run build
 
       - name: Upload Pages artifact
