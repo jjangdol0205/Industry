@@ -80,13 +80,22 @@ function App() {
     } catch (e) { console.error(e); }
   };
 
+  const handleHomeClick = () => {
+    setViewMode('research');
+    setSelectedReport(null);
+    setSelectedCompany(null);
+    setCompanyProfile(null);
+    setCompanyFinancials(null);
+    setCompanyAiAnalysis(null);
+  };
+
   if (loading) return <div className="layout"><div className="main-content">Loading...</div></div>;
 
   return (
     <div className="layout">
       {/* Sidebar */}
       <div className="sidebar glass-panel">
-        <h1><TrendingUp size={24} color="var(--accent-blue)" /> Alpha Research</h1>
+        <h1 onClick={handleHomeClick}><TrendingUp size={24} color="var(--accent-blue)" /> Alpha Research</h1>
         
         <div style={{ display:'flex', flexDirection:'column', gap:'6px', margin:'20px 0', borderBottom:'1px solid var(--border-color)', paddingBottom:'16px' }}>
           <div style={{ display:'flex', gap:'6px' }}>
@@ -1115,7 +1124,7 @@ function AgentWorkspace() {
   };
 
   const orchestrator = agents.find(a => a.type === 'orchestrator');
-  const manager = agents.find(a => a.type === 'management');
+  const managers = agents.filter(a => a.type === 'management');
   const industryAgents = agents.filter(a => a.type === 'industry');
   const companyAgents = agents.filter(a => a.type === 'company');
 
@@ -1148,13 +1157,13 @@ function AgentWorkspace() {
                   <div className="node-desc" style={{ fontSize:'0.75rem', opacity:0.8 }}>{orchestrator.role}</div>
                 </div>
               )}
-              {manager && (
-                <div className={`agent-node manager-node ${activeAgentName===manager.name?'active-glow':''}`}>
-                  <div className="node-role">Site Manager</div>
-                  <div className="node-name">{manager.name}</div>
-                  <div className="node-desc" style={{ fontSize:'0.75rem', opacity:0.8 }}>{manager.role}</div>
+              {managers.map(m => (
+                <div key={m.id} className={`agent-node manager-node ${activeAgentName===m.name?'active-glow':''}`}>
+                  <div className="node-role">{m.name === 'App Developer Agent' ? 'App Manager' : 'Site Manager'}</div>
+                  <div className="node-name">{m.name}</div>
+                  <div className="node-desc" style={{ fontSize:'0.75rem', opacity:0.8 }}>{m.role}</div>
                 </div>
-              )}
+              ))}
             </div>
             <div className="tree-divider"></div>
             <div className="tree-level row-layout">

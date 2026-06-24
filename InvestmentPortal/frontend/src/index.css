@@ -60,6 +60,12 @@ body {
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s ease;
+}
+.sidebar h1:hover {
+  opacity: 0.85;
 }
 
 .nav-item {
@@ -697,3 +703,53 @@ body {
   background: var(--bg-primary);
   padding-top: 8px;
 }
+
+/* ── Mobile Responsive Settings ───────────────────────── */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px;
+    gap: 12px;
+  }
+  .sidebar h1 {
+    margin-bottom: 10px;
+  }
+  .main-content {
+    padding: 20px 16px;
+  }
+  
+  /* Grid Layouts to Single Column on Mobile */
+  .dashboard-grid, 
+  .kpi-grid, 
+  .card-grid, 
+  .company-grid, 
+  .workspace-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+  
+  /* Agent Tree on Mobile */
+  .tree-level {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .agent-node {
+    width: 100%;
+    max-width: 320px;
+  }
+  .row-layout {
+    flex-direction: column;
+  }
+  
+  /* Table wrapping for small screen */
+  .table-wrapper {
+    overflow-x: auto;
+  }
+}
+
