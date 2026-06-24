@@ -628,6 +628,13 @@ body {
   80%, 100% { content: ''; }
 }
 
+/* ── AI Analysis Grid ───────────────────────────────── */
+.ai-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
 /* ── KPI Cards ──────────────────────────────────────── */
 .kpi-grid {
   display: grid;
@@ -704,25 +711,187 @@ body {
   padding-top: 8px;
 }
 
-/* ── Mobile Responsive Settings ───────────────────────── */
+/* ── Mobile Topbar ─────────────────────────────── */
+.mobile-topbar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 16px;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 200;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.mobile-menu-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-btn:active {
+  background: rgba(255,255,255,0.08);
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 150;
+  backdrop-filter: blur(2px);
+}
+
+/* ── Company Header Row ────────────────────── */
+.company-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.company-title {
+  font-size: 2.2rem;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.price-display {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.price-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.price-sub {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.company-action-btns {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.action-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.action-link:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.sync-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.sync-btn:hover:not(:disabled) {
+  background: var(--accent-blue-hover);
+}
+
+.sync-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Mobile Responsive Settings ─────────────────── */
 @media (max-width: 768px) {
+  /* 상단 바 표시 */
+  .mobile-topbar {
+    display: flex;
+  }
+
+  .sidebar-overlay {
+    display: block;
+  }
+
+  /* 레이아웃 변경: 열 방향 → 로 방향 */
   .layout {
     flex-direction: column;
+    padding-top: 56px; /* topbar 높이 */
   }
+
+  /* 사이드바 드로어 스타일 */
   .sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid var(--border-color);
-    padding: 16px;
-    gap: 12px;
-  }
-  .sidebar h1 {
-    margin-bottom: 10px;
-  }
-  .main-content {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    z-index: 160;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    border-right: 1px solid var(--border-color);
+    border-bottom: none;
+    border-radius: 0;
     padding: 20px 16px;
   }
-  
+
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  /* 데스크톱 사이드바 h1 숨기기 */
+  .sidebar h1 {
+    display: none;
+  }
+
+  .main-content {
+    padding: 16px 14px 32px;
+    min-height: calc(100vh - 56px);
+  }
+
+  /* 지울 배치: 원래 company-list 스타일 */
+  .company-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
   /* Grid Layouts to Single Column on Mobile */
   .dashboard-grid, 
   .kpi-grid, 
@@ -730,9 +899,33 @@ body {
   .company-grid, 
   .workspace-grid {
     grid-template-columns: 1fr !important;
-    gap: 16px;
+    gap: 12px;
   }
   
+  /* KPI 카드 2열 */
+  .kpi-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px;
+  }
+
+  /* AI 분석 카드 1열 */
+  .ai-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* AI 분석 카드 span2 무효화 */
+  .ai-grid > div[style*="span 2"] {
+    grid-column: span 1 !important;
+  }
+
+  .kpi-card {
+    padding: 12px 14px;
+  }
+
+  .kpi-value {
+    font-size: 1.2rem;
+  }
+
   /* Agent Tree on Mobile */
   .tree-level {
     flex-direction: column;
@@ -748,8 +941,88 @@ body {
   }
   
   /* Table wrapping for small screen */
-  .table-wrapper {
+  .table-wrapper, .data-table-container {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 회사 헤더 모바일 최적화 */
+  .company-header-row {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .company-title {
+    font-size: 1.6rem;
+  }
+
+  .price-value {
+    font-size: 1.4rem;
+  }
+
+  .company-action-btns {
+    align-self: stretch;
+  }
+
+  .sync-btn, .action-link {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+  }
+
+  /* 차트 모바일: 1열 강제 */
+  section > div[style*="grid-template-columns: 2fr"],
+  section > div[style*="grid-template-columns: 3fr"],
+  section > div[style*="grid-template-columns: 1fr 1fr"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  /* 리포트 제목 폰트 */
+  .page-header h2 {
+    font-size: 1.5rem;
+  }
+
+  /* AI 분석 카드 1열 */
+  div[style*="gridTemplateColumns: '1fr 1fr'"],
+  div[style*='gridTemplateColumns:"1fr 1fr"'] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 터미널 패널 축소 */
+  .terminal-panel {
+    height: 300px;
+  }
+
+  /* back-btn */
+  .back-btn {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
   }
 }
 
+@media (max-width: 480px) {
+  .kpi-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px;
+  }
+
+  .kpi-value {
+    font-size: 1.1rem;
+  }
+
+  .kpi-label {
+    font-size: 0.68rem;
+  }
+
+  .company-pill {
+    padding: 14px 12px;
+  }
+
+  .company-name {
+    font-size: 0.95rem;
+  }
+}
