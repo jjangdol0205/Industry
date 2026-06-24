@@ -162,10 +162,16 @@ def run_agent_simulation(db: Session):
             fin_summary = f"Ticker: {comp.ticker}\n"
             fin_summary += "Annual Financials:\n"
             for f in sorted(fin_annual, key=lambda x: x.date)[-3:]:
-                fin_summary += f"- Date: {f.date}, Rev: ${f.revenue/1e9:.2f}B, OpInc: ${f.operating_income/1e9:.2f}B, Margin: {f.gross_margin:.2f}%\n"
+                rev_val = (f.revenue or 0) / 1e9
+                op_val = (f.operating_income or 0) / 1e9
+                margin_val = f.gross_margin if f.gross_margin is not None else 0
+                fin_summary += f"- Date: {f.date}, Rev: ${rev_val:.2f}B, OpInc: ${op_val:.2f}B, Margin: {margin_val:.2f}%\n"
             fin_summary += "Quarterly Financials (Last 4):\n"
             for f in sorted(fin_quarterly, key=lambda x: x.date)[-4:]:
-                fin_summary += f"- Date: {f.date}, Rev: ${f.revenue/1e9:.2f}B, OpInc: ${f.operating_income/1e9:.2f}B, Margin: {f.gross_margin:.2f}%\n"
+                rev_val = (f.revenue or 0) / 1e9
+                op_val = (f.operating_income or 0) / 1e9
+                margin_val = f.gross_margin if f.gross_margin is not None else 0
+                fin_summary += f"- Date: {f.date}, Rev: ${rev_val:.2f}B, OpInc: ${op_val:.2f}B, Margin: {margin_val:.2f}%\n"
                 
             comp_thought = (
                 f"{comp.name}의 실적 데이터를 로드했습니다. 5년 치 재무 동향과 역할 정보를 분석하여 "
