@@ -43,6 +43,7 @@ function App() {
   const [companyAiAnalysis, setCompanyAiAnalysis] = useState(null);
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState('research');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => { fetchReports(); }, []);
 
@@ -50,6 +51,7 @@ function App() {
     try {
       const res = await axios.get(`${API_BASE}/reports`);
       setReports(res.data);
+      // 첫 번째 리포트를 홈 화면에 바로 표시
       if (res.data.length > 0) fetchReportDetails(res.data[0].id);
       setLoading(false);
     } catch (e) { console.error(e); setLoading(false); }
@@ -64,6 +66,7 @@ function App() {
 
   const fetchCompanyFull = async (id) => {
     setCompanyAiAnalysis(null); // reset so spinner shows
+    setSidebarOpen(false); // 모바일에서 사이드바 닫기
     try {
       const [compRes, profRes, finRes] = await Promise.all([
         axios.get(`${API_BASE}/companies/${id}`),
@@ -82,37 +85,58 @@ function App() {
 
   const handleHomeClick = () => {
     setViewMode('research');
-    setSelectedReport(null);
     setSelectedCompany(null);
     setCompanyProfile(null);
     setCompanyFinancials(null);
     setCompanyAiAnalysis(null);
+    setSidebarOpen(false);
+    // 첫 번째 리포트로 복귀
+    if (reports.length > 0) fetchReportDetails(reports[0].id);
   };
 
-  if (loading) return <div className="layout"><div className="main-content">Loading...</div></div>;
+  if (loading) return <div className="layout"><div className="main-content" style={{display:'flex',alignItems:'center',justifyContent:'center',minHeight:'100vh'}}><div style={{textAlign:'center'}}><div className="spin" style={{display:'inline-block',width:'32px',height:'32px',border:'3px solid rgba(59,130,246,0.3)',borderTopColor:'#3b82f6',borderRadius:'50%',marginBottom:'16px'}}></div><div style={{color:'var(--text-secondary)'}}>Alpha Research 로딩 중...</div></div></div></div>;
 
   return (
     <div className="layout">
+      {/* 모바일 상단 헤더 바 */}
+      <div className="mobile-topbar">
+        <button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="메뉴 열기">
+          <div style={{display:'flex',flexDirection:'column',gap:'5px'}}>
+            <span style={{display:'block',width:'22px',height:'2px',background:'var(--text-primary)',borderRadius:'2px',transition:'all 0.3s',transform: sidebarOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none'}}></span>
+            <span style={{display:'block',width:'22px',height:'2px',background:'var(--text-primary)',borderRadius:'2px',transition:'all 0.3s',opacity: sidebarOpen ? 0 : 1}}></span>
+            <span style={{display:'block',width:'22px',height:'2px',background:'var(--text-primary)',borderRadius:'2px',transition:'all 0.3s',transform: sidebarOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none'}}></span>
+          </div>
+        </button>
+        <div style={{display:'flex',alignItems:'center',gap:'8px',cursor:'pointer'}} onClick={handleHomeClick}>
+          <TrendingUp size={20} color="var(--accent-blue)" />
+          <span style={{fontWeight:700,fontSize:'1rem'}}>Alpha Research</span>
+        </div>
+        <div style={{width:'40px'}}></div>
+      </div>
+
+      {/* 모바일 오버레이 */}
+      {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
+
       {/* Sidebar */}
-      <div className="sidebar glass-panel">
+      <div className={`sidebar glass-panel ${sidebarOpen ? 'sidebar-open' : ''}`}>
         <h1 onClick={handleHomeClick}><TrendingUp size={24} color="var(--accent-blue)" /> Alpha Research</h1>
         
         <div style={{ display:'flex', flexDirection:'column', gap:'6px', margin:'20px 0', borderBottom:'1px solid var(--border-color)', paddingBottom:'16px' }}>
           <div style={{ display:'flex', gap:'6px' }}>
             <button className={`tab-btn ${viewMode==='research'?'active':''}`}
               style={{ flex:1, padding:'8px', fontSize:'0.8rem', cursor:'pointer' }}
-              onClick={() => setViewMode('research')}>
+              onClick={() => { setViewMode('research'); setSidebarOpen(false); }}>
               <BookOpen size={13} style={{marginRight:'5px',verticalAlign:'middle'}} /> 리서치 포털
             </button>
             <button className={`tab-btn ${viewMode==='agent-workspace'?'active':''}`}
               style={{ flex:1, padding:'8px', fontSize:'0.8rem', cursor:'pointer' }}
-              onClick={() => { setViewMode('agent-workspace'); setSelectedCompany(null); }}>
+              onClick={() => { setViewMode('agent-workspace'); setSelectedCompany(null); setSidebarOpen(false); }}>
               <Activity size={13} style={{marginRight:'5px',verticalAlign:'middle'}} /> AI 분석팀
             </button>
           </div>
           <button className={`tab-btn ${viewMode==='pdf-library'?'active':''}`}
             style={{ width:'100%', padding:'8px', fontSize:'0.8rem', cursor:'pointer' }}
-            onClick={() => { setViewMode('pdf-library'); setSelectedCompany(null); }}>
+            onClick={() => { setViewMode('pdf-library'); setSelectedCompany(null); setSidebarOpen(false); }}>
             <FolderOpen size={13} style={{marginRight:'5px',verticalAlign:'middle'}} /> 산업자료 PDF
           </button>
         </div>
@@ -131,7 +155,7 @@ function App() {
               {tagReports.map(r => (
                 <div key={r.id}
                   className={`nav-item ${selectedReport?.id===r.id?'active':''}`}
-                  onClick={() => { fetchReportDetails(r.id); setSelectedCompany(null); setCompanyProfile(null); }}>
+                  onClick={() => { fetchReportDetails(r.id); setSelectedCompany(null); setCompanyProfile(null); setSidebarOpen(false); }}>
                   <FileText size={18} /> {r.title}
                 </div>
               ))}
@@ -159,8 +183,8 @@ function App() {
           <IndustryView report={selectedReport} onSelectCompany={fetchCompanyFull} />
         ) : (
           <div className="page-header">
-            <h2>Welcome to Alpha Research</h2>
-            <p>Select an industry report from the sidebar to begin.</p>
+            <h2>Alpha Research</h2>
+            <p>사이드바에서 산업 리포트를 선택해 주세요.</p>
           </div>
         )}
       </div>
@@ -424,7 +448,7 @@ function AiAnalysisSection({ data }) {
       </div>
 
       {/* 카드 그리드 */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'16px' }}>
+      <div className="ai-grid">
 
         {/* 1. 핵심 제품/서비스 */}
         {d.what_they_sell && (
@@ -509,7 +533,8 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
   const handleSync = async () => {
     setSyncing(true);
     try {
-      await axios.post(`${API_BASE}/companies/${company.id}/sync`);
+      // 빠른 주가 최신화 먼저 (yfinance로 즉시)
+      await axios.get(`${API_BASE}/companies/${company.id}/price`);
       await onSync();
     } catch (e) { console.error(e); }
     setSyncing(false);
@@ -559,40 +584,36 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
     <div className="company-details">
       {/* ── 헤더 ─────────────────────────────────────── */}
       <button className="back-btn" onClick={onBack}>
-        <ArrowLeft size={20} /> Back to Industry Map
+        <ArrowLeft size={20} /> 리포트로 돌아가기
       </button>
 
-      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:'28px' }}>
+      <div className="company-header-row">
         <div>
-          <h2 style={{ fontSize:'2.4rem', marginBottom:'4px' }}>
+          <h2 className="company-title">
             {company.name}
-            <span style={{ fontSize:'1.1rem', color:'var(--accent-blue)', marginLeft:'12px' }}>{company.ticker}</span>
+            <span style={{ fontSize:'1rem', color:'var(--accent-blue)', marginLeft:'10px', fontWeight:600 }}>{company.ticker}</span>
           </h2>
           {p.sector && (
-            <div style={{ color:'var(--text-secondary)', fontSize:'0.9rem', marginBottom:'8px' }}>
+            <div style={{ color:'var(--text-secondary)', fontSize:'0.85rem', marginBottom:'6px' }}>
               {p.sector} › {p.industry}
             </div>
           )}
           {p.current_price && (
-            <div style={{ fontSize:'1.8rem', fontWeight:'700', color:'var(--accent-green)' }}>
-              ${p.current_price?.toFixed(2)}
-              <span style={{ fontSize:'0.9rem', color:'var(--text-secondary)', marginLeft:'10px' }}>
-                Beta: {p.beta?.toFixed(2)}
-              </span>
+            <div className="price-display">
+              <span className="price-value" style={{ color:'var(--accent-green)' }}>${p.current_price?.toFixed(2)}</span>
+              {p.beta != null && <span className="price-sub">Beta: {p.beta?.toFixed(2)}</span>}
             </div>
           )}
         </div>
-        <div style={{ display:'flex', gap:'10px' }}>
+        <div className="company-action-btns">
           {p.website && (
-            <a href={p.website} target="_blank" rel="noopener noreferrer"
-              style={{ display:'flex', alignItems:'center', gap:'6px', padding:'8px 14px', borderRadius:'8px', border:'1px solid var(--border-color)', color:'var(--text-secondary)', textDecoration:'none', fontSize:'0.85rem' }}>
-              <Globe size={14} /> Website
+            <a href={p.website} target="_blank" rel="noopener noreferrer" className="action-link">
+              <Globe size={14} /> <span className="btn-label">Website</span>
             </a>
           )}
-          <button onClick={handleSync} disabled={syncing}
-            style={{ display:'flex', alignItems:'center', gap:'6px', padding:'8px 14px', borderRadius:'8px', background:'var(--accent-blue)', color:'white', border:'none', cursor:'pointer', fontSize:'0.85rem' }}>
+          <button onClick={handleSync} disabled={syncing} className="sync-btn">
             <RefreshCw size={14} className={syncing?'spin':''} />
-            {syncing ? '수집 중...' : '데이터 최신화'}
+            <span>{syncing ? '수집 중...' : '주가 최신화'}</span>
           </button>
         </div>
       </div>

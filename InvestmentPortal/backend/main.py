@@ -296,6 +296,50 @@ def sync_company_full(company_id: int, db: Session = Depends(get_db)):
     return {"message": f"Synced {company.ticker} with institutional-grade data", "source": full_data["source"]}
 
 
+@app.get("/api/companies/{company_id}/price")
+def get_company_price(company_id: int, db: Session = Depends(get_db)):
+    """
+    실시간 주가 조회 (yfinance) — 빠른 가격 갱신 전용
+    DB의 CompanyProfile을 업데이트하고 현재 가격 반환
+    """
+    import yfinance as yf
+    
+    company = db.query(models.Company).filter(models.Company.id == company_id).first()
+    if not company:
+        raise HTTPException(status_code=404, detail="Company not found")
+    
+    try:
+        ticker = yf.Ticker(company.ticker)
+        info = ticker.info
+        
+        price = info.get("currentPrice") or info.get("regularMarketPrice") or info.get("previousClose")
+        market_cap = info.get("marketCap")
+        pe_ratio = info.get("trailingPE")
+        
+        # DB 업데이트
+        profile = db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id == company_id).first()
+        if profile and price:
+            profile.current_price = price
+            if market_cap:
+                profile.market_cap = market_cap
+            if pe_ratio:
+                profile.pe_ratio = pe_ratio
+            from datetime import datetime
+            profile.last_updated = datetime.now().strftime("%Y-%m-%d %H:%M")
+            db.commit()
+        
+        return {
+            "ticker": company.ticker,
+            "name": company.name,
+            "current_price": price,
+            "market_cap": market_cap,
+            "pe_ratio": pe_ratio,
+            "updated": True,
+        }
+    except Exception as e:
+        return {"ticker": company.ticker, "error": str(e), "updated": False}
+
+
 @app.get("/api/companies/{company_id}/ai-analysis")
 def get_company_ai_analysis(company_id: int, db: Session = Depends(get_db)):
     """Gemini AI 심층 기업 분석: 비즈니스 모델 / 수익 구조 / 비용 구조 / 해자 / 리스크 / 투자 포인트"""

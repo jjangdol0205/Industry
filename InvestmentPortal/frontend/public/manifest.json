@@ -1,16 +1,22 @@
 {
-  "short_name": "AlphaResearch",
+  "short_name": "Alpha Research",
   "name": "Alpha Research Portal",
+  "description": "기관급 AI 투자 리서치 포털 — 자율주행, 로봇, 우주 산업 분석",
   "icons": [
     {
       "src": "favicon.svg",
       "type": "image/svg+xml",
-      "sizes": "any"
+      "sizes": "any",
+      "purpose": "any maskable"
     }
   ],
   "start_url": "/",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "scope": "/",
+  "background_color": "#0f1115",
+  "theme_color": "#3b82f6",
   "display": "standalone",
-  "orientation": "any"
+  "orientation": "any",
+  "lang": "ko",
+  "categories": ["finance", "business"],
+  "prefer_related_applications": false
 }
