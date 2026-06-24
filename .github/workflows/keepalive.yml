@@ -2,34 +2,31 @@ name: Keepalive Ping (Render Cold Start 완전 방지)
 
 on:
   schedule:
-    # 매 5분마다 실행 - Render 15분 절전 방지 (여유 3배 확보)
     - cron: '*/5 * * * *'
-  workflow_dispatch: # 수동 실행 허용
+  workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Backend Server
+      - name: Ping Backend
+        shell: bash
         run: |
-          echo "Pinging backend server..."
-          # 첫 번째 시도
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 https://industry-l08j.onrender.com/ping || echo "000")
-          echo "Backend response: $STATUS"
-          
-          # 서버가 깨어나지 않았으면 한 번 더 시도
-          if [ "$STATUS" != "200" ]; then
-            echo "Retrying in 10 seconds..."
-            sleep 10
-            STATUS2=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 https://industry-l08j.onrender.com/ping || echo "000")
-            echo "Backend retry response: $STATUS2"
-          fi
-          
-          echo "✅ Ping complete at $(date -u)"
+          set +e
+          echo "Pinging backend: https://industry-l08j.onrender.com/ping"
+          curl -s --max-time 55 --retry 2 --retry-delay 5 \
+            -o /dev/null -w "HTTP %{http_code} (%{time_total}s)\n" \
+            https://industry-l08j.onrender.com/ping
+          echo "Backend ping done at $(date -u)"
+          exit 0
 
-      - name: Ping Frontend Server
+      - name: Ping Frontend
+        shell: bash
         run: |
-          echo "Pinging frontend server..."
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 https://industry-frontend-y8x2.onrender.com || echo "000")
-          echo "Frontend response: $STATUS"
-          echo "✅ Ping complete at $(date -u)"
+          set +e
+          echo "Pinging frontend: https://industry-frontend-y8x2.onrender.com"
+          curl -s --max-time 55 --retry 2 --retry-delay 5 \
+            -o /dev/null -w "HTTP %{http_code} (%{time_total}s)\n" \
+            https://industry-frontend-y8x2.onrender.com
+          echo "Frontend ping done at $(date -u)"
+          exit 0
