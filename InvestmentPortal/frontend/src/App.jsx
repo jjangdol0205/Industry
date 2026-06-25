@@ -1282,6 +1282,7 @@ function AgentWorkspace() {
     if (sender === 'System') return '#00f2fe';
     if (type === 'orchestrator') return '#39ff14';
     if (type === 'management') return '#00f2fe';
+    if (type === 'quant') return '#f59e0b';
     if (type === 'industry') return '#00bfff';
     if (type === 'company') return '#bd93f9';
     return 'var(--text-primary)';
@@ -1289,6 +1290,7 @@ function AgentWorkspace() {
 
   const orchestrator = agents.find(a => a.type === 'orchestrator');
   const managers = agents.filter(a => a.type === 'management');
+  const quantAgents = agents.filter(a => a.type === 'quant');
   const industryAgents = agents.filter(a => a.type === 'industry');
   const companyAgents = agents.filter(a => a.type === 'company');
 
@@ -1329,6 +1331,20 @@ function AgentWorkspace() {
                 </div>
               ))}
             </div>
+            <div className="tree-divider"></div>
+            {/* Quant Signal Agent */}
+            {quantAgents.length > 0 && (
+              <div className="tree-level row-layout" style={{ justifyContent:'center' }}>
+                {quantAgents.map(a => (
+                  <div key={a.id} className={`agent-node ${activeAgentName===a.name?'active-glow':''}`}
+                    style={{ borderColor:'rgba(245,158,11,0.5)', background:'rgba(245,158,11,0.05)', minWidth:'220px' }}>
+                    <div className="node-role" style={{ color:'#f59e0b' }}>Quant Signal Agent</div>
+                    <div className="node-name">{a.name}</div>
+                    <div className="node-desc" style={{ fontSize:'0.75rem', opacity:0.8 }}>{a.role}</div>
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="tree-divider"></div>
             <div className="tree-level row-layout">
               {industryAgents.map(a => (
