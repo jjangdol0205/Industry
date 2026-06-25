@@ -728,10 +728,19 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
   };
 
   // 연간 vs 분기 필터
-  const annualRaw = (financials || []).filter(f => f.period_type === 'annual').sort((a,b) => new Date(a.date)-new Date(b.date));
+  // 날짜 내림차순 정렬 후 연도별 중복 제거 (최신 레코드 우선)
+  const annualRaw = (financials || [])
+    .filter(f => f.period_type === 'annual')
+    .sort((a,b) => new Date(b.date)-new Date(a.date)); // 최신순
   const annualMap = new Map();
-  annualRaw.forEach(d => annualMap.set(d.date.substring(0,4), d));
-  const annualData = Array.from(annualMap.values());
+  annualRaw.forEach(d => {
+    const yr = d.date.substring(0,4);
+    if (!annualMap.has(yr)) annualMap.set(yr, d); // 최신 레코드만 유지
+  });
+  // 차트용은 오름차순 (옛날→최신)
+  const annualData = Array.from(annualMap.values()).sort((a,b) => new Date(a.date)-new Date(b.date));
+  // 비즈니스 모델용 latest는 가장 최신 연간 레코드
+  const latestRaw = annualRaw[0] || {};
 
   const quarterlyData = (financials || [])
     .filter(f => f.period_type === 'quarterly')
@@ -765,7 +774,15 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
   }));
 
   const p = profile || {};
-  const latest = annualData[annualData.length-1] || {};
+  // 최신 연간 레코드 사용 (COGS 등 최신값 보장)
+  const latest = (() => {
+    const r = latestRaw;
+    // cost_of_revenue가 없으면 revenue - gross_profit으로 계산 후 반환
+    if (r && r.revenue && r.gross_profit && !r.cost_of_revenue) {
+      return { ...r, cost_of_revenue: r.revenue - r.gross_profit };
+    }
+    return r || {};
+  })();
 
   return (
     <div className="company-details">
