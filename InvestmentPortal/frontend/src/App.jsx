@@ -49,6 +49,8 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [installPrompt, setInstallPrompt] = useState(null);
   const [showInstallBanner, setShowInstallBanner] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingPhase, setLoadingPhase] = useState('wakeup'); // 'wakeup' | 'data'
 
   // PWA 설치 프롬프트 캡처 (Android Chrome)
   useEffect(() => {
@@ -78,28 +80,48 @@ function App() {
 
   useEffect(() => { fetchReportsWithRetry(); }, []);
 
-  // Cold Start 대응: 최대 5회 재시도, 점진적 대기
+  // ── 서버 웜업 → 데이터 로드 ──────────────────────────────
   const fetchReportsWithRetry = async (attempt = 0) => {
+    // 1단계: 웜업 핑 (서버를 먼저 깨움)
+    if (attempt === 0) {
+      setLoadingMsg('서버 연결 중...');
+      setLoadingPhase('wakeup');
+      setLoadingProgress(5);
+      try {
+        await axios.get(`${BACKEND_HOST}/ping`, { timeout: 60000 });
+        setLoadingProgress(40);
+        setLoadingPhase('data');
+        setLoadingMsg('데이터 불러오는 중...');
+      } catch (e) {
+        // ping 실패해도 계속 진행
+        setLoadingProgress(20);
+      }
+    }
+
     const msgs = [
-      '서버에 연결 중...',
-      '서버를 깨우는 중... (최초 접속 시 약 30초 소요)',
-      '데이터를 불러오는 중...',
+      '데이터 불러오는 중...',
+      '데이터 처리 중...',
       '거의 다 됐어요!',
       '마지막 단계...',
     ];
     setLoadingMsg(msgs[Math.min(attempt, msgs.length - 1)]);
     setRetryCount(attempt);
+    setLoadingProgress(40 + attempt * 12);
+
     try {
-      const res = await axios.get(`${API_BASE}/reports`, { timeout: 15000 });
+      const res = await axios.get(`${API_BASE}/reports`, { timeout: 20000 });
       setReports(res.data);
-      if (res.data.length > 0) fetchReportDetails(res.data[0].id);
-      setLoading(false);
+      setLoadingProgress(90);
+      if (res.data.length > 0) await fetchReportDetails(res.data[0].id);
+      setLoadingProgress(100);
+      setTimeout(() => setLoading(false), 300);
     } catch (e) {
-      if (attempt < 6) {
-        const delay = Math.min(3000 * (attempt + 1), 12000);
+      if (attempt < 5) {
+        const delay = Math.min(3000 * (attempt + 1), 10000);
         setTimeout(() => fetchReportsWithRetry(attempt + 1), delay);
       } else {
         setLoadingMsg('연결 실패. 페이지를 새로고침 해주세요.');
+        setLoadingProgress(0);
       }
     }
   };
@@ -182,10 +204,32 @@ function App() {
         }} />
       </div>
 
+      {/* 진행률 바 */}
+      <div style={{ width: '280px', marginBottom: '24px' }}>
+        <div style={{
+          height: '4px', background: 'rgba(255,255,255,0.08)',
+          borderRadius: '4px', overflow: 'hidden'
+        }}>
+          <div style={{
+            height: '100%', borderRadius: '4px',
+            background: 'linear-gradient(90deg, #3b82f6, #8b5cf6)',
+            width: `${loadingProgress}%`,
+            transition: 'width 0.8s cubic-bezier(0.4,0,0.2,1)',
+            boxShadow: '0 0 12px rgba(59,130,246,0.6)',
+          }} />
+        </div>
+        <div style={{ display:'flex', justifyContent:'space-between', marginTop:'6px' }}>
+          <span style={{ fontSize:'0.7rem', color:'rgba(255,255,255,0.3)' }}>
+            {loadingPhase === 'wakeup' ? '🔌 서버 웜업 중' : '📊 데이터 로드 중'}
+          </span>
+          <span style={{ fontSize:'0.7rem', color:'rgba(255,255,255,0.3)' }}>{loadingProgress}%</span>
+        </div>
+      </div>
+
       {/* 메시지 */}
       <div style={{ textAlign: 'center', maxWidth: '320px' }}>
         <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.95rem', marginBottom: '8px', minHeight: '24px' }}>
-          {loadingMsg}{'.'  .repeat(loadingDot)}
+          {loadingMsg}{'.' .repeat(loadingDot)}
         </div>
         {retryCount >= 1 && (
           <div style={{

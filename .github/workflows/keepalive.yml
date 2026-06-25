@@ -2,31 +2,30 @@ name: Keepalive Ping (Render Cold Start 완전 방지)
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/2 * * * *'   # 2분마다 — GitHub 실제 실행 기준 최대 ~4분 간격
   workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
-      - name: Ping Backend
+      - name: Warmup Backend (Cold Start 방지)
         shell: bash
         run: |
           set +e
-          echo "Pinging backend: https://industry-l08j.onrender.com/ping"
-          curl -s --max-time 55 --retry 2 --retry-delay 5 \
-            -o /dev/null -w "HTTP %{http_code} (%{time_total}s)\n" \
-            https://industry-l08j.onrender.com/ping
-          echo "Backend ping done at $(date -u)"
-          exit 0
+          BACKEND="https://industry-l08j.onrender.com"
+          echo "=== $(date -u) 백엔드 웜업 핑 ==="
 
-      - name: Ping Frontend
-        shell: bash
-        run: |
-          set +e
-          echo "Pinging frontend: https://industry-frontend-y8x2.onrender.com"
-          curl -s --max-time 55 --retry 2 --retry-delay 5 \
-            -o /dev/null -w "HTTP %{http_code} (%{time_total}s)\n" \
-            https://industry-frontend-y8x2.onrender.com
-          echo "Frontend ping done at $(date -u)"
+          # 1) /ping 먼저 — 서버 깨우기 (최대 60초 대기)
+          echo "Step 1: /ping 핑..."
+          STATUS=$(curl -s --max-time 60 -o /dev/null -w "%{http_code}" "$BACKEND/ping")
+          echo "  /ping → HTTP $STATUS"
+
+          # 2) /api/reports — 실제 데이터 캐시 예열
+          echo "Step 2: /api/reports 핑..."
+          STATUS2=$(curl -s --max-time 30 -o /dev/null -w "%{http_code}" "$BACKEND/api/reports")
+          echo "  /api/reports → HTTP $STATUS2"
+
+          echo "=== 웜업 완료 ==="
           exit 0
