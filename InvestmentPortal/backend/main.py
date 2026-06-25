@@ -108,9 +108,9 @@ def get_db():
         db.close()
 
 # ─────────────────────────────────────────────
-# Keepalive (Render 절전 방지)
+# Keepalive (Render 절전 방지) — GET + HEAD 모두 허용
 # ─────────────────────────────────────────────
-@app.get("/ping")
+@app.api_route("/ping", methods=["GET", "HEAD"])
 def ping():
     return {"status": "ok", "message": "pong"}
 
