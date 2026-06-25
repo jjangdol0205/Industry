@@ -536,21 +536,49 @@ function IndustryView({ report, onSelectCompany }) {
         </div>
       </div>
 
-      <h3 style={{ marginBottom:'24px', color:'var(--accent-blue)', fontSize:'1.4rem', borderBottom:'1px solid var(--border-color)', paddingBottom:'12px' }}>
-        Key Tracked Companies
-      </h3>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'16px' }}>
+        <h3 style={{ color:'var(--accent-blue)', fontSize:'1.4rem', borderBottom:'none', margin:0 }}>
+          🏆 Key Tracked Companies
+        </h3>
+        <div style={{ fontSize:'0.75rem', color:'var(--text-secondary)', background:'rgba(255,255,255,0.05)', padding:'4px 12px', borderRadius:'20px' }}>
+          투자 매력도 순 정렬 · 매월 업데이트
+        </div>
+      </div>
       <div className="company-list">
-        {report.companies.map(comp => (
-          <div key={comp.id} className="company-pill glass-panel" onClick={() => onSelectCompany(comp.id)}>
-            <div className="company-header">
-              <span className="company-name">{comp.name}</span>
-              <span className="company-ticker">{comp.ticker}</span>
-            </div>
-            <div style={{ fontSize:'0.9rem', color:'var(--text-secondary)', display:'-webkit-box', WebkitLineClamp:3, WebkitBoxOrient:'vertical', overflow:'hidden' }}>
-              {comp.role_description}
-            </div>
-          </div>
-        ))}
+        {[...report.companies]
+          .sort((a, b) => (a.display_order ?? 999) - (b.display_order ?? 999))
+          .map((comp, idx) => {
+            const rank = comp.display_order ?? (idx + 1);
+            const rankColor = rank === 1 ? '#FFD700' : rank === 2 ? '#C0C0C0' : rank === 3 ? '#CD7F32' : rank <= 5 ? '#3b82f6' : 'rgba(255,255,255,0.25)';
+            const rankBg   = rank === 1 ? 'rgba(255,215,0,0.12)' : rank === 2 ? 'rgba(192,192,192,0.10)' : rank === 3 ? 'rgba(205,127,50,0.12)' : rank <= 5 ? 'rgba(59,130,246,0.08)' : 'transparent';
+            const rankEmoji = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
+            return (
+              <div key={comp.id}
+                className="company-pill glass-panel"
+                onClick={() => onSelectCompany(comp.id)}
+                style={{ position:'relative', border: rank <= 3 ? `1px solid ${rankColor}30` : undefined }}
+              >
+                {/* 순위 배지 */}
+                <div style={{
+                  position:'absolute', top:'10px', right:'10px',
+                  background: rankBg,
+                  border: `1px solid ${rankColor}60`,
+                  borderRadius:'12px', padding:'2px 8px',
+                  fontSize:'0.68rem', fontWeight:700, color: rankColor,
+                  display:'flex', alignItems:'center', gap:'3px',
+                }}>
+                  {rankEmoji} {rank}위
+                </div>
+                <div className="company-header" style={{ paddingRight:'48px' }}>
+                  <span className="company-name">{comp.name}</span>
+                  <span className="company-ticker">{comp.ticker}</span>
+                </div>
+                <div style={{ fontSize:'0.9rem', color:'var(--text-secondary)', display:'-webkit-box', WebkitLineClamp:3, WebkitBoxOrient:'vertical', overflow:'hidden' }}>
+                  {comp.role_description}
+                </div>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

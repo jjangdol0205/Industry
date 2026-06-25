@@ -29,6 +29,7 @@ class CompanyCreate(CompanyBase):
 class Company(CompanyBase):
     id: int
     industry_id: int
+    display_order: Optional[int] = 999
     financials: List[FinancialData] = []
 
     class Config:
