@@ -151,7 +151,10 @@ def get_report_pdf_url(report_id: int, db: Session = Depends(get_db)):
 
 @app.get("/api/companies", response_model=List[schemas.Company])
 def get_companies(db: Session = Depends(get_db)):
-    return db.query(models.Company).all()
+    return db.query(models.Company).order_by(
+        models.Company.industry_id,
+        models.Company.display_order.asc().nullslast()
+    ).all()
 
 @app.get("/api/companies/{company_id}", response_model=schemas.Company)
 def get_company(company_id: int, db: Session = Depends(get_db)):

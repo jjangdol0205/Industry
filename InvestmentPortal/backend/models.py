@@ -36,7 +36,8 @@ class Company(Base):
     ticker = Column(String, index=True)
     role_description = Column(Text)
     future_growth = Column(Text)
-    
+    display_order = Column(Integer, default=999, nullable=True)  # 투자 순위 (자동 업데이트)
+
     industry = relationship("IndustryReport", back_populates="companies")
     value_chain_node = relationship("ValueChainNode", back_populates="companies")
     financials = relationship("FinancialData", back_populates="company")

@@ -1,0 +1,367 @@
+{
+  "date": "2026-06-26",
+  "rankings": {
+    "로봇": [
+      {
+        "rank": 1,
+        "ticker": "ISRG",
+        "name": "Intuitive Surgical",
+        "score": 100
+      },
+      {
+        "rank": 2,
+        "ticker": "NVDA",
+        "name": "Nvidia",
+        "score": 100
+      },
+      {
+        "rank": 3,
+        "ticker": "PATH",
+        "name": "UiPath",
+        "score": 100
+      },
+      {
+        "rank": 4,
+        "ticker": "TER",
+        "name": "Teradyne",
+        "score": 100
+      },
+      {
+        "rank": 5,
+        "ticker": "CGNX",
+        "name": "Cognex",
+        "score": 95
+      },
+      {
+        "rank": 6,
+        "ticker": "ZBRA",
+        "name": "Zebra Technologies",
+        "score": 89
+      },
+      {
+        "rank": 7,
+        "ticker": "ROK",
+        "name": "Rockwell Automation",
+        "score": 87
+      },
+      {
+        "rank": 8,
+        "ticker": "EMR",
+        "name": "Emerson Electric",
+        "score": 83
+      },
+      {
+        "rank": 9,
+        "ticker": "SYM",
+        "name": "Symbotic",
+        "score": 83
+      },
+      {
+        "rank": 10,
+        "ticker": "ACMR",
+        "name": "ACM Research",
+        "score": 80
+      },
+      {
+        "rank": 11,
+        "ticker": "HON",
+        "name": "Honeywell International",
+        "score": 79
+      },
+      {
+        "rank": 12,
+        "ticker": "CEVA",
+        "name": "CEVA Inc",
+        "score": 62
+      },
+      {
+        "rank": 13,
+        "ticker": "AVAV",
+        "name": "AeroVironment",
+        "score": 54
+      }
+    ],
+    "우주": [
+      {
+        "rank": 1,
+        "ticker": "NOC",
+        "name": "Northrop Grumman",
+        "score": 87
+      },
+      {
+        "rank": 2,
+        "ticker": "LMT",
+        "name": "Lockheed Martin",
+        "score": 83
+      },
+      {
+        "rank": 3,
+        "ticker": "SPIR",
+        "name": "Spire Global",
+        "score": 83
+      },
+      {
+        "rank": 4,
+        "ticker": "IRDM",
+        "name": "Iridium Communications",
+        "score": 78
+      },
+      {
+        "rank": 5,
+        "ticker": "LHX",
+        "name": "L3Harris Technologies",
+        "score": 77
+      },
+      {
+        "rank": 6,
+        "ticker": "PL",
+        "name": "Planet Labs",
+        "score": 66
+      },
+      {
+        "rank": 7,
+        "ticker": "VSAT",
+        "name": "Viasat",
+        "score": 65
+      },
+      {
+        "rank": 8,
+        "ticker": "KTOS",
+        "name": "Kratos Defense & Security",
+        "score": 63
+      },
+      {
+        "rank": 9,
+        "ticker": "GSAT",
+        "name": "Globalstar",
+        "score": 62
+      },
+      {
+        "rank": 10,
+        "ticker": "RKLB",
+        "name": "Rocket Lab USA",
+        "score": 53
+      },
+      {
+        "rank": 11,
+        "ticker": "ASTS",
+        "name": "AST SpaceMobile",
+        "score": 52
+      },
+      {
+        "rank": 12,
+        "ticker": "LUNR",
+        "name": "Intuitive Machines",
+        "score": 31
+      },
+      {
+        "rank": 13,
+        "ticker": "BKSY",
+        "name": "BlackSky Technology",
+        "score": 26
+      },
+      {
+        "rank": 14,
+        "ticker": "SPCE",
+        "name": "Virgin Galactic",
+        "score": 10
+      }
+    ],
+    "자율주행": [
+      {
+        "rank": 1,
+        "ticker": "GOOGL",
+        "name": "Alphabet (Waymo)",
+        "score": 100
+      },
+      {
+        "rank": 2,
+        "ticker": "NVDA",
+        "name": "Nvidia",
+        "score": 100
+      },
+      {
+        "rank": 3,
+        "ticker": "NXPI",
+        "name": "NXP Semiconductors",
+        "score": 100
+      },
+      {
+        "rank": 4,
+        "ticker": "UBER",
+        "name": "Uber",
+        "score": 100
+      },
+      {
+        "rank": 5,
+        "ticker": "QCOM",
+        "name": "Qualcomm",
+        "score": 98
+      },
+      {
+        "rank": 6,
+        "ticker": "MBLY",
+        "name": "Mobileye",
+        "score": 95
+      },
+      {
+        "rank": 7,
+        "ticker": "ON",
+        "name": "ON Semiconductor",
+        "score": 73
+      },
+      {
+        "rank": 8,
+        "ticker": "TSLA",
+        "name": "Tesla",
+        "score": 66
+      },
+      {
+        "rank": 9,
+        "ticker": "WRD",
+        "name": "WeRide",
+        "score": 65
+      },
+      {
+        "rank": 10,
+        "ticker": "APTV",
+        "name": "Aptiv",
+        "score": 64
+      },
+      {
+        "rank": 11,
+        "ticker": "PONY",
+        "name": "Pony.ai",
+        "score": 43
+      },
+      {
+        "rank": 12,
+        "ticker": "AUR",
+        "name": "Aurora Innovation",
+        "score": 32
+      }
+    ],
+    "코인": [
+      {
+        "rank": 1,
+        "ticker": "HOOD",
+        "name": "Robinhood Markets",
+        "score": 100
+      },
+      {
+        "rank": 2,
+        "ticker": "PYPL",
+        "name": "PayPal Holdings",
+        "score": 100
+      },
+      {
+        "rank": 3,
+        "ticker": "XYZ",
+        "name": "Block (Square)",
+        "score": 74
+      },
+      {
+        "rank": 4,
+        "ticker": "COIN",
+        "name": "Coinbase Global",
+        "score": 68
+      },
+      {
+        "rank": 5,
+        "ticker": "MSTR",
+        "name": "MicroStrategy (Strategy)",
+        "score": 68
+      },
+      {
+        "rank": 6,
+        "ticker": "CORZ",
+        "name": "Core Scientific",
+        "score": 67
+      },
+      {
+        "rank": 7,
+        "ticker": "CRCL",
+        "name": "Circle Internet Group",
+        "score": 66
+      },
+      {
+        "rank": 8,
+        "ticker": "IREN",
+        "name": "Iris Energy",
+        "score": 56
+      },
+      {
+        "rank": 9,
+        "ticker": "BTBT",
+        "name": "Bit Digital",
+        "score": 54
+      },
+      {
+        "rank": 10,
+        "ticker": "GLXY",
+        "name": "Galaxy Digital",
+        "score": 48
+      },
+      {
+        "rank": 11,
+        "ticker": "HUT",
+        "name": "Hut 8 Mining",
+        "score": 48
+      },
+      {
+        "rank": 12,
+        "ticker": "RIOT",
+        "name": "Riot Platforms",
+        "score": 42
+      },
+      {
+        "rank": 13,
+        "ticker": "CAN",
+        "name": "Canaan Inc",
+        "score": 35
+      },
+      {
+        "rank": 14,
+        "ticker": "BTDR",
+        "name": "Bitdeer Technologies",
+        "score": 33
+      },
+      {
+        "rank": 15,
+        "ticker": "WULF",
+        "name": "TeraWulf",
+        "score": 33
+      },
+      {
+        "rank": 16,
+        "ticker": "BKKT",
+        "name": "Bakkt Holdings",
+        "score": 32
+      },
+      {
+        "rank": 17,
+        "ticker": "APLD",
+        "name": "Applied Digital",
+        "score": 31
+      },
+      {
+        "rank": 18,
+        "ticker": "MARA",
+        "name": "Marathon Digital Holdings",
+        "score": 27
+      },
+      {
+        "rank": 19,
+        "ticker": "CLSK",
+        "name": "CleanSpark",
+        "score": 20
+      },
+      {
+        "rank": 20,
+        "ticker": "CIFR",
+        "name": "Cipher Mining",
+        "score": 12
+      }
+    ]
+  }
+}

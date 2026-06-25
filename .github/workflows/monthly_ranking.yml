@@ -1,0 +1,49 @@
+name: Monthly Company Investment Ranking Update
+
+on:
+  schedule:
+    - cron: '0 1 1 * *'   # 매월 1일 오전 01:00 UTC (한국 오전 10시)
+  workflow_dispatch:       # 수동 실행 가능
+
+jobs:
+  rank-update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install --quiet requests yfinance
+
+      - name: Run Investment Ranking Script
+        env:
+          PYTHONIOENCODING: utf-8
+          LANG: en_US.UTF-8
+        run: |
+          cd InvestmentPortal/backend
+          echo "=== 월간 투자 순위 업데이트 시작: $(date -u) ==="
+          python -X utf8 rank_companies.py
+          echo "=== 완료 ==="
+
+      - name: Commit and Push ranking updates
+        run: |
+          git config user.name "Alpha Research Bot"
+          git config user.email "bot@industry.truthofmarket.com"
+          git add InvestmentPortal/backend/investment_portal.db
+          git add InvestmentPortal/backend/ranking_log.json
+          git diff --staged --quiet || git commit -m "🏆 Monthly ranking update: $(date -u '+%Y-%m-%d')"
+          git push
+
+      - name: Notify Render to Redeploy
+        run: |
+          echo "순위 업데이트 완료 → Render 자동 배포 트리거"
+          # Render는 GitHub push 후 자동 배포됨
