@@ -922,6 +922,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
               <tr>
                 <th>기간</th>
                 <th>매출</th>
+                <th>매출원가</th>
                 <th>매출총이익</th>
                 <th>영업이익</th>
                 <th>EBITDA</th>
@@ -941,6 +942,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
                 <tr key={i}>
                   <td style={{ fontWeight:600 }}>{d.date}</td>
                   <td>{fB(d.revenue)}</td>
+                  <td style={{ color:'#ff6b6b' }}>{fB(d.cost_of_revenue != null ? d.cost_of_revenue : (d.revenue && d.gross_profit ? d.revenue - d.gross_profit : null))}</td>
                   <td>{fB(d.gross_profit)}</td>
                   <td>{fB(d.operating_income)}</td>
                   <td>{fB(d.ebitda)}</td>
@@ -956,7 +958,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
                 </tr>
               ))}
               {tableData.length === 0 && (
-                <tr><td colSpan="14" style={{ textAlign:'center', padding:'40px', color:'var(--text-secondary)' }}>No data available</td></tr>
+                <tr><td colSpan="15" style={{ textAlign:'center', padding:'40px', color:'var(--text-secondary)' }}>No data available</td></tr>
               )}
             </tbody>
           </table>
@@ -1008,8 +1010,9 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
 // ── BusinessModelSection ─────────────────────────────
 function BusinessModelSection({ latest, profile, company }) {
   const rev = latest.revenue || 0;
-  const cogs = latest.cost_of_revenue || 0;
-  const gp = latest.gross_profit || (rev - cogs);
+  const gp = latest.gross_profit || 0;
+  // 매출원가 = DB값 우선, 없으면 매출 - 매출총이익으로 계산
+  const cogs = latest.cost_of_revenue || (rev > 0 && gp > 0 ? rev - gp : 0);
   const opInc = latest.operating_income || 0;
   const netInc = latest.net_income || 0;
   const opEx = Math.max(gp - opInc, 0);
