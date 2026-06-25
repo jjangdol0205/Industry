@@ -45,11 +45,32 @@ def run_startup_migrations():
         # 코인 industry_id=5로 잘못 등록된 기업이 있으면 4로 이동
         cur.execute("UPDATE companies SET industry_id=4 WHERE industry_id=5")
 
+        # ── display_order 컬럼 보장 ─────────────────────────────
+        cur.execute("PRAGMA table_info(companies)")
+        col_names = [r[1] for r in cur.fetchall()]
+        if 'display_order' not in col_names:
+            cur.execute("ALTER TABLE companies ADD COLUMN display_order INTEGER DEFAULT 999")
+            print("[Migration] display_order column added")
+
+        # ── COGS(매출원가) 자동 계산: NULL 또는 0이면 revenue - gross_profit ──
+        cur.execute("""
+            UPDATE financial_data
+            SET cost_of_revenue = revenue - gross_profit
+            WHERE (cost_of_revenue IS NULL OR cost_of_revenue = 0)
+              AND revenue IS NOT NULL AND revenue > 0
+              AND gross_profit IS NOT NULL AND gross_profit > 0
+              AND (revenue - gross_profit) > 0
+        """)
+        cogs_fixed = cur.rowcount
+        if cogs_fixed > 0:
+            print(f"[Migration] COGS auto-calculated: {cogs_fixed} records fixed")
+
         conn.commit()
         conn.close()
         print("[Migration] Startup DB migration complete.")
     except Exception as e:
         print(f"[Migration] Warning: {e}")
+
 
 run_startup_migrations()
 
