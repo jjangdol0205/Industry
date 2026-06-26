@@ -4,10 +4,25 @@ from typing import List, Optional
 class FinancialDataBase(BaseModel):
     period_type: str
     date: str
-    revenue: Optional[float]
-    operating_income: Optional[float]
-    net_income: Optional[float]
-    gross_margin: Optional[float]
+    revenue: Optional[float] = None
+    cost_of_revenue: Optional[float] = None      # 매출원가 (COGS)
+    gross_profit: Optional[float] = None          # 매출총이익
+    gross_margin: Optional[float] = None          # 매출총이익률 (%)
+    operating_income: Optional[float] = None      # 영업이익
+    op_margin: Optional[float] = None             # 영업이익률 (%)
+    net_income: Optional[float] = None            # 순이익
+    net_margin: Optional[float] = None            # 순이익률 (%)
+    operating_cash_flow: Optional[float] = None   # 영업현금흐름
+    capital_expenditure: Optional[float] = None   # 설비투자
+    free_cash_flow: Optional[float] = None        # 잉여현금흐름
+    total_assets: Optional[float] = None          # 총자산
+    total_debt: Optional[float] = None            # 총부채
+    shareholders_equity: Optional[float] = None   # 자기자본
+    cash_and_equivalents: Optional[float] = None  # 현금성자산
+    research_and_development: Optional[float] = None  # R&D 비용
+    selling_general_admin: Optional[float] = None # SG&A 비용
+    eps: Optional[float] = None                   # 주당순이익
+    shares_outstanding: Optional[float] = None    # 발행주식수
 
 class FinancialData(FinancialDataBase):
     id: int
