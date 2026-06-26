@@ -136,6 +136,32 @@ def ping():
     return {"status": "ok", "message": "pong"}
 
 # ─────────────────────────────────────────────
+# Admin: COGS 즉시 수정 (Render DB 직접 적용)
+# ─────────────────────────────────────────────
+@app.get("/api/admin/fix-cogs")
+def admin_fix_cogs():
+    """COGS(매출원가) = revenue - gross_profit 즉시 반영"""
+    import sqlite3
+    db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+    conn = sqlite3.connect(db_path)
+    cur = conn.cursor()
+    cur.execute("""
+        UPDATE financial_data
+        SET cost_of_revenue = revenue - gross_profit
+        WHERE (cost_of_revenue IS NULL OR cost_of_revenue = 0)
+          AND revenue IS NOT NULL AND revenue > 0
+          AND gross_profit IS NOT NULL AND gross_profit > 0
+          AND (revenue - gross_profit) > 0
+    """)
+    fixed = cur.rowcount
+    conn.commit()
+    # 검증
+    cur.execute("SELECT COUNT(*) FROM financial_data WHERE cost_of_revenue IS NOT NULL AND cost_of_revenue > 0")
+    total_ok = cur.fetchone()[0]
+    conn.close()
+    return {"fixed": fixed, "total_with_cogs": total_ok, "status": "done"}
+
+# ─────────────────────────────────────────────
 # Industry Reports
 # ─────────────────────────────────────────────
 @app.get("/api/reports", response_model=List[schemas.IndustryReport])
