@@ -1388,7 +1388,7 @@ function AgentWorkspace() {
 
   return (
     <div className="agent-workspace">
-      <div className="page-header" style={{ display:'flex', justifyContent:'space-between', alignItems:'center', borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'32px' }}>
+      <div className="page-header" style={{ display:'flex', justifyContent:'space-between', alignItems:'center', borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'24px' }}>
         <div>
           <div style={{ display:'flex', alignItems:'center', gap:'8px', marginBottom:'8px' }}>
             <span className={`live-badge ${running?'active':''}`}>{running?'● LIVE ANALYSIS':'● IDLE'}</span>
@@ -1401,94 +1401,60 @@ function AgentWorkspace() {
         </button>
       </div>
 
-      <div className="workspace-grid">
-        <div className="glass-panel" style={{ padding:'24px', display:'flex', flexDirection:'column', gap:'20px' }}>
-          <h3 style={{ color:'var(--accent-blue)', display:'flex', alignItems:'center', gap:'8px' }}>
-            <Activity size={20} /> 오케스트레이션 구성망 (Agent Tree)
-          </h3>
-          <div className="agent-tree">
-            <div className="tree-level row-layout wrap-layout" style={{ justifyContent: 'center', gap: '24px' }}>
-              {orchestrator && (
-                <div className={`agent-node orch-node ${activeAgentName===orchestrator.name?'active-glow':''}`}>
-                  <div className="node-role">Orchestrator</div>
-                  <div className="node-name">{orchestrator.name}</div>
-                  <div className="node-desc" style={{ fontSize:'0.75rem', opacity:0.8 }}>{orchestrator.role}</div>
-                </div>
-              )}
-              {managers.map(m => (
-                <div key={m.id} className={`agent-node manager-node ${activeAgentName===m.name?'active-glow':''}`}>
-                  <div className="node-role">{m.name === 'App Developer Agent' ? 'App Manager' : 'Site Manager'}</div>
-                  <div className="node-name">{m.name}</div>
-                  <div className="node-desc" style={{ fontSize:'0.75rem', opacity:0.8 }}>{m.role}</div>
-                </div>
-              ))}
-            </div>
-            <div className="tree-divider"></div>
-            {/* Quant Signal Agent */}
-            {quantAgents.length > 0 && (
-              <div className="tree-level row-layout" style={{ justifyContent:'center' }}>
-                {quantAgents.map(a => (
-                  <div key={a.id} className={`agent-node ${activeAgentName===a.name?'active-glow':''}`}
-                    style={{ borderColor:'rgba(245,158,11,0.5)', background:'rgba(245,158,11,0.05)', minWidth:'220px' }}>
-                    <div className="node-role" style={{ color:'#f59e0b' }}>Quant Signal Agent</div>
-                    <div className="node-name">{a.name}</div>
-                    <div className="node-desc" style={{ fontSize:'0.75rem', opacity:0.8 }}>{a.role}</div>
-                  </div>
-                ))}
+      {/* 에이전트 목록 — 가로 칩으로 간소화 */}
+      {agents.length > 0 && (
+        <div style={{ display:'flex', flexWrap:'wrap', gap:'8px', marginBottom:'16px' }}>
+          {agents.map(a => {
+            const typeColor = {
+              orchestrator:'#39ff14', management:'#00f2fe',
+              quant:'#f59e0b', industry:'#00bfff', company:'#bd93f9'
+            }[a.type] || '#aaa';
+            const isActive = activeAgentName === a.name;
+            return (
+              <div key={a.id} style={{
+                padding:'4px 12px', borderRadius:'20px', fontSize:'0.75rem', fontWeight:600,
+                border:`1px solid ${typeColor}55`,
+                background: isActive ? `${typeColor}22` : 'rgba(255,255,255,0.04)',
+                color: isActive ? typeColor : 'var(--text-secondary)',
+                transition:'all 0.3s',
+                boxShadow: isActive ? `0 0 8px ${typeColor}44` : 'none',
+              }}>
+                {isActive && <span style={{ marginRight:'4px' }}>●</span>}{a.name}
               </div>
-            )}
-            <div className="tree-divider"></div>
-            <div className="tree-level row-layout">
-              {industryAgents.map(a => (
-                <div key={a.id} className={`agent-node ind-node ${activeAgentName===a.name?'active-glow':''}`}>
-                  <div className="node-role">Industry Analyst</div>
-                  <div className="node-name">{a.name}</div>
-                  <div className="node-desc" style={{ fontSize:'0.75rem', opacity:0.8 }}>{a.role}</div>
-                </div>
-              ))}
-            </div>
-            <div className="tree-divider"></div>
-            <div className="tree-level row-layout wrap-layout">
-              {companyAgents.map(a => (
-                <div key={a.id} className={`agent-node comp-node ${activeAgentName===a.name?'active-glow':''}`}>
-                  <div className="node-role">Company Monitor</div>
-                  <div className="node-name">{a.name}</div>
-                  <div className="node-desc" style={{ fontSize:'0.75rem', opacity:0.8 }}>{a.role}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+            );
+          })}
         </div>
+      )}
 
-        <div className="terminal-panel glass-panel">
-          <div className="terminal-header">
-            <span>TERMINAL LOGS</span>
-            {running && <span className="loader-dots"></span>}
-          </div>
-          <div className="terminal-body">
-            {messages.length === 0 ? (
-              <div className="terminal-placeholder">AI 분석 가동 버튼을 누르면 에이전트들이 실시간 대화를 나누며 보고서를 도출합니다.</div>
-            ) : (
-              messages.map((m) => {
-                const isThought = m.msg_type === 'thought';
-                return (
-                  <div key={m.id} className={`terminal-line ${isThought?'thought-line':''}`}>
-                    <span className="timestamp">[{m.timestamp.substring(11)}]</span>{' '}
-                    <span className="sender" style={{ color:getAgentColor(m.sender, m.sender_type, isThought) }}>
-                      {m.sender}{isThought?'의 생각':''}:
-                    </span>{' '}
-                    <span className="content">{m.content}</span>
-                  </div>
-                );
-              })
-            )}
-            <div ref={terminalEndRef} />
-          </div>
+      {/* Terminal Logs — 전체 너비 */}
+      <div className="terminal-panel glass-panel" style={{ height:'60vh' }}>
+        <div className="terminal-header">
+          <span>TERMINAL LOGS</span>
+          {running && <span className="loader-dots"></span>}
+        </div>
+        <div className="terminal-body">
+          {messages.length === 0 ? (
+            <div className="terminal-placeholder">AI 분석 가동 버튼을 누르면 에이전트들이 실시간 대화를 나누며 보고서를 도출합니다.</div>
+          ) : (
+            messages.map((m) => {
+              const isThought = m.msg_type === 'thought';
+              return (
+                <div key={m.id} className={`terminal-line ${isThought?'thought-line':''}`}>
+                  <span className="timestamp">[{m.timestamp.substring(11)}]</span>{' '}
+                  <span className="sender" style={{ color:getAgentColor(m.sender, m.sender_type, isThought) }}>
+                    {m.sender}{isThought?'의 생각':''}:
+                  </span>{' '}
+                  <span className="content">{m.content}</span>
+                </div>
+              );
+            })
+          )}
+          <div ref={terminalEndRef} />
         </div>
       </div>
 
       {report && (
-        <div className="report-content glass-panel" style={{ padding:'40px', marginTop:'40px' }}>
+        <div className="report-content glass-panel" style={{ padding:'40px', marginTop:'32px' }}>
           <h2 style={{ color:'var(--accent-blue)', fontSize:'1.8rem', borderBottom:'1px solid var(--border-color)', paddingBottom:'16px', marginBottom:'24px' }}>
             {report.title}
           </h2>
