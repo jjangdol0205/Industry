@@ -300,6 +300,9 @@ def get_company_financials(
             "fiscal_year": f.fiscal_year,
             # 손익
             "revenue": f.revenue,
+            "cost_of_revenue": f.cost_of_revenue if f.cost_of_revenue else (
+                (f.revenue - f.gross_profit) if (f.revenue and f.gross_profit and f.revenue > f.gross_profit) else None
+            ),  # 매출원가: DB값 우선, 없으면 역산
             "gross_profit": f.gross_profit,
             "operating_income": f.operating_income,
             "ebitda": f.ebitda,
