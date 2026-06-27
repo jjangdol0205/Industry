@@ -1324,145 +1324,430 @@ function FlowArrow() {
   );
 }
 
-// ── AgentWorkspace (기존 코드 유지) ──────────────────────
+// ── AI 포트폴리오 매니저 ─────────────────────────────────
 function AgentWorkspace() {
-
-  const [agents, setAgents] = useState([]);
-  const [messages, setMessages] = useState([]);
-  const [report, setReport] = useState(null);
+  const [portfolio, setPortfolio] = useState(null);
   const [running, setRunning] = useState(false);
-  const [activeAgentName, setActiveAgentName] = useState(null);
-  const terminalEndRef = React.useRef(null);
+  const [loadingStep, setLoadingStep] = useState(0);
+  const pollRef = React.useRef(null);
 
-  useEffect(() => { fetchAgents(); fetchMessages(); fetchReport(); }, []);
+  const LOADING_STEPS = [
+    { icon: '🔍', text: '전 산업 밸류체인 분석 중...' },
+    { icon: '📊', text: `60+ 기업 성장성 스크리닝 중...` },
+    { icon: '💰', text: '현재 주가 대비 업사이드 갭 계산 중...' },
+    { icon: '🧮', text: '5~10년 기대수익률 모델링 중...' },
+    { icon: '⚖️', text: '최적 비중 배분 알고리즘 실행 중...' },
+    { icon: '✍️', text: 'AI가 투자 근거를 작성 중...' },
+  ];
 
+  // 로딩 스텝 순환
   useEffect(() => {
-    if (terminalEndRef.current) terminalEndRef.current.scrollIntoView({ behavior:'smooth' });
-    if (messages.length > 0) {
-      const last = messages[messages.length-1];
-      if (last.sender !== 'System') setActiveAgentName(last.sender);
-    }
-  }, [messages]);
-
-  useEffect(() => {
-    let interval;
-    if (running) interval = setInterval(() => { fetchMessages(); fetchReport(); }, 1500);
-    return () => clearInterval(interval);
+    let t;
+    if (running) t = setInterval(() => setLoadingStep(s => (s + 1) % LOADING_STEPS.length), 2500);
+    return () => clearInterval(t);
   }, [running]);
 
-  const fetchAgents = async () => { try { const r = await axios.get(`${API_BASE}/agents`); setAgents(r.data); } catch(e){} };
-  const fetchMessages = async () => {
+  // 기존 포트폴리오 로드
+  useEffect(() => {
+    axios.get(`${API_BASE}/orchestration/report`)
+      .then(r => {
+        if (r.data?.content) {
+          try {
+            const d = JSON.parse(r.data.content);
+            if (d.type === 'portfolio') setPortfolio(d);
+          } catch (_) {}
+        }
+      }).catch(() => {});
+  }, []);
+
+  const startPortfolio = async () => {
+    setRunning(true);
+    setPortfolio(null);
+    setLoadingStep(0);
     try {
-      const r = await axios.get(`${API_BASE}/agents/messages`);
-      setMessages(r.data);
-      if (r.data.some(m => m.content.includes('시뮬레이션을 종료합니다.'))) setRunning(false);
-    } catch(e){}
-  };
-  const fetchReport = async () => {
-    try {
-      const r = await axios.get(`${API_BASE}/orchestration/report`);
-      setReport(r.data?.title !== '보고서 없음' ? r.data : null);
-    } catch(e){}
-  };
-  const startAnalysis = async () => {
-    setRunning(true); setMessages([]); setReport(null); setActiveAgentName(null);
-    try { await axios.post(`${API_BASE}/agents/run`); } catch(e) { setRunning(false); }
+      await axios.post(`${API_BASE}/agents/run`);
+      // 폴링
+      pollRef.current = setInterval(async () => {
+        try {
+          const r = await axios.get(`${API_BASE}/orchestration/report`);
+          if (r.data?.content) {
+            try {
+              const d = JSON.parse(r.data.content);
+              if (d.type === 'portfolio' && d.portfolio?.length > 0) {
+                setPortfolio(d);
+                setRunning(false);
+                clearInterval(pollRef.current);
+              }
+            } catch (_) {}
+          }
+        } catch (_) {}
+      }, 2000);
+      // 3분 타임아웃
+      setTimeout(() => {
+        if (pollRef.current) clearInterval(pollRef.current);
+        setRunning(false);
+      }, 180000);
+    } catch (e) {
+      setRunning(false);
+    }
   };
 
-  const getAgentColor = (sender, type, isThought) => {
-    if (isThought) return '#888888';
-    if (sender === 'System') return '#00f2fe';
-    if (type === 'orchestrator') return '#39ff14';
-    if (type === 'management') return '#00f2fe';
-    if (type === 'quant') return '#f59e0b';
-    if (type === 'industry') return '#00bfff';
-    if (type === 'company') return '#bd93f9';
-    return 'var(--text-primary)';
-  };
+  const PIE_COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444'];
+  const RANK_COLORS = ['#FFD700', '#C0C0C0', '#CD7F32', '#3b82f6', '#6b7280'];
+  const RANK_LABELS = ['🥇 1위', '🥈 2위', '🥉 3위', '4위', '5위'];
 
-  const orchestrator = agents.find(a => a.type === 'orchestrator');
-  const managers = agents.filter(a => a.type === 'management');
-  const quantAgents = agents.filter(a => a.type === 'quant');
-  const industryAgents = agents.filter(a => a.type === 'industry');
-  const companyAgents = agents.filter(a => a.type === 'company');
+  const pieData = portfolio?.portfolio?.map((s, i) => ({
+    name: s.ticker, value: s.weight, fill: PIE_COLORS[i]
+  })) || [];
 
   return (
     <div className="agent-workspace">
-      <div className="page-header" style={{ display:'flex', justifyContent:'space-between', alignItems:'center', borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'24px' }}>
+      {/* ── 헤더 ── */}
+      <div className="page-header" style={{
+        display:'flex', justifyContent:'space-between', alignItems:'flex-start',
+        borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'32px'
+      }}>
         <div>
-          <div style={{ display:'flex', alignItems:'center', gap:'8px', marginBottom:'8px' }}>
-            <span className={`live-badge ${running?'active':''}`}>{running?'● LIVE ANALYSIS':'● IDLE'}</span>
-            <span style={{ color:'var(--text-secondary)' }}>Multi-Agent Strategy Room</span>
+          <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'10px' }}>
+            <span className={`live-badge ${running ? 'active' : ''}`}>
+              {running ? '● 분석 진행 중' : portfolio ? '● 포트폴리오 구성 완료' : '● 대기 중'}
+            </span>
+            <span style={{ color:'var(--text-secondary)', fontSize:'0.85rem' }}>
+              Multi-Agent Portfolio Manager
+            </span>
           </div>
-          <h2 style={{ fontSize:'2.5rem' }}>AI 애널리스트 워크스페이스</h2>
+          <h2 style={{ fontSize:'2.2rem', margin:0 }}>AI 포트폴리오 매니저</h2>
+          <p style={{ color:'var(--text-secondary)', margin:'8px 0 0', fontSize:'0.9rem' }}>
+            전 산업 · 전 기업 스크리닝 → 5종목 집중 포트폴리오 · 5~10년 중장기 최적 비중 배분
+          </p>
         </div>
-        <button className="run-btn" disabled={running} onClick={startAnalysis}>
-          {running ? '협동 분석 진행 중...' : 'AI 협동 분석 가동'}
+        <button
+          className="run-btn"
+          disabled={running}
+          onClick={startPortfolio}
+          style={{ whiteSpace:'nowrap', flexShrink:0 }}
+        >
+          {running ? '⏳ 포트폴리오 구성 중...' : '🚀 포트폴리오 구성 실행'}
         </button>
       </div>
 
-      {/* 에이전트 목록 — 가로 칩으로 간소화 */}
-      {agents.length > 0 && (
-        <div style={{ display:'flex', flexWrap:'wrap', gap:'8px', marginBottom:'16px' }}>
-          {agents.map(a => {
-            const typeColor = {
-              orchestrator:'#39ff14', management:'#00f2fe',
-              quant:'#f59e0b', industry:'#00bfff', company:'#bd93f9'
-            }[a.type] || '#aaa';
-            const isActive = activeAgentName === a.name;
-            return (
-              <div key={a.id} style={{
-                padding:'4px 12px', borderRadius:'20px', fontSize:'0.75rem', fontWeight:600,
-                border:`1px solid ${typeColor}55`,
-                background: isActive ? `${typeColor}22` : 'rgba(255,255,255,0.04)',
-                color: isActive ? typeColor : 'var(--text-secondary)',
-                transition:'all 0.3s',
-                boxShadow: isActive ? `0 0 8px ${typeColor}44` : 'none',
-              }}>
-                {isActive && <span style={{ marginRight:'4px' }}>●</span>}{a.name}
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Terminal Logs — 전체 너비 */}
-      <div className="terminal-panel glass-panel" style={{ height:'60vh' }}>
-        <div className="terminal-header">
-          <span>TERMINAL LOGS</span>
-          {running && <span className="loader-dots"></span>}
-        </div>
-        <div className="terminal-body">
-          {messages.length === 0 ? (
-            <div className="terminal-placeholder">AI 분석 가동 버튼을 누르면 에이전트들이 실시간 대화를 나누며 보고서를 도출합니다.</div>
-          ) : (
-            messages.map((m) => {
-              const isThought = m.msg_type === 'thought';
-              return (
-                <div key={m.id} className={`terminal-line ${isThought?'thought-line':''}`}>
-                  <span className="timestamp">[{m.timestamp.substring(11)}]</span>{' '}
-                  <span className="sender" style={{ color:getAgentColor(m.sender, m.sender_type, isThought) }}>
-                    {m.sender}{isThought?'의 생각':''}:
-                  </span>{' '}
-                  <span className="content">{m.content}</span>
-                </div>
-              );
-            })
-          )}
-          <div ref={terminalEndRef} />
-        </div>
-      </div>
-
-      {report && (
-        <div className="report-content glass-panel" style={{ padding:'40px', marginTop:'32px' }}>
-          <h2 style={{ color:'var(--accent-blue)', fontSize:'1.8rem', borderBottom:'1px solid var(--border-color)', paddingBottom:'16px', marginBottom:'24px' }}>
-            {report.title}
-          </h2>
-          <div className="markdown-body">
-            <ReactMarkdown>{report.content}</ReactMarkdown>
+      {/* ── 로딩 상태 ── */}
+      {running && (
+        <div className="glass-panel" style={{
+          padding:'60px 40px', textAlign:'center',
+          background:'linear-gradient(135deg, rgba(59,130,246,0.06), rgba(139,92,246,0.06))',
+          border:'1px solid rgba(59,130,246,0.2)', borderRadius:'16px', marginBottom:'32px',
+        }}>
+          {/* 스피너 */}
+          <div style={{ position:'relative', width:'80px', height:'80px', margin:'0 auto 32px' }}>
+            <div style={{
+              position:'absolute', inset:0,
+              border:'3px solid rgba(59,130,246,0.15)', borderTopColor:'#3b82f6',
+              borderRadius:'50%', animation:'spin 1s linear infinite',
+            }} />
+            <div style={{
+              position:'absolute', inset:'10px',
+              border:'3px solid rgba(139,92,246,0.15)', borderBottomColor:'#8b5cf6',
+              borderRadius:'50%', animation:'spin 1.5s linear infinite reverse',
+            }} />
+            <div style={{
+              position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center',
+              fontSize:'1.8rem',
+            }}>
+              {LOADING_STEPS[loadingStep].icon}
+            </div>
+          </div>
+          <div style={{ fontSize:'1.1rem', fontWeight:600, color:'white', marginBottom:'8px' }}>
+            {LOADING_STEPS[loadingStep].text}
+          </div>
+          <div style={{ color:'rgba(255,255,255,0.4)', fontSize:'0.85rem' }}>
+            3단계 스크리닝: Quant(30%) + Growth(40%) + Upside Gap(30%)
+          </div>
+          {/* 단계 도트 */}
+          <div style={{ display:'flex', justifyContent:'center', gap:'8px', marginTop:'24px' }}>
+            {LOADING_STEPS.map((_, i) => (
+              <div key={i} style={{
+                width:'8px', height:'8px', borderRadius:'50%',
+                background: i === loadingStep ? '#3b82f6' : 'rgba(255,255,255,0.15)',
+                transition:'background 0.3s',
+              }} />
+            ))}
           </div>
         </div>
       )}
+
+      {/* ── 빈 상태 ── */}
+      {!running && !portfolio && (
+        <div className="glass-panel" style={{
+          padding:'80px 40px', textAlign:'center',
+          border:'1px dashed rgba(255,255,255,0.1)', borderRadius:'16px',
+        }}>
+          <div style={{ fontSize:'4rem', marginBottom:'20px' }}>📊</div>
+          <div style={{ fontSize:'1.2rem', fontWeight:700, color:'white', marginBottom:'12px' }}>
+            AI 포트폴리오 매니저
+          </div>
+          <div style={{ color:'var(--text-secondary)', maxWidth:'480px', margin:'0 auto', lineHeight:'1.7', fontSize:'0.95rem' }}>
+            버튼을 클릭하면 AI가 <strong>5개 산업 · 60개+ 기업</strong>을 전수 분석하여<br />
+            현재 주가 대비 <strong>5~10년 기대수익률이 가장 높은 5종목</strong>을<br />
+            확신도 비례 차등 비중으로 구성합니다.
+          </div>
+          <div style={{
+            display:'flex', justifyContent:'center', gap:'24px', marginTop:'32px',
+            fontSize:'0.82rem', color:'rgba(255,255,255,0.3)',
+          }}>
+            <span>📐 Quant 30%</span>
+            <span>🌱 Growth 40%</span>
+            <span>🎯 Upside Gap 30%</span>
+          </div>
+        </div>
+      )}
+
+      {/* ── 포트폴리오 결과 ── */}
+      {!running && portfolio && (
+        <div>
+          {/* 요약 헤더 */}
+          <div className="glass-panel" style={{
+            padding:'24px 32px', marginBottom:'24px',
+            background:'linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.06))',
+            border:'1px solid rgba(59,130,246,0.25)',
+          }}>
+            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'16px' }}>
+              <div>
+                <div style={{ fontSize:'1.4rem', fontWeight:800, color:'white', marginBottom:'4px' }}>
+                  🏆 AI 최적 포트폴리오 — 중장기 집중 투자 (5~10년)
+                </div>
+                <div style={{ color:'rgba(255,255,255,0.45)', fontSize:'0.82rem' }}>
+                  구성일: {portfolio.created_at} · {portfolio.total_industries_analyzed}개 산업 · {portfolio.total_companies_screened}개 기업 스크리닝
+                </div>
+              </div>
+              <div style={{ display:'flex', gap:'24px' }}>
+                {[
+                  { label:'Base CAGR', val:`~${portfolio.scenario?.base?.cagr || '-'}%/yr`, color:'#3b82f6' },
+                  { label:'5년 기대수익', val:`+${portfolio.scenario?.base?.return_pct || '-'}%`, color:'#10b981' },
+                  { label:'Bull Case', val:`+${portfolio.scenario?.bull?.return_pct || '-'}%`, color:'#f59e0b' },
+                ].map(({ label, val, color }) => (
+                  <div key={label} style={{ textAlign:'center' }}>
+                    <div style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>{label}</div>
+                    <div style={{ fontSize:'1.3rem', fontWeight:800, color }}>{val}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* 메인: 도넛 차트 + 종목 카드 */}
+          <div style={{ display:'grid', gridTemplateColumns:'300px 1fr', gap:'24px', marginBottom:'24px' }}>
+
+            {/* 도넛 차트 */}
+            <div className="glass-panel" style={{ padding:'24px', display:'flex', flexDirection:'column', alignItems:'center' }}>
+              <div style={{ fontSize:'0.85rem', color:'var(--text-secondary)', marginBottom:'16px', fontWeight:600 }}>
+                포트폴리오 비중 배분
+              </div>
+              <ResponsiveContainer width="100%" height={220}>
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%" cy="50%"
+                    innerRadius={68} outerRadius={100}
+                    dataKey="value"
+                    paddingAngle={3}
+                  >
+                    {pieData.map((entry, i) => (
+                      <Cell key={i} fill={entry.fill} stroke="none" />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(v, name) => [`${v}%`, name]}
+                    contentStyle={{
+                      backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)',
+                      fontSize:'0.82rem', borderRadius:'8px',
+                    }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+              {/* 범례 */}
+              <div style={{ width:'100%', display:'flex', flexDirection:'column', gap:'8px', marginTop:'8px' }}>
+                {portfolio.portfolio.map((s, i) => (
+                  <div key={i} style={{ display:'flex', alignItems:'center', gap:'10px' }}>
+                    <div style={{ width:'12px', height:'12px', borderRadius:'3px', background:PIE_COLORS[i], flexShrink:0 }} />
+                    <div style={{ flex:1, fontSize:'0.82rem', color:'var(--text-primary)', fontWeight:600 }}>{s.ticker}</div>
+                    <div style={{ fontSize:'0.82rem', color:PIE_COLORS[i], fontWeight:700 }}>{s.weight}%</div>
+                    {/* 비중 바 */}
+                    <div style={{ width:'60px', height:'4px', background:'rgba(255,255,255,0.08)', borderRadius:'4px', overflow:'hidden' }}>
+                      <div style={{ width:`${s.weight}%`, height:'100%', background:PIE_COLORS[i], borderRadius:'4px' }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 5개 종목 카드 */}
+            <div style={{ display:'flex', flexDirection:'column', gap:'12px' }}>
+              {portfolio.portfolio.map((stock, i) => {
+                const col = PIE_COLORS[i];
+                const rankCol = RANK_COLORS[i];
+                return (
+                  <div key={i} className="glass-panel" style={{
+                    padding:'18px 22px',
+                    borderLeft:`4px solid ${col}`,
+                    background:`linear-gradient(135deg, ${col}08, transparent)`,
+                    transition:'box-shadow 0.2s',
+                  }}>
+                    {/* 상단: 종목명 + 비중 */}
+                    <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px' }}>
+                      <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
+                        <span style={{
+                          background:`${rankCol}22`, border:`1px solid ${rankCol}66`,
+                          color:rankCol, borderRadius:'10px', padding:'2px 10px',
+                          fontSize:'0.72rem', fontWeight:700,
+                        }}>
+                          {RANK_LABELS[i]}
+                        </span>
+                        <span style={{ fontSize:'1.05rem', fontWeight:700, color:'white' }}>{stock.name}</span>
+                        <span style={{
+                          background:'rgba(255,255,255,0.08)', borderRadius:'6px',
+                          padding:'2px 8px', fontSize:'0.75rem', color:'rgba(255,255,255,0.5)',
+                          fontFamily:'monospace',
+                        }}>{stock.ticker}</span>
+                        <span style={{
+                          background:`${col}18`, border:`1px solid ${col}44`,
+                          color:col, borderRadius:'8px', padding:'2px 8px', fontSize:'0.72rem',
+                        }}>{stock.industry}</span>
+                      </div>
+                      <div style={{ textAlign:'right' }}>
+                        <div style={{ fontSize:'1.8rem', fontWeight:900, color:col, lineHeight:1 }}>{stock.weight}%</div>
+                        <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.3)' }}>포트폴리오 비중</div>
+                      </div>
+                    </div>
+
+                    {/* 중단: 주가 & CAGR */}
+                    <div style={{
+                      display:'flex', gap:'20px', marginBottom:'10px',
+                      padding:'10px 14px', background:'rgba(0,0,0,0.2)', borderRadius:'8px',
+                      flexWrap:'wrap',
+                    }}>
+                      {stock.current_price && (
+                        <div>
+                          <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.35)' }}>현재가</div>
+                          <div style={{ fontWeight:700, color:'white', fontFamily:'monospace' }}>${stock.current_price}</div>
+                        </div>
+                      )}
+                      {stock.target_price_5y && (
+                        <>
+                          <div style={{ color:'rgba(255,255,255,0.2)', alignSelf:'center' }}>→</div>
+                          <div>
+                            <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.35)' }}>5년 목표</div>
+                            <div style={{ fontWeight:700, color:'#10b981', fontFamily:'monospace' }}>${stock.target_price_5y}</div>
+                          </div>
+                          <div>
+                            <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.35)' }}>총 수익</div>
+                            <div style={{ fontWeight:700, color:'#10b981' }}>+{stock.total_return_5y}%</div>
+                          </div>
+                          <div>
+                            <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.35)' }}>CAGR</div>
+                            <div style={{ fontWeight:700, color:col }}>{stock.cagr_5y}%/yr</div>
+                          </div>
+                        </>
+                      )}
+                      <div style={{ marginLeft:'auto', display:'flex', gap:'12px' }}>
+                        {[
+                          { label:'Quant', val:stock.quant_score },
+                          { label:'Growth', val:stock.growth_score },
+                          { label:'Upside', val:stock.upside_score },
+                        ].map(({ label, val }) => (
+                          <div key={label} style={{ textAlign:'center' }}>
+                            <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.3)' }}>{label}</div>
+                            <div style={{
+                              fontSize:'0.82rem', fontWeight:700,
+                              color: val >= 70 ? '#10b981' : val >= 50 ? '#f59e0b' : '#ef4444',
+                            }}>{val}</div>
+                          </div>
+                        ))}
+                        <div style={{ textAlign:'center' }}>
+                          <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.3)' }}>종합</div>
+                          <div style={{ fontSize:'0.9rem', fontWeight:800, color:col }}>{stock.portfolio_score}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 하단: 선정 이유 & 리스크 */}
+                    <div style={{ display:'flex', flexDirection:'column', gap:'6px' }}>
+                      <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.75)', lineHeight:'1.6' }}>
+                        <span style={{ color:col, fontWeight:700, marginRight:'6px' }}>📌 선정 이유</span>
+                        {stock.selection_reason}
+                      </div>
+                      <div style={{ fontSize:'0.82rem', color:'rgba(255,120,100,0.8)', lineHeight:'1.5' }}>
+                        <span style={{ fontWeight:700, marginRight:'6px' }}>⚠️ 핵심 리스크</span>
+                        {stock.key_risk}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 시나리오 테이블 */}
+          {portfolio.scenario && (
+            <div className="glass-panel" style={{ padding:'24px 28px', marginBottom:'24px' }}>
+              <div style={{ fontSize:'1rem', fontWeight:700, marginBottom:'16px', color:'var(--accent-blue)' }}>
+                📈 5년 시나리오 분석
+              </div>
+              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'12px' }}>
+                {[
+                  { key:'bull', label:'Bull Case', emoji:'🚀', color:'#10b981' },
+                  { key:'base', label:'Base Case', emoji:'📊', color:'#3b82f6' },
+                  { key:'bear', label:'Bear Case', emoji:'🐻', color:'#ef4444' },
+                ].map(({ key, label, emoji, color }) => {
+                  const sc = portfolio.scenario[key];
+                  if (!sc) return null;
+                  return (
+                    <div key={key} style={{
+                      padding:'16px', borderRadius:'12px',
+                      background:`${color}0a`, border:`1px solid ${color}30`,
+                    }}>
+                      <div style={{ display:'flex', alignItems:'center', gap:'8px', marginBottom:'10px' }}>
+                        <span style={{ fontSize:'1.2rem' }}>{emoji}</span>
+                        <span style={{ fontWeight:700, color }}>{label}</span>
+                        <span style={{
+                          marginLeft:'auto', background:`${color}20`, border:`1px solid ${color}40`,
+                          color, borderRadius:'8px', padding:'2px 8px', fontSize:'0.72rem', fontWeight:700,
+                        }}>P: {sc.probability}%</span>
+                      </div>
+                      <div style={{ fontSize:'1.8rem', fontWeight:900, color, marginBottom:'4px' }}>
+                        {sc.return_pct >= 0 ? '+' : ''}{sc.return_pct}%
+                      </div>
+                      <div style={{ fontSize:'0.8rem', color:`${color}99`, marginBottom:'8px' }}>
+                        CAGR {sc.cagr}%/yr
+                      </div>
+                      <div style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.45)', lineHeight:'1.5' }}>
+                        {sc.trigger}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* 스코어링 방법론 */}
+          <div className="glass-panel" style={{
+            padding:'16px 24px', background:'rgba(255,255,255,0.02)',
+            border:'1px solid rgba(255,255,255,0.06)',
+          }}>
+            <div style={{ display:'flex', gap:'24px', flexWrap:'wrap', fontSize:'0.78rem', color:'rgba(255,255,255,0.35)' }}>
+              <span style={{ fontWeight:700, color:'rgba(255,255,255,0.5)' }}>스코어링 방법론</span>
+              {portfolio.scoring_weights && Object.values(portfolio.scoring_weights).map((v, i) => (
+                <span key={i}>· {v}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes spin { to { transform: rotate(360deg); } }
+      `}</style>
     </div>
   );
 }
