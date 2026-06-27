@@ -1,0 +1,33 @@
+{
+  "short_name": "Alpha Research",
+  "name": "Alpha Research — 산업 투자 인텔리전스",
+  "description": "자율주행·로봇·우주·코인 산업 밸류체인 심층 분석 및 기관급 AI 투자 리서치 포털",
+  "icons": [
+    { "src": "/icon-72x72.png",   "type": "image/png", "sizes": "72x72",   "purpose": "any" },
+    { "src": "/icon-96x96.png",   "type": "image/png", "sizes": "96x96",   "purpose": "any" },
+    { "src": "/icon-128x128.png", "type": "image/png", "sizes": "128x128", "purpose": "any" },
+    { "src": "/icon-144x144.png", "type": "image/png", "sizes": "144x144", "purpose": "any" },
+    { "src": "/icon-152x152.png", "type": "image/png", "sizes": "152x152", "purpose": "any" },
+    { "src": "/icon-192x192.png", "type": "image/png", "sizes": "192x192", "purpose": "any maskable" },
+    { "src": "/icon-384x384.png", "type": "image/png", "sizes": "384x384", "purpose": "any" },
+    { "src": "/icon-512x512.png", "type": "image/png", "sizes": "512x512", "purpose": "any maskable" }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0e1a",
+  "theme_color": "#3b82f6",
+  "lang": "ko",
+  "categories": ["finance", "business"],
+  "prefer_related_applications": false,
+  "screenshots": [
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Alpha Research 메인 화면"
+    }
+  ]
+}

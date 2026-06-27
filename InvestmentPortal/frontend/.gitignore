@@ -8,8 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
-dist-ssr
+# dist  ← Render 배포용으로 빌드 파일 포함
+# dist-ssr
 *.local
 
 # Editor directories and files
