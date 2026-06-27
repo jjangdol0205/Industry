@@ -36,14 +36,72 @@ def run_startup_migrations():
             """)
             print("[Migration] id=4 title updated to merged coin report")
 
-        # Vol.2(id=5) 중복 리포트 삭제
+        # Vol.2(id=5) 중복 코인 리포트 삭제 (태그가 '코인'인 경우만)
         cur.execute("SELECT id FROM industry_reports WHERE id=5 AND tag='코인'")
         if cur.fetchone():
             cur.execute("DELETE FROM industry_reports WHERE id=5")
             print("[Migration] id=5 coin Vol.2 report deleted")
 
-        # 코인 industry_id=5로 잘못 등록된 기업이 있으면 4로 이동
-        cur.execute("UPDATE companies SET industry_id=4 WHERE industry_id=5")
+        # ── 에너지 산업 리포트 초기화 (id=5, tag='에너지') ──────────
+        cur.execute("SELECT id FROM industry_reports WHERE id=5")
+        if not cur.fetchone():
+            cur.execute("""
+                INSERT INTO industry_reports (id, title, summary, file_path, tag)
+                VALUES (5, 'AI 에너지 인프라 밸류체인 심층분석',
+                '## 1. 산업 개요: AI 전력 위기와 에너지 인프라의 부상\n\n생성형 AI 폭증이 초래한 데이터센터 전력 수요 급증은 전통적인 전력망이 감당할 수 있는 한계를 초과했습니다. 엔비디아 H100 GPU 클러스터 한 랙만으로도 40~100kW의 전력을 소비하며, 2030년까지 미국 데이터센터 전력 수요는 현재의 3배에 달하는 35GW 이상으로 폭증할 전망입니다. 재생에너지의 간헐성과 전력망 확충의 지연이라는 이중 장벽 앞에서, **SMR(소형모듈원전)**과 **가스터빈 분산 발전**이 구조적 해법으로 부상하고 있습니다.\n\n## 2. 핵심 투자 테마: 3개 레이어 밸류체인\n\n**① 가스터빈 발전 (단기: 1~3년)**\n- AI 데이터센터 전력 공급의 브릿지(Bridge) 솔루션\n- 태양광/풍력 간헐성 보완 + 1~2년 내 신속 구축 가능\n- GE Vernova, Siemens Energy, Mitsubishi Heavy Industries 수혜\n\n**② SMR 설계 팹리스 (중기: 3~7년)**\n- 미국 NRC 표준설계인가(SDA) = 규제 해자 독점\n- 24/7 무탄소(CFE) 기저 전원 공급 → 빅테크 직접 PPA 체결\n- NuScale Power, Oklo Inc. 인허가 선점 경쟁\n\n**③ 원자력 파운드리 & 핵연료 (장기: 7년+)**\n- SMR 상용화 시 수혜받는 실물 제조 독점 레이어\n- 수주 즉시 현금 수취(Cost-Plus 계약 구조)\n- BWX Technologies, Doosan Enerbility, Centrus Energy 독점적 위치\n\n## 3. 구조적 전환점: 빅테크 PPA가 만드는 새로운 질서\n\n마이크로소프트-쓰리마일섬 재가동 20년 PPA(2023), 구글-카이로스 파워 500MW PPA(2023), 아마존-탈렌에너지 원전 직결 데이터센터(2023) 체결은 단순한 계약이 아닌 **에너지 인프라 산업의 구조적 패러다임 전환**입니다.\n\n- **전력 구매자가 발전소를 직접 기획·발주**하는 수직통합 모델로 진화\n- Take-or-Pay PPA → 설계사/파운드리에 선수금 지급 구조 고착\n- 탄소국경세(CBAM) + 미국 IRA 인센티브가 원자력 경제성 방어\n\n## 4. 핵심 리스크\n\n* **규제 지연 리스크:** NRC 인허가 평균 소요기간 5~10년\n* **비용 초과 리스크:** SMR의 실제 $/kWh 경쟁력 검증 미완료\n* **핵연료 공급망:** HALEU 농축 시설 용량 부족\n* **빅테크 전략 선회:** 재생에너지 기술 돌파 시 원전 PPA 수요 감소\n\n## 5. 투자 전략: 밸류체인 레이어별 포지셔닝\n\n단기 수혜: GEV, SMEGF | 중기 옵션: SMR, OKLO | 장기 독점: LEU, BWXT, 034020.KS',
+                '5. 에너지/에너지 산업.pdf', '에너지')
+            """)
+            print("[Migration] id=5 energy report inserted")
+        else:
+            # 에너지 리포트 제목이 구버전이면 업데이트
+            cur.execute("SELECT title FROM industry_reports WHERE id=5")
+            title_row = cur.fetchone()
+            if title_row and 'AI 에너지 인프라' not in title_row[0]:
+                cur.execute("""
+                    UPDATE industry_reports SET
+                        title = 'AI 에너지 인프라 밸류체인 심층분석',
+                        tag = '에너지'
+                    WHERE id = 5
+                """)
+                print("[Migration] id=5 energy report title updated")
+
+        # ── 에너지 value_chain_nodes 초기화 ────────────────────
+        energy_nodes = [
+            (20, 5, '가스터빈 발전 (Gas Turbines)', 'AI 데이터센터 전력 공급의 브릿지 솔루션. 1~2년 내 신속 구축 가능한 분산 전원망.'),
+            (21, 5, 'SMR 설계 팹리스 (SMR Fabless)', '24/7 무탄소 CFE 전력을 공급하는 소형모듈원전 설계 전문 기업들.'),
+            (22, 5, '원자력 파운드리 및 제조 (Foundry & Manufacturing)', 'SMR 핵심 기자재 실물 제조 독점 레이어.'),
+            (23, 5, '차세대 핵연료 가공 (Advanced Nuclear Fuel)', 'HALEU 농축 및 TRISO 안전 연료 제조 독점 공급망.'),
+            (24, 5, '원전 운영 및 CFE 서비스 (Nuclear Operations)', '빅테크와 20년 이상 장기 PPA로 무탄소 전력 공급하는 운영 레이어.'),
+        ]
+        for node in energy_nodes:
+            cur.execute("SELECT id FROM value_chain_nodes WHERE id=?", (node[0],))
+            if not cur.fetchone():
+                cur.execute("INSERT INTO value_chain_nodes (id, industry_id, node_name, description) VALUES (?,?,?,?)", node)
+                print(f"[Migration] value_chain_node id={node[0]} inserted")
+
+        # ── 에너지 기업 초기화 (없으면 삽입) ─────────────────────
+        energy_companies = [
+            ('GE Vernova', 'GEV', 5, 20, 'GE Vernova — 글로벌 대용량 복합화력발전 1위. AI 데이터센터 단기 전력 공급원.', '가스터빈 수요 급증 수혜.', 4),
+            ('Siemens Energy', 'SMEGF', 5, 20, 'Siemens Energy — 신재생에너지 간헐성 제어를 위한 유연 가스터빈 세계적 우위.', '유럽 그린딜 및 청정에너지 인프라 수혜.', 6),
+            ('Mitsubishi Heavy Industries', 'MHVYF', 5, 20, 'MHI — 1650도 이상 초고효율 가스터빈 + 수소 100% 전소 터빈 상용화.', '수소 발전 프로젝트 수주 확대.', 5),
+            ('NuScale Power', 'SMR', 5, 21, 'NuScale — 세계 유일 NRC 표준설계인가(SDA) 획득 SMR 팹리스 선도 기업.', '빅테크 PPA 독식 잠재력.', 8),
+            ('Oklo Inc.', 'OKLO', 5, 21, 'Oklo — 샘 올트먼 이사회 의장. 데이터센터 직결 BTM 마이크로 원자로 전문.', '빅테크 직접 PPA 수혜.', 9),
+            ('Constellation Energy', 'CEG', 5, 24, 'Constellation Energy — 미국 최대 원자력 운영사. MS와 20년 PPA 쓰리마일섬 재가동.', '무탄소 기저 전원 프리미엄 재평가.', 1),
+            ('Centrus Energy', 'LEU', 5, 23, 'Centrus Energy — 미국 내 유일 HALEU 상업 농축 독점 공급사.', 'SMR 상용화 HALEU 수요 기하급수 성장.', 3),
+            ('BWX Technologies', 'BWXT', 5, 22, 'BWX Technologies — 미국 해군 원자로 + TRISO 핵연료 가공 독점 파운드리.', 'SMR 수주 즉시 현금 수취 구조.', 2),
+            ('Doosan Enerbility', '034020.KS', 5, 22, 'Doosan Enerbility — 글로벌 SMR 핵심 기자재 전담 원자력 파운드리. 17000톤 프레스 보유.', 'SMR 수주잔고 급증으로 매출 성장 보장.', 7),
+        ]
+        for co in energy_companies:
+            cur.execute("SELECT id FROM companies WHERE ticker=? AND industry_id=5", (co[1],))
+            if not cur.fetchone():
+                cur.execute("""
+                    INSERT INTO companies (name, ticker, industry_id, value_chain_node_id, role_description, future_growth, display_order)
+                    VALUES (?,?,?,?,?,?,?)
+                """, co)
+                print(f"[Migration] company {co[0]} ({co[1]}) inserted")
+            else:
+                # 기존 기업 display_order 업데이트
+                cur.execute("UPDATE companies SET display_order=? WHERE ticker=? AND industry_id=5", (co[6], co[1]))
 
         # ── display_order 컬럼 보장 ─────────────────────────────
         cur.execute("PRAGMA table_info(companies)")
