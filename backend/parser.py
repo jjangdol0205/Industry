@@ -207,7 +207,8 @@ def run_local_extraction(text, filename="보고서"):
     industry_keywords = {
         "인공지능 & IT": ["ai", "인공지능", "deep learning", "llm", "software", "소프트웨어", "디지털", "digital"],
         "반도체 & HBM": ["semiconductor", "반도체", "hbm", "칩", "chip", "npu", "foundry", "fab"],
-        "친환경 & ESG": ["green", "esg", "탄소", "carbon", "기후", "에너지", "energy", "배터리", "battery", "수소"],
+        "에너지 & 인프라": ["smr", "원전", "원자력", "전력", "발전", "인프라", "가스터빈", "gas turbine", "power grid", "송배전", "에너지", "energy"],
+        "친환경 & ESG": ["green", "esg", "탄소", "carbon", "기후", "배터리", "battery", "수소"],
         "거시 경제": ["경제", "economy", "무역", "금리", "inflation", "시장", "market", "재정"]
     }
     
@@ -269,7 +270,7 @@ def run_gemini_analysis(api_key, text, filename="보고서"):
 {{
   "title": "한글로 정돈된 보고서 핵심 제목",
   "summary": "전체 보고서 내용을 관통하는 3문장 이내의 종합 요약문",
-  "industry": "주요 산업군 분류 (예: 인공지능 & IT, 반도체 & HBM, 미래 모빌리티, 친환경 & ESG, 거시 경제 중 택1)",
+  "industry": "주요 산업군 분류 (예: 인공지능 & IT, 반도체 & HBM, 미래 모빌리티, 친환경 & ESG, 거시 경제, 에너지 & 인프라 중 택1)",
   "keywords": ["핵심키워드1", "핵심키워드2", "핵심키워드3", ... 최대 8개],
   "cagr": "원문에서 찾은 연평균 성장률 수치 (예: '15.4%' 또는 'N/A')",
   "chart_title": "시각화 차트의 적절한 제목 (예: '글로벌 AI 칩 시장 규모 전망')",
@@ -384,7 +385,7 @@ def run_search_synthesis(api_key, query, text):
 {{
   "title": "실시간 AI 분석: [검색어와 어우러지는 전문적인 제목]",
   "summary": "검색된 산업/기술의 핵심 트렌드 및 최신 동향을 관통하는 3문장 이내의 종합 요약문",
-  "industry": "주요 산업군 분류 (예: 인공지능 & IT, 반도체 & HBM, 미래 모빌리티, 친환경 & ESG, 거시 경제 중 택1)",
+  "industry": "주요 산업군 분류 (예: 인공지능 & IT, 반도체 & HBM, 미래 모빌리티, 친환경 & ESG, 거시 경제, 에너지 & 인프라 중 택1)",
   "keywords": ["핵심키워드1", "핵심키워드2", "핵심키워드3", ... 최대 8개],
   "cagr": "수집된 정보에서 유추된 연평균 성장률 수치 (예: '15.4%' 또는 'N/A')",
   "chart_title": "시각화 차트의 적절한 제목 (예: '글로벌 AI 칩 시장 규모 전망')",
