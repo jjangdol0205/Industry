@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Alpha Research — 산업 투자 인텔리전스</title>
+    <meta name="description" content="자율주행·로봇·우주·코인 산업 밸류체인 심층 분석 및 기관급 AI 투자 리서치 포털" />
+
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- PWA 매니페스트 -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- 테마 색상 (Android Chrome 상단바) -->
+    <meta name="theme-color" content="#0a0e1a" />
+    <meta name="msapplication-TileColor" content="#0a0e1a" />
+    <meta name="msapplication-TileImage" content="/icon-144x144.png" />
+
+    <!-- iOS Safari PWA 설정 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Alpha Research" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon-192x192.png" />
+
+    <!-- iOS 스플래시 스크린 (Safe Area 지원) -->
+    <meta name="apple-touch-fullscreen" content="yes" />
+
+    <!-- Open Graph (카카오톡, SNS 공유용) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Alpha Research — 산업 투자 인텔리전스" />
+    <meta property="og:description" content="자율주행·로봇·우주·코인 산업 밸류체인 심층 분석 및 기관급 AI 투자 리서치" />
+    <meta property="og:image" content="/icon-512x512.png" />
+
+    <!-- 서비스 워커 등록 -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('SW registered:', reg.scope))
+            .catch(err => console.log('SW failed:', err));
+        });
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-C12bzt5C.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BfewMb99.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
