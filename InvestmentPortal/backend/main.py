@@ -592,7 +592,14 @@ def get_company_ai_analysis(company_id: int, db: Session = Depends(get_db)):
     npm = f"{(p.net_margin_ttm*100):.1f}%" if p and p.net_margin_ttm is not None else "N/A"
     roe = f"{(p.roe*100):.1f}%" if p and p.roe is not None else "N/A"
     rev_growth = f"{(p.revenue_growth*100):.1f}%" if p and p.revenue_growth is not None else "N/A"
-    mktcap = f"${(p.market_cap/1e9):.1f}B" if p and p.market_cap else "N/A"
+    is_krw = company.ticker.endswith('.KS') or company.ticker.endswith('.KQ')
+    if p and p.market_cap:
+        if is_krw:
+            mktcap = f"₩{(p.market_cap/1e8):.0f}억"
+        else:
+            mktcap = f"${(p.market_cap/1e9):.1f}B"
+    else:
+        mktcap = "N/A"
 
     industry_title = industry.title if industry else "해당 산업"
     vc_name = vc_node.node_name if vc_node else "N/A"

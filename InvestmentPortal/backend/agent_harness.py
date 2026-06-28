@@ -29,9 +29,12 @@ def safe_float(v):
     except:
         return None
 
-def fmt_b(v):
+def fmt_b(v, ticker=''):
     v = safe_float(v)
-    return f"${v/1e9:.2f}B" if v is not None else "N/A"
+    if v is None: return "N/A"
+    if ticker.endswith('.KS') or ticker.endswith('.KQ'):
+        return f"₩{v/1e8:,.0f}억"
+    return f"${v/1e9:.2f}B"
 
 def fmt_pct(v):
     v = safe_float(v)
@@ -218,11 +221,15 @@ def calc_upside_score(company, profile, fin_annual):
     # 3. 시가총액 구간 프리미엄 (20점)
     # 소형주: 더 많은 성장 여력, 대형주: 제한적 업사이드
     if market_cap:
-        if market_cap < 2e9:     score += 20   # Small cap (<$2B): 폭발적 성장 가능
-        elif market_cap < 10e9:  score += 14   # Mid cap (<$10B)
-        elif market_cap < 50e9:  score += 6    # Large cap
-        elif market_cap < 200e9: score += 0    # Mega
-        else:                    score -= 10   # Ultra-mega (>$200B): 제한적
+        # 한국 주식인 경우 원화(KRW)를 달러(USD)로 환산 (약 1350원 = 1달러 기준)
+        ticker = getattr(company, 'ticker', '')
+        adjusted_mc = market_cap / 1350 if ticker.endswith('.KS') or ticker.endswith('.KQ') else market_cap
+
+        if adjusted_mc < 2e9:     score += 20   # Small cap (<$2B): 폭발적 성장 가능
+        elif adjusted_mc < 10e9:  score += 14   # Mid cap (<$10B)
+        elif adjusted_mc < 50e9:  score += 6    # Large cap
+        elif adjusted_mc < 200e9: score += 0    # Mega
+        else:                     score -= 10   # Ultra-mega (>$200B): 제한적
 
     # 4. PBR 역발상 (없으면 0)
     if pb and pb > 0:
@@ -496,15 +503,16 @@ def run_portfolio_construction(db: Session):
 
         rg_str  = f"{rg*100:.0f}%" if rg is not None else "N/A"
         pe_str  = fmt_x(pe)
-        cap_str = fmt_b(cap)
+        cap_str = fmt_b(cap, company.ticker)
         nm_str  = f"{nm*100:.1f}%" if nm is not None else "N/A"
         gm_str  = f"{gm*100:.1f}%" if gm is not None else "N/A"
         roe_str = f"{roe*100:.1f}%" if roe is not None else "N/A"
         de_str  = f"{de:.0f}%" if de is not None else "N/A"
         cr_str  = f"{cr:.1f}x" if cr is not None else "N/A"
-        fcf_str = fmt_b(fcf_val) if fcf_val else "N/A"
-        rev_str = fmt_b(rev_val) if rev_val else "N/A"
-        target_str = f"${target_5y:.2f}" if target_5y else "N/A"
+        fcf_str = fmt_b(fcf_val, company.ticker) if fcf_val else "N/A"
+        rev_str = fmt_b(rev_val, company.ticker) if rev_val else "N/A"
+        is_krw = company.ticker.endswith('.KS') or company.ticker.endswith('.KQ')
+        target_str = (f"₩{target_5y:,.0f}" if is_krw else f"${target_5y:.2f}") if target_5y else "N/A"
         upside_str = f"+{total_return_5y:.0f}%" if total_return_5y else "N/A"
         cagr_str   = f"{cagr_5y:.1f}%/yr" if cagr_5y else "N/A"
 
