@@ -435,13 +435,21 @@ def run_portfolio_construction(db: Session):
 
     print(f"[Portfolio] 스코어링 완료. 상위 5개 선발 중...")
 
-    # ── Step 2: 상위 5개 선발 ────────────────────────────────
+    # ── Step 2: 상위 5개 선발 (ticker 중복 제거) ─────────────
     ranked = sorted(
         company_scores.values(),
         key=lambda x: x["portfolio_score"],
         reverse=True
     )
-    top5 = ranked[:5]
+    seen_tickers = set()
+    top5 = []
+    for item in ranked:
+        ticker = item["company"].ticker
+        if ticker not in seen_tickers:
+            seen_tickers.add(ticker)
+            top5.append(item)
+        if len(top5) == 5:
+            break
 
     # ── Step 3: 비중 배분 ────────────────────────────────────
     top5_scores  = [x["portfolio_score"] for x in top5]
@@ -478,14 +486,14 @@ def run_portfolio_construction(db: Session):
 기업명: {company.name}
 티커: {company.ticker}
 산업: {industry_name}
-현재주가: ${current_price:.2f if current_price else 'N/A'}
+현재주가: ${f'{current_price:.2f}' if current_price else 'N/A'}
 시가총액: {cap_str}
 매출성장률(YoY): {rg_str}
 PER: {pe_str}
 포트폴리오 스코어: {data['portfolio_score']:.1f}/100 (Quant {data['quant_score']} | Growth {data['growth_score']} | Upside {data['upside_score']})
 밸류체인 역할: {company.role_description[:200]}
 성장 스토리: {company.future_growth[:200]}
-5년 목표주가: ${target_5y:.2f if target_5y else 'N/A'} (CAGR {cagr_5y}%/yr, 총수익 +{total_return_5y}%)
+5년 목표주가: ${f'{target_5y:.2f}' if target_5y else 'N/A'} (CAGR {cagr_5y if cagr_5y else 'N/A'}%/yr, 총수익 +{total_return_5y if total_return_5y else 'N/A'}%)
 
 요청:
 1. 선정 이유 (3문장): 왜 이 종목이 5~10년간 시장을 아웃퍼폼할 것인지. 구체적 수치와 차별화 포인트 필수. "AI 수혜" 같은 진부한 표현 금지.
