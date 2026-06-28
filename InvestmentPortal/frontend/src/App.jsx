@@ -69,6 +69,27 @@ function App() {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingPhase, setLoadingPhase] = useState('wakeup'); // 'wakeup' | 'data'
 
+
+  // 뒤로가기(Back) 버튼 핸들러
+  useEffect(() => {
+    const handlePopState = (e) => {
+      setViewMode('research');
+      setSelectedCompany(null);
+      setSidebarOpen(false);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const isHome = viewMode === 'research' && selectedCompany === null;
+  const isHomeRef = React.useRef(isHome);
+  useEffect(() => {
+    if (isHomeRef.current && !isHome) {
+      window.history.pushState({ detail: true }, '');
+    }
+    isHomeRef.current = isHome;
+  }, [isHome]);
+
   // PWA 설치 프롬프트 캡처 (Android Chrome)
   useEffect(() => {
     const handler = (e) => {
