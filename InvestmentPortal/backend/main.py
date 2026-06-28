@@ -163,6 +163,13 @@ def run_startup_migrations():
             else:
                 cur.execute("UPDATE companies SET display_order=? WHERE ticker=? AND industry_id=6", (co[6], co[1]))
 
+        # ── 이차전지 산업(id=7) 초기화 ────────────────────────────
+        try:
+            import init_battery_industry
+            init_battery_industry.init_battery_industry()
+        except Exception as e:
+            print(f"[Migration] Battery industry init error: {e}")
+
         # ── display_order 컬럼 보장 ─────────────────────────────
         cur.execute("PRAGMA table_info(companies)")
         col_names = [r[1] for r in cur.fetchall()]
