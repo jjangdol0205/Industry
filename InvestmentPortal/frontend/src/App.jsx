@@ -1670,15 +1670,81 @@ function AgentWorkspace() {
                       </div>
                     </div>
 
-                    {/* 하단: 선정 이유 & 리스크 */}
-                    <div style={{ display:'flex', flexDirection:'column', gap:'6px' }}>
-                      <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.75)', lineHeight:'1.6' }}>
-                        <span style={{ color:col, fontWeight:700, marginRight:'6px' }}>📌 선정 이유</span>
-                        {stock.selection_reason}
+                    {/* 하단: 투자 논거 & 리스크 */}
+                    <div style={{ display:'flex', flexDirection:'column', gap:'10px' }}>
+                      {/* 핵심 재무 메트릭 한 줄 */}
+                      {stock.metrics && (
+                        <div style={{
+                          display:'flex', gap:'12px', flexWrap:'wrap',
+                          padding:'8px 12px',
+                          background:'rgba(255,255,255,0.04)',
+                          borderRadius:'8px',
+                          fontSize:'0.72rem',
+                        }}>
+                          {[
+                            { label:'매출성장', val: stock.metrics.revenue_growth },
+                            { label:'순이익률', val: stock.metrics.net_margin },
+                            { label:'ROE', val: stock.metrics.roe },
+                            { label:'PER', val: stock.metrics.pe_ratio },
+                            { label:'EV/EBITDA', val: stock.metrics.ev_ebitda },
+                            { label:'부채비율', val: stock.metrics.debt_to_equity },
+                            { label:'FCF', val: stock.metrics.fcf },
+                          ].filter(m => m.val && m.val !== 'N/A').map(({ label, val }) => (
+                            <div key={label} style={{ display:'flex', gap:'4px', alignItems:'center' }}>
+                              <span style={{ color:'rgba(255,255,255,0.35)' }}>{label}</span>
+                              <span style={{ color:'rgba(255,255,255,0.75)', fontWeight:600, fontFamily:'monospace' }}>{val}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* 투자 논거 (번호 목록) */}
+                      <div>
+                        <div style={{ fontSize:'0.75rem', color:col, fontWeight:700, marginBottom:'6px' }}>
+                          📌 투자 논거
+                        </div>
+                        <div style={{ display:'flex', flexDirection:'column', gap:'5px' }}>
+                          {(stock.thesis || [stock.selection_reason]).map((point, pi) => (
+                            <div key={pi} style={{
+                              display:'flex', gap:'8px', fontSize:'0.84rem',
+                              color:'rgba(255,255,255,0.78)', lineHeight:'1.6',
+                              paddingLeft:'4px',
+                            }}>
+                              <span style={{
+                                flexShrink:0, width:'18px', height:'18px',
+                                borderRadius:'50%', background:`${col}30`,
+                                border:`1px solid ${col}60`, color:col,
+                                fontSize:'0.65rem', fontWeight:700,
+                                display:'flex', alignItems:'center', justifyContent:'center',
+                                marginTop:'2px',
+                              }}>{pi + 1}</span>
+                              <span>{point}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                      <div style={{ fontSize:'0.82rem', color:'rgba(255,120,100,0.8)', lineHeight:'1.5' }}>
-                        <span style={{ fontWeight:700, marginRight:'6px' }}>⚠️ 핵심 리스크</span>
-                        {stock.key_risk}
+
+                      {/* 리스크 요인 */}
+                      <div style={{
+                        padding:'10px 12px',
+                        background:'rgba(239,68,68,0.06)',
+                        border:'1px solid rgba(239,68,68,0.2)',
+                        borderRadius:'8px',
+                      }}>
+                        <div style={{ fontSize:'0.73rem', color:'#ef4444', fontWeight:700, marginBottom:'5px' }}>
+                          ⚠️ 리스크 요인
+                        </div>
+                        <div style={{ display:'flex', flexDirection:'column', gap:'4px' }}>
+                          {(stock.risks || [stock.key_risk]).map((risk, ri) => (
+                            <div key={ri} style={{
+                              display:'flex', gap:'6px',
+                              fontSize:'0.82rem', color:'rgba(239,120,100,0.85)', lineHeight:'1.55',
+                            }}>
+                              <span style={{ flexShrink:0, color:'rgba(239,68,68,0.6)', marginTop:'2px' }}>▸</span>
+                              <span>{risk}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
