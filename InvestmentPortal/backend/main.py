@@ -103,6 +103,62 @@ def run_startup_migrations():
                 # 기존 기업 display_order 업데이트
                 cur.execute("UPDATE companies SET display_order=? WHERE ticker=? AND industry_id=5", (co[6], co[1]))
 
+        # ── 전력 인프라 산업 리포트 초기화 (id=6, tag='전력인프라') ────
+        cur.execute("SELECT id FROM industry_reports WHERE id=6")
+        if not cur.fetchone():
+            cur.execute("""
+                INSERT INTO industry_reports (id, title, summary, file_path, tag)
+                VALUES (6, '전력 인프라 밸류체인 심층분석',
+                '## 1. 산업 개요: AI·전기화 시대의 전력 인프라 르네상스\n\nAI 데이터센터 급증, 전기차(EV) 보급 가속, 노후화된 전력망 교체 수요가 동시에 폭발하며 미국과 글로벌 전력 인프라 투자가 역사적 전환점을 맞고 있습니다. 미국 에너지부는 2035년까지 전력망 현대화에 5조 달러 이상의 투자가 필요하다고 추산하며, 바이든-트럼프 초당적 인프라 정책이 수요를 뒷받침합니다. 송·배전 인프라 노후화율 70% 이상, 전력망 연계 대기 프로젝트 1,700GW 이상이 적체된 상황에서 전력 인프라 밸류체인 전반이 수혜를 받고 있습니다.\n\n## 2. 핵심 투자 테마: 4개 레이어 밸류체인\n\n**① 전력 기기 및 설비 (즉각적 수혜)**\n- 변압기, 스위치기어, 배전반, 전력 관리 시스템 등 핵심 하드웨어\n- 공급 병목 심화로 리드타임 2~3년, 가격 프리미엄 지속\n- Eaton, Hubbell, Powell Industries 수혜\n\n**② 전력망 건설 및 엔지니어링 (중장기 성장)**\n- 송배전 선로, 변전소 EPC, 재생에너지 연계 공사\n- 미국 IRA + 인프라법 지원금 수혜 수주잔고 급증\n- Quanta Services, MYR Group, AECOM 수혜\n\n**③ 전기자재 유통 및 솔루션 (안정 성장)**\n- 전력 케이블, 전선관, 전기 보호장비 설계·유통\n- 데이터센터 건설 붐 + 그리드 현대화 동시 수혜\n- Wesco International, Atkore 수혜\n\n**④ 데이터센터 전력 인프라 (고성장)**\n- UPS, 열 관리, 전력 분배 장치(PDU) 등 미션크리티컬 시스템\n- AI 빅테크 하이퍼스케일 투자 직접 연동\n- Vertiv Holdings 수혜\n\n## 3. 구조적 전환점: 세 가지 동시 성장 드라이버\n\n① **AI 데이터센터 전력 수요**: 2030년까지 미국 전체 전력 수요의 8% 이상이 데이터센터에서 발생 예상\n② **전기화(Electrification)**: EV 충전 인프라 + 열펌프 + 산업용 전기화로 피크 전력 수요 2040년까지 30% 증가\n③ **노후망 교체**: 1950~70년대 설치된 변압기·변전소의 대규모 교체 사이클 본격화\n\n## 4. 핵심 리스크\n\n* **금리 민감성**: 인프라 프로젝트 파이낸싱 비용 상승 시 수주 지연\n* **원자재 변동성**: 구리·알루미늄 가격 급등이 마진 압박\n* **정책 불확실성**: IRA 세제혜택 축소 또는 인프라 예산 삭감 리스크\n* **공급망 병목 완화**: 변압기 리드타임 정상화 시 가격 프리미엄 축소\n\n## 5. 투자 전략: 레이어별 포지셔닝\n\n즉시 수혜: ETN, HUBB, POWL | 중기 성장: PWR, MYRG, WCC | 고성장 테마: VRT, ATKR',
+                '6. 전력 인프라/전력 인프라 산업.pdf', '전력인프라')
+            """)
+            print("[Migration] id=6 power infrastructure report inserted")
+        else:
+            cur.execute("SELECT tag FROM industry_reports WHERE id=6")
+            tag_row = cur.fetchone()
+            if tag_row and tag_row[0] != '전력인프라':
+                cur.execute("UPDATE industry_reports SET tag='전력인프라' WHERE id=6")
+                print("[Migration] id=6 tag updated to 전력인프라")
+
+        # ── 전력 인프라 value_chain_nodes 초기화 ──────────────────
+        power_nodes = [
+            (25, 6, '전력 기기 및 설비 (Power Equipment)', '변압기·스위치기어·배전반·UPS 등 전력망의 핵심 하드웨어를 설계·제조하는 레이어. 공급 병목으로 리드타임 2~3년, 가격 프리미엄 지속.'),
+            (26, 6, '전력망 건설 및 EPC (Grid Construction & EPC)', '송배전 선로, 변전소, 재생에너지 연계 공사를 수행하는 엔지니어링·조달·시공(EPC) 기업들. 미국 IRA·인프라법 수주잔고 급증 수혜.'),
+            (27, 6, '전기자재 유통 및 솔루션 (Electrical Distribution)', '전력 케이블·전선관·전기 보호장비를 설계·제조·유통하는 레이어. 데이터센터 붐과 그리드 현대화 이중 수혜.'),
+            (28, 6, '그리드 연결 및 부품 (Grid Connectivity & Components)', '송전선 연결 클램프, 그리드 커넥터, 전기 인클로저 등 그리드 연결 핵심 부품 제조. 재생에너지 연계 프로젝트 급증 수혜.'),
+            (29, 6, '데이터센터 전력 인프라 (Data Center Power)', 'AI 하이퍼스케일 데이터센터용 UPS·열 관리·전력 분배 장치(PDU) 등 미션크리티컬 전력 시스템. 빅테크 CapEx 직접 연동 고성장 레이어.'),
+        ]
+        for node in power_nodes:
+            cur.execute("SELECT id FROM value_chain_nodes WHERE id=?", (node[0],))
+            if not cur.fetchone():
+                cur.execute("INSERT INTO value_chain_nodes (id, industry_id, node_name, description) VALUES (?,?,?,?)", node)
+                print(f"[Migration] value_chain_node id={node[0]} inserted")
+
+        # ── 전력 인프라 기업 초기화 (없으면 삽입) ──────────────────
+        power_companies = [
+            # (name, ticker, industry_id, vc_node_id, role_description, future_growth, display_order)
+            ('Eaton Corporation', 'ETN', 6, 25, 'Eaton — 글로벌 전력 관리 1위. 전기 스위치기어·배전반·UPS·서킷 브레이커 포트폴리오 보유. AI 데이터센터·산업 전기화 전방위 수혜 기업.', '데이터센터 전력 설비 수요 급증으로 수주잔고 사상 최대. EV 충전 인프라·재생에너지 연계 사업 고성장.', 1),
+            ('Vertiv Holdings', 'VRT', 6, 29, 'Vertiv — AI 하이퍼스케일 데이터센터 전용 UPS·열 관리·전력 분배 장치(PDU) 글로벌 1위. 미션크리티컬 전력 인프라의 핵심 독점 공급사.', 'AI 빅테크 CapEx 직접 연동. 2030년까지 데이터센터 전력 수요 3배 성장 수혜. 고마진 소프트웨어 서비스 매출 확대.', 2),
+            ('Quanta Services', 'PWR', 6, 26, 'Quanta Services — 북미 최대 전력망·재생에너지·광통신 EPC 기업. 고압 송전선로 건설 북미 시장점유율 1위, 수주잔고 300억 달러 이상.', '미국 인프라법·IRA 지원 전력망 현대화 공사 대규모 수주. 재생에너지 연계 공사 및 해상풍력 송전 인프라 고성장.', 3),
+            ('Hubbell Incorporated', 'HUBB', 6, 25, 'Hubbell — 전기 인프라용 배선장치·제어 설비·변전소 구조물 전문 제조사. 미국 전력 유틸리티·산업 시장 100년 이상 독점적 브랜드 파워 보유.', '전력망 현대화 교체 사이클 직접 수혜. 전기차 충전 인프라·태양광·풍력 연계 설비 수요 확대.', 4),
+            ('Wesco International', 'WCC', 6, 27, 'Wesco — 북미 최대 전기자재·산업재·통신 인프라 유통기업. 연 매출 220억 달러 규모의 B2B 전력 인프라 원스톱 솔루션 제공사.', '전력망 현대화·데이터센터 건설·EV 인프라 확충으로 전기자재 수요 구조적 성장. M&A를 통한 통합 솔루션 확장.', 5),
+            ('Atkore', 'ATKR', 6, 27, 'Atkore — 전선관(Conduit)·케이블 트레이·전기 보호 시스템 북미 시장점유율 1위. 데이터센터·태양광 발전소·산업 시설 전기 인프라 핵심 자재 공급사.', '태양광·풍력·데이터센터 건설 붐으로 전선관 수요 급증. IRA 보조금 기반 재생에너지 프로젝트 파이프라인 수혜.', 6),
+            ('Powell Industries', 'POWL', 6, 25, 'Powell Industries — 전력 분배용 스위치기어·모터 컨트롤 센터·배전반 전문 미국 제조사. 석유화학·LNG·데이터센터 등 고마진 산업용 전력 시스템 특화.', 'LNG 수출 터미널·정유 시설·데이터센터 전력 시스템 수주 급증. 국내 제조 강점으로 리쇼어링 수혜.', 7),
+            ('MYR Group', 'MYRG', 6, 26, 'MYR Group — 미국 전력·통신 인프라 전문 전기 건설 기업. 상업용 건축 전기 공사(C&I)와 송배전 공사(T&D) 두 세그먼트로 안정적 이원화.', '전력망 현대화·재생에너지 연계 공사·데이터센터 전기 시공 수주잔고 사상 최대. 숙련 전기 기술자 확보 경쟁 우위.', 8),
+            ('nVent Electric', 'NVT', 6, 28, 'nVent Electric — 전기 인클로저·열 관리·접지 및 접합 시스템 글로벌 제조사. 데이터센터·전력 유틸리티·산업 자동화 전방위 전기 보호 솔루션 제공.', '데이터센터 열 관리 솔루션 수요 폭발적 성장. 전기화 추세로 전기 보호·접지 설비 구조적 수요 증가.', 9),
+            ('Preformed Line Products', 'PLPC', 6, 28, 'Preformed Line Products — 송전선 클램프·스플라이스·광섬유 연결 부품 전문 미국 글로벌 기업. 전력 유틸리티의 송전선 연결·보호 시스템 핵심 부품 공급사.', '재생에너지 연계 송전선 증설과 노후 전력망 교체로 연결 부품 수요 고성장. 광섬유·통신 인프라 시장 병행 수혜.', 10),
+        ]
+        for co in power_companies:
+            cur.execute("SELECT id FROM companies WHERE ticker=? AND industry_id=6", (co[1],))
+            if not cur.fetchone():
+                cur.execute("""
+                    INSERT INTO companies (name, ticker, industry_id, value_chain_node_id, role_description, future_growth, display_order)
+                    VALUES (?,?,?,?,?,?,?)
+                """, co)
+                print(f"[Migration] company {co[0]} ({co[1]}) inserted")
+            else:
+                cur.execute("UPDATE companies SET display_order=? WHERE ticker=? AND industry_id=6", (co[6], co[1]))
+
         # ── display_order 컬럼 보장 ─────────────────────────────
         cur.execute("PRAGMA table_info(companies)")
         col_names = [r[1] for r in cur.fetchall()]
