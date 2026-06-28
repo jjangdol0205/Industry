@@ -1026,3 +1026,45 @@ body {
     font-size: 0.95rem;
   }
 }
+
+/* 式式 AI Portfolio Manager Responsive 式式式式式式式式式式式式式式式式式式式式 */
+.orchestrator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.portfolio-main-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.portfolio-summary-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .orchestrator-header {
+    flex-direction: column;
+  }
+  
+  .orchestrator-header button {
+    width: 100%;
+  }
+
+  .portfolio-main-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .portfolio-summary-stats {
+    gap: 12px;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 16px;
+  }
+}

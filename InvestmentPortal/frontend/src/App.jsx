@@ -1420,8 +1420,7 @@ function AgentWorkspace() {
   return (
     <div className="agent-workspace">
       {/* ── 헤더 ── */}
-      <div className="page-header" style={{
-        display:'flex', justifyContent:'space-between', alignItems:'flex-start',
+      <div className="page-header orchestrator-header" style={{
         borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'32px'
       }}>
         <div>
@@ -1537,7 +1536,7 @@ function AgentWorkspace() {
                   구성일: {portfolio.created_at} · {portfolio.total_industries_analyzed}개 산업 · {portfolio.total_companies_screened}개 기업 스크리닝
                 </div>
               </div>
-              <div style={{ display:'flex', gap:'24px' }}>
+              <div className="portfolio-summary-stats">
                 {[
                   { label:'Base CAGR', val:`~${portfolio.scenario?.base?.cagr || '-'}%/yr`, color:'#3b82f6' },
                   { label:'5년 기대수익', val:`+${portfolio.scenario?.base?.return_pct || '-'}%`, color:'#10b981' },
@@ -1553,7 +1552,7 @@ function AgentWorkspace() {
           </div>
 
           {/* 메인: 도넛 차트 + 종목 카드 */}
-          <div style={{ display:'grid', gridTemplateColumns:'300px 1fr', gap:'24px', marginBottom:'24px' }}>
+          <div className="portfolio-main-grid">
 
             {/* 도넛 차트 */}
             <div className="glass-panel" style={{ padding:'24px', display:'flex', flexDirection:'column', alignItems:'center' }}>
