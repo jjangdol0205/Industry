@@ -114,11 +114,15 @@ def run_startup_migrations():
             """)
             print("[Migration] id=6 power infrastructure report inserted")
         else:
-            cur.execute("SELECT tag FROM industry_reports WHERE id=6")
-            tag_row = cur.fetchone()
-            if tag_row and tag_row[0] != '전력인프라':
-                cur.execute("UPDATE industry_reports SET tag='전력인프라' WHERE id=6")
-                print("[Migration] id=6 tag updated to 전력인프라")
+            cur.execute("SELECT tag, file_path FROM industry_reports WHERE id=6")
+            row = cur.fetchone()
+            if row:
+                if row[0] != '전력인프라':
+                    cur.execute("UPDATE industry_reports SET tag='전력인프라' WHERE id=6")
+                    print("[Migration] id=6 tag updated to 전력인프라")
+                if 'pptx' in row[1]:
+                    cur.execute("UPDATE industry_reports SET file_path='6. 전력 인프라/전력 인프라 산업.pdf' WHERE id=6")
+                    print("[Migration] id=6 file_path updated to pdf")
 
         # ── 전력 인프라 value_chain_nodes 초기화 ──────────────────
         power_nodes = [
