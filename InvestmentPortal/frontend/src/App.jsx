@@ -870,7 +870,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
           )}
           {p.current_price && (
             <div className="price-display">
-              <span className="price-value" style={{ color:'var(--accent-green)' }}>${p.current_price?.toFixed(2)}</span>
+              <span className="price-value" style={{ color:'var(--accent-green)' }}>{fDollar(p.current_price, company?.ticker)}</span>
               {p.beta != null && <span className="price-sub">Beta: {p.beta?.toFixed(2)}</span>}
             </div>
           )}
@@ -904,7 +904,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
           <KpiCard label="EV/EBITDA" value={fX(p.ev_ebitda)} sub="기업가치 배수"
             valueColor={p.ev_ebitda < 15 ? 'var(--accent-green)' : p.ev_ebitda > 40 ? '#ff6b6b' : 'var(--text-primary)'} />
           <KpiCard label="EV/Sales" value={fX(p.ev_sales)} sub="매출 배수" />
-          <KpiCard label="시가총액" value={p.market_cap ? `$${(p.market_cap/1e9).toFixed(1)}B` : '-'} sub="Market Cap" icon={DollarSign} />
+          <KpiCard label="시가총액" value={fB(p.market_cap, company?.ticker)} sub="Market Cap" icon={DollarSign} />
           <KpiCard label="애널리스트 목표가" value={fDollar(p.analyst_target, company?.ticker)} sub="Consensus Target"
             valueColor={p.analyst_target > p.current_price ? 'var(--accent-green)' : '#ff6b6b'} />
         </div>
@@ -957,7 +957,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
 
       {/* ── Section 4: 손익 차트 ─────────────────────────── */}
       <section style={{ marginBottom:'36px' }}>
-        <SectionHeader icon={BarChart2} title="손익 추이 (Income Statement History — $B)" />
+        <SectionHeader icon={BarChart2} title="손익 추이 (단위: 십억 달러 / 한국 억원)" />
         <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr', gap:'24px' }}>
           <div className="glass-panel" style={{ padding:'24px', height:'300px' }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -996,7 +996,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
       <section style={{ marginBottom:'36px' }}>
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'24px' }}>
           <div>
-            <SectionHeader icon={DollarSign} title="현금흐름 (Cash Flow — $B)" color="var(--accent-green)" />
+            <SectionHeader icon={DollarSign} title="현금흐름 (단위: 십억 달러 / 한국 억원)" color="var(--accent-green)" />
             <div className="glass-panel" style={{ padding:'24px', height:'260px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={cashFlowData}>
@@ -1013,7 +1013,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
             </div>
           </div>
           <div>
-            <SectionHeader icon={Database} title="재무상태표 (Balance Sheet — $B)" color="#f1c40f" />
+            <SectionHeader icon={Database} title="재무상태표 (단위: 십억 달러 / 한국 억원)" color="#f1c40f" />
             <div className="glass-panel" style={{ padding:'24px', height:'260px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={balanceData}>
@@ -1245,7 +1245,7 @@ function BusinessModelSection({ latest, profile, company }) {
 
         {/* 마진율 요약 바 */}
         <div style={{ marginTop:'24px', padding:'16px', borderRadius:'8px', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.06)' }}>
-          <div style={{ fontSize:'0.8rem', color:'var(--text-secondary)', marginBottom:'12px', fontWeight:600 }}>매출 $1에서 남는 이익</div>
+          <div style={{ fontSize:'0.8rem', color:'var(--text-secondary)', marginBottom:'12px', fontWeight:600 }}>매출 1단위에서 남는 이익</div>
           <div style={{ display:'flex', flexDirection:'column', gap:'10px' }}>
             {[
               { label:'매출총이익률 (GPM)', pct: gpm, color:'#10b981' },
@@ -1269,7 +1269,7 @@ function BusinessModelSection({ latest, profile, company }) {
         {/* Waterfall Chart */}
         <div className="glass-panel" style={{ padding:'24px' }}>
           <div style={{ fontSize:'0.85rem', color:'var(--text-secondary)', marginBottom:'16px', fontWeight:600 }}>
-            📊 수익 폭포 차트 (Profit Waterfall) — $B
+            📊 수익 폭포 차트 (Profit Waterfall)
           </div>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={wfData.map(d => ({
