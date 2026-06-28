@@ -458,7 +458,7 @@ def run_portfolio_construction(db: Session):
     print(f"[Portfolio] Top 5 선발 완료: {[x['company'].ticker for x in top5]}")
     print(f"[Portfolio] 비중 배분: {weights}")
 
-    # ── Step 4: 각 종목 투자 근거 생성 (Gemini) ──────────────
+    # ── Step 4: 각 종목 투자 근거 생성 ──────────────────────────
     portfolio_items = []
 
     for i, (data, weight) in enumerate(zip(top5, weights)):
@@ -476,50 +476,174 @@ def run_portfolio_construction(db: Session):
         ).first()
         industry_name = industry.tag if industry else "기타"
 
-        # Gemini 투자 근거 생성
-        rg_str  = f"{safe_float(getattr(profile, 'revenue_growth', None)) * 100:.0f}%" if profile and safe_float(getattr(profile, 'revenue_growth', None)) else "N/A"
-        pe_str  = fmt_x(getattr(profile, 'pe_ratio', None) if profile else None)
-        cap_str = fmt_b(getattr(profile, 'market_cap', None) if profile else None)
+        # ─── 핵심 재무 메트릭 추출 ────────────────────────────
+        rg    = safe_float(getattr(profile, 'revenue_growth', None)) if profile else None
+        nm    = safe_float(getattr(profile, 'net_margin_ttm', None)) if profile else None
+        gm    = safe_float(getattr(profile, 'gross_margin_ttm', None)) if profile else None
+        pe    = safe_float(getattr(profile, 'pe_ratio', None)) if profile else None
+        roe   = safe_float(getattr(profile, 'roe', None)) if profile else None
+        de    = safe_float(getattr(profile, 'debt_to_equity', None)) if profile else None
+        cap   = safe_float(getattr(profile, 'market_cap', None)) if profile else None
+        cr    = safe_float(getattr(profile, 'current_ratio', None)) if profile else None
+        ev_eb = safe_float(getattr(profile, 'ev_ebitda', None)) if profile else None
 
-        prompt = f"""당신은 퀀트 포트폴리오 매니저입니다. 다음 데이터를 바탕으로 {company.name}({company.ticker})의 5~10년 중장기 투자 근거를 한국어로 작성하세요.
+        fcf_val = None
+        rev_val = None
+        if fin_a:
+            latest = fin_a[-1]
+            fcf_val = safe_float(latest.free_cash_flow)
+            rev_val = safe_float(latest.revenue)
 
-기업명: {company.name}
-티커: {company.ticker}
-산업: {industry_name}
-현재주가: ${f'{current_price:.2f}' if current_price else 'N/A'}
-시가총액: {cap_str}
-매출성장률(YoY): {rg_str}
-PER: {pe_str}
-포트폴리오 스코어: {data['portfolio_score']:.1f}/100 (Quant {data['quant_score']} | Growth {data['growth_score']} | Upside {data['upside_score']})
-밸류체인 역할: {company.role_description[:200]}
-성장 스토리: {company.future_growth[:200]}
-5년 목표주가: ${f'{target_5y:.2f}' if target_5y else 'N/A'} (CAGR {cagr_5y if cagr_5y else 'N/A'}%/yr, 총수익 +{total_return_5y if total_return_5y else 'N/A'}%)
+        rg_str  = f"{rg*100:.0f}%" if rg is not None else "N/A"
+        pe_str  = fmt_x(pe)
+        cap_str = fmt_b(cap)
+        nm_str  = f"{nm*100:.1f}%" if nm is not None else "N/A"
+        gm_str  = f"{gm*100:.1f}%" if gm is not None else "N/A"
+        roe_str = f"{roe*100:.1f}%" if roe is not None else "N/A"
+        de_str  = f"{de:.0f}%" if de is not None else "N/A"
+        cr_str  = f"{cr:.1f}x" if cr is not None else "N/A"
+        fcf_str = fmt_b(fcf_val) if fcf_val else "N/A"
+        rev_str = fmt_b(rev_val) if rev_val else "N/A"
+        target_str = f"${target_5y:.2f}" if target_5y else "N/A"
+        upside_str = f"+{total_return_5y:.0f}%" if total_return_5y else "N/A"
+        cagr_str   = f"{cagr_5y:.1f}%/yr" if cagr_5y else "N/A"
 
-요청:
-1. 선정 이유 (3문장): 왜 이 종목이 5~10년간 시장을 아웃퍼폼할 것인지. 구체적 수치와 차별화 포인트 필수. "AI 수혜" 같은 진부한 표현 금지.
-2. 핵심 리스크 (1문장): 가장 현실적인 리스크 1개만.
+        # ─── 데이터 기반 투자 논거 생성 (Fallback) ───────────
+        thesis_points = []
+        risk_points   = []
 
-출력 형식 (반드시 지킬 것):
-선정이유: [3문장]
-핵심리스크: [1문장]"""
+        # 논거 1: 밸류에이션 업사이드 (현재가 → 목표가)
+        if current_price and target_5y and total_return_5y:
+            peg_desc = ""
+            if pe and rg and rg > 0:
+                peg = pe / (rg * 100)
+                if peg < 1.0:
+                    peg_desc = f" PEG {peg:.2f}x로 성장 대비 현저히 저평가,"
+                elif peg < 1.5:
+                    peg_desc = f" PEG {peg:.2f}x 적정 수준,"
+            thesis_points.append(
+                f"현재가 ${current_price:.2f} → 5년 목표가 {target_str}으로 업사이드 {upside_str}(CAGR {cagr_str}) 예상.{peg_desc} 현재 시가총액 {cap_str}은 {industry_name} 내 핵심 밸류체인 포지션 대비 저평가 구간."
+            )
+        elif company.role_description:
+            thesis_points.append(
+                f"{industry_name} 밸류체인 내 {company.role_description[:80]}의 핵심 포지션 확보. 산업 구조적 성장에 따른 장기 업사이드 기대."
+            )
 
-        fallback_reason = f"{company.name}은 {industry_name} 밸류체인에서 {company.role_description[:120]}의 독보적 위치를 점유하고 있습니다. 포트폴리오 종합 스코어 {data['portfolio_score']:.1f}점으로 전체 {len(all_companies)}개 기업 중 {i+1}위를 기록했습니다. {company.future_growth[:100]}의 성장 모멘텀이 5~10년 투자 기간 내 실현될 것으로 판단합니다."
-        fallback_risk   = f"규제 환경 변화 및 경쟁 심화로 인한 성장 모멘텀 약화 리스크가 존재합니다."
+        # 논거 2: 성장 모멘텀 (매출성장률 + FCF)
+        growth_desc = []
+        if rg is not None:
+            if rg > 0.5:
+                growth_desc.append(f"매출성장률 {rg_str}(고성장 구간)")
+            elif rg > 0.2:
+                growth_desc.append(f"매출성장률 {rg_str}(업계 상위권)")
+            elif rg > 0.05:
+                growth_desc.append(f"매출성장률 {rg_str}(안정 성장)")
+            elif rg < 0:
+                growth_desc.append(f"매출 역성장({rg_str}) 국면이나 구조적 전환 중")
+        if fcf_val and rev_val and rev_val > 0:
+            fcf_margin = fcf_val / rev_val
+            if fcf_margin > 0.15:
+                growth_desc.append(f"FCF 마진 {fcf_margin*100:.0f}%(강력한 현금 창출력)")
+            elif fcf_margin > 0.05:
+                growth_desc.append(f"FCF 마진 {fcf_margin*100:.0f}%(플러스 FCF)")
+            elif fcf_val < 0:
+                growth_desc.append("현재 FCF 음수이나 스케일업 단계")
+        if gm is not None and gm > 0.4:
+            growth_desc.append(f"매출총이익률 {gm_str}(소프트웨어급 해자)")
+        if not growth_desc:
+            growth_desc.append(f"{company.future_growth[:80]}")
 
-        gemini_text = get_gemini_response(prompt, f"선정이유: {fallback_reason}\n핵심리스크: {fallback_risk}")
+        thesis_points.append(
+            f"{', '.join(growth_desc[:3])}. " +
+            (f"ROE {roe_str}의 자본 효율성이 5~10년 복리 수익을 뒷받침." if roe and roe > 0.1 else
+             f"{company.future_growth[80:160] if len(company.future_growth) > 80 else company.future_growth[:80]}")
+        )
 
-        # 파싱
-        selection_reason = fallback_reason
-        key_risk         = fallback_risk
-        try:
-            lines = gemini_text.strip().split('\n')
-            for line in lines:
-                if line.startswith('선정이유:'):
-                    selection_reason = line.replace('선정이유:', '').strip()
-                elif line.startswith('핵심리스크:'):
-                    key_risk = line.replace('핵심리스크:', '').strip()
-        except Exception:
-            pass
+        # 논거 3: 구조적 촉매 (역할 + 경쟁 해자)
+        role_text = company.role_description[:200] if company.role_description else ""
+        future_text = company.future_growth[:200] if company.future_growth else ""
+        moat_desc = ""
+        if any(kw in (role_text + future_text).lower() for kw in ['독점', 'sole', 'only u.s.', '유일', 'monopoly']):
+            moat_desc = "국내 유일 혹은 독점적 기술 포지션으로 경쟁자 진입장벽 최고 수준."
+        elif any(kw in (role_text + future_text).lower() for kw in ['1위', 'leader', 'dominant', '지배', 'largest']):
+            moat_desc = "해당 세그먼트 시장 지배자로 점유율 확대 및 프라이싱 파워 보유."
+        elif any(kw in (role_text + future_text).lower() for kw in ['ppa', 'take-or-pay', 'backlog', '수주잔고', 'contract']):
+            moat_desc = "장기 계약(PPA·수주잔고) 기반 예측 가능한 수익 구조로 하방 리스크 제한."
+        else:
+            moat_desc = f"{role_text[:120]} 포지션에서 수혜 집중."
+
+        thesis_points.append(
+            f"{moat_desc} " +
+            (f"부채비율 {de_str}, 유동비율 {cr_str}의 건전한 재무구조가 장기 투자 안전마진을 제공." if de is not None and cr is not None else
+             f"5~10년 구조적 성장 수혜주로 중장기 포트폴리오 핵심 편입 논거.")
+        )
+
+        # ─── 리스크 요인 생성 (구체적 2개) ──────────────────
+        # Risk 1: 밸류에이션 / 실적 리스크
+        if pe and pe > 100:
+            risk_points.append(f"PER {pe:.0f}x의 과도한 밸류에이션은 실적 미달 시 30~50% 급락 위험. 성장 기대치 충족 실패가 최대 리스크.")
+        elif pe and pe > 50:
+            risk_points.append(f"PER {pe:.0f}x로 이미 성장이 선반영된 상태. 매출성장률 둔화 시 멀티플 압축으로 주가 하방 압력 불가피.")
+        elif rg is not None and rg < 0:
+            risk_points.append(f"현재 역성장({rg_str}) 국면. 사업 구조 전환 실패 시 추가 매출 감소 및 수익성 악화 가능.")
+        elif fcf_val is not None and fcf_val < 0:
+            risk_points.append(f"FCF 적자 지속. 자금 조달 여건 악화(금리 상승·투자 심리 위축) 시 유동성 위기 및 지분 희석 위험.")
+        else:
+            risk_points.append(f"예상 성장률({rg_str}) 둔화 시 현재 밸류에이션 정당성 약화. 경기침체·금리 상승 환경에서 성장주 멀티플 압축 리스크.")
+
+        # Risk 2: 사업/산업/규제 리스크
+        role_lower = (role_text + future_text).lower()
+        if any(kw in role_lower for kw in ['nrc', '인허가', 'faa', 'regulation', '규제', 'license']):
+            risk_points.append(f"규제 인허가 지연이 사업화 타임라인을 2~4년 연장할 수 있어 현재가 기준 업사이드 시나리오의 최대 불확실성.")
+        elif any(kw in role_lower for kw in ['경쟁', 'competitor', 'competition', 'rival', 'against']):
+            risk_points.append(f"빅테크·후발주자의 공격적 투자로 시장점유율 잠식 가능. 가격 경쟁 심화 시 마진 압박 현실화.")
+        elif any(kw in role_lower for kw in ['china', '중국', 'geopolit', '지정학', 'tariff', '관세']):
+            risk_points.append(f"미중 무역 갈등 및 지정학적 리스크로 공급망 비용 상승·시장 접근 제한 가능. 관세 정책 변화가 핵심 변수.")
+        elif de is not None and de > 200:
+            risk_points.append(f"부채비율 {de_str}의 높은 레버리지. 금리 상승 환경에서 이자 부담 급증 및 리파이낸싱 리스크 존재.")
+        else:
+            risk_points.append(f"거시 경기 침체 시 기업 IT/인프라 투자 감축으로 수요 위축 가능. 핵심 고객 집중도가 높을 경우 개별 리스크도 존재.")
+
+        # ─── Gemini로 논거 보강 (API 있는 경우) ─────────────
+        fallback_thesis_list = thesis_points
+        fallback_risk_list   = risk_points
+
+        gemini_prompt = f"""당신은 헤지펀드 포트폴리오 매니저입니다. 다음 기업의 5~10년 투자 논거를 한국어로 작성하세요.
+
+기업: {company.name}({company.ticker}) | 산업: {industry_name}
+현재가: ${f'{current_price:.2f}' if current_price else 'N/A'} → 5년 목표가: {target_str} (업사이드 {upside_str}, CAGR {cagr_str})
+시가총액: {cap_str} | 매출성장률: {rg_str} | 순이익률: {nm_str} | ROE: {roe_str}
+PER: {pe_str} | EV/EBITDA: {fmt_x(ev_eb)} | 부채비율: {de_str} | 유동비율: {cr_str}
+매출: {rev_str} | FCF: {fcf_str}
+밸류체인 역할: {role_text[:200]}
+성장 스토리: {future_text[:200]}
+
+출력 형식 (반드시 JSON):
+{{
+  "thesis": ["논거1(현재가 대비 업사이드 수치 필수 포함)", "논거2(성장 모멘텀, 구체 수치)", "논거3(해자 또는 구조적 촉매)"],
+  "risks": ["리스크1(밸류에이션/실적)", "리스크2(사업/규제/경쟁)"]
+}}
+
+규칙: 수치 없는 추상적 문장 금지. 각 항목 2문장 이내. "AI 수혜" 같은 진부한 표현 금지."""
+
+        # Gemini 호출
+        gemini_raw = get_gemini_response(gemini_prompt, "")
+        thesis_list = fallback_thesis_list
+        risk_list   = fallback_risk_list
+
+        if gemini_raw:
+            try:
+                import re
+                json_match = re.search(r'\{[\s\S]*\}', gemini_raw)
+                if json_match:
+                    parsed = json.loads(json_match.group())
+                    th = parsed.get('thesis', [])
+                    ri = parsed.get('risks', [])
+                    if len(th) >= 2 and len(ri) >= 1:
+                        thesis_list = th[:3]
+                        risk_list   = ri[:2]
+            except Exception as e:
+                print(f"[Portfolio] Gemini 파싱 실패 ({company.ticker}): {e}")
 
         portfolio_items.append({
             "rank":            i + 1,
@@ -531,16 +655,34 @@ PER: {pe_str}
             "target_price_5y": target_5y,
             "cagr_5y":         cagr_5y,
             "total_return_5y": total_return_5y,
+            "upside_str":      upside_str,
             "portfolio_score": round(data["portfolio_score"], 1),
             "quant_score":     data["quant_score"],
             "growth_score":    data["growth_score"],
             "upside_score":    data["upside_score"],
             "quant_grade":     data["quant_grade"],
-            "selection_reason": selection_reason,
-            "key_risk":        key_risk,
+            # 구조화된 논거 (리스트)
+            "thesis":          thesis_list,
+            "risks":           risk_list,
+            # 하위 호환
+            "selection_reason": " | ".join(thesis_list),
+            "key_risk":        " | ".join(risk_list),
+            # 재무 메트릭 요약 (UI 표시용)
+            "metrics": {
+                "revenue_growth": rg_str,
+                "net_margin":     nm_str,
+                "gross_margin":   gm_str,
+                "roe":            roe_str,
+                "pe_ratio":       pe_str,
+                "ev_ebitda":      fmt_x(ev_eb),
+                "debt_to_equity": de_str,
+                "market_cap":     cap_str,
+                "fcf":            fcf_str,
+            }
         })
 
         print(f"[Portfolio] #{i+1} {company.ticker}: 비중 {weight}%, 스코어 {data['portfolio_score']:.1f}")
+
 
     # ── Step 5: 포트폴리오 시나리오 & 최종 출력 ──────────────
     # 가중 평균 CAGR
