@@ -1,0 +1,287 @@
+# -*- coding: utf-8 -*-
+"""
+신규 추가 종목 재무데이터 일괄 수집
+"""
+import sqlite3
+import yfinance as yf
+from datetime import datetime
+import time
+import math
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+
+DB_PATH = 'investment_portal.db'
+
+def safe_float(val):
+    try:
+        if val is None: return None
+        f = float(val)
+        if math.isnan(f) or math.isinf(f): return None
+        return f
+    except:
+        return None
+
+def try_keys(df, keys, col):
+    for k in keys:
+        try:
+            if df is None or df.empty: continue
+            if k not in df.index: continue
+            v = df.loc[k, col]
+            r = safe_float(v)
+            if r is not None: return r
+        except:
+            continue
+    return None
+
+def fetch_data(ticker_str):
+    t = yf.Ticker(ticker_str)
+    try:
+        inc_a = t.financials
+        inc_q = t.quarterly_financials
+        bs_a  = t.balance_sheet
+        bs_q  = t.quarterly_balance_sheet
+        cf_a  = t.cashflow
+        cf_q  = t.quarterly_cashflow
+        info  = t.info
+    except Exception as e:
+        print(f"  [ERR] fetch failed: {e}")
+        return [], {}
+
+    periods = []
+
+    def process(date_col, ptype, inc, bs, cf):
+        d = str(date_col)[:10]
+        rev    = try_keys(inc, ['Total Revenue', 'Revenue'], date_col)
+        cogs   = try_keys(inc, ['Cost Of Revenue', 'Cost of Revenue'], date_col)
+        gp     = try_keys(inc, ['Gross Profit'], date_col)
+        if gp is None and rev and cogs: gp = rev - cogs
+        op_inc = try_keys(inc, ['Operating Income', 'Operating Revenue'], date_col)
+        ebitda = try_keys(inc, ['EBITDA', 'Normalized EBITDA'], date_col)
+        net_inc = try_keys(inc, ['Net Income', 'Net Income Common Stockholders', 'Net Income Including Noncontrolling Interests'], date_col)
+        eps = try_keys(inc, ['Diluted EPS', 'Basic EPS', 'Normalized Diluted EPS'], date_col)
+
+        gpm = (gp/rev*100) if gp and rev else None
+        opm = (op_inc/rev*100) if op_inc and rev else None
+        npm = (net_inc/rev*100) if net_inc and rev else None
+        ebitda_m = (ebitda/rev*100) if ebitda and rev else None
+
+        total_assets = try_keys(bs, ['Total Assets'], date_col)
+        cur_assets = try_keys(bs, ['Total Current Assets', 'Current Assets'], date_col)
+        cash = try_keys(bs, ['Cash And Cash Equivalents', 'Cash Cash Equivalents And Short Term Investments'], date_col)
+        total_debt = try_keys(bs, ['Total Debt', 'Long Term Debt And Capital Lease Obligation'], date_col)
+        total_liab = try_keys(bs, ['Total Liabilities Net Minority Interest', 'Total Liabilities'], date_col)
+        cur_liab = try_keys(bs, ['Total Current Liabilities', 'Current Liabilities'], date_col)
+        equity = try_keys(bs, ['Stockholders Equity', 'Common Stock Equity', 'Total Equity Gross Minority Interest'], date_col)
+
+        net_debt = (total_debt - cash) if total_debt and cash else None
+        cur_ratio = (cur_assets / cur_liab) if cur_assets and cur_liab and cur_liab != 0 else None
+        de_ratio = (total_debt / equity * 100) if total_debt and equity and equity != 0 else None
+        roe = (net_inc / equity * 100) if net_inc and equity and equity != 0 else None
+        roa = (net_inc / total_assets * 100) if net_inc and total_assets and total_assets != 0 else None
+
+        ocf = try_keys(cf, ['Operating Cash Flow', 'Cash Flow From Continuing Operating Activities'], date_col)
+        capex = try_keys(cf, ['Capital Expenditure', 'Capital Expenditures', 'Purchase Of Property Plant And Equipment'], date_col)
+        fcf = try_keys(cf, ['Free Cash Flow'], date_col)
+        if fcf is None and ocf is not None and capex is not None:
+            fcf = ocf + capex
+        fcf_margin = (fcf/rev*100) if fcf and rev else None
+
+        periods.append({
+            'date': d, 'period_type': ptype, 'fiscal_year': d[:4],
+            'revenue': rev, 'cost_of_revenue': cogs, 'gross_profit': gp,
+            'operating_income': op_inc, 'ebitda': ebitda, 'net_income': net_inc, 'eps': eps,
+            'gross_margin': gpm, 'op_margin': opm, 'net_margin': npm, 'ebitda_margin': ebitda_m,
+            'total_assets': total_assets, 'total_current_assets': cur_assets,
+            'cash_and_equivalents': cash, 'total_debt': total_debt,
+            'total_liabilities': total_liab, 'total_current_liabilities': cur_liab,
+            'shareholders_equity': equity, 'net_debt': net_debt,
+            'current_ratio': cur_ratio, 'debt_to_equity_ratio': de_ratio,
+            'operating_cash_flow': ocf, 'capital_expenditure': capex,
+            'free_cash_flow': fcf, 'roe': roe, 'roa': roa, 'fcf_margin': fcf_margin,
+        })
+
+    if inc_a is not None and not inc_a.empty:
+        for col in inc_a.columns:
+            process(col, 'annual', inc_a, bs_a, cf_a)
+    if inc_q is not None and not inc_q.empty:
+        for col in inc_q.columns:
+            process(col, 'quarterly', inc_q, bs_q, cf_q)
+
+    return periods, info
+
+def update_profile(cur, company_id, info):
+    if not info: return
+    price = safe_float(info.get("currentPrice") or info.get("regularMarketPrice") or info.get("previousClose"))
+    profile = {
+        'sector': info.get('sector'),
+        'industry_classification': info.get('industry'),
+        'description': info.get('longBusinessSummary'),
+        'employees': info.get('fullTimeEmployees'),
+        'website': info.get('website'),
+        'current_price': price,
+        'market_cap': safe_float(info.get('marketCap')),
+        'beta': safe_float(info.get('beta')),
+        'pe_ratio': safe_float(info.get('trailingPE')),
+        'pb_ratio': safe_float(info.get('priceToBook')),
+        'ev_ebitda': safe_float(info.get('enterpriseToEbitda')),
+        'ev_sales': safe_float(info.get('enterpriseToRevenue')),
+        'roe': safe_float(info.get('returnOnEquity')),
+        'roa': safe_float(info.get('returnOnAssets')),
+        'gross_margin_ttm': safe_float(info.get('grossMargins')),
+        'op_margin_ttm': safe_float(info.get('operatingMargins')),
+        'net_margin_ttm': safe_float(info.get('profitMargins')),
+        'revenue_growth': safe_float(info.get('revenueGrowth')),
+        'eps_growth': safe_float(info.get('trailingEps')),
+        'current_ratio': safe_float(info.get('currentRatio')),
+        'debt_to_equity': safe_float(info.get('debtToEquity')),
+        'dividend_yield': safe_float(info.get('dividendYield')),
+        'payout_ratio': safe_float(info.get('payoutRatio')),
+        'last_updated': datetime.now().strftime('%Y-%m-%d'),
+    }
+    profile = {k: v for k, v in profile.items() if v is not None or k == 'last_updated'}
+
+    cur.execute("SELECT id FROM company_profiles WHERE company_id=?", (company_id,))
+    if cur.fetchone():
+        fields = ', '.join([f"{k}=?" for k in profile.keys()])
+        cur.execute(f"UPDATE company_profiles SET {fields} WHERE company_id=?", list(profile.values()) + [company_id])
+    else:
+        cols = ', '.join(['company_id'] + list(profile.keys()))
+        ph = ', '.join(['?'] * (len(profile) + 1))
+        cur.execute(f"INSERT INTO company_profiles ({cols}) VALUES ({ph})", [company_id] + list(profile.values()))
+
+def upsert_financials(cur, company_id, periods):
+    new_c = upd_c = 0
+    for p in periods:
+        cur.execute("SELECT id FROM financial_data WHERE company_id=? AND date=? AND period_type=?",
+                    (company_id, p['date'], p['period_type']))
+        existing = cur.fetchone()
+        try:
+            if existing:
+                if p['revenue'] is not None:
+                    cur.execute("""
+                        UPDATE financial_data SET
+                            revenue=?, cost_of_revenue=?, gross_profit=?, operating_income=?,
+                            ebitda=?, net_income=?, eps=?,
+                            gross_margin=?, op_margin=?, net_margin=?, ebitda_margin=?,
+                            total_assets=?, total_current_assets=?, cash_and_equivalents=?,
+                            total_debt=?, total_liabilities=?, total_current_liabilities=?,
+                            shareholders_equity=?, net_debt=?,
+                            current_ratio=?, debt_to_equity_ratio=?,
+                            operating_cash_flow=?, capital_expenditure=?, free_cash_flow=?,
+                            roe=?, roa=?, fcf_margin=?
+                        WHERE company_id=? AND date=? AND period_type=?
+                    """, (p['revenue'], p['cost_of_revenue'], p['gross_profit'],
+                          p['operating_income'], p['ebitda'], p['net_income'], p['eps'],
+                          p['gross_margin'], p['op_margin'], p['net_margin'], p['ebitda_margin'],
+                          p['total_assets'], p['total_current_assets'], p['cash_and_equivalents'],
+                          p['total_debt'], p['total_liabilities'], p['total_current_liabilities'],
+                          p['shareholders_equity'], p['net_debt'],
+                          p['current_ratio'], p['debt_to_equity_ratio'],
+                          p['operating_cash_flow'], p['capital_expenditure'], p['free_cash_flow'],
+                          p['roe'], p['roa'], p['fcf_margin'],
+                          company_id, p['date'], p['period_type']))
+                    upd_c += 1
+            else:
+                cur.execute("""
+                    INSERT INTO financial_data (
+                        company_id, date, period_type, fiscal_year,
+                        revenue, cost_of_revenue, gross_profit, operating_income, ebitda, net_income, eps,
+                        gross_margin, op_margin, net_margin, ebitda_margin,
+                        total_assets, total_current_assets, cash_and_equivalents,
+                        total_debt, total_liabilities, total_current_liabilities,
+                        shareholders_equity, net_debt,
+                        current_ratio, debt_to_equity_ratio,
+                        operating_cash_flow, capital_expenditure, free_cash_flow,
+                        roe, roa, fcf_margin
+                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                """, (company_id, p['date'], p['period_type'], p['fiscal_year'],
+                      p['revenue'], p['cost_of_revenue'], p['gross_profit'],
+                      p['operating_income'], p['ebitda'], p['net_income'], p['eps'],
+                      p['gross_margin'], p['op_margin'], p['net_margin'], p['ebitda_margin'],
+                      p['total_assets'], p['total_current_assets'], p['cash_and_equivalents'],
+                      p['total_debt'], p['total_liabilities'], p['total_current_liabilities'],
+                      p['shareholders_equity'], p['net_debt'],
+                      p['current_ratio'], p['debt_to_equity_ratio'],
+                      p['operating_cash_flow'], p['capital_expenditure'], p['free_cash_flow'],
+                      p['roe'], p['roa'], p['fcf_margin']))
+                new_c += 1
+        except Exception as e:
+            print(f"  [WARN] {p['date']} {p['period_type']}: {e}")
+    return new_c, upd_c
+
+def main():
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+
+    # 프로필 없는 종목만 대상 (신규 추가된 것)
+    cur.execute("""
+        SELECT c.id, c.name, c.ticker, c.industry_id
+        FROM companies c
+        LEFT JOIN company_profiles cp ON c.id = cp.company_id
+        WHERE cp.id IS NULL
+        ORDER BY c.industry_id, c.id
+    """)
+    companies = cur.fetchall()
+
+    if not companies:
+        print("신규 추가 종목 없음 (모두 프로필 존재)")
+        conn.close()
+        return
+
+    print(f"=== 신규 추가 {len(companies)}개 종목 재무데이터 수집 ===")
+    print("="*65)
+
+    results = []
+    for cid, name, ticker, ind_id in companies:
+        print(f"\n[id={ind_id}] [{cid}] {name} ({ticker})")
+        try:
+            periods, info = fetch_data(ticker)
+        except Exception as e:
+            print(f"  [ERR] {e}")
+            results.append((cid, name, ticker, 0, 0, 0))
+            time.sleep(1)
+            continue
+
+        annual_c  = len([p for p in periods if p['period_type'] == 'annual'])
+        quarter_c = len([p for p in periods if p['period_type'] == 'quarterly'])
+
+        try:
+            update_profile(cur, cid, info)
+        except Exception as e:
+            print(f"  [WARN] profile: {e}")
+
+        new_c, upd_c = upsert_financials(cur, cid, periods)
+        conn.commit()
+
+        price_str = "N/A"
+        if info:
+            p = info.get('currentPrice') or info.get('regularMarketPrice') or info.get('previousClose')
+            if p: price_str = f"{p:.2f}"
+
+        mktcap_str = "N/A"
+        if info and info.get('marketCap'):
+            mc = info['marketCap']
+            if mc >= 1e12: mktcap_str = f"${mc/1e12:.1f}T"
+            elif mc >= 1e9: mktcap_str = f"${mc/1e9:.1f}B"
+            else: mktcap_str = f"${mc/1e6:.0f}M"
+
+        status = "OK" if annual_c > 0 or quarter_c > 0 else "NO_DATA"
+        print(f"  [{status}] annual={annual_c}, qtr={quarter_c} | new={new_c} | price={price_str} | mktcap={mktcap_str}")
+        results.append((cid, name, ticker, annual_c, quarter_c, new_c + upd_c))
+
+        time.sleep(2)
+
+    conn.close()
+
+    print("\n" + "="*65)
+    print("=== 최종 수집 결과 ===")
+    ok = fail = 0
+    for r in results:
+        status = "[OK]  " if r[3] > 0 or r[4] > 0 else "[WARN]"
+        print(f'{status} [{r[0]:>3}] {r[2]:<15} {r[1]:<35} ann={r[3]} qtr={r[4]}')
+        if r[3] > 0 or r[4] > 0: ok += 1
+        else: fail += 1
+    print(f"\nOK={ok}, NoData={fail}")
+
+if __name__ == "__main__":
+    main()
