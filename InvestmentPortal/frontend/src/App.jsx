@@ -19,14 +19,31 @@ const BACKEND_HOST = window.location.hostname === 'localhost' || window.location
 const API_BASE = `${BACKEND_HOST}/api`;
 
 // ── 포맷 유틸 ──────────────────────────────────────────
-const fB  = (n) => n == null ? '-' : `$${(n/1e9).toFixed(2)}B`;          // 십억 달러
-const fM  = (n) => n == null ? '-' : `$${(n/1e6).toFixed(0)}M`;          // 백만 달러
-const fP  = (n) => n == null ? '-' : `${(n*100).toFixed(1)}%`;            // 비율(0~1) → %
-const fP2 = (n) => n == null ? '-' : `${n.toFixed(1)}%`;                  // 이미 % 값
-const fX  = (n) => n == null ? '-' : `${n.toFixed(2)}x`;                  // 배수
-const fN  = (n) => n == null ? '-' : n.toFixed(2);                        // 소수
-const fK  = (n) => n == null ? '-' : n.toLocaleString();                  // 정수
-const fDollar = (n) => n == null ? '-' : `$${n.toFixed(2)}`;              // 달러 단위
+const isKrw = (ticker) => ticker && (ticker.endsWith('.KS') || ticker.endsWith('.KQ'));
+
+const fB = (n, t) => {
+  if (n == null) return '-';
+  if (isKrw(t)) return `₩${(n/1e8).toLocaleString(undefined, {maximumFractionDigits:0})}억`;
+  return `$${(n/1e9).toFixed(2)}B`;
+};
+
+const fM = (n, t) => {
+  if (n == null) return '-';
+  if (isKrw(t)) return `₩${(n/1e8).toLocaleString(undefined, {maximumFractionDigits:1})}억`;
+  return `$${(n/1e6).toFixed(0)}M`;
+};
+
+const fP  = (n) => n == null ? '-' : `${(n*100).toFixed(1)}%`;
+const fP2 = (n) => n == null ? '-' : `${n.toFixed(1)}%`;
+const fX  = (n) => n == null ? '-' : `${n.toFixed(2)}x`;
+const fN  = (n) => n == null ? '-' : n.toFixed(2);
+const fK  = (n) => n == null ? '-' : n.toLocaleString();
+
+const fDollar = (n, t) => {
+  if (n == null) return '-';
+  if (isKrw(t)) return `₩${n.toLocaleString(undefined, {maximumFractionDigits:0})}`;
+  return `$${n.toFixed(2)}`;
+};
 
 const color = (v, good, bad) => {
   if (v == null) return 'var(--text-secondary)';
@@ -867,7 +884,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
             valueColor={p.ev_ebitda < 15 ? 'var(--accent-green)' : p.ev_ebitda > 40 ? '#ff6b6b' : 'var(--text-primary)'} />
           <KpiCard label="EV/Sales" value={fX(p.ev_sales)} sub="매출 배수" />
           <KpiCard label="시가총액" value={p.market_cap ? `$${(p.market_cap/1e9).toFixed(1)}B` : '-'} sub="Market Cap" icon={DollarSign} />
-          <KpiCard label="애널리스트 목표가" value={fDollar(p.analyst_target)} sub="Consensus Target"
+          <KpiCard label="애널리스트 목표가" value={fDollar(p.analyst_target, company?.ticker)} sub="Consensus Target"
             valueColor={p.analyst_target > p.current_price ? 'var(--accent-green)' : '#ff6b6b'} />
         </div>
       </section>
@@ -899,7 +916,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'12px' }}>
               <KpiCard label="매출 성장률 (YoY)" value={p.revenue_growth != null ? fP(p.revenue_growth) : '-'} sub="Revenue Growth"
                 valueColor={p.revenue_growth > 0.1 ? 'var(--accent-green)' : p.revenue_growth < 0 ? '#ff6b6b' : 'var(--text-primary)'} />
-              <KpiCard label="EPS (TTM)" value={p.eps_growth != null ? fDollar(p.eps_growth) : '-'} sub="Earnings Per Share" />
+              <KpiCard label="EPS (TTM)" value={p.eps_growth != null ? fDollar(p.eps_growth, company?.ticker) : '-'} sub="Earnings Per Share" />
             </div>
           </div>
           <div>
@@ -1030,19 +1047,19 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
               {tableData.map((d, i) => (
                 <tr key={i}>
                   <td style={{ fontWeight:600 }}>{d.date}</td>
-                  <td>{fB(d.revenue)}</td>
-                  <td style={{ color:'#ff6b6b' }}>{fB(d.cost_of_revenue != null ? d.cost_of_revenue : (d.revenue && d.gross_profit ? d.revenue - d.gross_profit : null))}</td>
-                  <td>{fB(d.gross_profit)}</td>
-                  <td>{fB(d.operating_income)}</td>
-                  <td>{fB(d.ebitda)}</td>
-                  <td style={{ color: d.net_income >= 0 ? 'var(--accent-green)' : '#ff6b6b' }}>{fB(d.net_income)}</td>
-                  <td>{d.eps != null ? fDollar(d.eps) : '-'}</td>
+                  <td>{fB(d.revenue, company?.ticker)}</td>
+                  <td style={{ color:'#ff6b6b' }}>{fB(d.cost_of_revenue != null ? d.cost_of_revenue : (d.revenue && d.gross_profit ? d.revenue - d.gross_profit : null), company?.ticker)}</td>
+                  <td>{fB(d.gross_profit, company?.ticker)}</td>
+                  <td>{fB(d.operating_income, company?.ticker)}</td>
+                  <td>{fB(d.ebitda, company?.ticker)}</td>
+                  <td style={{ color: d.net_income >= 0 ? 'var(--accent-green)' : '#ff6b6b' }}>{fB(d.net_income, company?.ticker)}</td>
+                  <td>{d.eps != null ? fDollar(d.eps, company?.ticker) : '-'}</td>
                   <td style={{ color:'var(--accent-green)' }}>{fP2(d.gross_margin)}</td>
                   <td style={{ color:'var(--accent-blue)' }}>{fP2(d.op_margin)}</td>
-                  <td>{fB(d.operating_cash_flow)}</td>
-                  <td style={{ color: d.free_cash_flow >= 0 ? 'var(--accent-green)' : '#ff6b6b' }}>{fB(d.free_cash_flow)}</td>
-                  <td>{fB(d.total_assets)}</td>
-                  <td style={{ color: d.net_debt > 0 ? '#ff6b6b' : 'var(--accent-green)' }}>{fB(d.net_debt)}</td>
+                  <td>{fB(d.operating_cash_flow, company?.ticker)}</td>
+                  <td style={{ color: d.free_cash_flow >= 0 ? 'var(--accent-green)' : '#ff6b6b' }}>{fB(d.free_cash_flow, company?.ticker)}</td>
+                  <td>{fB(d.total_assets, company?.ticker)}</td>
+                  <td style={{ color: d.net_debt > 0 ? '#ff6b6b' : 'var(--accent-green)' }}>{fB(d.net_debt, company?.ticker)}</td>
                   <td>{d.roe != null ? fP2(d.roe) : '-'}</td>
                 </tr>
               ))}
@@ -1110,13 +1127,13 @@ function BusinessModelSection({ latest, profile, company }) {
 
   // Waterfall 데이터 (마이너스 바를 보이지 않는 스택으로 오프셋 처리)
   const wfData = [
-    { name: '매출액', value: rev/1e9, start: 0, fill: '#3b82f6', label: fB(rev) },
-    { name: '매출원가', value: -cogs/1e9, start: (rev-cogs)/1e9, fill: '#ff6b6b', label: fB(cogs) },
-    { name: '매출총이익', value: gp/1e9, start: 0, fill: '#10b981', label: fB(gp), isSum: true },
-    { name: '판관·R&D', value: -opEx/1e9, start: opInc/1e9, fill: '#f97316', label: fB(opEx) },
-    { name: '영업이익', value: opInc/1e9, start: 0, fill: '#8b5cf6', label: fB(opInc), isSum: true },
-    { name: '세금·기타', value: -taxOther/1e9, start: netInc/1e9, fill: '#ef4444', label: fB(taxOther) },
-    { name: '순이익', value: netInc/1e9, start: 0, fill: '#00f2fe', label: fB(netInc), isSum: true },
+    { name: '매출액', value: rev/1e9, start: 0, fill: '#3b82f6', label: fB(rev, company?.ticker) },
+    { name: '매출원가', value: -cogs/1e9, start: (rev-cogs)/1e9, fill: '#ff6b6b', label: fB(cogs, company?.ticker) },
+    { name: '매출총이익', value: gp/1e9, start: 0, fill: '#10b981', label: fB(gp, company?.ticker), isSum: true },
+    { name: '판관·R&D', value: -opEx/1e9, start: opInc/1e9, fill: '#f97316', label: fB(opEx, company?.ticker) },
+    { name: '영업이익', value: opInc/1e9, start: 0, fill: '#8b5cf6', label: fB(opInc, company?.ticker), isSum: true },
+    { name: '세금·기타', value: -taxOther/1e9, start: netInc/1e9, fill: '#ef4444', label: fB(taxOther, company?.ticker) },
+    { name: '순이익', value: netInc/1e9, start: 0, fill: '#00f2fe', label: fB(netInc, company?.ticker), isSum: true },
   ];
 
   // 비용 구조 파이 차트
@@ -1176,7 +1193,7 @@ function BusinessModelSection({ latest, profile, company }) {
           {/* Revenue */}
           <FlowBox
             label="매출액"
-            value={fB(rev)}
+            value={fB(rev, company?.ticker)}
             pct="100%"
             color="#3b82f6"
             desc={p.industry || '핵심 사업'}
@@ -1186,22 +1203,22 @@ function BusinessModelSection({ latest, profile, company }) {
 
           {/* COGS Split */}
           <div style={{ display:'flex', flexDirection:'column', gap:'8px', minWidth:'160px' }}>
-            <FlowBox label="매출원가 (COGS)" value={fB(cogs)} pct={`${(cogs/rev*100).toFixed(1)}%`} color="#ff6b6b" desc="제품·서비스 원가" small />
-            <FlowBox label="매출총이익" value={fB(gp)} pct={`${gpm.toFixed(1)}%`} color="#10b981" desc="Gross Profit" small highlight />
+            <FlowBox label="매출원가 (COGS)" value={fB(cogs, company?.ticker)} pct={`${(cogs/rev*100).toFixed(1)}%`} color="#ff6b6b" desc="제품·서비스 원가" small />
+            <FlowBox label="매출총이익" value={fB(gp, company?.ticker)} pct={`${gpm.toFixed(1)}%`} color="#10b981" desc="Gross Profit" small highlight />
           </div>
           <FlowArrow />
 
           {/* OpEx Split */}
           <div style={{ display:'flex', flexDirection:'column', gap:'8px', minWidth:'160px' }}>
-            <FlowBox label="판관비·R&D" value={fB(opEx)} pct={`${(opEx/rev*100).toFixed(1)}%`} color="#f97316" desc="운영비 공제" small />
-            <FlowBox label="영업이익" value={fB(opInc)} pct={`${opm.toFixed(1)}%`} color="#8b5cf6" desc="Operating Income" small highlight />
+            <FlowBox label="판관비·R&D" value={fB(opEx, company?.ticker)} pct={`${(opEx/rev*100).toFixed(1)}%`} color="#f97316" desc="운영비 공제" small />
+            <FlowBox label="영업이익" value={fB(opInc, company?.ticker)} pct={`${opm.toFixed(1)}%`} color="#8b5cf6" desc="Operating Income" small highlight />
           </div>
           <FlowArrow />
 
           {/* Net Income */}
           <div style={{ display:'flex', flexDirection:'column', gap:'8px', minWidth:'160px' }}>
-            <FlowBox label="세금·이자·기타" value={fB(taxOther)} pct={`${(taxOther/rev*100).toFixed(1)}%`} color="#ef4444" desc="비영업 비용" small />
-            <FlowBox label="🏆 순이익" value={fB(netInc)} pct={`${npm.toFixed(1)}%`} color="#00f2fe" desc="Net Income" small highlight glow />
+            <FlowBox label="세금·이자·기타" value={fB(taxOther, company?.ticker)} pct={`${(taxOther/rev*100).toFixed(1)}%`} color="#ef4444" desc="비영업 비용" small />
+            <FlowBox label="🏆 순이익" value={fB(netInc, company?.ticker)} pct={`${npm.toFixed(1)}%`} color="#00f2fe" desc="Net Income" small highlight glow />
           </div>
         </div>
 
@@ -1271,7 +1288,7 @@ function BusinessModelSection({ latest, profile, company }) {
                 ))}
               </Pie>
               <Tooltip
-                formatter={(v) => fB(v)}
+                formatter={(v) => fB(v, company?.ticker)}
                 contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', fontSize:'0.82rem' }}
               />
             </PieChart>
