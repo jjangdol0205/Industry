@@ -67,7 +67,8 @@ function App() {
   const [installPrompt, setInstallPrompt] = useState(null);
   const [showInstallBanner, setShowInstallBanner] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [loadingPhase, setLoadingPhase] = useState('wakeup'); // 'wakeup' | 'data'
+  const [loadingPhase, setLoadingPhase] = useState('wakeup');
+  const [showUpdateBanner, setShowUpdateBanner] = useState(false);
 
 
   // 뒤로가기(Back) 버튼 핸들러
@@ -99,6 +100,18 @@ function App() {
     };
     window.addEventListener('beforeinstallprompt', handler);
     return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  // SW 업데이트 감지 → 업데이트 배너 표시
+  useEffect(() => {
+    if (!('serviceWorker' in navigator)) return;
+    const handleMsg = (e) => {
+      if (e.data?.type === 'SW_UPDATED') {
+        setShowUpdateBanner(true);
+      }
+    };
+    navigator.serviceWorker.addEventListener('message', handleMsg);
+    return () => navigator.serviceWorker.removeEventListener('message', handleMsg);
   }, []);
 
   const handleInstallClick = async () => {
@@ -285,12 +298,49 @@ function App() {
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes pulse { 0%,100% { transform: scale(1); box-shadow: 0 0 40px rgba(59,130,246,0.4); }
           50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(59,130,246,0.6); } }
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+          to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
       `}</style>
     </div>
   );
 
   return (
     <div className="layout">
+
+      {/* ── 앱 업데이트 배너 ── */}
+      {showUpdateBanner && (
+        <div style={{
+          position: 'fixed', top: '16px', left: '50%', transform: 'translateX(-50%)',
+          zIndex: 10000, display: 'flex', alignItems: 'center', gap: '12px',
+          background: 'linear-gradient(135deg, #0f2027, #1a2a3a)',
+          border: '1px solid rgba(16,185,129,0.5)',
+          borderRadius: '14px', padding: '12px 18px',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(16,185,129,0.15)',
+          maxWidth: '340px', width: 'calc(100% - 32px)',
+          animation: 'slideDown 0.3s ease-out',
+        }}>
+          <span style={{ fontSize: '1.3rem' }}>🚀</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ color: 'white', fontWeight: 700, fontSize: '0.88rem' }}>새 버전이 있습니다</div>
+            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.74rem' }}>주도주 스코어링 UI 업데이트</div>
+          </div>
+          <button
+            onClick={() => window.location.reload()}
+            style={{
+              background: 'linear-gradient(135deg, #10b981, #059669)',
+              border: 'none', borderRadius: '8px', color: 'white',
+              padding: '7px 14px', fontSize: '0.82rem', fontWeight: 700,
+              cursor: 'pointer', whiteSpace: 'nowrap',
+            }}
+          >지금 업데이트</button>
+          <button
+            onClick={() => setShowUpdateBanner(false)}
+            style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.35)', fontSize: '1.1rem', cursor: 'pointer', padding: '0 4px' }}
+          >✕</button>
+        </div>
+      )}
 
       {/* ── PWA 설치 배너 (Android Chrome) ── */}
       {showInstallBanner && (
