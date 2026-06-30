@@ -201,6 +201,31 @@ run_startup_migrations()
 
 app = FastAPI(title="Investment Portal API")
 
+# ─────────────────────────────────────────────
+# 주도주 스코어 맵 로드 (메모리 캐시)
+# ─────────────────────────────────────────────
+_LEADING_SCORE_MAP: dict = {}  # ticker -> {score, grade, breakdown}
+
+def _load_leading_scores():
+    global _LEADING_SCORE_MAP
+    try:
+        rank_path = os.path.join(os.path.dirname(__file__), "leading_stock_rankings.json")
+        if os.path.exists(rank_path):
+            with open(rank_path, encoding="utf-8") as f:
+                data = json.load(f)
+            for item in data.get("rankings", []):
+                t = item["ticker"]
+                _LEADING_SCORE_MAP[t] = {
+                    "leading_score": item["score"],
+                    "leading_grade": item["grade"],
+                    "leading_breakdown": item.get("breakdown", {}),
+                }
+            print(f"[LeadingScore] Loaded {len(_LEADING_SCORE_MAP)} ticker scores")
+    except Exception as e:
+        print(f"[LeadingScore] Warning: {e}")
+
+_load_leading_scores()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -299,6 +324,12 @@ def get_report(report_id: int, db: Session = Depends(get_db)):
     report = db.query(models.IndustryReport).filter(models.IndustryReport.id == report_id).first()
     if not report:
         raise HTTPException(status_code=404, detail="Report not found")
+    # 주도주 점수 주입
+    for comp in (report.companies or []):
+        ls = _LEADING_SCORE_MAP.get(comp.ticker, {})
+        comp.leading_score    = ls.get("leading_score")
+        comp.leading_grade    = ls.get("leading_grade")
+        comp.leading_breakdown = ls.get("leading_breakdown", {})
     return report
 
 @app.get("/api/reports/{report_id}/pdf_url")
