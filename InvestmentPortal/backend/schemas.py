@@ -46,6 +46,10 @@ class Company(CompanyBase):
     industry_id: int
     display_order: Optional[int] = 999
     financials: List[FinancialData] = []
+    # 주도주 스코어링 (leading_stock_rankings.json 기반, 런타임 주입)
+    leading_score: Optional[float] = None
+    leading_grade: Optional[str] = None
+    leading_breakdown: Optional[dict] = None
 
     class Config:
         from_attributes = True

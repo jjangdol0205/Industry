@@ -550,8 +550,80 @@ function PdfLibraryView() {
   );
 }
 
+// ── 주도주 등급 색상 시스템 ──────────────────────────────
+const GRADE_CONFIG = {
+  S: { color: '#FFD700', bg: 'rgba(255,215,0,0.15)',  border: 'rgba(255,215,0,0.5)',  label: 'S등급', emoji: '👑' },
+  A: { color: '#10b981', bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.4)', label: 'A등급', emoji: '🏆' },
+  B: { color: '#3b82f6', bg: 'rgba(59,130,246,0.12)', border: 'rgba(59,130,246,0.4)', label: 'B등급', emoji: '⭐' },
+  C: { color: '#9ca3af', bg: 'rgba(156,163,175,0.10)',border: 'rgba(156,163,175,0.3)', label: 'C등급', emoji: '🔵' },
+  D: { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',  border: 'rgba(239,68,68,0.3)',  label: 'D등급', emoji: '⚠️' },
+};
+
+// ── 주도주 점수 바 컴포넌트 ────────────────────────────────
+function LeadingScoreBar({ breakdown, score, grade }) {
+  if (!breakdown || !score) return null;
+  const cfg = GRADE_CONFIG[grade] || GRADE_CONFIG['C'];
+  const items = [
+    { key: 'A_성장(품질조정)', label: '성장', max: 40, color: '#10b981' },
+    { key: 'B_마진해자',       label: '해자', max: 30, color: '#3b82f6' },
+    { key: 'C_재무안전성',     label: '안전', max: 20, color: '#8b5cf6' },
+    { key: 'D_규모리더십',     label: '리더', max: 10, color: '#f59e0b' },
+  ];
+  return (
+    <div style={{ marginTop: '10px' }}>
+      {/* 총점 + 등급 */}
+      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'8px' }}>
+        <span style={{ fontSize:'0.72rem', color:'var(--text-secondary)' }}>주도주 점수</span>
+        <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
+          <div style={{
+            fontSize:'0.7rem', fontWeight:800, padding:'2px 8px', borderRadius:'8px',
+            background: cfg.bg, border:`1px solid ${cfg.border}`, color: cfg.color,
+            letterSpacing:'0.5px',
+          }}>{cfg.emoji} {grade}</div>
+          <span style={{ fontSize:'0.85rem', fontWeight:700, color: cfg.color }}>{score}점</span>
+        </div>
+      </div>
+      {/* 세그먼트 바 */}
+      <div style={{ display:'flex', gap:'2px', height:'6px', borderRadius:'4px', overflow:'hidden', background:'rgba(255,255,255,0.06)' }}>
+        {items.map(item => {
+          const val = Math.max(0, breakdown[item.key] || 0);
+          const pct = (val / item.max) * (item.max / 100) * 100;
+          return (
+            <div key={item.key} title={`${item.label}: ${val}/${item.max}`}
+              style={{ flex: item.max, background: pct > 0 ? item.color : 'transparent',
+                       opacity: pct > 0 ? 0.85 : 0.2, transition:'all 0.3s' }} />
+          );
+        })}
+      </div>
+      {/* 라벨 */}
+      <div style={{ display:'flex', gap:'2px', marginTop:'4px' }}>
+        {items.map(item => (
+          <div key={item.key} style={{ flex: item.max, textAlign:'center',
+            fontSize:'0.6rem', color:'rgba(255,255,255,0.3)' }}>{item.label}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── IndustryView ────────────────────────────────
 function IndustryView({ report, onSelectCompany }) {
+  const [gradeFilter, setGradeFilter] = useState('전체');
+
+  const companies = [...report.companies]
+    .sort((a, b) => (a.display_order ?? 999) - (b.display_order ?? 999));
+
+  // 등급 필터 적용
+  const filtered = gradeFilter === '전체'
+    ? companies
+    : companies.filter(c => c.leading_grade === gradeFilter);
+
+  // 필터 탭 등급별 카운트
+  const gradeCounts = companies.reduce((acc, c) => {
+    const g = c.leading_grade || 'D';
+    acc[g] = (acc[g] || 0) + 1;
+    return acc;
+  }, {});
 
   return (
     <div className="industry-view">
@@ -574,53 +646,143 @@ function IndustryView({ report, onSelectCompany }) {
         </div>
       </div>
 
-      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'16px' }}>
-        <h3 style={{ color:'var(--accent-blue)', fontSize:'1.4rem', borderBottom:'none', margin:0 }}>
-          🏆 Key Tracked Companies
-        </h3>
-        <div style={{ fontSize:'0.75rem', color:'var(--text-secondary)', background:'rgba(255,255,255,0.05)', padding:'4px 12px', borderRadius:'20px' }}>
-          투자 매력도 순 정렬 · 매월 업데이트
+      {/* 헤더 + 등급 필터 */}
+      <div style={{ marginBottom:'20px' }}>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'14px' }}>
+          <h3 style={{ color:'var(--accent-blue)', fontSize:'1.4rem', borderBottom:'none', margin:0 }}>
+            🏆 Key Tracked Companies
+          </h3>
+          <div style={{ fontSize:'0.75rem', color:'var(--text-secondary)', background:'rgba(255,255,255,0.05)', padding:'4px 12px', borderRadius:'20px' }}>
+            주도주 투자법 순위 · 매월 업데이트
+          </div>
         </div>
-      </div>
-      <div className="company-list">
-        {[...report.companies]
-          .sort((a, b) => (a.display_order ?? 999) - (b.display_order ?? 999))
-          .map((comp, idx) => {
-            const rank = comp.display_order ?? (idx + 1);
-            const rankColor = rank === 1 ? '#FFD700' : rank === 2 ? '#C0C0C0' : rank === 3 ? '#CD7F32' : rank <= 5 ? '#3b82f6' : 'rgba(255,255,255,0.25)';
-            const rankBg   = rank === 1 ? 'rgba(255,215,0,0.12)' : rank === 2 ? 'rgba(192,192,192,0.10)' : rank === 3 ? 'rgba(205,127,50,0.12)' : rank <= 5 ? 'rgba(59,130,246,0.08)' : 'transparent';
-            const rankEmoji = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
+
+        {/* 등급 필터 탭 */}
+        <div style={{ display:'flex', gap:'6px', flexWrap:'wrap' }}>
+          {['전체', 'S', 'A', 'B', 'C', 'D'].map(g => {
+            const cfg = g === '전체' ? null : GRADE_CONFIG[g];
+            const cnt = g === '전체' ? companies.length : (gradeCounts[g] || 0);
+            const isActive = gradeFilter === g;
             return (
-              <div key={comp.id}
-                className="company-pill glass-panel"
-                onClick={() => onSelectCompany(comp.id)}
-                style={{ position:'relative', border: rank <= 3 ? `1px solid ${rankColor}30` : undefined }}
+              <button key={g} onClick={() => setGradeFilter(g)}
+                style={{
+                  padding:'6px 14px', borderRadius:'20px', border:'none', cursor:'pointer',
+                  fontSize:'0.8rem', fontWeight:600, transition:'all 0.2s',
+                  background: isActive
+                    ? (cfg ? cfg.bg : 'rgba(59,130,246,0.2)')
+                    : 'rgba(255,255,255,0.05)',
+                  color: isActive
+                    ? (cfg ? cfg.color : 'var(--accent-blue)')
+                    : 'var(--text-secondary)',
+                  border: isActive
+                    ? `1px solid ${cfg ? cfg.border : 'rgba(59,130,246,0.5)'}`
+                    : '1px solid transparent',
+                  boxShadow: isActive && cfg
+                    ? `0 0 12px ${cfg.color}30`
+                    : 'none',
+                }}
               >
+                {cfg ? `${cfg.emoji} ${g}등급` : '전체'} <span style={{ opacity:0.6, fontSize:'0.72rem' }}>({cnt})</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* 필터 결과 없을 때 */}
+        {filtered.length === 0 && (
+          <div style={{ textAlign:'center', padding:'40px', color:'var(--text-secondary)' }}>
+            이 산업에 {gradeFilter}등급 기업이 없습니다.
+          </div>
+        )}
+      </div>
+
+      <div className="company-list">
+        {filtered.map((comp, idx) => {
+          const rank  = comp.display_order ?? (idx + 1);
+          const grade = comp.leading_grade;
+          const cfg   = grade ? (GRADE_CONFIG[grade] || GRADE_CONFIG['C']) : null;
+
+          // 등급 기반 카드 테두리 (기존 순위 기반 → 등급 기반으로 교체)
+          const cardBorder = cfg
+            ? `1px solid ${cfg.border}`
+            : '1px solid rgba(255,255,255,0.06)';
+          const cardGlow = grade === 'S'
+            ? `0 0 20px ${cfg.color}20`
+            : grade === 'A'
+            ? `0 0 12px ${cfg.color}15`
+            : 'none';
+
+          const rankEmoji = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
+
+          return (
+            <div key={comp.id}
+              className="company-pill glass-panel"
+              onClick={() => onSelectCompany(comp.id)}
+              style={{
+                position:'relative',
+                border: cardBorder,
+                boxShadow: cardGlow,
+                transition: 'all 0.25s',
+              }}
+            >
+              {/* 상단: 순위 + 등급 배지 나란히 */}
+              <div style={{
+                position:'absolute', top:'10px', right:'10px',
+                display:'flex', alignItems:'center', gap:'5px',
+              }}>
+                {/* 등급 배지 */}
+                {cfg && (
+                  <div style={{
+                    background: cfg.bg,
+                    border: `1px solid ${cfg.border}`,
+                    borderRadius:'10px', padding:'2px 8px',
+                    fontSize:'0.7rem', fontWeight:800, color: cfg.color,
+                    letterSpacing:'0.5px',
+                    boxShadow: grade === 'S' ? `0 0 8px ${cfg.color}50` : 'none',
+                  }}>{cfg.emoji} {grade}</div>
+                )}
                 {/* 순위 배지 */}
                 <div style={{
-                  position:'absolute', top:'10px', right:'10px',
-                  background: rankBg,
-                  border: `1px solid ${rankColor}60`,
-                  borderRadius:'12px', padding:'2px 8px',
-                  fontSize:'0.68rem', fontWeight:700, color: rankColor,
-                  display:'flex', alignItems:'center', gap:'3px',
+                  background:'rgba(255,255,255,0.06)',
+                  border:'1px solid rgba(255,255,255,0.12)',
+                  borderRadius:'10px', padding:'2px 8px',
+                  fontSize:'0.68rem', fontWeight:600, color:'var(--text-secondary)',
+                  display:'flex', alignItems:'center', gap:'2px',
                 }}>
                   {rankEmoji} {rank}위
                 </div>
-                <div className="company-header" style={{ paddingRight:'48px' }}>
-                  <span className="company-name">{comp.name}</span>
-                  <span className="company-ticker">{comp.ticker}</span>
-                </div>
-                <div style={{ fontSize:'0.9rem', color:'var(--text-secondary)', display:'-webkit-box', WebkitLineClamp:3, WebkitBoxOrient:'vertical', overflow:'hidden' }}>
-                  {comp.role_description}
-                </div>
               </div>
-            );
-          })}
+
+              {/* 기업명 + 티커 */}
+              <div className="company-header" style={{ paddingRight:'100px' }}>
+                <span className="company-name">{comp.name}</span>
+                <span className="company-ticker">{comp.ticker}</span>
+              </div>
+
+              {/* 설명 */}
+              <div style={{
+                fontSize:'0.9rem', color:'var(--text-secondary)',
+                display:'-webkit-box', WebkitLineClamp:2,
+                WebkitBoxOrient:'vertical', overflow:'hidden',
+                marginBottom: comp.leading_score ? '0' : '0',
+              }}>
+                {comp.role_description}
+              </div>
+
+              {/* 주도주 점수 바 */}
+              <LeadingScoreBar
+                breakdown={comp.leading_breakdown}
+                score={comp.leading_score}
+                grade={comp.leading_grade}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 }
+
 
 // ── KPI 카드 ─────────────────────────────────────────────
 function KpiCard({ label, value, sub, valueColor, icon: Icon }) {
