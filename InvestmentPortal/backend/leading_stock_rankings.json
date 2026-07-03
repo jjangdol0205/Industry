@@ -1,6 +1,6 @@
 {
   "version": "v2",
-  "generated_at": "2026-06-30T08:57:40.283180",
+  "generated_at": "2026-07-03T14:48:42.891425",
   "scoring_logic": {
     "A_성장모멘텀(40점)": "FCF- 기업은 성장점수 40% 감점",
     "B_마진해자(30점)": "GPM+FCF마진+ROE",
@@ -20,7 +20,7 @@
       "ticker": "NVDA",
       "name": "Nvidia",
       "industry": "자율주행",
-      "score": 88.0,
+      "score": 89.0,
       "grade": "S",
       "breakdown": {
         "매출성장": "65.5%",
@@ -31,7 +31,7 @@
         "B_마진해자": 30,
         "순이익률": "55.6%",
         "C_재무안전성": 10,
-        "D_규모리더십": 8.0
+        "D_규모리더십": 9.0
       }
     },
     {
@@ -39,7 +39,7 @@
       "ticker": "NVDA",
       "name": "Nvidia",
       "industry": "로봇",
-      "score": 88.0,
+      "score": 89.0,
       "grade": "S",
       "breakdown": {
         "매출성장": "65.5%",
@@ -50,7 +50,7 @@
         "B_마진해자": 30,
         "순이익률": "55.6%",
         "C_재무안전성": 10,
-        "D_규모리더십": 8.0
+        "D_규모리더십": 9.0
       }
     },
     {
@@ -77,7 +77,7 @@
       "ticker": "GOOGL",
       "name": "Alphabet (Waymo)",
       "industry": "자율주행",
-      "score": 68.0,
+      "score": 67.0,
       "grade": "B",
       "breakdown": {
         "매출성장": "15.1%",
@@ -88,7 +88,7 @@
         "B_마진해자": 25,
         "순이익률": "32.8%",
         "C_재무안전성": 10,
-        "D_규모리더십": 9.0
+        "D_규모리더십": 8.0
       }
     },
     {
@@ -96,7 +96,7 @@
       "ticker": "VRT",
       "name": "Vertiv Holdings",
       "industry": "전력인프라",
-      "score": 65.0,
+      "score": 66.0,
       "grade": "B",
       "breakdown": {
         "매출성장": "27.7%",
@@ -107,34 +107,15 @@
         "B_마진해자": 18,
         "순이익률": "13.0%",
         "C_재무안전성": 8,
-        "D_규모리더십": 7.0
-      }
-    },
-    {
-      "rank": 6,
-      "ticker": "ISRG",
-      "name": "Intuitive Surgical",
-      "industry": "로봇",
-      "score": 64.0,
-      "grade": "B",
-      "breakdown": {
-        "매출성장": "20.5%",
-        "A_성장(품질조정)": 24,
-        "GPM": "66.0%",
-        "FCF마진": "24.7%",
-        "ROE": "16.0%",
-        "B_마진해자": 22,
-        "순이익률": "28.4%",
-        "C_재무안전성": 10,
         "D_규모리더십": 8.0
       }
     },
     {
-      "rank": 7,
+      "rank": 6,
       "ticker": "083650.KQ",
       "name": "비에이치아이",
       "industry": "전력인프라",
-      "score": 63.0,
+      "score": 66.0,
       "grade": "B",
       "breakdown": {
         "매출성장": "91.3%",
@@ -145,45 +126,64 @@
         "B_마진해자": 12,
         "순이익률": "8.4%",
         "C_재무안전성": 6,
+        "D_규모리더십": 8.0
+      }
+    },
+    {
+      "rank": 7,
+      "ticker": "META",
+      "name": "Meta Platforms",
+      "industry": "온디바이스AI",
+      "score": 66.0,
+      "grade": "B",
+      "breakdown": {
+        "매출성장": "22.2%",
+        "A_성장(품질조정)": 24,
+        "GPM": "82.0%",
+        "FCF마진": "22.9%",
+        "ROE": "27.8%",
+        "B_마진해자": 27,
+        "순이익률": "30.1%",
+        "C_재무안전성": 10,
         "D_규모리더십": 5.0
       }
     },
     {
       "rank": 8,
-      "ticker": "UBER",
-      "name": "Uber",
-      "industry": "자율주행",
-      "score": 55.0,
+      "ticker": "GOOGL",
+      "name": "Alphabet (Google)",
+      "industry": "온디바이스AI",
+      "score": 64.0,
       "grade": "B",
       "breakdown": {
-        "매출성장": "18.3%",
+        "매출성장": "15.1%",
         "A_성장(품질조정)": 24,
-        "GPM": "39.8%",
-        "FCF마진": "18.8%",
-        "ROE": "37.2%",
-        "B_마진해자": 18,
-        "순이익률": "19.3%",
-        "C_재무안전성": 8,
+        "GPM": "59.7%",
+        "FCF마진": "18.2%",
+        "ROE": "31.8%",
+        "B_마진해자": 25,
+        "순이익률": "32.8%",
+        "C_재무안전성": 10,
         "D_규모리더십": 5.0
       }
     },
     {
       "rank": 9,
-      "ticker": "NVT",
-      "name": "nVent Electric",
-      "industry": "전력인프라",
-      "score": 55.0,
+      "ticker": "ISRG",
+      "name": "Intuitive Surgical",
+      "industry": "로봇",
+      "score": 63.0,
       "grade": "B",
       "breakdown": {
-        "매출성장": "29.5%",
-        "A_성장(품질조정)": 32,
-        "GPM": "37.7%",
-        "FCF마진": "9.6%",
-        "ROE": "19.0%",
-        "B_마진해자": 12,
-        "순이익률": "18.2%",
-        "C_재무안전성": 8,
-        "D_규모리더십": 3.0
+        "매출성장": "20.5%",
+        "A_성장(품질조정)": 24,
+        "GPM": "66.0%",
+        "FCF마진": "24.7%",
+        "ROE": "16.0%",
+        "B_마진해자": 22,
+        "순이익률": "28.4%",
+        "C_재무안전성": 10,
+        "D_규모리더십": 7.0
       }
     },
     {
@@ -191,7 +191,7 @@
       "ticker": "267260.KS",
       "name": "HD현대일렉트릭",
       "industry": "에너지",
-      "score": 55.0,
+      "score": 59.0,
       "grade": "B",
       "breakdown": {
         "매출성장": "22.8%",
@@ -202,15 +202,110 @@
         "B_마진해자": 18,
         "순이익률": "18.0%",
         "C_재무안전성": 8,
-        "D_규모리더십": 5.0
+        "D_규모리더십": 9.0
       }
     },
     {
       "rank": 11,
+      "ticker": "NVT",
+      "name": "nVent Electric",
+      "industry": "전력인프라",
+      "score": 57.0,
+      "grade": "B",
+      "breakdown": {
+        "매출성장": "29.5%",
+        "A_성장(품질조정)": 32,
+        "GPM": "37.7%",
+        "FCF마진": "9.6%",
+        "ROE": "19.0%",
+        "B_마진해자": 12,
+        "순이익률": "18.2%",
+        "C_재무안전성": 8,
+        "D_규모리더십": 5.0
+      }
+    },
+    {
+      "rank": 12,
+      "ticker": "UBER",
+      "name": "Uber",
+      "industry": "자율주행",
+      "score": 56.0,
+      "grade": "B",
+      "breakdown": {
+        "매출성장": "18.3%",
+        "A_성장(품질조정)": 24,
+        "GPM": "39.8%",
+        "FCF마진": "18.8%",
+        "ROE": "37.2%",
+        "B_마진해자": 18,
+        "순이익률": "19.3%",
+        "C_재무안전성": 8,
+        "D_규모리더십": 6.0
+      }
+    },
+    {
+      "rank": 13,
+      "ticker": "QCOM",
+      "name": "Qualcomm",
+      "industry": "온디바이스AI",
+      "score": 56.0,
+      "grade": "B",
+      "breakdown": {
+        "매출성장": "13.7%",
+        "A_성장(품질조정)": 14,
+        "GPM": "55.4%",
+        "FCF마진": "28.9%",
+        "ROE": "26.1%",
+        "B_마진해자": 26,
+        "순이익률": "12.5%",
+        "C_재무안전성": 8,
+        "D_규모리더십": 8.0
+      }
+    },
+    {
+      "rank": 14,
+      "ticker": "MSFT",
+      "name": "Microsoft",
+      "industry": "온디바이스AI",
+      "score": 55.0,
+      "grade": "B",
+      "breakdown": {
+        "매출성장": "14.9%",
+        "A_성장(품질조정)": 14,
+        "GPM": "68.8%",
+        "FCF마진": "25.4%",
+        "ROE": "29.6%",
+        "B_마진해자": 26,
+        "순이익률": "36.1%",
+        "C_재무안전성": 10,
+        "D_규모리더십": 5.0
+      }
+    },
+    {
+      "rank": 15,
+      "ticker": "AAPL",
+      "name": "Apple",
+      "industry": "온디바이스AI",
+      "score": 54.0,
+      "grade": "C",
+      "breakdown": {
+        "매출성장": "6.4%",
+        "A_성장(품질조정)": 14,
+        "GPM": "46.9%",
+        "FCF마진": "23.7%",
+        "ROE": "151.9%",
+        "B_마진해자": 22,
+        "순이익률": "26.9%",
+        "C_재무안전성": 10,
+        "D_규모리더십": 8.0
+      }
+    },
+    {
+      "rank": 16,
       "ticker": "QCOM",
       "name": "Qualcomm",
       "industry": "자율주행",
-      "score": 52.0,
+      "score": 53.0,
       "grade": "C",
       "breakdown": {
         "매출성장": "13.7%",
@@ -221,11 +316,11 @@
         "B_마진해자": 26,
         "순이익률": "12.5%",
         "C_재무안전성": 8,
-        "D_규모리더십": 4.0
+        "D_규모리더십": 5.0
       }
     },
     {
-      "rank": 12,
+      "rank": 17,
       "ticker": "PATH",
       "name": "UiPath",
       "industry": "로봇",
@@ -244,7 +339,26 @@
       }
     },
     {
-      "rank": 13,
+      "rank": 18,
+      "ticker": "2454.TW",
+      "name": "MediaTek",
+      "industry": "온디바이스AI",
+      "score": 50.0,
+      "grade": "C",
+      "breakdown": {
+        "매출성장": "12.3%",
+        "A_성장(품질조정)": 14,
+        "GPM": "47.5%",
+        "FCF마진": "23.1%",
+        "ROE": "26.3%",
+        "B_마진해자": 21,
+        "순이익률": "17.7%",
+        "C_재무안전성": 8,
+        "D_규모리더십": 7.0
+      }
+    },
+    {
+      "rank": 19,
       "ticker": "BWXT",
       "name": "BWX Technologies",
       "industry": "에너지",
@@ -263,11 +377,30 @@
       }
     },
     {
-      "rank": 14,
+      "rank": 20,
+      "ticker": "IRDM",
+      "name": "Iridium Communications",
+      "industry": "우주",
+      "score": 48.0,
+      "grade": "C",
+      "breakdown": {
+        "매출성장": "4.9%",
+        "A_성장(품질조정)": 6,
+        "GPM": "71.5%",
+        "FCF마진": "34.4%",
+        "ROE": "24.7%",
+        "B_마진해자": 29,
+        "순이익률": "13.1%",
+        "C_재무안전성": 8,
+        "D_규모리더십": 5.0
+      }
+    },
+    {
+      "rank": 21,
       "ticker": "298040.KS",
       "name": "효성중공업",
       "industry": "에너지",
-      "score": 46.0,
+      "score": 48.0,
       "grade": "C",
       "breakdown": {
         "매출성장": "21.9%",
@@ -278,11 +411,11 @@
         "B_마진해자": 11,
         "순이익률": "8.7%",
         "C_재무안전성": 6,
-        "D_규모리더십": 5.0
+        "D_규모리더십": 7.0
       }
     },
     {
-      "rank": 15,
+      "rank": 22,
       "ticker": "TER",
       "name": "Teradyne",
       "industry": "로봇",
@@ -301,45 +434,7 @@
       }
     },
     {
-      "rank": 16,
-      "ticker": "IRDM",
-      "name": "Iridium Communications",
-      "industry": "우주",
-      "score": 45.0,
-      "grade": "C",
-      "breakdown": {
-        "매출성장": "4.9%",
-        "A_성장(품질조정)": 6,
-        "GPM": "71.5%",
-        "FCF마진": "34.4%",
-        "ROE": "24.7%",
-        "B_마진해자": 29,
-        "순이익률": "13.1%",
-        "C_재무안전성": 8,
-        "D_규모리더십": 2.0
-      }
-    },
-    {
-      "rank": 17,
-      "ticker": "ETN",
-      "name": "Eaton Corporation",
-      "industry": "전력인프라",
-      "score": 44.0,
-      "grade": "C",
-      "breakdown": {
-        "매출성장": "10.3%",
-        "A_성장(품질조정)": 14,
-        "GPM": "37.6%",
-        "FCF마진": "12.9%",
-        "ROE": "21.0%",
-        "B_마진해자": 14,
-        "순이익률": "14.9%",
-        "C_재무안전성": 8,
-        "D_규모리더십": 8.0
-      }
-    },
-    {
-      "rank": 18,
+      "rank": 23,
       "ticker": "CGNX",
       "name": "Cognex",
       "industry": "로봇",
@@ -358,7 +453,7 @@
       }
     },
     {
-      "rank": 19,
+      "rank": 24,
       "ticker": "ZBRA",
       "name": "Zebra Technologies",
       "industry": "로봇",
@@ -377,7 +472,7 @@
       }
     },
     {
-      "rank": 20,
+      "rank": 25,
       "ticker": "PYPL",
       "name": "PayPal Holdings",
       "industry": "코인",
@@ -396,26 +491,7 @@
       }
     },
     {
-      "rank": 21,
-      "ticker": "PWR",
-      "name": "Quanta Services",
-      "industry": "전력인프라",
-      "score": 42.0,
-      "grade": "C",
-      "breakdown": {
-        "매출성장": "20.3%",
-        "A_성장(품질조정)": 24,
-        "GPM": "15.0%",
-        "FCF마진": "5.7%",
-        "ROE": "11.5%",
-        "B_마진해자": 9,
-        "순이익률": "3.6%",
-        "C_재무안전성": 3,
-        "D_규모리더십": 6.0
-      }
-    },
-    {
-      "rank": 22,
+      "rank": 26,
       "ticker": "HON",
       "name": "Honeywell International",
       "industry": "로봇",
@@ -434,7 +510,45 @@
       }
     },
     {
-      "rank": 23,
+      "rank": 27,
+      "ticker": "ETN",
+      "name": "Eaton Corporation",
+      "industry": "전력인프라",
+      "score": 41.0,
+      "grade": "C",
+      "breakdown": {
+        "매출성장": "10.3%",
+        "A_성장(품질조정)": 14,
+        "GPM": "37.6%",
+        "FCF마진": "12.9%",
+        "ROE": "21.0%",
+        "B_마진해자": 14,
+        "순이익률": "14.9%",
+        "C_재무안전성": 8,
+        "D_규모리더십": 5.0
+      }
+    },
+    {
+      "rank": 28,
+      "ticker": "PWR",
+      "name": "Quanta Services",
+      "industry": "전력인프라",
+      "score": 40.0,
+      "grade": "C",
+      "breakdown": {
+        "매출성장": "20.3%",
+        "A_성장(품질조정)": 24,
+        "GPM": "15.0%",
+        "FCF마진": "5.7%",
+        "ROE": "11.5%",
+        "B_마진해자": 9,
+        "순이익률": "3.6%",
+        "C_재무안전성": 3,
+        "D_규모리더십": 4.0
+      }
+    },
+    {
+      "rank": 29,
       "ticker": "LMT",
       "name": "Lockheed Martin",
       "industry": "우주",
@@ -453,7 +567,7 @@
       }
     },
     {
-      "rank": 24,
+      "rank": 30,
       "ticker": "GEV",
       "name": "GE Vernova",
       "industry": "에너지",
@@ -472,7 +586,7 @@
       }
     },
     {
-      "rank": 25,
+      "rank": 31,
       "ticker": "POWL",
       "name": "Powell Industries",
       "industry": "전력인프라",
@@ -491,7 +605,45 @@
       }
     },
     {
-      "rank": 26,
+      "rank": 32,
+      "ticker": "005930.KS",
+      "name": "Samsung Electronics",
+      "industry": "온디바이스AI",
+      "score": 39.0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "10.9%",
+        "A_성장(품질조정)": 14,
+        "GPM": "39.4%",
+        "FCF마진": "9.9%",
+        "ROE": "10.4%",
+        "B_마진해자": 12,
+        "순이익률": "13.3%",
+        "C_재무안전성": 8,
+        "D_규모리더십": 5.0
+      }
+    },
+    {
+      "rank": 33,
+      "ticker": "0992.HK",
+      "name": "Lenovo",
+      "industry": "온디바이스AI",
+      "score": 39.0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "20.3%",
+        "A_성장(품질조정)": 24,
+        "GPM": "15.4%",
+        "FCF마진": "2.6%",
+        "ROE": "25.0%",
+        "B_마진해자": 8,
+        "순이익률": "2.3%",
+        "C_재무안전성": 3,
+        "D_규모리더십": 4.0
+      }
+    },
+    {
+      "rank": 34,
       "ticker": "ROK",
       "name": "Rockwell Automation",
       "industry": "로봇",
@@ -510,7 +662,7 @@
       }
     },
     {
-      "rank": 27,
+      "rank": 35,
       "ticker": "033100.KQ",
       "name": "제룡전기",
       "industry": "전력인프라",
@@ -529,49 +681,11 @@
       }
     },
     {
-      "rank": 28,
-      "ticker": "CEG",
-      "name": "Constellation Energy",
-      "industry": "에너지",
-      "score": 37.0,
-      "grade": "D",
-      "breakdown": {
-        "매출성장": "8.3%",
-        "A_성장(품질조정)": 14,
-        "GPM": "18.4%",
-        "FCF마진": "5.0%",
-        "ROE": "16.0%",
-        "B_마진해자": 9,
-        "순이익률": "9.1%",
-        "C_재무안전성": 6,
-        "D_규모리더십": 8.0
-      }
-    },
-    {
-      "rank": 29,
-      "ticker": "NXPI",
-      "name": "NXP Semiconductors",
-      "industry": "자율주행",
-      "score": 35.0,
-      "grade": "D",
-      "breakdown": {
-        "매출성장": "-2.7%",
-        "A_성장(품질조정)": 0,
-        "GPM": "54.7%",
-        "FCF마진": "18.6%",
-        "ROE": "20.1%",
-        "B_마진해자": 21,
-        "순이익률": "16.5%",
-        "C_재무안전성": 8,
-        "D_규모리더십": 6.0
-      }
-    },
-    {
-      "rank": 30,
+      "rank": 36,
       "ticker": "CLSK",
       "name": "CleanSpark",
       "industry": "코인",
-      "score": 35.0,
+      "score": 37.0,
       "grade": "D",
       "breakdown": {
         "매출성장": "102.2%",
@@ -582,11 +696,30 @@
         "B_마진해자": 8,
         "순이익률": "47.6%",
         "C_재무안전성": 10,
-        "D_규모리더십": 1.0
+        "D_규모리더십": 3.0
       }
     },
     {
-      "rank": 31,
+      "rank": 37,
+      "ticker": "IREN",
+      "name": "Iris Energy",
+      "industry": "코인",
+      "score": 35.0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "167.7%",
+        "A_성장(품질조정)": 16,
+        "GPM": "68.3%",
+        "FCF마진": "❌-2.2%",
+        "ROE": "4.8%",
+        "B_마진해자": 9,
+        "순이익률": "17.4%",
+        "C_재무안전성": 8,
+        "D_규모리더십": 2.0
+      }
+    },
+    {
+      "rank": 38,
       "ticker": "EMR",
       "name": "Emerson Electric",
       "industry": "로봇",
@@ -605,30 +738,49 @@
       }
     },
     {
-      "rank": 32,
-      "ticker": "IREN",
-      "name": "Iris Energy",
-      "industry": "코인",
-      "score": 34.0,
+      "rank": 39,
+      "ticker": "NXPI",
+      "name": "NXP Semiconductors",
+      "industry": "자율주행",
+      "score": 33.0,
       "grade": "D",
       "breakdown": {
-        "매출성장": "167.7%",
-        "A_성장(품질조정)": 16,
-        "GPM": "68.3%",
-        "FCF마진": "❌-2.2%",
-        "ROE": "4.8%",
-        "B_마진해자": 9,
-        "순이익률": "17.4%",
+        "매출성장": "-2.7%",
+        "A_성장(품질조정)": 0,
+        "GPM": "54.7%",
+        "FCF마진": "18.6%",
+        "ROE": "20.1%",
+        "B_마진해자": 21,
+        "순이익률": "16.5%",
         "C_재무안전성": 8,
-        "D_규모리더십": 1.0
+        "D_규모리더십": 4.0
       }
     },
     {
-      "rank": 33,
+      "rank": 40,
+      "ticker": "CEG",
+      "name": "Constellation Energy",
+      "industry": "에너지",
+      "score": 33.0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "8.3%",
+        "A_성장(품질조정)": 14,
+        "GPM": "18.4%",
+        "FCF마진": "5.0%",
+        "ROE": "16.0%",
+        "B_마진해자": 9,
+        "순이익률": "9.1%",
+        "C_재무안전성": 6,
+        "D_규모리더십": 4.0
+      }
+    },
+    {
+      "rank": 41,
       "ticker": "COIN",
       "name": "Coinbase Global",
       "industry": "코인",
-      "score": 32.0,
+      "score": 31.0,
       "grade": "D",
       "breakdown": {
         "매출성장": "9.4%",
@@ -638,68 +790,11 @@
         "B_마진해자": 15,
         "순이익률": "17.6%",
         "C_재무안전성": 8,
-        "D_규모리더십": 4.0
+        "D_규모리더십": 3.0
       }
     },
     {
-      "rank": 34,
-      "ticker": "XYZ",
-      "name": "Block (Square)",
-      "industry": "코인",
-      "score": 32.0,
-      "grade": "D",
-      "breakdown": {
-        "매출성장": "0.3%",
-        "A_성장(품질조정)": 6,
-        "GPM": "42.8%",
-        "FCF마진": "10.0%",
-        "ROE": "5.9%",
-        "B_마진해자": 14,
-        "순이익률": "5.4%",
-        "C_재무안전성": 6,
-        "D_규모리더십": 6.0
-      }
-    },
-    {
-      "rank": 35,
-      "ticker": "HUBB",
-      "name": "Hubbell Incorporated",
-      "industry": "전력인프라",
-      "score": 32.0,
-      "grade": "D",
-      "breakdown": {
-        "매출성장": "3.8%",
-        "A_성장(품질조정)": 6,
-        "GPM": "35.3%",
-        "FCF마진": "15.0%",
-        "ROE": "23.1%",
-        "B_마진해자": 14,
-        "순이익률": "15.2%",
-        "C_재무안전성": 8,
-        "D_규모리더십": 4.0
-      }
-    },
-    {
-      "rank": 36,
-      "ticker": "NOC",
-      "name": "Northrop Grumman",
-      "industry": "우주",
-      "score": 31.0,
-      "grade": "D",
-      "breakdown": {
-        "매출성장": "2.2%",
-        "A_성장(품질조정)": 6,
-        "GPM": "19.8%",
-        "FCF마진": "7.9%",
-        "ROE": "25.1%",
-        "B_마진해자": 11,
-        "순이익률": "10.0%",
-        "C_재무안전성": 6,
-        "D_규모리더십": 8.0
-      }
-    },
-    {
-      "rank": 37,
+      "rank": 42,
       "ticker": "MHVYF",
       "name": "Mitsubishi Heavy Industries",
       "industry": "에너지",
@@ -718,7 +813,26 @@
       }
     },
     {
-      "rank": 38,
+      "rank": 43,
+      "ticker": "HUBB",
+      "name": "Hubbell Incorporated",
+      "industry": "전력인프라",
+      "score": 31.0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "3.8%",
+        "A_성장(품질조정)": 6,
+        "GPM": "35.3%",
+        "FCF마진": "15.0%",
+        "ROE": "23.1%",
+        "B_마진해자": 14,
+        "순이익률": "15.2%",
+        "C_재무안전성": 8,
+        "D_규모리더십": 3.0
+      }
+    },
+    {
+      "rank": 44,
       "ticker": "010120.KS",
       "name": "LS ELECTRIC",
       "industry": "에너지",
@@ -737,7 +851,26 @@
       }
     },
     {
-      "rank": 39,
+      "rank": 45,
+      "ticker": "XYZ",
+      "name": "Block (Square)",
+      "industry": "코인",
+      "score": 30.0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "0.3%",
+        "A_성장(품질조정)": 6,
+        "GPM": "42.8%",
+        "FCF마진": "10.0%",
+        "ROE": "5.9%",
+        "B_마진해자": 14,
+        "순이익률": "5.4%",
+        "C_재무안전성": 6,
+        "D_규모리더십": 4.0
+      }
+    },
+    {
+      "rank": 46,
       "ticker": "SMEGF",
       "name": "Siemens Energy",
       "industry": "에너지",
@@ -756,26 +889,26 @@
       }
     },
     {
-      "rank": 40,
-      "ticker": "LEU",
-      "name": "Centrus Energy",
-      "industry": "에너지",
+      "rank": 47,
+      "ticker": "NOC",
+      "name": "Northrop Grumman",
+      "industry": "우주",
       "score": 29.0,
       "grade": "D",
       "breakdown": {
-        "매출성장": "1.5%",
+        "매출성장": "2.2%",
         "A_성장(품질조정)": 6,
-        "GPM": "26.2%",
-        "FCF마진": "7.0%",
-        "ROE": "10.2%",
-        "B_마진해자": 12,
-        "순이익률": "17.3%",
-        "C_재무안전성": 8,
-        "D_규모리더십": 3.0
+        "GPM": "19.8%",
+        "FCF마진": "7.9%",
+        "ROE": "25.1%",
+        "B_마진해자": 11,
+        "순이익률": "10.0%",
+        "C_재무안전성": 6,
+        "D_규모리더십": 6.0
       }
     },
     {
-      "rank": 41,
+      "rank": 48,
       "ticker": "MYRG",
       "name": "MYR Group",
       "industry": "전력인프라",
@@ -794,7 +927,7 @@
       }
     },
     {
-      "rank": 42,
+      "rank": 49,
       "ticker": "012330.KS",
       "name": "현대모비스",
       "industry": "자율주행",
@@ -813,7 +946,7 @@
       }
     },
     {
-      "rank": 43,
+      "rank": 50,
       "ticker": "PLPC",
       "name": "Preformed Line Products",
       "industry": "전력인프라",
@@ -832,7 +965,45 @@
       }
     },
     {
-      "rank": 44,
+      "rank": 51,
+      "ticker": "LHX",
+      "name": "L3Harris Technologies",
+      "industry": "우주",
+      "score": 27.0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "2.5%",
+        "A_성장(품질조정)": 6,
+        "GPM": "25.7%",
+        "FCF마진": "12.3%",
+        "ROE": "8.2%",
+        "B_마진해자": 10,
+        "순이익률": "7.3%",
+        "C_재무안전성": 6,
+        "D_규모리더십": 5.0
+      }
+    },
+    {
+      "rank": 52,
+      "ticker": "LEU",
+      "name": "Centrus Energy",
+      "industry": "에너지",
+      "score": 27.0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "1.5%",
+        "A_성장(품질조정)": 6,
+        "GPM": "26.2%",
+        "FCF마진": "7.0%",
+        "ROE": "10.2%",
+        "B_마진해자": 12,
+        "순이익률": "17.3%",
+        "C_재무안전성": 8,
+        "D_규모리더십": 1.0
+      }
+    },
+    {
+      "rank": 53,
       "ticker": "WCC",
       "name": "Wesco International",
       "industry": "전력인프라",
@@ -851,7 +1022,7 @@
       }
     },
     {
-      "rank": 45,
+      "rank": 54,
       "ticker": "SYM",
       "name": "Symbotic",
       "industry": "로봇",
@@ -869,26 +1040,7 @@
       }
     },
     {
-      "rank": 46,
-      "ticker": "LHX",
-      "name": "L3Harris Technologies",
-      "industry": "우주",
-      "score": 26.0,
-      "grade": "D",
-      "breakdown": {
-        "매출성장": "2.5%",
-        "A_성장(품질조정)": 6,
-        "GPM": "25.7%",
-        "FCF마진": "12.3%",
-        "ROE": "8.2%",
-        "B_마진해자": 10,
-        "순이익률": "7.3%",
-        "C_재무안전성": 6,
-        "D_규모리더십": 4.0
-      }
-    },
-    {
-      "rank": 47,
+      "rank": 55,
       "ticker": "CRCL",
       "name": "Circle Internet Group",
       "industry": "코인",
@@ -905,7 +1057,7 @@
       }
     },
     {
-      "rank": 48,
+      "rank": 56,
       "ticker": "034020.KS",
       "name": "Doosan Enerbility",
       "industry": "에너지",
@@ -924,7 +1076,7 @@
       }
     },
     {
-      "rank": 49,
+      "rank": 57,
       "ticker": "ACMR",
       "name": "ACM Research",
       "industry": "로봇",
@@ -943,7 +1095,7 @@
       }
     },
     {
-      "rank": 50,
+      "rank": 58,
       "ticker": "079550.KS",
       "name": "LIG넥스원",
       "industry": "우주",
@@ -962,26 +1114,26 @@
       }
     },
     {
-      "rank": 51,
-      "ticker": "SPIR",
-      "name": "Spire Global",
-      "industry": "우주",
+      "rank": 59,
+      "ticker": "010130.KS",
+      "name": "고려아연",
+      "industry": "이차전지",
       "score": 23.0,
       "grade": "D",
       "breakdown": {
-        "매출성장": "-35.2%",
-        "A_성장(품질조정)": 0,
-        "GPM": "40.8%",
-        "FCF마진": "❌-1.3%",
-        "ROE": "45.4%",
-        "B_마진해자": 11,
-        "순이익률": "71.7%",
-        "C_재무안전성": 10,
-        "D_규모리더십": 2.0
+        "매출성장": "37.6%",
+        "A_성장(품질조정)": 12,
+        "GPM": "10.9%",
+        "FCF마진": "❌-9.5%",
+        "ROE": "7.1%",
+        "B_마진해자": -1,
+        "순이익률": "4.7%",
+        "C_재무안전성": 3,
+        "D_규모리더십": 9.0
       }
     },
     {
-      "rank": 52,
+      "rank": 60,
       "ticker": "PL",
       "name": "Planet Labs",
       "industry": "우주",
@@ -999,7 +1151,7 @@
       }
     },
     {
-      "rank": 53,
+      "rank": 61,
       "ticker": "BTDR",
       "name": "Bitdeer Technologies",
       "industry": "코인",
@@ -1017,26 +1169,7 @@
       }
     },
     {
-      "rank": 54,
-      "ticker": "010130.KS",
-      "name": "고려아연",
-      "industry": "이차전지",
-      "score": 22.0,
-      "grade": "D",
-      "breakdown": {
-        "매출성장": "37.6%",
-        "A_성장(품질조정)": 12,
-        "GPM": "10.9%",
-        "FCF마진": "❌-9.5%",
-        "ROE": "7.1%",
-        "B_마진해자": -1,
-        "순이익률": "4.7%",
-        "C_재무안전성": 3,
-        "D_규모리더십": 8.0
-      }
-    },
-    {
-      "rank": 55,
+      "rank": 62,
       "ticker": "YASKY",
       "name": "Yaskawa Electric",
       "industry": "로봇",
@@ -1055,7 +1188,26 @@
       }
     },
     {
-      "rank": 56,
+      "rank": 63,
+      "ticker": "SPIR",
+      "name": "Spire Global",
+      "industry": "우주",
+      "score": 21.0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "-35.2%",
+        "A_성장(품질조정)": 0,
+        "GPM": "40.8%",
+        "FCF마진": "❌-1.3%",
+        "ROE": "45.4%",
+        "B_마진해자": 11,
+        "순이익률": "71.7%",
+        "C_재무안전성": 10,
+        "D_규모리더십": 0.0
+      }
+    },
+    {
+      "rank": 64,
       "ticker": "277810.KQ",
       "name": "레인보우로보틱스",
       "industry": "로봇",
@@ -1074,7 +1226,26 @@
       }
     },
     {
-      "rank": 57,
+      "rank": 65,
+      "ticker": "256840.KQ",
+      "name": "새빗켐",
+      "industry": "이차전지",
+      "score": 21.0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "7.5%",
+        "A_성장(품질조정)": 5,
+        "GPM": "41.1%",
+        "FCF마진": "❌-2.0%",
+        "ROE": "1.2%",
+        "B_마진해자": 6,
+        "순이익률": "3.0%",
+        "C_재무안전성": 3,
+        "D_규모리더십": 7.0
+      }
+    },
+    {
+      "rank": 66,
       "ticker": "APTV",
       "name": "Aptiv",
       "industry": "자율주행",
@@ -1093,7 +1264,7 @@
       }
     },
     {
-      "rank": 58,
+      "rank": 67,
       "ticker": "MARA",
       "name": "Marathon Digital Holdings",
       "industry": "코인",
@@ -1111,7 +1282,7 @@
       }
     },
     {
-      "rank": 59,
+      "rank": 68,
       "ticker": "MBLY",
       "name": "Mobileye",
       "industry": "자율주행",
@@ -1129,7 +1300,7 @@
       }
     },
     {
-      "rank": 60,
+      "rank": 69,
       "ticker": "ON",
       "name": "ON Semiconductor",
       "industry": "자율주행",
@@ -1148,26 +1319,25 @@
       }
     },
     {
-      "rank": 61,
-      "ticker": "256840.KQ",
-      "name": "새빗켐",
-      "industry": "이차전지",
-      "score": 18.0,
+      "rank": 70,
+      "ticker": "SNAP",
+      "name": "Snap",
+      "industry": "온디바이스AI",
+      "score": 19.0,
       "grade": "D",
       "breakdown": {
-        "매출성장": "7.5%",
-        "A_성장(품질조정)": 5,
-        "GPM": "41.1%",
-        "FCF마진": "❌-2.0%",
-        "ROE": "1.2%",
-        "B_마진해자": 6,
-        "순이익률": "3.0%",
-        "C_재무안전성": 3,
-        "D_규모리더십": 4.0
+        "매출성장": "10.6%",
+        "A_성장(품질조정)": 7,
+        "GPM": "55.0%",
+        "FCF마진": "7.4%",
+        "B_마진해자": 14,
+        "순이익률": "❌-7.8%",
+        "C_재무안전성": -5,
+        "D_규모리더십": 3.0
       }
     },
     {
-      "rank": 62,
+      "rank": 71,
       "ticker": "ASTS",
       "name": "AST SpaceMobile",
       "industry": "우주",
@@ -1185,7 +1355,7 @@
       }
     },
     {
-      "rank": 63,
+      "rank": 72,
       "ticker": "GSAT",
       "name": "Globalstar",
       "industry": "우주",
@@ -1203,7 +1373,7 @@
       }
     },
     {
-      "rank": 64,
+      "rank": 73,
       "ticker": "005380.KS",
       "name": "현대자동차",
       "industry": "자율주행",
@@ -1222,7 +1392,7 @@
       }
     },
     {
-      "rank": 65,
+      "rank": 74,
       "ticker": "TSLA",
       "name": "Tesla",
       "industry": "자율주행",
@@ -1241,7 +1411,7 @@
       }
     },
     {
-      "rank": 66,
+      "rank": 75,
       "ticker": "AVAV",
       "name": "AeroVironment",
       "industry": "로봇",
@@ -1260,7 +1430,7 @@
       }
     },
     {
-      "rank": 67,
+      "rank": 76,
       "ticker": "KTOS",
       "name": "Kratos Defense & Security",
       "industry": "우주",
@@ -1279,7 +1449,7 @@
       }
     },
     {
-      "rank": 68,
+      "rank": 77,
       "ticker": "RIOT",
       "name": "Riot Platforms",
       "industry": "코인",
@@ -1297,7 +1467,7 @@
       }
     },
     {
-      "rank": 69,
+      "rank": 78,
       "ticker": "WRD",
       "name": "WeRide",
       "industry": "자율주행",
@@ -1315,7 +1485,7 @@
       }
     },
     {
-      "rank": 70,
+      "rank": 79,
       "ticker": "KIGRY",
       "name": "Kion Group",
       "industry": "로봇",
@@ -1333,7 +1503,7 @@
       }
     },
     {
-      "rank": 71,
+      "rank": 80,
       "ticker": "VSAT",
       "name": "Viasat",
       "industry": "우주",
@@ -1351,7 +1521,7 @@
       }
     },
     {
-      "rank": 72,
+      "rank": 81,
       "ticker": "WULF",
       "name": "TeraWulf",
       "industry": "코인",
@@ -1369,7 +1539,7 @@
       }
     },
     {
-      "rank": 73,
+      "rank": 82,
       "ticker": "CIFR",
       "name": "Cipher Mining",
       "industry": "코인",
@@ -1387,7 +1557,7 @@
       }
     },
     {
-      "rank": 74,
+      "rank": 83,
       "ticker": "CEVA",
       "name": "CEVA Inc",
       "industry": "로봇",
@@ -1405,7 +1575,7 @@
       }
     },
     {
-      "rank": 75,
+      "rank": 84,
       "ticker": "047810.KS",
       "name": "한국항공우주",
       "industry": "우주",
@@ -1424,25 +1594,7 @@
       }
     },
     {
-      "rank": 76,
-      "ticker": "005490.KS",
-      "name": "포스코홀딩스",
-      "industry": "이차전지",
-      "score": 9.0,
-      "grade": "D",
-      "breakdown": {
-        "매출성장": "-6.1%",
-        "A_성장(품질조정)": 0,
-        "FCF마진": "❌-2.4%",
-        "ROE": "1.2%",
-        "B_마진해자": -3,
-        "순이익률": "1.0%",
-        "C_재무안전성": 3,
-        "D_규모리더십": 9.0
-      }
-    },
-    {
-      "rank": 77,
+      "rank": 85,
       "ticker": "247540.KQ",
       "name": "에코프로비엠",
       "industry": "이차전지",
@@ -1461,7 +1613,25 @@
       }
     },
     {
-      "rank": 78,
+      "rank": 86,
+      "ticker": "005490.KS",
+      "name": "포스코홀딩스",
+      "industry": "이차전지",
+      "score": 6.0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "-6.1%",
+        "A_성장(품질조정)": 0,
+        "FCF마진": "❌-2.4%",
+        "ROE": "1.2%",
+        "B_마진해자": -3,
+        "순이익률": "1.0%",
+        "C_재무안전성": 3,
+        "D_규모리더십": 6.0
+      }
+    },
+    {
+      "rank": 87,
       "ticker": "INVZ",
       "name": "Innoviz Technologies",
       "industry": "자율주행",
@@ -1479,7 +1649,7 @@
       }
     },
     {
-      "rank": 79,
+      "rank": 88,
       "ticker": "ATKR",
       "name": "Atkore",
       "industry": "전력인프라",
@@ -1497,7 +1667,7 @@
       }
     },
     {
-      "rank": 80,
+      "rank": 89,
       "ticker": "ALB",
       "name": "Albemarle",
       "industry": "이차전지",
@@ -1515,7 +1685,7 @@
       }
     },
     {
-      "rank": 81,
+      "rank": 90,
       "ticker": "HUT",
       "name": "Hut 8 Mining",
       "industry": "코인",
@@ -1533,7 +1703,7 @@
       }
     },
     {
-      "rank": 82,
+      "rank": 91,
       "ticker": "086520.KQ",
       "name": "에코프로",
       "industry": "이차전지",
@@ -1551,7 +1721,7 @@
       }
     },
     {
-      "rank": 83,
+      "rank": 92,
       "ticker": "OUST",
       "name": "Ouster",
       "industry": "자율주행",
@@ -1569,7 +1739,7 @@
       }
     },
     {
-      "rank": 84,
+      "rank": 93,
       "ticker": "MSTR",
       "name": "MicroStrategy (Strategy)",
       "industry": "코인",
@@ -1587,7 +1757,7 @@
       }
     },
     {
-      "rank": 85,
+      "rank": 94,
       "ticker": "GLXY",
       "name": "Galaxy Digital",
       "industry": "코인",
@@ -1605,7 +1775,7 @@
       }
     },
     {
-      "rank": 86,
+      "rank": 95,
       "ticker": "PONY",
       "name": "Pony.ai",
       "industry": "자율주행",
@@ -1623,7 +1793,7 @@
       }
     },
     {
-      "rank": 87,
+      "rank": 96,
       "ticker": "APLD",
       "name": "Applied Digital",
       "industry": "코인",
@@ -1641,11 +1811,11 @@
       }
     },
     {
-      "rank": 88,
+      "rank": 97,
       "ticker": "003670.KS",
       "name": "포스코퓨처엠",
       "industry": "이차전지",
-      "score": 2.0,
+      "score": 1.0,
       "grade": "D",
       "breakdown": {
         "매출성장": "-20.6%",
@@ -1655,11 +1825,11 @@
         "B_마진해자": -7,
         "순이익률": "1.1%",
         "C_재무안전성": 3,
-        "D_규모리더십": 6.0
+        "D_규모리더십": 5.0
       }
     },
     {
-      "rank": 89,
+      "rank": 98,
       "ticker": "RKLB",
       "name": "Rocket Lab USA",
       "industry": "우주",
@@ -1677,7 +1847,7 @@
       }
     },
     {
-      "rank": 90,
+      "rank": 99,
       "ticker": "SPCE",
       "name": "Virgin Galactic",
       "industry": "우주",
@@ -1695,7 +1865,7 @@
       }
     },
     {
-      "rank": 91,
+      "rank": 100,
       "ticker": "LUNR",
       "name": "Intuitive Machines",
       "industry": "우주",
@@ -1712,7 +1882,7 @@
       }
     },
     {
-      "rank": 92,
+      "rank": 101,
       "ticker": "CAN",
       "name": "Canaan Inc",
       "industry": "코인",
@@ -1729,7 +1899,7 @@
       }
     },
     {
-      "rank": 93,
+      "rank": 102,
       "ticker": "CORZ",
       "name": "Core Scientific",
       "industry": "코인",
@@ -1747,7 +1917,7 @@
       }
     },
     {
-      "rank": 94,
+      "rank": 103,
       "ticker": "BKKT",
       "name": "Bakkt Holdings",
       "industry": "코인",
@@ -1764,7 +1934,7 @@
       }
     },
     {
-      "rank": 95,
+      "rank": 104,
       "ticker": "AUR",
       "name": "Aurora Innovation",
       "industry": "자율주행",
@@ -1782,7 +1952,7 @@
       }
     },
     {
-      "rank": 96,
+      "rank": 105,
       "ticker": "BKSY",
       "name": "BlackSky Technology",
       "industry": "우주",
@@ -1800,7 +1970,7 @@
       }
     },
     {
-      "rank": 97,
+      "rank": 106,
       "ticker": "BTBT",
       "name": "Bit Digital",
       "industry": "코인",
@@ -1818,7 +1988,7 @@
       }
     },
     {
-      "rank": 98,
+      "rank": 107,
       "ticker": "SMR",
       "name": "NuScale Power",
       "industry": "에너지",
@@ -1836,7 +2006,7 @@
       }
     },
     {
-      "rank": 99,
+      "rank": 108,
       "ticker": "051910.KS",
       "name": "LG화학",
       "industry": "이차전지",
@@ -1854,7 +2024,7 @@
       }
     },
     {
-      "rank": 100,
+      "rank": 109,
       "ticker": "348370.KQ",
       "name": "엔켐",
       "industry": "이차전지",
@@ -1872,7 +2042,7 @@
       }
     },
     {
-      "rank": 101,
+      "rank": 110,
       "ticker": "373220.KS",
       "name": "LG에너지솔루션",
       "industry": "이차전지",
@@ -1890,7 +2060,7 @@
       }
     },
     {
-      "rank": 102,
+      "rank": 111,
       "ticker": "006400.KS",
       "name": "삼성SDI",
       "industry": "이차전지",
@@ -1908,7 +2078,7 @@
       }
     },
     {
-      "rank": 103,
+      "rank": 112,
       "ticker": "365340.KQ",
       "name": "성일하이텍",
       "industry": "이차전지",
@@ -1926,7 +2096,7 @@
       }
     },
     {
-      "rank": 104,
+      "rank": 113,
       "ticker": "454910.KQ",
       "name": "두산로보틱스",
       "industry": "로봇",
@@ -1944,7 +2114,7 @@
       }
     },
     {
-      "rank": 105,
+      "rank": 114,
       "ticker": "SERV",
       "name": "Serve Robotics",
       "industry": "로봇",
@@ -1962,7 +2132,7 @@
       }
     },
     {
-      "rank": 106,
+      "rank": 115,
       "ticker": "RDW",
       "name": "Redwire",
       "industry": "우주",
@@ -1979,7 +2149,7 @@
       }
     },
     {
-      "rank": 107,
+      "rank": 116,
       "ticker": "SIDU",
       "name": "Sidus Space",
       "industry": "우주",
@@ -1997,7 +2167,7 @@
       }
     },
     {
-      "rank": 108,
+      "rank": 117,
       "ticker": "FLNC",
       "name": "Fluence Energy",
       "industry": "이차전지",
@@ -2015,7 +2185,7 @@
       }
     },
     {
-      "rank": 109,
+      "rank": 118,
       "ticker": "MP",
       "name": "MP Materials",
       "industry": "이차전지",
@@ -2030,6 +2200,24 @@
         "순이익률": "❌❌❌-38.3%",
         "C_재무안전성": -15,
         "D_규모리더십": 1.0
+      }
+    },
+    {
+      "rank": 119,
+      "ticker": "INTC",
+      "name": "Intel",
+      "industry": "온디바이스AI",
+      "score": 0,
+      "grade": "D",
+      "breakdown": {
+        "매출성장": "-0.5%",
+        "A_성장(품질조정)": 0,
+        "GPM": "34.8%",
+        "FCF마진": "❌-9.4%",
+        "B_마진해자": 2,
+        "순이익률": "❌❌❌-50.5%",
+        "C_재무안전성": -15,
+        "D_규모리더십": 5.0
       }
     }
   ]

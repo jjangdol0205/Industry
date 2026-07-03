@@ -170,6 +170,16 @@ def run_startup_migrations():
         except Exception as e:
             print(f"[Migration] Battery industry init error: {e}")
 
+        # ── 온디바이스 AI 산업(id=8) 초기화 ──────────────────────
+        cur.execute("SELECT id FROM industry_reports WHERE id=8")
+        if not cur.fetchone():
+            try:
+                import insert_ondevice_ai  # 직접 import해서 실행
+                print("[Migration] On-device AI industry (id=8) inserted via insert_ondevice_ai")
+            except Exception as e:
+                print(f"[Migration] On-device AI industry init error: {e}")
+
+
         # ── display_order 컬럼 보장 ─────────────────────────────
         cur.execute("PRAGMA table_info(companies)")
         col_names = [r[1] for r in cur.fetchall()]
