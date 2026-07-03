@@ -179,6 +179,15 @@ def run_startup_migrations():
             except Exception as e:
                 print(f"[Migration] On-device AI industry init error: {e}")
 
+        # ── 반도체 산업(id=9) 초기화 ──────────────────────────────
+        cur.execute("SELECT id FROM industry_reports WHERE id=9")
+        if not cur.fetchone():
+            try:
+                import insert_semiconductor
+                print("[Migration] Semiconductor industry (id=9) inserted via insert_semiconductor")
+            except Exception as e:
+                print(f"[Migration] Semiconductor industry init error: {e}")
+
 
         # ── display_order 컬럼 보장 ─────────────────────────────
         cur.execute("PRAGMA table_info(companies)")
