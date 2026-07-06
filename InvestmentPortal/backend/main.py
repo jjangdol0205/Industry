@@ -197,6 +197,15 @@ def run_startup_migrations():
             except Exception as e:
                 print(f"[Migration] Game industry init error: {e}")
 
+        # ── 엔터테인먼트 산업(id=11) 초기화 ──────────────────────
+        cur.execute("SELECT id FROM industry_reports WHERE id=11")
+        if not cur.fetchone():
+            try:
+                import insert_entertainment
+                print("[Migration] Entertainment industry (id=11) inserted via insert_entertainment")
+            except Exception as e:
+                print(f"[Migration] Entertainment industry init error: {e}")
+
 
         # ── display_order 컬럼 보장 ─────────────────────────────
         cur.execute("PRAGMA table_info(companies)")
