@@ -417,23 +417,11 @@ function App() {
         </div>
 
         <div style={{ marginTop:'10px' }}>
-          {Object.entries(reports.reduce((acc, r) => {
-            const tag = r.tag || '일반';
-            if (!acc[tag]) acc[tag] = [];
-            acc[tag].push(r);
-            return acc;
-          }, {})).map(([tag, tagReports]) => (
-            <div key={tag} style={{ marginBottom:'24px' }}>
-              <div style={{ color:'var(--text-secondary)', fontSize:'0.8rem', marginBottom:'10px', fontWeight:'600', textTransform:'uppercase' }}>
-                # {tag}
-              </div>
-              {tagReports.map(r => (
-                <div key={r.id}
-                  className={`nav-item ${selectedReport?.id===r.id?'active':''}`}
-                  onClick={() => { fetchReportDetails(r.id); setSelectedCompany(null); setCompanyProfile(null); setSidebarOpen(false); }}>
-                  <FileText size={18} /> {r.title}
-                </div>
-              ))}
+          {reports.map(r => (
+            <div key={r.id}
+              className={`nav-item ${selectedReport?.id===r.id?'active':''}`}
+              onClick={() => { fetchReportDetails(r.id); setSelectedCompany(null); setCompanyProfile(null); setSidebarOpen(false); }}>
+              <FileText size={18} /> {r.tag || r.title}
             </div>
           ))}
         </div>
