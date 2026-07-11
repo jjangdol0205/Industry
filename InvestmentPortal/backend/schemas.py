@@ -50,6 +50,8 @@ class Company(CompanyBase):
     leading_score: Optional[float] = None
     leading_grade: Optional[str] = None
     leading_breakdown: Optional[dict] = None
+    # 성장성 기반 기업가치 업사이드 점수 (런타임 계산)
+    upside_score: Optional[float] = None
 
     class Config:
         from_attributes = True

@@ -655,24 +655,40 @@ function LeadingScoreBar({ breakdown, score, grade }) {
 // ── IndustryView ────────────────────────────────
 function IndustryView({ report, onSelectCompany }) {
   const [gradeFilter, setGradeFilter] = useState('전체');
+  const [sortMode, setSortMode]       = useState('upside');
 
-  const companies = [...report.companies]
-    .sort((a, b) => (a.display_order ?? 999) - (b.display_order ?? 999));
+  // 복합 점수: 기업가치 상승 기대(upside_score) 60% + 주도주점수 40%
+  const compositeScore = (c) =>
+    (c.upside_score ?? 0) * 0.6 + (c.leading_score ?? 0) * 0.4;
 
-  // 등급 필터 적용
+  const companies = [...report.companies].sort((a, b) => {
+    if (sortMode === 'upside') return compositeScore(b) - compositeScore(a);
+    if (sortMode === 'grade') {
+      const ord = { S:0, A:1, B:2, C:3, D:4 };
+      return (ord[a.leading_grade] ?? 5) - (ord[b.leading_grade] ?? 5);
+    }
+    return (a.display_order ?? 999) - (b.display_order ?? 999);
+  });
+
   const filtered = gradeFilter === '전체'
     ? companies
     : companies.filter(c => c.leading_grade === gradeFilter);
 
-  // 필터 탭 등급별 카운트
   const gradeCounts = companies.reduce((acc, c) => {
     const g = c.leading_grade || 'D';
     acc[g] = (acc[g] || 0) + 1;
     return acc;
   }, {});
 
+  const SORT_OPTS = [
+    { key:'upside',  icon:'📈', label:'기업가치 상승', tip:'매출성장+영업이익률+ROE+저PER+FCF성장 복합점수 순' },
+    { key:'grade',   icon:'🏆', label:'주도주 등급',   tip:'S→A→B→C→D 순서' },
+    { key:'default', icon:'📋', label:'기본',           tip:'업종별 기본 순서' },
+  ];
+
   return (
     <div className="industry-view">
+      {/* 페이지 헤더 */}
       <div className="page-header" style={{ borderBottom:'1px solid var(--border-color)', paddingBottom:'20px', marginBottom:'28px' }}>
         <div style={{ display:'flex', alignItems:'center', gap:'12px', marginBottom:'12px' }}>
           <span style={{ background:'linear-gradient(135deg,var(--accent-blue),var(--accent-purple))', color:'white', padding:'4px 14px', borderRadius:'20px', fontSize:'0.82rem', fontWeight:700, letterSpacing:'0.03em' }}>
@@ -684,123 +700,119 @@ function IndustryView({ report, onSelectCompany }) {
         <p style={{ color:'var(--text-secondary)', fontSize:'0.9rem', marginTop:'6px' }}>{report.title}</p>
       </div>
 
-      <div className="report-content glass-panel" style={{ padding:'40px', marginBottom:'40px', fontSize:'1.1rem', lineHeight:'1.8' }}>
-        <h3 style={{ display:'flex', alignItems:'center', gap:'10px', color:'var(--accent-blue)', marginBottom:'24px', fontSize:'1.4rem' }}>
-          <BookOpen size={24} /> Industry Overview
+      {/* 리포트 요약 */}
+      <div className="report-content glass-panel" style={{ padding:'32px 40px', marginBottom:'36px' }}>
+        <h3 style={{ display:'flex', alignItems:'center', gap:'10px', color:'var(--accent-blue)', marginBottom:'20px', fontSize:'1.3rem' }}>
+          <BookOpen size={22} /> Industry Overview
         </h3>
         <div className="markdown-body" style={{ color:'var(--text-primary)' }}>
           <ReactMarkdown>{report.summary}</ReactMarkdown>
         </div>
       </div>
 
-      {/* 헤더 + 등급 필터 */}
-      <div style={{ marginBottom:'20px' }}>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'14px' }}>
-          <h3 style={{ color:'var(--accent-blue)', fontSize:'1.4rem', borderBottom:'none', margin:0 }}>
-            🏆 Key Tracked Companies
-          </h3>
-          <div style={{ fontSize:'0.75rem', color:'var(--text-secondary)', background:'rgba(255,255,255,0.05)', padding:'4px 12px', borderRadius:'20px' }}>
-            주도주 투자법 순위 · 매월 업데이트
+      {/* 기업 목록 컨트롤 */}
+      <div style={{ marginBottom:'16px' }}>
+        {/* 타이틀 + 정렬 버튼 */}
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:'10px', marginBottom:'12px' }}>
+          <div>
+            <h3 style={{ color:'var(--accent-blue)', fontSize:'1.2rem', margin:'0 0 4px' }}>
+              🏆 핵심 추적 기업
+            </h3>
+            <div style={{ fontSize:'0.73rem', color:'var(--text-secondary)' }}>
+              {SORT_OPTS.find(o => o.key === sortMode)?.icon}{' '}
+              {SORT_OPTS.find(o => o.key === sortMode)?.label} 순 정렬
+            </div>
+          </div>
+          <div style={{ display:'flex', gap:'5px', flexWrap:'wrap' }}>
+            {SORT_OPTS.map(o => (
+              <button key={o.key} onClick={() => setSortMode(o.key)} title={o.tip}
+                style={{
+                  padding:'6px 12px', borderRadius:'20px', cursor:'pointer', border:'none',
+                  fontSize:'0.73rem', fontWeight:700, transition:'all 0.2s',
+                  background: sortMode === o.key
+                    ? 'linear-gradient(135deg,var(--accent-blue),var(--accent-purple))'
+                    : 'rgba(255,255,255,0.06)',
+                  color: sortMode === o.key ? '#fff' : 'var(--text-secondary)',
+                  boxShadow: sortMode === o.key ? '0 2px 10px rgba(59,130,246,0.35)' : 'none',
+                }}
+              >{o.icon} {o.label}</button>
+            ))}
           </div>
         </div>
 
         {/* 등급 필터 탭 */}
         <div style={{ display:'flex', gap:'6px', flexWrap:'wrap' }}>
           {['전체', 'S', 'A', 'B', 'C', 'D'].map(g => {
-            const cfg = g === '전체' ? null : GRADE_CONFIG[g];
-            const cnt = g === '전체' ? companies.length : (gradeCounts[g] || 0);
-            const isActive = gradeFilter === g;
+            const cfg    = g === '전체' ? null : GRADE_CONFIG[g];
+            const cnt    = g === '전체' ? companies.length : (gradeCounts[g] || 0);
+            const active = gradeFilter === g;
             return (
               <button key={g} onClick={() => setGradeFilter(g)}
                 style={{
-                  padding:'6px 14px', borderRadius:'20px', border:'none', cursor:'pointer',
-                  fontSize:'0.8rem', fontWeight:600, transition:'all 0.2s',
-                  background: isActive
-                    ? (cfg ? cfg.bg : 'rgba(59,130,246,0.2)')
-                    : 'rgba(255,255,255,0.05)',
-                  color: isActive
-                    ? (cfg ? cfg.color : 'var(--accent-blue)')
-                    : 'var(--text-secondary)',
-                  border: isActive
-                    ? `1px solid ${cfg ? cfg.border : 'rgba(59,130,246,0.5)'}`
-                    : '1px solid transparent',
-                  boxShadow: isActive && cfg
-                    ? `0 0 12px ${cfg.color}30`
-                    : 'none',
+                  padding:'5px 12px', borderRadius:'20px', cursor:'pointer',
+                  fontSize:'0.77rem', fontWeight:600, transition:'all 0.2s',
+                  background: active ? (cfg ? cfg.bg : 'rgba(59,130,246,0.18)') : 'rgba(255,255,255,0.04)',
+                  color:      active ? (cfg ? cfg.color : 'var(--accent-blue)') : 'var(--text-secondary)',
+                  border:     active ? `1px solid ${cfg ? cfg.border : 'rgba(59,130,246,0.5)'}` : '1px solid transparent',
+                  boxShadow:  active && cfg ? `0 0 8px ${cfg.color}25` : 'none',
                 }}
               >
-                {cfg ? `${cfg.emoji} ${g}등급` : '전체'} <span style={{ opacity:0.6, fontSize:'0.72rem' }}>({cnt})</span>
+                {cfg ? `${cfg.emoji} ${g}` : '전체'}{' '}
+                <span style={{ opacity:0.5, fontSize:'0.68rem' }}>({cnt})</span>
               </button>
             );
           })}
         </div>
 
-        {/* 필터 결과 없을 때 */}
         {filtered.length === 0 && (
-          <div style={{ textAlign:'center', padding:'40px', color:'var(--text-secondary)' }}>
-            이 산업에 {gradeFilter}등급 기업이 없습니다.
+          <div style={{ textAlign:'center', padding:'32px', color:'var(--text-secondary)' }}>
+            {gradeFilter}등급 기업이 없습니다.
           </div>
         )}
       </div>
 
+      {/* 기업 카드 목록 */}
       <div className="company-list">
         {filtered.map((comp, idx) => {
-          const rank  = comp.display_order ?? (idx + 1);
-          const grade = comp.leading_grade;
-          const cfg   = grade ? (GRADE_CONFIG[grade] || GRADE_CONFIG['C']) : null;
+          const rank   = idx + 1;
+          const grade  = comp.leading_grade;
+          const cfg    = grade ? (GRADE_CONFIG[grade] || GRADE_CONFIG['C']) : null;
+          const upside = comp.upside_score;
 
-          // 등급 기반 카드 테두리 (기존 순위 기반 → 등급 기반으로 교체)
-          const cardBorder = cfg
-            ? `1px solid ${cfg.border}`
-            : '1px solid rgba(255,255,255,0.06)';
-          const cardGlow = grade === 'S'
-            ? `0 0 20px ${cfg.color}20`
-            : grade === 'A'
-            ? `0 0 12px ${cfg.color}15`
-            : 'none';
-
-          const rankEmoji = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
+          const cardBorder = cfg ? `1px solid ${cfg.border}` : '1px solid rgba(255,255,255,0.06)';
+          const cardGlow   = grade === 'S' ? `0 0 20px ${cfg.color}1a`
+                           : grade === 'A' ? `0 0 12px ${cfg.color}12` : 'none';
+          const rankEmoji  = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
+          const upsideColor = !upside      ? '#6b7280'
+                            : upside >= 70 ? '#10b981'
+                            : upside >= 50 ? '#3b82f6'
+                            : upside >= 30 ? '#f59e0b'
+                            :                '#9ca3af';
 
           return (
             <div key={comp.id}
               className="company-pill glass-panel"
               onClick={() => onSelectCompany(comp.id)}
-              style={{
-                position:'relative',
-                border: cardBorder,
-                boxShadow: cardGlow,
-                transition: 'all 0.25s',
-              }}
+              style={{ position:'relative', border: cardBorder, boxShadow: cardGlow, transition:'all 0.25s' }}
             >
-              {/* 상단: 순위 + 등급 배지 나란히 */}
-              <div style={{
-                position:'absolute', top:'10px', right:'10px',
-                display:'flex', alignItems:'center', gap:'5px',
-              }}>
-                {/* 등급 배지 */}
+              {/* 배지 */}
+              <div style={{ position:'absolute', top:'10px', right:'10px', display:'flex', alignItems:'center', gap:'5px' }}>
                 {cfg && (
-                  <div style={{
-                    background: cfg.bg,
-                    border: `1px solid ${cfg.border}`,
+                  <div title={cfg.desc} style={{
+                    background: cfg.bg, border:`1px solid ${cfg.border}`,
                     borderRadius:'10px', padding:'2px 8px',
-                    fontSize:'0.7rem', fontWeight:800, color: cfg.color,
-                    letterSpacing:'0.5px',
+                    fontSize:'0.68rem', fontWeight:800, color: cfg.color,
                     boxShadow: grade === 'S' ? `0 0 8px ${cfg.color}50` : 'none',
                   }}>{cfg.emoji} {grade}</div>
                 )}
-                {/* 순위 배지 */}
                 <div style={{
-                  background:'rgba(255,255,255,0.06)',
-                  border:'1px solid rgba(255,255,255,0.12)',
-                  borderRadius:'10px', padding:'2px 8px',
-                  fontSize:'0.68rem', fontWeight:600, color:'var(--text-secondary)',
-                  display:'flex', alignItems:'center', gap:'2px',
-                }}>
-                  {rankEmoji} {rank}위
-                </div>
+                  background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)',
+                  borderRadius:'10px', padding:'2px 7px',
+                  fontSize:'0.66rem', fontWeight:600, color:'var(--text-secondary)',
+                }}>{rankEmoji} {rank}위</div>
               </div>
 
-              {/* 기업명 + 티커 */}
+              {/* 기업명 */}
               <div className="company-header" style={{ paddingRight:'100px' }}>
                 <span className="company-name">{comp.name}</span>
                 <span className="company-ticker">{comp.ticker}</span>
@@ -808,13 +820,30 @@ function IndustryView({ report, onSelectCompany }) {
 
               {/* 설명 */}
               <div style={{
-                fontSize:'0.9rem', color:'var(--text-secondary)',
+                fontSize:'0.86rem', color:'var(--text-secondary)', lineHeight:1.55,
                 display:'-webkit-box', WebkitLineClamp:2,
-                WebkitBoxOrient:'vertical', overflow:'hidden',
-                marginBottom: comp.leading_score ? '0' : '0',
-              }}>
-                {comp.role_description}
-              </div>
+                WebkitBoxOrient:'vertical', overflow:'hidden', marginBottom:'10px',
+              }}>{comp.role_description}</div>
+
+              {/* 기업가치 상승 기대 바 */}
+              {upside != null && (
+                <div style={{ marginBottom:'8px' }}>
+                  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'4px' }}>
+                    <span style={{ fontSize:'0.66rem', color:'var(--text-secondary)', cursor:'help' }}
+                      title="매출성장(40)+영업이익률(20)+ROE(15)+저PER여부(15)+FCF성장(10) 합산 100점">
+                      📈 기업가치 상승 기대 ⓘ
+                    </span>
+                    <span style={{ fontSize:'0.8rem', fontWeight:700, color: upsideColor }}>{upside}점</span>
+                  </div>
+                  <div style={{ height:'4px', borderRadius:'4px', background:'rgba(255,255,255,0.06)', overflow:'hidden' }}>
+                    <div style={{
+                      width:`${upside}%`, height:'100%', borderRadius:'4px',
+                      background:`linear-gradient(90deg,${upsideColor},${upsideColor}bb)`,
+                      transition:'width 0.8s ease',
+                    }} />
+                  </div>
+                </div>
+              )}
 
               {/* 주도주 점수 바 */}
               <LeadingScoreBar
@@ -831,7 +860,6 @@ function IndustryView({ report, onSelectCompany }) {
 }
 
 
-// ── KPI 카드 ─────────────────────────────────────────────
 function KpiCard({ label, value, sub, valueColor, icon: Icon }) {
   return (
     <div className="kpi-card glass-panel">

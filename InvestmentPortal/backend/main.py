@@ -369,12 +369,62 @@ def get_report(report_id: int, db: Session = Depends(get_db)):
     report = db.query(models.IndustryReport).filter(models.IndustryReport.id == report_id).first()
     if not report:
         raise HTTPException(status_code=404, detail="Report not found")
-    # 주도주 점수 주입
+    # 주도주 점수 + 업사이드 점수 주입
     for comp in (report.companies or []):
         ls = _LEADING_SCORE_MAP.get(comp.ticker, {})
-        comp.leading_score    = ls.get("leading_score")
-        comp.leading_grade    = ls.get("leading_grade")
+        comp.leading_score     = ls.get("leading_score")
+        comp.leading_grade     = ls.get("leading_grade")
         comp.leading_breakdown = ls.get("leading_breakdown", {})
+        # ── 성장성 기반 업사이드 점수 계산 ──────────────────────────────
+        # profile 데이터 로드
+        profile = db.query(models.CompanyProfile).filter(
+            models.CompanyProfile.company_id == comp.id
+        ).first()
+        upside = 0.0
+        if profile:
+            # 1. 매출 성장률 (0~40점): 미래 성장의 핵심 지표
+            rev_g = profile.revenue_growth or 0
+            if rev_g >= 0.5:   upside += 40
+            elif rev_g >= 0.25: upside += 32
+            elif rev_g >= 0.15: upside += 24
+            elif rev_g >= 0.10: upside += 16
+            elif rev_g >= 0.05: upside += 8
+            elif rev_g >= 0:    upside += 3
+            # 음수 성장이면 큰 감점
+            else:               upside += max(-20, rev_g * 40)
+
+            # 2. 영업이익률 (0~20점): 수익 확장 여부
+            opm = profile.op_margin_ttm or 0
+            if opm >= 0.30:    upside += 20
+            elif opm >= 0.20:  upside += 16
+            elif opm >= 0.10:  upside += 11
+            elif opm >= 0.05:  upside += 6
+            elif opm >= 0:     upside += 2
+
+            # 3. ROE (0~15점): 자본 효율로 내재가치 상승 가속
+            roe = profile.roe or 0
+            if roe >= 0.30:    upside += 15
+            elif roe >= 0.20:  upside += 11
+            elif roe >= 0.10:  upside += 6
+            elif roe >= 0:     upside += 2
+
+            # 4. PER 기반 저평가 여부 (0~15점): 낮을수록 상승 여력
+            pe = profile.pe_ratio
+            if pe is not None and pe > 0:
+                if pe <= 15:    upside += 15
+                elif pe <= 20:  upside += 12
+                elif pe <= 30:  upside += 8
+                elif pe <= 50:  upside += 4
+                else:           upside += 1
+            elif pe is None:    upside += 7  # 데이터 없으면 중립
+
+            # 5. FCF 성장률 가산 (0~10점)
+            fcf_g = profile.fcf_growth or 0
+            if fcf_g >= 0.30:  upside += 10
+            elif fcf_g >= 0.15: upside += 7
+            elif fcf_g >= 0:    upside += 3
+
+        comp.upside_score = round(max(0, min(100, upside)), 1)
     return report
 
 @app.get("/api/reports/{report_id}/pdf_url")
