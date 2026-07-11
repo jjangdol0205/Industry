@@ -208,8 +208,8 @@ function App() {
     setCompanyProfile(null);
     setCompanyFinancials(null);
     setCompanyAiAnalysis(null);
+    setSelectedReport(null);
     setSidebarOpen(false);
-    if (reports.length > 0) fetchReportDetails(reports[0].id);
   };
 
   // ── 스플래시 로딩 화면 ─────────────────────────────────
@@ -417,11 +417,12 @@ function App() {
         </div>
 
         <div style={{ marginTop:'10px' }}>
-          {reports.map(r => (
+          {reports.map((r, idx) => (
             <div key={r.id}
               className={`nav-item ${selectedReport?.id===r.id?'active':''}`}
               onClick={() => { fetchReportDetails(r.id); setSelectedCompany(null); setCompanyProfile(null); setSidebarOpen(false); }}>
-              <FileText size={18} /> {r.tag || r.title}
+              <span style={{ width:'20px', height:'20px', borderRadius:'50%', background:'rgba(59,130,246,0.15)', color:'var(--accent-blue)', fontSize:'0.65rem', fontWeight:700, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>{idx+1}</span>
+              {r.tag || r.title}
             </div>
           ))}
         </div>
@@ -445,10 +446,7 @@ function App() {
         ) : selectedReport ? (
           <IndustryView report={selectedReport} onSelectCompany={fetchCompanyFull} />
         ) : (
-          <div className="page-header">
-            <h2>Alpha Research</h2>
-            <p>사이드바에서 산업 리포트를 선택해 주세요.</p>
-          </div>
+          <HomeDashboard reports={reports} onSelect={(id) => { fetchReportDetails(id); setSelectedCompany(null); }} />
         )}
       </div>
     </div>
@@ -590,12 +588,22 @@ function PdfLibraryView() {
 
 // ── 주도주 등급 색상 시스템 ──────────────────────────────
 const GRADE_CONFIG = {
-  S: { color: '#FFD700', bg: 'rgba(255,215,0,0.15)',  border: 'rgba(255,215,0,0.5)',  label: 'S등급', emoji: '👑' },
-  A: { color: '#10b981', bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.4)', label: 'A등급', emoji: '🏆' },
-  B: { color: '#3b82f6', bg: 'rgba(59,130,246,0.12)', border: 'rgba(59,130,246,0.4)', label: 'B등급', emoji: '⭐' },
-  C: { color: '#9ca3af', bg: 'rgba(156,163,175,0.10)',border: 'rgba(156,163,175,0.3)', label: 'C등급', emoji: '🔵' },
-  D: { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',  border: 'rgba(239,68,68,0.3)',  label: 'D등급', emoji: '⚠️' },
+  S: { color: '#FFD700', bg: 'rgba(255,215,0,0.15)',  border: 'rgba(255,215,0,0.5)',  label: 'S등급', emoji: '👑', desc: '탁월한 성장·해자·재무 모두 최상위' },
+  A: { color: '#10b981', bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.4)', label: 'A등급', emoji: '🏆', desc: '성장성과 해자가 모두 우수한 핵심 보유주' },
+  B: { color: '#3b82f6', bg: 'rgba(59,130,246,0.12)', border: 'rgba(59,130,246,0.4)', label: 'B등급', emoji: '⭐', desc: '평균 이상의 퀄리티, 관심 종목 적합' },
+  C: { color: '#9ca3af', bg: 'rgba(156,163,175,0.10)',border: 'rgba(156,163,175,0.3)', label: 'C등급', emoji: '🔵', desc: '평균 수준, 섹터 대표주로 보유 가능' },
+  D: { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',  border: 'rgba(239,68,68,0.3)',  label: 'D등급', emoji: '⚠️', desc: '아직 수익성·성장성 미흡, 주의 필요' },
 };
+
+// ── 주도주 점수 기준 설명 툴팁 ─────────────────────────────────
+const SCORE_TOOLTIP = `주도주 투자법 점수 (100점 만점)
+─────────────────────────────
+• 성장 (40점): 매출·이익 성장률, 품질 조정
+• 해자 (30점): GPM·OPM 마진 우위
+• 안전 (20점): 부채비율·유동비율
+• 리더 (10점): 시가총액 규모 리더십
+─────────────────────────────
+S≥85 / A≥70 / B≥55 / C≥40 / D<40`;
 
 // ── 주도주 점수 바 컴포넌트 ────────────────────────────────
 function LeadingScoreBar({ breakdown, score, grade }) {
@@ -611,13 +619,13 @@ function LeadingScoreBar({ breakdown, score, grade }) {
     <div style={{ marginTop: '10px' }}>
       {/* 총점 + 등급 */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'8px' }}>
-        <span style={{ fontSize:'0.72rem', color:'var(--text-secondary)' }}>주도주 점수</span>
+        <span style={{ fontSize:'0.72rem', color:'var(--text-secondary)', cursor:'help' }} title={SCORE_TOOLTIP}>주도주 점수 ⓘ</span>
         <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
           <div style={{
             fontSize:'0.7rem', fontWeight:800, padding:'2px 8px', borderRadius:'8px',
             background: cfg.bg, border:`1px solid ${cfg.border}`, color: cfg.color,
-            letterSpacing:'0.5px',
-          }}>{cfg.emoji} {grade}</div>
+            letterSpacing:'0.5px', cursor:'help',
+          }} title={cfg.desc}>{cfg.emoji} {grade}</div>
           <span style={{ fontSize:'0.85rem', fontWeight:700, color: cfg.color }}>{score}점</span>
         </div>
       </div>
@@ -627,7 +635,7 @@ function LeadingScoreBar({ breakdown, score, grade }) {
           const val = Math.max(0, breakdown[item.key] || 0);
           const pct = (val / item.max) * (item.max / 100) * 100;
           return (
-            <div key={item.key} title={`${item.label}: ${val}/${item.max}`}
+            <div key={item.key} title={`${item.label}: ${val.toFixed(1)}/${item.max}점`}
               style={{ flex: item.max, background: pct > 0 ? item.color : 'transparent',
                        opacity: pct > 0 ? 0.85 : 0.2, transition:'all 0.3s' }} />
           );
@@ -665,14 +673,15 @@ function IndustryView({ report, onSelectCompany }) {
 
   return (
     <div className="industry-view">
-      <div className="page-header" style={{ borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'32px' }}>
-        <div style={{ display:'flex', alignItems:'center', gap:'12px', marginBottom:'16px' }}>
-          <span style={{ background:'var(--accent-blue)', color:'white', padding:'4px 12px', borderRadius:'16px', fontSize:'0.85rem', fontWeight:'bold' }}>
+      <div className="page-header" style={{ borderBottom:'1px solid var(--border-color)', paddingBottom:'20px', marginBottom:'28px' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:'12px', marginBottom:'12px' }}>
+          <span style={{ background:'linear-gradient(135deg,var(--accent-blue),var(--accent-purple))', color:'white', padding:'4px 14px', borderRadius:'20px', fontSize:'0.82rem', fontWeight:700, letterSpacing:'0.03em' }}>
             #{report.tag}
           </span>
-          <span style={{ color:'var(--text-secondary)' }}>Executive Summary Report</span>
+          <span style={{ color:'var(--text-secondary)', fontSize:'0.85rem' }}>Industry Research</span>
         </div>
-        <h2 style={{ fontSize:'2.5rem' }}>{report.title}</h2>
+        <h2 style={{ fontSize:'2rem', lineHeight:1.2 }}>{report.tag} 산업</h2>
+        <p style={{ color:'var(--text-secondary)', fontSize:'0.9rem', marginTop:'6px' }}>{report.title}</p>
       </div>
 
       <div className="report-content glass-panel" style={{ padding:'40px', marginBottom:'40px', fontSize:'1.1rem', lineHeight:'1.8' }}>
@@ -1054,7 +1063,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
     <div className="company-details">
       {/* ── 헤더 ─────────────────────────────────────── */}
       <button className="back-btn" onClick={onBack}>
-        <ArrowLeft size={20} /> 리포트로 돌아가기
+        <ArrowLeft size={16} /> 돌아가기
       </button>
 
       <div className="company-header-row">
@@ -1157,20 +1166,20 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
 
       {/* ── Section 4: 손익 차트 ─────────────────────────── */}
       <section style={{ marginBottom:'36px' }}>
-        <SectionHeader icon={BarChart2} title="손익 추이 (단위: 십억 달러 / 한국 억원)" />
-        <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr', gap:'24px' }}>
+        <SectionHeader icon={BarChart2} title={`손익 추이 (단위: ${chartUnit})`} />
+        <div className="chart-grid-2">
           <div className="glass-panel" style={{ padding:'24px', height:'300px' }}>
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={incomeChartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.07)" />
                 <XAxis dataKey="year" stroke="var(--text-secondary)" fontSize={12} />
-                <YAxis yAxisId="left" stroke="var(--text-secondary)" fontSize={12} />
+                <YAxis yAxisId="left" stroke="var(--text-secondary)" fontSize={12} tickFormatter={v => isKrwTicker ? v.toLocaleString() : v} />
                 <YAxis yAxisId="right" orientation="right" stroke="#00f2fe" fontSize={12} unit="%" />
-                <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.85rem' }} />
+                <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.85rem' }} formatter={(v, name) => [isKrwTicker ? `₩${v.toLocaleString()}억` : `$${v}B`, name]} />
                 <Legend />
-                <Bar yAxisId="left" dataKey="Revenue" fill="var(--accent-blue)" radius={[4,4,0,0]} />
-                <Bar yAxisId="left" dataKey="Op Income" fill="var(--accent-purple)" radius={[4,4,0,0]} />
-                <Bar yAxisId="left" dataKey="Net Income" fill="var(--accent-green)" radius={[4,4,0,0]} />
+                <Bar yAxisId="left" dataKey="매출" fill="var(--accent-blue)" radius={[4,4,0,0]} />
+                <Bar yAxisId="left" dataKey="영업이익" fill="var(--accent-purple)" radius={[4,4,0,0]} />
+                <Bar yAxisId="left" dataKey="순이익" fill="var(--accent-green)" radius={[4,4,0,0]} />
                 <Line yAxisId="right" type="monotone" dataKey="OPM%" stroke="#00f2fe" strokeWidth={2} dot={false} />
               </ComposedChart>
             </ResponsiveContainer>
@@ -1194,16 +1203,16 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
 
       {/* ── Section 5: 현금흐름 + 재무상태표 차트 ───────── */}
       <section style={{ marginBottom:'36px' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'24px' }}>
+        <div className="chart-grid-equal">
           <div>
-            <SectionHeader icon={DollarSign} title="현금흐름 (단위: 십억 달러 / 한국 억원)" color="var(--accent-green)" />
+            <SectionHeader icon={DollarSign} title={`현금흐름 (${chartUnit})`} color="var(--accent-green)" />
             <div className="glass-panel" style={{ padding:'24px', height:'260px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={cashFlowData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.07)" />
                   <XAxis dataKey="year" stroke="var(--text-secondary)" fontSize={11} />
-                  <YAxis stroke="var(--text-secondary)" fontSize={11} />
-                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} />
+                  <YAxis stroke="var(--text-secondary)" fontSize={11} tickFormatter={v => isKrwTicker ? v.toLocaleString() : v} />
+                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} formatter={(v) => [isKrwTicker ? `₩${v.toLocaleString()}억` : `$${v}B`]} />
                   <Legend />
                   <Bar dataKey="OCF" fill="var(--accent-blue)" radius={[3,3,0,0]} />
                   <Bar dataKey="FCF" fill="var(--accent-green)" radius={[3,3,0,0]} />
@@ -1213,19 +1222,19 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
             </div>
           </div>
           <div>
-            <SectionHeader icon={Database} title="재무상태표 (단위: 십억 달러 / 한국 억원)" color="#f1c40f" />
+            <SectionHeader icon={Database} title={`재무상태표 (${chartUnit})`} color="#f1c40f" />
             <div className="glass-panel" style={{ padding:'24px', height:'260px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={balanceData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.07)" />
                   <XAxis dataKey="year" stroke="var(--text-secondary)" fontSize={11} />
-                  <YAxis stroke="var(--text-secondary)" fontSize={11} />
-                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} />
+                  <YAxis stroke="var(--text-secondary)" fontSize={11} tickFormatter={v => isKrwTicker ? v.toLocaleString() : v} />
+                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} formatter={(v) => [isKrwTicker ? `₩${v.toLocaleString()}억` : `$${v}B`]} />
                   <Legend />
-                  <Bar dataKey="Assets" fill="rgba(0,191,255,0.6)" radius={[3,3,0,0]} />
-                  <Bar dataKey="Equity" fill="rgba(0,255,100,0.6)" radius={[3,3,0,0]} />
-                  <Bar dataKey="Debt" fill="rgba(255,107,107,0.6)" radius={[3,3,0,0]} />
-                  <Line type="monotone" dataKey="Cash" stroke="#ffd700" strokeWidth={2.5} dot={{ r:4 }} />
+                  <Bar dataKey="자산" fill="rgba(0,191,255,0.6)" radius={[3,3,0,0]} />
+                  <Bar dataKey="자본" fill="rgba(0,255,100,0.6)" radius={[3,3,0,0]} />
+                  <Bar dataKey="부채" fill="rgba(255,107,107,0.6)" radius={[3,3,0,0]} />
+                  <Line type="monotone" dataKey="현금" stroke="#ffd700" strokeWidth={2.5} dot={{ r:4 }} />
                 </ComposedChart>
               </ResponsiveContainer>
             </div>
@@ -1346,15 +1355,16 @@ function BusinessModelSection({ latest, profile, company }) {
   const taxOther = Math.max(opInc - netInc, 0);
   const p = profile || {};
 
-  // Waterfall 데이터 (마이너스 바를 보이지 않는 스택으로 오프셋 처리)
+  // Waterfall 데이터 — KRW는 억원 단위, USD는 십억달러 단위
+  const wfDiv = (company?.ticker?.endsWith('.KS') || company?.ticker?.endsWith('.KQ')) ? 1e8 : 1e9;
   const wfData = [
-    { name: '매출액', value: rev/1e9, start: 0, fill: '#3b82f6', label: fB(rev, company?.ticker) },
-    { name: '매출원가', value: -cogs/1e9, start: (rev-cogs)/1e9, fill: '#ff6b6b', label: fB(cogs, company?.ticker) },
-    { name: '매출총이익', value: gp/1e9, start: 0, fill: '#10b981', label: fB(gp, company?.ticker), isSum: true },
-    { name: '판관·R&D', value: -opEx/1e9, start: opInc/1e9, fill: '#f97316', label: fB(opEx, company?.ticker) },
-    { name: '영업이익', value: opInc/1e9, start: 0, fill: '#8b5cf6', label: fB(opInc, company?.ticker), isSum: true },
-    { name: '세금·기타', value: -taxOther/1e9, start: netInc/1e9, fill: '#ef4444', label: fB(taxOther, company?.ticker) },
-    { name: '순이익', value: netInc/1e9, start: 0, fill: '#00f2fe', label: fB(netInc, company?.ticker), isSum: true },
+    { name: '매출액', value: rev/wfDiv, start: 0, fill: '#3b82f6', label: fB(rev, company?.ticker) },
+    { name: '매출원가', value: -cogs/wfDiv, start: (rev-cogs)/wfDiv, fill: '#ff6b6b', label: fB(cogs, company?.ticker) },
+    { name: '매출총이익', value: gp/wfDiv, start: 0, fill: '#10b981', label: fB(gp, company?.ticker), isSum: true },
+    { name: '판관·R&D', value: -opEx/wfDiv, start: opInc/wfDiv, fill: '#f97316', label: fB(opEx, company?.ticker) },
+    { name: '영업이익', value: opInc/wfDiv, start: 0, fill: '#8b5cf6', label: fB(opInc, company?.ticker), isSum: true },
+    { name: '세금·기타', value: -taxOther/wfDiv, start: netInc/wfDiv, fill: '#ef4444', label: fB(taxOther, company?.ticker) },
+    { name: '순이익', value: netInc/wfDiv, start: 0, fill: '#00f2fe', label: fB(netInc, company?.ticker), isSum: true },
   ];
 
   // 비용 구조 파이 차트
@@ -2051,6 +2061,92 @@ function AgentWorkspace() {
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
       `}</style>
+    </div>
+  );
+}
+
+// ── HomeDashboard ─────────────────────────────────────────────
+const INDUSTRY_ICONS = {
+  '자율주행': '🚗', '로봇': '🤖', '에너지': '⚡', '우주': '🚀',
+  'AI': 'AI', '전력인프라': '🔌', '이차전지': '🔋', '온디바이스AI': '📱',
+  '반도체': '💎', '게임': '🎮', '엔터테인먼트': '🎬', '조선': '🚢',
+};
+
+function HomeDashboard({ reports, onSelect }) {
+  return (
+    <div style={{ animation:'fadeIn 0.4s ease' }}>
+      {/* Hero */}
+      <div style={{
+        textAlign:'center', padding:'48px 24px 40px',
+        background:'linear-gradient(180deg, rgba(59,130,246,0.06) 0%, transparent 100%)',
+        borderBottom:'1px solid var(--border-color)', marginBottom:'36px',
+      }}>
+        <div style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(59,130,246,0.1)', border:'1px solid rgba(59,130,246,0.25)', borderRadius:'20px', padding:'6px 16px', marginBottom:'20px' }}>
+          <span style={{ fontSize:'0.75rem', color:'var(--accent-blue)', fontWeight:600, letterSpacing:'0.05em' }}>ALPHA RESEARCH PLATFORM</span>
+        </div>
+        <h1 style={{ fontSize:'2.8rem', fontWeight:900, lineHeight:1.1, marginBottom:'16px', background:'linear-gradient(135deg,#f8fafc,#94a3b8)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
+          Industry Intelligence
+        </h1>
+        <p style={{ color:'var(--text-secondary)', fontSize:'1rem', maxWidth:'480px', margin:'0 auto', lineHeight:1.7 }}>
+          {reports.length}개 산업의 밸류체인, 기업 재무, AI 분석을<br/>한 곳에서 확인하세요
+        </p>
+      </div>
+
+      {/* Stats Bar */}
+      <div style={{ display:'flex', gap:'16px', justifyContent:'center', marginBottom:'40px', flexWrap:'wrap' }}>
+        {[
+          { label:'커버리지 산업', value:`${reports.length}개`, color:'var(--accent-blue)' },
+          { label:'추적 기업', value:'100개+', color:'var(--accent-purple)' },
+          { label:'재무 데이터', value:'연간+분기', color:'var(--accent-green)' },
+          { label:'AI 분석', value:'기업별 맞춤', color:'#f59e0b' },
+        ].map(s => (
+          <div key={s.label} style={{ textAlign:'center', padding:'16px 24px', borderRadius:'12px', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.07)' }}>
+            <div style={{ fontSize:'1.4rem', fontWeight:800, color:s.color }}>{s.value}</div>
+            <div style={{ fontSize:'0.75rem', color:'var(--text-secondary)', marginTop:'2px' }}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Industry Cards Grid */}
+      <div style={{ marginBottom:'12px', fontSize:'0.8rem', color:'var(--text-secondary)', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>산업 리포트 선택</div>
+      <div className="home-industry-grid">
+        {reports.map((r, idx) => {
+          const icon = INDUSTRY_ICONS[r.tag] || '📊';
+          return (
+            <div key={r.id}
+              className="home-industry-card"
+              onClick={() => onSelect(r.id)}
+            >
+              <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', marginBottom:'14px' }}>
+                <div style={{ fontSize:'2rem', lineHeight:1 }}>{icon}</div>
+                <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.25)', fontWeight:600, background:'rgba(255,255,255,0.04)', padding:'2px 8px', borderRadius:'8px' }}>#{idx+1}</div>
+              </div>
+              <div style={{ fontWeight:700, fontSize:'1.05rem', color:'var(--text-primary)', marginBottom:'6px' }}>{r.tag}</div>
+              <div style={{ fontSize:'0.78rem', color:'var(--text-secondary)', lineHeight:1.5 }}>{r.title.replace(/ (산업|밸류체인|완벽|심층|분석|가이드|리포트|Report|완성).*/g,'').slice(0,40)}</div>
+              <div style={{ marginTop:'14px', display:'flex', alignItems:'center', gap:'6px', color:'var(--accent-blue)', fontSize:'0.78rem', fontWeight:600 }}>
+                <span>리포트 보기</span>
+                <span style={{ fontSize:'0.9rem' }}>→</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Quick Tips */}
+      <div style={{ marginTop:'40px', padding:'20px 24px', borderRadius:'12px', background:'rgba(59,130,246,0.04)', border:'1px solid rgba(59,130,246,0.12)' }}>
+        <div style={{ fontSize:'0.8rem', color:'var(--accent-blue)', fontWeight:700, marginBottom:'12px' }}>💡 사용 가이드</div>
+        <div style={{ display:'flex', gap:'20px', flexWrap:'wrap' }}>
+          {[
+            { icon:'1️⃣', text:'산업 카드 클릭 → 밸류체인 & 기업 목록 확인' },
+            { icon:'2️⃣', text:'기업 카드 클릭 → 재무제표·차트·AI 분석 확인' },
+            { icon:'3️⃣', text:'AI 분석팀 탭 → AI가 최적 포트폴리오 5종목 추천' },
+          ].map(tip => (
+            <div key={tip.text} style={{ display:'flex', gap:'8px', alignItems:'flex-start', fontSize:'0.82rem', color:'var(--text-secondary)', flex:'1 1 200px' }}>
+              <span>{tip.icon}</span><span>{tip.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
