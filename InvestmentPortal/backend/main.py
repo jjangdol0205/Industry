@@ -357,6 +357,44 @@ def admin_fix_cogs():
     return {"fixed": fixed, "total_with_cogs": total_ok, "status": "done"}
 
 # ─────────────────────────────────────────────
+# Debug: DB 상태 확인 (Render 에러 진단용)
+# ─────────────────────────────────────────────
+@app.get("/api/admin/debug")
+def admin_debug():
+    import sqlite3, traceback
+    db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+    result = {"db_path": db_path, "db_exists": os.path.exists(db_path)}
+    if result["db_exists"]:
+        try:
+            conn = sqlite3.connect(db_path)
+            cur = conn.cursor()
+            cur.execute("SELECT COUNT(*) FROM industry_reports"); result["reports"] = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(*) FROM companies"); result["companies"] = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(*) FROM financial_data"); result["financials"] = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(*) FROM companies WHERE future_growth IS NULL"); result["null_future_growth"] = cur.fetchone()[0]
+            conn.close()
+        except Exception as e:
+            result["db_error"] = str(e)
+    try:
+        from sqlalchemy.orm import Session as SASession
+        db = database.SessionLocal()
+        reps = db.query(models.IndustryReport).all()
+        result["orm_reports"] = len(reps)
+        import schemas as sc
+        errors = []
+        for r in reps:
+            try:
+                sc.IndustryReport.model_validate(r)
+            except Exception as e:
+                errors.append({"id": r.id, "tag": r.tag, "error": str(e)})
+        result["schema_errors"] = errors
+        db.close()
+    except Exception as e:
+        result["orm_error"] = str(e)
+        result["traceback"] = traceback.format_exc()
+    return result
+
+# ─────────────────────────────────────────────
 # Industry Reports
 # ─────────────────────────────────────────────
 @app.get("/api/reports", response_model=List[schemas.IndustryReport])
