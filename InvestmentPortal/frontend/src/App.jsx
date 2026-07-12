@@ -1051,30 +1051,43 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
 
   const tableData = tab === 'annual' ? [...annualData].reverse() : quarterlyData;
 
+  // KRW 여부 및 차트 단위
+  const isKrwTicker = isKrw(company?.ticker);
+  const chartUnit = isKrwTicker ? '억원' : 'B USD';
+
   // 차트 데이터 (최근 6년)
-  const incomeChartData = annualData.slice(-6).map(d => ({
-    year: d.date.substring(0,4),
-    Revenue: +(d.revenue/1e9).toFixed(2),
-    'Op Income': +(( d.operating_income||0)/1e9).toFixed(2),
-    'Net Income': +((d.net_income||0)/1e9).toFixed(2),
-    'OPM%': +(d.op_margin||0).toFixed(1),
-    'GPM%': +(d.gross_margin||0).toFixed(1),
-  }));
+  const incomeChartData = annualData.slice(-6).map(d => {
+    const scale = isKrwTicker ? 1e8 : 1e9;
+    return {
+      year: d.date.substring(0,4),
+      매출: +(d.revenue / scale).toFixed(2),
+      영업이익: +((d.operating_income||0) / scale).toFixed(2),
+      순이익: +((d.net_income||0) / scale).toFixed(2),
+      'OPM%': +(d.op_margin||0).toFixed(1),
+      'GPM%': +(d.gross_margin||0).toFixed(1),
+    };
+  });
 
-  const cashFlowData = annualData.slice(-6).map(d => ({
-    year: d.date.substring(0,4),
-    OCF: +((d.operating_cash_flow||0)/1e9).toFixed(2),
-    CAPEX: +((d.capital_expenditure||0)/1e9).toFixed(2),
-    FCF: +((d.free_cash_flow||0)/1e9).toFixed(2),
-  }));
+  const cashFlowData = annualData.slice(-6).map(d => {
+    const scale = isKrwTicker ? 1e8 : 1e9;
+    return {
+      year: d.date.substring(0,4),
+      OCF: +((d.operating_cash_flow||0) / scale).toFixed(2),
+      CAPEX: +((d.capital_expenditure||0) / scale).toFixed(2),
+      FCF: +((d.free_cash_flow||0) / scale).toFixed(2),
+    };
+  });
 
-  const balanceData = annualData.slice(-6).map(d => ({
-    year: d.date.substring(0,4),
-    Assets: +((d.total_assets||0)/1e9).toFixed(2),
-    Debt: +((d.total_debt||0)/1e9).toFixed(2),
-    Equity: +((d.shareholders_equity||0)/1e9).toFixed(2),
-    Cash: +((d.cash_and_equivalents||0)/1e9).toFixed(2),
-  }));
+  const balanceData = annualData.slice(-6).map(d => {
+    const scale = isKrwTicker ? 1e8 : 1e9;
+    return {
+      year: d.date.substring(0,4),
+      자산: +((d.total_assets||0) / scale).toFixed(2),
+      부채: +((d.total_debt||0) / scale).toFixed(2),
+      자본: +((d.shareholders_equity||0) / scale).toFixed(2),
+      현금: +((d.cash_and_equivalents||0) / scale).toFixed(2),
+    };
+  });
 
   const p = profile || {};
   // 최신 연간 레코드 사용 (COGS 등 최신값 보장)
