@@ -2,7 +2,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./investment_portal.db"
+import os as _os
+_DB_PATH = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "investment_portal.db")
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{_DB_PATH}"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}

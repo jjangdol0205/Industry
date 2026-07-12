@@ -20,11 +20,9 @@ node_modules/
 **/start.ps1
 start.ps1
 
-# Frontend build outputs
-**/dist/
-dist/
-**/build/
-build/
+# Frontend build outputs - exclude from ignore so Render can serve pre-built assets
+!InvestmentPortal/frontend/dist/
+!InvestmentPortal/frontend/dist/**
 
 # Logs
 *.log
