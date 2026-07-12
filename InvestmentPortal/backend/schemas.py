@@ -35,7 +35,7 @@ class CompanyBase(BaseModel):
     name: str
     ticker: str
     role_description: str
-    future_growth: str
+    future_growth: Optional[str] = None
     value_chain_node_id: Optional[int] = None
 
 class CompanyCreate(CompanyBase):
