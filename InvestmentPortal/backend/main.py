@@ -1488,28 +1488,35 @@ def screen_to_watchlist(
             score += 15; tags.append(f"📊 -20%+ 조정 ({mdd_v:.1f}%)")
 
         # 4. 섹터별 독점력 프리미엄 (수동 매핑)
+        # ── 서브에이전트 리서치 기반 독점력 점수 (2026-08-08 갱신) ──
         MONOPOLY_BOOST = {
-            'QCOM': (25, '모바일 AP/5G 모뎀 독점', True),
-            'RKLB': (25, '소형 발사체 2위 독점', True),
-            'ISRG': (30, '수술로봇 다빈치 독점', True),
-            'PALNT': (20, 'AI 운영체제 AIP 독점', True),
-            'NXPI': (15, '자동차용 SoC 상위권', True),
-            'HUBB': (15, '전력기기 북미 시장 선도', True),
-            'POWL': (20, '전력배전 설비 틈새 독점', True),
-            'ON':   (10, '전력반도체 상위권', False),
-            'KLIC': (10, '반도체 본딩장비 선도', False),
-            'MBLY': (5,  'ADAS 센서 기술 보유하나 경쟁 심화', False),
-            'APTV': (0,  '자동차 전장 범용, 업황 부진', False),
-            'STM':  (0,  '범용 반도체, 업황 부진', False),
-            'GFS':  (5,  '2nd tier 파운드리', False),
-            'SHLS': (5,  '태양광 BOS 틈새', False),
-            'MYRG': (10, '전력망 EPC 틈새', False),
-            'WCC':  (5,  '전기자재 유통 경쟁 시장', False),
-            'ATKR': (5,  '전선관 북미 시장 선도', False),
-            'ACM':  (5,  '인프라 엔지니어링 다수 경쟁사', False),
-            'ADMA': (10, '혈액제제 CDMO 틈새', False),
-            'CBRE': (10, '글로벌 부동산 서비스 1위', False),
+            # ✅ WATCHLIST 1순위 (최강 해자)
+            'PLTR':  (30, 'AI 플랫폼 AIP 독점·OPM 47%·매출 +93% YoY', True),
+            'PALNT': (30, 'AI 플랫폼 AIP 독점·OPM 47%·매출 +93% YoY', True),  # ticker alias
+            'ISRG':  (30, '다빈치 수술로봇 독점·OPM 32.9%·11700+ 설치', True),
+            'QCOM':  (25, '5G 모뎀 특허독점·ROE 35%·OPM 28.6%', True),
+            # ✅ WATCHLIST 2순위 (강한 해자)
+            'HUBB':  (20, '전력기기 Wide Moat·OPM 22.7%·AI 데이터센터 수혜', True),
+            'NXPI':  (20, '자동차 MCU 독점·Non-GAAP OPM 33%·SDV 수혜', True),
+            'POWL':  (20, '전력배전 틈새독점·OPM 21.1%·수주잔고 $1.7B', True),
+            'RKLB':  (25, '소형발사체 독보적 2위·국방계약 $1.2B', True),
+            'ACM':   (15, '글로벌 1위 인프라 엔지니어링·EPS +16% YoY', True),
+            # ⚠️ 주의 관찰
+            'ADMA':  (15, '혈액제제 CDMO·OPM 38% 우수하나 시총 소형', False),
+            'KLIC':  (12, '반도체 본딩장비 선도·OPM 22.9% 회복중', False),
+            'MYRG':  (10, '전력망 EPC·ROE 26% 우수하나 OPM 4.4% 낮음', False),
+            'GFS':   (8,  '2nd tier 파운드리·CHIPS Act 수혜 있음', False),
+            'MBLY':  (5,  'ADAS 센서 기술·ROE 음수·CEO 리스크', False),
+            'WCC':   (5,  '전기자재 유통·시총 충족하나 OPM 3.6%', False),
+            # ❌ 제외
+            'APTV':  (0,  '자동차 전장 범용·OPM 4.5%·업황 구조적 둔화', False),
+            'ON':    (0,  '매출 -15% YoY·GAAP OPM 1.4% 추락', False),
+            'STM':   (0,  '매출 3년 연속 하락·EPS 급락', False),
+            'SHLS':  (0,  '시총 소형·소송 리스크·현금흐름 음수', False),
+            'ATKR':  (0,  '순손실 전환·ROE -8.7%', False),
+            'CBRE':  (0,  'OPM 3.9%·ROE 9.7% 기준 미달', False),
         }
+
         tk_upper = ticker.upper().replace('.', '')
         boost_info = MONOPOLY_BOOST.get(tk_upper)
         if boost_info:
