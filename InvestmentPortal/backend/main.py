@@ -276,6 +276,53 @@ def run_startup_migrations():
               AND (revenue - gross_profit) > 0
         """)
 
+        # ── 미비된 52주 최고가 / MDD 데이터 자동 갱신 ──
+        cur.execute("SELECT count(*) FROM company_profiles WHERE high_52w IS NULL")
+        missing_count = cur.fetchone()[0]
+        if missing_count > 0:
+            print(f"[Migration] Found {missing_count} profiles missing 52w high & MDD. Updating...")
+            import yfinance as yf
+            cur.execute("""
+                SELECT c.id, c.ticker, c.portfolio_tier
+                FROM companies c
+                JOIN company_profiles cp ON c.id = cp.company_id
+                WHERE cp.high_52w IS NULL AND c.ticker IS NOT NULL
+            """)
+            missing_comps = cur.fetchall()
+            tickers = list(set([c[1].strip() for c in missing_comps if c[1]]))
+            if tickers:
+                data = yf.download(tickers, period="1y", progress=False)
+                for cid, ticker, tier in missing_comps:
+                    clean_t = ticker.strip()
+                    try:
+                        if clean_t in data['Close'].columns:
+                            close_ser = data['Close'][clean_t].dropna()
+                            high_ser = data['High'][clean_t].dropna()
+                            if not close_ser.empty and not high_ser.empty:
+                                curr = float(close_ser.iloc[-1])
+                                high52 = float(high_ser.max())
+                                mdd = float(((curr - high52) / high52) * 100.0)
+
+                                signal = "WAIT (MDD 미달 - 고점 부근)"
+                                if tier in ['Core', 'Satellite']:
+                                    if mdd <= -40.0: signal = "DEEP_DISCOUNT (3차 분할매수 -40% 진입)"
+                                    elif mdd <= -30.0: signal = "BUY_READY (2차 분할매수 -30% 진입)"
+                                    elif mdd <= -20.0: signal = "BUY_READY (1차 분할매수 -20% 진입)"
+                                    else: signal = f"WAIT (MDD {mdd:.1f}% > -20% 고점대비 미달)"
+                                elif tier == 'Watchlist':
+                                    if mdd <= -30.0: signal = "WATCHLIST_BUY_READY (관심종목 -30% 폭락진입)"
+                                    else: signal = f"WAIT (MDD {mdd:.1f}% > -30% 폭락대기 미달)"
+                                else:
+                                    if mdd <= -20.0: signal = "BUY_CANDIDATE (-20% 할인)"
+
+                                cur.execute("""
+                                    UPDATE company_profiles 
+                                    SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?, last_updated=datetime('now', 'localtime')
+                                    WHERE company_id=?
+                                """, (curr, high52, mdd, signal, cid))
+                    except Exception:
+                        pass
+
         conn.commit()
         conn.close()
         print("[Migration] Startup DB migration complete.")
