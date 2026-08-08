@@ -1591,6 +1591,11 @@ def screen_to_watchlist(
             'PALNT': (30, 'AI 플랫폼 AIP 독점·OPM 47%·매출 +93% YoY', True),  # ticker alias
             'ISRG':  (30, '다빈치 수술로봇 독점·OPM 32.9%·11700+ 설치', True),
             'QCOM':  (25, '5G 모뎀 특허독점·ROE 35%·OPM 28.6%', True),
+            # ✅ 한국 핵심 반도체 (리서치 에이전트 분석 2026-08-08)
+            '000660KS': (30, 'NVIDIA HBM 독점 공급·OPM 71.5%·ROE 61.2%·AI 병목 해자 최강', True),  # SK하이닉스 → Core
+            'A000660':  (30, 'NVIDIA HBM 독점 공급·OPM 71.5%·ROE 61.2%·AI 병목 해자 최강', True),
+            '005930KS': (20, 'DRAM 1위·스마트폰 2위·OPM 42.8%·HBM 추격자 Satellite', True),     # 삼성전자 → Satellite
+            'A005930':  (20, 'DRAM 1위·스마트폰 2위·OPM 42.8%·HBM 추격자 Satellite', True),
             # ✅ WATCHLIST 2순위 (강한 해자)
             'HUBB':  (20, '전력기기 Wide Moat·OPM 22.7%·AI 데이터센터 수혜', True),
             'NXPI':  (20, '자동차 MCU 독점·Non-GAAP OPM 33%·SDV 수혜', True),
@@ -2022,6 +2027,7 @@ def get_universe_tracker():
 
 def refresh_universe_prices(db: Session = Depends(get_db)):
     """Yahoo Finance를 통해 실시간 현재가, 52주 최고가, MDD 및 BUY_READY 신호 일괄 갱신"""
+    re_eval_result = {}
     try:
         import sqlite3, yfinance as yf
         db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
@@ -2083,10 +2089,51 @@ def refresh_universe_prices(db: Session = Depends(get_db)):
                     pass
 
             conn.commit()
+
+            # 4단계 투자원칙 자동 재평가 (MDD 업데이트 후)
+            def _auto_re_evaluate(conn_path):
+                conn2 = sqlite3.connect(conn_path)
+                cur2 = conn2.cursor()
+                
+                # Standard → BUY_CANDIDATE: MDD ≤ -20%이고 최소 수익성 있는 종목
+                cur2.execute("""
+                    UPDATE companies SET portfolio_tier = 'BUY_CANDIDATE'
+                    WHERE portfolio_tier = 'Standard'
+                    AND id IN (
+                        SELECT company_id FROM company_profiles
+                        WHERE mdd_pct <= -20.0
+                        AND roe IS NOT NULL AND roe > 0
+                        AND op_margin_ttm IS NOT NULL AND op_margin_ttm > 0
+                    )
+                """)
+                upgraded_to_buy = cur2.rowcount
+                
+                # BUY_CANDIDATE → Watchlist: 투자원칙 조건 충족
+                cur2.execute("""
+                    UPDATE companies SET portfolio_tier = 'Watchlist'
+                    WHERE portfolio_tier = 'BUY_CANDIDATE'
+                    AND id IN (
+                        SELECT company_id FROM company_profiles
+                        WHERE mdd_pct <= -15.0
+                        AND roe >= 0.15
+                        AND op_margin_ttm >= 0.15
+                        AND (market_cap IS NULL OR market_cap >= 3e9)
+                    )
+                """)
+                upgraded_to_watch = cur2.rowcount
+                
+                conn2.commit()
+                conn2.close()
+                print(f"[ReEval] BUY_CANDIDATE 승격: {upgraded_to_buy}개, Watchlist 승격: {upgraded_to_watch}개")
+                return {'upgraded_to_buy_candidate': upgraded_to_buy, 'upgraded_to_watchlist': upgraded_to_watch}
+
+            re_eval_result = _auto_re_evaluate(db_path)
             conn.close()
             print("[RefreshPrices] Successfully updated price & MDD data.")
     except Exception as e:
         print(f"[RefreshPrices Error] {e}")
 
-    return get_investment_principles_universe(db)
+    universe = get_investment_principles_universe(db)
+    universe['re_evaluation'] = re_eval_result
+    return universe
 
