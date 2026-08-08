@@ -1591,15 +1591,25 @@ function AgentWorkspace() {
     fetchUniverse();
   }, []);
 
-  const fetchUniverse = async () => {
+  const fetchUniverse = async (retryCount = 0) => {
     setLoading(true);
     try {
       const r = await axios.get(`${API_BASE}/portfolio/universe`);
-      if (r.data) setUniverseData(r.data);
+      if (r.data && r.data.universe && r.data.universe.length > 0) {
+        setUniverseData(r.data);
+        setLoading(false);
+      } else if (retryCount < 3) {
+        setTimeout(() => fetchUniverse(retryCount + 1), 2000);
+      } else {
+        setLoading(false);
+      }
     } catch (e) {
       console.error("Failed to load universe", e);
-    } finally {
-      setLoading(false);
+      if (retryCount < 3) {
+        setTimeout(() => fetchUniverse(retryCount + 1), 2500);
+      } else {
+        setLoading(false);
+      }
     }
   };
 
