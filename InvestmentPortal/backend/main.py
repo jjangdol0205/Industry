@@ -332,7 +332,91 @@ def run_startup_migrations():
 
 run_startup_migrations()
 
+
+# ─────────────────────────────────────────────
+# EPS 시계열 데이터 로드 (CSV → SQLite)
+# Render 배포 환경: eps_data.csv.gz → eps_timeseries 테이블
+# ─────────────────────────────────────────────
+def load_eps_from_csv_if_needed():
+    """
+    eps_data.csv.gz 파일이 있고 eps_timeseries 테이블이 비어 있으면
+    자동으로 SQLite에 로드합니다.
+    """
+    import sqlite3, gzip
+    db_path  = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+    csv_path = os.path.join(os.path.dirname(__file__), "eps_data.csv.gz")
+
+    if not os.path.exists(csv_path):
+        print("[EPS] eps_data.csv.gz 파일 없음 - 건너뜀")
+        return
+
+    conn = sqlite3.connect(db_path)
+    cur  = conn.cursor()
+
+    # 테이블 존재 여부 & 데이터 수 확인
+    cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='eps_timeseries'")
+    table_exists = cur.fetchone() is not None
+    if table_exists:
+        cur.execute("SELECT COUNT(*) FROM eps_timeseries")
+        cnt = cur.fetchone()[0]
+        if cnt > 100000:
+            print(f"[EPS] eps_timeseries 이미 {cnt:,}행 존재 - 건너뜀")
+            conn.close()
+            return
+
+    print("[EPS] eps_timeseries 로드 시작...")
+    cur.execute("DROP TABLE IF EXISTS eps_timeseries")
+    cur.execute("""
+        CREATE TABLE eps_timeseries (
+            date       TEXT NOT NULL,
+            code       TEXT NOT NULL,
+            name       TEXT NOT NULL,
+            index_type TEXT NOT NULL,
+            eps_fwd    REAL,
+            price      REAL,
+            fwd_per    REAL,
+            PRIMARY KEY (date, code)
+        )
+    """)
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_eps_date ON eps_timeseries(date)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_eps_code ON eps_timeseries(code)")
+
+    BATCH   = 30000
+    buffer  = []
+    total   = 0
+
+    with gzip.open(csv_path, 'rt', encoding='utf-8') as f:
+        next(f)  # 헤더 건너뜀
+        for line in f:
+            parts = line.strip().split(',')
+            if len(parts) < 7:
+                continue
+            date, code, name, itype = parts[0], parts[1], parts[2], parts[3]
+            try:
+                eps   = float(parts[4]) if parts[4] else None
+                price = float(parts[5]) if parts[5] else None
+                per   = float(parts[6]) if parts[6] else None
+            except ValueError:
+                continue
+            buffer.append((date, code, name, itype, eps, price, per))
+            total += 1
+            if len(buffer) >= BATCH:
+                cur.executemany("INSERT OR REPLACE INTO eps_timeseries VALUES (?,?,?,?,?,?,?)", buffer)
+                conn.commit()
+                buffer = []
+                print(f"[EPS] 진행: {total:,}행 로드")
+
+    if buffer:
+        cur.executemany("INSERT OR REPLACE INTO eps_timeseries VALUES (?,?,?,?,?,?,?)", buffer)
+        conn.commit()
+
+    conn.close()
+    print(f"[EPS] 로드 완료: {total:,}행")
+
+load_eps_from_csv_if_needed()
+
 app = FastAPI(title="Investment Portal API")
+
 
 # ─────────────────────────────────────────────
 # 주도주 스코어 맵 로드 (메모리 캐시)
@@ -1289,8 +1373,348 @@ def auto_scan_investment_candidates():
     }
 
 
-# ─────────────────────────────────────────────
-@app.post("/api/portfolio/refresh_prices")
+# ═══════════════════════════════════════════════════════
+#  EPS 분석 API 엔드포인트 (SQLite eps_timeseries 기반)
+# ═══════════════════════════════════════════════════════
+
+def _eps_db():
+    """eps_timeseries SQLite 연결"""
+    import sqlite3
+    db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def _check_eps_table(cur) -> bool:
+    cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='eps_timeseries'")
+    return cur.fetchone() is not None
+
+
+# ── 1) 시장 밸류에이션 온도계 ───────────────────────────
+@app.get("/api/eps/market_valuation")
+def get_market_valuation():
+    """
+    KOSPI200 전체 중앙값 Forward PER 시계열 반환
+    - 현재값, 1년 시계열(차트용), 10년 히스토리 기반 분위수
+    """
+    conn = _eps_db()
+    cur  = conn.cursor()
+
+    if not _check_eps_table(cur):
+        conn.close()
+        return {"error": "EPS 데이터가 아직 로드되지 않았습니다. 관리자에게 문의하세요."}
+
+    # 1년치 일별 중앙값 PER (KOSPI200)
+    cur.execute("""
+        SELECT date,
+               ROUND(AVG(fwd_per), 2)      AS avg_per,
+               COUNT(*)                    AS stock_count
+        FROM eps_timeseries
+        WHERE index_type='KOSPI200'
+          AND fwd_per IS NOT NULL
+          AND fwd_per > 0
+          AND fwd_per < 200
+          AND date >= date('now', '-400 days')
+        GROUP BY date
+        ORDER BY date
+    """)
+    rows_1y = cur.fetchall()
+
+    # 전체 10년 히스토리 (분위수 계산용)
+    cur.execute("""
+        SELECT fwd_per FROM eps_timeseries
+        WHERE index_type='KOSPI200'
+          AND fwd_per IS NOT NULL
+          AND fwd_per > 0
+          AND fwd_per < 200
+        ORDER BY fwd_per
+    """)
+    all_pers = [r[0] for r in cur.fetchall()]
+
+    # KOSDAQ150
+    cur.execute("""
+        SELECT date,
+               ROUND(AVG(fwd_per), 2) AS avg_per,
+               COUNT(*) AS stock_count
+        FROM eps_timeseries
+        WHERE index_type='KOSDAQ150'
+          AND fwd_per IS NOT NULL
+          AND fwd_per > 0
+          AND fwd_per < 200
+          AND date >= date('now', '-400 days')
+        GROUP BY date
+        ORDER BY date
+    """)
+    rows_kq = cur.fetchall()
+
+    conn.close()
+
+    # 분위수 계산
+    import statistics
+    def percentile(data, p):
+        if not data: return None
+        idx = int(len(data) * p / 100)
+        return round(data[min(idx, len(data)-1)], 1)
+
+    hist_min  = round(min(all_pers), 1) if all_pers else None
+    hist_max  = round(max(all_pers), 1) if all_pers else None
+    hist_avg  = round(sum(all_pers)/len(all_pers), 1) if all_pers else None
+    p10 = percentile(all_pers, 10)
+    p25 = percentile(all_pers, 25)
+    p50 = percentile(all_pers, 50)
+    p75 = percentile(all_pers, 75)
+    p90 = percentile(all_pers, 90)
+
+    # 현재 PER (최신 날짜 기준)
+    current = {"kospi200": None, "kosdaq150": None}
+    if rows_1y:
+        current["kospi200"] = rows_1y[-1]["avg_per"]
+    if rows_kq:
+        current["kosdaq150"] = rows_kq[-1]["avg_per"]
+
+    # 현재 위치 분위수
+    curr_per = current["kospi200"]
+    if curr_per and all_pers:
+        curr_pct = round(sum(1 for x in all_pers if x <= curr_per) / len(all_pers) * 100, 1)
+    else:
+        curr_pct = None
+
+    # 온도계 레벨 판단
+    if curr_pct is not None:
+        if curr_pct <= 20:  level = "매우 저평가 🟢 (역사적 저점)"
+        elif curr_pct <= 35: level = "저평가 🟢 (매수 적극 고려)"
+        elif curr_pct <= 55: level = "적정 🟡 (중립)"
+        elif curr_pct <= 75: level = "다소 고평가 🟠 (신중)"
+        else:                level = "과열 🔴 (현금 비중 확대)"
+    else:
+        level = "데이터 없음"
+
+    return {
+        "current": current,
+        "current_percentile": curr_pct,
+        "level": level,
+        "history": {
+            "min": hist_min, "max": hist_max, "avg": hist_avg,
+            "p10": p10, "p25": p25, "p50": p50, "p75": p75, "p90": p90
+        },
+        "chart_kospi200": [{"date": r["date"], "per": r["avg_per"], "count": r["stock_count"]}
+                           for r in rows_1y],
+        "chart_kosdaq150": [{"date": r["date"], "per": r["avg_per"], "count": r["stock_count"]}
+                            for r in rows_kq],
+    }
+
+
+# ── 2) 주가-EPS 괴리 스크리너 ───────────────────────────
+@app.get("/api/eps/spread_screen")
+def get_spread_screen(period_days: int = 252, top_n: int = 20):
+    """
+    주가 성장률 vs EPS 성장률 괴리 기반 저평가/과열 종목 스크리닝
+    - period_days: 비교 기간 (기본 252일=1년)
+    - top_n: 반환 종목 수
+    """
+    conn = _eps_db()
+    cur  = conn.cursor()
+
+    if not _check_eps_table(cur):
+        conn.close()
+        return {"error": "EPS 데이터 없음"}
+
+    # 최신 날짜와 N일 전 날짜 구하기
+    cur.execute("SELECT MAX(date) FROM eps_timeseries WHERE fwd_per IS NOT NULL")
+    latest_date = cur.fetchone()[0]
+
+    cur.execute(f"""
+        SELECT date FROM eps_timeseries
+        WHERE fwd_per IS NOT NULL
+          AND date <= '{latest_date}'
+        GROUP BY date
+        ORDER BY date DESC
+        LIMIT {period_days + 10}
+    """)
+    date_rows = cur.fetchall()
+    if len(date_rows) < period_days:
+        conn.close()
+        return {"error": "데이터 부족"}
+
+    past_date = date_rows[period_days - 1]["date"]
+
+    # 현재 & 과거 데이터 조인
+    cur.execute(f"""
+        SELECT
+            n.code, n.name, n.index_type,
+            n.eps_fwd   AS eps_now,
+            n.price     AS price_now,
+            n.fwd_per   AS per_now,
+            o.eps_fwd   AS eps_past,
+            o.price     AS price_past,
+            ROUND((n.price   - o.price)   / o.price   * 100, 1) AS price_growth,
+            ROUND((n.eps_fwd - o.eps_fwd) / ABS(o.eps_fwd) * 100, 1) AS eps_growth,
+            ROUND(
+                ((n.price - o.price)/o.price) - ((n.eps_fwd - o.eps_fwd)/ABS(o.eps_fwd)),
+                3
+            ) * 100 AS spread_pct
+        FROM
+            (SELECT code, name, index_type, eps_fwd, price, fwd_per
+             FROM eps_timeseries WHERE date='{latest_date}' AND fwd_per IS NOT NULL) n
+        JOIN
+            (SELECT code, eps_fwd, price
+             FROM eps_timeseries WHERE date='{past_date}' AND eps_fwd > 0 AND price > 0) o
+            ON n.code = o.code
+        WHERE
+            o.eps_fwd > 0
+            AND o.price > 0
+            AND n.eps_fwd > 0
+            AND n.price > 0
+        ORDER BY spread_pct ASC
+    """)
+    all_rows = cur.fetchall()
+    conn.close()
+
+    undervalued = []  # 저평가: EPS가 주가보다 훨씬 많이 오름 (spread 음수)
+    overheated  = []  # 과열: 주가가 EPS보다 훨씬 많이 오름 (spread 양수)
+
+    for r in all_rows:
+        obj = {
+            "code": r["code"],
+            "name": r["name"],
+            "index_type": r["index_type"],
+            "eps_fwd": round(r["eps_now"], 0) if r["eps_now"] else None,
+            "price": round(r["price_now"], 0) if r["price_now"] else None,
+            "fwd_per": round(r["per_now"], 1) if r["per_now"] else None,
+            "eps_growth_pct": r["eps_growth"],
+            "price_growth_pct": r["price_growth"],
+            "spread_pct": round(r["spread_pct"], 1) if r["spread_pct"] else None,
+        }
+        if len(undervalued) < top_n:
+            undervalued.append(obj)
+
+    # 과열 = 역순
+    for r in reversed(all_rows):
+        obj = {
+            "code": r["code"],
+            "name": r["name"],
+            "index_type": r["index_type"],
+            "eps_fwd": round(r["eps_now"], 0) if r["eps_now"] else None,
+            "price": round(r["price_now"], 0) if r["price_now"] else None,
+            "fwd_per": round(r["per_now"], 1) if r["per_now"] else None,
+            "eps_growth_pct": r["eps_growth"],
+            "price_growth_pct": r["price_growth"],
+            "spread_pct": round(r["spread_pct"], 1) if r["spread_pct"] else None,
+        }
+        if len(overheated) < top_n // 2:
+            overheated.append(obj)
+
+    return {
+        "latest_date": latest_date,
+        "past_date": past_date,
+        "period_days": period_days,
+        "undervalued": undervalued,
+        "overheated": overheated,
+        "total_screened": len(all_rows),
+    }
+
+
+# ── 3) 팔로잉 종목 EPS 트래커 ────────────────────────────
+@app.get("/api/eps/universe_tracker")
+def get_universe_tracker():
+    """
+    현재 유니버스(Core/Satellite/Watchlist) 종목 중
+    KOSPI200/KOSDAQ150에 있는 종목의 EPS 트래커 반환
+    - FWD EPS 최근 1년 추이 + 주가 추이 + 현재 FWD PER + MDD
+    """
+    conn = _eps_db()
+    cur  = conn.cursor()
+
+    if not _check_eps_table(cur):
+        conn.close()
+        return {"tracker": []}
+
+    # 유니버스 종목 조회 (KS/KQ 티커)
+    cur.execute("""
+        SELECT DISTINCT c.id, c.name, c.ticker, c.portfolio_tier,
+               cp.current_price, cp.high_52w, cp.mdd_pct, cp.buy_signal
+        FROM companies c
+        LEFT JOIN company_profiles cp ON c.id = cp.company_id
+        WHERE (c.ticker LIKE '%.KS' OR c.ticker LIKE '%.KQ')
+          AND c.portfolio_tier IN ('Core','Satellite','Watchlist')
+    """)
+    universe_stocks = cur.fetchall()
+
+    tracker = []
+    for u in universe_stocks:
+        ticker = u["ticker"]
+        # yfinance 티커 → DataGuide 코드 변환 (예: 005930.KS → A005930)
+        raw_code = ticker.replace('.KS','').replace('.KQ','').zfill(6)
+        dg_code  = f"A{raw_code}"
+
+        # 1년 시계열 (날짜, EPS, 주가, FWD PER)
+        cur.execute(f"""
+            SELECT date, eps_fwd, price, fwd_per
+            FROM eps_timeseries
+            WHERE code = '{dg_code}'
+              AND date >= date('now', '-400 days')
+              AND eps_fwd IS NOT NULL
+              AND price IS NOT NULL
+            ORDER BY date
+        """)
+        ts_rows = cur.fetchall()
+
+        if not ts_rows:
+            continue
+
+        # 1년 전 vs 현재 비교
+        latest = ts_rows[-1]
+        past   = ts_rows[0]
+
+        eps_change = None
+        if past["eps_fwd"] and abs(past["eps_fwd"]) > 0:
+            eps_change = round((latest["eps_fwd"] - past["eps_fwd"]) / abs(past["eps_fwd"]) * 100, 1)
+
+        price_change = None
+        if past["price"] and past["price"] > 0:
+            price_change = round((latest["price"] - past["price"]) / past["price"] * 100, 1)
+
+        spread = None
+        if eps_change is not None and price_change is not None:
+            spread = round(price_change - eps_change, 1)
+
+        tracker.append({
+            "id": u["id"],
+            "name": u["name"],
+            "ticker": ticker,
+            "dg_code": dg_code,
+            "portfolio_tier": u["portfolio_tier"],
+            "current_price_db": u["current_price"],
+            "high_52w": u["high_52w"],
+            "mdd_pct": u["mdd_pct"],
+            "buy_signal": u["buy_signal"],
+            "eps_latest": round(latest["eps_fwd"], 0) if latest["eps_fwd"] else None,
+            "price_latest": round(latest["price"], 0) if latest["price"] else None,
+            "fwd_per_latest": round(latest["fwd_per"], 1) if latest["fwd_per"] else None,
+            "eps_change_1y": eps_change,
+            "price_change_1y": price_change,
+            "spread_1y": spread,
+            "chart": [
+                {
+                    "date": r["date"],
+                    "eps": round(r["eps_fwd"], 0) if r["eps_fwd"] else None,
+                    "price": round(r["price"], 0) if r["price"] else None,
+                    "per": round(r["fwd_per"], 1) if r["fwd_per"] else None
+                }
+                for r in ts_rows[::5]  # 5일 간격으로 샘플링 (차트 최적화)
+            ]
+        })
+
+    conn.close()
+
+    # 티어별 정렬
+    tier_order = {"Core": 1, "Satellite": 2, "Watchlist": 3}
+    tracker.sort(key=lambda x: tier_order.get(x["portfolio_tier"], 4))
+
+    return {"tracker": tracker}
+
+
+
 def refresh_universe_prices(db: Session = Depends(get_db)):
     """Yahoo Finance를 통해 실시간 현재가, 52주 최고가, MDD 및 BUY_READY 신호 일괄 갱신"""
     try:
