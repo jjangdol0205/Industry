@@ -277,7 +277,7 @@ def run_startup_migrations():
         """)
 
         # ── 미비된 52주 최고가 / MDD 데이터 자동 갱신 ──
-        cur.execute("SELECT count(*) FROM company_profiles WHERE high_52w IS NULL")
+        cur.execute("SELECT count(*) FROM company_profiles WHERE high_52w IS NULL OR mdd_pct IS NULL")
         missing_count = cur.fetchone()[0]
         if missing_count > 0:
             print(f"[Migration] Found {missing_count} profiles missing 52w high & MDD. Updating...")
@@ -286,7 +286,7 @@ def run_startup_migrations():
                 SELECT c.id, c.ticker, c.portfolio_tier
                 FROM companies c
                 JOIN company_profiles cp ON c.id = cp.company_id
-                WHERE cp.high_52w IS NULL AND c.ticker IS NOT NULL
+                WHERE (cp.high_52w IS NULL OR cp.mdd_pct IS NULL) AND c.ticker IS NOT NULL
             """)
             missing_comps = cur.fetchall()
             tickers = list(set([c[1].strip() for c in missing_comps if c[1]]))
