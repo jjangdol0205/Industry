@@ -37,6 +37,8 @@ class CompanyBase(BaseModel):
     role_description: str
     future_growth: Optional[str] = None
     value_chain_node_id: Optional[int] = None
+    portfolio_tier: Optional[str] = "Standard"
+    principle_reason: Optional[str] = None
 
 class CompanyCreate(CompanyBase):
     pass

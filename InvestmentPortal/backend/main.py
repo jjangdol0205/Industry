@@ -915,3 +915,45 @@ def get_latest_report(db: Session = Depends(get_db)):
     if not report:
         return {"title": "보고서 없음", "content": "* 분석 시뮬레이션을 가동하면 여기에 결과 리포트가 생성됩니다."}
     return report
+
+# ─────────────────────────────────────────────
+# 4단계 투자원칙 기반 유니버스 팔로잉 API
+# ─────────────────────────────────────────────
+@app.get("/api/portfolio/universe")
+def get_investment_principles_universe(db: Session = Depends(get_db)):
+    """4단계 투자원칙(MDD, 독점력, 성장성) 기반 Core/Satellite/Watchlist 팔로잉 유니버스 반환"""
+    companies = db.query(models.Company).all()
+    result = []
+    
+    for c in companies:
+        profile = db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id == c.id).first()
+        ind = db.query(models.IndustryReport).filter(models.IndustryReport.id == c.industry_id).first()
+        
+        result.append({
+            "id": c.id,
+            "name": c.name,
+            "ticker": c.ticker,
+            "industry_id": c.industry_id,
+            "industry_title": ind.title if ind else "기타",
+            "role_description": c.role_description,
+            "future_growth": c.future_growth,
+            "portfolio_tier": c.portfolio_tier or "Standard",
+            "principle_reason": c.principle_reason,
+            "current_price": profile.current_price if profile else None,
+            "high_52w": profile.high_52w if profile else None,
+            "mdd_pct": profile.mdd_pct if profile else None,
+            "buy_signal": profile.buy_signal if profile else "WAIT (정보 대기)",
+            "last_updated": profile.last_updated if profile else None
+        })
+        
+    return {
+        "principles_summary": {
+            "title": "4단계 통합 투자원칙 표준 체계",
+            "mdd_rule": "Core/Satellite: MDD -20%~-30% 이상 할인 시 1차/2차 분할매수 진입, Watchlist: -30%~-40% 폭락 진입",
+            "core_rule": "시장점유율 50%+ (독과점 1~2위), OPM 25%+ / GPM 50%+, 강력한 락인(Switching Cost)",
+            "satellite_rule": "글로벌 Top 3 입지, 수주잔고 YoY +30%+ or 최고치, SW/구독 이익률 체질개선",
+            "asset_allocation": "주식 70% (Core 3 + Satellite 2) : 현금 30% (3분할 매수 & 반등 시 회수)"
+        },
+        "universe": result
+    }
+

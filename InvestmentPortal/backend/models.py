@@ -37,6 +37,8 @@ class Company(Base):
     role_description = Column(Text)
     future_growth = Column(Text)
     display_order = Column(Integer, default=999, nullable=True)  # 투자 순위 (자동 업데이트)
+    portfolio_tier = Column(String, default="Standard", nullable=True)  # Core, Satellite, Watchlist, Standard
+    principle_reason = Column(Text, nullable=True)  # 4단계 투자원칙 충족 이유
 
     industry = relationship("IndustryReport", back_populates="companies")
     value_chain_node = relationship("ValueChainNode", back_populates="companies")

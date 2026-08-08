@@ -1581,216 +1581,325 @@ function BusinessModelSection({ latest, profile, company }) {
   );
 }
 
-// ── FlowBox (수익 흐름 시각화 박스) ─────────────────────
-function FlowBox({ label, value, pct, color, desc, isFirst, small, highlight, glow }) {
-  return (
-    <div style={{
-      minWidth: small ? '150px' : '180px',
-      padding: small ? '12px 14px' : '18px 20px',
-      borderRadius:'10px',
-      background: highlight
-        ? `linear-gradient(135deg, ${color}18, ${color}08)`
-        : 'rgba(255,255,255,0.03)',
-      border: `1px solid ${highlight ? color + '50' : 'rgba(255,255,255,0.08)'}`,
-      boxShadow: glow ? `0 0 20px ${color}40` : 'none',
-      display:'flex', flexDirection:'column', gap:'4px',
-      flex: small ? '0 0 auto' : '0 0 auto',
-    }}>
-      <div style={{ fontSize:'0.72rem', color:'var(--text-secondary)', fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em' }}>{label}</div>
-      <div style={{ fontSize: small ? '1rem' : '1.3rem', fontWeight:700, color: color, fontVariantNumeric:'tabular-nums' }}>{value}</div>
-      <div style={{ fontSize:'0.75rem', color: highlight ? color : 'var(--text-secondary)' }}>매출 대비 {pct}</div>
-      <div style={{ fontSize:'0.72rem', color:'var(--text-secondary)', marginTop:'2px' }}>{desc}</div>
-    </div>
-  );
-}
-
-// ── FlowArrow ────────────────────────────────────────────
-function FlowArrow() {
-  return (
-    <div style={{ display:'flex', alignItems:'center', padding:'0 8px', color:'rgba(255,255,255,0.3)', fontSize:'1.4rem', flexShrink:0, alignSelf:'center' }}>
-      →
-    </div>
-  );
-}
-
-// ── AI 포트폴리오 매니저 ─────────────────────────────────
+// ── 4단계 투자원칙 기반 유니버스 팔로잉 & 포트폴리오 매니저 ─────────────────
 function AgentWorkspace() {
-  const [portfolio, setPortfolio] = useState(null);
-  const [running, setRunning] = useState(false);
-  const [loadingStep, setLoadingStep] = useState(0);
-  const pollRef = React.useRef(null);
+  const [universeData, setUniverseData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedTier, setSelectedTier] = useState('ALL'); // 'ALL', 'Core', 'Satellite', 'Watchlist', 'BUY_READY'
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const LOADING_STEPS = [
-    { icon: '🔍', text: '전 산업 밸류체인 분석 중...' },
-    { icon: '📊', text: `60+ 기업 성장성 스크리닝 중...` },
-    { icon: '💰', text: '현재 주가 대비 업사이드 갭 계산 중...' },
-    { icon: '🧮', text: '5~10년 기대수익률 모델링 중...' },
-    { icon: '⚖️', text: '최적 비중 배분 알고리즘 실행 중...' },
-    { icon: '✍️', text: 'AI가 투자 근거를 작성 중...' },
-  ];
-
-  // 로딩 스텝 순환
   useEffect(() => {
-    let t;
-    if (running) t = setInterval(() => setLoadingStep(s => (s + 1) % LOADING_STEPS.length), 2500);
-    return () => clearInterval(t);
-  }, [running]);
-
-  // 기존 포트폴리오 로드
-  useEffect(() => {
-    axios.get(`${API_BASE}/orchestration/report`)
-      .then(r => {
-        if (r.data?.content) {
-          try {
-            const d = JSON.parse(r.data.content);
-            if (d.type === 'portfolio') setPortfolio(d);
-          } catch (_) {}
-        }
-      }).catch(() => {});
+    fetchUniverse();
   }, []);
 
-  const startPortfolio = async () => {
-    setRunning(true);
-    setPortfolio(null);
-    setLoadingStep(0);
+  const fetchUniverse = async () => {
+    setLoading(true);
     try {
-      await axios.post(`${API_BASE}/agents/run`);
-      // 폴링
-      pollRef.current = setInterval(async () => {
-        try {
-          const r = await axios.get(`${API_BASE}/orchestration/report`);
-          if (r.data?.content) {
-            try {
-              const d = JSON.parse(r.data.content);
-              if (d.type === 'portfolio' && d.portfolio?.length > 0) {
-                setPortfolio(d);
-                setRunning(false);
-                clearInterval(pollRef.current);
-              }
-            } catch (_) {}
-          }
-        } catch (_) {}
-      }, 2000);
-      // 3분 타임아웃
-      setTimeout(() => {
-        if (pollRef.current) clearInterval(pollRef.current);
-        setRunning(false);
-      }, 180000);
+      const r = await axios.get(`${API_BASE}/portfolio/universe`);
+      if (r.data) {
+        setUniverseData(r.data);
+      }
     } catch (e) {
-      setRunning(false);
+      console.error("Failed to load universe", e);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const PIE_COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444'];
-  const RANK_COLORS = ['#FFD700', '#C0C0C0', '#CD7F32', '#3b82f6', '#6b7280'];
-  const RANK_LABELS = ['🥇 1위', '🥈 2위', '🥉 3위', '4위', '5위'];
+  const universeList = universeData?.universe || [];
+  const principles = universeData?.principles_summary || {};
 
-  const pieData = portfolio?.portfolio?.map((s, i) => ({
-    name: s.ticker, value: s.weight, fill: PIE_COLORS[i]
-  })) || [];
+  // 필터링 규칙
+  const filteredList = universeList.filter(item => {
+    // 탭 필터
+    if (selectedTier === 'Core' && item.portfolio_tier !== 'Core') return false;
+    if (selectedTier === 'Satellite' && item.portfolio_tier !== 'Satellite') return false;
+    if (selectedTier === 'Watchlist' && item.portfolio_tier !== 'Watchlist') return false;
+    if (selectedTier === 'BUY_READY' && !item.buy_signal?.includes('BUY_READY') && !item.buy_signal?.includes('DEEP_DISCOUNT')) return false;
+
+    // 검색어 필터
+    if (searchQuery.trim() !== '') {
+      const q = searchQuery.toLowerCase();
+      const matchName = item.name?.toLowerCase().includes(q);
+      const matchTicker = item.ticker?.toLowerCase().includes(q);
+      const matchIndustry = item.industry_title?.toLowerCase().includes(q);
+      return matchName || matchTicker || matchIndustry;
+    }
+
+    return true;
+  });
+
+  // 카운트 계산
+  const coreCount = universeList.filter(i => i.portfolio_tier === 'Core').length;
+  const satCount = universeList.filter(i => i.portfolio_tier === 'Satellite').length;
+  const watchCount = universeList.filter(i => i.portfolio_tier === 'Watchlist').length;
+  const buyReadyCount = universeList.filter(i => i.buy_signal?.includes('BUY_READY') || i.buy_signal?.includes('DEEP_DISCOUNT')).length;
 
   return (
     <div className="agent-workspace">
       {/* ── 헤더 ── */}
       <div className="page-header orchestrator-header" style={{
-        borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'32px'
+        borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'24px'
       }}>
         <div>
           <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'10px' }}>
-            <span className={`live-badge ${running ? 'active' : ''}`}>
-              {running ? '● 분석 진행 중' : portfolio ? '● 포트폴리오 구성 완료' : '● 대기 중'}
+            <span className="live-badge active" style={{ background:'rgba(16,185,129,0.15)', color:'#10b981', border:'1px solid rgba(16,185,129,0.3)' }}>
+              ● 4단계 투자원칙 엔진 가동 중
             </span>
             <span style={{ color:'var(--text-secondary)', fontSize:'0.85rem' }}>
-              Multi-Agent Portfolio Manager
+              Real-time Portfolio Universe Monitor
             </span>
           </div>
-          <h2 style={{ fontSize:'2.2rem', margin:0 }}>AI 포트폴리오 매니저</h2>
-          <p style={{ color:'var(--text-secondary)', margin:'8px 0 0', fontSize:'0.9rem' }}>
-            전 산업 · 전 기업 스크리닝 → 5종목 집중 포트폴리오 · 5~10년 중장기 최적 비중 배분
+          <h2 style={{ fontSize:'2.2rem', margin:0, background:'linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
+            🛡️ 4단계 투자원칙 기반 유니버스 모니터링
+          </h2>
+          <p style={{ color:'var(--text-secondary)', margin:'8px 0 0', fontSize:'0.92rem', lineHeight:'1.5' }}>
+            전 16개 산업 · 230개 기업 대상 <strong>Core(독점 병목)</strong> vs <strong>Satellite(고성장 알파)</strong> 스크리닝 및 <strong>제1원칙 가격 필터(MDD)</strong> 실시간 팔로잉
           </p>
         </div>
+
         <button
           className="run-btn"
-          disabled={running}
-          onClick={startPortfolio}
-          style={{ whiteSpace:'nowrap', flexShrink:0 }}
+          disabled={loading}
+          onClick={fetchUniverse}
+          style={{ whiteSpace:'nowrap', flexShrink:0, display:'flex', alignItems:'center', gap:'8px' }}
         >
-          {running ? '⏳ 포트폴리오 구성 중...' : '🚀 포트폴리오 구성 실행'}
+          {loading ? '⏳ 주가/MDD 갱신 중...' : '🔄 실시간 주가/MDD 재조회'}
         </button>
       </div>
 
-      {/* ── 로딩 상태 ── */}
-      {running && (
-        <div className="glass-panel" style={{
-          padding:'60px 40px', textAlign:'center',
-          background:'linear-gradient(135deg, rgba(59,130,246,0.06), rgba(139,92,246,0.06))',
-          border:'1px solid rgba(59,130,246,0.2)', borderRadius:'16px', marginBottom:'32px',
-        }}>
-          {/* 스피너 */}
-          <div style={{ position:'relative', width:'80px', height:'80px', margin:'0 auto 32px' }}>
-            <div style={{
-              position:'absolute', inset:0,
-              border:'3px solid rgba(59,130,246,0.15)', borderTopColor:'#3b82f6',
-              borderRadius:'50%', animation:'spin 1s linear infinite',
-            }} />
-            <div style={{
-              position:'absolute', inset:'10px',
-              border:'3px solid rgba(139,92,246,0.15)', borderBottomColor:'#8b5cf6',
-              borderRadius:'50%', animation:'spin 1.5s linear infinite reverse',
-            }} />
-            <div style={{
-              position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center',
-              fontSize:'1.8rem',
-            }}>
-              {LOADING_STEPS[loadingStep].icon}
+      {/* ── 4단계 투자원칙 요약 배너 ── */}
+      <div className="glass-panel" style={{
+        padding:'20px 24px', marginBottom:'28px',
+        background:'linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8))',
+        border:'1px solid rgba(99, 102, 241, 0.25)', borderRadius:'16px'
+      }}>
+        <div style={{ fontSize:'0.9rem', fontWeight:700, color:'#a5b4fc', marginBottom:'14px', display:'flex', alignItems:'center', gap:'8px' }}>
+          <span>📜 4단계 통합 투자원칙 정량 가이드라인</span>
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:'16px' }}>
+          <div style={{ background:'rgba(255,255,255,0.03)', padding:'12px 16px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ fontSize:'0.78rem', color:'#f43f5e', fontWeight:700, marginBottom:'4px' }}>1단계: 제1원칙 가격 필터 (MDD)</div>
+            <div style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.8)', lineHeight:'1.4' }}>
+              고점 뇌동매수 금지! <strong>MDD -20%~-30% 이상 할인</strong> 또는 밸류 최하단 시만 진입
             </div>
           </div>
-          <div style={{ fontSize:'1.1rem', fontWeight:600, color:'white', marginBottom:'8px' }}>
-            {LOADING_STEPS[loadingStep].text}
+          <div style={{ background:'rgba(255,255,255,0.03)', padding:'12px 16px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ fontSize:'0.78rem', color:'#3b82f6', fontWeight:700, marginBottom:'4px' }}>2단계: Core 독점 병목</div>
+            <div style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.8)', lineHeight:'1.4' }}>
+              점유율 <strong>50%+ (독과점 1위)</strong>, OPM 25%+, 강력한 Lock-in (대체불가 병목)
+            </div>
           </div>
-          <div style={{ color:'rgba(255,255,255,0.4)', fontSize:'0.85rem' }}>
-            3단계 스크리닝: Quant(30%) + Growth(40%) + Upside Gap(30%)
+          <div style={{ background:'rgba(255,255,255,0.03)', padding:'12px 16px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ fontSize:'0.78rem', color:'#10b981', fontWeight:700, marginBottom:'4px' }}>2단계: Satellite 성장 알파</div>
+            <div style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.8)', lineHeight:'1.4' }}>
+              글로벌 <strong>Top 3 이내</strong>, 수주잔고 YoY +30%+ 또는 최고치 경신
+            </div>
           </div>
-          {/* 단계 도트 */}
-          <div style={{ display:'flex', justifyContent:'center', gap:'8px', marginTop:'24px' }}>
-            {LOADING_STEPS.map((_, i) => (
-              <div key={i} style={{
-                width:'8px', height:'8px', borderRadius:'50%',
-                background: i === loadingStep ? '#3b82f6' : 'rgba(255,255,255,0.15)',
-                transition:'background 0.3s',
-              }} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* ── 빈 상태 ── */}
-      {!running && !portfolio && (
-        <div className="glass-panel" style={{
-          padding:'80px 40px', textAlign:'center',
-          border:'1px dashed rgba(255,255,255,0.1)', borderRadius:'16px',
-        }}>
-          <div style={{ fontSize:'4rem', marginBottom:'20px' }}>📊</div>
-          <div style={{ fontSize:'1.2rem', fontWeight:700, color:'white', marginBottom:'12px' }}>
-            AI 포트폴리오 매니저
-          </div>
-          <div style={{ color:'var(--text-secondary)', maxWidth:'480px', margin:'0 auto', lineHeight:'1.7', fontSize:'0.95rem' }}>
-            버튼을 클릭하면 AI가 <strong>5개 산업 · 60개+ 기업</strong>을 전수 분석하여<br />
-            현재 주가 대비 <strong>5~10년 기대수익률이 가장 높은 5종목</strong>을<br />
-            확신도 비례 차등 비중으로 구성합니다.
-          </div>
-          <div style={{
-            display:'flex', justifyContent:'center', gap:'24px', marginTop:'32px',
-            fontSize:'0.82rem', color:'rgba(255,255,255,0.3)',
-          }}>
-            <span>📐 Quant 30%</span>
-            <span>🌱 Growth 40%</span>
-            <span>🎯 Upside Gap 30%</span>
+          <div style={{ background:'rgba(255,255,255,0.03)', padding:'12px 16px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ fontSize:'0.78rem', color:'#f59e0b', fontWeight:700, marginBottom:'4px' }}>3&4단계: 자산배분 & 손익관리</div>
+            <div style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.8)', lineHeight:'1.4' }}>
+              주식 70% : 현금 30% (3분할 매수) / 손절 -10%, +100% 원금회수 (Free Carry)
+            </div>
           </div>
         </div>
-      )}
+      </div>
 
-      {/* ── 포트폴리오 결과 ── */}
+      {/* ── 컨트롤 바: 탭 필터 + 검색 ── */}
+      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'16px', marginBottom:'24px' }}>
+        {/* 탭 버튼 */}
+        <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' }}>
+          {[
+            { id: 'ALL', label: `전체 유니버스 (${universeList.length})`, color: '#64748b' },
+            { id: 'BUY_READY', label: `🟢 매수 가능 (${buyReadyCount})`, color: '#10b981' },
+            { id: 'Core', label: `🏆 Core 독점 (${coreCount})`, color: '#3b82f6' },
+            { id: 'Satellite', label: `🚀 Satellite 성장 (${satCount})`, color: '#8b5cf6' },
+            { id: 'Watchlist', label: `✨ 관심종목 (${watchCount})`, color: '#f59e0b' },
+          ].map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setSelectedTier(tab.id)}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '10px',
+                border: selectedTier === tab.id ? `1.5px solid ${tab.color}` : '1px solid rgba(255,255,255,0.1)',
+                background: selectedTier === tab.id ? `${tab.color}22` : 'rgba(255,255,255,0.03)',
+                color: selectedTier === tab.id ? '#ffffff' : 'rgba(255,255,255,0.6)',
+                fontWeight: selectedTier === tab.id ? 700 : 500,
+                fontSize: '0.85rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* 검색 인풋 */}
+        <div style={{ position:'relative', minWidth:'240px' }}>
+          <input
+            type="text"
+            placeholder="종목명, 티커, 산업 검색..."
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            style={{
+              width:'100%', padding:'8px 14px', borderRadius:'10px',
+              border:'1px solid rgba(255,255,255,0.15)', background:'rgba(15,23,42,0.6)',
+              color:'white', fontSize:'0.85rem', outline:'none'
+            }}
+          />
+        </div>
+      </div>
+
+      {/* ── 종목 목록 카드 그리드 ── */}
+      {loading ? (
+        <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
+          <div style={{ fontSize:'1.2rem', marginBottom:'12px' }}>⏳ 실시간 유니버스 데이터 수집 중...</div>
+        </div>
+      ) : filteredList.length === 0 ? (
+        <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
+          해당 필터 조건에 부합하는 종목이 없습니다.
+        </div>
+      ) : (
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(340px, 1fr))', gap:'16px' }}>
+          {filteredList.map((item) => {
+            const isCore = item.portfolio_tier === 'Core';
+            const isSat = item.portfolio_tier === 'Satellite';
+            const isWatch = item.portfolio_tier === 'Watchlist';
+            
+            const isBuyReady = item.buy_signal?.includes('BUY_READY') || item.buy_signal?.includes('DEEP_DISCOUNT');
+            const isDeepDiscount = item.buy_signal?.includes('DEEP_DISCOUNT');
+
+            let badgeBg = 'rgba(239, 68, 68, 0.15)';
+            let badgeBorder = 'rgba(239, 68, 68, 0.4)';
+            let badgeText = '#f87171';
+
+            if (isBuyReady) {
+              badgeBg = 'rgba(16, 185, 129, 0.15)';
+              badgeBorder = 'rgba(16, 185, 129, 0.4)';
+              badgeText = '#34d399';
+            }
+            if (isDeepDiscount) {
+              badgeBg = 'rgba(59, 130, 246, 0.2)';
+              badgeBorder = 'rgba(59, 130, 246, 0.5)';
+              badgeText = '#60a5fa';
+            }
+
+            let tierTagBg = 'rgba(255,255,255,0.06)';
+            let tierTagText = '#94a3b8';
+            if (isCore) { tierTagBg = 'rgba(59,130,246,0.15)'; tierTagText = '#60a5fa'; }
+            if (isSat) { tierTagBg = 'rgba(139,92,246,0.15)'; tierTagText = '#c084fc'; }
+            if (isWatch) { tierTagBg = 'rgba(245,158,11,0.15)'; tierTagText = '#fbbf24'; }
+
+            return (
+              <div
+                key={item.id}
+                className="glass-panel"
+                style={{
+                  padding: '20px',
+                  borderRadius: '14px',
+                  border: isBuyReady ? '1.5px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(255, 255, 255, 0.08)',
+                  background: isBuyReady
+                    ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(15, 23, 42, 0.7))'
+                    : 'linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6))',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justify: 'space-between',
+                  transition: 'transform 0.2s, box-shadow 0.2s'
+                }}
+              >
+                {/* 상단: 티어 배지 + 주가 신호등 */}
+                <div>
+                  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px' }}>
+                    <span style={{
+                      padding:'3px 8px', borderRadius:'6px', background:tierTagBg, color:tierTagText,
+                      fontSize:'0.75rem', fontWeight:700
+                    }}>
+                      {isCore ? '🏆 Core (독점)' : isSat ? '🚀 Satellite (성장)' : isWatch ? '✨ Watchlist' : '🏢 Standard'}
+                    </span>
+                    <span style={{
+                      padding:'3px 10px', borderRadius:'12px', background:badgeBg, border:`1px solid ${badgeBorder}`,
+                      color:badgeText, fontSize:'0.75rem', fontWeight:700
+                    }}>
+                      {item.buy_signal || 'WAIT'}
+                    </span>
+                  </div>
+
+                  {/* 기업명 및 티커 */}
+                  <div style={{ display:'flex', alignItems:'baseline', gap:'8px', marginBottom:'4px' }}>
+                    <h3 style={{ margin:0, fontSize:'1.15rem', color:'white', fontWeight:700 }}>{item.name}</h3>
+                    <span style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.4)', fontWeight:600 }}>{item.ticker}</span>
+                  </div>
+
+                  <div style={{ fontSize:'0.78rem', color:'#a5b4fc', marginBottom:'12px' }}>
+                    📂 {item.industry_title}
+                  </div>
+
+                  {/* 가격 및 MDD 메트릭 바 */}
+                  <div style={{
+                    display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'8px',
+                    background:'rgba(0,0,0,0.2)', padding:'10px', borderRadius:'8px', marginBottom:'12px'
+                  }}>
+                    <div>
+                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)' }}>현재가</div>
+                      <div style={{ fontSize:'0.9rem', color:'white', fontWeight:700 }}>
+                        {item.current_price ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ') ? `${item.current_price.toLocaleString()}원` : `$${item.current_price.toLocaleString()}`) : '-'}
+                      </div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)' }}>52주 최고가</div>
+                      <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)' }}>
+                        {item.high_52w ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ') ? `${item.high_52w.toLocaleString()}원` : `$${item.high_52w.toLocaleString()}`) : '-'}
+                      </div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)' }}>현재 MDD</div>
+                      <div style={{
+                        fontSize:'0.9rem', fontWeight:800,
+                        color: (item.mdd_pct || 0) <= -20 ? '#34d399' : '#f87171'
+                      }}>
+                        {item.mdd_pct ? `${item.mdd_pct.toFixed(1)}%` : '-'}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 원칙 부합 사유 */}
+                  {item.principle_reason && (
+                    <div style={{
+                      fontSize:'0.8rem', color:'rgba(255,255,255,0.85)', background:'rgba(99, 102, 241, 0.08)',
+                      padding:'8px 10px', borderRadius:'6px', borderLeft:'3px solid #6366f1', marginBottom:'10px',
+                      lineHeight:'1.4'
+                    }}>
+                      💡 <strong>원칙 근거:</strong> {item.principle_reason}
+                    </div>
+                  )}
+
+                  {/* 역할 설명 */}
+                  <div style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.6)', lineHeight:'1.4', marginBottom:'8px' }}>
+                    {item.role_description}
+                  </div>
+                </div>
+
+                {/* 하단 미래 성장성 */}
+                {item.future_growth && (
+                  <div style={{
+                    fontSize:'0.75rem', color:'rgba(16, 185, 129, 0.8)', borderTop:'1px dashed rgba(255,255,255,0.08)',
+                    paddingTop:'8px', marginTop:'6px'
+                  }}>
+                    🌱 {item.future_growth}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── 포트폴리오 결과 ──
       {!running && portfolio && (
         <div>
           {/* 요약 헤더 */}
