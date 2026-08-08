@@ -1,4 +1,4 @@
-﻿// Build: 20260808-184331
+// Build: 20260808-184331
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
@@ -1600,6 +1600,7 @@ function AgentWorkspace() {
   // ?ㅽ겕由щ떇 state
   const [screenData, setScreenData] = useState(null);
   const [screenLoading, setScreenLoading] = useState(false);
+  const [reEvalNotice, setReEvalNotice] = useState(null); // {buy_candidate: N, watchlist: N}
 
   useEffect(() => {
     fetchUniverse();
@@ -1613,6 +1614,13 @@ function AgentWorkspace() {
       const r = await method(endpoint);
       if (r.data && r.data.universe && r.data.universe.length > 0) {
         setUniverseData(r.data);
+        if (r.data.re_evaluation) {
+          const { upgraded_to_buy_candidate, upgraded_to_watchlist } = r.data.re_evaluation;
+          if (upgraded_to_buy_candidate > 0 || upgraded_to_watchlist > 0) {
+            setReEvalNotice({ buy: upgraded_to_buy_candidate, watch: upgraded_to_watchlist });
+            setTimeout(() => setReEvalNotice(null), 8000); // 8초 후 사라짐
+          }
+        }
         setLoading(false);
       } else if (retryCount < 3) {
         setTimeout(() => fetchUniverse(retryCount + 1, forceRefresh), 2000);
@@ -1701,6 +1709,26 @@ function AgentWorkspace() {
 
   return (
     <div className="agent-workspace">
+      {/* 재평가 알림 토스트 */}
+      {reEvalNotice && (
+        <div style={{
+          position:'fixed', bottom:'24px', right:'24px', zIndex:9999,
+          background:'linear-gradient(135deg, rgba(52,211,153,0.95), rgba(16,185,129,0.9))',
+          borderRadius:'14px', padding:'16px 22px', boxShadow:'0 8px 32px rgba(0,0,0,0.4)',
+          color:'white', fontSize:'0.9rem', fontWeight:700,
+          display:'flex', flexDirection:'column', gap:'6px', minWidth:'280px',
+          animation:'slideIn 0.3s ease'
+        }}>
+          <div style={{fontSize:'1rem', marginBottom:'4px'}}>🔄 투자원칙 자동 재평가 완료</div>
+          {reEvalNotice.buy > 0 && (
+            <div>📈 BUY_CANDIDATE 신규 승격: <strong>{reEvalNotice.buy}개</strong></div>
+          )}
+          {reEvalNotice.watch > 0 && (
+            <div>⭐ 관심종목(Watchlist) 신규 진입: <strong>{reEvalNotice.watch}개</strong></div>
+          )}
+          <div style={{fontSize:'0.75rem', opacity:0.8, marginTop:'4px'}}>유니버스 목록이 자동으로 업데이트됩니다</div>
+        </div>
+      )}
       <div className="page-header orchestrator-header" style={{ borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'24px' }}>
         <div>
           <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'10px' }}>
