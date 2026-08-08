@@ -1677,7 +1677,21 @@ function AgentWorkspace() {
       </div>
 
       {loading ? (
-        <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>⏳ 실시간 유니버스 데이터 수집 중...</div>
+        <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
+          <div style={{ fontSize:'1.2rem', marginBottom:'12px' }}>⏳ 실시간 유니버스 데이터 수집 중...</div>
+        </div>
+      ) : universeList.length === 0 ? (
+        <div className="glass-panel" style={{ padding:'50px 24px', textAlign:'center' }}>
+          <div style={{ fontSize:'1.2rem', color:'#f59e0b', fontWeight:700, marginBottom:'10px' }}>
+            ⚠️ 유니버스 데이터를 불러오는 중입니다 (서버 연결 대기)
+          </div>
+          <div style={{ fontSize:'0.88rem', color:'rgba(255,255,255,0.6)', marginBottom:'20px' }}>
+            Render 백엔드 서버가 켜지는 중입니다. 아래 버튼을 눌러 바로 연결을 재시도하세요.
+          </div>
+          <button className="run-btn" onClick={() => fetchUniverse(0, false)} style={{ margin:'0 auto' }}>
+            🔄 실시간 데이터 다시 불러오기
+          </button>
+        </div>
       ) : filteredList.length === 0 ? (
         <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>해당 필터 조건에 부합하는 종목이 없습니다.</div>
       ) : (
