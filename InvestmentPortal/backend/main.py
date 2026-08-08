@@ -215,14 +215,58 @@ def run_startup_migrations():
             except Exception as e:
                 print(f"[Migration] Shipbuilding industry init error: {e}")
 
-        # ── display_order 컬럼 보장 ─────────────────────────────
+        # ── companies & company_profiles 컬럼 보장 ─────────────
         cur.execute("PRAGMA table_info(companies)")
-        col_names = [r[1] for r in cur.fetchall()]
-        if 'display_order' not in col_names:
+        comp_cols = [r[1] for r in cur.fetchall()]
+        if 'display_order' not in comp_cols:
             cur.execute("ALTER TABLE companies ADD COLUMN display_order INTEGER DEFAULT 999")
-            print("[Migration] display_order column added")
+            print("[Migration] display_order column added to companies")
+        if 'portfolio_tier' not in comp_cols:
+            cur.execute("ALTER TABLE companies ADD COLUMN portfolio_tier TEXT DEFAULT 'Standard'")
+            print("[Migration] portfolio_tier column added to companies")
+        if 'principle_reason' not in comp_cols:
+            cur.execute("ALTER TABLE companies ADD COLUMN principle_reason TEXT")
+            print("[Migration] principle_reason column added to companies")
 
-        # ── COGS(매출원가) 자동 계산: NULL 또는 0이면 revenue - gross_profit ──
+        cur.execute("PRAGMA table_info(company_profiles)")
+        prof_cols = [r[1] for r in cur.fetchall()]
+        if prof_cols:
+            if 'current_price' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN current_price REAL")
+            if 'high_52w' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN high_52w REAL")
+            if 'mdd_pct' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN mdd_pct REAL")
+            if 'buy_signal' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN buy_signal TEXT DEFAULT 'WAIT'")
+            if 'last_updated' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN last_updated TEXT")
+
+        # ── 4단계 투자원칙 핵심 티어 데이터 자동 업데이트 ───────
+        tier_updates = [
+            ("ASML", "Core", "EUV 노광장비 100% 독점, GPM 51%+, 전환비용 극상 (Core 1호)"),
+            ("NVIDIA", "Core", "AI GPU 시장 80%+ 독점, OPM 55%+, CUDA 생태계 락인 (Core 2호)"),
+            ("TSMC", "Core", "5nm 이하 파운드리 90%+ 독점, OPM 42%+, CoWoS 병목 소유 (Core 3호)"),
+            ("삼성바이오로직스", "Core", "세계 1위 배양용량 CDMO 독점력, CAPEX 무거운 자본 장벽 (국내 Core 대체)"),
+            ("코스맥스", "Core", "글로벌 1위 화장품 ODM, Fast Beauty 밸류체인 핵심 병목 (국내 Core 대체)"),
+            ("Rocket Lab USA", "Satellite", "소형 발사체 독보적 2위, 수주잔고 역대 최고치, 위성 SW/시스템 체질개선 (Satellite 1호)"),
+            ("Vertiv Holdings", "Satellite", "AI 데이터센터 액체냉각/UPS 1위, 수주잔고 YoY +35%, 고마진 체질개선 (Satellite 2호)"),
+            ("삼양식품", "Satellite", "불닭볶음면 글로벌 IP 독점, 수출 비중 70%+, 수주/수출 역대 최고치 (국내 Satellite 대체)"),
+            ("HD현대일렉트릭", "Satellite", "글로벌 전력기기 리드타임 2년+ 병목, 수주잔고 최고치 경신 (국내 Satellite 대체)"),
+            ("Intuitive Surgical", "Watchlist", "다빈치 수술로봇 독점, OPM 30%+, 소모품 락인 (대체 관심 1호)"),
+            ("HD한국조선해양", "Watchlist", "LNG/친환경선 글로벌 1위, 3년치 고가 수주잔고 (대체 관심 2호)"),
+            ("브이티", "Watchlist", "마이크로니들(리들샷) 독점 IP, 글로벌 바이럴 고마진 (대체 관심 3호)"),
+            ("Palantir Technologies", "Watchlist", "기업/정부 AI 운영체제(AIP) 시장 선도, ARR 구독 성장 (대체 관심 4호)"),
+            ("실리콘투", "Watchlist", "K-뷰티 글로벌 풀필먼트 플랫폼 1위, 150개국 직매입 유통 (대체 관심 5호)"),
+        ]
+        for cname, tier, reason in tier_updates:
+            cur.execute("""
+                UPDATE companies
+                SET portfolio_tier=?, principle_reason=?
+                WHERE name LIKE ? OR ticker LIKE ?
+            """, (tier, reason, f"%{cname}%", f"%{cname}%"))
+
+        # ── COGS(매출원가) 자동 계산 ──
         cur.execute("""
             UPDATE financial_data
             SET cost_of_revenue = revenue - gross_profit
@@ -231,9 +275,6 @@ def run_startup_migrations():
               AND gross_profit IS NOT NULL AND gross_profit > 0
               AND (revenue - gross_profit) > 0
         """)
-        cogs_fixed = cur.rowcount
-        if cogs_fixed > 0:
-            print(f"[Migration] COGS auto-calculated: {cogs_fixed} records fixed")
 
         conn.commit()
         conn.close()
@@ -922,30 +963,76 @@ def get_latest_report(db: Session = Depends(get_db)):
 @app.get("/api/portfolio/universe")
 def get_investment_principles_universe(db: Session = Depends(get_db)):
     """4단계 투자원칙(MDD, 독점력, 성장성) 기반 Core/Satellite/Watchlist 팔로잉 유니버스 반환"""
-    companies = db.query(models.Company).all()
     result = []
-    
-    for c in companies:
-        profile = db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id == c.id).first()
-        ind = db.query(models.IndustryReport).filter(models.IndustryReport.id == c.industry_id).first()
-        
-        result.append({
-            "id": c.id,
-            "name": c.name,
-            "ticker": c.ticker,
-            "industry_id": c.industry_id,
-            "industry_title": ind.title if ind else "기타",
-            "role_description": c.role_description,
-            "future_growth": c.future_growth,
-            "portfolio_tier": c.portfolio_tier or "Standard",
-            "principle_reason": c.principle_reason,
-            "current_price": profile.current_price if profile else None,
-            "high_52w": profile.high_52w if profile else None,
-            "mdd_pct": profile.mdd_pct if profile else None,
-            "buy_signal": profile.buy_signal if profile else "WAIT (정보 대기)",
-            "last_updated": profile.last_updated if profile else None
-        })
-        
+    try:
+        companies = db.query(models.Company).all()
+        for c in companies:
+            profile = db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id == c.id).first()
+            ind = db.query(models.IndustryReport).filter(models.IndustryReport.id == c.industry_id).first()
+            
+            curr_p = getattr(profile, 'current_price', None) if profile else None
+            high_52 = getattr(profile, 'high_52w', None) if profile else None
+            mdd = getattr(profile, 'mdd_pct', None) if profile else None
+            signal = getattr(profile, 'buy_signal', None) if profile else None
+
+            result.append({
+                "id": c.id,
+                "name": c.name,
+                "ticker": c.ticker,
+                "industry_id": c.industry_id,
+                "industry_title": ind.title if ind else "기타",
+                "role_description": c.role_description,
+                "future_growth": c.future_growth,
+                "portfolio_tier": getattr(c, 'portfolio_tier', None) or "Standard",
+                "principle_reason": getattr(c, 'principle_reason', None),
+                "current_price": curr_p,
+                "high_52w": high_52,
+                "mdd_pct": mdd,
+                "buy_signal": signal or "WAIT (정보 대기)",
+                "last_updated": getattr(profile, 'last_updated', None) if profile else None
+            })
+    except Exception as e:
+        print(f"[Universe API ORM Exception] {e}")
+        import traceback
+        traceback.print_exc()
+
+    # ORM 결과가 비어있거나 에러가 난 경우 raw SQLite 로 강인하게 수집
+    if not result:
+        try:
+            import sqlite3
+            db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+            conn = sqlite3.connect(db_path)
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT c.id, c.name, c.ticker, c.industry_id, ir.title, c.role_description, c.future_growth,
+                       c.portfolio_tier, c.principle_reason, cp.current_price, cp.high_52w, cp.mdd_pct, cp.buy_signal, cp.last_updated
+                FROM companies c
+                LEFT JOIN industry_reports ir ON c.industry_id = ir.id
+                LEFT JOIN company_profiles cp ON c.id = cp.company_id
+            """)
+            rows = cur.fetchall()
+            for r in rows:
+                result.append({
+                    "id": r[0],
+                    "name": r[1],
+                    "ticker": r[2],
+                    "industry_id": r[3],
+                    "industry_title": r[4] or "기타",
+                    "role_description": r[5],
+                    "future_growth": r[6],
+                    "portfolio_tier": r[7] or "Standard",
+                    "principle_reason": r[8],
+                    "current_price": r[9],
+                    "high_52w": r[10],
+                    "mdd_pct": r[11],
+                    "buy_signal": r[12] or "WAIT (정보 대기)",
+                    "last_updated": r[13]
+                })
+            conn.close()
+            print(f"[Universe API Raw Fallback Success] fetched {len(result)} items")
+        except Exception as ex:
+            print(f"[Universe API Raw Fallback Exception] {ex}")
+
     return {
         "principles_summary": {
             "title": "4단계 통합 투자원칙 표준 체계",
