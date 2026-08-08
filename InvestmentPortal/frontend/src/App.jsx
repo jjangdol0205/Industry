@@ -1,3 +1,4 @@
+﻿// Build: 20260808-184331
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
@@ -18,18 +19,18 @@ const BACKEND_HOST = window.location.hostname === 'localhost' || window.location
   : 'https://industry-l08j.onrender.com';
 const API_BASE = `${BACKEND_HOST}/api`;
 
-// ── 포맷 유틸 ──────────────────────────────────────────
+// ?? ?щ㎎ ?좏떥 ??????????????????????????????????????????
 const isKrw = (ticker) => ticker && (ticker.endsWith('.KS') || ticker.endsWith('.KQ'));
 
 const fB = (n, t) => {
   if (n == null) return '-';
-  if (isKrw(t)) return `₩${(n/1e8).toLocaleString(undefined, {maximumFractionDigits:0})}억`;
+  if (isKrw(t)) return `??{(n/1e8).toLocaleString(undefined, {maximumFractionDigits:0})}??;
   return `$${(n/1e9).toFixed(2)}B`;
 };
 
 const fM = (n, t) => {
   if (n == null) return '-';
-  if (isKrw(t)) return `₩${(n/1e8).toLocaleString(undefined, {maximumFractionDigits:1})}억`;
+  if (isKrw(t)) return `??{(n/1e8).toLocaleString(undefined, {maximumFractionDigits:1})}??;
   return `$${(n/1e6).toFixed(0)}M`;
 };
 
@@ -41,7 +42,7 @@ const fK  = (n) => n == null ? '-' : n.toLocaleString();
 
 const fDollar = (n, t) => {
   if (n == null) return '-';
-  if (isKrw(t)) return `₩${n.toLocaleString(undefined, {maximumFractionDigits:0})}`;
+  if (isKrw(t)) return `??{n.toLocaleString(undefined, {maximumFractionDigits:0})}`;
   return `$${n.toFixed(2)}`;
 };
 
@@ -50,7 +51,7 @@ const color = (v, good, bad) => {
   return v >= good ? 'var(--accent-green)' : v <= bad ? '#ff6b6b' : 'var(--text-primary)';
 };
 
-// ── 메인 앱 ─────────────────────────────────────────────
+// ?? 硫붿씤 ???????????????????????????????????????????????
 function App() {
   const [reports, setReports] = useState([]);
   const [selectedReport, setSelectedReport] = useState(null);
@@ -59,7 +60,7 @@ function App() {
   const [companyFinancials, setCompanyFinancials] = useState(null);
   const [companyAiAnalysis, setCompanyAiAnalysis] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [loadingMsg, setLoadingMsg] = useState('서버에 연결 중...');
+  const [loadingMsg, setLoadingMsg] = useState('?쒕쾭???곌껐 以?..');
   const [loadingDot, setLoadingDot] = useState(0);
   const [retryCount, setRetryCount] = useState(0);
   const [viewMode, setViewMode] = useState('research');
@@ -71,7 +72,7 @@ function App() {
   const [showUpdateBanner, setShowUpdateBanner] = useState(false);
 
 
-  // 뒤로가기(Back) 버튼 핸들러
+  // ?ㅻ줈媛湲?Back) 踰꾪듉 ?몃뱾??
   useEffect(() => {
     const handlePopState = (e) => {
       setViewMode('research');
@@ -91,7 +92,7 @@ function App() {
     isHomeRef.current = isHome;
   }, [isHome]);
 
-  // PWA 설치 프롬프트 캡처 (Android Chrome)
+  // PWA ?ㅼ튂 ?꾨＼?꾪듃 罹≪쿂 (Android Chrome)
   useEffect(() => {
     const handler = (e) => {
       e.preventDefault();
@@ -102,7 +103,7 @@ function App() {
     return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
 
-  // SW 업데이트 감지 → 업데이트 배너 표시
+  // SW ?낅뜲?댄듃 媛먯? ???낅뜲?댄듃 諛곕꼫 ?쒖떆
   useEffect(() => {
     if (!('serviceWorker' in navigator)) return;
     const handleMsg = (e) => {
@@ -131,29 +132,29 @@ function App() {
 
   useEffect(() => { fetchReportsWithRetry(); }, []);
 
-  // ── 서버 웜업 → 데이터 로드 ──────────────────────────────
+  // ?? ?쒕쾭 ?쒖뾽 ???곗씠??濡쒕뱶 ??????????????????????????????
   const fetchReportsWithRetry = async (attempt = 0) => {
-    // 1단계: 웜업 핑 (서버를 먼저 깨움)
+    // 1?④퀎: ?쒖뾽 ??(?쒕쾭瑜?癒쇱? 源⑥?)
     if (attempt === 0) {
-      setLoadingMsg('서버 연결 중...');
+      setLoadingMsg('?쒕쾭 ?곌껐 以?..');
       setLoadingPhase('wakeup');
       setLoadingProgress(5);
       try {
         await axios.get(`${BACKEND_HOST}/ping`, { timeout: 60000 });
         setLoadingProgress(40);
         setLoadingPhase('data');
-        setLoadingMsg('데이터 불러오는 중...');
+        setLoadingMsg('?곗씠??遺덈윭?ㅻ뒗 以?..');
       } catch (e) {
-        // ping 실패해도 계속 진행
+        // ping ?ㅽ뙣?대룄 怨꾩냽 吏꾪뻾
         setLoadingProgress(20);
       }
     }
 
     const msgs = [
-      '데이터 불러오는 중...',
-      '데이터 처리 중...',
-      '거의 다 됐어요!',
-      '마지막 단계...',
+      '?곗씠??遺덈윭?ㅻ뒗 以?..',
+      '?곗씠??泥섎━ 以?..',
+      '嫄곗쓽 ???먯뼱??',
+      '留덉?留??④퀎...',
     ];
     setLoadingMsg(msgs[Math.min(attempt, msgs.length - 1)]);
     setRetryCount(attempt);
@@ -171,7 +172,7 @@ function App() {
         const delay = Math.min(3000 * (attempt + 1), 10000);
         setTimeout(() => fetchReportsWithRetry(attempt + 1), delay);
       } else {
-        setLoadingMsg('연결 실패. 페이지를 새로고침 해주세요.');
+        setLoadingMsg('?곌껐 ?ㅽ뙣. ?섏씠吏瑜??덈줈怨좎묠 ?댁＜?몄슂.');
         setLoadingProgress(0);
       }
     }
@@ -212,7 +213,7 @@ function App() {
     setSidebarOpen(false);
   };
 
-  // ── 스플래시 로딩 화면 ─────────────────────────────────
+  // ?? ?ㅽ뵆?섏떆 濡쒕뵫 ?붾㈃ ?????????????????????????????????
   if (loading) return (
     <div style={{
       display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -220,7 +221,7 @@ function App() {
       background: 'linear-gradient(135deg, #0a0e1a 0%, #0d1526 50%, #0a1020 100%)',
       fontFamily: 'Inter, sans-serif',
     }}>
-      {/* 로고 */}
+      {/* 濡쒓퀬 */}
       <div style={{ marginBottom: '40px', textAlign: 'center' }}>
         <div style={{
           width: '72px', height: '72px', borderRadius: '20px',
@@ -239,7 +240,7 @@ function App() {
         </div>
       </div>
 
-      {/* 스피너 */}
+      {/* ?ㅽ뵾??*/}
       <div style={{ position: 'relative', width: '60px', height: '60px', marginBottom: '32px' }}>
         <div style={{
           position: 'absolute', inset: 0,
@@ -255,7 +256,7 @@ function App() {
         }} />
       </div>
 
-      {/* 진행률 바 */}
+      {/* 吏꾪뻾瑜?諛?*/}
       <div style={{ width: '280px', marginBottom: '24px' }}>
         <div style={{
           height: '4px', background: 'rgba(255,255,255,0.08)',
@@ -271,13 +272,13 @@ function App() {
         </div>
         <div style={{ display:'flex', justifyContent:'space-between', marginTop:'6px' }}>
           <span style={{ fontSize:'0.7rem', color:'rgba(255,255,255,0.3)' }}>
-            {loadingPhase === 'wakeup' ? '🔌 서버 웜업 중' : '📊 데이터 로드 중'}
+            {loadingPhase === 'wakeup' ? '?뵆 ?쒕쾭 ?쒖뾽 以? : '?뱤 ?곗씠??濡쒕뱶 以?}
           </span>
           <span style={{ fontSize:'0.7rem', color:'rgba(255,255,255,0.3)' }}>{loadingProgress}%</span>
         </div>
       </div>
 
-      {/* 메시지 */}
+      {/* 硫붿떆吏 */}
       <div style={{ textAlign: 'center', maxWidth: '320px' }}>
         <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.95rem', marginBottom: '8px', minHeight: '24px' }}>
           {loadingMsg}{'.' .repeat(loadingDot)}
@@ -288,8 +289,8 @@ function App() {
             background: 'rgba(255,255,255,0.05)', borderRadius: '8px',
             padding: '8px 16px', marginTop: '12px', lineHeight: '1.6'
           }}>
-            🔄 Render 무료 서버는 비활성 시 절전 모드로 전환됩니다.<br />
-            최초 접속 시 30~60초 소요될 수 있습니다.
+            ?봽 Render 臾대즺 ?쒕쾭??鍮꾪솢?????덉쟾 紐⑤뱶濡??꾪솚?⑸땲??<br />
+            理쒖큹 ?묒냽 ??30~60珥??뚯슂?????덉뒿?덈떎.
           </div>
         )}
       </div>
@@ -309,7 +310,7 @@ function App() {
   return (
     <div className="layout">
 
-      {/* ── 앱 업데이트 배너 ── */}
+      {/* ?? ???낅뜲?댄듃 諛곕꼫 ?? */}
       {showUpdateBanner && (
         <div style={{
           position: 'fixed', top: '16px', left: '50%', transform: 'translateX(-50%)',
@@ -321,10 +322,10 @@ function App() {
           maxWidth: '340px', width: 'calc(100% - 32px)',
           animation: 'slideDown 0.3s ease-out',
         }}>
-          <span style={{ fontSize: '1.3rem' }}>🚀</span>
+          <span style={{ fontSize: '1.3rem' }}>??</span>
           <div style={{ flex: 1 }}>
-            <div style={{ color: 'white', fontWeight: 700, fontSize: '0.88rem' }}>새 버전이 있습니다</div>
-            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.74rem' }}>주도주 스코어링 UI 업데이트</div>
+            <div style={{ color: 'white', fontWeight: 700, fontSize: '0.88rem' }}>??踰꾩쟾???덉뒿?덈떎</div>
+            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.74rem' }}>二쇰룄二??ㅼ퐫?대쭅 UI ?낅뜲?댄듃</div>
           </div>
           <button
             onClick={() => window.location.reload()}
@@ -334,15 +335,15 @@ function App() {
               padding: '7px 14px', fontSize: '0.82rem', fontWeight: 700,
               cursor: 'pointer', whiteSpace: 'nowrap',
             }}
-          >지금 업데이트</button>
+          >吏湲??낅뜲?댄듃</button>
           <button
             onClick={() => setShowUpdateBanner(false)}
             style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.35)', fontSize: '1.1rem', cursor: 'pointer', padding: '0 4px' }}
-          >✕</button>
+          >??/button>
         </div>
       )}
 
-      {/* ── PWA 설치 배너 (Android Chrome) ── */}
+      {/* ?? PWA ?ㅼ튂 諛곕꼫 (Android Chrome) ?? */}
       {showInstallBanner && (
         <div style={{
           position: 'fixed', bottom: '80px', left: '50%', transform: 'translateX(-50%)',
@@ -355,27 +356,27 @@ function App() {
         }}>
           <img src="/icon-192x192.png" alt="icon" style={{ width: '44px', height: '44px', borderRadius: '10px' }} />
           <div style={{ flex: 1 }}>
-            <div style={{ color: 'white', fontWeight: 700, fontSize: '0.9rem' }}>앱으로 설치하기</div>
-            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem' }}>홈 화면에 추가하면 앱처럼 사용할 수 있어요</div>
+            <div style={{ color: 'white', fontWeight: 700, fontSize: '0.9rem' }}>?깆쑝濡??ㅼ튂?섍린</div>
+            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem' }}>???붾㈃??異붽??섎㈃ ?깆쿂???ъ슜?????덉뼱??/div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <button onClick={handleInstallClick} style={{
               background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
               border: 'none', borderRadius: '8px', color: 'white',
               padding: '6px 14px', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
-            }}>설치</button>
+            }}>?ㅼ튂</button>
             <button onClick={() => setShowInstallBanner(false)} style={{
               background: 'transparent', border: 'none',
               color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', cursor: 'pointer',
-            }}>닫기</button>
+            }}>?リ린</button>
           </div>
         </div>
       )}
 
-      {/* 모바일 상단 헤더 바 */}
+      {/* 紐⑤컮???곷떒 ?ㅻ뜑 諛?*/}
 
       <div className="mobile-topbar">
-        <button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="메뉴 열기">
+        <button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="硫붾돱 ?닿린">
           <div style={{display:'flex',flexDirection:'column',gap:'5px'}}>
             <span style={{display:'block',width:'22px',height:'2px',background:'var(--text-primary)',borderRadius:'2px',transition:'all 0.3s',transform: sidebarOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none'}}></span>
             <span style={{display:'block',width:'22px',height:'2px',background:'var(--text-primary)',borderRadius:'2px',transition:'all 0.3s',opacity: sidebarOpen ? 0 : 1}}></span>
@@ -389,7 +390,7 @@ function App() {
         <div style={{width:'40px'}}></div>
       </div>
 
-      {/* 모바일 오버레이 */}
+      {/* 紐⑤컮???ㅻ쾭?덉씠 */}
       {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
 
       {/* Sidebar */}
@@ -401,18 +402,18 @@ function App() {
             <button className={`tab-btn ${viewMode==='research'?'active':''}`}
               style={{ flex:1, padding:'8px', fontSize:'0.8rem', cursor:'pointer' }}
               onClick={() => { setViewMode('research'); setSidebarOpen(false); }}>
-              <BookOpen size={13} style={{marginRight:'5px',verticalAlign:'middle'}} /> 리서치 포털
+              <BookOpen size={13} style={{marginRight:'5px',verticalAlign:'middle'}} /> 由ъ꽌移??ы꽭
             </button>
             <button className={`tab-btn ${viewMode==='agent-workspace'?'active':''}`}
               style={{ flex:1, padding:'8px', fontSize:'0.8rem', cursor:'pointer' }}
               onClick={() => { setViewMode('agent-workspace'); setSelectedCompany(null); setSidebarOpen(false); }}>
-              <Activity size={13} style={{marginRight:'5px',verticalAlign:'middle'}} /> AI 분석팀
+              <Activity size={13} style={{marginRight:'5px',verticalAlign:'middle'}} /> AI 遺꾩꽍?
             </button>
           </div>
           <button className={`tab-btn ${viewMode==='pdf-library'?'active':''}`}
             style={{ width:'100%', padding:'8px', fontSize:'0.8rem', cursor:'pointer' }}
             onClick={() => { setViewMode('pdf-library'); setSelectedCompany(null); setSidebarOpen(false); }}>
-            <FolderOpen size={13} style={{marginRight:'5px',verticalAlign:'middle'}} /> 산업자료 PDF
+            <FolderOpen size={13} style={{marginRight:'5px',verticalAlign:'middle'}} /> ?곗뾽?먮즺 PDF
           </button>
         </div>
 
@@ -453,7 +454,7 @@ function App() {
   );
 }
 
-// ── PdfLibraryView ──────────────────────────────
+// ?? PdfLibraryView ??????????????????????????????
 function PdfLibraryView() {
   const [categories, setCategories] = useState([]);
   const [activePdf, setActivePdf] = useState(null); // { name, url }
@@ -464,7 +465,7 @@ function PdfLibraryView() {
     axios.get(`${API_BASE}/pdfs`)
       .then(res => {
         setCategories(res.data);
-        // 첫 번째 카테고리 펼치기
+        // 泥?踰덉㎏ 移댄뀒怨좊━ ?쇱튂湲?
         if (res.data.length > 0) {
           setExpanded({ [res.data[0].category]: true });
         }
@@ -475,11 +476,11 @@ function PdfLibraryView() {
 
   const toggleCategory = (cat) => setExpanded(prev => ({ ...prev, [cat]: !prev[cat] }));
 
-  if (loading) return <div className="page-header"><p>PDF 목록 불러오는 중...</p></div>;
+  if (loading) return <div className="page-header"><p>PDF 紐⑸줉 遺덈윭?ㅻ뒗 以?..</p></div>;
 
   return (
     <div style={{ display:'flex', height:'100%', gap:'0' }}>
-      {/* 좌측 파일 트리 */}
+      {/* 醫뚯륫 ?뚯씪 ?몃━ */}
       <div style={{
         width: activePdf ? '260px' : '100%',
         minWidth: '220px',
@@ -491,10 +492,10 @@ function PdfLibraryView() {
       }}>
         <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'24px' }}>
           <FolderOpen size={22} color="var(--accent-blue)" />
-          <h2 style={{ fontSize:'1.3rem', margin:0 }}>산업자료 PDF</h2>
+          <h2 style={{ fontSize:'1.3rem', margin:0 }}>?곗뾽?먮즺 PDF</h2>
         </div>
         {categories.length === 0 && (
-          <p style={{ color:'var(--text-secondary)' }}>PDF 파일이 없습니다.</p>
+          <p style={{ color:'var(--text-secondary)' }}>PDF ?뚯씪???놁뒿?덈떎.</p>
         )}
         {categories.map(cat => (
           <div key={cat.category} style={{ marginBottom:'12px' }}>
@@ -544,10 +545,10 @@ function PdfLibraryView() {
         ))}
       </div>
 
-      {/* 우측 PDF 뷰어 */}
+      {/* ?곗륫 PDF 酉곗뼱 */}
       {activePdf && (
         <div style={{ flex:1, display:'flex', flexDirection:'column', minWidth:0 }}>
-          {/* 툴바 */}
+          {/* ?대컮 */}
           <div style={{
             display:'flex', alignItems:'center', justifyContent:'space-between',
             padding:'12px 20px', borderBottom:'1px solid var(--border-color)',
@@ -563,13 +564,13 @@ function PdfLibraryView() {
                 rel="noreferrer"
                 style={{ display:'flex', alignItems:'center', gap:'6px', padding:'6px 14px', borderRadius:'6px', background:'rgba(99,102,241,0.12)', border:'1px solid rgba(99,102,241,0.3)', color:'var(--accent-blue)', textDecoration:'none', fontSize:'0.85rem', fontWeight:600 }}
               >
-                <ExternalLink size={13} /> 새 탭에서 열기
+                <ExternalLink size={13} /> ????뿉???닿린
               </a>
               <button
                 onClick={() => setActivePdf(null)}
                 style={{ padding:'6px 14px', borderRadius:'6px', background:'transparent', border:'1px solid var(--border-color)', color:'var(--text-secondary)', cursor:'pointer', fontSize:'0.85rem' }}
               >
-                ✕ 닫기
+                ???リ린
               </button>
             </div>
           </div>
@@ -586,62 +587,62 @@ function PdfLibraryView() {
   );
 }
 
-// ── 주도주 등급 색상 시스템 ──────────────────────────────
+// ?? 二쇰룄二??깃툒 ?됱긽 ?쒖뒪????????????????????????????????
 const GRADE_CONFIG = {
-  S: { color: '#FFD700', bg: 'rgba(255,215,0,0.15)',  border: 'rgba(255,215,0,0.5)',  label: 'S등급', emoji: '👑', desc: '탁월한 성장·해자·재무 모두 최상위' },
-  A: { color: '#10b981', bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.4)', label: 'A등급', emoji: '🏆', desc: '성장성과 해자가 모두 우수한 핵심 보유주' },
-  B: { color: '#3b82f6', bg: 'rgba(59,130,246,0.12)', border: 'rgba(59,130,246,0.4)', label: 'B등급', emoji: '⭐', desc: '평균 이상의 퀄리티, 관심 종목 적합' },
-  C: { color: '#9ca3af', bg: 'rgba(156,163,175,0.10)',border: 'rgba(156,163,175,0.3)', label: 'C등급', emoji: '🔵', desc: '평균 수준, 섹터 대표주로 보유 가능' },
-  D: { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',  border: 'rgba(239,68,68,0.3)',  label: 'D등급', emoji: '⚠️', desc: '아직 수익성·성장성 미흡, 주의 필요' },
+  S: { color: '#FFD700', bg: 'rgba(255,215,0,0.15)',  border: 'rgba(255,215,0,0.5)',  label: 'S?깃툒', emoji: '?몣', desc: '?곸썡???깆옣쨌?댁옄쨌?щТ 紐⑤몢 理쒖긽?? },
+  A: { color: '#10b981', bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.4)', label: 'A?깃툒', emoji: '?룇', desc: '?깆옣?깃낵 ?댁옄媛 紐⑤몢 ?곗닔???듭떖 蹂댁쑀二? },
+  B: { color: '#3b82f6', bg: 'rgba(59,130,246,0.12)', border: 'rgba(59,130,246,0.4)', label: 'B?깃툒', emoji: '狩?, desc: '?됯퇏 ?댁긽???꾨━?? 愿??醫낅ぉ ?곹빀' },
+  C: { color: '#9ca3af', bg: 'rgba(156,163,175,0.10)',border: 'rgba(156,163,175,0.3)', label: 'C?깃툒', emoji: '?뵷', desc: '?됯퇏 ?섏?, ?뱁꽣 ??쒖＜濡?蹂댁쑀 媛?? },
+  D: { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',  border: 'rgba(239,68,68,0.3)',  label: 'D?깃툒', emoji: '?좑툘', desc: '?꾩쭅 ?섏씡?굿룹꽦?μ꽦 誘명씉, 二쇱쓽 ?꾩슂' },
 };
 
-// ── 주도주 점수 기준 설명 툴팁 ─────────────────────────────────
-const SCORE_TOOLTIP = `주도주 투자법 점수 (100점 만점)
-─────────────────────────────
-• 성장 (40점): 매출·이익 성장률, 품질 조정
-• 해자 (30점): GPM·OPM 마진 우위
-• 안전 (20점): 부채비율·유동비율
-• 리더 (10점): 시가총액 규모 리더십
-─────────────────────────────
-S≥85 / A≥70 / B≥55 / C≥40 / D<40`;
+// ?? 二쇰룄二??먯닔 湲곗? ?ㅻ챸 ?댄똻 ?????????????????????????????????
+const SCORE_TOOLTIP = `二쇰룄二??ъ옄踰??먯닔 (100??留뚯젏)
+?????????????????????????????
+???깆옣 (40??: 留ㅼ텧쨌?댁씡 ?깆옣瑜? ?덉쭏 議곗젙
+???댁옄 (30??: GPM쨌OPM 留덉쭊 ?곗쐞
+???덉쟾 (20??: 遺梨꾨퉬?㉱룹쑀?숇퉬??
+??由щ뜑 (10??: ?쒓?珥앹븸 洹쒕え 由щ뜑??
+?????????????????????????????
+S??5 / A??0 / B??5 / C??0 / D<40`;
 
-// ── 주도주 점수 바 컴포넌트 ────────────────────────────────
+// ?? 二쇰룄二??먯닔 諛?而댄룷?뚰듃 ????????????????????????????????
 function LeadingScoreBar({ breakdown, score, grade }) {
   if (!breakdown || !score) return null;
   const cfg = GRADE_CONFIG[grade] || GRADE_CONFIG['C'];
   const items = [
-    { key: 'A_성장(품질조정)', label: '성장', max: 40, color: '#10b981' },
-    { key: 'B_마진해자',       label: '해자', max: 30, color: '#3b82f6' },
-    { key: 'C_재무안전성',     label: '안전', max: 20, color: '#8b5cf6' },
-    { key: 'D_규모리더십',     label: '리더', max: 10, color: '#f59e0b' },
+    { key: 'A_?깆옣(?덉쭏議곗젙)', label: '?깆옣', max: 40, color: '#10b981' },
+    { key: 'B_留덉쭊?댁옄',       label: '?댁옄', max: 30, color: '#3b82f6' },
+    { key: 'C_?щТ?덉쟾??,     label: '?덉쟾', max: 20, color: '#8b5cf6' },
+    { key: 'D_洹쒕え由щ뜑??,     label: '由щ뜑', max: 10, color: '#f59e0b' },
   ];
   return (
     <div style={{ marginTop: '10px' }}>
-      {/* 총점 + 등급 */}
+      {/* 珥앹젏 + ?깃툒 */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'8px' }}>
-        <span style={{ fontSize:'0.72rem', color:'var(--text-secondary)', cursor:'help' }} title={SCORE_TOOLTIP}>주도주 점수 ⓘ</span>
+        <span style={{ fontSize:'0.72rem', color:'var(--text-secondary)', cursor:'help' }} title={SCORE_TOOLTIP}>二쇰룄二??먯닔 ??/span>
         <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
           <div style={{
             fontSize:'0.7rem', fontWeight:800, padding:'2px 8px', borderRadius:'8px',
             background: cfg.bg, border:`1px solid ${cfg.border}`, color: cfg.color,
             letterSpacing:'0.5px', cursor:'help',
           }} title={cfg.desc}>{cfg.emoji} {grade}</div>
-          <span style={{ fontSize:'0.85rem', fontWeight:700, color: cfg.color }}>{score}점</span>
+          <span style={{ fontSize:'0.85rem', fontWeight:700, color: cfg.color }}>{score}??/span>
         </div>
       </div>
-      {/* 세그먼트 바 */}
+      {/* ?멸렇癒쇳듃 諛?*/}
       <div style={{ display:'flex', gap:'2px', height:'6px', borderRadius:'4px', overflow:'hidden', background:'rgba(255,255,255,0.06)' }}>
         {items.map(item => {
           const val = Math.max(0, breakdown[item.key] || 0);
           const pct = (val / item.max) * (item.max / 100) * 100;
           return (
-            <div key={item.key} title={`${item.label}: ${val.toFixed(1)}/${item.max}점`}
+            <div key={item.key} title={`${item.label}: ${val.toFixed(1)}/${item.max}??}
               style={{ flex: item.max, background: pct > 0 ? item.color : 'transparent',
                        opacity: pct > 0 ? 0.85 : 0.2, transition:'all 0.3s' }} />
           );
         })}
       </div>
-      {/* 라벨 */}
+      {/* ?쇰꺼 */}
       <div style={{ display:'flex', gap:'2px', marginTop:'4px' }}>
         {items.map(item => (
           <div key={item.key} style={{ flex: item.max, textAlign:'center',
@@ -652,12 +653,12 @@ function LeadingScoreBar({ breakdown, score, grade }) {
   );
 }
 
-// ── IndustryView ────────────────────────────────
+// ?? IndustryView ????????????????????????????????
 function IndustryView({ report, onSelectCompany }) {
-  const [gradeFilter, setGradeFilter] = useState('전체');
+  const [gradeFilter, setGradeFilter] = useState('?꾩껜');
   const [sortMode, setSortMode]       = useState('upside');
 
-  // 복합 점수: 기업가치 상승 기대(upside_score) 60% + 주도주점수 40%
+  // 蹂듯빀 ?먯닔: 湲곗뾽媛移??곸듅 湲곕?(upside_score) 60% + 二쇰룄二쇱젏??40%
   const compositeScore = (c) =>
     (c.upside_score ?? 0) * 0.6 + (c.leading_score ?? 0) * 0.4;
 
@@ -670,7 +671,7 @@ function IndustryView({ report, onSelectCompany }) {
     return (a.display_order ?? 999) - (b.display_order ?? 999);
   });
 
-  const filtered = gradeFilter === '전체'
+  const filtered = gradeFilter === '?꾩껜'
     ? companies
     : companies.filter(c => c.leading_grade === gradeFilter);
 
@@ -681,14 +682,14 @@ function IndustryView({ report, onSelectCompany }) {
   }, {});
 
   const SORT_OPTS = [
-    { key:'upside',  icon:'📈', label:'기업가치 상승', tip:'매출성장+영업이익률+ROE+저PER+FCF성장 복합점수 순' },
-    { key:'grade',   icon:'🏆', label:'주도주 등급',   tip:'S→A→B→C→D 순서' },
-    { key:'default', icon:'📋', label:'기본',           tip:'업종별 기본 순서' },
+    { key:'upside',  icon:'?뱢', label:'湲곗뾽媛移??곸듅', tip:'留ㅼ텧?깆옣+?곸뾽?댁씡瑜?ROE+?PER+FCF?깆옣 蹂듯빀?먯닔 ?? },
+    { key:'grade',   icon:'?룇', label:'二쇰룄二??깃툒',   tip:'S?묨?묪?묬?묭 ?쒖꽌' },
+    { key:'default', icon:'?뱥', label:'湲곕낯',           tip:'?낆쥌蹂?湲곕낯 ?쒖꽌' },
   ];
 
   return (
     <div className="industry-view">
-      {/* 페이지 헤더 */}
+      {/* ?섏씠吏 ?ㅻ뜑 */}
       <div className="page-header" style={{ borderBottom:'1px solid var(--border-color)', paddingBottom:'20px', marginBottom:'28px' }}>
         <div style={{ display:'flex', alignItems:'center', gap:'12px', marginBottom:'12px' }}>
           <span style={{ background:'linear-gradient(135deg,var(--accent-blue),var(--accent-purple))', color:'white', padding:'4px 14px', borderRadius:'20px', fontSize:'0.82rem', fontWeight:700, letterSpacing:'0.03em' }}>
@@ -696,11 +697,11 @@ function IndustryView({ report, onSelectCompany }) {
           </span>
           <span style={{ color:'var(--text-secondary)', fontSize:'0.85rem' }}>Industry Research</span>
         </div>
-        <h2 style={{ fontSize:'2rem', lineHeight:1.2 }}>{report.tag} 산업</h2>
+        <h2 style={{ fontSize:'2rem', lineHeight:1.2 }}>{report.tag} ?곗뾽</h2>
         <p style={{ color:'var(--text-secondary)', fontSize:'0.9rem', marginTop:'6px' }}>{report.title}</p>
       </div>
 
-      {/* 리포트 요약 */}
+      {/* 由ы룷???붿빟 */}
       <div className="report-content glass-panel" style={{ padding:'32px 40px', marginBottom:'36px' }}>
         <h3 style={{ display:'flex', alignItems:'center', gap:'10px', color:'var(--accent-blue)', marginBottom:'20px', fontSize:'1.3rem' }}>
           <BookOpen size={22} /> Industry Overview
@@ -710,17 +711,17 @@ function IndustryView({ report, onSelectCompany }) {
         </div>
       </div>
 
-      {/* 기업 목록 컨트롤 */}
+      {/* 湲곗뾽 紐⑸줉 而⑦듃濡?*/}
       <div style={{ marginBottom:'16px' }}>
-        {/* 타이틀 + 정렬 버튼 */}
+        {/* ??댄? + ?뺣젹 踰꾪듉 */}
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:'10px', marginBottom:'12px' }}>
           <div>
             <h3 style={{ color:'var(--accent-blue)', fontSize:'1.2rem', margin:'0 0 4px' }}>
-              🏆 핵심 추적 기업
+              ?룇 ?듭떖 異붿쟻 湲곗뾽
             </h3>
             <div style={{ fontSize:'0.73rem', color:'var(--text-secondary)' }}>
               {SORT_OPTS.find(o => o.key === sortMode)?.icon}{' '}
-              {SORT_OPTS.find(o => o.key === sortMode)?.label} 순 정렬
+              {SORT_OPTS.find(o => o.key === sortMode)?.label} ???뺣젹
             </div>
           </div>
           <div style={{ display:'flex', gap:'5px', flexWrap:'wrap' }}>
@@ -740,11 +741,11 @@ function IndustryView({ report, onSelectCompany }) {
           </div>
         </div>
 
-        {/* 등급 필터 탭 */}
+        {/* ?깃툒 ?꾪꽣 ??*/}
         <div style={{ display:'flex', gap:'6px', flexWrap:'wrap' }}>
-          {['전체', 'S', 'A', 'B', 'C', 'D'].map(g => {
-            const cfg    = g === '전체' ? null : GRADE_CONFIG[g];
-            const cnt    = g === '전체' ? companies.length : (gradeCounts[g] || 0);
+          {['?꾩껜', 'S', 'A', 'B', 'C', 'D'].map(g => {
+            const cfg    = g === '?꾩껜' ? null : GRADE_CONFIG[g];
+            const cnt    = g === '?꾩껜' ? companies.length : (gradeCounts[g] || 0);
             const active = gradeFilter === g;
             return (
               <button key={g} onClick={() => setGradeFilter(g)}
@@ -757,7 +758,7 @@ function IndustryView({ report, onSelectCompany }) {
                   boxShadow:  active && cfg ? `0 0 8px ${cfg.color}25` : 'none',
                 }}
               >
-                {cfg ? `${cfg.emoji} ${g}` : '전체'}{' '}
+                {cfg ? `${cfg.emoji} ${g}` : '?꾩껜'}{' '}
                 <span style={{ opacity:0.5, fontSize:'0.68rem' }}>({cnt})</span>
               </button>
             );
@@ -766,12 +767,12 @@ function IndustryView({ report, onSelectCompany }) {
 
         {filtered.length === 0 && (
           <div style={{ textAlign:'center', padding:'32px', color:'var(--text-secondary)' }}>
-            {gradeFilter}등급 기업이 없습니다.
+            {gradeFilter}?깃툒 湲곗뾽???놁뒿?덈떎.
           </div>
         )}
       </div>
 
-      {/* 기업 카드 목록 */}
+      {/* 湲곗뾽 移대뱶 紐⑸줉 */}
       <div className="company-list">
         {filtered.map((comp, idx) => {
           const rank   = idx + 1;
@@ -782,7 +783,7 @@ function IndustryView({ report, onSelectCompany }) {
           const cardBorder = cfg ? `1px solid ${cfg.border}` : '1px solid rgba(255,255,255,0.06)';
           const cardGlow   = grade === 'S' ? `0 0 20px ${cfg.color}1a`
                            : grade === 'A' ? `0 0 12px ${cfg.color}12` : 'none';
-          const rankEmoji  = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
+          const rankEmoji  = rank === 1 ? '?쪍' : rank === 2 ? '?쪎' : rank === 3 ? '?쪏' : '';
           const upsideColor = !upside      ? '#6b7280'
                             : upside >= 70 ? '#10b981'
                             : upside >= 50 ? '#3b82f6'
@@ -795,7 +796,7 @@ function IndustryView({ report, onSelectCompany }) {
               onClick={() => onSelectCompany(comp.id)}
               style={{ position:'relative', border: cardBorder, boxShadow: cardGlow, transition:'all 0.25s' }}
             >
-              {/* 배지 */}
+              {/* 諛곗? */}
               <div style={{ position:'absolute', top:'10px', right:'10px', display:'flex', alignItems:'center', gap:'5px' }}>
                 {cfg && (
                   <div title={cfg.desc} style={{
@@ -809,31 +810,31 @@ function IndustryView({ report, onSelectCompany }) {
                   background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)',
                   borderRadius:'10px', padding:'2px 7px',
                   fontSize:'0.66rem', fontWeight:600, color:'var(--text-secondary)',
-                }}>{rankEmoji} {rank}위</div>
+                }}>{rankEmoji} {rank}??/div>
               </div>
 
-              {/* 기업명 */}
+              {/* 湲곗뾽紐?*/}
               <div className="company-header" style={{ paddingRight:'100px' }}>
                 <span className="company-name">{comp.name}</span>
                 <span className="company-ticker">{comp.ticker}</span>
               </div>
 
-              {/* 설명 */}
+              {/* ?ㅻ챸 */}
               <div style={{
                 fontSize:'0.86rem', color:'var(--text-secondary)', lineHeight:1.55,
                 display:'-webkit-box', WebkitLineClamp:2,
                 WebkitBoxOrient:'vertical', overflow:'hidden', marginBottom:'10px',
               }}>{comp.role_description}</div>
 
-              {/* 기업가치 상승 기대 바 */}
+              {/* 湲곗뾽媛移??곸듅 湲곕? 諛?*/}
               {upside != null && (
                 <div style={{ marginBottom:'8px' }}>
                   <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'4px' }}>
                     <span style={{ fontSize:'0.66rem', color:'var(--text-secondary)', cursor:'help' }}
-                      title="매출성장(40)+영업이익률(20)+ROE(15)+저PER여부(15)+FCF성장(10) 합산 100점">
-                      📈 기업가치 상승 기대 ⓘ
+                      title="留ㅼ텧?깆옣(40)+?곸뾽?댁씡瑜?20)+ROE(15)+?PER?щ?(15)+FCF?깆옣(10) ?⑹궛 100??>
+                      ?뱢 湲곗뾽媛移??곸듅 湲곕? ??
                     </span>
-                    <span style={{ fontSize:'0.8rem', fontWeight:700, color: upsideColor }}>{upside}점</span>
+                    <span style={{ fontSize:'0.8rem', fontWeight:700, color: upsideColor }}>{upside}??/span>
                   </div>
                   <div style={{ height:'4px', borderRadius:'4px', background:'rgba(255,255,255,0.06)', overflow:'hidden' }}>
                     <div style={{
@@ -845,7 +846,7 @@ function IndustryView({ report, onSelectCompany }) {
                 </div>
               )}
 
-              {/* 주도주 점수 바 */}
+              {/* 二쇰룄二??먯닔 諛?*/}
               <LeadingScoreBar
                 breakdown={comp.leading_breakdown}
                 score={comp.leading_score}
@@ -871,7 +872,7 @@ function KpiCard({ label, value, sub, valueColor, icon: Icon }) {
   );
 }
 
-// ── SectionHeader ─────────────────────────────────────────
+// ?? SectionHeader ?????????????????????????????????????????
 function SectionHeader({ icon: Icon, title, color: clr }) {
   return (
     <h3 style={{ display:'flex', alignItems:'center', gap:'10px', color: clr || 'var(--accent-blue)', marginBottom:'20px', fontSize:'1.2rem', borderBottom:'1px solid var(--border-color)', paddingBottom:'10px' }}>
@@ -880,7 +881,7 @@ function SectionHeader({ icon: Icon, title, color: clr }) {
   );
 }
 
-// ── AiAnalysisSection ─────────────────────────────────────
+// ?? AiAnalysisSection ?????????????????????????????????????
 function AiAnalysisCard({ icon: Icon, title, color, children, span2 }) {
   return (
     <div className="glass-panel" style={{
@@ -905,7 +906,7 @@ function AiAnalysisSection({ data }) {
     <div className="glass-panel" style={{ padding:'28px', marginBottom:'32px' }}>
       <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'20px' }}>
         <Activity size={18} color="var(--accent-purple)" />
-        <span style={{ fontWeight:700, fontSize:'1rem', color:'var(--accent-purple)' }}>AI 심층 비즈니스 분석 — 로딩 중...</span>
+        <span style={{ fontWeight:700, fontSize:'1rem', color:'var(--accent-purple)' }}>AI ?ъ링 鍮꾩쫰?덉뒪 遺꾩꽍 ??濡쒕뵫 以?..</span>
       </div>
       {[1,2,3,4].map(i => (
         <div key={i} style={{ height:'80px', background:'rgba(255,255,255,0.04)', borderRadius:'8px', marginBottom:'12px', animation:'pulse 1.5s infinite' }} />
@@ -913,7 +914,7 @@ function AiAnalysisSection({ data }) {
     </div>
   );
   if (data.error && !data.what_they_sell) return (
-    <div className="glass-panel" style={{ padding:'20px', color:'#ff6b6b' }}>AI 분석 결과를 불러올 수 없습니다.</div>
+    <div className="glass-panel" style={{ padding:'20px', color:'#ff6b6b' }}>AI 遺꾩꽍 寃곌낵瑜?遺덈윭?????놁뒿?덈떎.</div>
   );
 
   const badge = d.generated_by === 'gemini'
@@ -926,58 +927,58 @@ function AiAnalysisSection({ data }) {
 
   return (
     <div style={{ marginBottom:'36px' }}>
-      {/* 헤더 */}
+      {/* ?ㅻ뜑 */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'18px' }}>
         <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
           <Activity size={20} color="var(--accent-purple)" />
-          <h3 style={{ fontSize:'1.2rem', fontWeight:700, color:'var(--accent-purple)', margin:0 }}>AI 심층 비즈니스 분석 리포트</h3>
+          <h3 style={{ fontSize:'1.2rem', fontWeight:700, color:'var(--accent-purple)', margin:0 }}>AI ?ъ링 鍮꾩쫰?덉뒪 遺꾩꽍 由ы룷??/h3>
         </div>
         <span style={{ fontSize:'0.75rem', padding:'3px 10px', borderRadius:'12px', background:'rgba(129,140,248,0.15)', color: badge.color, border:`1px solid ${badge.color}40` }}>
           {badge.label}
         </span>
       </div>
 
-      {/* 카드 그리드 */}
+      {/* 移대뱶 洹몃━??*/}
       <div className="ai-grid">
 
-        {/* 1. 핵심 제품/서비스 */}
+        {/* 1. ?듭떖 ?쒗뭹/?쒕퉬??*/}
         {d.what_they_sell && (
-          <AiAnalysisCard icon={Package} title="핵심 제품 & 서비스" color="var(--accent-blue)" span2={false}>
+          <AiAnalysisCard icon={Package} title="?듭떖 ?쒗뭹 & ?쒕퉬?? color="var(--accent-blue)" span2={false}>
             {d.what_they_sell}
           </AiAnalysisCard>
         )}
 
-        {/* 2. 수익 모델 */}
+        {/* 2. ?섏씡 紐⑤뜽 */}
         {d.revenue_model && (
-          <AiAnalysisCard icon={DollarSign} title="수익 모델 — 어떻게 돈을 버는가" color="var(--accent-green)" span2={false}>
+          <AiAnalysisCard icon={DollarSign} title="?섏씡 紐⑤뜽 ???대뼸寃??덉쓣 踰꾨뒗媛" color="var(--accent-green)" span2={false}>
             {d.revenue_model}
           </AiAnalysisCard>
         )}
 
-        {/* 3. 비용 구조 */}
+        {/* 3. 鍮꾩슜 援ъ“ */}
         {d.cost_structure && (
-          <AiAnalysisCard icon={BarChart3} title="비용 구조 — 어디에 돈을 쓰는가" color="#f59e0b" span2={false}>
+          <AiAnalysisCard icon={BarChart3} title="鍮꾩슜 援ъ“ ???대뵒???덉쓣 ?곕뒗媛" color="#f59e0b" span2={false}>
             {d.cost_structure}
           </AiAnalysisCard>
         )}
 
-        {/* 4. 이익 구조 */}
+        {/* 4. ?댁씡 援ъ“ */}
         {d.how_they_profit && (
-          <AiAnalysisCard icon={TrendingUp} title="이익 구조 — 어떻게 돈을 남기는가" color="#06b6d4" span2={false}>
+          <AiAnalysisCard icon={TrendingUp} title="?댁씡 援ъ“ ???대뼸寃??덉쓣 ?④린?붽?" color="#06b6d4" span2={false}>
             {d.how_they_profit}
           </AiAnalysisCard>
         )}
 
-        {/* 5. 경제적 해자 */}
+        {/* 5. 寃쎌젣???댁옄 */}
         {d.competitive_moat && (
-          <AiAnalysisCard icon={Shield} title="경제적 해자 (Competitive Moat)" color="var(--accent-purple)" span2={true}>
+          <AiAnalysisCard icon={Shield} title="寃쎌젣???댁옄 (Competitive Moat)" color="var(--accent-purple)" span2={true}>
             {d.competitive_moat}
           </AiAnalysisCard>
         )}
 
-        {/* 6. 사업 세그먼트 */}
+        {/* 6. ?ъ뾽 ?멸렇癒쇳듃 */}
         {d.key_segments && d.key_segments.length > 0 && (
-          <AiAnalysisCard icon={Layers} title="핵심 사업 세그먼트" color="#84cc16" span2={true}>
+          <AiAnalysisCard icon={Layers} title="?듭떖 ?ъ뾽 ?멸렇癒쇳듃" color="#84cc16" span2={true}>
             <div style={{ display:'flex', flexWrap:'wrap', gap:'12px' }}>
               {d.key_segments.map((seg, i) => (
                 <div key={i} style={{ flex:'1 1 280px', background:'rgba(255,255,255,0.05)', borderRadius:'8px', padding:'12px 16px', borderLeft:'3px solid #84cc16' }}>
@@ -989,23 +990,23 @@ function AiAnalysisSection({ data }) {
           </AiAnalysisCard>
         )}
 
-        {/* 7. 리스크 */}
+        {/* 7. 由ъ뒪??*/}
         {d.risk_factors && (
-          <AiAnalysisCard icon={AlertTriangle} title="핵심 리스크 포인트" color="#ef4444" span2={false}>
+          <AiAnalysisCard icon={AlertTriangle} title="?듭떖 由ъ뒪???ъ씤?? color="#ef4444" span2={false}>
             {d.risk_factors}
           </AiAnalysisCard>
         )}
 
-        {/* 8. 투자 포인트 */}
+        {/* 8. ?ъ옄 ?ъ씤??*/}
         {d.investment_thesis && (
-          <AiAnalysisCard icon={Star} title="투자 포인트 (Investment Thesis)" color="#f97316" span2={false}>
+          <AiAnalysisCard icon={Star} title="?ъ옄 ?ъ씤??(Investment Thesis)" color="#f97316" span2={false}>
             {d.investment_thesis}
           </AiAnalysisCard>
         )}
 
-        {/* 9. 산업 투자 포인트 */}
+        {/* 9. ?곗뾽 ?ъ옄 ?ъ씤??*/}
         {d.industry_connection && (
-          <AiAnalysisCard icon={Globe} title="산업 내 투자 포인트 — 왜 이 산업에서 이 기업인가" color="var(--accent-blue)" span2={true}>
+          <AiAnalysisCard icon={Globe} title="?곗뾽 ???ъ옄 ?ъ씤?????????곗뾽?먯꽌 ??湲곗뾽?멸?" color="var(--accent-blue)" span2={true}>
             {d.industry_connection}
           </AiAnalysisCard>
         )}
@@ -1015,7 +1016,7 @@ function AiAnalysisSection({ data }) {
 }
 
 
-// ── CompanyView (기관급 풀 대시보드) ──────────────────
+// ?? CompanyView (湲곌?湲?? ??쒕낫?? ??????????????????
 function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync }) {
   const [tab, setTab] = useState('annual');
   const [syncing, setSyncing] = useState(false);
@@ -1023,26 +1024,26 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
   const handleSync = async () => {
     setSyncing(true);
     try {
-      // 빠른 주가 최신화 먼저 (yfinance로 즉시)
+      // 鍮좊Ⅸ 二쇨? 理쒖떊??癒쇱? (yfinance濡?利됱떆)
       await axios.get(`${API_BASE}/companies/${company.id}/price`);
       await onSync();
     } catch (e) { console.error(e); }
     setSyncing(false);
   };
 
-  // 연간 vs 분기 필터
-  // 날짜 내림차순 정렬 후 연도별 중복 제거 (최신 레코드 우선)
+  // ?곌컙 vs 遺꾧린 ?꾪꽣
+  // ?좎쭨 ?대┝李⑥닚 ?뺣젹 ???곕룄蹂?以묐났 ?쒓굅 (理쒖떊 ?덉퐫???곗꽑)
   const annualRaw = (financials || [])
     .filter(f => f.period_type === 'annual')
-    .sort((a,b) => new Date(b.date)-new Date(a.date)); // 최신순
+    .sort((a,b) => new Date(b.date)-new Date(a.date)); // 理쒖떊??
   const annualMap = new Map();
   annualRaw.forEach(d => {
     const yr = d.date.substring(0,4);
-    if (!annualMap.has(yr)) annualMap.set(yr, d); // 최신 레코드만 유지
+    if (!annualMap.has(yr)) annualMap.set(yr, d); // 理쒖떊 ?덉퐫?쒕쭔 ?좎?
   });
-  // 차트용은 오름차순 (옛날→최신)
+  // 李⑦듃?⑹? ?ㅻ쫫李⑥닚 (?쏅궇?믪턀??
   const annualData = Array.from(annualMap.values()).sort((a,b) => new Date(a.date)-new Date(b.date));
-  // 비즈니스 모델용 latest는 가장 최신 연간 레코드
+  // 鍮꾩쫰?덉뒪 紐⑤뜽??latest??媛??理쒖떊 ?곌컙 ?덉퐫??
   const latestRaw = annualRaw[0] || {};
 
   const quarterlyData = (financials || [])
@@ -1051,18 +1052,18 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
 
   const tableData = tab === 'annual' ? [...annualData].reverse() : quarterlyData;
 
-  // KRW 여부 및 차트 단위
+  // KRW ?щ? 諛?李⑦듃 ?⑥쐞
   const isKrwTicker = isKrw(company?.ticker);
-  const chartUnit = isKrwTicker ? '억원' : 'B USD';
+  const chartUnit = isKrwTicker ? '?듭썝' : 'B USD';
 
-  // 차트 데이터 (최근 6년)
+  // 李⑦듃 ?곗씠??(理쒓렐 6??
   const incomeChartData = annualData.slice(-6).map(d => {
     const scale = isKrwTicker ? 1e8 : 1e9;
     return {
       year: d.date.substring(0,4),
-      매출: +(d.revenue / scale).toFixed(2),
-      영업이익: +((d.operating_income||0) / scale).toFixed(2),
-      순이익: +((d.net_income||0) / scale).toFixed(2),
+      留ㅼ텧: +(d.revenue / scale).toFixed(2),
+      ?곸뾽?댁씡: +((d.operating_income||0) / scale).toFixed(2),
+      ?쒖씠?? +((d.net_income||0) / scale).toFixed(2),
       'OPM%': +(d.op_margin||0).toFixed(1),
       'GPM%': +(d.gross_margin||0).toFixed(1),
     };
@@ -1082,18 +1083,18 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
     const scale = isKrwTicker ? 1e8 : 1e9;
     return {
       year: d.date.substring(0,4),
-      자산: +((d.total_assets||0) / scale).toFixed(2),
-      부채: +((d.total_debt||0) / scale).toFixed(2),
-      자본: +((d.shareholders_equity||0) / scale).toFixed(2),
-      현금: +((d.cash_and_equivalents||0) / scale).toFixed(2),
+      ?먯궛: +((d.total_assets||0) / scale).toFixed(2),
+      遺梨? +((d.total_debt||0) / scale).toFixed(2),
+      ?먮낯: +((d.shareholders_equity||0) / scale).toFixed(2),
+      ?꾧툑: +((d.cash_and_equivalents||0) / scale).toFixed(2),
     };
   });
 
   const p = profile || {};
-  // 최신 연간 레코드 사용 (COGS 등 최신값 보장)
+  // 理쒖떊 ?곌컙 ?덉퐫???ъ슜 (COGS ??理쒖떊媛?蹂댁옣)
   const latest = (() => {
     const r = latestRaw;
-    // cost_of_revenue가 없으면 revenue - gross_profit으로 계산 후 반환
+    // cost_of_revenue媛 ?놁쑝硫?revenue - gross_profit?쇰줈 怨꾩궛 ??諛섑솚
     if (r && r.revenue && r.gross_profit && !r.cost_of_revenue) {
       return { ...r, cost_of_revenue: r.revenue - r.gross_profit };
     }
@@ -1102,9 +1103,9 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
 
   return (
     <div className="company-details">
-      {/* ── 헤더 ─────────────────────────────────────── */}
+      {/* ?? ?ㅻ뜑 ??????????????????????????????????????? */}
       <button className="back-btn" onClick={onBack}>
-        <ArrowLeft size={16} /> 돌아가기
+        <ArrowLeft size={16} /> ?뚯븘媛湲?
       </button>
 
       <div className="company-header-row">
@@ -1115,7 +1116,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
           </h2>
           {p.sector && (
             <div style={{ color:'var(--text-secondary)', fontSize:'0.85rem', marginBottom:'6px' }}>
-              {p.sector} › {p.industry}
+              {p.sector} ??{p.industry}
             </div>
           )}
           {p.current_price && (
@@ -1133,81 +1134,81 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
           )}
           <button onClick={handleSync} disabled={syncing} className="sync-btn">
             <RefreshCw size={14} className={syncing?'spin':''} />
-            <span>{syncing ? '수집 중...' : '주가 최신화'}</span>
+            <span>{syncing ? '?섏쭛 以?..' : '二쇨? 理쒖떊??}</span>
           </button>
         </div>
       </div>
 
-      {/* ── Section 0: AI 기업 심층 분석 ──────────────── */}
+      {/* ?? Section 0: AI 湲곗뾽 ?ъ링 遺꾩꽍 ???????????????? */}
       <AiAnalysisSection data={aiAnalysis} company={company} />
 
-      {/* ── Section 0b: 비즈니스 모델 수익구조 ──────── */}
+      {/* ?? Section 0b: 鍮꾩쫰?덉뒪 紐⑤뜽 ?섏씡援ъ“ ???????? */}
       <BusinessModelSection latest={latest} profile={p} company={company} />
 
-      {/* ── Section 1: 밸류에이션 KPI 카드 ─────────────── */}
+      {/* ?? Section 1: 諛몃쪟?먯씠??KPI 移대뱶 ??????????????? */}
       <section style={{ marginBottom:'36px' }}>
-        <SectionHeader icon={BarChart2} title="밸류에이션 (TTM 기준)" />
+        <SectionHeader icon={BarChart2} title="諛몃쪟?먯씠??(TTM 湲곗?)" />
         <div className="kpi-grid">
-          <KpiCard label="P/E Ratio (PER)" value={fN(p.pe_ratio)} sub="주가수익비율" icon={TrendingUp}
+          <KpiCard label="P/E Ratio (PER)" value={fN(p.pe_ratio)} sub="二쇨??섏씡鍮꾩쑉" icon={TrendingUp}
             valueColor={p.pe_ratio < 20 ? 'var(--accent-green)' : p.pe_ratio > 50 ? '#ff6b6b' : 'var(--text-primary)'} />
-          <KpiCard label="P/B Ratio (PBR)" value={fN(p.pb_ratio)} sub="주가순자산비율" />
-          <KpiCard label="EV/EBITDA" value={fX(p.ev_ebitda)} sub="기업가치 배수"
+          <KpiCard label="P/B Ratio (PBR)" value={fN(p.pb_ratio)} sub="二쇨??쒖옄?곕퉬?? />
+          <KpiCard label="EV/EBITDA" value={fX(p.ev_ebitda)} sub="湲곗뾽媛移?諛곗닔"
             valueColor={p.ev_ebitda < 15 ? 'var(--accent-green)' : p.ev_ebitda > 40 ? '#ff6b6b' : 'var(--text-primary)'} />
-          <KpiCard label="EV/Sales" value={fX(p.ev_sales)} sub="매출 배수" />
-          <KpiCard label="시가총액" value={fB(p.market_cap, company?.ticker)} sub="Market Cap" icon={DollarSign} />
-          <KpiCard label="애널리스트 목표가" value={fDollar(p.analyst_target, company?.ticker)} sub="Consensus Target"
+          <KpiCard label="EV/Sales" value={fX(p.ev_sales)} sub="留ㅼ텧 諛곗닔" />
+          <KpiCard label="?쒓?珥앹븸" value={fB(p.market_cap, company?.ticker)} sub="Market Cap" icon={DollarSign} />
+          <KpiCard label="?좊꼸由ъ뒪??紐⑺몴媛" value={fDollar(p.analyst_target, company?.ticker)} sub="Consensus Target"
             valueColor={p.analyst_target > p.current_price ? 'var(--accent-green)' : '#ff6b6b'} />
         </div>
       </section>
 
-      {/* ── Section 2: 수익성 지표 ───────────────────────── */}
+      {/* ?? Section 2: ?섏씡??吏??????????????????????????? */}
       <section style={{ marginBottom:'36px' }}>
-        <SectionHeader icon={Zap} title="수익성 지표 (Profitability TTM)" color="var(--accent-purple)" />
+        <SectionHeader icon={Zap} title="?섏씡??吏??(Profitability TTM)" color="var(--accent-purple)" />
         <div className="kpi-grid">
-          <KpiCard label="GPM (매출총이익률)" value={fP(p.gross_margin_ttm)} sub="Gross Profit Margin"
+          <KpiCard label="GPM (留ㅼ텧珥앹씠?듬쪧)" value={fP(p.gross_margin_ttm)} sub="Gross Profit Margin"
             valueColor={color(p.gross_margin_ttm*100, 50, 20)} />
-          <KpiCard label="OPM (영업이익률)" value={fP(p.op_margin_ttm)} sub="Operating Margin"
+          <KpiCard label="OPM (?곸뾽?댁씡瑜?" value={fP(p.op_margin_ttm)} sub="Operating Margin"
             valueColor={color(p.op_margin_ttm*100, 20, 5)} />
           <KpiCard label="EBITDA Margin" value={fP(p.ebitda_margin_ttm)} sub="EBITDA / Revenue"
             valueColor={color(p.ebitda_margin_ttm*100, 25, 10)} />
-          <KpiCard label="순이익률" value={fP(p.net_margin_ttm)} sub="Net Profit Margin"
+          <KpiCard label="?쒖씠?듬쪧" value={fP(p.net_margin_ttm)} sub="Net Profit Margin"
             valueColor={color(p.net_margin_ttm*100, 15, 0)} />
-          <KpiCard label="ROE" value={fP(p.roe)} sub="자기자본이익률"
+          <KpiCard label="ROE" value={fP(p.roe)} sub="?먭린?먮낯?댁씡瑜?
             valueColor={color(p.roe*100, 15, 5)} />
-          <KpiCard label="ROA" value={fP(p.roa)} sub="총자산이익률"
+          <KpiCard label="ROA" value={fP(p.roa)} sub="珥앹옄?곗씠?듬쪧"
             valueColor={color(p.roa*100, 8, 2)} />
         </div>
       </section>
 
-      {/* ── Section 3: 성장성 + 재무건전성 ──────────────── */}
+      {/* ?? Section 3: ?깆옣??+ ?щТ嫄댁쟾?????????????????? */}
       <section style={{ marginBottom:'36px' }}>
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'24px' }}>
           <div>
-            <SectionHeader icon={TrendingUp} title="성장성 (Growth)" color="var(--accent-green)" />
+            <SectionHeader icon={TrendingUp} title="?깆옣??(Growth)" color="var(--accent-green)" />
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'12px' }}>
-              <KpiCard label="매출 성장률 (YoY)" value={p.revenue_growth != null ? fP(p.revenue_growth) : '-'} sub="Revenue Growth"
+              <KpiCard label="留ㅼ텧 ?깆옣瑜?(YoY)" value={p.revenue_growth != null ? fP(p.revenue_growth) : '-'} sub="Revenue Growth"
                 valueColor={p.revenue_growth > 0.1 ? 'var(--accent-green)' : p.revenue_growth < 0 ? '#ff6b6b' : 'var(--text-primary)'} />
               <KpiCard label="EPS (TTM)" value={p.eps_growth != null ? fDollar(p.eps_growth, company?.ticker) : '-'} sub="Earnings Per Share" />
             </div>
           </div>
           <div>
-            <SectionHeader icon={Shield} title="재무건전성 (Financial Health)" color="#f1c40f" />
+            <SectionHeader icon={Shield} title="?щТ嫄댁쟾??(Financial Health)" color="#f1c40f" />
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'12px' }}>
-              <KpiCard label="유동비율" value={fN(p.current_ratio)} sub="Current Ratio"
+              <KpiCard label="?좊룞鍮꾩쑉" value={fN(p.current_ratio)} sub="Current Ratio"
                 valueColor={color(p.current_ratio, 2, 1)} />
-              <KpiCard label="부채비율" value={fN(p.debt_to_equity)} sub="D/E Ratio"
+              <KpiCard label="遺梨꾨퉬?? value={fN(p.debt_to_equity)} sub="D/E Ratio"
                 valueColor={p.debt_to_equity < 50 ? 'var(--accent-green)' : p.debt_to_equity > 200 ? '#ff6b6b' : 'var(--text-primary)'} />
-              <KpiCard label="배당수익률" value={p.dividend_yield != null ? fP(p.dividend_yield) : '-'} sub="Dividend Yield"
+              <KpiCard label="諛곕떦?섏씡瑜? value={p.dividend_yield != null ? fP(p.dividend_yield) : '-'} sub="Dividend Yield"
                 valueColor='var(--accent-green)' />
-              <KpiCard label="배당성향" value={p.payout_ratio != null ? fP(p.payout_ratio) : '-'} sub="Payout Ratio" />
+              <KpiCard label="諛곕떦?깊뼢" value={p.payout_ratio != null ? fP(p.payout_ratio) : '-'} sub="Payout Ratio" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Section 4: 손익 차트 ─────────────────────────── */}
+      {/* ?? Section 4: ?먯씡 李⑦듃 ??????????????????????????? */}
       <section style={{ marginBottom:'36px' }}>
-        <SectionHeader icon={BarChart2} title={`손익 추이 (단위: ${chartUnit})`} />
+        <SectionHeader icon={BarChart2} title={`?먯씡 異붿씠 (?⑥쐞: ${chartUnit})`} />
         <div className="chart-grid-2">
           <div className="glass-panel" style={{ padding:'24px', height:'300px' }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -1216,17 +1217,17 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
                 <XAxis dataKey="year" stroke="var(--text-secondary)" fontSize={12} />
                 <YAxis yAxisId="left" stroke="var(--text-secondary)" fontSize={12} tickFormatter={v => isKrwTicker ? v.toLocaleString() : v} />
                 <YAxis yAxisId="right" orientation="right" stroke="#00f2fe" fontSize={12} unit="%" />
-                <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.85rem' }} formatter={(v, name) => [isKrwTicker ? `₩${v.toLocaleString()}억` : `$${v}B`, name]} />
+                <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.85rem' }} formatter={(v, name) => [isKrwTicker ? `??{v.toLocaleString()}?? : `$${v}B`, name]} />
                 <Legend />
-                <Bar yAxisId="left" dataKey="매출" fill="var(--accent-blue)" radius={[4,4,0,0]} />
-                <Bar yAxisId="left" dataKey="영업이익" fill="var(--accent-purple)" radius={[4,4,0,0]} />
-                <Bar yAxisId="left" dataKey="순이익" fill="var(--accent-green)" radius={[4,4,0,0]} />
+                <Bar yAxisId="left" dataKey="留ㅼ텧" fill="var(--accent-blue)" radius={[4,4,0,0]} />
+                <Bar yAxisId="left" dataKey="?곸뾽?댁씡" fill="var(--accent-purple)" radius={[4,4,0,0]} />
+                <Bar yAxisId="left" dataKey="?쒖씠?? fill="var(--accent-green)" radius={[4,4,0,0]} />
                 <Line yAxisId="right" type="monotone" dataKey="OPM%" stroke="#00f2fe" strokeWidth={2} dot={false} />
               </ComposedChart>
             </ResponsiveContainer>
           </div>
           <div className="glass-panel" style={{ padding:'24px', height:'300px' }}>
-            <div style={{ fontSize:'0.85rem', color:'var(--text-secondary)', marginBottom:'12px' }}>영업이익률 / 매출총이익률 추이</div>
+            <div style={{ fontSize:'0.85rem', color:'var(--text-secondary)', marginBottom:'12px' }}>?곸뾽?댁씡瑜?/ 留ㅼ텧珥앹씠?듬쪧 異붿씠</div>
             <ResponsiveContainer width="100%" height="85%">
               <LineChart data={incomeChartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.07)" />
@@ -1242,18 +1243,18 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
         </div>
       </section>
 
-      {/* ── Section 5: 현금흐름 + 재무상태표 차트 ───────── */}
+      {/* ?? Section 5: ?꾧툑?먮쫫 + ?щТ?곹깭??李⑦듃 ????????? */}
       <section style={{ marginBottom:'36px' }}>
         <div className="chart-grid-equal">
           <div>
-            <SectionHeader icon={DollarSign} title={`현금흐름 (${chartUnit})`} color="var(--accent-green)" />
+            <SectionHeader icon={DollarSign} title={`?꾧툑?먮쫫 (${chartUnit})`} color="var(--accent-green)" />
             <div className="glass-panel" style={{ padding:'24px', height:'260px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={cashFlowData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.07)" />
                   <XAxis dataKey="year" stroke="var(--text-secondary)" fontSize={11} />
                   <YAxis stroke="var(--text-secondary)" fontSize={11} tickFormatter={v => isKrwTicker ? v.toLocaleString() : v} />
-                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} formatter={(v) => [isKrwTicker ? `₩${v.toLocaleString()}억` : `$${v}B`]} />
+                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} formatter={(v) => [isKrwTicker ? `??{v.toLocaleString()}?? : `$${v}B`]} />
                   <Legend />
                   <Bar dataKey="OCF" fill="var(--accent-blue)" radius={[3,3,0,0]} />
                   <Bar dataKey="FCF" fill="var(--accent-green)" radius={[3,3,0,0]} />
@@ -1263,19 +1264,19 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
             </div>
           </div>
           <div>
-            <SectionHeader icon={Database} title={`재무상태표 (${chartUnit})`} color="#f1c40f" />
+            <SectionHeader icon={Database} title={`?щТ?곹깭??(${chartUnit})`} color="#f1c40f" />
             <div className="glass-panel" style={{ padding:'24px', height:'260px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={balanceData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.07)" />
                   <XAxis dataKey="year" stroke="var(--text-secondary)" fontSize={11} />
                   <YAxis stroke="var(--text-secondary)" fontSize={11} tickFormatter={v => isKrwTicker ? v.toLocaleString() : v} />
-                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} formatter={(v) => [isKrwTicker ? `₩${v.toLocaleString()}억` : `$${v}B`]} />
+                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} formatter={(v) => [isKrwTicker ? `??{v.toLocaleString()}?? : `$${v}B`]} />
                   <Legend />
-                  <Bar dataKey="자산" fill="rgba(0,191,255,0.6)" radius={[3,3,0,0]} />
-                  <Bar dataKey="자본" fill="rgba(0,255,100,0.6)" radius={[3,3,0,0]} />
-                  <Bar dataKey="부채" fill="rgba(255,107,107,0.6)" radius={[3,3,0,0]} />
-                  <Line type="monotone" dataKey="현금" stroke="#ffd700" strokeWidth={2.5} dot={{ r:4 }} />
+                  <Bar dataKey="?먯궛" fill="rgba(0,191,255,0.6)" radius={[3,3,0,0]} />
+                  <Bar dataKey="?먮낯" fill="rgba(0,255,100,0.6)" radius={[3,3,0,0]} />
+                  <Bar dataKey="遺梨? fill="rgba(255,107,107,0.6)" radius={[3,3,0,0]} />
+                  <Line type="monotone" dataKey="?꾧툑" stroke="#ffd700" strokeWidth={2.5} dot={{ r:4 }} />
                 </ComposedChart>
               </ResponsiveContainer>
             </div>
@@ -1283,13 +1284,13 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
         </div>
       </section>
 
-      {/* ── Section 6: 풀 재무제표 테이블 ───────────────── */}
+      {/* ?? Section 6: ? ?щТ?쒗몴 ?뚯씠釉?????????????????? */}
       <section style={{ marginBottom:'40px' }}>
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'16px' }}>
-          <SectionHeader icon={FileText} title="재무제표 데이터 (Full Financials)" />
+          <SectionHeader icon={FileText} title="?щТ?쒗몴 ?곗씠??(Full Financials)" />
           <div className="tabs">
-            <button className={`tab-btn ${tab==='annual'?'active':''}`} onClick={() => setTab('annual')}>연간</button>
-            <button className={`tab-btn ${tab==='quarterly'?'active':''}`} onClick={() => setTab('quarterly')}>분기</button>
+            <button className={`tab-btn ${tab==='annual'?'active':''}`} onClick={() => setTab('annual')}>?곌컙</button>
+            <button className={`tab-btn ${tab==='quarterly'?'active':''}`} onClick={() => setTab('quarterly')}>遺꾧린</button>
           </div>
         </div>
 
@@ -1297,20 +1298,20 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
           <table className="data-table" style={{ minWidth:'1100px' }}>
             <thead>
               <tr>
-                <th>기간</th>
-                <th>매출</th>
-                <th>매출원가</th>
-                <th>매출총이익</th>
-                <th>영업이익</th>
+                <th>湲곌컙</th>
+                <th>留ㅼ텧</th>
+                <th>留ㅼ텧?먭?</th>
+                <th>留ㅼ텧珥앹씠??/th>
+                <th>?곸뾽?댁씡</th>
                 <th>EBITDA</th>
-                <th>순이익</th>
+                <th>?쒖씠??/th>
                 <th>EPS</th>
                 <th>GPM</th>
                 <th>OPM</th>
                 <th>OCF</th>
                 <th>FCF</th>
-                <th>총자산</th>
-                <th>순부채</th>
+                <th>珥앹옄??/th>
+                <th>?쒕?梨?/th>
                 <th>ROE</th>
               </tr>
             </thead>
@@ -1342,15 +1343,15 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
         </div>
       </section>
 
-      {/* ── Section 7: 회사 개요 ─────────────────────────── */}
+      {/* ?? Section 7: ?뚯궗 媛쒖슂 ??????????????????????????? */}
       {(p.description || company.role_description) && (
         <section style={{ marginBottom:'40px' }}>
-          <SectionHeader icon={BookOpen} title="회사 개요 (Business Overview)" />
+          <SectionHeader icon={BookOpen} title="?뚯궗 媛쒖슂 (Business Overview)" />
           <div className="glass-panel" style={{ padding:'28px' }}>
             <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'16px', marginBottom:'20px' }}>
               {p.employees && (
                 <div style={{ display:'flex', alignItems:'center', gap:'8px', color:'var(--text-secondary)', fontSize:'0.9rem' }}>
-                  <Users size={16} /> 임직원: {fK(p.employees)}명
+                  <Users size={16} /> ?꾩쭅?? {fK(p.employees)}紐?
                 </div>
               )}
               {p.ceo && (
@@ -1360,7 +1361,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
               )}
               {p.last_updated && (
                 <div style={{ display:'flex', alignItems:'center', gap:'8px', color:'var(--text-secondary)', fontSize:'0.9rem' }}>
-                  <RefreshCw size={14} /> 갱신: {p.last_updated}
+                  <RefreshCw size={14} /> 媛깆떊: {p.last_updated}
                 </div>
               )}
             </div>
@@ -1372,7 +1373,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
             {company.future_growth && (
               <div style={{ marginTop:'16px', padding:'16px', borderRadius:'8px', background:'rgba(0,191,255,0.06)', border:'1px solid rgba(0,191,255,0.2)' }}>
                 <div style={{ color:'var(--accent-blue)', fontWeight:600, marginBottom:'8px', fontSize:'0.9rem' }}>
-                  📈 투자 포인트 / Future Growth
+                  ?뱢 ?ъ옄 ?ъ씤??/ Future Growth
                 </div>
                 <p style={{ color:'var(--text-primary)', lineHeight:'1.7', fontSize:'0.95rem' }}>{company.future_growth}</p>
               </div>
@@ -1384,11 +1385,11 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
   );
 }
 
-// ── BusinessModelSection ─────────────────────────────
+// ?? BusinessModelSection ?????????????????????????????
 function BusinessModelSection({ latest, profile, company }) {
   const rev = latest.revenue || 0;
   const gp = latest.gross_profit || 0;
-  // 매출원가 = DB값 우선, 없으면 매출 - 매출총이익으로 계산
+  // 留ㅼ텧?먭? = DB媛??곗꽑, ?놁쑝硫?留ㅼ텧 - 留ㅼ텧珥앹씠?듭쑝濡?怨꾩궛
   const cogs = latest.cost_of_revenue || (rev > 0 && gp > 0 ? rev - gp : 0);
   const opInc = latest.operating_income || 0;
   const netInc = latest.net_income || 0;
@@ -1396,24 +1397,24 @@ function BusinessModelSection({ latest, profile, company }) {
   const taxOther = Math.max(opInc - netInc, 0);
   const p = profile || {};
 
-  // Waterfall 데이터 — KRW는 억원 단위, USD는 십억달러 단위
+  // Waterfall ?곗씠????KRW???듭썝 ?⑥쐞, USD????뼲?щ윭 ?⑥쐞
   const wfDiv = (company?.ticker?.endsWith('.KS') || company?.ticker?.endsWith('.KQ')) ? 1e8 : 1e9;
   const wfData = [
-    { name: '매출액', value: rev/wfDiv, start: 0, fill: '#3b82f6', label: fB(rev, company?.ticker) },
-    { name: '매출원가', value: -cogs/wfDiv, start: (rev-cogs)/wfDiv, fill: '#ff6b6b', label: fB(cogs, company?.ticker) },
-    { name: '매출총이익', value: gp/wfDiv, start: 0, fill: '#10b981', label: fB(gp, company?.ticker), isSum: true },
-    { name: '판관·R&D', value: -opEx/wfDiv, start: opInc/wfDiv, fill: '#f97316', label: fB(opEx, company?.ticker) },
-    { name: '영업이익', value: opInc/wfDiv, start: 0, fill: '#8b5cf6', label: fB(opInc, company?.ticker), isSum: true },
-    { name: '세금·기타', value: -taxOther/wfDiv, start: netInc/wfDiv, fill: '#ef4444', label: fB(taxOther, company?.ticker) },
-    { name: '순이익', value: netInc/wfDiv, start: 0, fill: '#00f2fe', label: fB(netInc, company?.ticker), isSum: true },
+    { name: '留ㅼ텧??, value: rev/wfDiv, start: 0, fill: '#3b82f6', label: fB(rev, company?.ticker) },
+    { name: '留ㅼ텧?먭?', value: -cogs/wfDiv, start: (rev-cogs)/wfDiv, fill: '#ff6b6b', label: fB(cogs, company?.ticker) },
+    { name: '留ㅼ텧珥앹씠??, value: gp/wfDiv, start: 0, fill: '#10b981', label: fB(gp, company?.ticker), isSum: true },
+    { name: '?먭?쨌R&D', value: -opEx/wfDiv, start: opInc/wfDiv, fill: '#f97316', label: fB(opEx, company?.ticker) },
+    { name: '?곸뾽?댁씡', value: opInc/wfDiv, start: 0, fill: '#8b5cf6', label: fB(opInc, company?.ticker), isSum: true },
+    { name: '?멸툑쨌湲고?', value: -taxOther/wfDiv, start: netInc/wfDiv, fill: '#ef4444', label: fB(taxOther, company?.ticker) },
+    { name: '?쒖씠??, value: netInc/wfDiv, start: 0, fill: '#00f2fe', label: fB(netInc, company?.ticker), isSum: true },
   ];
 
-  // 비용 구조 파이 차트
+  // 鍮꾩슜 援ъ“ ?뚯씠 李⑦듃
   const costPieData = [
-    { name: '매출원가 (COGS)', value: cogs, color: '#ff6b6b' },
-    { name: '판관·R&D 비용', value: opEx, color: '#f97316' },
-    { name: '세금·이자·기타', value: taxOther, color: '#ef4444' },
-    { name: '순이익', value: Math.max(netInc, 0), color: '#00f2fe' },
+    { name: '留ㅼ텧?먭? (COGS)', value: cogs, color: '#ff6b6b' },
+    { name: '?먭?쨌R&D 鍮꾩슜', value: opEx, color: '#f97316' },
+    { name: '?멸툑쨌?댁옄쨌湲고?', value: taxOther, color: '#ef4444' },
+    { name: '?쒖씠??, value: Math.max(netInc, 0), color: '#00f2fe' },
   ].filter(d => d.value > 0);
 
   const gpm = gp / (rev || 1) * 100;
@@ -1451,56 +1452,56 @@ function BusinessModelSection({ latest, profile, company }) {
   return (
     <section style={{ marginBottom:'40px' }}>
       <h3 style={{ display:'flex', alignItems:'center', gap:'10px', color:'#00f2fe', marginBottom:'20px', fontSize:'1.2rem', borderBottom:'1px solid var(--border-color)', paddingBottom:'10px' }}>
-        <DollarSign size={20} /> 비즈니스 모델 & 수익 구조 (최근 연간 기준)
+        <DollarSign size={20} /> 鍮꾩쫰?덉뒪 紐⑤뜽 & ?섏씡 援ъ“ (理쒓렐 ?곌컙 湲곗?)
       </h3>
 
-      {/* ── 수익 흐름 SVG 플로우 다이어그램 ── */}
+      {/* ?? ?섏씡 ?먮쫫 SVG ?뚮줈???ㅼ씠?닿렇???? */}
       <div className="glass-panel" style={{ padding:'28px', marginBottom:'24px' }}>
         <div style={{ fontSize:'0.85rem', color:'var(--text-secondary)', marginBottom:'20px', fontWeight:600 }}>
-          💰 돈의 흐름 — {company.name}은 어떻게 수익을 만드는가
+          ?뮥 ?덉쓽 ?먮쫫 ??{company.name}? ?대뼸寃??섏씡??留뚮뱶?붽?
         </div>
 
         {/* Flow Diagram */}
         <div style={{ display:'flex', alignItems:'stretch', gap:'0', overflowX:'auto', padding:'4px 0' }}>
           {/* Revenue */}
           <FlowBox
-            label="매출액"
+            label="留ㅼ텧??
             value={fB(rev, company?.ticker)}
             pct="100%"
             color="#3b82f6"
-            desc={p.industry || '핵심 사업'}
+            desc={p.industry || '?듭떖 ?ъ뾽'}
             isFirst
           />
           <FlowArrow />
 
           {/* COGS Split */}
           <div style={{ display:'flex', flexDirection:'column', gap:'8px', minWidth:'160px' }}>
-            <FlowBox label="매출원가 (COGS)" value={fB(cogs, company?.ticker)} pct={`${(cogs/rev*100).toFixed(1)}%`} color="#ff6b6b" desc="제품·서비스 원가" small />
-            <FlowBox label="매출총이익" value={fB(gp, company?.ticker)} pct={`${gpm.toFixed(1)}%`} color="#10b981" desc="Gross Profit" small highlight />
+            <FlowBox label="留ㅼ텧?먭? (COGS)" value={fB(cogs, company?.ticker)} pct={`${(cogs/rev*100).toFixed(1)}%`} color="#ff6b6b" desc="?쒗뭹쨌?쒕퉬???먭?" small />
+            <FlowBox label="留ㅼ텧珥앹씠?? value={fB(gp, company?.ticker)} pct={`${gpm.toFixed(1)}%`} color="#10b981" desc="Gross Profit" small highlight />
           </div>
           <FlowArrow />
 
           {/* OpEx Split */}
           <div style={{ display:'flex', flexDirection:'column', gap:'8px', minWidth:'160px' }}>
-            <FlowBox label="판관비·R&D" value={fB(opEx, company?.ticker)} pct={`${(opEx/rev*100).toFixed(1)}%`} color="#f97316" desc="운영비 공제" small />
-            <FlowBox label="영업이익" value={fB(opInc, company?.ticker)} pct={`${opm.toFixed(1)}%`} color="#8b5cf6" desc="Operating Income" small highlight />
+            <FlowBox label="?먭?鍮꽷톀&D" value={fB(opEx, company?.ticker)} pct={`${(opEx/rev*100).toFixed(1)}%`} color="#f97316" desc="?댁쁺鍮?怨듭젣" small />
+            <FlowBox label="?곸뾽?댁씡" value={fB(opInc, company?.ticker)} pct={`${opm.toFixed(1)}%`} color="#8b5cf6" desc="Operating Income" small highlight />
           </div>
           <FlowArrow />
 
           {/* Net Income */}
           <div style={{ display:'flex', flexDirection:'column', gap:'8px', minWidth:'160px' }}>
-            <FlowBox label="세금·이자·기타" value={fB(taxOther, company?.ticker)} pct={`${(taxOther/rev*100).toFixed(1)}%`} color="#ef4444" desc="비영업 비용" small />
-            <FlowBox label="🏆 순이익" value={fB(netInc, company?.ticker)} pct={`${npm.toFixed(1)}%`} color="#00f2fe" desc="Net Income" small highlight glow />
+            <FlowBox label="?멸툑쨌?댁옄쨌湲고?" value={fB(taxOther, company?.ticker)} pct={`${(taxOther/rev*100).toFixed(1)}%`} color="#ef4444" desc="鍮꾩쁺??鍮꾩슜" small />
+            <FlowBox label="?룇 ?쒖씠?? value={fB(netInc, company?.ticker)} pct={`${npm.toFixed(1)}%`} color="#00f2fe" desc="Net Income" small highlight glow />
           </div>
         </div>
-        {/* 마진율 요약 바 */}
+        {/* 留덉쭊???붿빟 諛?*/}
         <div style={{ marginTop:'24px', padding:'16px', borderRadius:'8px', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.06)' }}>
-          <div style={{ fontSize:'0.8rem', color:'var(--text-secondary)', marginBottom:'12px', fontWeight:600 }}>매출 1단위에서 남는 이익</div>
+          <div style={{ fontSize:'0.8rem', color:'var(--text-secondary)', marginBottom:'12px', fontWeight:600 }}>留ㅼ텧 1?⑥쐞?먯꽌 ?⑤뒗 ?댁씡</div>
           <div style={{ display:'flex', flexDirection:'column', gap:'10px' }}>
             {[
-              { label:'매출총이익률 (GPM)', pct: gpm, color:'#10b981' },
-              { label:'영업이익률 (OPM)', pct: opm, color:'#8b5cf6' },
-              { label:'순이익률 (NPM)',   pct: npm, color:'#00f2fe' },
+              { label:'留ㅼ텧珥앹씠?듬쪧 (GPM)', pct: gpm, color:'#10b981' },
+              { label:'?곸뾽?댁씡瑜?(OPM)', pct: opm, color:'#8b5cf6' },
+              { label:'?쒖씠?듬쪧 (NPM)',   pct: npm, color:'#00f2fe' },
             ].map(row => (
               <div key={row.label} style={{ display:'flex', alignItems:'center', gap:'12px' }}>
                 <div style={{ width:'140px', fontSize:'0.8rem', color:'var(--text-secondary)', flexShrink:0 }}>{row.label}</div>
@@ -1514,12 +1515,12 @@ function BusinessModelSection({ latest, profile, company }) {
         </div>
       </div>
 
-      {/* ── 수익 폭포 차트 + 비용 구조 파이 ── */}
+      {/* ?? ?섏씡 ??룷 李⑦듃 + 鍮꾩슜 援ъ“ ?뚯씠 ?? */}
       <div style={{ display:'grid', gridTemplateColumns:'3fr 2fr', gap:'20px' }}>
         {/* Waterfall Chart */}
         <div className="glass-panel" style={{ padding:'24px' }}>
           <div style={{ fontSize:'0.85rem', color:'var(--text-secondary)', marginBottom:'16px', fontWeight:600 }}>
-            📊 수익 폭포 차트 (Profit Waterfall)
+            ?뱤 ?섏씡 ??룷 李⑦듃 (Profit Waterfall)
           </div>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={wfData.map(d => ({
@@ -1548,7 +1549,7 @@ function BusinessModelSection({ latest, profile, company }) {
         {/* Cost Breakdown Pie */}
         <div className="glass-panel" style={{ padding:'24px' }}>
           <div style={{ fontSize:'0.85rem', color:'var(--text-secondary)', marginBottom:'16px', fontWeight:600 }}>
-            🥧 매출 배분 구조
+            ?ⅶ 留ㅼ텧 諛곕텇 援ъ“
           </div>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
@@ -1580,7 +1581,7 @@ function BusinessModelSection({ latest, profile, company }) {
   );
 }
 
-// ── 4단계 투자원칙 기반 유니버스 팔로잉 & 포트폴리오 매니저 ─────────────────
+// ?? 4?④퀎 ?ъ옄?먯튃 湲곕컲 ?좊땲踰꾩뒪 ?붾줈??& ?ы듃?대━??留ㅻ땲? ?????????????????
 function AgentWorkspace() {
   const [universeData, setUniverseData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -1589,14 +1590,14 @@ function AgentWorkspace() {
   const [scanData, setScanData] = useState(null);
   const [scanLoading, setScanLoading] = useState(false);
   const [mainTab, setMainTab] = useState('universe'); // 'universe' | 'autoscan' | 'eps'
-  // EPS 분석 state
+  // EPS 遺꾩꽍 state
   const [epsValuation, setEpsValuation] = useState(null);
   const [epsSpread, setEpsSpread] = useState(null);
   const [epsTracker, setEpsTracker] = useState(null);
   const [epsLoading, setEpsLoading] = useState(false);
   const [epsSubTab, setEpsSubTab] = useState('valuation'); // 'valuation'|'spread'|'tracker'
   const [spreadPeriod, setSpreadPeriod] = useState(252);
-  // 스크리닝 state
+  // ?ㅽ겕由щ떇 state
   const [screenData, setScreenData] = useState(null);
   const [screenLoading, setScreenLoading] = useState(false);
 
@@ -1703,39 +1704,39 @@ function AgentWorkspace() {
       <div className="page-header orchestrator-header" style={{ borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'24px' }}>
         <div>
           <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'10px' }}>
-            <span className="live-badge active" style={{ background:'rgba(16,185,129,0.15)', color:'#10b981', border:'1px solid rgba(16,185,129,0.3)' }}>● 4단계 투자원칙 엔진 가동 중</span>
+            <span className="live-badge active" style={{ background:'rgba(16,185,129,0.15)', color:'#10b981', border:'1px solid rgba(16,185,129,0.3)' }}>??4?④퀎 ?ъ옄?먯튃 ?붿쭊 媛??以?/span>
             <span style={{ color:'var(--text-secondary)', fontSize:'0.85rem' }}>Real-time Portfolio Universe Monitor</span>
           </div>
-          <h2 style={{ fontSize:'2.2rem', margin:0, background:'linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>🛡️ 4단계 투자원칙 기반 유니버스 모니터링</h2>
+          <h2 style={{ fontSize:'2.2rem', margin:0, background:'linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>?썳截?4?④퀎 ?ъ옄?먯튃 湲곕컲 ?좊땲踰꾩뒪 紐⑤땲?곕쭅</h2>
         </div>
         <div style={{ display:'flex', gap:'8px', alignItems:'center', flexWrap:'wrap' }}>
-          {/* 메인 탭 전환 */}
+          {/* 硫붿씤 ???꾪솚 */}
           <button onClick={() => setMainTab('universe')} style={{
             padding:'8px 18px', borderRadius:'10px', cursor:'pointer', fontWeight:700, fontSize:'0.85rem',
             border: mainTab==='universe' ? '1.5px solid #a5b4fc' : '1px solid rgba(255,255,255,0.1)',
             background: mainTab==='universe' ? 'rgba(165,180,252,0.15)' : 'rgba(255,255,255,0.03)',
             color: mainTab==='universe' ? '#a5b4fc' : 'rgba(255,255,255,0.5)'
-          }}>🛡️ 팔로잉 유니버스</button>
+          }}>?썳截??붾줈???좊땲踰꾩뒪</button>
           <button onClick={() => { setMainTab('autoscan'); if (!scanData && !scanLoading) fetchAutoScan(); }} style={{
             padding:'8px 18px', borderRadius:'10px', cursor:'pointer', fontWeight:700, fontSize:'0.85rem',
             border: mainTab==='autoscan' ? '1.5px solid #fbbf24' : '1px solid rgba(255,255,255,0.1)',
             background: mainTab==='autoscan' ? 'rgba(251,191,36,0.12)' : 'rgba(255,255,255,0.03)',
             color: mainTab==='autoscan' ? '#fbbf24' : 'rgba(255,255,255,0.5)'
-          }}>🔍 자동 종목 추천</button>
+          }}>?뵇 ?먮룞 醫낅ぉ 異붿쿇</button>
           <button onClick={() => { setMainTab('eps'); if (!epsValuation) fetchEpsValuation(); setEpsSubTab('valuation'); }} style={{
             padding:'8px 18px', borderRadius:'10px', cursor:'pointer', fontWeight:700, fontSize:'0.85rem',
             border: mainTab==='eps' ? '1.5px solid #34d399' : '1px solid rgba(255,255,255,0.1)',
             background: mainTab==='eps' ? 'rgba(52,211,153,0.12)' : 'rgba(255,255,255,0.03)',
             color: mainTab==='eps' ? '#34d399' : 'rgba(255,255,255,0.5)'
-          }}>📊 EPS 분석</button>
+          }}>?뱤 EPS 遺꾩꽍</button>
           {mainTab === 'universe' && (
             <button className="run-btn" disabled={loading} onClick={() => fetchUniverse(0, true)}>
-              {loading ? '⏳ 갱신 중...' : '🔄 실시간 주가/MDD 재조회 (Yahoo Live)'}
+              {loading ? '??媛깆떊 以?..' : '?봽 ?ㅼ떆媛?二쇨?/MDD ?ъ“??(Yahoo Live)'}
             </button>
           )}
           {mainTab === 'autoscan' && (
             <button className="run-btn" disabled={scanLoading} onClick={fetchAutoScan}>
-              {scanLoading ? '⏳ 스캔 중 (약 1분)...' : '🔍 투자원칙 기반 신규 종목 재스캔'}
+              {scanLoading ? '???ㅼ틪 以?(??1遺?...' : '?뵇 ?ъ옄?먯튃 湲곕컲 ?좉퇋 醫낅ぉ ?ъ뒪罹?}
             </button>
           )}
           {mainTab === 'eps' && (
@@ -1744,21 +1745,21 @@ function AgentWorkspace() {
               if (epsSubTab==='spread') fetchEpsSpread();
               if (epsSubTab==='tracker') fetchEpsTracker();
             }}>
-              {epsLoading ? '⏳ 조회 중...' : '🔄 EPS 데이터 새로고침'}
+              {epsLoading ? '??議고쉶 以?..' : '?봽 EPS ?곗씠???덈줈怨좎묠'}
             </button>
           )}
         </div>
       </div>
 
-      {/* ── EPS 분석 탭 ── */}
+      {/* ?? EPS 遺꾩꽍 ???? */}
       {mainTab === 'eps' && (
         <div>
-          {/* EPS 서브탭 */}
+          {/* EPS ?쒕툕??*/}
           <div style={{ display:'flex', gap:'8px', marginBottom:'24px', flexWrap:'wrap' }}>
             {[
-              { id:'valuation', label:'📈 시장 밸류에이션 온도계', color:'#a78bfa' },
-              { id:'spread',    label:'🔬 주가-EPS 괴리 스크리너', color:'#34d399' },
-              { id:'tracker',   label:'🎯 팔로잉 종목 EPS 트래커', color:'#60a5fa' },
+              { id:'valuation', label:'?뱢 ?쒖옣 諛몃쪟?먯씠???⑤룄怨?, color:'#a78bfa' },
+              { id:'spread',    label:'?뵮 二쇨?-EPS 愿대━ ?ㅽ겕由щ꼫', color:'#34d399' },
+              { id:'tracker',   label:'?렞 ?붾줈??醫낅ぉ EPS ?몃옒而?, color:'#60a5fa' },
             ].map(t => (
               <button key={t.id} onClick={() => handleEpsTabClick(t.id)} style={{
                 padding:'8px 18px', borderRadius:'10px', cursor:'pointer', fontWeight:700, fontSize:'0.85rem',
@@ -1771,28 +1772,28 @@ function AgentWorkspace() {
 
           {epsLoading ? (
             <div className="glass-panel" style={{ padding:'60px', textAlign:'center' }}>
-              <div style={{ fontSize:'1.2rem', color:'#34d399', marginBottom:'12px' }}>⏳ EPS 데이터 분석 중...</div>
-              <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.4)' }}>KOSPI200+KOSDAQ150 350개 종목 처리 중</div>
+              <div style={{ fontSize:'1.2rem', color:'#34d399', marginBottom:'12px' }}>??EPS ?곗씠??遺꾩꽍 以?..</div>
+              <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.4)' }}>KOSPI200+KOSDAQ150 350媛?醫낅ぉ 泥섎━ 以?/div>
             </div>
           ) : (
             <>
-              {/* ── 서브탭 1: 시장 밸류에이션 온도계 ── */}
+              {/* ?? ?쒕툕??1: ?쒖옣 諛몃쪟?먯씠???⑤룄怨??? */}
               {epsSubTab === 'valuation' && (
                 !epsValuation ? (
                   <div className="glass-panel" style={{ padding:'50px', textAlign:'center' }}>
-                    <button className="run-btn" onClick={fetchEpsValuation} style={{ margin:'0 auto' }}>📈 시장 PER 데이터 불러오기</button>
+                    <button className="run-btn" onClick={fetchEpsValuation} style={{ margin:'0 auto' }}>?뱢 ?쒖옣 PER ?곗씠??遺덈윭?ㅺ린</button>
                   </div>
                 ) : epsValuation.error ? (
                   <div className="glass-panel" style={{ padding:'40px', textAlign:'center', color:'#f87171' }}>{epsValuation.error}</div>
                 ) : (
                   <div>
-                    {/* 현재 온도 게이지 */}
+                    {/* ?꾩옱 ?⑤룄 寃뚯씠吏 */}
                     <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))', gap:'12px', marginBottom:'24px' }}>
                       {[
-                        { label:'KOSPI200 현재 FWD PER', value:`${epsValuation.current?.kospi200}x`, sub:'시장 평균', color:'#a78bfa' },
-                        { label:'KOSDAQ150 현재 FWD PER', value:`${epsValuation.current?.kosdaq150}x`, sub:'시장 평균', color:'#60a5fa' },
-                        { label:'현재 역사적 분위수', value:`${epsValuation.current_percentile}%ile`, sub:epsValuation.level, color: epsValuation.current_percentile <= 35 ? '#34d399' : epsValuation.current_percentile <= 55 ? '#fbbf24' : '#f87171' },
-                        { label:'10년 평균 PER', value:`${epsValuation.history?.avg}x`, sub:`범위: ${epsValuation.history?.min}x ~ ${epsValuation.history?.max}x`, color:'#94a3b8' },
+                        { label:'KOSPI200 ?꾩옱 FWD PER', value:`${epsValuation.current?.kospi200}x`, sub:'?쒖옣 ?됯퇏', color:'#a78bfa' },
+                        { label:'KOSDAQ150 ?꾩옱 FWD PER', value:`${epsValuation.current?.kosdaq150}x`, sub:'?쒖옣 ?됯퇏', color:'#60a5fa' },
+                        { label:'?꾩옱 ??궗??遺꾩쐞??, value:`${epsValuation.current_percentile}%ile`, sub:epsValuation.level, color: epsValuation.current_percentile <= 35 ? '#34d399' : epsValuation.current_percentile <= 55 ? '#fbbf24' : '#f87171' },
+                        { label:'10???됯퇏 PER', value:`${epsValuation.history?.avg}x`, sub:`踰붿쐞: ${epsValuation.history?.min}x ~ ${epsValuation.history?.max}x`, color:'#94a3b8' },
                       ].map(s => (
                         <div key={s.label} className="glass-panel" style={{ padding:'18px', borderRadius:'12px', textAlign:'center', border:`1px solid ${s.color}33` }}>
                           <div style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.45)', marginBottom:'6px' }}>{s.label}</div>
@@ -1802,10 +1803,10 @@ function AgentWorkspace() {
                       ))}
                     </div>
 
-                    {/* 온도계 바 */}
+                    {/* ?⑤룄怨?諛?*/}
                     <div className="glass-panel" style={{ padding:'20px', marginBottom:'20px', borderRadius:'14px' }}>
                       <div style={{ fontSize:'0.85rem', color:'#a78bfa', fontWeight:700, marginBottom:'14px' }}>
-                        🌡️ KOSPI200 FWD PER 역사적 위치 ({epsValuation.current_percentile}%ile)
+                        ?뙜截?KOSPI200 FWD PER ??궗???꾩튂 ({epsValuation.current_percentile}%ile)
                       </div>
                       {(() => {
                         const pct = epsValuation.current_percentile || 0;
@@ -1813,40 +1814,40 @@ function AgentWorkspace() {
                         return (
                           <div>
                             <div style={{ position:'relative', height:'32px', background:'rgba(255,255,255,0.06)', borderRadius:'16px', overflow:'hidden', marginBottom:'8px' }}>
-                              {/* 구간 색상 */}
+                              {/* 援ш컙 ?됱긽 */}
                               <div style={{ position:'absolute', left:'0%', width:'20%', height:'100%', background:'rgba(52,211,153,0.25)' }}/>
                               <div style={{ position:'absolute', left:'20%', width:'15%', height:'100%', background:'rgba(52,211,153,0.15)' }}/>
                               <div style={{ position:'absolute', left:'35%', width:'20%', height:'100%', background:'rgba(251,191,36,0.15)' }}/>
                               <div style={{ position:'absolute', left:'55%', width:'20%', height:'100%', background:'rgba(251,191,36,0.25)' }}/>
                               <div style={{ position:'absolute', left:'75%', width:'25%', height:'100%', background:'rgba(239,68,68,0.2)' }}/>
-                              {/* 현재 위치 포인터 */}
+                              {/* ?꾩옱 ?꾩튂 ?ъ씤??*/}
                               <div style={{ position:'absolute', left:`${Math.min(pct,98)}%`, top:'2px', width:'28px', height:'28px', background:clr, borderRadius:'50%', transform:'translateX(-50%)', boxShadow:`0 0 12px ${clr}80`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'0.7rem', fontWeight:900, color:'#000' }}>
                                 {pct}
                               </div>
                             </div>
                             <div style={{ display:'flex', justifyContent:'space-between', fontSize:'0.68rem', color:'rgba(255,255,255,0.4)' }}>
-                              <span>매우 저평가</span><span>저평가</span><span>적정</span><span>고평가</span><span>과열</span>
+                              <span>留ㅼ슦 ??됯?</span><span>??됯?</span><span>?곸젙</span><span>怨좏룊媛</span><span>怨쇱뿴</span>
                             </div>
                             <div style={{ marginTop:'8px', padding:'8px 12px', borderRadius:'8px', background:`${clr}15`, border:`1px solid ${clr}30`, fontSize:'0.82rem', color:clr, fontWeight:700 }}>
-                              → {epsValuation.level}
+                              ??{epsValuation.level}
                             </div>
                           </div>
                         );
                       })()}
                     </div>
 
-                    {/* PER 분위수 히스토리 */}
+                    {/* PER 遺꾩쐞???덉뒪?좊━ */}
                     <div className="glass-panel" style={{ padding:'20px', marginBottom:'20px', borderRadius:'14px' }}>
                       <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', fontWeight:700, marginBottom:'14px' }}>
-                        📊 10년 PER 분위수 밴드
+                        ?뱤 10??PER 遺꾩쐞??諛대뱶
                       </div>
                       <div style={{ display:'grid', gridTemplateColumns:'repeat(5,1fr)', gap:'8px' }}>
                         {[
-                          { label:'P10 (극저)', value:epsValuation.history?.p10, color:'#34d399' },
-                          { label:'P25 (저평가)', value:epsValuation.history?.p25, color:'#a7f3d0' },
-                          { label:'P50 (중앙)', value:epsValuation.history?.p50, color:'#fbbf24' },
-                          { label:'P75 (고평가)', value:epsValuation.history?.p75, color:'#fb923c' },
-                          { label:'P90 (과열)', value:epsValuation.history?.p90, color:'#f87171' },
+                          { label:'P10 (洹뱀?)', value:epsValuation.history?.p10, color:'#34d399' },
+                          { label:'P25 (??됯?)', value:epsValuation.history?.p25, color:'#a7f3d0' },
+                          { label:'P50 (以묒븰)', value:epsValuation.history?.p50, color:'#fbbf24' },
+                          { label:'P75 (怨좏룊媛)', value:epsValuation.history?.p75, color:'#fb923c' },
+                          { label:'P90 (怨쇱뿴)', value:epsValuation.history?.p90, color:'#f87171' },
                         ].map(p => (
                           <div key={p.label} style={{ textAlign:'center', padding:'12px', borderRadius:'10px', background:'rgba(255,255,255,0.04)', border:`1px solid ${p.color}33` }}>
                             <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.45)', marginBottom:'4px' }}>{p.label}</div>
@@ -1856,11 +1857,11 @@ function AgentWorkspace() {
                       </div>
                     </div>
 
-                    {/* 1년 PER 추이 차트 */}
+                    {/* 1??PER 異붿씠 李⑦듃 */}
                     {epsValuation.chart_kospi200?.length > 0 && (
                       <div className="glass-panel" style={{ padding:'20px', borderRadius:'14px' }}>
                         <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', fontWeight:700, marginBottom:'14px' }}>
-                          📈 KOSPI200 FWD PER 1년 추이
+                          ?뱢 KOSPI200 FWD PER 1??異붿씠
                         </div>
                         <ResponsiveContainer width="100%" height={260}>
                           <ComposedChart data={epsValuation.chart_kospi200}>
@@ -1871,24 +1872,24 @@ function AgentWorkspace() {
                             <RechartsTooltip
                               contentStyle={{ background:'rgba(15,23,42,0.95)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'8px', fontSize:'12px' }}
                               formatter={(v,n) => [`${v}x`, n==='per'?'FWD PER':n]}
-                              labelFormatter={l=>`📅 ${l}`}
+                              labelFormatter={l=>`?뱟 ${l}`}
                             />
-                            {/* 과거 평균선 */}
-                            <Line type="monotone" dataKey={() => epsValuation.history?.avg} stroke="rgba(148,163,184,0.4)" strokeDasharray="5 5" dot={false} name="10년평균" />
+                            {/* 怨쇨굅 ?됯퇏??*/}
+                            <Line type="monotone" dataKey={() => epsValuation.history?.avg} stroke="rgba(148,163,184,0.4)" strokeDasharray="5 5" dot={false} name="10?꾪룊洹? />
                             <Area type="monotone" dataKey="per" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" strokeWidth={2} dot={false} name="FWD PER" />
                           </ComposedChart>
                         </ResponsiveContainer>
                         {epsValuation.chart_kosdaq150?.length > 0 && (
                           <>
                             <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', fontWeight:700, margin:'20px 0 14px' }}>
-                              📈 KOSDAQ150 FWD PER 1년 추이
+                              ?뱢 KOSDAQ150 FWD PER 1??異붿씠
                             </div>
                             <ResponsiveContainer width="100%" height={200}>
                               <ComposedChart data={epsValuation.chart_kosdaq150}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
                                 <XAxis dataKey="date" tick={{ fontSize:11, fill:'rgba(255,255,255,0.4)' }} tickFormatter={v=>v?.slice(5)} interval={30}/>
                                 <YAxis domain={['auto','auto']} tick={{ fontSize:11, fill:'rgba(255,255,255,0.4)' }} tickFormatter={v=>`${v}x`}/>
-                                <RechartsTooltip contentStyle={{ background:'rgba(15,23,42,0.95)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'8px', fontSize:'12px' }} formatter={(v)=>[`${v}x`,'FWD PER']} labelFormatter={l=>`📅 ${l}`}/>
+                                <RechartsTooltip contentStyle={{ background:'rgba(15,23,42,0.95)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'8px', fontSize:'12px' }} formatter={(v)=>[`${v}x`,'FWD PER']} labelFormatter={l=>`?뱟 ${l}`}/>
                                 <Area type="monotone" dataKey="per" fill="rgba(96,165,250,0.1)" stroke="#60a5fa" strokeWidth={2} dot={false} name="FWD PER"/>
                               </ComposedChart>
                             </ResponsiveContainer>
@@ -1900,24 +1901,24 @@ function AgentWorkspace() {
                 )
               )}
 
-              {/* ── 서브탭 2: 주가-EPS 괴리 스크리너 ── */}
+              {/* ?? ?쒕툕??2: 二쇨?-EPS 愿대━ ?ㅽ겕由щ꼫 ?? */}
               {epsSubTab === 'spread' && (
                 !epsSpread ? (
                   <div className="glass-panel" style={{ padding:'50px', textAlign:'center' }}>
                     <div style={{ color:'rgba(255,255,255,0.6)', marginBottom:'20px' }}>
-                      EPS 성장 대비 주가 성장 괴리를 분석합니다<br/>
-                      <span style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.4)' }}>음수 괴리 = EPS가 주가보다 더 올랐음 = 저평가 기회</span>
+                      EPS ?깆옣 ?鍮?二쇨? ?깆옣 愿대━瑜?遺꾩꽍?⑸땲??br/>
+                      <span style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.4)' }}>?뚯닔 愿대━ = EPS媛 二쇨?蹂대떎 ???щ옄??= ??됯? 湲고쉶</span>
                     </div>
-                    <button className="run-btn" onClick={() => fetchEpsSpread()} style={{ margin:'0 auto' }}>🔬 스크리닝 시작</button>
+                    <button className="run-btn" onClick={() => fetchEpsSpread()} style={{ margin:'0 auto' }}>?뵮 ?ㅽ겕由щ떇 ?쒖옉</button>
                   </div>
                 ) : epsSpread.error ? (
                   <div className="glass-panel" style={{ padding:'40px', textAlign:'center', color:'#f87171' }}>{epsSpread.error}</div>
                 ) : (
                   <div>
-                    {/* 기간 선택 */}
+                    {/* 湲곌컙 ?좏깮 */}
                     <div style={{ display:'flex', gap:'8px', marginBottom:'20px', alignItems:'center', flexWrap:'wrap' }}>
-                      <span style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.5)' }}>비교 기간:</span>
-                      {[[63,'3개월'],[126,'6개월'],[252,'1년'],[504,'2년']].map(([d,l]) => (
+                      <span style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.5)' }}>鍮꾧탳 湲곌컙:</span>
+                      {[[63,'3媛쒖썡'],[126,'6媛쒖썡'],[252,'1??],[504,'2??]].map(([d,l]) => (
                         <button key={d} onClick={() => { setSpreadPeriod(d); fetchEpsSpread(d); }} style={{
                           padding:'5px 12px', borderRadius:'8px', cursor:'pointer', fontSize:'0.8rem', fontWeight:600,
                           border: spreadPeriod===d ? '1.5px solid #34d399' : '1px solid rgba(255,255,255,0.1)',
@@ -1926,15 +1927,15 @@ function AgentWorkspace() {
                         }}>{l}</button>
                       ))}
                       <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.35)', marginLeft:'auto' }}>
-                        기준일: {epsSpread.past_date} → {epsSpread.latest_date} | 총 {epsSpread.total_screened}종목 분석
+                        湲곗??? {epsSpread.past_date} ??{epsSpread.latest_date} | 珥?{epsSpread.total_screened}醫낅ぉ 遺꾩꽍
                       </span>
                     </div>
 
-                    {/* 저평가 섹션 */}
+                    {/* ??됯? ?뱀뀡 */}
                     <div style={{ marginBottom:'24px' }}>
                       <div style={{ fontSize:'1rem', fontWeight:700, color:'#34d399', marginBottom:'12px', display:'flex', alignItems:'center', gap:'8px' }}>
-                        🟢 저평가 TOP {epsSpread.undervalued?.length}
-                        <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.4)', fontWeight:400 }}>EPS 성장 &gt;&gt; 주가 상승 → 시장이 아직 반영 못한 기회</span>
+                        ?윟 ??됯? TOP {epsSpread.undervalued?.length}
+                        <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.4)', fontWeight:400 }}>EPS ?깆옣 &gt;&gt; 二쇨? ?곸듅 ???쒖옣???꾩쭅 諛섏쁺 紐삵븳 湲고쉶</span>
                       </div>
                       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:'12px' }}>
                         {epsSpread.undervalued?.map((item, idx) => (
@@ -1951,41 +1952,41 @@ function AgentWorkspace() {
                             </div>
                             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'6px', background:'rgba(0,0,0,0.2)', padding:'10px', borderRadius:'8px' }}>
                               <div style={{ textAlign:'center' }}>
-                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>EPS 성장</div>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>EPS ?깆옣</div>
                                 <div style={{ fontSize:'0.92rem', fontWeight:800, color:'#34d399' }}>+{item.eps_growth_pct?.toFixed(0)}%</div>
                               </div>
                               <div style={{ textAlign:'center' }}>
-                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>주가 성장</div>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>二쇨? ?깆옣</div>
                                 <div style={{ fontSize:'0.92rem', fontWeight:800, color: item.price_growth_pct >= 0 ? '#60a5fa' : '#f87171' }}>
                                   {item.price_growth_pct >= 0 ? '+' : ''}{item.price_growth_pct?.toFixed(0)}%
                                 </div>
                               </div>
                               <div style={{ textAlign:'center' }}>
-                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>괴리</div>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>愿대━</div>
                                 <div style={{ fontSize:'0.92rem', fontWeight:800, color:'#34d399' }}>{item.spread_pct?.toFixed(0)}%p</div>
                               </div>
                             </div>
                             <div style={{ marginTop:'8px', fontSize:'0.72rem', color:'rgba(255,255,255,0.45)', display:'flex', gap:'12px' }}>
-                              <span>현재가 {item.price?.toLocaleString()}원</span>
-                              <span>EPS {item.eps_fwd?.toLocaleString()}원</span>
+                              <span>?꾩옱媛 {item.price?.toLocaleString()}??/span>
+                              <span>EPS {item.eps_fwd?.toLocaleString()}??/span>
                             </div>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    {/* 과열 섹션 */}
+                    {/* 怨쇱뿴 ?뱀뀡 */}
                     <div>
                       <div style={{ fontSize:'1rem', fontWeight:700, color:'#f87171', marginBottom:'12px', display:'flex', alignItems:'center', gap:'8px' }}>
-                        🔴 주의 과열 TOP {epsSpread.overheated?.length}
-                        <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.4)', fontWeight:400 }}>주가 상승 &gt;&gt; EPS 성장 → 주의 필요</span>
+                        ?뵶 二쇱쓽 怨쇱뿴 TOP {epsSpread.overheated?.length}
+                        <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.4)', fontWeight:400 }}>二쇨? ?곸듅 &gt;&gt; EPS ?깆옣 ??二쇱쓽 ?꾩슂</span>
                       </div>
                       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:'12px' }}>
                         {epsSpread.overheated?.map((item, idx) => (
                           <div key={idx} className="glass-panel" style={{ padding:'16px', borderRadius:'12px', border:'1px solid rgba(239,68,68,0.25)', background:'rgba(239,68,68,0.04)' }}>
                             <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' }}>
                               <div style={{ display:'flex', gap:'8px', alignItems:'center' }}>
-                                <span style={{ fontSize:'0.9rem', fontWeight:900, color:'#f87171' }}>⚠️</span>
+                                <span style={{ fontSize:'0.9rem', fontWeight:900, color:'#f87171' }}>?좑툘</span>
                                 <span style={{ fontSize:'1rem', fontWeight:700, color:'white' }}>{item.name}</span>
                                 <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.4)' }}>{item.index_type}</span>
                               </div>
@@ -1995,15 +1996,15 @@ function AgentWorkspace() {
                             </div>
                             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'6px', background:'rgba(0,0,0,0.2)', padding:'10px', borderRadius:'8px' }}>
                               <div style={{ textAlign:'center' }}>
-                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>EPS 성장</div>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>EPS ?깆옣</div>
                                 <div style={{ fontSize:'0.92rem', fontWeight:800, color:'#94a3b8' }}>{item.eps_growth_pct?.toFixed(0)}%</div>
                               </div>
                               <div style={{ textAlign:'center' }}>
-                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>주가 성장</div>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>二쇨? ?깆옣</div>
                                 <div style={{ fontSize:'0.92rem', fontWeight:800, color:'#f87171' }}>+{item.price_growth_pct?.toFixed(0)}%</div>
                               </div>
                               <div style={{ textAlign:'center' }}>
-                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>괴리</div>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>愿대━</div>
                                 <div style={{ fontSize:'0.92rem', fontWeight:800, color:'#f87171' }}>+{item.spread_pct?.toFixed(0)}%p</div>
                               </div>
                             </div>
@@ -2015,16 +2016,16 @@ function AgentWorkspace() {
                 )
               )}
 
-              {/* ── 서브탭 3: 팔로잉 종목 EPS 트래커 ── */}
+              {/* ?? ?쒕툕??3: ?붾줈??醫낅ぉ EPS ?몃옒而??? */}
               {epsSubTab === 'tracker' && (
                 !epsTracker ? (
                   <div className="glass-panel" style={{ padding:'50px', textAlign:'center' }}>
-                    <div style={{ color:'rgba(255,255,255,0.6)', marginBottom:'20px' }}>유니버스 한국 종목의 FWD EPS + 주가 추이를 추적합니다</div>
-                    <button className="run-btn" onClick={fetchEpsTracker} style={{ margin:'0 auto' }}>🎯 EPS 트래커 불러오기</button>
+                    <div style={{ color:'rgba(255,255,255,0.6)', marginBottom:'20px' }}>?좊땲踰꾩뒪 ?쒓뎅 醫낅ぉ??FWD EPS + 二쇨? 異붿씠瑜?異붿쟻?⑸땲??/div>
+                    <button className="run-btn" onClick={fetchEpsTracker} style={{ margin:'0 auto' }}>?렞 EPS ?몃옒而?遺덈윭?ㅺ린</button>
                   </div>
                 ) : epsTracker.tracker?.length === 0 ? (
                   <div className="glass-panel" style={{ padding:'40px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
-                    KOSPI200/KOSDAQ150 매칭 종목이 없습니다. 유니버스에 한국 종목을 추가해주세요.
+                    KOSPI200/KOSDAQ150 留ㅼ묶 醫낅ぉ???놁뒿?덈떎. ?좊땲踰꾩뒪???쒓뎅 醫낅ぉ??異붽??댁＜?몄슂.
                   </div>
                 ) : (
                   <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(380px,1fr))', gap:'16px' }}>
@@ -2040,22 +2041,22 @@ function AgentWorkspace() {
                           border: isBuy ? '1.5px solid rgba(52,211,153,0.4)' : `1px solid ${tierC}22`,
                           background: isBuy ? 'rgba(52,211,153,0.04)' : 'rgba(30,41,59,0.5)'
                         }}>
-                          {/* 헤더 */}
+                          {/* ?ㅻ뜑 */}
                           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'12px' }}>
                             <div>
                               <span style={{ fontSize:'0.72rem', padding:'2px 7px', borderRadius:'6px', background:`${tierC}22`, color:tierC, fontWeight:700, marginRight:'8px' }}>
-                                {isCore ? '🏆 Core' : isSat ? '🚀 Satellite' : '✨ Watchlist'}
+                                {isCore ? '?룇 Core' : isSat ? '?? Satellite' : '??Watchlist'}
                               </span>
                               <span style={{ fontSize:'1.05rem', fontWeight:700, color:'white' }}>{item.name}</span>
                             </div>
                             {isBuy && <span style={{ fontSize:'0.7rem', padding:'2px 8px', borderRadius:'10px', background:'rgba(52,211,153,0.15)', color:'#34d399', border:'1px solid rgba(52,211,153,0.3)', fontWeight:700 }}>BUY READY</span>}
                           </div>
 
-                          {/* FWD PER + MDD 게이지 */}
+                          {/* FWD PER + MDD 寃뚯씠吏 */}
                           <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'8px', background:'rgba(0,0,0,0.2)', padding:'10px', borderRadius:'8px', marginBottom:'12px' }}>
                             <div style={{ textAlign:'center' }}>
-                              <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.35)', marginBottom:'2px' }}>현재가</div>
-                              <div style={{ fontSize:'0.82rem', fontWeight:700, color:'white' }}>{item.price_latest?.toLocaleString()}원</div>
+                              <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.35)', marginBottom:'2px' }}>?꾩옱媛</div>
+                              <div style={{ fontSize:'0.82rem', fontWeight:700, color:'white' }}>{item.price_latest?.toLocaleString()}??/div>
                             </div>
                             <div style={{ textAlign:'center' }}>
                               <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.35)', marginBottom:'2px' }}>FWD PER</div>
@@ -2069,13 +2070,13 @@ function AgentWorkspace() {
                             </div>
                             <div style={{ textAlign:'center' }}>
                               <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.35)', marginBottom:'2px' }}>FWD EPS</div>
-                              <div style={{ fontSize:'0.82rem', fontWeight:700, color:'#fbbf24' }}>{item.eps_latest?.toLocaleString()}원</div>
+                              <div style={{ fontSize:'0.82rem', fontWeight:700, color:'#fbbf24' }}>{item.eps_latest?.toLocaleString()}??/div>
                             </div>
                           </div>
 
-                          {/* EPS vs 주가 성장 비교 */}
+                          {/* EPS vs 二쇨? ?깆옣 鍮꾧탳 */}
                           <div style={{ marginBottom:'12px', padding:'10px', borderRadius:'8px', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.06)' }}>
-                            <div style={{ fontSize:'0.7rem', color:'rgba(255,255,255,0.4)', marginBottom:'8px' }}>1년 EPS 성장 vs 주가 수익률</div>
+                            <div style={{ fontSize:'0.7rem', color:'rgba(255,255,255,0.4)', marginBottom:'8px' }}>1??EPS ?깆옣 vs 二쇨? ?섏씡瑜?/div>
                             <div style={{ display:'flex', gap:'12px', alignItems:'center', flexWrap:'wrap' }}>
                               <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
                                 <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.5)' }}>EPS</span>
@@ -2085,13 +2086,13 @@ function AgentWorkspace() {
                               </div>
                               <span style={{ color:'rgba(255,255,255,0.2)' }}>vs</span>
                               <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
-                                <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.5)' }}>주가</span>
+                                <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.5)' }}>二쇨?</span>
                                 <span style={{ fontSize:'1rem', fontWeight:800, color: item.price_change_1y >= 0 ? '#60a5fa' : '#f87171' }}>
                                   {item.price_change_1y >= 0 ? '+' : ''}{item.price_change_1y?.toFixed(1)}%
                                 </span>
                               </div>
                               <div style={{ marginLeft:'auto', display:'flex', alignItems:'center', gap:'4px' }}>
-                                <span style={{ fontSize:'0.7rem', color:'rgba(255,255,255,0.4)' }}>괴리</span>
+                                <span style={{ fontSize:'0.7rem', color:'rgba(255,255,255,0.4)' }}>愿대━</span>
                                 <span style={{ fontSize:'0.95rem', fontWeight:800, color:spreadColor }}>
                                   {item.spread_1y > 0 ? '+' : ''}{item.spread_1y?.toFixed(1)}%p
                                 </span>
@@ -2099,7 +2100,7 @@ function AgentWorkspace() {
                             </div>
                           </div>
 
-                          {/* 미니 차트 (EPS + 주가 정규화) */}
+                          {/* 誘몃땲 李⑦듃 (EPS + 二쇨? ?뺢퇋?? */}
                           {item.chart?.length > 2 && (() => {
                             const base_eps   = item.chart[0].eps   || 1;
                             const base_price = item.chart[0].price || 1;
@@ -2111,7 +2112,7 @@ function AgentWorkspace() {
                             return (
                               <div>
                                 <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.35)', marginBottom:'4px' }}>
-                                  📈 EPS(주황) vs 주가(파랑) 정규화 (기준=100)
+                                  ?뱢 EPS(二쇳솴) vs 二쇨?(?뚮옉) ?뺢퇋??(湲곗?=100)
                                 </div>
                                 <ResponsiveContainer width="100%" height={100}>
                                   <LineChart data={chartData}>
@@ -2119,7 +2120,7 @@ function AgentWorkspace() {
                                     <YAxis hide domain={['auto','auto']}/>
                                     <RechartsTooltip
                                       contentStyle={{ background:'rgba(15,23,42,0.95)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'6px', fontSize:'11px' }}
-                                      formatter={(v,n) => [`${v}`, n==='eps_idx'?'FWD EPS':'주가']}
+                                      formatter={(v,n) => [`${v}`, n==='eps_idx'?'FWD EPS':'二쇨?']}
                                     />
                                     <Line type="monotone" dataKey="eps_idx"   stroke="#fbbf24" strokeWidth={1.5} dot={false} name="eps_idx"/>
                                     <Line type="monotone" dataKey="price_idx" stroke="#60a5fa" strokeWidth={1.5} dot={false} name="price_idx"/>
@@ -2139,17 +2140,17 @@ function AgentWorkspace() {
         </div>
       )}
 
-      {/* ── 팔로잉 유니버스 탭 ── */}
+      {/* ?? ?붾줈???좊땲踰꾩뒪 ???? */}
       {mainTab === 'universe' && (<>
 
         <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'16px', marginBottom:'24px' }}>
           <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' }}>
             {[
-              { id: 'ALL', label: `전체 유니버스 (${universeList.length})`, color: '#64748b' },
-              { id: 'BUY_READY', label: `🟢 매수 가능 (${buyReadyCount})`, color: '#10b981' },
-              { id: 'Core', label: `🏆 Core 독점 (${coreCount})`, color: '#3b82f6' },
-              { id: 'Satellite', label: `🚀 Satellite 성장 (${satCount})`, color: '#8b5cf6' },
-              { id: 'Watchlist', label: `✨ 관심종목 (${watchCount})`, color: '#f59e0b' },
+              { id: 'ALL', label: `?꾩껜 ?좊땲踰꾩뒪 (${universeList.length})`, color: '#64748b' },
+              { id: 'BUY_READY', label: `?윟 留ㅼ닔 媛??(${buyReadyCount})`, color: '#10b981' },
+              { id: 'Core', label: `?룇 Core ?낆젏 (${coreCount})`, color: '#3b82f6' },
+              { id: 'Satellite', label: `?? Satellite ?깆옣 (${satCount})`, color: '#8b5cf6' },
+              { id: 'Watchlist', label: `??愿?ъ쥌紐?(${watchCount})`, color: '#f59e0b' },
             ].map(tab => (
               <button key={tab.id} onClick={() => setSelectedTier(tab.id)} style={{
                 padding: '8px 16px', borderRadius: '10px',
@@ -2162,7 +2163,7 @@ function AgentWorkspace() {
           </div>
 
           <div style={{ position:'relative', minWidth:'240px' }}>
-            <input type="text" placeholder="종목명, 티커, 산업 검색..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{
+            <input type="text" placeholder="醫낅ぉ紐? ?곗빱, ?곗뾽 寃??.." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{
               width:'100%', padding:'8px 14px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.15)', background:'rgba(15,23,42,0.6)', color:'white', fontSize:'0.85rem', outline:'none'
             }} />
           </div>
@@ -2170,22 +2171,22 @@ function AgentWorkspace() {
 
         {loading ? (
           <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
-            <div style={{ fontSize:'1.2rem', marginBottom:'12px' }}>⏳ 실시간 유니버스 데이터 수집 중...</div>
+            <div style={{ fontSize:'1.2rem', marginBottom:'12px' }}>???ㅼ떆媛??좊땲踰꾩뒪 ?곗씠???섏쭛 以?..</div>
           </div>
         ) : universeList.length === 0 ? (
           <div className="glass-panel" style={{ padding:'50px 24px', textAlign:'center' }}>
             <div style={{ fontSize:'1.2rem', color:'#f59e0b', fontWeight:700, marginBottom:'10px' }}>
-              ⚠️ 유니버스 데이터를 불러오는 중입니다 (서버 연결 대기)
+              ?좑툘 ?좊땲踰꾩뒪 ?곗씠?곕? 遺덈윭?ㅻ뒗 以묒엯?덈떎 (?쒕쾭 ?곌껐 ?湲?
             </div>
             <div style={{ fontSize:'0.88rem', color:'rgba(255,255,255,0.6)', marginBottom:'20px' }}>
-              Render 백엔드 서버가 켜지는 중입니다. 아래 버튼을 눌러 바로 연결을 재시도하세요.
+              Render 諛깆뿏???쒕쾭媛 耳쒖???以묒엯?덈떎. ?꾨옒 踰꾪듉???뚮윭 諛붾줈 ?곌껐???ъ떆?꾪븯?몄슂.
             </div>
             <button className="run-btn" onClick={() => fetchUniverse(0, false)} style={{ margin:'0 auto' }}>
-              🔄 실시간 데이터 다시 불러오기
+              ?봽 ?ㅼ떆媛??곗씠???ㅼ떆 遺덈윭?ㅺ린
             </button>
           </div>
         ) : filteredList.length === 0 ? (
-          <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>해당 필터 조건에 부합하는 종목이 없습니다.</div>
+          <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>?대떦 ?꾪꽣 議곌굔??遺?⑺븯??醫낅ぉ???놁뒿?덈떎.</div>
         ) : (
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(340px, 1fr))', gap:'16px' }}>
             {filteredList.map((item) => {
@@ -2216,7 +2217,7 @@ function AgentWorkspace() {
                         padding:'3px 8px', borderRadius:'6px', background:tierTagBg, color:tierTagText,
                         fontSize:'0.75rem', fontWeight:700
                       }}>
-                        {isCore ? '🏆 Core (독점)' : isSat ? '🚀 Satellite (성장)' : isWatch ? '✨ Watchlist' : '🏢 Standard'}
+                        {isCore ? '?룇 Core (?낆젏)' : isSat ? '?? Satellite (?깆옣)' : isWatch ? '??Watchlist' : '?룫 Standard'}
                       </span>
                       <span style={{
                         padding:'3px 10px', borderRadius:'12px', background:badgeBg, border:`1px solid ${badgeBorder}`,
@@ -2226,44 +2227,44 @@ function AgentWorkspace() {
                       </span>
                     </div>
 
-                    {/* 기업명 및 티커 */}
+                    {/* 湲곗뾽紐?諛??곗빱 */}
                     <div style={{ display:'flex', alignItems:'baseline', gap:'8px', marginBottom:'4px' }}>
                       <h3 style={{ margin:0, fontSize:'1.15rem', color:'white', fontWeight:700 }}>{item.name}</h3>
                       <span style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.4)', fontWeight:600 }}>{item.ticker}</span>
                     </div>
 
                     <div style={{ fontSize:'0.78rem', color:'#a5b4fc', marginBottom:'12px' }}>
-                      📂 {item.industry_title}
+                      ?뱛 {item.industry_title}
                     </div>
 
-                    {/* 가격 및 MDD 메트릭 바 */}
+                    {/* 媛寃?諛?MDD 硫뷀듃由?諛?*/}
                     <div style={{
                       display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'8px',
                       background:'rgba(0,0,0,0.25)', padding:'10px 12px', borderRadius:'8px', marginBottom:'12px',
                       border:'1px solid rgba(255,255,255,0.06)'
                     }}>
                       <div>
-                        <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>현재가</div>
+                        <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>?꾩옱媛</div>
                         <div style={{ fontSize:'0.88rem', color:'white', fontWeight:700 }}>
                           {item.current_price != null && item.current_price > 0
                             ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
-                                ? `${Math.round(item.current_price).toLocaleString()}원`
+                                ? `${Math.round(item.current_price).toLocaleString()}??
                                 : `$${item.current_price.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}`)
                             : '-'}
                         </div>
                       </div>
                       <div>
-                        <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>52주 최고가</div>
+                        <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>52二?理쒓퀬媛</div>
                         <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', fontWeight:600 }}>
                           {item.high_52w != null && item.high_52w > 0
                             ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
-                                ? `${Math.round(item.high_52w).toLocaleString()}원`
+                                ? `${Math.round(item.high_52w).toLocaleString()}??
                                 : `$${item.high_52w.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}`)
                             : '-'}
                         </div>
                       </div>
                       <div>
-                        <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>현재 MDD</div>
+                        <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>?꾩옱 MDD</div>
                         <div style={{
                           fontSize:'0.9rem', fontWeight:800,
                           color: (item.mdd_pct != null && item.mdd_pct <= -20) ? '#34d399' : '#f87171'
@@ -2273,30 +2274,30 @@ function AgentWorkspace() {
                       </div>
                     </div>
 
-                    {/* 원칙 부합 사유 */}
+                    {/* ?먯튃 遺???ъ쑀 */}
                     {item.principle_reason && (
                       <div style={{
                         fontSize:'0.8rem', color:'rgba(255,255,255,0.85)', background:'rgba(99, 102, 241, 0.08)',
                         padding:'8px 10px', borderRadius:'6px', borderLeft:'3px solid #6366f1', marginBottom:'10px',
                         lineHeight:'1.4'
                       }}>
-                        💡 <strong>원칙 근거:</strong> {item.principle_reason}
+                        ?뮕 <strong>?먯튃 洹쇨굅:</strong> {item.principle_reason}
                       </div>
                     )}
 
-                    {/* 역할 설명 */}
+                    {/* ??븷 ?ㅻ챸 */}
                     <div style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.6)', lineHeight:'1.4', marginBottom:'8px' }}>
                       {item.role_description}
                     </div>
                   </div>
 
-                  {/* 하단 미래 성장성 */}
+                  {/* ?섎떒 誘몃옒 ?깆옣??*/}
                   {item.future_growth && (
                     <div style={{
                       fontSize:'0.75rem', color:'rgba(16, 185, 129, 0.8)', borderTop:'1px dashed rgba(255,255,255,0.08)',
                       paddingTop:'8px', marginTop:'6px'
                     }}>
-                      🌱 {item.future_growth}
+                      ?뙮 {item.future_growth}
                     </div>
                   )}
                 </div>
@@ -2306,19 +2307,19 @@ function AgentWorkspace() {
         )}
       </>)}
 
-      {/* ── 자동 종목 추천 탭 ── */}
+      {/* ?? ?먮룞 醫낅ぉ 異붿쿇 ???? */}
       {mainTab === 'autoscan' && (
         <div>
-          {/* ── 투자원칙 스크리닝 배너 ── */}
+          {/* ?? ?ъ옄?먯튃 ?ㅽ겕由щ떇 諛곕꼫 ?? */}
           <div className="glass-panel" style={{ padding:'20px 24px', marginBottom:'20px', borderRadius:'14px', border:'1px solid rgba(52,211,153,0.25)', background:'rgba(52,211,153,0.04)' }}>
             <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'12px' }}>
               <div>
                 <div style={{ fontSize:'0.95rem', fontWeight:800, color:'#34d399', marginBottom:'6px' }}>
-                  🎯 BUY_CANDIDATE → Watchlist 자동 스크리닝
+                  ?렞 BUY_CANDIDATE ??Watchlist ?먮룞 ?ㅽ겕由щ떇
                 </div>
                 <div style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.55)', lineHeight:'1.6' }}>
-                  현재 유니버스의 BUY_CANDIDATE 종목들을 투자원칙(독점력·수익성·시총)으로 재검증<br/>
-                  기준 통과 시 자동으로 <strong style={{ color:'#fbbf24' }}>관심종목(Watchlist)</strong> 슬롯에 등재됩니다
+                  ?꾩옱 ?좊땲踰꾩뒪??BUY_CANDIDATE 醫낅ぉ?ㅼ쓣 ?ъ옄?먯튃(?낆젏?Β룹닔?듭꽦쨌?쒖킑)?쇰줈 ?ш?利?br/>
+                  湲곗? ?듦낵 ???먮룞?쇰줈 <strong style={{ color:'#fbbf24' }}>愿?ъ쥌紐?Watchlist)</strong> ?щ’???깆옱?⑸땲??
                 </div>
               </div>
               <button
@@ -2327,29 +2328,29 @@ function AgentWorkspace() {
                 onClick={fetchScreening}
                 style={{ background:'linear-gradient(135deg, rgba(52,211,153,0.2), rgba(16,185,129,0.15))', borderColor:'rgba(52,211,153,0.4)', color:'#34d399', minWidth:'160px' }}
               >
-                {screenLoading ? '⏳ 스크리닝 중 (약 30초)...' : '🔬 투자원칙 스크리닝 실행'}
+                {screenLoading ? '???ㅽ겕由щ떇 以?(??30珥?...' : '?뵮 ?ъ옄?먯튃 ?ㅽ겕由щ떇 ?ㅽ뻾'}
               </button>
             </div>
 
-            {/* 스크리닝 결과 */}
+            {/* ?ㅽ겕由щ떇 寃곌낵 */}
             {screenData && !screenLoading && (
               <div style={{ marginTop:'16px', borderTop:'1px solid rgba(255,255,255,0.08)', paddingTop:'16px' }}>
-                {/* 요약 배지 */}
+                {/* ?붿빟 諛곗? */}
                 <div style={{ display:'flex', gap:'10px', flexWrap:'wrap', marginBottom:'14px' }}>
                   <span style={{ padding:'4px 12px', borderRadius:'8px', background:'rgba(52,211,153,0.15)', color:'#34d399', fontSize:'0.8rem', fontWeight:700 }}>
-                    ✅ Watchlist 승격 {screenData.promoted_count}개
+                    ??Watchlist ?밴꺽 {screenData.promoted_count}媛?
                   </span>
                   <span style={{ padding:'4px 12px', borderRadius:'8px', background:'rgba(255,255,255,0.06)', color:'rgba(255,255,255,0.5)', fontSize:'0.8rem' }}>
-                    총 분석 {screenData.total_screened}개
+                    珥?遺꾩꽍 {screenData.total_screened}媛?
                   </span>
                   {screenData.promoted_count > 0 && (
                     <span style={{ padding:'4px 12px', borderRadius:'8px', background:'rgba(251,191,36,0.12)', color:'#fbbf24', fontSize:'0.8rem', fontWeight:600 }}>
-                      🎉 유니버스에 자동 등재됨
+                      ?럦 ?좊땲踰꾩뒪???먮룞 ?깆옱??
                     </span>
                   )}
                 </div>
 
-                {/* 승격 종목 카드 */}
+                {/* ?밴꺽 醫낅ぉ 移대뱶 */}
                 {screenData.promoted?.length > 0 && (
                   <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))', gap:'10px' }}>
                     {screenData.promoted.map((item, idx) => (
@@ -2360,7 +2361,7 @@ function AgentWorkspace() {
                             <span style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.4)', marginLeft:'6px' }}>{item.ticker}</span>
                           </div>
                           <span style={{ fontSize:'0.72rem', padding:'2px 8px', borderRadius:'6px', background:'rgba(52,211,153,0.2)', color:'#34d399', fontWeight:800 }}>
-                            점수 {item.score}
+                            ?먯닔 {item.score}
                           </span>
                         </div>
                         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'6px', background:'rgba(0,0,0,0.2)', padding:'8px', borderRadius:'6px', marginBottom:'8px' }}>
@@ -2391,46 +2392,46 @@ function AgentWorkspace() {
 
                 {screenData.promoted_count === 0 && (
                   <div style={{ textAlign:'center', padding:'20px', color:'rgba(255,255,255,0.4)', fontSize:'0.85rem' }}>
-                    현재 BUY_CANDIDATE 중 투자원칙 기준을 통과한 신규 종목이 없습니다.<br/>
-                    <span style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.3)' }}>기존 Watchlist 종목은 이미 등재되어 있습니다.</span>
+                    ?꾩옱 BUY_CANDIDATE 以??ъ옄?먯튃 湲곗????듦낵???좉퇋 醫낅ぉ???놁뒿?덈떎.<br/>
+                    <span style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.3)' }}>湲곗〈 Watchlist 醫낅ぉ? ?대? ?깆옱?섏뼱 ?덉뒿?덈떎.</span>
                   </div>
                 )}
               </div>
             )}
           </div>
 
-          {/* 기존 자동 스캔 UI */}
+          {/* 湲곗〈 ?먮룞 ?ㅼ틪 UI */}
           {scanLoading ? (
 
             <div className="glass-panel" style={{ padding:'60px', textAlign:'center' }}>
-              <div style={{ fontSize:'1.3rem', color:'#fbbf24', marginBottom:'12px' }}>🔍 투자원칙 기반 자동 스캔 중...</div>
+              <div style={{ fontSize:'1.3rem', color:'#fbbf24', marginBottom:'12px' }}>?뵇 ?ъ옄?먯튃 湲곕컲 ?먮룞 ?ㅼ틪 以?..</div>
               <div style={{ fontSize:'0.88rem', color:'rgba(255,255,255,0.5)' }}>
-                80여개 글로벌 우량주 후보군을 yfinance로 스캔 중입니다.<br/>약 30~60초 소요됩니다.
+                80?ш컻 湲濡쒕쾶 ?곕웾二??꾨낫援곗쓣 yfinance濡??ㅼ틪 以묒엯?덈떎.<br/>??30~60珥??뚯슂?⑸땲??
               </div>
             </div>
           ) : !scanData ? (
             <div className="glass-panel" style={{ padding:'60px', textAlign:'center' }}>
               <div style={{ fontSize:'1.2rem', color:'rgba(255,255,255,0.6)', marginBottom:'16px' }}>
-                🔍 4단계 투자원칙 기반으로 신규 투자 후보 종목을 자동으로 스캔합니다
+                ?뵇 4?④퀎 ?ъ옄?먯튃 湲곕컲?쇰줈 ?좉퇋 ?ъ옄 ?꾨낫 醫낅ぉ???먮룞?쇰줈 ?ㅼ틪?⑸땲??
               </div>
               <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.4)', marginBottom:'24px', lineHeight:'1.7' }}>
-                ✅ 이미 팔로잉 유니버스에 없는 종목만 대상<br/>
-                ✅ S&P500 + 코스피 우량주 후보군 80종목 스캔<br/>
-                ✅ MDD -15% 이상 조정 + 수익성/독점력 기준 필터링<br/>
-                ✅ 투자원칙 점수 기반 랭킹 정렬
+                ???대? ?붾줈???좊땲踰꾩뒪???녿뒗 醫낅ぉ留????br/>
+                ??S&P500 + 肄붿뒪???곕웾二??꾨낫援?80醫낅ぉ ?ㅼ틪<br/>
+                ??MDD -15% ?댁긽 議곗젙 + ?섏씡???낆젏??湲곗? ?꾪꽣留?br/>
+                ???ъ옄?먯튃 ?먯닔 湲곕컲 ??궧 ?뺣젹
               </div>
               <button className="run-btn" onClick={fetchAutoScan} style={{ margin:'0 auto' }}>
-                🔍 지금 바로 스캔 시작
+                ?뵇 吏湲?諛붾줈 ?ㅼ틪 ?쒖옉
               </button>
             </div>
           ) : (
             <div>
-              {/* 스캔 요약 */}
+              {/* ?ㅼ틪 ?붿빟 */}
               <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(200px, 1fr))', gap:'12px', marginBottom:'24px' }}>
                 {[
-                  { label:'스캔 대상', value:`${scanData.scanned_tickers}개 종목`, color:'#a5b4fc' },
-                  { label:'투자 적합', value:`${scanData.scan_count}개 발견`, color:'#34d399' },
-                  { label:'필터 기준', value:'MDD -15%+ / 시총 7억$+', color:'#fbbf24' },
+                  { label:'?ㅼ틪 ???, value:`${scanData.scanned_tickers}媛?醫낅ぉ`, color:'#a5b4fc' },
+                  { label:'?ъ옄 ?곹빀', value:`${scanData.scan_count}媛?諛쒓껄`, color:'#34d399' },
+                  { label:'?꾪꽣 湲곗?', value:'MDD -15%+ / ?쒖킑 7??+', color:'#fbbf24' },
                 ].map(s => (
                   <div key={s.label} className="glass-panel" style={{ padding:'16px', borderRadius:'12px', textAlign:'center' }}>
                     <div style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.4)', marginBottom:'6px' }}>{s.label}</div>
@@ -2441,12 +2442,12 @@ function AgentWorkspace() {
 
               {scanData.scan_count === 0 ? (
                 <div className="glass-panel" style={{ padding:'40px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
-                  현재 투자원칙 기준을 충족하는 신규 종목이 없습니다 (시장 고점 부근)
+                  ?꾩옱 ?ъ옄?먯튃 湲곗???異⑹”?섎뒗 ?좉퇋 醫낅ぉ???놁뒿?덈떎 (?쒖옣 怨좎젏 遺洹?
                 </div>
               ) : (
                 <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(360px, 1fr))', gap:'16px' }}>
                   {scanData.recommendations.map((item, idx) => {
-                    const isBuy = item.signal?.includes('BUY_추천') || item.signal?.includes('DEEP_DISCOUNT');
+                    const isBuy = item.signal?.includes('BUY_異붿쿇') || item.signal?.includes('DEEP_DISCOUNT');
                     const isDeep = item.signal?.includes('DEEP_DISCOUNT');
                     const borderC = isDeep ? 'rgba(59,130,246,0.5)' : isBuy ? 'rgba(16,185,129,0.4)' : 'rgba(251,191,36,0.3)';
                     const bgC = isDeep ? 'rgba(59,130,246,0.06)' : isBuy ? 'rgba(16,185,129,0.05)' : 'rgba(251,191,36,0.04)';
@@ -2461,7 +2462,7 @@ function AgentWorkspace() {
                           <div style={{ display:'flex', alignItems:'center', gap:'8px' }}>
                             <span style={{ fontSize:'1.2rem', fontWeight:900, color:'#fbbf24' }}>#{idx+1}</span>
                             <span style={{ fontSize:'0.72rem', padding:'2px 8px', borderRadius:'6px', background:'rgba(251,191,36,0.12)', color:'#fbbf24', fontWeight:700 }}>
-                              점수 {item.score}pt
+                              ?먯닔 {item.score}pt
                             </span>
                           </div>
                           <span style={{ fontSize:'0.72rem', padding:'3px 10px', borderRadius:'12px', background:`${signalColor}22`, border:`1px solid ${signalColor}44`, color:signalColor, fontWeight:700 }}>
@@ -2474,28 +2475,28 @@ function AgentWorkspace() {
                           <span style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.4)', fontWeight:600 }}>{item.ticker}</span>
                         </div>
                         <div style={{ fontSize:'0.75rem', color:'#a5b4fc', marginBottom:'12px' }}>
-                          {item.sector} {item.industry ? `· ${item.industry}` : ''}
+                          {item.sector} {item.industry ? `쨌 ${item.industry}` : ''}
                         </div>
 
-                        {/* 가격 메트릭 */}
+                        {/* 媛寃?硫뷀듃由?*/}
                         <div style={{
                           display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'8px',
                           background:'rgba(0,0,0,0.25)', padding:'10px 12px', borderRadius:'8px', marginBottom:'12px',
                           border:'1px solid rgba(255,255,255,0.06)'
                         }}>
                           <div>
-                            <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>현재가</div>
+                            <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>?꾩옱媛</div>
                             <div style={{ fontSize:'0.85rem', color:'white', fontWeight:700 }}>
                               {item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
-                                ? `${Math.round(item.current_price).toLocaleString()}원`
+                                ? `${Math.round(item.current_price).toLocaleString()}??
                                 : `$${item.current_price?.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`}
                             </div>
                           </div>
                           <div>
-                            <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>52주 고가</div>
+                            <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>52二?怨좉?</div>
                             <div style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.7)', fontWeight:600 }}>
                               {item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
-                                ? `${Math.round(item.high_52w).toLocaleString()}원`
+                                ? `${Math.round(item.high_52w).toLocaleString()}??
                                 : `$${item.high_52w?.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`}
                             </div>
                           </div>
@@ -2507,7 +2508,7 @@ function AgentWorkspace() {
                           </div>
                         </div>
 
-                        {/* 수익성 지표 */}
+                        {/* ?섏씡??吏??*/}
                         <div style={{ display:'flex', gap:'6px', flexWrap:'wrap', marginBottom:'10px' }}>
                           {item.tags?.map((tag, ti) => (
                             <span key={ti} style={{ fontSize:'0.7rem', padding:'2px 7px', borderRadius:'5px', background:'rgba(99,102,241,0.12)', color:'#a5b4fc', fontWeight:600 }}>
@@ -2516,13 +2517,13 @@ function AgentWorkspace() {
                           ))}
                         </div>
 
-                        {/* 재무 요약 */}
+                        {/* ?щТ ?붿빟 */}
                         <div style={{ display:'flex', gap:'12px', fontSize:'0.73rem', color:'rgba(255,255,255,0.5)', flexWrap:'wrap' }}>
                           {item.roe != null && <span>ROE {item.roe}%</span>}
                           {item.op_margin != null && <span>OPM {item.op_margin}%</span>}
-                          {item.profit_margin != null && <span>순이익률 {item.profit_margin}%</span>}
+                          {item.profit_margin != null && <span>?쒖씠?듬쪧 {item.profit_margin}%</span>}
                           {item.pe_ratio != null && <span>PER {item.pe_ratio}x</span>}
-                          {item.market_cap_b != null && <span>시총 ${item.market_cap_b}B</span>}
+                          {item.market_cap_b != null && <span>?쒖킑 ${item.market_cap_b}B</span>}
                         </div>
                       </div>
                     );
@@ -2538,11 +2539,11 @@ function AgentWorkspace() {
 }
 
 
-// ── HomeDashboard ─────────────────────────────────────────────
+// ?? HomeDashboard ?????????????????????????????????????????????
 const INDUSTRY_ICONS = {
-  '자율주행': '🚗', '로봇': '🤖', '에너지': '⚡', '우주': '🚀',
-  'AI': 'AI', '전력인프라': '🔌', '이차전지': '🔋', '온디바이스AI': '📱',
-  '반도체': '💎', '게임': '🎮', '엔터테인먼트': '🎬', '조선': '🚢',
+  '?먯쑉二쇳뻾': '?슅', '濡쒕큸': '?쨼', '?먮꼫吏': '??, '?곗＜': '??',
+  'AI': 'AI', '?꾨젰?명봽??: '?뵆', '?댁감?꾩?': '?뵅', '?⑤뵒諛붿씠?짞I': '?벑',
+  '諛섎룄泥?: '?뭿', '寃뚯엫': '?렜', '?뷀꽣?뚯씤癒쇳듃': '?렗', '議곗꽑': '?슓',
 };
 
 function HomeDashboard({ reports, onSelect }) {
@@ -2561,17 +2562,17 @@ function HomeDashboard({ reports, onSelect }) {
           Industry Intelligence
         </h1>
         <p style={{ color:'var(--text-secondary)', fontSize:'1rem', maxWidth:'480px', margin:'0 auto', lineHeight:1.7 }}>
-          {reports.length}개 산업의 밸류체인, 기업 재무, AI 분석을<br/>한 곳에서 확인하세요
+          {reports.length}媛??곗뾽??諛몃쪟泥댁씤, 湲곗뾽 ?щТ, AI 遺꾩꽍??br/>??怨녹뿉???뺤씤?섏꽭??
         </p>
       </div>
 
       {/* Stats Bar */}
       <div style={{ display:'flex', gap:'16px', justifyContent:'center', marginBottom:'40px', flexWrap:'wrap' }}>
         {[
-          { label:'커버리지 산업', value:`${reports.length}개`, color:'var(--accent-blue)' },
-          { label:'추적 기업', value:'100개+', color:'var(--accent-purple)' },
-          { label:'재무 데이터', value:'연간+분기', color:'var(--accent-green)' },
-          { label:'AI 분석', value:'기업별 맞춤', color:'#f59e0b' },
+          { label:'而ㅻ쾭由ъ? ?곗뾽', value:`${reports.length}媛?, color:'var(--accent-blue)' },
+          { label:'異붿쟻 湲곗뾽', value:'100媛?', color:'var(--accent-purple)' },
+          { label:'?щТ ?곗씠??, value:'?곌컙+遺꾧린', color:'var(--accent-green)' },
+          { label:'AI 遺꾩꽍', value:'湲곗뾽蹂?留욎땄', color:'#f59e0b' },
         ].map(s => (
           <div key={s.label} style={{ textAlign:'center', padding:'16px 24px', borderRadius:'12px', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.07)' }}>
             <div style={{ fontSize:'1.4rem', fontWeight:800, color:s.color }}>{s.value}</div>
@@ -2581,10 +2582,10 @@ function HomeDashboard({ reports, onSelect }) {
       </div>
 
       {/* Industry Cards Grid */}
-      <div style={{ marginBottom:'12px', fontSize:'0.8rem', color:'var(--text-secondary)', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>산업 리포트 선택</div>
+      <div style={{ marginBottom:'12px', fontSize:'0.8rem', color:'var(--text-secondary)', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>?곗뾽 由ы룷???좏깮</div>
       <div className="home-industry-grid">
         {reports.map((r, idx) => {
-          const icon = INDUSTRY_ICONS[r.tag] || '📊';
+          const icon = INDUSTRY_ICONS[r.tag] || '?뱤';
           return (
             <div key={r.id}
               className="home-industry-card"
@@ -2595,10 +2596,10 @@ function HomeDashboard({ reports, onSelect }) {
                 <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.25)', fontWeight:600, background:'rgba(255,255,255,0.04)', padding:'2px 8px', borderRadius:'8px' }}>#{idx+1}</div>
               </div>
               <div style={{ fontWeight:700, fontSize:'1.05rem', color:'var(--text-primary)', marginBottom:'6px' }}>{r.tag}</div>
-              <div style={{ fontSize:'0.78rem', color:'var(--text-secondary)', lineHeight:1.5 }}>{r.title.replace(/ (산업|밸류체인|완벽|심층|분석|가이드|리포트|Report|완성).*/g,'').slice(0,40)}</div>
+              <div style={{ fontSize:'0.78rem', color:'var(--text-secondary)', lineHeight:1.5 }}>{r.title.replace(/ (?곗뾽|諛몃쪟泥댁씤|?꾨꼍|?ъ링|遺꾩꽍|媛?대뱶|由ы룷??Report|?꾩꽦).*/g,'').slice(0,40)}</div>
               <div style={{ marginTop:'14px', display:'flex', alignItems:'center', gap:'6px', color:'var(--accent-blue)', fontSize:'0.78rem', fontWeight:600 }}>
-                <span>리포트 보기</span>
-                <span style={{ fontSize:'0.9rem' }}>→</span>
+                <span>由ы룷??蹂닿린</span>
+                <span style={{ fontSize:'0.9rem' }}>??/span>
               </div>
             </div>
           );
@@ -2607,12 +2608,12 @@ function HomeDashboard({ reports, onSelect }) {
 
       {/* Quick Tips */}
       <div style={{ marginTop:'40px', padding:'20px 24px', borderRadius:'12px', background:'rgba(59,130,246,0.04)', border:'1px solid rgba(59,130,246,0.12)' }}>
-        <div style={{ fontSize:'0.8rem', color:'var(--accent-blue)', fontWeight:700, marginBottom:'12px' }}>💡 사용 가이드</div>
+        <div style={{ fontSize:'0.8rem', color:'var(--accent-blue)', fontWeight:700, marginBottom:'12px' }}>?뮕 ?ъ슜 媛?대뱶</div>
         <div style={{ display:'flex', gap:'20px', flexWrap:'wrap' }}>
           {[
-            { icon:'1️⃣', text:'산업 카드 클릭 → 밸류체인 & 기업 목록 확인' },
-            { icon:'2️⃣', text:'기업 카드 클릭 → 재무제표·차트·AI 분석 확인' },
-            { icon:'3️⃣', text:'AI 분석팀 탭 → AI가 최적 포트폴리오 5종목 추천' },
+            { icon:'1截뤴깵', text:'?곗뾽 移대뱶 ?대┃ ??諛몃쪟泥댁씤 & 湲곗뾽 紐⑸줉 ?뺤씤' },
+            { icon:'2截뤴깵', text:'湲곗뾽 移대뱶 ?대┃ ???щТ?쒗몴쨌李⑦듃쨌AI 遺꾩꽍 ?뺤씤' },
+            { icon:'3截뤴깵', text:'AI 遺꾩꽍? ????AI媛 理쒖쟻 ?ы듃?대━??5醫낅ぉ 異붿쿇' },
           ].map(tip => (
             <div key={tip.text} style={{ display:'flex', gap:'8px', alignItems:'flex-start', fontSize:'0.82rem', color:'var(--text-secondary)', flex:'1 1 200px' }}>
               <span>{tip.icon}</span><span>{tip.text}</span>
