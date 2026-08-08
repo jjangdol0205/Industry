@@ -32,3 +32,15 @@ logs/
 # OS files
 .DS_Store
 Thumbs.db
+
+# SQLite journal & WAL files
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Temporary analysis scripts (D:\Industry root)
+inspect_eps*.py
+parse_eps.py
+analyze_eps.py
+load_eps_sqlite.py
+check_dups.py
