@@ -1493,7 +1493,6 @@ function BusinessModelSection({ latest, profile, company }) {
             <FlowBox label="🏆 순이익" value={fB(netInc, company?.ticker)} pct={`${npm.toFixed(1)}%`} color="#00f2fe" desc="Net Income" small highlight glow />
           </div>
         </div>
-
         {/* 마진율 요약 바 */}
         <div style={{ marginTop:'24px', padding:'16px', borderRadius:'8px', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.06)' }}>
           <div style={{ fontSize:'0.8rem', color:'var(--text-secondary)', marginBottom:'12px', fontWeight:600 }}>매출 1단위에서 남는 이익</div>
@@ -1585,7 +1584,7 @@ function BusinessModelSection({ latest, profile, company }) {
 function AgentWorkspace() {
   const [universeData, setUniverseData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedTier, setSelectedTier] = useState('ALL'); // 'ALL', 'Core', 'Satellite', 'Watchlist', 'BUY_READY'
+  const [selectedTier, setSelectedTier] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -1596,9 +1595,7 @@ function AgentWorkspace() {
     setLoading(true);
     try {
       const r = await axios.get(`${API_BASE}/portfolio/universe`);
-      if (r.data) {
-        setUniverseData(r.data);
-      }
+      if (r.data) setUniverseData(r.data);
     } catch (e) {
       console.error("Failed to load universe", e);
     } finally {
@@ -1607,29 +1604,20 @@ function AgentWorkspace() {
   };
 
   const universeList = universeData?.universe || [];
-  const principles = universeData?.principles_summary || {};
 
-  // 필터링 규칙
   const filteredList = universeList.filter(item => {
-    // 탭 필터
     if (selectedTier === 'Core' && item.portfolio_tier !== 'Core') return false;
     if (selectedTier === 'Satellite' && item.portfolio_tier !== 'Satellite') return false;
     if (selectedTier === 'Watchlist' && item.portfolio_tier !== 'Watchlist') return false;
     if (selectedTier === 'BUY_READY' && !item.buy_signal?.includes('BUY_READY') && !item.buy_signal?.includes('DEEP_DISCOUNT')) return false;
 
-    // 검색어 필터
     if (searchQuery.trim() !== '') {
       const q = searchQuery.toLowerCase();
-      const matchName = item.name?.toLowerCase().includes(q);
-      const matchTicker = item.ticker?.toLowerCase().includes(q);
-      const matchIndustry = item.industry_title?.toLowerCase().includes(q);
-      return matchName || matchTicker || matchIndustry;
+      return item.name?.toLowerCase().includes(q) || item.ticker?.toLowerCase().includes(q) || item.industry_title?.toLowerCase().includes(q);
     }
-
     return true;
   });
 
-  // 카운트 계산
   const coreCount = universeList.filter(i => i.portfolio_tier === 'Core').length;
   const satCount = universeList.filter(i => i.portfolio_tier === 'Satellite').length;
   const watchCount = universeList.filter(i => i.portfolio_tier === 'Watchlist').length;
@@ -1637,77 +1625,20 @@ function AgentWorkspace() {
 
   return (
     <div className="agent-workspace">
-      {/* ── 헤더 ── */}
-      <div className="page-header orchestrator-header" style={{
-        borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'24px'
-      }}>
+      <div className="page-header orchestrator-header" style={{ borderBottom:'1px solid var(--border-color)', paddingBottom:'24px', marginBottom:'24px' }}>
         <div>
           <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'10px' }}>
-            <span className="live-badge active" style={{ background:'rgba(16,185,129,0.15)', color:'#10b981', border:'1px solid rgba(16,185,129,0.3)' }}>
-              ● 4단계 투자원칙 엔진 가동 중
-            </span>
-            <span style={{ color:'var(--text-secondary)', fontSize:'0.85rem' }}>
-              Real-time Portfolio Universe Monitor
-            </span>
+            <span className="live-badge active" style={{ background:'rgba(16,185,129,0.15)', color:'#10b981', border:'1px solid rgba(16,185,129,0.3)' }}>● 4단계 투자원칙 엔진 가동 중</span>
+            <span style={{ color:'var(--text-secondary)', fontSize:'0.85rem' }}>Real-time Portfolio Universe Monitor</span>
           </div>
-          <h2 style={{ fontSize:'2.2rem', margin:0, background:'linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
-            🛡️ 4단계 투자원칙 기반 유니버스 모니터링
-          </h2>
-          <p style={{ color:'var(--text-secondary)', margin:'8px 0 0', fontSize:'0.92rem', lineHeight:'1.5' }}>
-            전 16개 산업 · 230개 기업 대상 <strong>Core(독점 병목)</strong> vs <strong>Satellite(고성장 알파)</strong> 스크리닝 및 <strong>제1원칙 가격 필터(MDD)</strong> 실시간 팔로잉
-          </p>
+          <h2 style={{ fontSize:'2.2rem', margin:0, background:'linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>🛡️ 4단계 투자원칙 기반 유니버스 모니터링</h2>
         </div>
-
-        <button
-          className="run-btn"
-          disabled={loading}
-          onClick={fetchUniverse}
-          style={{ whiteSpace:'nowrap', flexShrink:0, display:'flex', alignItems:'center', gap:'8px' }}
-        >
+        <button className="run-btn" disabled={loading} onClick={fetchUniverse}>
           {loading ? '⏳ 주가/MDD 갱신 중...' : '🔄 실시간 주가/MDD 재조회'}
         </button>
       </div>
 
-      {/* ── 4단계 투자원칙 요약 배너 ── */}
-      <div className="glass-panel" style={{
-        padding:'20px 24px', marginBottom:'28px',
-        background:'linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8))',
-        border:'1px solid rgba(99, 102, 241, 0.25)', borderRadius:'16px'
-      }}>
-        <div style={{ fontSize:'0.9rem', fontWeight:700, color:'#a5b4fc', marginBottom:'14px', display:'flex', alignItems:'center', gap:'8px' }}>
-          <span>📜 4단계 통합 투자원칙 정량 가이드라인</span>
-        </div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:'16px' }}>
-          <div style={{ background:'rgba(255,255,255,0.03)', padding:'12px 16px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.06)' }}>
-            <div style={{ fontSize:'0.78rem', color:'#f43f5e', fontWeight:700, marginBottom:'4px' }}>1단계: 제1원칙 가격 필터 (MDD)</div>
-            <div style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.8)', lineHeight:'1.4' }}>
-              고점 뇌동매수 금지! <strong>MDD -20%~-30% 이상 할인</strong> 또는 밸류 최하단 시만 진입
-            </div>
-          </div>
-          <div style={{ background:'rgba(255,255,255,0.03)', padding:'12px 16px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.06)' }}>
-            <div style={{ fontSize:'0.78rem', color:'#3b82f6', fontWeight:700, marginBottom:'4px' }}>2단계: Core 독점 병목</div>
-            <div style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.8)', lineHeight:'1.4' }}>
-              점유율 <strong>50%+ (독과점 1위)</strong>, OPM 25%+, 강력한 Lock-in (대체불가 병목)
-            </div>
-          </div>
-          <div style={{ background:'rgba(255,255,255,0.03)', padding:'12px 16px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.06)' }}>
-            <div style={{ fontSize:'0.78rem', color:'#10b981', fontWeight:700, marginBottom:'4px' }}>2단계: Satellite 성장 알파</div>
-            <div style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.8)', lineHeight:'1.4' }}>
-              글로벌 <strong>Top 3 이내</strong>, 수주잔고 YoY +30%+ 또는 최고치 경신
-            </div>
-          </div>
-          <div style={{ background:'rgba(255,255,255,0.03)', padding:'12px 16px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.06)' }}>
-            <div style={{ fontSize:'0.78rem', color:'#f59e0b', fontWeight:700, marginBottom:'4px' }}>3&4단계: 자산배분 & 손익관리</div>
-            <div style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.8)', lineHeight:'1.4' }}>
-              주식 70% : 현금 30% (3분할 매수) / 손절 -10%, +100% 원금회수 (Free Carry)
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── 컨트롤 바: 탭 필터 + 검색 ── */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'16px', marginBottom:'24px' }}>
-        {/* 탭 버튼 */}
         <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' }}>
           {[
             { id: 'ALL', label: `전체 유니버스 (${universeList.length})`, color: '#64748b' },
@@ -1716,100 +1647,51 @@ function AgentWorkspace() {
             { id: 'Satellite', label: `🚀 Satellite 성장 (${satCount})`, color: '#8b5cf6' },
             { id: 'Watchlist', label: `✨ 관심종목 (${watchCount})`, color: '#f59e0b' },
           ].map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setSelectedTier(tab.id)}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '10px',
-                border: selectedTier === tab.id ? `1.5px solid ${tab.color}` : '1px solid rgba(255,255,255,0.1)',
-                background: selectedTier === tab.id ? `${tab.color}22` : 'rgba(255,255,255,0.03)',
-                color: selectedTier === tab.id ? '#ffffff' : 'rgba(255,255,255,0.6)',
-                fontWeight: selectedTier === tab.id ? 700 : 500,
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s'
-              }}
-            >
-              {tab.label}
-            </button>
+            <button key={tab.id} onClick={() => setSelectedTier(tab.id)} style={{
+              padding: '8px 16px', borderRadius: '10px',
+              border: selectedTier === tab.id ? `1.5px solid ${tab.color}` : '1px solid rgba(255,255,255,0.1)',
+              background: selectedTier === tab.id ? `${tab.color}22` : 'rgba(255,255,255,0.03)',
+              color: selectedTier === tab.id ? '#ffffff' : 'rgba(255,255,255,0.6)',
+              fontWeight: selectedTier === tab.id ? 700 : 500, fontSize: '0.85rem', cursor: 'pointer'
+            }}>{tab.label}</button>
           ))}
         </div>
 
-        {/* 검색 인풋 */}
         <div style={{ position:'relative', minWidth:'240px' }}>
-          <input
-            type="text"
-            placeholder="종목명, 티커, 산업 검색..."
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            style={{
-              width:'100%', padding:'8px 14px', borderRadius:'10px',
-              border:'1px solid rgba(255,255,255,0.15)', background:'rgba(15,23,42,0.6)',
-              color:'white', fontSize:'0.85rem', outline:'none'
-            }}
-          />
+          <input type="text" placeholder="종목명, 티커, 산업 검색..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{
+            width:'100%', padding:'8px 14px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.15)', background:'rgba(15,23,42,0.6)', color:'white', fontSize:'0.85rem', outline:'none'
+          }} />
         </div>
       </div>
 
-      {/* ── 종목 목록 카드 그리드 ── */}
       {loading ? (
-        <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
-          <div style={{ fontSize:'1.2rem', marginBottom:'12px' }}>⏳ 실시간 유니버스 데이터 수집 중...</div>
-        </div>
+        <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>⏳ 실시간 유니버스 데이터 수집 중...</div>
       ) : filteredList.length === 0 ? (
-        <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
-          해당 필터 조건에 부합하는 종목이 없습니다.
-        </div>
+        <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>해당 필터 조건에 부합하는 종목이 없습니다.</div>
       ) : (
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(340px, 1fr))', gap:'16px' }}>
           {filteredList.map((item) => {
             const isCore = item.portfolio_tier === 'Core';
             const isSat = item.portfolio_tier === 'Satellite';
             const isWatch = item.portfolio_tier === 'Watchlist';
-            
             const isBuyReady = item.buy_signal?.includes('BUY_READY') || item.buy_signal?.includes('DEEP_DISCOUNT');
             const isDeepDiscount = item.buy_signal?.includes('DEEP_DISCOUNT');
 
-            let badgeBg = 'rgba(239, 68, 68, 0.15)';
-            let badgeBorder = 'rgba(239, 68, 68, 0.4)';
-            let badgeText = '#f87171';
-
-            if (isBuyReady) {
-              badgeBg = 'rgba(16, 185, 129, 0.15)';
-              badgeBorder = 'rgba(16, 185, 129, 0.4)';
-              badgeText = '#34d399';
-            }
-            if (isDeepDiscount) {
-              badgeBg = 'rgba(59, 130, 246, 0.2)';
-              badgeBorder = 'rgba(59, 130, 246, 0.5)';
-              badgeText = '#60a5fa';
-            }
-
-            let tierTagBg = 'rgba(255,255,255,0.06)';
-            let tierTagText = '#94a3b8';
-            if (isCore) { tierTagBg = 'rgba(59,130,246,0.15)'; tierTagText = '#60a5fa'; }
-            if (isSat) { tierTagBg = 'rgba(139,92,246,0.15)'; tierTagText = '#c084fc'; }
-            if (isWatch) { tierTagBg = 'rgba(245,158,11,0.15)'; tierTagText = '#fbbf24'; }
+            let [badgeBg, badgeBorder, badgeText] = isBuyReady ? ['rgba(16, 185, 129, 0.15)', 'rgba(16, 185, 129, 0.4)', '#34d399'] : ['rgba(239, 68, 68, 0.15)', 'rgba(239, 68, 68, 0.4)', '#f87171'];
+            if (isDeepDiscount) [badgeBg, badgeBorder, badgeText] = ['rgba(59, 130, 246, 0.2)', 'rgba(59, 130, 246, 0.5)', '#60a5fa'];
+            
+            let [tierTagBg, tierTagText] = ['rgba(255,255,255,0.06)', '#94a3b8'];
+            if (isCore) [tierTagBg, tierTagText] = ['rgba(59,130,246,0.15)', '#60a5fa'];
+            if (isSat) [tierTagBg, tierTagText] = ['rgba(139,92,246,0.15)', '#c084fc'];
+            if (isWatch) [tierTagBg, tierTagText] = ['rgba(245,158,11,0.15)', '#fbbf24'];
 
             return (
-              <div
-                key={item.id}
-                className="glass-panel"
-                style={{
-                  padding: '20px',
-                  borderRadius: '14px',
-                  border: isBuyReady ? '1.5px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(255, 255, 255, 0.08)',
-                  background: isBuyReady
-                    ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(15, 23, 42, 0.7))'
-                    : 'linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6))',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justify: 'space-between',
-                  transition: 'transform 0.2s, box-shadow 0.2s'
-                }}
-              >
-                {/* 상단: 티어 배지 + 주가 신호등 */}
+              <div key={item.id} className="glass-panel" style={{
+                padding: '20px', borderRadius: '14px',
+                border: isBuyReady ? '1.5px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(255, 255, 255, 0.08)',
+                background: isBuyReady ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(15, 23, 42, 0.7))' : 'linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6))',
+                display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
+              }}>
                 <div>
                   <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px' }}>
                     <span style={{
@@ -1899,321 +1781,6 @@ function AgentWorkspace() {
   );
 }
 
-// ── 포트폴리오 결과 ──
-      {!running && portfolio && (
-        <div>
-          {/* 요약 헤더 */}
-          <div className="glass-panel" style={{
-            padding:'24px 32px', marginBottom:'24px',
-            background:'linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.06))',
-            border:'1px solid rgba(59,130,246,0.25)',
-          }}>
-            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'16px' }}>
-              <div>
-                <div style={{ fontSize:'1.4rem', fontWeight:800, color:'white', marginBottom:'4px' }}>
-                  🏆 AI 최적 포트폴리오 — 중장기 집중 투자 (5~10년)
-                </div>
-                <div style={{ color:'rgba(255,255,255,0.45)', fontSize:'0.82rem' }}>
-                  구성일: {portfolio.created_at} · {portfolio.total_industries_analyzed}개 산업 · {portfolio.total_companies_screened}개 기업 스크리닝
-                </div>
-              </div>
-              <div className="portfolio-summary-stats">
-                {[
-                  { label:'Base CAGR', val:`~${portfolio.scenario?.base?.cagr || '-'}%/yr`, color:'#3b82f6' },
-                  { label:'5년 기대수익', val:`+${portfolio.scenario?.base?.return_pct || '-'}%`, color:'#10b981' },
-                  { label:'Bull Case', val:`+${portfolio.scenario?.bull?.return_pct || '-'}%`, color:'#f59e0b' },
-                ].map(({ label, val, color }) => (
-                  <div key={label} style={{ textAlign:'center' }}>
-                    <div style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>{label}</div>
-                    <div style={{ fontSize:'1.3rem', fontWeight:800, color }}>{val}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* 메인: 도넛 차트 + 종목 카드 */}
-          <div className="portfolio-main-grid">
-
-            {/* 도넛 차트 */}
-            <div className="glass-panel" style={{ padding:'24px', display:'flex', flexDirection:'column', alignItems:'center' }}>
-              <div style={{ fontSize:'0.85rem', color:'var(--text-secondary)', marginBottom:'16px', fontWeight:600 }}>
-                포트폴리오 비중 배분
-              </div>
-              <ResponsiveContainer width="100%" height={220}>
-                <PieChart>
-                  <Pie
-                    data={pieData}
-                    cx="50%" cy="50%"
-                    innerRadius={68} outerRadius={100}
-                    dataKey="value"
-                    paddingAngle={3}
-                  >
-                    {pieData.map((entry, i) => (
-                      <Cell key={i} fill={entry.fill} stroke="none" />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    formatter={(v, name) => [`${v}%`, name]}
-                    contentStyle={{
-                      backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)',
-                      fontSize:'0.82rem', borderRadius:'8px',
-                    }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-              {/* 범례 */}
-              <div style={{ width:'100%', display:'flex', flexDirection:'column', gap:'8px', marginTop:'8px' }}>
-                {portfolio.portfolio.map((s, i) => (
-                  <div key={i} style={{ display:'flex', alignItems:'center', gap:'10px' }}>
-                    <div style={{ width:'12px', height:'12px', borderRadius:'3px', background:PIE_COLORS[i], flexShrink:0 }} />
-                    <div style={{ flex:1, fontSize:'0.82rem', color:'var(--text-primary)', fontWeight:600 }}>{s.ticker}</div>
-                    <div style={{ fontSize:'0.82rem', color:PIE_COLORS[i], fontWeight:700 }}>{s.weight}%</div>
-                    {/* 비중 바 */}
-                    <div style={{ width:'60px', height:'4px', background:'rgba(255,255,255,0.08)', borderRadius:'4px', overflow:'hidden' }}>
-                      <div style={{ width:`${s.weight}%`, height:'100%', background:PIE_COLORS[i], borderRadius:'4px' }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 5개 종목 카드 */}
-            <div style={{ display:'flex', flexDirection:'column', gap:'12px' }}>
-              {portfolio.portfolio.map((stock, i) => {
-                const col = PIE_COLORS[i];
-                const rankCol = RANK_COLORS[i];
-                return (
-                  <div key={i} className="glass-panel" style={{
-                    padding:'18px 22px',
-                    borderLeft:`4px solid ${col}`,
-                    background:`linear-gradient(135deg, ${col}08, transparent)`,
-                    transition:'box-shadow 0.2s',
-                  }}>
-                    {/* 상단: 종목명 + 비중 */}
-                    <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px' }}>
-                      <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
-                        <span style={{
-                          background:`${rankCol}22`, border:`1px solid ${rankCol}66`,
-                          color:rankCol, borderRadius:'10px', padding:'2px 10px',
-                          fontSize:'0.72rem', fontWeight:700,
-                        }}>
-                          {RANK_LABELS[i]}
-                        </span>
-                        <span style={{ fontSize:'1.05rem', fontWeight:700, color:'white' }}>{stock.name}</span>
-                        <span style={{
-                          background:'rgba(255,255,255,0.08)', borderRadius:'6px',
-                          padding:'2px 8px', fontSize:'0.75rem', color:'rgba(255,255,255,0.5)',
-                          fontFamily:'monospace',
-                        }}>{stock.ticker}</span>
-                        <span style={{
-                          background:`${col}18`, border:`1px solid ${col}44`,
-                          color:col, borderRadius:'8px', padding:'2px 8px', fontSize:'0.72rem',
-                        }}>{stock.industry}</span>
-                      </div>
-                      <div style={{ textAlign:'right' }}>
-                        <div style={{ fontSize:'1.8rem', fontWeight:900, color:col, lineHeight:1 }}>{stock.weight}%</div>
-                        <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.3)' }}>포트폴리오 비중</div>
-                      </div>
-                    </div>
-
-                    {/* 중단: 주가 & CAGR */}
-                    <div style={{
-                      display:'flex', gap:'20px', marginBottom:'10px',
-                      padding:'10px 14px', background:'rgba(0,0,0,0.2)', borderRadius:'8px',
-                      flexWrap:'wrap',
-                    }}>
-                      {stock.current_price && (
-                        <div>
-                          <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.35)' }}>현재가</div>
-                          <div style={{ fontWeight:700, color:'white', fontFamily:'monospace' }}>${stock.current_price}</div>
-                        </div>
-                      )}
-                      {stock.target_price_5y && (
-                        <>
-                          <div style={{ color:'rgba(255,255,255,0.2)', alignSelf:'center' }}>→</div>
-                          <div>
-                            <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.35)' }}>5년 목표</div>
-                            <div style={{ fontWeight:700, color:'#10b981', fontFamily:'monospace' }}>${stock.target_price_5y}</div>
-                          </div>
-                          <div>
-                            <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.35)' }}>총 수익</div>
-                            <div style={{ fontWeight:700, color:'#10b981' }}>+{stock.total_return_5y}%</div>
-                          </div>
-                          <div>
-                            <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.35)' }}>CAGR</div>
-                            <div style={{ fontWeight:700, color:col }}>{stock.cagr_5y}%/yr</div>
-                          </div>
-                        </>
-                      )}
-                      <div style={{ marginLeft:'auto', display:'flex', gap:'12px' }}>
-                        {[
-                          { label:'Quant', val:stock.quant_score },
-                          { label:'Growth', val:stock.growth_score },
-                          { label:'Upside', val:stock.upside_score },
-                        ].map(({ label, val }) => (
-                          <div key={label} style={{ textAlign:'center' }}>
-                            <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.3)' }}>{label}</div>
-                            <div style={{
-                              fontSize:'0.82rem', fontWeight:700,
-                              color: val >= 70 ? '#10b981' : val >= 50 ? '#f59e0b' : '#ef4444',
-                            }}>{val}</div>
-                          </div>
-                        ))}
-                        <div style={{ textAlign:'center' }}>
-                          <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.3)' }}>종합</div>
-                          <div style={{ fontSize:'0.9rem', fontWeight:800, color:col }}>{stock.portfolio_score}</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* 하단: 투자 논거 & 리스크 */}
-                    <div style={{ display:'flex', flexDirection:'column', gap:'10px' }}>
-                      {/* 핵심 재무 메트릭 한 줄 */}
-                      {stock.metrics && (
-                        <div style={{
-                          display:'flex', gap:'12px', flexWrap:'wrap',
-                          padding:'8px 12px',
-                          background:'rgba(255,255,255,0.04)',
-                          borderRadius:'8px',
-                          fontSize:'0.72rem',
-                        }}>
-                          {[
-                            { label:'매출성장', val: stock.metrics.revenue_growth },
-                            { label:'순이익률', val: stock.metrics.net_margin },
-                            { label:'ROE', val: stock.metrics.roe },
-                            { label:'PER', val: stock.metrics.pe_ratio },
-                            { label:'EV/EBITDA', val: stock.metrics.ev_ebitda },
-                            { label:'부채비율', val: stock.metrics.debt_to_equity },
-                            { label:'FCF', val: stock.metrics.fcf },
-                          ].filter(m => m.val && m.val !== 'N/A').map(({ label, val }) => (
-                            <div key={label} style={{ display:'flex', gap:'4px', alignItems:'center' }}>
-                              <span style={{ color:'rgba(255,255,255,0.35)' }}>{label}</span>
-                              <span style={{ color:'rgba(255,255,255,0.75)', fontWeight:600, fontFamily:'monospace' }}>{val}</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* 투자 논거 (번호 목록) */}
-                      <div>
-                        <div style={{ fontSize:'0.75rem', color:col, fontWeight:700, marginBottom:'6px' }}>
-                          📌 투자 논거
-                        </div>
-                        <div style={{ display:'flex', flexDirection:'column', gap:'5px' }}>
-                          {(stock.thesis || [stock.selection_reason]).map((point, pi) => (
-                            <div key={pi} style={{
-                              display:'flex', gap:'8px', fontSize:'0.84rem',
-                              color:'rgba(255,255,255,0.78)', lineHeight:'1.6',
-                              paddingLeft:'4px',
-                            }}>
-                              <span style={{
-                                flexShrink:0, width:'18px', height:'18px',
-                                borderRadius:'50%', background:`${col}30`,
-                                border:`1px solid ${col}60`, color:col,
-                                fontSize:'0.65rem', fontWeight:700,
-                                display:'flex', alignItems:'center', justifyContent:'center',
-                                marginTop:'2px',
-                              }}>{pi + 1}</span>
-                              <span>{point}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* 리스크 요인 */}
-                      <div style={{
-                        padding:'10px 12px',
-                        background:'rgba(239,68,68,0.06)',
-                        border:'1px solid rgba(239,68,68,0.2)',
-                        borderRadius:'8px',
-                      }}>
-                        <div style={{ fontSize:'0.73rem', color:'#ef4444', fontWeight:700, marginBottom:'5px' }}>
-                          ⚠️ 리스크 요인
-                        </div>
-                        <div style={{ display:'flex', flexDirection:'column', gap:'4px' }}>
-                          {(stock.risks || [stock.key_risk]).map((risk, ri) => (
-                            <div key={ri} style={{
-                              display:'flex', gap:'6px',
-                              fontSize:'0.82rem', color:'rgba(239,120,100,0.85)', lineHeight:'1.55',
-                            }}>
-                              <span style={{ flexShrink:0, color:'rgba(239,68,68,0.6)', marginTop:'2px' }}>▸</span>
-                              <span>{risk}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* 시나리오 테이블 */}
-          {portfolio.scenario && (
-            <div className="glass-panel" style={{ padding:'24px 28px', marginBottom:'24px' }}>
-              <div style={{ fontSize:'1rem', fontWeight:700, marginBottom:'16px', color:'var(--accent-blue)' }}>
-                📈 5년 시나리오 분석
-              </div>
-              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'12px' }}>
-                {[
-                  { key:'bull', label:'Bull Case', emoji:'🚀', color:'#10b981' },
-                  { key:'base', label:'Base Case', emoji:'📊', color:'#3b82f6' },
-                  { key:'bear', label:'Bear Case', emoji:'🐻', color:'#ef4444' },
-                ].map(({ key, label, emoji, color }) => {
-                  const sc = portfolio.scenario[key];
-                  if (!sc) return null;
-                  return (
-                    <div key={key} style={{
-                      padding:'16px', borderRadius:'12px',
-                      background:`${color}0a`, border:`1px solid ${color}30`,
-                    }}>
-                      <div style={{ display:'flex', alignItems:'center', gap:'8px', marginBottom:'10px' }}>
-                        <span style={{ fontSize:'1.2rem' }}>{emoji}</span>
-                        <span style={{ fontWeight:700, color }}>{label}</span>
-                        <span style={{
-                          marginLeft:'auto', background:`${color}20`, border:`1px solid ${color}40`,
-                          color, borderRadius:'8px', padding:'2px 8px', fontSize:'0.72rem', fontWeight:700,
-                        }}>P: {sc.probability}%</span>
-                      </div>
-                      <div style={{ fontSize:'1.8rem', fontWeight:900, color, marginBottom:'4px' }}>
-                        {sc.return_pct >= 0 ? '+' : ''}{sc.return_pct}%
-                      </div>
-                      <div style={{ fontSize:'0.8rem', color:`${color}99`, marginBottom:'8px' }}>
-                        CAGR {sc.cagr}%/yr
-                      </div>
-                      <div style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.45)', lineHeight:'1.5' }}>
-                        {sc.trigger}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* 스코어링 방법론 */}
-          <div className="glass-panel" style={{
-            padding:'16px 24px', background:'rgba(255,255,255,0.02)',
-            border:'1px solid rgba(255,255,255,0.06)',
-          }}>
-            <div style={{ display:'flex', gap:'24px', flexWrap:'wrap', fontSize:'0.78rem', color:'rgba(255,255,255,0.35)' }}>
-              <span style={{ fontWeight:700, color:'rgba(255,255,255,0.5)' }}>스코어링 방법론</span>
-              {portfolio.scoring_weights && Object.values(portfolio.scoring_weights).map((v, i) => (
-                <span key={i}>· {v}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      <style>{`
-        @keyframes spin { to { transform: rotate(360deg); } }
-      `}</style>
-    </div>
-  );
-}
 
 // ── HomeDashboard ─────────────────────────────────────────────
 const INDUSTRY_ICONS = {
