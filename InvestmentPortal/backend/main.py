@@ -1028,7 +1028,37 @@ def get_investment_principles_universe(db: Session = Depends(get_db)):
             FROM companies c
             LEFT JOIN industry_reports ir ON c.industry_id = ir.id
             LEFT JOIN company_profiles cp ON c.id = cp.company_id
-            ORDER BY c.id
+            WHERE c.id IN (
+                -- ticker 기준 중복 제거: Core > Satellite > Watchlist > Standard 우선, 같으면 id 최솟값
+                SELECT MIN(sub.id)
+                FROM (
+                    SELECT id, ticker,
+                        CASE COALESCE(portfolio_tier, 'Standard')
+                            WHEN 'Core'      THEN 1
+                            WHEN 'Satellite' THEN 2
+                            WHEN 'Watchlist' THEN 3
+                            ELSE 4
+                        END AS tier_rank
+                    FROM companies
+                    WHERE ticker IS NOT NULL
+                ) sub
+                INNER JOIN (
+                    SELECT ticker, MIN(CASE COALESCE(portfolio_tier,'Standard')
+                        WHEN 'Core' THEN 1 WHEN 'Satellite' THEN 2 WHEN 'Watchlist' THEN 3 ELSE 4 END) AS best_rank
+                    FROM companies WHERE ticker IS NOT NULL GROUP BY ticker
+                ) best ON sub.ticker = best.ticker AND sub.tier_rank = best.best_rank
+                GROUP BY sub.ticker
+                UNION
+                -- ticker가 NULL인 경우도 포함
+                SELECT id FROM companies WHERE ticker IS NULL
+            )
+            ORDER BY
+                CASE COALESCE(c.portfolio_tier, 'Standard')
+                    WHEN 'Core'      THEN 1
+                    WHEN 'Satellite' THEN 2
+                    WHEN 'Watchlist' THEN 3
+                    ELSE 4
+                END, c.id
         """)
         rows = cur.fetchall()
         conn.close()
@@ -1049,7 +1079,7 @@ def get_investment_principles_universe(db: Session = Depends(get_db)):
                 "buy_signal": r[12],
                 "last_updated": r[13]
             })
-        print(f"[Universe API] Raw SQL fetched {len(result)} items")
+        print(f"[Universe API] Raw SQL fetched {len(result)} items (ticker 중복 제거 후)")
     except Exception as e:
         print(f"[Universe API Exception] {e}")
         import traceback; traceback.print_exc()
@@ -1067,7 +1097,198 @@ def get_investment_principles_universe(db: Session = Depends(get_db)):
 
 
 # ─────────────────────────────────────────────
-# 실시간 주가 / 52주 최고가 / MDD 갱신 API
+# 투자원칙 기반 자동 종목 추천 스캐너
+# ─────────────────────────────────────────────
+@app.get("/api/portfolio/auto_scan")
+def auto_scan_investment_candidates():
+    """
+    4단계 투자원칙 기반 자동 종목 스캔:
+    - 글로벌 독점 우량주 후보군(S&P500 + 코스피 고품질) 대상
+    - yfinance로 52주 최고가/MDD/수익성 자동 계산
+    - 투자원칙 필터: 시총 10조+ / MDD -15% 이상 할인 / ROE or 영업이익률 우수
+    - 이미 유니버스에 있는 종목 제외 후 신규 추천
+    """
+    import sqlite3, yfinance as yf
+
+    # ── 1) 투자원칙 적합 후보 티커 풀 (독점 우량주 중심) ──
+    CANDIDATE_TICKERS = [
+        # 🏆 글로벌 독점 플랫폼/인프라
+        "META", "GOOGL", "AMZN", "MSFT", "AAPL", "NFLX",
+        "V", "MA", "PYPL", "ADBE", "CRM", "NOW", "SNOW",
+        # 🔬 반도체/AI 인프라
+        "AMD", "AVGO", "QCOM", "AMAT", "KLAC", "LRCX", "MRVL",
+        "ARM", "SMCI", "MU",
+        # 🏥 헬스케어 독점
+        "LLY", "UNH", "ABBV", "TMO", "ISRG", "DXCM",
+        "VEEV", "IDXX", "PODD", "ZBH",
+        # 🏗️ 산업/방산
+        "RTX", "LMT", "NOC", "GD", "HII", "AXON",
+        "CAT", "DE", "HON", "GE", "ETN",
+        # 💰 금융 독점
+        "BRK-B", "JPM", "GS", "BLK", "SPGI", "MCO",
+        "ICE", "MSCI", "FDS",
+        # 🛒 소비재 독점 브랜드
+        "MCD", "SBUX", "NKE", "COST", "TJX",
+        "PG", "KO", "PEP", "PM", "MO",
+        # ⚡ 에너지/유틸리티 독점
+        "NEE", "SO", "AEP", "XEL",
+        # 🇰🇷 코스피 우량주 (국내)
+        "005380.KS",  # 현대차
+        "000660.KS",  # SK하이닉스
+        "035720.KS",  # 카카오
+        "035420.KS",  # NAVER
+        "051910.KS",  # LG화학
+        "006400.KS",  # 삼성SDI
+        "003670.KS",  # 포스코퓨처엠
+        "373220.KS",  # LG에너지솔루션
+        "207940.KS",  # 삼성바이오로직스(이미있지만 체크)
+        "068270.KS",  # 셀트리온
+        "105560.KS",  # KB금융
+        "055550.KS",  # 신한지주
+        "032830.KS",  # 삼성생명
+        "009150.KS",  # 삼성전기
+        "028260.KS",  # 삼성물산
+    ]
+
+    # ── 2) 이미 유니버스에 등록된 ticker 조회 ──
+    try:
+        db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+        conn = sqlite3.connect(db_path)
+        cur = conn.cursor()
+        cur.execute("SELECT DISTINCT ticker FROM companies WHERE ticker IS NOT NULL")
+        existing_tickers = set(r[0].strip().upper() for r in cur.fetchall())
+        conn.close()
+    except Exception:
+        existing_tickers = set()
+
+    # 후보에서 이미 있는 종목 제외
+    new_candidates = [t for t in CANDIDATE_TICKERS if t.upper() not in existing_tickers]
+
+    if not new_candidates:
+        return {"scan_count": 0, "recommendations": [], "message": "신규 추천 종목 없음 (모두 유니버스 등록됨)"}
+
+    # ── 3) yfinance 데이터 수집 ──
+    results = []
+    try:
+        data = yf.download(new_candidates, period="1y", progress=False, auto_adjust=True)
+        info_cache = {}
+
+        for ticker in new_candidates:
+            try:
+                clean_t = ticker.strip()
+                # 가격 데이터
+                if 'Close' in data.columns.names[0] if hasattr(data.columns, 'names') else True:
+                    try:
+                        close_s = data['Close'][clean_t].dropna() if clean_t in data['Close'].columns else None
+                        high_s  = data['High'][clean_t].dropna()  if clean_t in data['High'].columns  else None
+                    except Exception:
+                        close_s, high_s = None, None
+                else:
+                    close_s, high_s = None, None
+
+                if close_s is None or close_s.empty or high_s is None or high_s.empty:
+                    continue
+
+                curr_price = float(close_s.iloc[-1])
+                high_52w   = float(high_s.max())
+                if high_52w <= 0 or curr_price <= 0:
+                    continue
+                mdd = float(((curr_price - high_52w) / high_52w) * 100.0)
+
+                # MDD -15% 이하만 관심 대상 (추천 필터)
+                if mdd > -15.0:
+                    continue
+
+                # yfinance info (수익성 필터)
+                try:
+                    t_obj = yf.Ticker(clean_t)
+                    info = t_obj.fast_info
+                    market_cap = getattr(info, 'market_cap', None) or 0
+                    # 시총 1조원(약 $7억) 이상만
+                    if market_cap < 700_000_000:
+                        continue
+
+                    t_full = t_obj.info
+                    roe           = t_full.get('returnOnEquity', None)
+                    profit_margin = t_full.get('profitMargins', None)
+                    op_margin     = t_full.get('operatingMargins', None)
+                    pe_ratio      = t_full.get('trailingPE', None)
+                    name          = t_full.get('longName') or t_full.get('shortName') or clean_t
+                    sector        = t_full.get('sector', '기타')
+                    industry      = t_full.get('industry', '')
+                except Exception:
+                    roe, profit_margin, op_margin, pe_ratio = None, None, None, None
+                    name = clean_t
+                    sector = '기타'
+                    industry = ''
+                    market_cap = 0
+
+                # 투자원칙 점수 산정
+                score = 0
+                tags = []
+
+                # MDD 할인율별 가점
+                if mdd <= -40: score += 40; tags.append("🔥 -40%+ 폭락")
+                elif mdd <= -30: score += 30; tags.append("📉 -30%+ 급락")
+                elif mdd <= -20: score += 20; tags.append("📊 -20%+ 조정")
+                elif mdd <= -15: score += 10; tags.append("📈 -15%+ 주목")
+
+                # 수익성 가점
+                if roe and roe > 0.20: score += 20; tags.append(f"ROE {roe*100:.0f}%")
+                if op_margin and op_margin > 0.25: score += 15; tags.append(f"OPM {op_margin*100:.0f}%")
+                elif op_margin and op_margin > 0.15: score += 8
+                if profit_margin and profit_margin > 0.15: score += 10; tags.append(f"순이익률 {profit_margin*100:.0f}%")
+
+                # 섹터 독점 프리미엄
+                if any(s in sector for s in ['Technology', 'Healthcare', 'Financial']):
+                    score += 10; tags.append(f"독점섹터({sector})")
+
+                # 매수신호 분류
+                if mdd <= -40:   signal = "DEEP_DISCOUNT_추천 (3차 분할매수 타이밍)"
+                elif mdd <= -30: signal = "BUY_추천 (2차 분할매수 타이밍)"
+                elif mdd <= -20: signal = "BUY_주목 (1차 분할매수 고려)"
+                else:            signal = "WATCHLIST_주목 (-15% 조정 관심)"
+
+                results.append({
+                    "ticker": clean_t,
+                    "name": name,
+                    "sector": sector,
+                    "industry": industry,
+                    "current_price": round(curr_price, 2),
+                    "high_52w": round(high_52w, 2),
+                    "mdd_pct": round(mdd, 2),
+                    "roe": round(roe * 100, 1) if roe else None,
+                    "op_margin": round(op_margin * 100, 1) if op_margin else None,
+                    "profit_margin": round(profit_margin * 100, 1) if profit_margin else None,
+                    "pe_ratio": round(pe_ratio, 1) if pe_ratio else None,
+                    "market_cap_b": round(market_cap / 1e9, 1) if market_cap else None,
+                    "signal": signal,
+                    "score": score,
+                    "tags": tags,
+                    "already_in_universe": False
+                })
+            except Exception as e:
+                print(f"[AutoScan] {ticker} error: {e}")
+                continue
+
+    except Exception as e:
+        print(f"[AutoScan] yfinance batch error: {e}")
+
+    # ── 4) 점수 내림차순 정렬 ──
+    results.sort(key=lambda x: x['score'], reverse=True)
+
+    return {
+        "scan_count": len(results),
+        "scanned_tickers": len(new_candidates),
+        "recommendations": results,
+        "criteria": {
+            "mdd_threshold": "-15% 이상 고점 대비 조정",
+            "market_cap": "시총 $7억 이상",
+            "focus": "독점력/수익성/MDD 기반 자동 필터링"
+        }
+    }
+
+
 # ─────────────────────────────────────────────
 @app.post("/api/portfolio/refresh_prices")
 def refresh_universe_prices(db: Session = Depends(get_db)):

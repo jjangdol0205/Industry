@@ -1586,6 +1586,9 @@ function AgentWorkspace() {
   const [loading, setLoading] = useState(true);
   const [selectedTier, setSelectedTier] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
+  const [scanData, setScanData] = useState(null);
+  const [scanLoading, setScanLoading] = useState(false);
+  const [mainTab, setMainTab] = useState('universe'); // 'universe' | 'autoscan'
 
   useEffect(() => {
     fetchUniverse();
@@ -1612,6 +1615,18 @@ function AgentWorkspace() {
       } else {
         setLoading(false);
       }
+    }
+  };
+
+  const fetchAutoScan = async () => {
+    setScanLoading(true);
+    try {
+      const r = await axios.get(`${API_BASE}/portfolio/auto_scan`);
+      setScanData(r.data);
+    } catch (e) {
+      console.error("Auto scan failed", e);
+    } finally {
+      setScanLoading(false);
     }
   };
 
@@ -1645,171 +1660,332 @@ function AgentWorkspace() {
           </div>
           <h2 style={{ fontSize:'2.2rem', margin:0, background:'linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>🛡️ 4단계 투자원칙 기반 유니버스 모니터링</h2>
         </div>
-        <button className="run-btn" disabled={loading} onClick={() => fetchUniverse(0, true)}>
-          {loading ? '⏳ 실시간 주가/MDD 갱신 중...' : '🔄 실시간 주가/MDD 재조회 (Yahoo Live)'}
-        </button>
-      </div>
-
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'16px', marginBottom:'24px' }}>
-        <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' }}>
-          {[
-            { id: 'ALL', label: `전체 유니버스 (${universeList.length})`, color: '#64748b' },
-            { id: 'BUY_READY', label: `🟢 매수 가능 (${buyReadyCount})`, color: '#10b981' },
-            { id: 'Core', label: `🏆 Core 독점 (${coreCount})`, color: '#3b82f6' },
-            { id: 'Satellite', label: `🚀 Satellite 성장 (${satCount})`, color: '#8b5cf6' },
-            { id: 'Watchlist', label: `✨ 관심종목 (${watchCount})`, color: '#f59e0b' },
-          ].map(tab => (
-            <button key={tab.id} onClick={() => setSelectedTier(tab.id)} style={{
-              padding: '8px 16px', borderRadius: '10px',
-              border: selectedTier === tab.id ? `1.5px solid ${tab.color}` : '1px solid rgba(255,255,255,0.1)',
-              background: selectedTier === tab.id ? `${tab.color}22` : 'rgba(255,255,255,0.03)',
-              color: selectedTier === tab.id ? '#ffffff' : 'rgba(255,255,255,0.6)',
-              fontWeight: selectedTier === tab.id ? 700 : 500, fontSize: '0.85rem', cursor: 'pointer'
-            }}>{tab.label}</button>
-          ))}
-        </div>
-
-        <div style={{ position:'relative', minWidth:'240px' }}>
-          <input type="text" placeholder="종목명, 티커, 산업 검색..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{
-            width:'100%', padding:'8px 14px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.15)', background:'rgba(15,23,42,0.6)', color:'white', fontSize:'0.85rem', outline:'none'
-          }} />
+        <div style={{ display:'flex', gap:'8px', alignItems:'center', flexWrap:'wrap' }}>
+          {/* 메인 탭 전환 */}
+          <button onClick={() => setMainTab('universe')} style={{
+            padding:'8px 18px', borderRadius:'10px', cursor:'pointer', fontWeight:700, fontSize:'0.85rem',
+            border: mainTab==='universe' ? '1.5px solid #a5b4fc' : '1px solid rgba(255,255,255,0.1)',
+            background: mainTab==='universe' ? 'rgba(165,180,252,0.15)' : 'rgba(255,255,255,0.03)',
+            color: mainTab==='universe' ? '#a5b4fc' : 'rgba(255,255,255,0.5)'
+          }}>🛡️ 팔로잉 유니버스</button>
+          <button onClick={() => { setMainTab('autoscan'); if (!scanData && !scanLoading) fetchAutoScan(); }} style={{
+            padding:'8px 18px', borderRadius:'10px', cursor:'pointer', fontWeight:700, fontSize:'0.85rem',
+            border: mainTab==='autoscan' ? '1.5px solid #fbbf24' : '1px solid rgba(255,255,255,0.1)',
+            background: mainTab==='autoscan' ? 'rgba(251,191,36,0.12)' : 'rgba(255,255,255,0.03)',
+            color: mainTab==='autoscan' ? '#fbbf24' : 'rgba(255,255,255,0.5)'
+          }}>🔍 자동 종목 추천</button>
+          {mainTab === 'universe' && (
+            <button className="run-btn" disabled={loading} onClick={() => fetchUniverse(0, true)}>
+              {loading ? '⏳ 갱신 중...' : '🔄 실시간 주가/MDD 재조회 (Yahoo Live)'}
+            </button>
+          )}
+          {mainTab === 'autoscan' && (
+            <button className="run-btn" disabled={scanLoading} onClick={fetchAutoScan}>
+              {scanLoading ? '⏳ 스캔 중 (약 1분)...' : '🔍 투자원칙 기반 신규 종목 재스캔'}
+            </button>
+          )}
         </div>
       </div>
 
-      {loading ? (
-        <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
-          <div style={{ fontSize:'1.2rem', marginBottom:'12px' }}>⏳ 실시간 유니버스 데이터 수집 중...</div>
-        </div>
-      ) : universeList.length === 0 ? (
-        <div className="glass-panel" style={{ padding:'50px 24px', textAlign:'center' }}>
-          <div style={{ fontSize:'1.2rem', color:'#f59e0b', fontWeight:700, marginBottom:'10px' }}>
-            ⚠️ 유니버스 데이터를 불러오는 중입니다 (서버 연결 대기)
+      {/* ── 팔로잉 유니버스 탭 ── */}
+      {mainTab === 'universe' && (<>
+        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'16px', marginBottom:'24px' }}>
+          <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' }}>
+            {[
+              { id: 'ALL', label: `전체 유니버스 (${universeList.length})`, color: '#64748b' },
+              { id: 'BUY_READY', label: `🟢 매수 가능 (${buyReadyCount})`, color: '#10b981' },
+              { id: 'Core', label: `🏆 Core 독점 (${coreCount})`, color: '#3b82f6' },
+              { id: 'Satellite', label: `🚀 Satellite 성장 (${satCount})`, color: '#8b5cf6' },
+              { id: 'Watchlist', label: `✨ 관심종목 (${watchCount})`, color: '#f59e0b' },
+            ].map(tab => (
+              <button key={tab.id} onClick={() => setSelectedTier(tab.id)} style={{
+                padding: '8px 16px', borderRadius: '10px',
+                border: selectedTier === tab.id ? `1.5px solid ${tab.color}` : '1px solid rgba(255,255,255,0.1)',
+                background: selectedTier === tab.id ? `${tab.color}22` : 'rgba(255,255,255,0.03)',
+                color: selectedTier === tab.id ? '#ffffff' : 'rgba(255,255,255,0.6)',
+                fontWeight: selectedTier === tab.id ? 700 : 500, fontSize: '0.85rem', cursor: 'pointer'
+              }}>{tab.label}</button>
+            ))}
           </div>
-          <div style={{ fontSize:'0.88rem', color:'rgba(255,255,255,0.6)', marginBottom:'20px' }}>
-            Render 백엔드 서버가 켜지는 중입니다. 아래 버튼을 눌러 바로 연결을 재시도하세요.
+
+          <div style={{ position:'relative', minWidth:'240px' }}>
+            <input type="text" placeholder="종목명, 티커, 산업 검색..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{
+              width:'100%', padding:'8px 14px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.15)', background:'rgba(15,23,42,0.6)', color:'white', fontSize:'0.85rem', outline:'none'
+            }} />
           </div>
-          <button className="run-btn" onClick={() => fetchUniverse(0, false)} style={{ margin:'0 auto' }}>
-            🔄 실시간 데이터 다시 불러오기
-          </button>
         </div>
-      ) : filteredList.length === 0 ? (
-        <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>해당 필터 조건에 부합하는 종목이 없습니다.</div>
-      ) : (
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(340px, 1fr))', gap:'16px' }}>
-          {filteredList.map((item) => {
-            const isCore = item.portfolio_tier === 'Core';
-            const isSat = item.portfolio_tier === 'Satellite';
-            const isWatch = item.portfolio_tier === 'Watchlist';
-            const isBuyReady = item.buy_signal?.includes('BUY_READY') || item.buy_signal?.includes('DEEP_DISCOUNT');
-            const isDeepDiscount = item.buy_signal?.includes('DEEP_DISCOUNT');
 
-            let [badgeBg, badgeBorder, badgeText] = isBuyReady ? ['rgba(16, 185, 129, 0.15)', 'rgba(16, 185, 129, 0.4)', '#34d399'] : ['rgba(239, 68, 68, 0.15)', 'rgba(239, 68, 68, 0.4)', '#f87171'];
-            if (isDeepDiscount) [badgeBg, badgeBorder, badgeText] = ['rgba(59, 130, 246, 0.2)', 'rgba(59, 130, 246, 0.5)', '#60a5fa'];
-            
-            let [tierTagBg, tierTagText] = ['rgba(255,255,255,0.06)', '#94a3b8'];
-            if (isCore) [tierTagBg, tierTagText] = ['rgba(59,130,246,0.15)', '#60a5fa'];
-            if (isSat) [tierTagBg, tierTagText] = ['rgba(139,92,246,0.15)', '#c084fc'];
-            if (isWatch) [tierTagBg, tierTagText] = ['rgba(245,158,11,0.15)', '#fbbf24'];
+        {loading ? (
+          <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
+            <div style={{ fontSize:'1.2rem', marginBottom:'12px' }}>⏳ 실시간 유니버스 데이터 수집 중...</div>
+          </div>
+        ) : universeList.length === 0 ? (
+          <div className="glass-panel" style={{ padding:'50px 24px', textAlign:'center' }}>
+            <div style={{ fontSize:'1.2rem', color:'#f59e0b', fontWeight:700, marginBottom:'10px' }}>
+              ⚠️ 유니버스 데이터를 불러오는 중입니다 (서버 연결 대기)
+            </div>
+            <div style={{ fontSize:'0.88rem', color:'rgba(255,255,255,0.6)', marginBottom:'20px' }}>
+              Render 백엔드 서버가 켜지는 중입니다. 아래 버튼을 눌러 바로 연결을 재시도하세요.
+            </div>
+            <button className="run-btn" onClick={() => fetchUniverse(0, false)} style={{ margin:'0 auto' }}>
+              🔄 실시간 데이터 다시 불러오기
+            </button>
+          </div>
+        ) : filteredList.length === 0 ? (
+          <div className="glass-panel" style={{ padding:'60px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>해당 필터 조건에 부합하는 종목이 없습니다.</div>
+        ) : (
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(340px, 1fr))', gap:'16px' }}>
+            {filteredList.map((item) => {
+              const isCore = item.portfolio_tier === 'Core';
+              const isSat = item.portfolio_tier === 'Satellite';
+              const isWatch = item.portfolio_tier === 'Watchlist';
+              const isBuyReady = item.buy_signal?.includes('BUY_READY') || item.buy_signal?.includes('DEEP_DISCOUNT');
+              const isDeepDiscount = item.buy_signal?.includes('DEEP_DISCOUNT');
 
-            return (
-              <div key={item.id} className="glass-panel" style={{
-                padding: '20px', borderRadius: '14px',
-                border: isBuyReady ? '1.5px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(255, 255, 255, 0.08)',
-                background: isBuyReady ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(15, 23, 42, 0.7))' : 'linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6))',
-                display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
-              }}>
-                <div>
-                  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px' }}>
-                    <span style={{
-                      padding:'3px 8px', borderRadius:'6px', background:tierTagBg, color:tierTagText,
-                      fontSize:'0.75rem', fontWeight:700
-                    }}>
-                      {isCore ? '🏆 Core (독점)' : isSat ? '🚀 Satellite (성장)' : isWatch ? '✨ Watchlist' : '🏢 Standard'}
-                    </span>
-                    <span style={{
-                      padding:'3px 10px', borderRadius:'12px', background:badgeBg, border:`1px solid ${badgeBorder}`,
-                      color:badgeText, fontSize:'0.75rem', fontWeight:700
-                    }}>
-                      {item.buy_signal || 'WAIT'}
-                    </span>
-                  </div>
+              let [badgeBg, badgeBorder, badgeText] = isBuyReady ? ['rgba(16, 185, 129, 0.15)', 'rgba(16, 185, 129, 0.4)', '#34d399'] : ['rgba(239, 68, 68, 0.15)', 'rgba(239, 68, 68, 0.4)', '#f87171'];
+              if (isDeepDiscount) [badgeBg, badgeBorder, badgeText] = ['rgba(59, 130, 246, 0.2)', 'rgba(59, 130, 246, 0.5)', '#60a5fa'];
+              
+              let [tierTagBg, tierTagText] = ['rgba(255,255,255,0.06)', '#94a3b8'];
+              if (isCore) [tierTagBg, tierTagText] = ['rgba(59,130,246,0.15)', '#60a5fa'];
+              if (isSat) [tierTagBg, tierTagText] = ['rgba(139,92,246,0.15)', '#c084fc'];
+              if (isWatch) [tierTagBg, tierTagText] = ['rgba(245,158,11,0.15)', '#fbbf24'];
 
-                  {/* 기업명 및 티커 */}
-                  <div style={{ display:'flex', alignItems:'baseline', gap:'8px', marginBottom:'4px' }}>
-                    <h3 style={{ margin:0, fontSize:'1.15rem', color:'white', fontWeight:700 }}>{item.name}</h3>
-                    <span style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.4)', fontWeight:600 }}>{item.ticker}</span>
-                  </div>
-
-                  <div style={{ fontSize:'0.78rem', color:'#a5b4fc', marginBottom:'12px' }}>
-                    📂 {item.industry_title}
-                  </div>
-
-                  {/* 가격 및 MDD 메트릭 바 */}
-                  <div style={{
-                    display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'8px',
-                    background:'rgba(0,0,0,0.25)', padding:'10px 12px', borderRadius:'8px', marginBottom:'12px',
-                    border:'1px solid rgba(255,255,255,0.06)'
-                  }}>
-                    <div>
-                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>현재가</div>
-                      <div style={{ fontSize:'0.88rem', color:'white', fontWeight:700 }}>
-                        {item.current_price != null && item.current_price > 0
-                          ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
-                              ? `${Math.round(item.current_price).toLocaleString()}원`
-                              : `$${item.current_price.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}`)
-                          : '-'}
-                      </div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>52주 최고가</div>
-                      <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', fontWeight:600 }}>
-                        {item.high_52w != null && item.high_52w > 0
-                          ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
-                              ? `${Math.round(item.high_52w).toLocaleString()}원`
-                              : `$${item.high_52w.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}`)
-                          : '-'}
-                      </div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>현재 MDD</div>
-                      <div style={{
-                        fontSize:'0.9rem', fontWeight:800,
-                        color: (item.mdd_pct != null && item.mdd_pct <= -20) ? '#34d399' : '#f87171'
+              return (
+                <div key={item.id} className="glass-panel" style={{
+                  padding: '20px', borderRadius: '14px',
+                  border: isBuyReady ? '1.5px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(255, 255, 255, 0.08)',
+                  background: isBuyReady ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(15, 23, 42, 0.7))' : 'linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6))',
+                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
+                }}>
+                  <div>
+                    <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px' }}>
+                      <span style={{
+                        padding:'3px 8px', borderRadius:'6px', background:tierTagBg, color:tierTagText,
+                        fontSize:'0.75rem', fontWeight:700
                       }}>
-                        {item.mdd_pct != null ? `${item.mdd_pct.toFixed(1)}%` : '-'}
+                        {isCore ? '🏆 Core (독점)' : isSat ? '🚀 Satellite (성장)' : isWatch ? '✨ Watchlist' : '🏢 Standard'}
+                      </span>
+                      <span style={{
+                        padding:'3px 10px', borderRadius:'12px', background:badgeBg, border:`1px solid ${badgeBorder}`,
+                        color:badgeText, fontSize:'0.75rem', fontWeight:700
+                      }}>
+                        {item.buy_signal || 'WAIT'}
+                      </span>
+                    </div>
+
+                    {/* 기업명 및 티커 */}
+                    <div style={{ display:'flex', alignItems:'baseline', gap:'8px', marginBottom:'4px' }}>
+                      <h3 style={{ margin:0, fontSize:'1.15rem', color:'white', fontWeight:700 }}>{item.name}</h3>
+                      <span style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.4)', fontWeight:600 }}>{item.ticker}</span>
+                    </div>
+
+                    <div style={{ fontSize:'0.78rem', color:'#a5b4fc', marginBottom:'12px' }}>
+                      📂 {item.industry_title}
+                    </div>
+
+                    {/* 가격 및 MDD 메트릭 바 */}
+                    <div style={{
+                      display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'8px',
+                      background:'rgba(0,0,0,0.25)', padding:'10px 12px', borderRadius:'8px', marginBottom:'12px',
+                      border:'1px solid rgba(255,255,255,0.06)'
+                    }}>
+                      <div>
+                        <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>현재가</div>
+                        <div style={{ fontSize:'0.88rem', color:'white', fontWeight:700 }}>
+                          {item.current_price != null && item.current_price > 0
+                            ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
+                                ? `${Math.round(item.current_price).toLocaleString()}원`
+                                : `$${item.current_price.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}`)
+                            : '-'}
+                        </div>
                       </div>
+                      <div>
+                        <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>52주 최고가</div>
+                        <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', fontWeight:600 }}>
+                          {item.high_52w != null && item.high_52w > 0
+                            ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
+                                ? `${Math.round(item.high_52w).toLocaleString()}원`
+                                : `$${item.high_52w.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}`)
+                            : '-'}
+                        </div>
+                      </div>
+                      <div>
+                        <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>현재 MDD</div>
+                        <div style={{
+                          fontSize:'0.9rem', fontWeight:800,
+                          color: (item.mdd_pct != null && item.mdd_pct <= -20) ? '#34d399' : '#f87171'
+                        }}>
+                          {item.mdd_pct != null ? `${item.mdd_pct.toFixed(1)}%` : '-'}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 원칙 부합 사유 */}
+                    {item.principle_reason && (
+                      <div style={{
+                        fontSize:'0.8rem', color:'rgba(255,255,255,0.85)', background:'rgba(99, 102, 241, 0.08)',
+                        padding:'8px 10px', borderRadius:'6px', borderLeft:'3px solid #6366f1', marginBottom:'10px',
+                        lineHeight:'1.4'
+                      }}>
+                        💡 <strong>원칙 근거:</strong> {item.principle_reason}
+                      </div>
+                    )}
+
+                    {/* 역할 설명 */}
+                    <div style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.6)', lineHeight:'1.4', marginBottom:'8px' }}>
+                      {item.role_description}
                     </div>
                   </div>
 
-                  {/* 원칙 부합 사유 */}
-                  {item.principle_reason && (
+                  {/* 하단 미래 성장성 */}
+                  {item.future_growth && (
                     <div style={{
-                      fontSize:'0.8rem', color:'rgba(255,255,255,0.85)', background:'rgba(99, 102, 241, 0.08)',
-                      padding:'8px 10px', borderRadius:'6px', borderLeft:'3px solid #6366f1', marginBottom:'10px',
-                      lineHeight:'1.4'
+                      fontSize:'0.75rem', color:'rgba(16, 185, 129, 0.8)', borderTop:'1px dashed rgba(255,255,255,0.08)',
+                      paddingTop:'8px', marginTop:'6px'
                     }}>
-                      💡 <strong>원칙 근거:</strong> {item.principle_reason}
+                      🌱 {item.future_growth}
                     </div>
                   )}
-
-                  {/* 역할 설명 */}
-                  <div style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.6)', lineHeight:'1.4', marginBottom:'8px' }}>
-                    {item.role_description}
-                  </div>
                 </div>
+              );
+            })}
+          </div>
+        )}
+      </>)}
 
-                {/* 하단 미래 성장성 */}
-                {item.future_growth && (
-                  <div style={{
-                    fontSize:'0.75rem', color:'rgba(16, 185, 129, 0.8)', borderTop:'1px dashed rgba(255,255,255,0.08)',
-                    paddingTop:'8px', marginTop:'6px'
-                  }}>
-                    🌱 {item.future_growth}
-                  </div>
-                )}
+      {/* ── 자동 종목 추천 탭 ── */}
+      {mainTab === 'autoscan' && (
+        <div>
+          {scanLoading ? (
+            <div className="glass-panel" style={{ padding:'60px', textAlign:'center' }}>
+              <div style={{ fontSize:'1.3rem', color:'#fbbf24', marginBottom:'12px' }}>🔍 투자원칙 기반 자동 스캔 중...</div>
+              <div style={{ fontSize:'0.88rem', color:'rgba(255,255,255,0.5)' }}>
+                80여개 글로벌 우량주 후보군을 yfinance로 스캔 중입니다.<br/>약 30~60초 소요됩니다.
               </div>
-            );
-          })}
+            </div>
+          ) : !scanData ? (
+            <div className="glass-panel" style={{ padding:'60px', textAlign:'center' }}>
+              <div style={{ fontSize:'1.2rem', color:'rgba(255,255,255,0.6)', marginBottom:'16px' }}>
+                🔍 4단계 투자원칙 기반으로 신규 투자 후보 종목을 자동으로 스캔합니다
+              </div>
+              <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.4)', marginBottom:'24px', lineHeight:'1.7' }}>
+                ✅ 이미 팔로잉 유니버스에 없는 종목만 대상<br/>
+                ✅ S&P500 + 코스피 우량주 후보군 80종목 스캔<br/>
+                ✅ MDD -15% 이상 조정 + 수익성/독점력 기준 필터링<br/>
+                ✅ 투자원칙 점수 기반 랭킹 정렬
+              </div>
+              <button className="run-btn" onClick={fetchAutoScan} style={{ margin:'0 auto' }}>
+                🔍 지금 바로 스캔 시작
+              </button>
+            </div>
+          ) : (
+            <div>
+              {/* 스캔 요약 */}
+              <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(200px, 1fr))', gap:'12px', marginBottom:'24px' }}>
+                {[
+                  { label:'스캔 대상', value:`${scanData.scanned_tickers}개 종목`, color:'#a5b4fc' },
+                  { label:'투자 적합', value:`${scanData.scan_count}개 발견`, color:'#34d399' },
+                  { label:'필터 기준', value:'MDD -15%+ / 시총 7억$+', color:'#fbbf24' },
+                ].map(s => (
+                  <div key={s.label} className="glass-panel" style={{ padding:'16px', borderRadius:'12px', textAlign:'center' }}>
+                    <div style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.4)', marginBottom:'6px' }}>{s.label}</div>
+                    <div style={{ fontSize:'1.1rem', fontWeight:800, color:s.color }}>{s.value}</div>
+                  </div>
+                ))}
+              </div>
+
+              {scanData.scan_count === 0 ? (
+                <div className="glass-panel" style={{ padding:'40px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
+                  현재 투자원칙 기준을 충족하는 신규 종목이 없습니다 (시장 고점 부근)
+                </div>
+              ) : (
+                <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(360px, 1fr))', gap:'16px' }}>
+                  {scanData.recommendations.map((item, idx) => {
+                    const isBuy = item.signal?.includes('BUY_추천') || item.signal?.includes('DEEP_DISCOUNT');
+                    const isDeep = item.signal?.includes('DEEP_DISCOUNT');
+                    const borderC = isDeep ? 'rgba(59,130,246,0.5)' : isBuy ? 'rgba(16,185,129,0.4)' : 'rgba(251,191,36,0.3)';
+                    const bgC = isDeep ? 'rgba(59,130,246,0.06)' : isBuy ? 'rgba(16,185,129,0.05)' : 'rgba(251,191,36,0.04)';
+                    const signalColor = isDeep ? '#60a5fa' : isBuy ? '#34d399' : '#fbbf24';
+                    return (
+                      <div key={idx} className="glass-panel" style={{
+                        padding:'20px', borderRadius:'14px',
+                        border:`1.5px solid ${borderC}`,
+                        background:`linear-gradient(135deg, ${bgC}, rgba(15,23,42,0.7))`
+                      }}>
+                        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'10px' }}>
+                          <div style={{ display:'flex', alignItems:'center', gap:'8px' }}>
+                            <span style={{ fontSize:'1.2rem', fontWeight:900, color:'#fbbf24' }}>#{idx+1}</span>
+                            <span style={{ fontSize:'0.72rem', padding:'2px 8px', borderRadius:'6px', background:'rgba(251,191,36,0.12)', color:'#fbbf24', fontWeight:700 }}>
+                              점수 {item.score}pt
+                            </span>
+                          </div>
+                          <span style={{ fontSize:'0.72rem', padding:'3px 10px', borderRadius:'12px', background:`${signalColor}22`, border:`1px solid ${signalColor}44`, color:signalColor, fontWeight:700 }}>
+                            {item.signal}
+                          </span>
+                        </div>
+
+                        <div style={{ display:'flex', alignItems:'baseline', gap:'8px', marginBottom:'4px' }}>
+                          <h3 style={{ margin:0, fontSize:'1.1rem', color:'white', fontWeight:700 }}>{item.name}</h3>
+                          <span style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.4)', fontWeight:600 }}>{item.ticker}</span>
+                        </div>
+                        <div style={{ fontSize:'0.75rem', color:'#a5b4fc', marginBottom:'12px' }}>
+                          {item.sector} {item.industry ? `· ${item.industry}` : ''}
+                        </div>
+
+                        {/* 가격 메트릭 */}
+                        <div style={{
+                          display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'8px',
+                          background:'rgba(0,0,0,0.25)', padding:'10px 12px', borderRadius:'8px', marginBottom:'12px',
+                          border:'1px solid rgba(255,255,255,0.06)'
+                        }}>
+                          <div>
+                            <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>현재가</div>
+                            <div style={{ fontSize:'0.85rem', color:'white', fontWeight:700 }}>
+                              {item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
+                                ? `${Math.round(item.current_price).toLocaleString()}원`
+                                : `$${item.current_price?.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`}
+                            </div>
+                          </div>
+                          <div>
+                            <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>52주 고가</div>
+                            <div style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.7)', fontWeight:600 }}>
+                              {item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
+                                ? `${Math.round(item.high_52w).toLocaleString()}원`
+                                : `$${item.high_52w?.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`}
+                            </div>
+                          </div>
+                          <div>
+                            <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>MDD</div>
+                            <div style={{ fontSize:'0.92rem', fontWeight:800, color:signalColor }}>
+                              {item.mdd_pct?.toFixed(1)}%
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* 수익성 지표 */}
+                        <div style={{ display:'flex', gap:'6px', flexWrap:'wrap', marginBottom:'10px' }}>
+                          {item.tags?.map((tag, ti) => (
+                            <span key={ti} style={{ fontSize:'0.7rem', padding:'2px 7px', borderRadius:'5px', background:'rgba(99,102,241,0.12)', color:'#a5b4fc', fontWeight:600 }}>
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* 재무 요약 */}
+                        <div style={{ display:'flex', gap:'12px', fontSize:'0.73rem', color:'rgba(255,255,255,0.5)', flexWrap:'wrap' }}>
+                          {item.roe != null && <span>ROE {item.roe}%</span>}
+                          {item.op_margin != null && <span>OPM {item.op_margin}%</span>}
+                          {item.profit_margin != null && <span>순이익률 {item.profit_margin}%</span>}
+                          {item.pe_ratio != null && <span>PER {item.pe_ratio}x</span>}
+                          {item.market_cap_b != null && <span>시총 ${item.market_cap_b}B</span>}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>
