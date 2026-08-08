@@ -1009,76 +1009,50 @@ def get_latest_report(db: Session = Depends(get_db)):
 # ─────────────────────────────────────────────
 @app.get("/api/portfolio/universe")
 def get_investment_principles_universe(db: Session = Depends(get_db)):
-    """4단계 투자원칙(MDD, 독점력, 성장성) 기반 Core/Satellite/Watchlist 팔로잉 유니버스 반환"""
+    """4단계 투자원칙(MDD, 독점력, 성장성) 기반 Core/Satellite/Watchlist 팔로잉 유니버스 반환 (Raw SQL)"""
     result = []
     try:
-        companies = db.query(models.Company).all()
-        for c in companies:
-            profile = db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id == c.id).first()
-            ind = db.query(models.IndustryReport).filter(models.IndustryReport.id == c.industry_id).first()
-            
-            curr_p = getattr(profile, 'current_price', None) if profile else None
-            high_52 = getattr(profile, 'high_52w', None) if profile else None
-            mdd = getattr(profile, 'mdd_pct', None) if profile else None
-            signal = getattr(profile, 'buy_signal', None) if profile else None
-
+        import sqlite3
+        db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+        conn = sqlite3.connect(db_path)
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT c.id, c.name, c.ticker, c.industry_id,
+                   COALESCE(ir.title, '기타') AS industry_title,
+                   c.role_description, c.future_growth,
+                   COALESCE(c.portfolio_tier, 'Standard') AS portfolio_tier,
+                   c.principle_reason,
+                   cp.current_price, cp.high_52w, cp.mdd_pct,
+                   COALESCE(cp.buy_signal, 'WAIT (정보 대기)') AS buy_signal,
+                   cp.last_updated
+            FROM companies c
+            LEFT JOIN industry_reports ir ON c.industry_id = ir.id
+            LEFT JOIN company_profiles cp ON c.id = cp.company_id
+            ORDER BY c.id
+        """)
+        rows = cur.fetchall()
+        conn.close()
+        for r in rows:
             result.append({
-                "id": c.id,
-                "name": c.name,
-                "ticker": c.ticker,
-                "industry_id": c.industry_id,
-                "industry_title": ind.title if ind else "기타",
-                "role_description": c.role_description,
-                "future_growth": c.future_growth,
-                "portfolio_tier": getattr(c, 'portfolio_tier', None) or "Standard",
-                "principle_reason": getattr(c, 'principle_reason', None),
-                "current_price": curr_p,
-                "high_52w": high_52,
-                "mdd_pct": mdd,
-                "buy_signal": signal or "WAIT (정보 대기)",
-                "last_updated": getattr(profile, 'last_updated', None) if profile else None
+                "id": r[0],
+                "name": r[1],
+                "ticker": r[2],
+                "industry_id": r[3],
+                "industry_title": r[4],
+                "role_description": r[5],
+                "future_growth": r[6],
+                "portfolio_tier": r[7],
+                "principle_reason": r[8],
+                "current_price": r[9],
+                "high_52w": r[10],
+                "mdd_pct": r[11],
+                "buy_signal": r[12],
+                "last_updated": r[13]
             })
+        print(f"[Universe API] Raw SQL fetched {len(result)} items")
     except Exception as e:
-        print(f"[Universe API ORM Exception] {e}")
-        import traceback
-        traceback.print_exc()
-
-    # ORM 결과가 비어있거나 에러가 난 경우 raw SQLite 로 강인하게 수집
-    if not result:
-        try:
-            import sqlite3
-            db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
-            conn = sqlite3.connect(db_path)
-            cur = conn.cursor()
-            cur.execute("""
-                SELECT c.id, c.name, c.ticker, c.industry_id, ir.title, c.role_description, c.future_growth,
-                       c.portfolio_tier, c.principle_reason, cp.current_price, cp.high_52w, cp.mdd_pct, cp.buy_signal, cp.last_updated
-                FROM companies c
-                LEFT JOIN industry_reports ir ON c.industry_id = ir.id
-                LEFT JOIN company_profiles cp ON c.id = cp.company_id
-            """)
-            rows = cur.fetchall()
-            for r in rows:
-                result.append({
-                    "id": r[0],
-                    "name": r[1],
-                    "ticker": r[2],
-                    "industry_id": r[3],
-                    "industry_title": r[4] or "기타",
-                    "role_description": r[5],
-                    "future_growth": r[6],
-                    "portfolio_tier": r[7] or "Standard",
-                    "principle_reason": r[8],
-                    "current_price": r[9],
-                    "high_52w": r[10],
-                    "mdd_pct": r[11],
-                    "buy_signal": r[12] or "WAIT (정보 대기)",
-                    "last_updated": r[13]
-                })
-            conn.close()
-            print(f"[Universe API Raw Fallback Success] fetched {len(result)} items")
-        except Exception as ex:
-            print(f"[Universe API Raw Fallback Exception] {ex}")
+        print(f"[Universe API Exception] {e}")
+        import traceback; traceback.print_exc()
 
     return {
         "principles_summary": {

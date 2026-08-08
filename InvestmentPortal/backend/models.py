@@ -65,6 +65,9 @@ class CompanyProfile(Base):
     # --- 시장 데이터 ---
     market_cap = Column(Float, nullable=True)       # 시가총액 (USD)
     current_price = Column(Float, nullable=True)    # 현재 주가
+    high_52w = Column(Float, nullable=True)         # 52주 최고가
+    mdd_pct = Column(Float, nullable=True)          # 현재 MDD (고점 대비 %)
+    buy_signal = Column(String, nullable=True)      # 4단계 제1원칙 매수신호
     beta = Column(Float, nullable=True)             # 베타 (시장 민감도)
 
     # --- 밸류에이션 (TTM) ---
