@@ -1044,3 +1044,78 @@ def get_investment_principles_universe(db: Session = Depends(get_db)):
         "universe": result
     }
 
+
+# ─────────────────────────────────────────────
+# 실시간 주가 / 52주 최고가 / MDD 갱신 API
+# ─────────────────────────────────────────────
+@app.post("/api/portfolio/refresh_prices")
+def refresh_universe_prices(db: Session = Depends(get_db)):
+    """Yahoo Finance를 통해 실시간 현재가, 52주 최고가, MDD 및 BUY_READY 신호 일괄 갱신"""
+    try:
+        import sqlite3, yfinance as yf
+        db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+        conn = sqlite3.connect(db_path)
+        cur = conn.cursor()
+
+        cur.execute("""
+            SELECT c.id, c.name, c.ticker, c.portfolio_tier
+            FROM companies c
+            WHERE c.ticker IS NOT NULL AND length(c.ticker) > 0
+        """)
+        companies = cur.fetchall()
+        tickers = [c[2].strip() for c in companies if c[2]]
+
+        if tickers:
+            print(f"[RefreshPrices] Fetching live yfinance data for {len(tickers)} tickers...")
+            data = yf.download(tickers, period="1y", progress=False)
+
+            for cid, cname, ticker, tier in companies:
+                clean_t = ticker.strip()
+                try:
+                    if len(tickers) == 1:
+                        close_ser = data['Close']
+                        high_ser = data['High']
+                    else:
+                        close_ser = data['Close'][clean_t] if clean_t in data['Close'].columns else None
+                        high_ser = data['High'][clean_t] if clean_t in data['High'].columns else None
+
+                    if close_ser is not None and not close_ser.dropna().empty:
+                        curr = float(close_ser.dropna().iloc[-1])
+                        high52 = float(high_ser.dropna().max())
+                        mdd = float(((curr - high52) / high52) * 100.0)
+
+                        signal = "WAIT (MDD 미달 - 고점 부근)"
+                        if tier in ['Core', 'Satellite']:
+                            if mdd <= -40.0:
+                                signal = "DEEP_DISCOUNT (3차 분할매수 -40% 진입)"
+                            elif mdd <= -30.0:
+                                signal = "BUY_READY (2차 분할매수 -30% 진입)"
+                            elif mdd <= -20.0:
+                                signal = "BUY_READY (1차 분할매수 -20% 진입)"
+                            else:
+                                signal = f"WAIT (MDD {mdd:.1f}% > -20% 고점대비 미달)"
+                        elif tier == 'Watchlist':
+                            if mdd <= -30.0:
+                                signal = "WATCHLIST_BUY_READY (관심종목 -30% 폭락진입)"
+                            else:
+                                signal = f"WAIT (MDD {mdd:.1f}% > -30% 폭락대기 미달)"
+                        else:
+                            if mdd <= -20.0:
+                                signal = "BUY_CANDIDATE (-20% 할인)"
+
+                        cur.execute("""
+                            UPDATE company_profiles 
+                            SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?, last_updated=datetime('now', 'localtime')
+                            WHERE company_id=?
+                        """, (curr, high52, mdd, signal, cid))
+                except Exception as ex:
+                    pass
+
+            conn.commit()
+            conn.close()
+            print("[RefreshPrices] Successfully updated price & MDD data.")
+    except Exception as e:
+        print(f"[RefreshPrices Error] {e}")
+
+    return get_investment_principles_universe(db)
+

@@ -1591,22 +1591,24 @@ function AgentWorkspace() {
     fetchUniverse();
   }, []);
 
-  const fetchUniverse = async (retryCount = 0) => {
+  const fetchUniverse = async (retryCount = 0, forceRefresh = false) => {
     setLoading(true);
     try {
-      const r = await axios.get(`${API_BASE}/portfolio/universe`);
+      const endpoint = forceRefresh ? `${API_BASE}/portfolio/refresh_prices` : `${API_BASE}/portfolio/universe`;
+      const method = forceRefresh ? axios.post : axios.get;
+      const r = await method(endpoint);
       if (r.data && r.data.universe && r.data.universe.length > 0) {
         setUniverseData(r.data);
         setLoading(false);
       } else if (retryCount < 3) {
-        setTimeout(() => fetchUniverse(retryCount + 1), 2000);
+        setTimeout(() => fetchUniverse(retryCount + 1, forceRefresh), 2000);
       } else {
         setLoading(false);
       }
     } catch (e) {
       console.error("Failed to load universe", e);
       if (retryCount < 3) {
-        setTimeout(() => fetchUniverse(retryCount + 1), 2500);
+        setTimeout(() => fetchUniverse(retryCount + 1, forceRefresh), 2500);
       } else {
         setLoading(false);
       }
@@ -1643,8 +1645,8 @@ function AgentWorkspace() {
           </div>
           <h2 style={{ fontSize:'2.2rem', margin:0, background:'linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>🛡️ 4단계 투자원칙 기반 유니버스 모니터링</h2>
         </div>
-        <button className="run-btn" disabled={loading} onClick={fetchUniverse}>
-          {loading ? '⏳ 주가/MDD 갱신 중...' : '🔄 실시간 주가/MDD 재조회'}
+        <button className="run-btn" disabled={loading} onClick={() => fetchUniverse(0, true)}>
+          {loading ? '⏳ 실시간 주가/MDD 갱신 중...' : '🔄 실시간 주가/MDD 재조회 (Yahoo Live)'}
         </button>
       </div>
 
@@ -1731,27 +1733,36 @@ function AgentWorkspace() {
                   {/* 가격 및 MDD 메트릭 바 */}
                   <div style={{
                     display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'8px',
-                    background:'rgba(0,0,0,0.2)', padding:'10px', borderRadius:'8px', marginBottom:'12px'
+                    background:'rgba(0,0,0,0.25)', padding:'10px 12px', borderRadius:'8px', marginBottom:'12px',
+                    border:'1px solid rgba(255,255,255,0.06)'
                   }}>
                     <div>
-                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)' }}>현재가</div>
-                      <div style={{ fontSize:'0.9rem', color:'white', fontWeight:700 }}>
-                        {item.current_price ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ') ? `${item.current_price.toLocaleString()}원` : `$${item.current_price.toLocaleString()}`) : '-'}
+                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>현재가</div>
+                      <div style={{ fontSize:'0.88rem', color:'white', fontWeight:700 }}>
+                        {item.current_price != null && item.current_price > 0
+                          ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
+                              ? `${Math.round(item.current_price).toLocaleString()}원`
+                              : `$${item.current_price.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}`)
+                          : '-'}
                       </div>
                     </div>
                     <div>
-                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)' }}>52주 최고가</div>
-                      <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)' }}>
-                        {item.high_52w ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ') ? `${item.high_52w.toLocaleString()}원` : `$${item.high_52w.toLocaleString()}`) : '-'}
+                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>52주 최고가</div>
+                      <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', fontWeight:600 }}>
+                        {item.high_52w != null && item.high_52w > 0
+                          ? (item.ticker?.includes('.KS') || item.ticker?.includes('.KQ')
+                              ? `${Math.round(item.high_52w).toLocaleString()}원`
+                              : `$${item.high_52w.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}`)
+                          : '-'}
                       </div>
                     </div>
                     <div>
-                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)' }}>현재 MDD</div>
+                      <div style={{ fontSize:'0.68rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>현재 MDD</div>
                       <div style={{
                         fontSize:'0.9rem', fontWeight:800,
-                        color: (item.mdd_pct || 0) <= -20 ? '#34d399' : '#f87171'
+                        color: (item.mdd_pct != null && item.mdd_pct <= -20) ? '#34d399' : '#f87171'
                       }}>
-                        {item.mdd_pct ? `${item.mdd_pct.toFixed(1)}%` : '-'}
+                        {item.mdd_pct != null ? `${item.mdd_pct.toFixed(1)}%` : '-'}
                       </div>
                     </div>
                   </div>
