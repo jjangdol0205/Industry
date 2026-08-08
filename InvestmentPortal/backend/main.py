@@ -1373,6 +1373,208 @@ def auto_scan_investment_candidates():
     }
 
 
+# ── BUY_CANDIDATE → Watchlist 스크리닝 ─────────────────────────────────
+@app.post("/api/portfolio/screen_to_watchlist")
+def screen_to_watchlist(
+    tickers: list[str] | None = None,
+    auto_promote: bool = True
+):
+    """
+    BUY_CANDIDATE 종목을 투자원칙으로 스크리닝 → Watchlist 승격
+    - tickers: None이면 DB의 모든 BUY_CANDIDATE Standard 종목
+    - auto_promote: True이면 통과 종목을 즉시 DB에 Watchlist로 업데이트
+    """
+    import sqlite3, yfinance as yf
+    db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "investment_portal.db")
+
+    conn = sqlite3.connect(db_path)
+    cur  = conn.cursor()
+
+    # BUY_CANDIDATE 목록 가져오기
+    if tickers:
+        placeholders = ','.join('?' * len(tickers))
+        cur.execute(f"""
+            SELECT c.id, c.name, c.ticker, cp.mdd_pct, cp.current_price, cp.high_52w, cp.buy_signal
+            FROM companies c
+            LEFT JOIN company_profiles cp ON c.id = cp.company_id
+            WHERE c.ticker IN ({placeholders})
+              AND cp.buy_signal LIKE '%BUY_CANDIDATE%'
+        """, tickers)
+    else:
+        cur.execute("""
+            SELECT c.id, c.name, c.ticker, cp.mdd_pct, cp.current_price, cp.high_52w, cp.buy_signal
+            FROM companies c
+            LEFT JOIN company_profiles cp ON c.id = cp.company_id
+            WHERE c.portfolio_tier = 'Standard'
+              AND cp.buy_signal LIKE '%BUY_CANDIDATE%'
+        """)
+
+    candidates = cur.fetchall()
+    conn.close()
+
+    if not candidates:
+        return {"message": "스크리닝할 BUY_CANDIDATE 종목이 없습니다.", "promoted": []}
+
+    promoted   = []
+    watchlist  = []
+    excluded   = []
+
+    for cid, name, ticker, mdd, curr_price, high52, buy_sig in candidates:
+        result = {
+            "id": cid, "name": name, "ticker": ticker,
+            "mdd_pct": mdd, "current_price": curr_price,
+            "score": 0, "tags": [], "decision": "EXCLUDE",
+            "roe": None, "opm": None, "market_cap_b": None
+        }
+
+        # ── yfinance 데이터 조회 ──
+        try:
+            import time; time.sleep(0.3)
+            t = yf.Ticker(ticker)
+            info = t.info
+            roe        = info.get('returnOnEquity')       # 0.25 = 25%
+            opm        = info.get('operatingMargins')     # 0.18 = 18%
+            market_cap = info.get('marketCap', 0)
+            sector     = info.get('sector', '')
+            industry   = info.get('industry', '')
+            eps_fwd    = info.get('forwardEps')
+            eps_trail  = info.get('trailingEps')
+            revenue_gr = info.get('revenueGrowth')
+            ps_ratio   = info.get('priceToSalesTrailingMomonths12')
+            beta       = info.get('beta', 1.0)
+
+            result['roe']          = round(roe * 100, 1) if roe else None
+            result['opm']          = round(opm * 100, 1) if opm else None
+            result['market_cap_b'] = round(market_cap / 1e9, 1) if market_cap else None
+            result['sector']       = sector
+            result['industry']     = industry
+            result['eps_fwd']      = eps_fwd
+            result['revenue_growth_pct'] = round(revenue_gr * 100, 1) if revenue_gr else None
+
+        except Exception as e:
+            print(f"[Screen] {ticker} info error: {e}")
+            info = {}
+            roe = opm = market_cap = None
+
+        # ── 투자원칙 점수 산정 ──
+        score = 0; tags = []
+
+        # 1. 시총 기준 ($70억 = 약 10조원)
+        mc = result.get('market_cap_b') or 0
+        if mc >= 70:
+            score += 20; tags.append(f"💰 시총 ${mc:.0f}B")
+        elif mc >= 10:
+            score += 10; tags.append(f"시총 ${mc:.0f}B")
+        else:
+            tags.append(f"⚠️ 시총 소형 ${mc:.1f}B")
+
+        # 2. 수익성
+        r_roe = result.get('roe') or 0
+        r_opm = result.get('opm') or 0
+        if r_roe >= 20 or r_opm >= 20:
+            score += 30; tags.append(f"✅ 고수익 ROE={r_roe}% OPM={r_opm}%")
+        elif r_roe >= 12 or r_opm >= 12:
+            score += 15; tags.append(f"ROE={r_roe}% OPM={r_opm}%")
+        else:
+            tags.append(f"❌ 수익성 부족 ROE={r_roe}% OPM={r_opm}%")
+
+        # 3. MDD 할인율
+        mdd_v = mdd or 0
+        if mdd_v <= -40:
+            score += 35; tags.append(f"🔥 -40%+ 폭락 ({mdd_v:.1f}%)")
+        elif mdd_v <= -30:
+            score += 25; tags.append(f"📉 -30%+ 급락 ({mdd_v:.1f}%)")
+        elif mdd_v <= -20:
+            score += 15; tags.append(f"📊 -20%+ 조정 ({mdd_v:.1f}%)")
+
+        # 4. 섹터별 독점력 프리미엄 (수동 매핑)
+        MONOPOLY_BOOST = {
+            'QCOM': (25, '모바일 AP/5G 모뎀 독점', True),
+            'RKLB': (25, '소형 발사체 2위 독점', True),
+            'ISRG': (30, '수술로봇 다빈치 독점', True),
+            'PALNT': (20, 'AI 운영체제 AIP 독점', True),
+            'NXPI': (15, '자동차용 SoC 상위권', True),
+            'HUBB': (15, '전력기기 북미 시장 선도', True),
+            'POWL': (20, '전력배전 설비 틈새 독점', True),
+            'ON':   (10, '전력반도체 상위권', False),
+            'KLIC': (10, '반도체 본딩장비 선도', False),
+            'MBLY': (5,  'ADAS 센서 기술 보유하나 경쟁 심화', False),
+            'APTV': (0,  '자동차 전장 범용, 업황 부진', False),
+            'STM':  (0,  '범용 반도체, 업황 부진', False),
+            'GFS':  (5,  '2nd tier 파운드리', False),
+            'SHLS': (5,  '태양광 BOS 틈새', False),
+            'MYRG': (10, '전력망 EPC 틈새', False),
+            'WCC':  (5,  '전기자재 유통 경쟁 시장', False),
+            'ATKR': (5,  '전선관 북미 시장 선도', False),
+            'ACM':  (5,  '인프라 엔지니어링 다수 경쟁사', False),
+            'ADMA': (10, '혈액제제 CDMO 틈새', False),
+            'CBRE': (10, '글로벌 부동산 서비스 1위', False),
+        }
+        tk_upper = ticker.upper().replace('.', '')
+        boost_info = MONOPOLY_BOOST.get(tk_upper)
+        if boost_info:
+            bscore, breason, is_monopoly = boost_info
+            score += bscore
+            if bscore > 0:
+                tags.append(f"{'🏆' if is_monopoly else '📌'} {breason}")
+
+        result['score'] = score
+        result['tags']  = tags
+
+        # ── 최종 판단 ──
+        # 기준: score >= 50 + 수익성 충족 + 시총 $70B+
+        profitable = (r_roe >= 12 or r_opm >= 12)
+        large_cap  = mc >= 10
+        has_moat   = (boost_info[0] if boost_info else 0) >= 15
+
+        if score >= 55 and profitable and (large_cap or has_moat):
+            result['decision'] = 'WATCHLIST'
+            watchlist.append(result)
+        elif score >= 35 and (profitable or large_cap):
+            result['decision'] = 'WATCH'
+        else:
+            result['decision'] = 'EXCLUDE'
+            excluded.append(result)
+
+    # ── DB 업데이트 ──
+    promoted_names = []
+    if auto_promote and watchlist:
+        conn2 = sqlite3.connect(db_path)
+        cur2  = conn2.cursor()
+        for item in watchlist:
+            reason = f"BUY_CANDIDATE 자동스크리닝 통과 (점수={item['score']}, ROE={item.get('roe')}%, OPM={item.get('opm')}%)"
+            cur2.execute("""
+                UPDATE companies SET portfolio_tier='Watchlist', principle_reason=?
+                WHERE id=?
+            """, (reason, item['id']))
+            # buy_signal도 업데이트
+            cur2.execute("""
+                UPDATE company_profiles
+                SET buy_signal='WATCHLIST_BUY_READY (스크리닝 통과 → 관심종목 등재)'
+                WHERE company_id=?
+            """, (item['id'],))
+            promoted_names.append(item['name'])
+            promoted.append(item)
+        conn2.commit()
+        conn2.close()
+        print(f"[Screen] Watchlist 승격: {promoted_names}")
+
+    return {
+        "total_screened": len(candidates),
+        "promoted_count": len(watchlist),
+        "promoted": [{"name": w['name'], "ticker": w['ticker'],
+                      "score": w['score'], "tags": w['tags'],
+                      "roe": w.get('roe'), "opm": w.get('opm'),
+                      "mdd_pct": w.get('mdd_pct'), "market_cap_b": w.get('market_cap_b')}
+                     for w in watchlist],
+        "watch_list": [{"name": w['name'], "ticker": w['ticker'],
+                        "score": w['score'], "tags": w['tags']}
+                       for w in watchlist if w.get('decision') == 'WATCH'],
+        "excluded_count": len(excluded),
+        "auto_promoted_to_watchlist": promoted_names
+    }
+
+
 # ═══════════════════════════════════════════════════════
 #  EPS 분석 API 엔드포인트 (SQLite eps_timeseries 기반)
 # ═══════════════════════════════════════════════════════

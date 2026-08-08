@@ -1588,7 +1588,17 @@ function AgentWorkspace() {
   const [searchQuery, setSearchQuery] = useState('');
   const [scanData, setScanData] = useState(null);
   const [scanLoading, setScanLoading] = useState(false);
-  const [mainTab, setMainTab] = useState('universe'); // 'universe' | 'autoscan'
+  const [mainTab, setMainTab] = useState('universe'); // 'universe' | 'autoscan' | 'eps'
+  // EPS 분석 state
+  const [epsValuation, setEpsValuation] = useState(null);
+  const [epsSpread, setEpsSpread] = useState(null);
+  const [epsTracker, setEpsTracker] = useState(null);
+  const [epsLoading, setEpsLoading] = useState(false);
+  const [epsSubTab, setEpsSubTab] = useState('valuation'); // 'valuation'|'spread'|'tracker'
+  const [spreadPeriod, setSpreadPeriod] = useState(252);
+  // 스크리닝 state
+  const [screenData, setScreenData] = useState(null);
+  const [screenLoading, setScreenLoading] = useState(false);
 
   useEffect(() => {
     fetchUniverse();
@@ -1630,7 +1640,45 @@ function AgentWorkspace() {
     }
   };
 
+  const fetchScreening = async () => {
+    setScreenLoading(true);
+    try {
+      const r = await axios.post(`${API_BASE}/portfolio/screen_to_watchlist?auto_promote=true`);
+      setScreenData(r.data);
+      if (r.data?.promoted_count > 0) { setUniverseData(null); fetchUniverse(0, false); }
+    } catch(e) { console.error('Screening failed', e); }
+    finally { setScreenLoading(false); }
+  };
+
+  const fetchEpsValuation = async () => {
+
+    setEpsLoading(true);
+    try { const r = await axios.get(`${API_BASE}/eps/market_valuation`); setEpsValuation(r.data); }
+    catch(e) { console.error('EPS valuation failed', e); }
+    finally { setEpsLoading(false); }
+  };
+  const fetchEpsSpread = async (days) => {
+    const d = days || spreadPeriod;
+    setEpsLoading(true);
+    try { const r = await axios.get(`${API_BASE}/eps/spread_screen?period_days=${d}&top_n=20`); setEpsSpread(r.data); }
+    catch(e) { console.error('EPS spread failed', e); }
+    finally { setEpsLoading(false); }
+  };
+  const fetchEpsTracker = async () => {
+    setEpsLoading(true);
+    try { const r = await axios.get(`${API_BASE}/eps/universe_tracker`); setEpsTracker(r.data); }
+    catch(e) { console.error('EPS tracker failed', e); }
+    finally { setEpsLoading(false); }
+  };
+  const handleEpsTabClick = (subTab) => {
+    setEpsSubTab(subTab);
+    if (subTab === 'valuation' && !epsValuation) fetchEpsValuation();
+    if (subTab === 'spread' && !epsSpread) fetchEpsSpread();
+    if (subTab === 'tracker' && !epsTracker) fetchEpsTracker();
+  };
+
   const universeList = universeData?.universe || [];
+
 
   const filteredList = universeList.filter(item => {
     if (selectedTier === 'Core' && item.portfolio_tier !== 'Core') return false;
@@ -1674,6 +1722,12 @@ function AgentWorkspace() {
             background: mainTab==='autoscan' ? 'rgba(251,191,36,0.12)' : 'rgba(255,255,255,0.03)',
             color: mainTab==='autoscan' ? '#fbbf24' : 'rgba(255,255,255,0.5)'
           }}>🔍 자동 종목 추천</button>
+          <button onClick={() => { setMainTab('eps'); if (!epsValuation) fetchEpsValuation(); setEpsSubTab('valuation'); }} style={{
+            padding:'8px 18px', borderRadius:'10px', cursor:'pointer', fontWeight:700, fontSize:'0.85rem',
+            border: mainTab==='eps' ? '1.5px solid #34d399' : '1px solid rgba(255,255,255,0.1)',
+            background: mainTab==='eps' ? 'rgba(52,211,153,0.12)' : 'rgba(255,255,255,0.03)',
+            color: mainTab==='eps' ? '#34d399' : 'rgba(255,255,255,0.5)'
+          }}>📊 EPS 분석</button>
           {mainTab === 'universe' && (
             <button className="run-btn" disabled={loading} onClick={() => fetchUniverse(0, true)}>
               {loading ? '⏳ 갱신 중...' : '🔄 실시간 주가/MDD 재조회 (Yahoo Live)'}
@@ -1684,11 +1738,410 @@ function AgentWorkspace() {
               {scanLoading ? '⏳ 스캔 중 (약 1분)...' : '🔍 투자원칙 기반 신규 종목 재스캔'}
             </button>
           )}
+          {mainTab === 'eps' && (
+            <button className="run-btn" disabled={epsLoading} onClick={() => {
+              if (epsSubTab==='valuation') fetchEpsValuation();
+              if (epsSubTab==='spread') fetchEpsSpread();
+              if (epsSubTab==='tracker') fetchEpsTracker();
+            }}>
+              {epsLoading ? '⏳ 조회 중...' : '🔄 EPS 데이터 새로고침'}
+            </button>
+          )}
         </div>
       </div>
 
+      {/* ── EPS 분석 탭 ── */}
+      {mainTab === 'eps' && (
+        <div>
+          {/* EPS 서브탭 */}
+          <div style={{ display:'flex', gap:'8px', marginBottom:'24px', flexWrap:'wrap' }}>
+            {[
+              { id:'valuation', label:'📈 시장 밸류에이션 온도계', color:'#a78bfa' },
+              { id:'spread',    label:'🔬 주가-EPS 괴리 스크리너', color:'#34d399' },
+              { id:'tracker',   label:'🎯 팔로잉 종목 EPS 트래커', color:'#60a5fa' },
+            ].map(t => (
+              <button key={t.id} onClick={() => handleEpsTabClick(t.id)} style={{
+                padding:'8px 18px', borderRadius:'10px', cursor:'pointer', fontWeight:700, fontSize:'0.85rem',
+                border: epsSubTab===t.id ? `1.5px solid ${t.color}` : '1px solid rgba(255,255,255,0.1)',
+                background: epsSubTab===t.id ? `${t.color}22` : 'rgba(255,255,255,0.03)',
+                color: epsSubTab===t.id ? '#fff' : 'rgba(255,255,255,0.5)'
+              }}>{t.label}</button>
+            ))}
+          </div>
+
+          {epsLoading ? (
+            <div className="glass-panel" style={{ padding:'60px', textAlign:'center' }}>
+              <div style={{ fontSize:'1.2rem', color:'#34d399', marginBottom:'12px' }}>⏳ EPS 데이터 분석 중...</div>
+              <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.4)' }}>KOSPI200+KOSDAQ150 350개 종목 처리 중</div>
+            </div>
+          ) : (
+            <>
+              {/* ── 서브탭 1: 시장 밸류에이션 온도계 ── */}
+              {epsSubTab === 'valuation' && (
+                !epsValuation ? (
+                  <div className="glass-panel" style={{ padding:'50px', textAlign:'center' }}>
+                    <button className="run-btn" onClick={fetchEpsValuation} style={{ margin:'0 auto' }}>📈 시장 PER 데이터 불러오기</button>
+                  </div>
+                ) : epsValuation.error ? (
+                  <div className="glass-panel" style={{ padding:'40px', textAlign:'center', color:'#f87171' }}>{epsValuation.error}</div>
+                ) : (
+                  <div>
+                    {/* 현재 온도 게이지 */}
+                    <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))', gap:'12px', marginBottom:'24px' }}>
+                      {[
+                        { label:'KOSPI200 현재 FWD PER', value:`${epsValuation.current?.kospi200}x`, sub:'시장 평균', color:'#a78bfa' },
+                        { label:'KOSDAQ150 현재 FWD PER', value:`${epsValuation.current?.kosdaq150}x`, sub:'시장 평균', color:'#60a5fa' },
+                        { label:'현재 역사적 분위수', value:`${epsValuation.current_percentile}%ile`, sub:epsValuation.level, color: epsValuation.current_percentile <= 35 ? '#34d399' : epsValuation.current_percentile <= 55 ? '#fbbf24' : '#f87171' },
+                        { label:'10년 평균 PER', value:`${epsValuation.history?.avg}x`, sub:`범위: ${epsValuation.history?.min}x ~ ${epsValuation.history?.max}x`, color:'#94a3b8' },
+                      ].map(s => (
+                        <div key={s.label} className="glass-panel" style={{ padding:'18px', borderRadius:'12px', textAlign:'center', border:`1px solid ${s.color}33` }}>
+                          <div style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.45)', marginBottom:'6px' }}>{s.label}</div>
+                          <div style={{ fontSize:'1.6rem', fontWeight:900, color:s.color, marginBottom:'4px' }}>{s.value}</div>
+                          <div style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.6)' }}>{s.sub}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* 온도계 바 */}
+                    <div className="glass-panel" style={{ padding:'20px', marginBottom:'20px', borderRadius:'14px' }}>
+                      <div style={{ fontSize:'0.85rem', color:'#a78bfa', fontWeight:700, marginBottom:'14px' }}>
+                        🌡️ KOSPI200 FWD PER 역사적 위치 ({epsValuation.current_percentile}%ile)
+                      </div>
+                      {(() => {
+                        const pct = epsValuation.current_percentile || 0;
+                        const clr = pct<=35?'#34d399':pct<=55?'#fbbf24':'#f87171';
+                        return (
+                          <div>
+                            <div style={{ position:'relative', height:'32px', background:'rgba(255,255,255,0.06)', borderRadius:'16px', overflow:'hidden', marginBottom:'8px' }}>
+                              {/* 구간 색상 */}
+                              <div style={{ position:'absolute', left:'0%', width:'20%', height:'100%', background:'rgba(52,211,153,0.25)' }}/>
+                              <div style={{ position:'absolute', left:'20%', width:'15%', height:'100%', background:'rgba(52,211,153,0.15)' }}/>
+                              <div style={{ position:'absolute', left:'35%', width:'20%', height:'100%', background:'rgba(251,191,36,0.15)' }}/>
+                              <div style={{ position:'absolute', left:'55%', width:'20%', height:'100%', background:'rgba(251,191,36,0.25)' }}/>
+                              <div style={{ position:'absolute', left:'75%', width:'25%', height:'100%', background:'rgba(239,68,68,0.2)' }}/>
+                              {/* 현재 위치 포인터 */}
+                              <div style={{ position:'absolute', left:`${Math.min(pct,98)}%`, top:'2px', width:'28px', height:'28px', background:clr, borderRadius:'50%', transform:'translateX(-50%)', boxShadow:`0 0 12px ${clr}80`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'0.7rem', fontWeight:900, color:'#000' }}>
+                                {pct}
+                              </div>
+                            </div>
+                            <div style={{ display:'flex', justifyContent:'space-between', fontSize:'0.68rem', color:'rgba(255,255,255,0.4)' }}>
+                              <span>매우 저평가</span><span>저평가</span><span>적정</span><span>고평가</span><span>과열</span>
+                            </div>
+                            <div style={{ marginTop:'8px', padding:'8px 12px', borderRadius:'8px', background:`${clr}15`, border:`1px solid ${clr}30`, fontSize:'0.82rem', color:clr, fontWeight:700 }}>
+                              → {epsValuation.level}
+                            </div>
+                          </div>
+                        );
+                      })()}
+                    </div>
+
+                    {/* PER 분위수 히스토리 */}
+                    <div className="glass-panel" style={{ padding:'20px', marginBottom:'20px', borderRadius:'14px' }}>
+                      <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', fontWeight:700, marginBottom:'14px' }}>
+                        📊 10년 PER 분위수 밴드
+                      </div>
+                      <div style={{ display:'grid', gridTemplateColumns:'repeat(5,1fr)', gap:'8px' }}>
+                        {[
+                          { label:'P10 (극저)', value:epsValuation.history?.p10, color:'#34d399' },
+                          { label:'P25 (저평가)', value:epsValuation.history?.p25, color:'#a7f3d0' },
+                          { label:'P50 (중앙)', value:epsValuation.history?.p50, color:'#fbbf24' },
+                          { label:'P75 (고평가)', value:epsValuation.history?.p75, color:'#fb923c' },
+                          { label:'P90 (과열)', value:epsValuation.history?.p90, color:'#f87171' },
+                        ].map(p => (
+                          <div key={p.label} style={{ textAlign:'center', padding:'12px', borderRadius:'10px', background:'rgba(255,255,255,0.04)', border:`1px solid ${p.color}33` }}>
+                            <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.45)', marginBottom:'4px' }}>{p.label}</div>
+                            <div style={{ fontSize:'1.15rem', fontWeight:800, color:p.color }}>{p.value}x</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 1년 PER 추이 차트 */}
+                    {epsValuation.chart_kospi200?.length > 0 && (
+                      <div className="glass-panel" style={{ padding:'20px', borderRadius:'14px' }}>
+                        <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', fontWeight:700, marginBottom:'14px' }}>
+                          📈 KOSPI200 FWD PER 1년 추이
+                        </div>
+                        <ResponsiveContainer width="100%" height={260}>
+                          <ComposedChart data={epsValuation.chart_kospi200}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                            <XAxis dataKey="date" tick={{ fontSize:11, fill:'rgba(255,255,255,0.4)' }}
+                              tickFormatter={v => v?.slice(5)} interval={30} />
+                            <YAxis domain={['auto','auto']} tick={{ fontSize:11, fill:'rgba(255,255,255,0.4)' }} tickFormatter={v=>`${v}x`} />
+                            <RechartsTooltip
+                              contentStyle={{ background:'rgba(15,23,42,0.95)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'8px', fontSize:'12px' }}
+                              formatter={(v,n) => [`${v}x`, n==='per'?'FWD PER':n]}
+                              labelFormatter={l=>`📅 ${l}`}
+                            />
+                            {/* 과거 평균선 */}
+                            <Line type="monotone" dataKey={() => epsValuation.history?.avg} stroke="rgba(148,163,184,0.4)" strokeDasharray="5 5" dot={false} name="10년평균" />
+                            <Area type="monotone" dataKey="per" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" strokeWidth={2} dot={false} name="FWD PER" />
+                          </ComposedChart>
+                        </ResponsiveContainer>
+                        {epsValuation.chart_kosdaq150?.length > 0 && (
+                          <>
+                            <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', fontWeight:700, margin:'20px 0 14px' }}>
+                              📈 KOSDAQ150 FWD PER 1년 추이
+                            </div>
+                            <ResponsiveContainer width="100%" height={200}>
+                              <ComposedChart data={epsValuation.chart_kosdaq150}>
+                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                                <XAxis dataKey="date" tick={{ fontSize:11, fill:'rgba(255,255,255,0.4)' }} tickFormatter={v=>v?.slice(5)} interval={30}/>
+                                <YAxis domain={['auto','auto']} tick={{ fontSize:11, fill:'rgba(255,255,255,0.4)' }} tickFormatter={v=>`${v}x`}/>
+                                <RechartsTooltip contentStyle={{ background:'rgba(15,23,42,0.95)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'8px', fontSize:'12px' }} formatter={(v)=>[`${v}x`,'FWD PER']} labelFormatter={l=>`📅 ${l}`}/>
+                                <Area type="monotone" dataKey="per" fill="rgba(96,165,250,0.1)" stroke="#60a5fa" strokeWidth={2} dot={false} name="FWD PER"/>
+                              </ComposedChart>
+                            </ResponsiveContainer>
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )
+              )}
+
+              {/* ── 서브탭 2: 주가-EPS 괴리 스크리너 ── */}
+              {epsSubTab === 'spread' && (
+                !epsSpread ? (
+                  <div className="glass-panel" style={{ padding:'50px', textAlign:'center' }}>
+                    <div style={{ color:'rgba(255,255,255,0.6)', marginBottom:'20px' }}>
+                      EPS 성장 대비 주가 성장 괴리를 분석합니다<br/>
+                      <span style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.4)' }}>음수 괴리 = EPS가 주가보다 더 올랐음 = 저평가 기회</span>
+                    </div>
+                    <button className="run-btn" onClick={() => fetchEpsSpread()} style={{ margin:'0 auto' }}>🔬 스크리닝 시작</button>
+                  </div>
+                ) : epsSpread.error ? (
+                  <div className="glass-panel" style={{ padding:'40px', textAlign:'center', color:'#f87171' }}>{epsSpread.error}</div>
+                ) : (
+                  <div>
+                    {/* 기간 선택 */}
+                    <div style={{ display:'flex', gap:'8px', marginBottom:'20px', alignItems:'center', flexWrap:'wrap' }}>
+                      <span style={{ fontSize:'0.82rem', color:'rgba(255,255,255,0.5)' }}>비교 기간:</span>
+                      {[[63,'3개월'],[126,'6개월'],[252,'1년'],[504,'2년']].map(([d,l]) => (
+                        <button key={d} onClick={() => { setSpreadPeriod(d); fetchEpsSpread(d); }} style={{
+                          padding:'5px 12px', borderRadius:'8px', cursor:'pointer', fontSize:'0.8rem', fontWeight:600,
+                          border: spreadPeriod===d ? '1.5px solid #34d399' : '1px solid rgba(255,255,255,0.1)',
+                          background: spreadPeriod===d ? 'rgba(52,211,153,0.15)' : 'rgba(255,255,255,0.03)',
+                          color: spreadPeriod===d ? '#34d399' : 'rgba(255,255,255,0.5)'
+                        }}>{l}</button>
+                      ))}
+                      <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.35)', marginLeft:'auto' }}>
+                        기준일: {epsSpread.past_date} → {epsSpread.latest_date} | 총 {epsSpread.total_screened}종목 분석
+                      </span>
+                    </div>
+
+                    {/* 저평가 섹션 */}
+                    <div style={{ marginBottom:'24px' }}>
+                      <div style={{ fontSize:'1rem', fontWeight:700, color:'#34d399', marginBottom:'12px', display:'flex', alignItems:'center', gap:'8px' }}>
+                        🟢 저평가 TOP {epsSpread.undervalued?.length}
+                        <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.4)', fontWeight:400 }}>EPS 성장 &gt;&gt; 주가 상승 → 시장이 아직 반영 못한 기회</span>
+                      </div>
+                      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:'12px' }}>
+                        {epsSpread.undervalued?.map((item, idx) => (
+                          <div key={idx} className="glass-panel" style={{ padding:'16px', borderRadius:'12px', border:'1.5px solid rgba(52,211,153,0.3)', background:'rgba(52,211,153,0.04)' }}>
+                            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' }}>
+                              <div style={{ display:'flex', gap:'8px', alignItems:'center' }}>
+                                <span style={{ fontSize:'0.9rem', fontWeight:900, color:'#34d399' }}>#{idx+1}</span>
+                                <span style={{ fontSize:'1rem', fontWeight:700, color:'white' }}>{item.name}</span>
+                                <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.4)' }}>{item.index_type}</span>
+                              </div>
+                              <span style={{ fontSize:'0.75rem', padding:'2px 8px', borderRadius:'6px', background:'rgba(52,211,153,0.15)', color:'#34d399', fontWeight:700 }}>
+                                FWD {item.fwd_per}x
+                              </span>
+                            </div>
+                            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'6px', background:'rgba(0,0,0,0.2)', padding:'10px', borderRadius:'8px' }}>
+                              <div style={{ textAlign:'center' }}>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>EPS 성장</div>
+                                <div style={{ fontSize:'0.92rem', fontWeight:800, color:'#34d399' }}>+{item.eps_growth_pct?.toFixed(0)}%</div>
+                              </div>
+                              <div style={{ textAlign:'center' }}>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>주가 성장</div>
+                                <div style={{ fontSize:'0.92rem', fontWeight:800, color: item.price_growth_pct >= 0 ? '#60a5fa' : '#f87171' }}>
+                                  {item.price_growth_pct >= 0 ? '+' : ''}{item.price_growth_pct?.toFixed(0)}%
+                                </div>
+                              </div>
+                              <div style={{ textAlign:'center' }}>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>괴리</div>
+                                <div style={{ fontSize:'0.92rem', fontWeight:800, color:'#34d399' }}>{item.spread_pct?.toFixed(0)}%p</div>
+                              </div>
+                            </div>
+                            <div style={{ marginTop:'8px', fontSize:'0.72rem', color:'rgba(255,255,255,0.45)', display:'flex', gap:'12px' }}>
+                              <span>현재가 {item.price?.toLocaleString()}원</span>
+                              <span>EPS {item.eps_fwd?.toLocaleString()}원</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 과열 섹션 */}
+                    <div>
+                      <div style={{ fontSize:'1rem', fontWeight:700, color:'#f87171', marginBottom:'12px', display:'flex', alignItems:'center', gap:'8px' }}>
+                        🔴 주의 과열 TOP {epsSpread.overheated?.length}
+                        <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.4)', fontWeight:400 }}>주가 상승 &gt;&gt; EPS 성장 → 주의 필요</span>
+                      </div>
+                      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:'12px' }}>
+                        {epsSpread.overheated?.map((item, idx) => (
+                          <div key={idx} className="glass-panel" style={{ padding:'16px', borderRadius:'12px', border:'1px solid rgba(239,68,68,0.25)', background:'rgba(239,68,68,0.04)' }}>
+                            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' }}>
+                              <div style={{ display:'flex', gap:'8px', alignItems:'center' }}>
+                                <span style={{ fontSize:'0.9rem', fontWeight:900, color:'#f87171' }}>⚠️</span>
+                                <span style={{ fontSize:'1rem', fontWeight:700, color:'white' }}>{item.name}</span>
+                                <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.4)' }}>{item.index_type}</span>
+                              </div>
+                              <span style={{ fontSize:'0.75rem', padding:'2px 8px', borderRadius:'6px', background:'rgba(239,68,68,0.15)', color:'#f87171', fontWeight:700 }}>
+                                FWD {item.fwd_per}x
+                              </span>
+                            </div>
+                            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'6px', background:'rgba(0,0,0,0.2)', padding:'10px', borderRadius:'8px' }}>
+                              <div style={{ textAlign:'center' }}>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>EPS 성장</div>
+                                <div style={{ fontSize:'0.92rem', fontWeight:800, color:'#94a3b8' }}>{item.eps_growth_pct?.toFixed(0)}%</div>
+                              </div>
+                              <div style={{ textAlign:'center' }}>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>주가 성장</div>
+                                <div style={{ fontSize:'0.92rem', fontWeight:800, color:'#f87171' }}>+{item.price_growth_pct?.toFixed(0)}%</div>
+                              </div>
+                              <div style={{ textAlign:'center' }}>
+                                <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.4)', marginBottom:'2px' }}>괴리</div>
+                                <div style={{ fontSize:'0.92rem', fontWeight:800, color:'#f87171' }}>+{item.spread_pct?.toFixed(0)}%p</div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )
+              )}
+
+              {/* ── 서브탭 3: 팔로잉 종목 EPS 트래커 ── */}
+              {epsSubTab === 'tracker' && (
+                !epsTracker ? (
+                  <div className="glass-panel" style={{ padding:'50px', textAlign:'center' }}>
+                    <div style={{ color:'rgba(255,255,255,0.6)', marginBottom:'20px' }}>유니버스 한국 종목의 FWD EPS + 주가 추이를 추적합니다</div>
+                    <button className="run-btn" onClick={fetchEpsTracker} style={{ margin:'0 auto' }}>🎯 EPS 트래커 불러오기</button>
+                  </div>
+                ) : epsTracker.tracker?.length === 0 ? (
+                  <div className="glass-panel" style={{ padding:'40px', textAlign:'center', color:'rgba(255,255,255,0.5)' }}>
+                    KOSPI200/KOSDAQ150 매칭 종목이 없습니다. 유니버스에 한국 종목을 추가해주세요.
+                  </div>
+                ) : (
+                  <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(380px,1fr))', gap:'16px' }}>
+                    {epsTracker.tracker?.map((item, idx) => {
+                      const isCore = item.portfolio_tier === 'Core';
+                      const isSat  = item.portfolio_tier === 'Satellite';
+                      const tierC  = isCore ? '#60a5fa' : isSat ? '#c084fc' : '#fbbf24';
+                      const isBuy  = item.buy_signal?.includes('BUY_READY') || item.buy_signal?.includes('DEEP_DISCOUNT');
+                      const spreadColor = item.spread_1y < -10 ? '#34d399' : item.spread_1y > 10 ? '#f87171' : '#94a3b8';
+                      return (
+                        <div key={idx} className="glass-panel" style={{
+                          padding:'20px', borderRadius:'14px',
+                          border: isBuy ? '1.5px solid rgba(52,211,153,0.4)' : `1px solid ${tierC}22`,
+                          background: isBuy ? 'rgba(52,211,153,0.04)' : 'rgba(30,41,59,0.5)'
+                        }}>
+                          {/* 헤더 */}
+                          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'12px' }}>
+                            <div>
+                              <span style={{ fontSize:'0.72rem', padding:'2px 7px', borderRadius:'6px', background:`${tierC}22`, color:tierC, fontWeight:700, marginRight:'8px' }}>
+                                {isCore ? '🏆 Core' : isSat ? '🚀 Satellite' : '✨ Watchlist'}
+                              </span>
+                              <span style={{ fontSize:'1.05rem', fontWeight:700, color:'white' }}>{item.name}</span>
+                            </div>
+                            {isBuy && <span style={{ fontSize:'0.7rem', padding:'2px 8px', borderRadius:'10px', background:'rgba(52,211,153,0.15)', color:'#34d399', border:'1px solid rgba(52,211,153,0.3)', fontWeight:700 }}>BUY READY</span>}
+                          </div>
+
+                          {/* FWD PER + MDD 게이지 */}
+                          <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'8px', background:'rgba(0,0,0,0.2)', padding:'10px', borderRadius:'8px', marginBottom:'12px' }}>
+                            <div style={{ textAlign:'center' }}>
+                              <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.35)', marginBottom:'2px' }}>현재가</div>
+                              <div style={{ fontSize:'0.82rem', fontWeight:700, color:'white' }}>{item.price_latest?.toLocaleString()}원</div>
+                            </div>
+                            <div style={{ textAlign:'center' }}>
+                              <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.35)', marginBottom:'2px' }}>FWD PER</div>
+                              <div style={{ fontSize:'0.82rem', fontWeight:700, color:'#a78bfa' }}>{item.fwd_per_latest}x</div>
+                            </div>
+                            <div style={{ textAlign:'center' }}>
+                              <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.35)', marginBottom:'2px' }}>MDD</div>
+                              <div style={{ fontSize:'0.82rem', fontWeight:800, color: item.mdd_pct <= -20 ? '#34d399' : '#f87171' }}>
+                                {item.mdd_pct?.toFixed(1)}%
+                              </div>
+                            </div>
+                            <div style={{ textAlign:'center' }}>
+                              <div style={{ fontSize:'0.6rem', color:'rgba(255,255,255,0.35)', marginBottom:'2px' }}>FWD EPS</div>
+                              <div style={{ fontSize:'0.82rem', fontWeight:700, color:'#fbbf24' }}>{item.eps_latest?.toLocaleString()}원</div>
+                            </div>
+                          </div>
+
+                          {/* EPS vs 주가 성장 비교 */}
+                          <div style={{ marginBottom:'12px', padding:'10px', borderRadius:'8px', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.06)' }}>
+                            <div style={{ fontSize:'0.7rem', color:'rgba(255,255,255,0.4)', marginBottom:'8px' }}>1년 EPS 성장 vs 주가 수익률</div>
+                            <div style={{ display:'flex', gap:'12px', alignItems:'center', flexWrap:'wrap' }}>
+                              <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
+                                <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.5)' }}>EPS</span>
+                                <span style={{ fontSize:'1rem', fontWeight:800, color: item.eps_change_1y >= 0 ? '#34d399' : '#f87171' }}>
+                                  {item.eps_change_1y >= 0 ? '+' : ''}{item.eps_change_1y?.toFixed(1)}%
+                                </span>
+                              </div>
+                              <span style={{ color:'rgba(255,255,255,0.2)' }}>vs</span>
+                              <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
+                                <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.5)' }}>주가</span>
+                                <span style={{ fontSize:'1rem', fontWeight:800, color: item.price_change_1y >= 0 ? '#60a5fa' : '#f87171' }}>
+                                  {item.price_change_1y >= 0 ? '+' : ''}{item.price_change_1y?.toFixed(1)}%
+                                </span>
+                              </div>
+                              <div style={{ marginLeft:'auto', display:'flex', alignItems:'center', gap:'4px' }}>
+                                <span style={{ fontSize:'0.7rem', color:'rgba(255,255,255,0.4)' }}>괴리</span>
+                                <span style={{ fontSize:'0.95rem', fontWeight:800, color:spreadColor }}>
+                                  {item.spread_1y > 0 ? '+' : ''}{item.spread_1y?.toFixed(1)}%p
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* 미니 차트 (EPS + 주가 정규화) */}
+                          {item.chart?.length > 2 && (() => {
+                            const base_eps   = item.chart[0].eps   || 1;
+                            const base_price = item.chart[0].price || 1;
+                            const chartData  = item.chart.map(d => ({
+                              date: d.date?.slice(5),
+                              eps_idx:   d.eps   ? Math.round(d.eps   / base_eps   * 100) : null,
+                              price_idx: d.price ? Math.round(d.price / base_price * 100) : null,
+                            }));
+                            return (
+                              <div>
+                                <div style={{ fontSize:'0.65rem', color:'rgba(255,255,255,0.35)', marginBottom:'4px' }}>
+                                  📈 EPS(주황) vs 주가(파랑) 정규화 (기준=100)
+                                </div>
+                                <ResponsiveContainer width="100%" height={100}>
+                                  <LineChart data={chartData}>
+                                    <XAxis dataKey="date" hide />
+                                    <YAxis hide domain={['auto','auto']}/>
+                                    <RechartsTooltip
+                                      contentStyle={{ background:'rgba(15,23,42,0.95)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'6px', fontSize:'11px' }}
+                                      formatter={(v,n) => [`${v}`, n==='eps_idx'?'FWD EPS':'주가']}
+                                    />
+                                    <Line type="monotone" dataKey="eps_idx"   stroke="#fbbf24" strokeWidth={1.5} dot={false} name="eps_idx"/>
+                                    <Line type="monotone" dataKey="price_idx" stroke="#60a5fa" strokeWidth={1.5} dot={false} name="price_idx"/>
+                                  </LineChart>
+                                </ResponsiveContainer>
+                              </div>
+                            );
+                          })()}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )
+              )}
+            </>
+          )}
+        </div>
+      )}
+
       {/* ── 팔로잉 유니버스 탭 ── */}
       {mainTab === 'universe' && (<>
+
         <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'16px', marginBottom:'24px' }}>
           <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' }}>
             {[
@@ -1856,7 +2309,99 @@ function AgentWorkspace() {
       {/* ── 자동 종목 추천 탭 ── */}
       {mainTab === 'autoscan' && (
         <div>
+          {/* ── 투자원칙 스크리닝 배너 ── */}
+          <div className="glass-panel" style={{ padding:'20px 24px', marginBottom:'20px', borderRadius:'14px', border:'1px solid rgba(52,211,153,0.25)', background:'rgba(52,211,153,0.04)' }}>
+            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'12px' }}>
+              <div>
+                <div style={{ fontSize:'0.95rem', fontWeight:800, color:'#34d399', marginBottom:'6px' }}>
+                  🎯 BUY_CANDIDATE → Watchlist 자동 스크리닝
+                </div>
+                <div style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.55)', lineHeight:'1.6' }}>
+                  현재 유니버스의 BUY_CANDIDATE 종목들을 투자원칙(독점력·수익성·시총)으로 재검증<br/>
+                  기준 통과 시 자동으로 <strong style={{ color:'#fbbf24' }}>관심종목(Watchlist)</strong> 슬롯에 등재됩니다
+                </div>
+              </div>
+              <button
+                className="run-btn"
+                disabled={screenLoading}
+                onClick={fetchScreening}
+                style={{ background:'linear-gradient(135deg, rgba(52,211,153,0.2), rgba(16,185,129,0.15))', borderColor:'rgba(52,211,153,0.4)', color:'#34d399', minWidth:'160px' }}
+              >
+                {screenLoading ? '⏳ 스크리닝 중 (약 30초)...' : '🔬 투자원칙 스크리닝 실행'}
+              </button>
+            </div>
+
+            {/* 스크리닝 결과 */}
+            {screenData && !screenLoading && (
+              <div style={{ marginTop:'16px', borderTop:'1px solid rgba(255,255,255,0.08)', paddingTop:'16px' }}>
+                {/* 요약 배지 */}
+                <div style={{ display:'flex', gap:'10px', flexWrap:'wrap', marginBottom:'14px' }}>
+                  <span style={{ padding:'4px 12px', borderRadius:'8px', background:'rgba(52,211,153,0.15)', color:'#34d399', fontSize:'0.8rem', fontWeight:700 }}>
+                    ✅ Watchlist 승격 {screenData.promoted_count}개
+                  </span>
+                  <span style={{ padding:'4px 12px', borderRadius:'8px', background:'rgba(255,255,255,0.06)', color:'rgba(255,255,255,0.5)', fontSize:'0.8rem' }}>
+                    총 분석 {screenData.total_screened}개
+                  </span>
+                  {screenData.promoted_count > 0 && (
+                    <span style={{ padding:'4px 12px', borderRadius:'8px', background:'rgba(251,191,36,0.12)', color:'#fbbf24', fontSize:'0.8rem', fontWeight:600 }}>
+                      🎉 유니버스에 자동 등재됨
+                    </span>
+                  )}
+                </div>
+
+                {/* 승격 종목 카드 */}
+                {screenData.promoted?.length > 0 && (
+                  <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))', gap:'10px' }}>
+                    {screenData.promoted.map((item, idx) => (
+                      <div key={idx} style={{ padding:'14px', borderRadius:'10px', background:'rgba(52,211,153,0.06)', border:'1px solid rgba(52,211,153,0.25)' }}>
+                        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' }}>
+                          <div>
+                            <span style={{ fontSize:'0.95rem', fontWeight:700, color:'white' }}>{item.name}</span>
+                            <span style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.4)', marginLeft:'6px' }}>{item.ticker}</span>
+                          </div>
+                          <span style={{ fontSize:'0.72rem', padding:'2px 8px', borderRadius:'6px', background:'rgba(52,211,153,0.2)', color:'#34d399', fontWeight:800 }}>
+                            점수 {item.score}
+                          </span>
+                        </div>
+                        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'6px', background:'rgba(0,0,0,0.2)', padding:'8px', borderRadius:'6px', marginBottom:'8px' }}>
+                          <div style={{ textAlign:'center' }}>
+                            <div style={{ fontSize:'0.58rem', color:'rgba(255,255,255,0.35)' }}>MDD</div>
+                            <div style={{ fontSize:'0.82rem', fontWeight:700, color:'#34d399' }}>{item.mdd_pct?.toFixed(1)}%</div>
+                          </div>
+                          <div style={{ textAlign:'center' }}>
+                            <div style={{ fontSize:'0.58rem', color:'rgba(255,255,255,0.35)' }}>ROE</div>
+                            <div style={{ fontSize:'0.82rem', fontWeight:700, color:'#a78bfa' }}>{item.roe != null ? `${item.roe}%` : '-'}</div>
+                          </div>
+                          <div style={{ textAlign:'center' }}>
+                            <div style={{ fontSize:'0.58rem', color:'rgba(255,255,255,0.35)' }}>OPM</div>
+                            <div style={{ fontSize:'0.82rem', fontWeight:700, color:'#60a5fa' }}>{item.opm != null ? `${item.opm}%` : '-'}</div>
+                          </div>
+                        </div>
+                        <div style={{ display:'flex', flexWrap:'wrap', gap:'4px' }}>
+                          {item.tags?.map((tag, ti) => (
+                            <span key={ti} style={{ fontSize:'0.62rem', padding:'2px 6px', borderRadius:'4px', background:'rgba(255,255,255,0.06)', color:'rgba(255,255,255,0.6)' }}>
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {screenData.promoted_count === 0 && (
+                  <div style={{ textAlign:'center', padding:'20px', color:'rgba(255,255,255,0.4)', fontSize:'0.85rem' }}>
+                    현재 BUY_CANDIDATE 중 투자원칙 기준을 통과한 신규 종목이 없습니다.<br/>
+                    <span style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.3)' }}>기존 Watchlist 종목은 이미 등재되어 있습니다.</span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* 기존 자동 스캔 UI */}
           {scanLoading ? (
+
             <div className="glass-panel" style={{ padding:'60px', textAlign:'center' }}>
               <div style={{ fontSize:'1.3rem', color:'#fbbf24', marginBottom:'12px' }}>🔍 투자원칙 기반 자동 스캔 중...</div>
               <div style={{ fontSize:'0.88rem', color:'rgba(255,255,255,0.5)' }}>
