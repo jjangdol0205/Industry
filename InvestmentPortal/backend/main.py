@@ -334,6 +334,102 @@ run_startup_migrations()
 
 
 # ─────────────────────────────────────────────
+# Seed 데이터 로드 (산업/회사 데이터가 없을 때 자동 복구)
+# Render 재배포 후 DB가 비어있을 때 seed_data.py에서 로드
+# ─────────────────────────────────────────────
+def load_seed_data_if_needed():
+    """
+    industry_reports / companies / company_profiles 가 비어있으면
+    seed_data.py에서 전체 데이터를 로드합니다.
+    """
+    import sqlite3
+    db_path   = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+    seed_path = os.path.join(os.path.dirname(__file__), "seed_data.py")
+
+    if not os.path.exists(seed_path):
+        print("[Seed] seed_data.py 없음 - 건너뜀")
+        return
+
+    conn = sqlite3.connect(db_path)
+    cur  = conn.cursor()
+
+    # 이미 충분한 데이터가 있으면 건너뜀
+    cur.execute("SELECT COUNT(*) FROM industry_reports")
+    n_reports = cur.fetchone()[0]
+    cur.execute("SELECT COUNT(*) FROM companies")
+    n_companies = cur.fetchone()[0]
+
+    if n_reports >= 10 and n_companies >= 100:
+        print(f"[Seed] 데이터 충분 (산업={n_reports}, 회사={n_companies}) - 건너뜀")
+        conn.close()
+        return
+
+    print(f"[Seed] 데이터 부족 (산업={n_reports}, 회사={n_companies}) → seed 로드 시작")
+
+    # seed_data.py 동적 임포트
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("seed_data", seed_path)
+    sd   = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sd)
+
+    # industry_reports
+    for row in sd.INDUSTRY_REPORTS:
+        rid, title, summary, fp, tag = row
+        cur.execute("SELECT id FROM industry_reports WHERE id=?", (rid,))
+        if not cur.fetchone():
+            cur.execute(
+                "INSERT INTO industry_reports (id, title, summary, file_path, tag) VALUES (?,?,?,?,?)",
+                (rid, title, summary, fp, tag)
+            )
+    conn.commit()
+    print(f"[Seed] industry_reports 로드 완료: {len(sd.INDUSTRY_REPORTS)}개")
+
+    # value_chain_nodes
+    for row in sd.VALUE_CHAIN_NODES:
+        nid, ind_id, nm, desc = row
+        cur.execute("SELECT id FROM value_chain_nodes WHERE id=?", (nid,))
+        if not cur.fetchone():
+            cur.execute(
+                "INSERT INTO value_chain_nodes (id, industry_id, node_name, description) VALUES (?,?,?,?)",
+                (nid, ind_id, nm, desc)
+            )
+    conn.commit()
+    print(f"[Seed] value_chain_nodes 로드 완료: {len(sd.VALUE_CHAIN_NODES)}개")
+
+    # companies
+    for row in sd.COMPANIES:
+        cid, iid, vid, name, ticker, role, fut, dorder, tier, reason = row
+        cur.execute("SELECT id FROM companies WHERE id=?", (cid,))
+        if not cur.fetchone():
+            cur.execute("""
+                INSERT INTO companies
+                  (id, industry_id, value_chain_node_id, name, ticker,
+                   role_description, future_growth, display_order, portfolio_tier, principle_reason)
+                VALUES (?,?,?,?,?,?,?,?,?,?)
+            """, (cid, iid, vid, name, ticker, role, fut, dorder, tier, reason))
+    conn.commit()
+    print(f"[Seed] companies 로드 완료: {len(sd.COMPANIES)}개")
+
+    # company_profiles
+    for row in sd.COMPANY_PROFILES:
+        cid, curr, h52, mdd, sig, desc = row
+        cur.execute("SELECT id FROM company_profiles WHERE company_id=?", (cid,))
+        if not cur.fetchone():
+            cur.execute("""
+                INSERT INTO company_profiles
+                  (company_id, current_price, high_52w, mdd_pct, buy_signal, description_ko)
+                VALUES (?,?,?,?,?,?)
+            """, (cid, curr, h52, mdd, sig, desc))
+    conn.commit()
+    print(f"[Seed] company_profiles 로드 완료: {len(sd.COMPANY_PROFILES)}개")
+
+    conn.close()
+    print("[Seed] 전체 시드 로드 완료!")
+
+load_seed_data_if_needed()
+
+
+# ─────────────────────────────────────────────
 # EPS 시계열 데이터 로드 (CSV → SQLite)
 # Render 배포 환경: eps_data.csv.gz → eps_timeseries 테이블
 # ─────────────────────────────────────────────
