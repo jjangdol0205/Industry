@@ -59,3 +59,4 @@ InvestmentPortal/frontend/*.py
 InvestmentPortal/frontend/patch.js
 *.working
 *_working.*
+산업자료_텍스트/
