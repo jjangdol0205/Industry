@@ -188,6 +188,7 @@ function App() {
   const fetchCompanyFull = async (id) => {
     setCompanyAiAnalysis(null);
     setSidebarOpen(false);
+    setViewMode('research');
     try {
       const [compRes, profRes, finRes] = await Promise.all([
         axios.get(`${API_BASE}/companies/${id}`),
@@ -432,7 +433,7 @@ function App() {
       {/* Main */}
       <div className="main-content">
         {viewMode === 'agent-workspace' ? (
-          <AgentWorkspace />
+          <AgentWorkspace onSelectCompany={fetchCompanyFull} />
         ) : viewMode === 'pdf-library' ? (
           <PdfLibraryView />
         ) : selectedCompany ? (
@@ -1768,7 +1769,7 @@ function BusinessModelSection({ latest, profile, company }) {
 }
 
 // ── 4단계 투자원칙 기반 유니버스 팔로잉 & 포트폴리오 매니저 ─────────────────
-function AgentWorkspace() {
+function AgentWorkspace({ onSelectCompany }) {
   const [universeData, setUniverseData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedTier, setSelectedTier] = useState('ALL');
@@ -1895,8 +1896,8 @@ function AgentWorkspace() {
             if (isWatch) [tierTagBg, tierTagText] = ['rgba(245,158,11,0.15)', '#fbbf24'];
 
             return (
-              <div key={item.id} className="glass-panel" style={{
-                padding: '20px', borderRadius: '14px',
+              <div key={item.id} className="glass-panel" onClick={() => onSelectCompany && onSelectCompany(item.id)} style={{
+                padding: '20px', borderRadius: '14px', cursor: 'pointer', transition: 'all 0.2s ease',
                 border: isBuyReady ? '1.5px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(255, 255, 255, 0.08)',
                 background: isBuyReady ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(15, 23, 42, 0.7))' : 'linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6))',
                 display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
@@ -1970,6 +1971,11 @@ function AgentWorkspace() {
                   <div style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.6)', lineHeight:'1.4', marginBottom:'8px' }}>
                     {item.role_description}
                   </div>
+                </div>
+
+                <div style={{ marginTop:'12px', paddingTop:'10px', borderTop:'1px solid rgba(255,255,255,0.08)', display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+                  <span style={{ fontSize:'0.78rem', color:'#60a5fa', fontWeight:600 }}>🔬 4단계 심층 분석 보기</span>
+                  <span style={{ fontSize:'0.85rem', color:'#60a5fa', fontWeight:700 }}>→</span>
                 </div>
 
                 {/* 하단 미래 성장성 */}
