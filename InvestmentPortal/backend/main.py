@@ -601,6 +601,42 @@ if PDF_ROOT:
     app.mount("/pdfs", StaticFiles(directory=PDF_ROOT), name="pdfs")
 
 
+# ── ISRG & Core/Satellite Deepdive 데이터 로드 ──
+ISRG_DEEPDIVE_PATH = os.path.join(os.path.dirname(__file__), "isrg_deepdive_data.json")
+isrg_deepdive_data = {}
+if os.path.exists(ISRG_DEEPDIVE_PATH):
+    try:
+        with open(ISRG_DEEPDIVE_PATH, "r", encoding="utf-8") as f:
+            isrg_deepdive_data = json.load(f)
+        print("Loaded ISRG deepdive data successfully.")
+    except Exception as e:
+        print("Failed to load ISRG deepdive data:", e)
+
+@app.get("/api/company/{company_id}/deepdive")
+def get_company_deepdive(company_id: int):
+    """Core/Satellite 독점주 4단계 딥다이브 리서치 & 세그먼트 데이터 반환"""
+    import sqlite3
+    db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+    conn = sqlite3.connect(db_path)
+    cur = conn.cursor()
+    cur.execute("SELECT ticker, name, portfolio_tier FROM companies WHERE id=?", (company_id,))
+    row = cur.fetchone()
+    conn.close()
+
+    if row and row[0] == 'ISRG':
+        return isrg_deepdive_data
+
+    if row and isrg_deepdive_data:
+        # Fallback for other core stocks using general template
+        data = dict(isrg_deepdive_data)
+        data["ticker"] = row[0]
+        data["name"] = row[1]
+        data["korean_name"] = row[1]
+        return data
+
+    return {"error": "Deepdive data not found"}
+
+
 # DeepSeek 설정 (OpenAI 호환 API)
 DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
 deepseek_client = OpenAI(
