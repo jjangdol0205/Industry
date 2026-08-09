@@ -811,7 +811,7 @@ function IndustryView({ report, onSelectCompany }) {
           return (
             <div key={comp.id}
               className="company-pill glass-panel"
-              onClick={() => onSelectCompany(comp.id)}
+              onClick={() => onSelectCompany(comp.id, comp)}
               style={{ position:'relative', border: cardBorder, boxShadow: cardGlow, transition:'all 0.25s' }}
             >
               {/* 배지 */}
@@ -1441,9 +1441,8 @@ function DeepDiveSection({ company, profile }) {
     }
   };
 
-  if (!deepData || deepData.error) return null;
-
   const isISRG = company?.ticker === 'ISRG';
+  if (!isISRG || !deepData || deepData.error || deepData.ticker !== 'ISRG') return null;
   const q = deepData.quote || {};
   const segments = deepData.segment_revenue_2025 || [];
   const history = deepData.financial_history || [];

@@ -626,15 +626,7 @@ def get_company_deepdive(company_id: int):
     if row and row[0] == 'ISRG':
         return isrg_deepdive_data
 
-    if row and isrg_deepdive_data:
-        # Fallback for other core stocks using general template
-        data = dict(isrg_deepdive_data)
-        data["ticker"] = row[0]
-        data["name"] = row[1]
-        data["korean_name"] = row[1]
-        return data
-
-    return {"error": "Deepdive data not found"}
+    return {"ticker": row[0] if row else "", "name": row[1] if row else "", "error": "Custom deepdive only available for ISRG currently"}
 
 
 # DeepSeek 설정 (OpenAI 호환 API)
