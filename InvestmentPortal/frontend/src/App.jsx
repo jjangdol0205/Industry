@@ -1623,23 +1623,25 @@ function AgentWorkspace() {
   };
 
   const universeList = universeData?.universe || [];
+  const getTier = (item) => item.portfolio_tier || item.suggested_tier || item.current_tier || 'Standard';
 
   const filteredList = universeList.filter(item => {
-    if (selectedTier === 'Core' && item.portfolio_tier !== 'Core') return false;
-    if (selectedTier === 'Satellite' && item.portfolio_tier !== 'Satellite') return false;
-    if (selectedTier === 'Watchlist' && item.portfolio_tier !== 'Watchlist') return false;
+    const itemTier = getTier(item);
+    if (selectedTier === 'Core' && itemTier !== 'Core') return false;
+    if (selectedTier === 'Satellite' && itemTier !== 'Satellite') return false;
+    if (selectedTier === 'Watchlist' && itemTier !== 'Watchlist') return false;
     if (selectedTier === 'BUY_READY' && !item.buy_signal?.includes('BUY_READY') && !item.buy_signal?.includes('DEEP_DISCOUNT')) return false;
 
     if (searchQuery.trim() !== '') {
       const q = searchQuery.toLowerCase();
-      return item.name?.toLowerCase().includes(q) || item.ticker?.toLowerCase().includes(q) || item.industry_title?.toLowerCase().includes(q);
+      return item.name?.toLowerCase().includes(q) || item.ticker?.toLowerCase().includes(q) || item.industry_title?.toLowerCase().includes(q) || item.industry?.toLowerCase().includes(q);
     }
     return true;
   });
 
-  const coreCount = universeList.filter(i => i.portfolio_tier === 'Core').length;
-  const satCount = universeList.filter(i => i.portfolio_tier === 'Satellite').length;
-  const watchCount = universeList.filter(i => i.portfolio_tier === 'Watchlist').length;
+  const coreCount = universeList.filter(i => getTier(i) === 'Core').length;
+  const satCount = universeList.filter(i => getTier(i) === 'Satellite').length;
+  const watchCount = universeList.filter(i => getTier(i) === 'Watchlist').length;
   const buyReadyCount = universeList.filter(i => i.buy_signal?.includes('BUY_READY') || i.buy_signal?.includes('DEEP_DISCOUNT')).length;
 
   return (
@@ -1690,9 +1692,10 @@ function AgentWorkspace() {
       ) : (
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(340px, 1fr))', gap:'16px' }}>
           {filteredList.map((item) => {
-            const isCore = item.portfolio_tier === 'Core';
-            const isSat = item.portfolio_tier === 'Satellite';
-            const isWatch = item.portfolio_tier === 'Watchlist';
+            const itemTier = getTier(item);
+            const isCore = itemTier === 'Core';
+            const isSat = itemTier === 'Satellite';
+            const isWatch = itemTier === 'Watchlist';
             const isBuyReady = item.buy_signal?.includes('BUY_READY') || item.buy_signal?.includes('DEEP_DISCOUNT');
             const isDeepDiscount = item.buy_signal?.includes('DEEP_DISCOUNT');
 
