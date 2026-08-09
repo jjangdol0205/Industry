@@ -1596,9 +1596,27 @@ function AgentWorkspace() {
     setLoading(true);
     try {
       const r = await axios.get(`${API_BASE}/portfolio/universe`);
-      if (r.data) setUniverseData(r.data);
+      if (r.data && r.data.universe && r.data.universe.length >= 240) {
+        setUniverseData(r.data);
+      } else {
+        // Fallback to static static universe JSON if backend universe < 240
+        const fb = await axios.get('./universe_evaluated.json');
+        if (fb.data && Array.isArray(fb.data)) {
+          setUniverseData({ universe: fb.data });
+        } else if (r.data) {
+          setUniverseData(r.data);
+        }
+      }
     } catch (e) {
-      console.error("Failed to load universe", e);
+      console.error("Failed to load universe from API, using fallback", e);
+      try {
+        const fb = await axios.get('./universe_evaluated.json');
+        if (fb.data && Array.isArray(fb.data)) {
+          setUniverseData({ universe: fb.data });
+        }
+      } catch (err) {
+        console.error("Fallback failed", err);
+      }
     } finally {
       setLoading(false);
     }

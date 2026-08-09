@@ -249,15 +249,39 @@ def run_startup_migrations():
             ("TSMC", "Core", "5nm 이하 파운드리 90%+ 독점, OPM 42%+, CoWoS 병목 소유 (Core 3호)"),
             ("삼성바이오로직스", "Core", "세계 1위 배양용량 CDMO 독점력, CAPEX 무거운 자본 장벽 (국내 Core 대체)"),
             ("코스맥스", "Core", "글로벌 1위 화장품 ODM, Fast Beauty 밸류체인 핵심 병목 (국내 Core 대체)"),
-            ("Rocket Lab USA", "Satellite", "소형 발사체 독보적 2위, 수주잔고 역대 최고치, 위성 SW/시스템 체질개선 (Satellite 1호)"),
+            ("Intuitive Surgical", "Core", "다빈치 수술로봇 독점, OPM 30%+, 소모품 락인 (Core)"),
+            ("Qualcomm", "Core", "5G/모바일 AP 특허 독점, ROE 35%, SDV 확장 (Core)"),
+            ("KLA Corporation", "Core", "반도체 계측/검사 장비 독점율 80%+, EUV 필수 병목 (Core)"),
+            ("Constellation Energy", "Core", "미국 1위 원자력 발전, AI 데이터센터 직결 전력 독점 (Core)"),
+            ("SK하이닉스", "Core", "NVIDIA HBM3E/4 독점 공급, OPM 71.5%, ROE 61.2% (Core)"),
+            ("한미반도체", "Core", "[🔥 Satellite 10-Bagger 후보] TAM: ₩50조+ HBM 3D Stack 본딩 | HBM TC 본더 글로벌 90%+ 독점, OPM 40%+ 이익 체질"),
+            ("HPSP", "Core", "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ 선단공정 고압 어닐링 | 고압 수소 어닐링 장비 100% 세계 독점, OPM 50%+"),
+            ("Broadcom", "Core", "AI ASIC 설계 + 네트워킹 반도체 독점, OPM 35%+, GPM 60%+ (Core)"),
+            ("Synopsys", "Core", "반도체 EDA 소프트웨어 독점, OPM 30%+, GRR 90%+ (Core)"),
+            ("LIG넥스원", "Core", "정밀유도무기·전자전·우주방위 전문 방산기업, 위성 기반 정밀 항법 시스템 공급 (Core)"),
+            ("한화에어로스페이스", "Core", "누리호 발사체 총괄 주관 및 우주 발사체 엔진 독점 (수주잔고 30조원+) (Core)"),
+            ("LS ELECTRIC", "Core", "변압기·배전반·에너지관리시스템(EMS) 국내 1위 전력 기기 기업 (Core)"),
+            ("리노공업", "Core", "[🔥 Satellite 10-Bagger 후보] TAM: ₩10조+ 온디바이스 AI | 온디바이스 AI 칩 소켓 및 LEAP 프로브 핀 글로벌 독점 1위"),
+            ("에이피알", "Core", "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ 글로벌 뷰티 디바이스 | 뷰티 디바이스(AGE-R) 글로벌 1위 독점 IP, OPM 22%"),
+            ("크래프톤", "Core", "PUBG 개발사 — 배틀그라운드 PC·모바일 글로벌 1위, OPM 45%+ (Core)"),
             ("Vertiv Holdings", "Satellite", "AI 데이터센터 액체냉각/UPS 1위, 수주잔고 YoY +35%, 고마진 체질개선 (Satellite 2호)"),
-            ("삼양식품", "Satellite", "불닭볶음면 글로벌 IP 독점, 수출 비중 70%+, 수주/수출 역대 최고치 (국내 Satellite 대체)"),
-            ("HD현대일렉트릭", "Satellite", "글로벌 전력기기 리드타임 2년+ 병목, 수주잔고 최고치 경신 (국내 Satellite 대체)"),
-            ("Intuitive Surgical", "Watchlist", "다빈치 수술로봇 독점, OPM 30%+, 소모품 락인 (대체 관심 1호)"),
-            ("HD한국조선해양", "Watchlist", "LNG/친환경선 글로벌 1위, 3년치 고가 수주잔고 (대체 관심 2호)"),
-            ("브이티", "Watchlist", "마이크로니들(리들샷) 독점 IP, 글로벌 바이럴 고마진 (대체 관심 3호)"),
-            ("Palantir Technologies", "Watchlist", "기업/정부 AI 운영체제(AIP) 시장 선도, ARR 구독 성장 (대체 관심 4호)"),
-            ("실리콘투", "Watchlist", "K-뷰티 글로벌 풀필먼트 플랫폼 1위, 150개국 직매입 유통 (대체 관심 5호)"),
+            ("Rocket Lab USA", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: $100B+ 민간 우주 발사체 & 위성 서비스 | 소형 발사체 2위 + 뉴트론 중형 로켓, 수주잔고 $1.0B+"),
+            ("Powell Industries", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: $50B+ AI 데이터센터 전력배전 | 전력배전/스위치기어 틈새 독점, 수주잔고 $1.7B, OPM 21%+"),
+            ("오픈엣지테크놀로지", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: ₩10조+ 온디바이스 AI 칩 IP | 글로벌 유일 NPU + 메모리 컨트롤러 통합 IP 보유, 로열티 10배 폭발"),
+            ("가온칩스", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ 삼성 파운드리 커스텀 AI 칩 | 삼성 파운드리 1위 DSP 파트너, AI NPU 칩 설계 수주 잔고 급증"),
+            ("Camtek", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: $30B+ HBM 3D TSV/CoWoS 검사 장비 | HBM 3D TSV 첨단 패키징 검사장비 글로벌 1위 독점, OPM 30%+"),
+            ("실리콘투", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ 글로벌 K-뷰티 유통망 | K-뷰티 150개국 글로벌 직매입 풀필먼트 독점 1위"),
+            ("알테오젠", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: ₩100조+ 글로벌 항암제 SC 제형 변경 | ALT-B4 SC 플랫폼 글로벌 독점, 키트루다 SC 전환 수혜"),
+            ("퓨런티어", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: ₩5조+ 자율주행 전장 카메라 공정 | 전장용 자율주행 카메라 조립/조정 장비 틈새 1위 독점"),
+            ("인텔리안테크", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: ₩10조+ LEO 저궤도 위성 안테나 | 저궤도 위성 안테나 글로벌 1위, 스타링크/원웹 공급망 핵심 병목"),
+            ("Coinbase Global", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: $1T+ 제도권 암호화폐 커스터디 | 미국 1위 규제 준수 거래소 & 비트코인 ETF 80%+ 커스터디 독점"),
+            ("레인보우로보틱스", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: ₩50조+ 협동/휴머노이드 로봇 | 삼성전자 대주주, 협동로봇 및 휴머노이드 핵심 부품 내재화 독점력"),
+            ("현대오토에버", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ SDV 차량용 SW | SDV 차량용 SW 플랫폼 및 내비게이션 독점, 수주잔고 지속 폭발"),
+            ("에스티팜", "Satellite", "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ RNA 치료제 올리고 CDMO | 올리고핵산(RNA 치료제 원료) 글로벌 Top 3 독점 CDMO"),
+            ("삼양식품", "Satellite", "불닭볶음면 글로벌 IP 독점, 수출 비중 70%+, 수주/수출 역대 최고치 (Satellite)"),
+            ("HD현대일렉트릭", "Satellite", "글로벌 전력기기 리드타임 2년+ 병목, 수주잔고 최고치 경신 (Satellite)"),
+            ("HD한국조선해양", "Watchlist", "LNG/친환경선 글로벌 1위, 3년치 고가 수주잔고 (Watchlist)"),
+            ("MicroStrategy", "Watchlist", "세계 최대 상장사 비트코인 보유 기업 (Watchlist)"),
         ]
         for cname, tier, reason in tier_updates:
             cur.execute("""
@@ -359,12 +383,13 @@ def load_seed_data_if_needed():
     cur.execute("SELECT COUNT(*) FROM companies")
     n_companies = cur.fetchone()[0]
 
-    if n_reports >= 10 and n_companies >= 100:
+    # 260개 미만이면 262개 유니버스로 업데이트
+    if n_reports >= 10 and n_companies >= 260:
         print(f"[Seed] 데이터 충분 (산업={n_reports}, 회사={n_companies}) - 건너뜀")
         conn.close()
         return
 
-    print(f"[Seed] 데이터 부족 (산업={n_reports}, 회사={n_companies}) → seed 로드 시작")
+    print(f"[Seed] 262개 유니버스 데이터 갱신 필요 (현재 회사={n_companies}) → seed 로드 시작")
 
     # seed_data.py 동적 임포트
     import importlib.util
@@ -407,8 +432,14 @@ def load_seed_data_if_needed():
                    role_description, future_growth, display_order, portfolio_tier, principle_reason)
                 VALUES (?,?,?,?,?,?,?,?,?,?)
             """, (cid, iid, vid, name, ticker, role, fut, dorder, tier, reason))
+        else:
+            cur.execute("""
+                UPDATE companies
+                SET portfolio_tier=?, principle_reason=?
+                WHERE id=?
+            """, (tier, reason, cid))
     conn.commit()
-    print(f"[Seed] companies 로드 완료: {len(sd.COMPANIES)}개")
+    print(f"[Seed] companies 로드 및 업데이트 완료: {len(sd.COMPANIES)}개")
 
     # company_profiles
     for row in sd.COMPANY_PROFILES:
@@ -420,6 +451,12 @@ def load_seed_data_if_needed():
                   (company_id, current_price, high_52w, mdd_pct, buy_signal, description_ko)
                 VALUES (?,?,?,?,?,?)
             """, (cid, curr, h52, mdd, sig, desc))
+        else:
+            cur.execute("""
+                UPDATE company_profiles
+                SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?
+                WHERE company_id=?
+            """, (curr, h52, mdd, sig, cid))
     conn.commit()
     print(f"[Seed] company_profiles 로드 완료: {len(sd.COMPANY_PROFILES)}개")
 
