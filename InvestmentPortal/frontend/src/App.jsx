@@ -1407,7 +1407,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
 }
 
 
-// ── DeepDiveSection (Intuitive Surgical & Core/Satellite 76개 독점주 전용 딥다이브) ──
+// ── Universal DeepDiveSection (전체 유니버스 기업 4단계 딥다이브 리서치 & 전용 차트) ──
 function DeepDiveSection({ company, profile }) {
   const [deepData, setDeepData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -1415,34 +1415,37 @@ function DeepDiveSection({ company, profile }) {
   useEffect(() => {
     if (!company?.id) return;
     fetchDeepdive();
-  }, [company?.id]);
+  }, [company?.id, company?.ticker]);
 
   const fetchDeepdive = async () => {
     setLoading(true);
     const ts = Date.now();
     try {
       const res = await axios.get(`${API_BASE}/company/${company.id}/deepdive?t=${ts}`);
-      if (res.data && !res.data.error) {
+      if (res.data && !res.data.error && res.data.quote) {
         setDeepData(res.data);
-      } else if (company?.ticker === 'ISRG') {
-        const fb = await axios.get(`./isrg_deepdive_data.json?t=${ts}`);
-        if (fb.data) setDeepData(fb.data);
+      } else {
+        const fb = await axios.get(`./universal_deepdive_data.json?t=${ts}`);
+        if (fb.data) {
+          const item = fb.data[company.id] || fb.data[company.ticker];
+          if (item) setDeepData(item);
+        }
       }
     } catch (e) {
-      console.error("Failed to load deepdive data", e);
-      if (company?.ticker === 'ISRG') {
-        try {
-          const fb = await axios.get(`./isrg_deepdive_data.json?t=${ts}`);
-          if (fb.data) setDeepData(fb.data);
-        } catch (err) {}
-      }
+      try {
+        const fb = await axios.get(`./universal_deepdive_data.json?t=${ts}`);
+        if (fb.data) {
+          const item = fb.data[company.id] || fb.data[company.ticker];
+          if (item) setDeepData(item);
+        }
+      } catch (err) {}
     } finally {
       setLoading(false);
     }
   };
 
-  const isISRG = company?.ticker === 'ISRG';
-  if (!isISRG || !deepData || deepData.error || deepData.ticker !== 'ISRG') return null;
+  if (!deepData || deepData.error) return null;
+
   const q = deepData.quote || {};
   const segments = deepData.segment_revenue_2025 || [];
   const history = deepData.financial_history || [];
@@ -1513,7 +1516,7 @@ function DeepDiveSection({ company, profile }) {
         </div>
 
         {/* ISRG 매출 세그먼트 파이차트 & 4개년 시계열 차트 */}
-        {isISRG && (
+        {segments.length > 0 && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px', marginBottom: '24px' }}>
             {/* 파이 차트: 2025년 세그먼트 매출 비중 */}
             <div style={{ background: 'rgba(0,0,0,0.2)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>

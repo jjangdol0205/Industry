@@ -601,32 +601,38 @@ if PDF_ROOT:
     app.mount("/pdfs", StaticFiles(directory=PDF_ROOT), name="pdfs")
 
 
-# ── ISRG & Core/Satellite Deepdive 데이터 로드 ──
-ISRG_DEEPDIVE_PATH = os.path.join(os.path.dirname(__file__), "isrg_deepdive_data.json")
-isrg_deepdive_data = {}
-if os.path.exists(ISRG_DEEPDIVE_PATH):
+# ── Universal 4단계 딥다이브 데이터 로드 ──
+UNIVERSAL_DEEPDIVE_PATH = os.path.join(os.path.dirname(__file__), "universal_deepdive_data.json")
+universal_deepdive_data = {}
+if os.path.exists(UNIVERSAL_DEEPDIVE_PATH):
     try:
-        with open(ISRG_DEEPDIVE_PATH, "r", encoding="utf-8") as f:
-            isrg_deepdive_data = json.load(f)
-        print("Loaded ISRG deepdive data successfully.")
+        with open(UNIVERSAL_DEEPDIVE_PATH, "r", encoding="utf-8") as f:
+            universal_deepdive_data = json.load(f)
+        print(f"Loaded universal deepdive data for {len(universal_deepdive_data)} entries.")
     except Exception as e:
-        print("Failed to load ISRG deepdive data:", e)
+        print("Failed to load universal deepdive data:", e)
 
 @app.get("/api/company/{company_id}/deepdive")
 def get_company_deepdive(company_id: int):
-    """Core/Satellite 독점주 4단계 딥다이브 리서치 & 세그먼트 데이터 반환"""
+    """모든 기업 4단계 딥다이브 리서치 & 세그먼트 데이터 반환"""
+    # 1. Check by ID string
+    cid_str = str(company_id)
+    if cid_str in universal_deepdive_data:
+        return universal_deepdive_data[cid_str]
+
+    # 2. Check by ticker in DB
     import sqlite3
     db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
-    cur.execute("SELECT ticker, name, portfolio_tier FROM companies WHERE id=?", (company_id,))
+    cur.execute("SELECT ticker, name FROM companies WHERE id=?", (company_id,))
     row = cur.fetchone()
     conn.close()
 
-    if row and row[0] == 'ISRG':
-        return isrg_deepdive_data
+    if row and row[0] in universal_deepdive_data:
+        return universal_deepdive_data[row[0]]
 
-    return {"ticker": row[0] if row else "", "name": row[1] if row else "", "error": "Custom deepdive only available for ISRG currently"}
+    return {"error": "Deepdive data not found"}
 
 
 # DeepSeek 설정 (OpenAI 호환 API)
