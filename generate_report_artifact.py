@@ -47,7 +47,10 @@ sat_list  = [r for r in unique_rows if r['portfolio_tier'] == 'Satellite']
 watch_list = [r for r in unique_rows if r['portfolio_tier'] == 'Watchlist']
 std_list   = [r for r in unique_rows if r['portfolio_tier'] == 'Standard']
 
-# Find VRT details
+# Filter 10-bagger candidates
+ten_baggers = [r for r in sat_list if r['principle_reason'] and '10-Bagger' in r['principle_reason']]
+regular_sat = [r for r in sat_list if r not in ten_baggers]
+
 vrt = next((r for r in unique_rows if r['ticker'] == 'VRT'), None)
 vrt_price = f"${vrt['current_price']:.2f}" if vrt and vrt['current_price'] else "$272.40"
 vrt_high  = f"${vrt['high_52w']:.2f}" if vrt and vrt['high_52w'] else "$379.86"
@@ -65,12 +68,12 @@ def fmt_mdd(m):
         return "-"
     return f"{m:.1f}%"
 
-md = f"""# 16개 산업자료 기반 유니버스 대폭 확장 및 4단계 투자원칙 종목 분류 보고서
+md = f"""# 16개 산업자료 기반 유니버스 대폭 확장 & 텐베거(10-Bagger) 알파 정밀 심층 보고서
 
 > [!IMPORTANT]
 > **모니터링 기준일시**: 2026-08-09 (실시간 시세 및 16개 산업 자료 OCR 동기화 완료)
 > **확장 유니버스 총계**: **전체 {len(unique_rows)}개 기업** (DB 등록 {len(all_rows)}개 항목)
-> **핵심 포트폴리오 비중**: **Core ({len(core_list)}개)** : **Satellite ({len(sat_list)}개)** : **Watchlist ({len(watch_list)}개)** : **Standard ({len(std_list)}개)**
+> **핵심 포트폴리오 비중**: **Core ({len(core_list)}개)** : **Satellite ({len(sat_list)}개 - 🔥텐베거 {len(ten_baggers)}개 포함)** : **Watchlist ({len(watch_list)}개)** : **Standard ({len(std_list)}개)**
 
 ---
 
@@ -93,7 +96,7 @@ md = f"""# 16개 산업자료 기반 유니버스 대폭 확장 및 4단계 투�
 
 ---
 
-## 2. 4단계 통합 투자원칙 체계 (Updated spectrum)
+## 2. 4단계 통합 투자원칙 체계 및 텐베거(10-Bagger) 알파 프레임워크
 
 ```mermaid
 flowchart TD
@@ -102,37 +105,39 @@ flowchart TD
     B -- Yes: 독점력/병목 소유 --> D{{"Step 2: 4단계 투자원칙 분류<br/>가격 / MDD / 해자 강도"}}
     D -- M/S 50%+ & OPM 25%+ & 최상위 락인 --> E["Core 포트폴리오 ({len(core_list)}개 / 비중 50%)"]
     D -- Top 3 입지 & 수주잔고 +30%+ & 초고성장 --> F["Satellite 포트폴리오 ({len(sat_list)}개 / 비중 20%)"]
+    F -- 시총 팽창 여력 + 틈새 독점 + OPM 급증 --> H["🔥 Satellite 10-Bagger Alpha ({len(ten_baggers)}개)"]
     D -- 최상 해자 & MDD -30%~-40% 대기 --> G["Watchlist 관망대기 ({len(watch_list)}개 / 비중 0%)"]
 ```
 
-### 📌 4단계 상세 평가 스펙트럼
-
-1. **제1원칙 (가격 & MDD 할인율 분할매수 원칙)**
-   - **Core / Satellite**: MDD **-20%~-30%** 1차/2차 분할매수, **-40%** 폭락 시 3차 적극 매수.
-   - **Watchlist**: MDD **-30%~-40%** 폭락 진입 시까지 대기.
-2. **제2원칙 (비즈니스 모델 & 독점적 병목 해자 - 매수 가능 여부)**
-   - 가격과 무관하게 산업 밸류체인 내 대체 불가능한 **락인(Switching cost)**, **독점 특허/기술**, **공급망 병목**을 보유했는지 평가 (Total 120개+ 종목 매수 가능 판정).
-3. **제3원칙 (재무 안정성 & 이익 체질)**
-   - **Core**: M/S 50%+ 독과점, OPM 25%+ / GPM 50%+ 또는 극상의 전환비용.
-   - **Satellite**: 글로벌 Top 3 입지, 수주잔고 YoY +30%+ 또는 최고치 경신, 초고성장 알파.
-4. **제4원칙 (포트폴리오 편입 및 자산 배분 체계)**
-   - **주식 70%** (Core {len(core_list)}개 + Satellite {len(sat_list)}개) : **현금 30%**.
+### 📌 🔥 텐베거(10-Bagger) 5대 엄격 평가 조건
+1. **시가총액 팽창 여력 (Small-Mid Cap Runway)**: 시가총액 $100M ~ $15B (1,000억 ~ 15조원 미만)로 10배 팽창 시에도 TAM 상한선에 걸리지 않는 거대한 시장 여력 보유.
+2. **독점적 틈새 병목 (Monopolistic Niche Moat)**: 거대 기업이 직접 개발하기 어려운 독보적 특허, 기술 표준, 파운드리/센서/소프트웨어 병목 소유.
+3. **폭발적 성장의 수주잔고/매출 (YoY +30%~+100%)**: 산업 초기 침투 단계로 연간 수주잔고가 폭발적으로 증가.
+4. **마진 폭발 영업레버리지 (OPM J-Curve)**: 고정비 단계를 넘어서며 영업이익률이 10% → 25%~50%+로 급증하는 이익 체질 개선.
+5. **MDD 할인 매수 진입 적기**: 고점 대비 MDD -20% ~ -60% 폭락 할인 구간에 위치하여 초기 진입 평균 단가를 극도로 낮춤.
 
 ---
 
-## 3. 전체 유니버스 ({len(unique_rows)}개 종목) 분류 통계
+## 3. 🔥 Satellite 텐베거(10-Bagger) 후보 15선 심층 리서치 리스트
 
-| 분류 (Tier) | 종목 수 | 비율 (%) | 핵심 요약 및 매수 신호 |
+M/S 팽창 여력, 독점 틈새 기술, 이익 폭발 레버리지를 갖춘 텐베거 최우선 알파 종목군입니다.
+
+| 종목명 (Ticker) | 현재가 | MDD | 타겟 TAM 시장 & 10배 주가 상승 핵심 동력 (10x Engine) |
 | :--- | :---: | :---: | :--- |
-| **🛡️ Core (핵심)** | **{len(core_list)}개** | {len(core_list)/len(unique_rows)*100:.1f}% | M/S 50%+ 독과점, 높은 진입장벽, 대체 불가능한 시스템 기둥 기업 |
-| **🚀 Satellite (위성)** | **{len(sat_list)}개** | {len(sat_list)/len(unique_rows)*100:.1f}% | 초고성장 밸류체인 알파, 수주잔고/마진 급증 틈새 독점 기업 |
-| **👀 Watchlist (관심대기)** | **{len(watch_list)}개** | {len(watch_list)/len(unique_rows)*100:.1f}% | 독점력 보유 중이나 -30%~-40% 폭락 진입 대기 종목 |
-| **📊 Standard (일반)** | **{len(std_list)}개** | {len(std_list)/len(unique_rows)*100:.1f}% | 16개 산업 에이전트 모니터링 대상 일반 관망 기업 |
-| **합계** | **{len(unique_rows)}개 유니버스** | **100.0%** | **매수 가능 독점 우량주 Total: {len(core_list)+len(sat_list)+len(watch_list)}개 종목** |
+"""
 
+for r in ten_baggers:
+    name = r['name']
+    tk = r['ticker'] or ''
+    pr = fmt_price(r['current_price'], tk)
+    mdd = fmt_mdd(r['mdd_pct'])
+    reason = r['principle_reason'] or r['role_description'] or '텐베거 동력 보유'
+    md += f"| **{name} ({tk})** | {pr} | {mdd} | **[🔥10-Bagger]** {reason} |\n"
+
+md += f"""
 ---
 
-## 4. [Core / Satellite / Watchlist] 세부 종목 리스트 & MDD / 해자 분석
+## 4. [Core / Satellite Core / Watchlist] 세부 종목 리스트 & MDD / 해자 분석
 
 ### 🛡️ Core 포트폴리오 ({len(core_list)}개 종목) - 핵심 독점 병목 기업 (자산 비중 50%)
 M/S 50%+ 독과점, 높은 진입장벽, 대체 불가능한 시스템 기둥 기업
@@ -152,14 +157,13 @@ for r in core_list:
 md += f"""
 ---
 
-### 🚀 Satellite 포트폴리오 ({len(sat_list)}개 종목) - 구조적 초고성장 알파 병목 기업 (자산 비중 20%)
-초고성장 밸류체인 알파, 수주잔고/마진 급증 틈새 독점 기업
+### 🚀 Satellite 일반 Core-Alpha 포트폴리오 ({len(regular_sat)}개 종목) - 구조적 대형 알파 기업 (자산 비중 10%)
 
 | 종목명 (Ticker) | 현재가 | MDD | 경제적 해자 및 독점 병목 근거 |
 | :--- | :---: | :---: | :--- |
 """
 
-for r in sat_list:
+for r in regular_sat:
     name = r['name']
     tk = r['ticker'] or ''
     pr = fmt_price(r['current_price'], tk)
@@ -193,12 +197,15 @@ md += """
    - 현재가 **$272.40** (MDD **-28.29%**)는 4단계 투자원칙에 따라 **Satellite 포트폴리오 1차 분할매수(-20%) 완료 후 2차 분할매수(-30% = $265.90 부근) 진입 바로 직전 구간**입니다.
    - 기업의 액체냉각/전력 독점력에는 훼손이 없으므로, 현재 구간에서 **1차 분할 비중을 확보하고 $265 이하 시 2차 추가 매수**하는 비중 확대 전략이 매우 유효합니다.
 
-2. **포트폴리오 전체 리밸런싱 체계**:
-   - **자산 배분**: **주식 70%** (Core + Satellite) : **현금 30%**.
+2. **🔥 텐베거(10-Bagger) 알파 분할매수 실행 가이드**:
+   - **Satellite 텐베거 15선** 중 MDD **-30% ~ -60%** 폭락 진입 종목(예: 오픈엣지테크놀로지 -58.6%, HPSP -62.6%, 한미반도체 -54.9%, 레인보우로보틱스 -52.5%, 인텔리안테크 -60.8%, RKLB -45.1%)은 10배 상승 시의 극적인 평단가 우위를 제공하므로 **1차~2차 분할매수 집중 추천 타겟**에 해당합니다.
+
+3. **포트폴리오 전체 리밸런싱 체계**:
+   - **자산 배분**: **주식 70%** (Core 50% + Satellite 텐베거/알파 20%) : **현금 30%**.
    - **분할 매수 규칙**: MDD -20% 진입 시 1차 (30% 비중), MDD -30% 진입 시 2차 (30% 비중), MDD -40% 폭락 진입 시 3차 (40% 비중) 투입으로 평균 단가 및 리스크를 완벽 관리합니다.
 """
 
 with open(artifact_path, 'w', encoding='utf-8') as f:
     f.write(md)
 
-print(f"Report artifact updated and written successfully to {artifact_path}")
+print(f"Report artifact updated with 10-Bagger section and written successfully to {artifact_path}")

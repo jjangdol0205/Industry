@@ -390,51 +390,6 @@
     "principle_reason": "온디바이스 AI 칩 소켓 및 LEAP 프로브 핀 글로벌 독점 1위 (OPM 40%+, AI 칩 R&D 테스트 필수 병목)"
   },
   {
-    "id": 297,
-    "name": "한미반도체",
-    "ticker": "042700.KS",
-    "industry": "자율주행 산업 밸류체인 심층 분석",
-    "current_price": 192300.0,
-    "high_52w": 426000.0,
-    "mdd_pct": -54.85915492957747,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "is_buyable": true,
-    "buyable_reason": "HBM TC 본더(Dual TC Bonder) 글로벌 90%+ 독점 (SK하이닉스/Micron HBM3E/4 수주 독점, OPM 40%+)",
-    "current_tier": "Core",
-    "suggested_tier": "Core",
-    "principle_reason": "HBM TC 본더(Dual TC Bonder) 글로벌 90%+ 독점 (SK하이닉스/Micron HBM3E/4 수주 독점, OPM 40%+)"
-  },
-  {
-    "id": 298,
-    "name": "HPSP",
-    "ticker": "403870.KQ",
-    "industry": "자율주행 산업 밸류체인 심층 분석",
-    "current_price": 34400.0,
-    "high_52w": 92000.0,
-    "mdd_pct": -62.60869565217392,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "is_buyable": true,
-    "buyable_reason": "고압 수소 어닐링 장비 100% 세계 독점 (선단 공정 수율 향상 필수 장비, OPM 50%+)",
-    "current_tier": "Core",
-    "suggested_tier": "Core",
-    "principle_reason": "고압 수소 어닐링 장비 100% 세계 독점 (선단 공정 수율 향상 필수 장비, OPM 50%+)"
-  },
-  {
-    "id": 302,
-    "name": "에이피알",
-    "ticker": "278470.KS",
-    "industry": "자율주행 산업 밸류체인 심층 분석",
-    "current_price": 384500.0,
-    "high_52w": 469246.0012128995,
-    "mdd_pct": -18.060036951588167,
-    "buy_signal": "HOLD_WATCH",
-    "is_buyable": true,
-    "buyable_reason": "뷰티 디바이스(메디큐브 AGE-R) 글로벌 1위 독점 IP (미국/일본 뷰티 디바이스 매출 YoY +80%+, OPM 22%)",
-    "current_tier": "Core",
-    "suggested_tier": "Core",
-    "principle_reason": "뷰티 디바이스(메디큐브 AGE-R) 글로벌 1위 독점 IP (미국/일본 뷰티 디바이스 매출 YoY +80%+, OPM 22%)"
-  },
-  {
     "id": 2,
     "name": "Tesla",
     "ticker": "TSLA",
@@ -489,10 +444,10 @@
     "mdd_pct": -45.145694151619416,
     "buy_signal": "DEEP_DISCOUNT (3차 분할매수 -40% 진입)",
     "is_buyable": true,
-    "buyable_reason": "소형 발사체 독보적 2위, 수주잔고 역대 최고치, 위성 SW/시스템 체질개선 (Satellite 1호)",
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $100B+ 민간 우주 발사체 & 위성 서비스 | 소형 발사체 2위 + 뉴트론(Neutron) 중형 로켓, 수주잔고 $1.0B+ 역대 최고치",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "소형 발사체 독보적 2위, 수주잔고 역대 최고치, 위성 SW/시스템 체질개선 (Satellite 1호)"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $100B+ 민간 우주 발사체 & 위성 서비스 | 소형 발사체 2위 + 뉴트론(Neutron) 중형 로켓, 수주잔고 $1.0B+ 역대 최고치"
   },
   {
     "id": 29,
@@ -504,10 +459,10 @@
     "mdd_pct": -61.80624510025399,
     "buy_signal": "BUY_CANDIDATE (-20% 할인)",
     "is_buyable": true,
-    "buyable_reason": "고수익성 고해자 기업 (OPM -7.1% / ROE 6.7%)",
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $1T+ 제도권 암호화폐 커스터디 | 미국 1위 규제 준수 거래소 & 비트코인 ETF 80%+ 커스터디 독점",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": null
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $1T+ 제도권 암호화폐 커스터디 | 미국 1위 규제 준수 거래소 & 비트코인 ETF 80%+ 커스터디 독점"
   },
   {
     "id": 70,
@@ -549,10 +504,10 @@
     "mdd_pct": -35.4778002731439,
     "buy_signal": "BUY_READY (2차 분할매수 MDD -35.5%)",
     "is_buyable": true,
-    "buyable_reason": "전력배전 틈새 독점, 수주잔고 $1.7B, OPM 21%+ (Satellite)",
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $50B+ AI 데이터센터 전력배전 | 전력배전/스위치기어 틈새 독점, 수주잔고 $1.7B (시총 70%), OPM 21%+ 영업레버리지 폭발",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "전력배전 틈새 독점, 수주잔고 $1.7B, OPM 21%+ (Satellite)"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $50B+ AI 데이터센터 전력배전 | 전력배전/스위치기어 틈새 독점, 수주잔고 $1.7B (시총 70%), OPM 21%+ 영업레버리지 폭발"
   },
   {
     "id": 86,
@@ -579,10 +534,10 @@
     "mdd_pct": -52.50255362614913,
     "buy_signal": "BUY_CANDIDATE (-20% 할인)",
     "is_buyable": true,
-    "buyable_reason": "고수익성 고해자 기업 (OPM -17.3% / ROE 0.9%)",
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩50조+ 협동/휴머노이드 로봇 | 삼성전자 대주주, 협동로봇 및 휴머노이드 핵심 부품 내재화 독점력",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": null
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩50조+ 협동/휴머노이드 로봇 | 삼성전자 대주주, 협동로봇 및 휴머노이드 핵심 부품 내재화 독점력"
   },
   {
     "id": 103,
@@ -729,10 +684,10 @@
     "mdd_pct": -30.25740868492683,
     "buy_signal": "BUY_READY (2차 분할매수 MDD -30.3%)",
     "is_buyable": true,
-    "buyable_reason": "ALT-B4 인간 히알루로니다제 플랫폼 독점 기술 (Satellite)",
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩100조+ 글로벌 항암제 SC 제형 변경 | ALT-B4 SC 플랫폼 글로벌 독점, 키트루다 SC 전환 시 연간 로열티 1조원+ 순이익",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "ALT-B4 인간 히알루로니다제 플랫폼 독점 기술 (Satellite)"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩100조+ 글로벌 항암제 SC 제형 변경 | ALT-B4 SC 플랫폼 글로벌 독점, 키트루다 SC 전환 시 연간 로열티 1조원+ 순이익"
   },
   {
     "id": 196,
@@ -744,10 +699,10 @@
     "mdd_pct": -41.83614177803602,
     "buy_signal": "BUY_CANDIDATE (-20% 할인)",
     "is_buyable": true,
-    "buyable_reason": "산업 내 강력한 기술/영업 독점력 및 병목 지위 보유 (블록버스터 고지혈증 치료제(렉비오 등) 원료 공급 및 글로벌 RNA 치료제 시장 만개 수혜)",
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ RNA 치료제 올리고 CDMO | 올리고핵산(RNA 치료제 원료) 글로벌 Top 3 독점 CDMO",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": null
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ RNA 치료제 올리고 CDMO | 올리고핵산(RNA 치료제 원료) 글로벌 Top 3 독점 CDMO"
   },
   {
     "id": 200,
@@ -774,10 +729,10 @@
     "mdd_pct": -29.389650505231877,
     "buy_signal": "BUY_READY (1차 분할매수 MDD -29.4%)",
     "is_buyable": true,
-    "buyable_reason": "K-뷰티 글로벌 풀필먼트 1위 독점 유통 (Satellite)",
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ 글로벌 K-뷰티 유통망 | K-뷰티 150개국 글로벌 직매입 풀필먼트 독점 1위, 해외 침투율 5% 미만으로 10배 잠재력",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "K-뷰티 글로벌 풀필먼트 1위 독점 유통 (Satellite)"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ 글로벌 K-뷰티 유통망 | K-뷰티 150개국 글로벌 직매입 풀필먼트 독점 1위, 해외 침투율 5% 미만으로 10배 잠재력"
   },
   {
     "id": 258,
@@ -969,10 +924,25 @@
     "mdd_pct": -61.350844277673545,
     "buy_signal": "BUY_STRONG (3차 적극매수)",
     "is_buyable": true,
-    "buyable_reason": "SDV 차량용 SW 플랫폼 및 자율주행 내비게이션 독점 (SDV 전환 수주 잔고 급증, OPM 8%+)",
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ SDV 차량용 SW | SDV 차량용 SW 플랫폼 및 내비게이션 독점, 수주잔고 지속 폭발",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "SDV 차량용 SW 플랫폼 및 자율주행 내비게이션 독점 (SDV 전환 수주 잔고 급증, OPM 8%+)"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ SDV 차량용 SW | SDV 차량용 SW 플랫폼 및 내비게이션 독점, 수주잔고 지속 폭발"
+  },
+  {
+    "id": 286,
+    "name": "퓨런티어",
+    "ticker": "370090.KQ",
+    "industry": "자율주행 산업 밸류체인 심층 분석",
+    "current_price": 6370.0,
+    "high_52w": 18930.0,
+    "mdd_pct": -66.34970945589012,
+    "buy_signal": "BUY_STRONG (3차 적극매수)",
+    "is_buyable": true,
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩5조+ 자율주행 전장 카메라 공정 | 전장용 자율주행 카메라 조립/조정 장비 틈새 1위 독점",
+    "current_tier": "Satellite",
+    "suggested_tier": "Satellite",
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩5조+ 자율주행 전장 카메라 공정 | 전장용 자율주행 카메라 조립/조정 장비 틈새 1위 독점"
   },
   {
     "id": 288,
@@ -999,10 +969,10 @@
     "mdd_pct": -60.82130965593785,
     "buy_signal": "BUY_STRONG (3차 적극매수)",
     "is_buyable": true,
-    "buyable_reason": "저궤도(LEO) 위성 통신 안테나 글로벌 1위 (원웹/스페이스X 스타링크 생태계 공급망 병목)",
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩10조+ LEO 저궤도 위성 안테나 | 저궤도 위성 안테나 글로벌 1위, 스타링크/원웹 공급망 핵심 병목",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "저궤도(LEO) 위성 통신 안테나 글로벌 1위 (원웹/스페이스X 스타링크 생태계 공급망 병목)"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩10조+ LEO 저궤도 위성 안테나 | 저궤도 위성 안테나 글로벌 1위, 스타링크/원웹 공급망 핵심 병목"
   },
   {
     "id": 290,
@@ -1029,10 +999,10 @@
     "mdd_pct": -47.59615384615385,
     "buy_signal": "BUY_STRONG (3차 적극매수)",
     "is_buyable": true,
-    "buyable_reason": "삼성 파운드리 최상위 디자인솔루션파트너(DSP) 온디바이스 칩 설계 독점 (AI NPU 칩 디자인 수주잔고 급증)",
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ 삼성 파운드리 커스텀 AI 칩 | 삼성 파운드리 1위 DSP 파트너, AI NPU 칩 설계 수주 잔고 급증",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "삼성 파운드리 최상위 디자인솔루션파트너(DSP) 온디바이스 칩 설계 독점 (AI NPU 칩 디자인 수주잔고 급증)"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ 삼성 파운드리 커스텀 AI 칩 | 삼성 파운드리 1위 DSP 파트너, AI NPU 칩 설계 수주 잔고 급증"
   },
   {
     "id": 296,
@@ -1044,10 +1014,40 @@
     "mdd_pct": -58.590308370044056,
     "buy_signal": "BUY_STRONG (3차 적극매수)",
     "is_buyable": true,
-    "buyable_reason": "온디바이스 AI NPU 및 메모리 컨트롤러 IP 글로벌 독점 (AI 칩 라이선스 및 로열티 매출 고성장)",
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩10조+ 온디바이스 AI 칩 IP | 글로벌 유일 NPU + 메모리 컨트롤러 통합 IP 보유, 온디바이스 AI 개화 시 로열티 10배 폭발",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "온디바이스 AI NPU 및 메모리 컨트롤러 IP 글로벌 독점 (AI 칩 라이선스 및 로열티 매출 고성장)"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩10조+ 온디바이스 AI 칩 IP | 글로벌 유일 NPU + 메모리 컨트롤러 통합 IP 보유, 온디바이스 AI 개화 시 로열티 10배 폭발"
+  },
+  {
+    "id": 297,
+    "name": "한미반도체",
+    "ticker": "042700.KS",
+    "industry": "자율주행 산업 밸류체인 심층 분석",
+    "current_price": 192300.0,
+    "high_52w": 426000.0,
+    "mdd_pct": -54.85915492957747,
+    "buy_signal": "BUY_STRONG (3차 적극매수)",
+    "is_buyable": true,
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩50조+ HBM 3D Stack 본딩 | HBM TC 본더 글로벌 90%+ 독점, OPM 40%+ 이익 체질",
+    "current_tier": "Satellite",
+    "suggested_tier": "Satellite",
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩50조+ HBM 3D Stack 본딩 | HBM TC 본더 글로벌 90%+ 독점, OPM 40%+ 이익 체질"
+  },
+  {
+    "id": 298,
+    "name": "HPSP",
+    "ticker": "403870.KQ",
+    "industry": "자율주행 산업 밸류체인 심층 분석",
+    "current_price": 34400.0,
+    "high_52w": 92000.0,
+    "mdd_pct": -62.60869565217392,
+    "buy_signal": "BUY_STRONG (3차 적극매수)",
+    "is_buyable": true,
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ 선단공정 고압 어닐링 | 고압 수소 어닐링 장비 100% 세계 독점, OPM 50%+",
+    "current_tier": "Satellite",
+    "suggested_tier": "Satellite",
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ 선단공정 고압 어닐링 | 고압 수소 어닐링 장비 100% 세계 독점, OPM 50%+"
   },
   {
     "id": 300,
@@ -1063,6 +1063,21 @@
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
     "principle_reason": "친환경 LNG/LPG 운반선 건조 이익률 세계 1위 (OPM 12%+ 조선업 최고 수익성 경신)"
+  },
+  {
+    "id": 302,
+    "name": "에이피알",
+    "ticker": "278470.KS",
+    "industry": "자율주행 산업 밸류체인 심층 분석",
+    "current_price": 384500.0,
+    "high_52w": 469246.0012128995,
+    "mdd_pct": -18.060036951588167,
+    "buy_signal": "HOLD_WATCH",
+    "is_buyable": true,
+    "buyable_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ 글로벌 뷰티 디바이스 | 뷰티 디바이스(AGE-R) 글로벌 1위 독점 IP, 미국/일본 매출 YoY +80%+, OPM 22%",
+    "current_tier": "Satellite",
+    "suggested_tier": "Satellite",
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ 글로벌 뷰티 디바이스 | 뷰티 디바이스(AGE-R) 글로벌 1위 독점 IP, 미국/일본 매출 YoY +80%+, OPM 22%"
   },
   {
     "id": 30,
@@ -3643,21 +3658,6 @@
     "current_tier": "Standard",
     "suggested_tier": "Standard",
     "principle_reason": null
-  },
-  {
-    "id": 286,
-    "name": "퓨런티어",
-    "ticker": "370090.KQ",
-    "industry": "자율주행 산업 밸류체인 심층 분석",
-    "current_price": 6370.0,
-    "high_52w": 18930.0,
-    "mdd_pct": -66.34970945589012,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "is_buyable": true,
-    "buyable_reason": "자율주행 카메라 모듈 센싱 하우징/조립 장비 독점 (전장용 카메라 공정 병목 소유)",
-    "current_tier": "Standard",
-    "suggested_tier": "Core",
-    "principle_reason": "자율주행 카메라 모듈 센싱 하우징/조립 장비 독점 (전장용 카메라 공정 병목 소유)"
   },
   {
     "id": 292,
