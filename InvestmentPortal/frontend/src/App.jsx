@@ -185,23 +185,40 @@ function App() {
     } catch (e) { console.error(e); }
   };
 
-  const fetchCompanyFull = async (id) => {
+  const fetchCompanyFull = async (id, fallbackItem = null) => {
     setCompanyAiAnalysis(null);
+    setCompanyProfile(null);
+    setCompanyFinancials(null);
     setSidebarOpen(false);
     setViewMode('research');
+
+    // ⚡ 0.01초 즉시 화면 전환: fallbackItem이 있으면 클릭 즉시 CompanyView 렌더링!
+    if (fallbackItem) {
+      setSelectedCompany({
+        id: fallbackItem.id,
+        name: fallbackItem.name,
+        ticker: fallbackItem.ticker,
+        role_description: fallbackItem.principle_reason || fallbackItem.role_description,
+        future_growth: fallbackItem.future_growth
+      });
+    }
+
     try {
       const [compRes, profRes, finRes] = await Promise.all([
-        axios.get(`${API_BASE}/companies/${id}`),
-        axios.get(`${API_BASE}/companies/${id}/profile`),
-        axios.get(`${API_BASE}/companies/${id}/financials?limit=200`),
+        axios.get(`${API_BASE}/companies/${id}`).catch(() => ({ data: fallbackItem })),
+        axios.get(`${API_BASE}/companies/${id}/profile`).catch(() => ({ data: { profile: {} } })),
+        axios.get(`${API_BASE}/companies/${id}/financials?limit=200`).catch(() => ({ data: { financials: [] } })),
       ]);
-      setSelectedCompany(compRes.data);
-      setCompanyProfile(profRes.data.profile);
-      setCompanyFinancials(finRes.data.financials);
+      if (compRes.data) setSelectedCompany(compRes.data);
+      if (profRes.data?.profile) setCompanyProfile(profRes.data.profile);
+      if (finRes.data?.financials) setCompanyFinancials(finRes.data.financials);
       axios.get(`${API_BASE}/companies/${id}/ai-analysis`)
         .then(r => setCompanyAiAnalysis(r.data))
         .catch(() => setCompanyAiAnalysis({ error: true }));
-    } catch (e) { console.error(e); }
+    } catch (e) {
+      console.error(e);
+      if (fallbackItem) setSelectedCompany(fallbackItem);
+    }
   };
 
   const handleHomeClick = () => {
@@ -1405,9 +1422,20 @@ function DeepDiveSection({ company, profile }) {
     const ts = Date.now();
     try {
       const res = await axios.get(`${API_BASE}/company/${company.id}/deepdive?t=${ts}`);
-      if (res.data && !res.data.error) setDeepData(res.data);
+      if (res.data && !res.data.error) {
+        setDeepData(res.data);
+      } else if (company?.ticker === 'ISRG') {
+        const fb = await axios.get(`./isrg_deepdive_data.json?t=${ts}`);
+        if (fb.data) setDeepData(fb.data);
+      }
     } catch (e) {
       console.error("Failed to load deepdive data", e);
+      if (company?.ticker === 'ISRG') {
+        try {
+          const fb = await axios.get(`./isrg_deepdive_data.json?t=${ts}`);
+          if (fb.data) setDeepData(fb.data);
+        } catch (err) {}
+      }
     } finally {
       setLoading(false);
     }
@@ -1896,7 +1924,7 @@ function AgentWorkspace({ onSelectCompany }) {
             if (isWatch) [tierTagBg, tierTagText] = ['rgba(245,158,11,0.15)', '#fbbf24'];
 
             return (
-              <div key={item.id} className="glass-panel" onClick={() => onSelectCompany && onSelectCompany(item.id)} style={{
+              <div key={item.id} className="glass-panel" onClick={() => onSelectCompany && onSelectCompany(item.id, item)} style={{
                 padding: '20px', borderRadius: '14px', cursor: 'pointer', transition: 'all 0.2s ease',
                 border: isBuyReady ? '1.5px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(255, 255, 255, 0.08)',
                 background: isBuyReady ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(15, 23, 42, 0.7))' : 'linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6))',

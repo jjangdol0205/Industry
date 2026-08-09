@@ -1,0 +1,57 @@
+{
+  "ticker": "ISRG",
+  "name": "Intuitive Surgical",
+  "korean_name": "인튜이티브 서지컬",
+  "as_of_date": "2026-08-09",
+  "quote": {
+    "current_price": 378.81,
+    "high_52w": 603.88,
+    "low_52w": 341.20,
+    "mdd_pct": -37.27,
+    "market_cap_usd": 134424424000,
+    "market_cap_fmt": "$134.4B",
+    "pe_trailing": 46.7,
+    "pe_forward": 39.2,
+    "gross_margin": 66.0,
+    "op_margin": 29.26,
+    "net_margin": 28.58,
+    "roe": 17.2,
+    "fcf_2025_usd": 2490700000,
+    "fcf_2025_fmt": "$2.49B",
+    "buy_signal": "BUY_READY (2차 분할매수 -30% 진입 완료, 3차 -40%=$362 직전)"
+  },
+  "segment_revenue_2025": [
+    { "name": "소모품/수술도구 (Instruments & Accessories)", "value": 6038.8, "pct": 60.0, "color": "#3b82f6", "desc": "수술 1회당 $1,800~$3,200 필수 소모품 자동 구매 락인 (반복 매출)" },
+    { "name": "수술 로봇 시스템 (Systems - da Vinci 5 & Ion)", "value": 2516.2, "pct": 25.0, "color": "#8b5cf6", "desc": "병원당 $1.5M~$2.5M 고가 CAPEX 장비 공급" },
+    { "name": "유지보수 & 구독 서비스 (Services)", "value": 1509.7, "pct": 15.0, "color": "#10b981", "desc": "연간 $150K~$220K 필수 리스 및 유지보수 연계 구독 매출" }
+  ],
+  "financial_history": [
+    { "year": "2022", "revenue_usd_m": 6222.2, "op_income_usd_m": 1577.1, "opm_pct": 25.3, "fcf_usd_m": 958.4, "instruments_pct": 57.2 },
+    { "year": "2023", "revenue_usd_m": 7124.1, "op_income_usd_m": 1766.8, "opm_pct": 24.8, "fcf_usd_m": 749.6, "instruments_pct": 58.1 },
+    { "year": "2024", "revenue_usd_m": 8352.1, "op_income_usd_m": 2348.9, "opm_pct": 28.1, "fcf_usd_m": 1303.8, "instruments_pct": 59.2 },
+    { "year": "2025", "revenue_usd_m": 10064.7, "op_income_usd_m": 2945.5, "opm_pct": 29.3, "fcf_usd_m": 2490.7, "instruments_pct": 60.0 }
+  ],
+  "principles_eval": {
+    "principle_1_mdd": {
+      "status": "PASS (최적 할인 매수 적기)",
+      "details": "52주 최고가 $603.88 대비 -37.27% 하락한 $378.81 위치. 1차(-20%=$483), 2차(-30%=$422) 분할매수가 완료되었으며, 3차 폭락매수(-40%=$362) 진입 바로 직전의 평단가 극상 우위 구간."
+    },
+    "principle_2_moat": {
+      "status": "PASS (대체 불가능한 독점 해자)",
+      "details": "글로벌 복강경 수술 로봇 시장점유율 90%+ 독점. 전 세계 3.5만 명 이상 의사가 다빈치 시스템으로 수술 훈련을 마쳐 대체 불가능한 전환비용(Switching Cost) 락인 형성."
+    },
+    "principle_3_financials": {
+      "status": "PASS (극상의 반복 매출 & OPM J-커브)",
+      "details": "전체 매출의 75%(소모품 60% + 서비스 15%)가 매 수술 시 자동으로 발생하는 반복 매출(Recurring Revenue) 구조. OPM 29.3%, 순현금 $3.4B 이상으로 무부채 재무 구조."
+    },
+    "principle_4_portfolio": {
+      "status": "PASS (Core 1호 시스템 기둥 편입)",
+      "details": "Core 포트폴리오 1호 기둥 기업. 주식 자산의 5%~8% 비중 배정 추천."
+    }
+  },
+  "valuation_scenarios": [
+    { "scenario": "Bear (보수적)", "target_price": 450, "upside_pct": 18.8, "assumptions": "다빈치 5 병원 도입 지연, 글로벌 수술 건수 YoY +10% 성장 정체" },
+    { "scenario": "Base (기본)", "target_price": 580, "upside_pct": 53.1, "assumptions": "다빈치 5 교체 수요 본격화, 수술 건수 YoY +16% 성장, OPM 31% 확장" },
+    { "scenario": "Bull (낙관적)", "target_price": 720, "upside_pct": 90.1, "assumptions": "중국/유럽 시장 침투율 2배 폭발, Ion 폐생검 로봇 고성장, OPM 34% 달성" }
+  ]
+}
