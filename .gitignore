@@ -33,18 +33,29 @@ logs/
 .DS_Store
 Thumbs.db
 
-# SQLite journal & WAL files (NOT the db itself - it's needed for Render)
+# SQLite database files (exceeding 100MB limit)
+*.db
 *.db-journal
 *.db-wal
 *.db-shm
 
-# Temporary analysis scripts (D:\Industry root)
-inspect_eps*.py
+# Temporary analysis & fix scripts
+inspect_*.py
 parse_eps.py
-analyze_eps.py
+analyze_*.py
 load_eps_sqlite.py
-check_dups.py
-check_eps_db.py
-check_eps_db2.py
-export_eps_csv.py
+check_*.py
+fix_*.py
+debug_*.py
+export_*.py
 list_candidates.py
+gen_seed.py
+screen_bottlenecks.py
+apply_bottlenecks.py
+print_details.py
+replace.py
+update_kr_stocks.py
+InvestmentPortal/frontend/*.py
+InvestmentPortal/frontend/patch.js
+*.working
+*_working.*
