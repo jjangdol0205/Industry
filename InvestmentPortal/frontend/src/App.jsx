@@ -1594,13 +1594,14 @@ function AgentWorkspace() {
 
   const fetchUniverse = async () => {
     setLoading(true);
+    const ts = Date.now();
     try {
-      const r = await axios.get(`${API_BASE}/portfolio/universe`);
+      const r = await axios.get(`${API_BASE}/portfolio/universe?t=${ts}`);
       if (r.data && r.data.universe && r.data.universe.length >= 240) {
         setUniverseData(r.data);
       } else {
-        // Fallback to static static universe JSON if backend universe < 240
-        const fb = await axios.get('./universe_evaluated.json');
+        // Fallback to static universe JSON with cache-busting query
+        const fb = await axios.get(`./universe_evaluated.json?t=${ts}`);
         if (fb.data && Array.isArray(fb.data)) {
           setUniverseData({ universe: fb.data });
         } else if (r.data) {
@@ -1610,7 +1611,7 @@ function AgentWorkspace() {
     } catch (e) {
       console.error("Failed to load universe from API, using fallback", e);
       try {
-        const fb = await axios.get('./universe_evaluated.json');
+        const fb = await axios.get(`./universe_evaluated.json?t=${ts}`);
         if (fb.data && Array.isArray(fb.data)) {
           setUniverseData({ universe: fb.data });
         }

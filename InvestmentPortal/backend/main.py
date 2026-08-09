@@ -1246,28 +1246,9 @@ def get_investment_principles_universe(db: Session = Depends(get_db)):
             LEFT JOIN industry_reports ir ON c.industry_id = ir.id
             LEFT JOIN company_profiles cp ON c.id = cp.company_id
             WHERE c.id IN (
-                -- ticker 기준 중복 제거: Core > Satellite > Watchlist > Standard 우선, 같으면 id 최솟값
-                SELECT MIN(sub.id)
-                FROM (
-                    SELECT id, ticker,
-                        CASE COALESCE(portfolio_tier, 'Standard')
-                            WHEN 'Core'      THEN 1
-                            WHEN 'Satellite' THEN 2
-                            WHEN 'Watchlist' THEN 3
-                            ELSE 4
-                        END AS tier_rank
-                    FROM companies
-                    WHERE ticker IS NOT NULL
-                ) sub
-                INNER JOIN (
-                    SELECT ticker, MIN(CASE COALESCE(portfolio_tier,'Standard')
-                        WHEN 'Core' THEN 1 WHEN 'Satellite' THEN 2 WHEN 'Watchlist' THEN 3 ELSE 4 END) AS best_rank
-                    FROM companies WHERE ticker IS NOT NULL GROUP BY ticker
-                ) best ON sub.ticker = best.ticker AND sub.tier_rank = best.best_rank
-                GROUP BY sub.ticker
-                UNION
-                -- ticker가 NULL인 경우도 포함
-                SELECT id FROM companies WHERE ticker IS NULL
+                SELECT MIN(id) 
+                FROM companies 
+                GROUP BY CASE WHEN ticker IS NOT NULL AND length(ticker) > 0 THEN UPPER(TRIM(ticker)) ELSE UPPER(TRIM(name)) END
             )
             ORDER BY
                 CASE COALESCE(c.portfolio_tier, 'Standard')
