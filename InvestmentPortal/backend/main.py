@@ -850,6 +850,10 @@ def get_company_profile(company_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Company not found")
 
     profile = db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id == company_id).first()
+    if not profile and company and company.ticker:
+        # Fallback by ticker
+        matching_comp_ids = [c.id for c in db.query(models.Company).filter(models.Company.ticker == company.ticker).all()]
+        profile = db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id.in_(matching_comp_ids)).first()
 
     # ── 한국어 번역 (없으면 DeepSeek으로 생성 후 저장) ──────────
     description_ko = None
@@ -939,7 +943,8 @@ def get_company_financials(
     if not company:
         raise HTTPException(status_code=404, detail="Company not found")
     
-    query = db.query(models.FinancialData).filter(models.FinancialData.company_id == company_id)
+    matching_comp_ids = [c.id for c in db.query(models.Company).filter(models.Company.ticker == company.ticker).all()] if company and company.ticker else [company_id]
+    query = db.query(models.FinancialData).filter(models.FinancialData.company_id.in_(matching_comp_ids))
     if period_type:
         query = query.filter(models.FinancialData.period_type == period_type)
     
