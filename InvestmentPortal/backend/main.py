@@ -697,34 +697,56 @@ def admin_fix_cogs():
 
 @app.get("/api/admin/reload-seed")
 def admin_reload_seed():
-    """seed_data.py 기반으로 Render DB 동기화 재구축"""
+    """seed_data.py 기반으로 Render DB 동기화 재구축 (FINANCIAL_DATA 포함)"""
     import sqlite3
     db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
     try:
-        from seed_data import COMPANIES, COMPANY_PROFILES
+        from seed_data import COMPANIES, COMPANY_PROFILES, FINANCIAL_DATA
         conn = sqlite3.connect(db_path)
         cur = conn.cursor()
+        
+        # 1. COMPANIES
         for row in COMPANIES:
-            # (id, industry_id, value_chain_node_id, name, ticker, role_description, future_growth, display_order, portfolio_tier, principle_reason)
             cid, ind_id, vcn_id, name, ticker, role_desc, fg, disp, tier, p_reason = row
             cur.execute("""
                 INSERT OR REPLACE INTO companies (id, industry_id, value_chain_node_id, name, ticker, role_description, future_growth, display_order, portfolio_tier, principle_reason)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (cid, ind_id, vcn_id, name, ticker, role_desc, fg, disp, tier, p_reason))
         
+        # 2. COMPANY_PROFILES
         for row in COMPANY_PROFILES:
-            cid, price, high_52, mdd, signal, desc_ko = row
+            cid = row[0]
             cur.execute("""
-                UPDATE company_profiles 
-                SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?, description_ko=?
-                WHERE company_id=?
-            """, (price, high_52, mdd, signal, desc_ko, cid))
+                INSERT OR REPLACE INTO company_profiles (
+                    company_id, sector, industry_classification, description, ceo, employees, website,
+                    market_cap, current_price, beta, pe_ratio, pb_ratio, ps_ratio, ev_ebitda, ev_sales,
+                    dcf_value, roe, roa, roic, gross_margin_ttm, op_margin_ttm, net_margin_ttm,
+                    ebitda_margin_ttm, revenue_growth, eps_growth, fcf_growth, op_income_growth,
+                    current_ratio, debt_to_equity, net_debt_to_ebitda, interest_coverage,
+                    dividend_yield, payout_ratio, asset_turnover, receivables_turnover, inventory_turnover,
+                    last_updated, description_ko, ai_analysis_json, high_52w, mdd_pct, buy_signal
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, row)
             
+        # 3. FINANCIAL_DATA
+        for row in FINANCIAL_DATA:
+            cur.execute("""
+                INSERT OR REPLACE INTO financial_data (
+                    company_id, date, period_type, fiscal_year, revenue, cost_of_revenue, gross_profit,
+                    operating_income, ebitda, net_income, eps, gross_margin, op_margin, net_margin,
+                    ebitda_margin, revenue_growth_yoy, op_income_growth_yoy, eps_growth_yoy,
+                    total_assets, total_liabilities, shareholders_equity, net_debt, operating_cash_flow,
+                    free_cash_flow, capital_expenditure, roe, roa
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, row)
+
         conn.commit()
+        cur.execute("SELECT COUNT(*) FROM financial_data")
+        fin_count = cur.fetchone()[0]
         cur.execute("SELECT id, name, ticker FROM companies WHERE ticker IN ('NVDA', 'GEV', 'ISRG')")
         verified = cur.fetchall()
         conn.close()
-        return {"status": "success", "verified": verified}
+        return {"status": "success", "financials_count": fin_count, "verified": verified}
     except Exception as e:
         return {"status": "error", "error": str(e)}
 @app.get("/api/admin/debug")
