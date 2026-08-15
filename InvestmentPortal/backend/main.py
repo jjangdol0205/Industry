@@ -695,9 +695,38 @@ def admin_fix_cogs():
     conn.close()
     return {"fixed": fixed, "total_with_cogs": total_ok, "status": "done"}
 
-# ─────────────────────────────────────────────
-# Debug: DB 상태 확인 (Render 에러 진단용)
-# ─────────────────────────────────────────────
+@app.get("/api/admin/reload-seed")
+def admin_reload_seed():
+    """seed_data.py 기반으로 Render DB 동기화 재구축"""
+    import sqlite3
+    db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+    try:
+        from seed_data import COMPANIES, COMPANY_PROFILES
+        conn = sqlite3.connect(db_path)
+        cur = conn.cursor()
+        for row in COMPANIES:
+            # (id, industry_id, value_chain_node_id, name, ticker, role_description, future_growth, display_order, portfolio_tier, principle_reason)
+            cid, ind_id, vcn_id, name, ticker, role_desc, fg, disp, tier, p_reason = row
+            cur.execute("""
+                INSERT OR REPLACE INTO companies (id, industry_id, value_chain_node_id, name, ticker, role_description, future_growth, display_order, portfolio_tier, principle_reason)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (cid, ind_id, vcn_id, name, ticker, role_desc, fg, disp, tier, p_reason))
+        
+        for row in COMPANY_PROFILES:
+            cid, price, high_52, mdd, signal, desc_ko = row
+            cur.execute("""
+                UPDATE company_profiles 
+                SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?, description_ko=?
+                WHERE company_id=?
+            """, (price, high_52, mdd, signal, desc_ko, cid))
+            
+        conn.commit()
+        cur.execute("SELECT id, name, ticker FROM companies WHERE ticker IN ('NVDA', 'GEV', 'ISRG')")
+        verified = cur.fetchall()
+        conn.close()
+        return {"status": "success", "verified": verified}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
 @app.get("/api/admin/debug")
 def admin_debug():
     import sqlite3, traceback
