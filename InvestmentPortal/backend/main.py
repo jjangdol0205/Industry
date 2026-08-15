@@ -1096,25 +1096,6 @@ def get_company_financials(
             })
 
     return {"company_id": company.id, "financials": result}
-            "total_current_assets": f.total_current_assets,
-            "cash_and_equivalents": f.cash_and_equivalents,
-            "total_debt": f.total_debt,
-            "shareholders_equity": f.shareholders_equity,
-            "net_debt": f.net_debt,
-            # 재무건전성
-            "current_ratio": f.current_ratio,
-            "debt_to_equity_ratio": f.debt_to_equity_ratio,
-            # 현금흐름
-            "operating_cash_flow": f.operating_cash_flow,
-            "capital_expenditure": f.capital_expenditure,
-            "free_cash_flow": f.free_cash_flow,
-            # 수익성
-            "roe": f.roe,
-            "roa": f.roa,
-            "fcf_margin": f.fcf_margin,
-        })
-    
-    return {"ticker": company.ticker, "name": company.name, "financials": result}
 
 
 @app.post("/api/companies/{company_id}/sync")
