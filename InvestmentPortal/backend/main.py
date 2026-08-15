@@ -832,28 +832,33 @@ def get_companies(db: Session = Depends(get_db)):
     ).all()
 
 @app.get("/api/companies/{company_id}", response_model=schemas.Company)
-def get_company(company_id: int, db: Session = Depends(get_db)):
-    company = db.query(models.Company).filter(models.Company.id == company_id).first()
+def get_company(company_id: int, ticker: Optional[str] = None, db: Session = Depends(get_db)):
+    company = None
+    if ticker:
+        company = db.query(models.Company).filter(models.Company.ticker.ilike(ticker)).first()
+    if not company:
+        company = db.query(models.Company).filter(models.Company.id == company_id).first()
     if not company:
         raise HTTPException(status_code=404, detail="Company not found")
     return company
 
 @app.get("/api/companies/{company_id}/profile")
-def get_company_profile(company_id: int, db: Session = Depends(get_db)):
+def get_company_profile(company_id: int, ticker: Optional[str] = None, db: Session = Depends(get_db)):
     """
     회사의 기관급 밸류에이션·프로파일 데이터 반환
     P/E, P/B, EV/EBITDA, ROE, ROA, GPM, OPM, 배당수익률 등
     description은 DeepSeek으로 번역 후 DB 캐시
     """
-    company = db.query(models.Company).filter(models.Company.id == company_id).first()
+    company = None
+    if ticker:
+        company = db.query(models.Company).filter(models.Company.ticker.ilike(ticker)).first()
+    if not company:
+        company = db.query(models.Company).filter(models.Company.id == company_id).first()
     if not company:
         raise HTTPException(status_code=404, detail="Company not found")
 
-    profile = db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id == company_id).first()
-    if not profile and company and company.ticker:
-        # Fallback by ticker
-        matching_comp_ids = [c.id for c in db.query(models.Company).filter(models.Company.ticker == company.ticker).all()]
-        profile = db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id.in_(matching_comp_ids)).first()
+    matching_comp_ids = [c.id for c in db.query(models.Company).filter(models.Company.ticker.ilike(company.ticker)).all()] if company and company.ticker else [company.id]
+    profile = db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id.in_(matching_comp_ids)).first()
 
     # ── 한국어 번역 (없으면 DeepSeek으로 생성 후 저장) ──────────
     description_ko = None
@@ -932,6 +937,7 @@ def get_company_profile(company_id: int, db: Session = Depends(get_db)):
 @app.get("/api/companies/{company_id}/financials")
 def get_company_financials(
     company_id: int,
+    ticker: Optional[str] = None,
     period_type: Optional[str] = None,  # "annual" or "quarterly"
     limit: int = 20,
     db: Session = Depends(get_db)
@@ -939,11 +945,15 @@ def get_company_financials(
     """
     연간/분기 재무제표 반환 (손익 + 재무상태표 + 현금흐름 통합)
     """
-    company = db.query(models.Company).filter(models.Company.id == company_id).first()
+    company = None
+    if ticker:
+        company = db.query(models.Company).filter(models.Company.ticker.ilike(ticker)).first()
+    if not company:
+        company = db.query(models.Company).filter(models.Company.id == company_id).first()
     if not company:
         raise HTTPException(status_code=404, detail="Company not found")
     
-    matching_comp_ids = [c.id for c in db.query(models.Company).filter(models.Company.ticker == company.ticker).all()] if company and company.ticker else [company_id]
+    matching_comp_ids = [c.id for c in db.query(models.Company).filter(models.Company.ticker.ilike(company.ticker)).all()] if company and company.ticker else [company.id]
     query = db.query(models.FinancialData).filter(models.FinancialData.company_id.in_(matching_comp_ids))
     if period_type:
         query = query.filter(models.FinancialData.period_type == period_type)

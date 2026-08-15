@@ -203,16 +203,20 @@ function App() {
       });
     }
 
+    const tk = fallbackItem?.ticker || '';
+    const queryTk = tk ? `?ticker=${encodeURIComponent(tk)}` : '';
+    const queryTkAmp = tk ? `&ticker=${encodeURIComponent(tk)}` : '';
+
     try {
       const [compRes, profRes, finRes] = await Promise.all([
-        axios.get(`${API_BASE}/companies/${id}`).catch(() => ({ data: fallbackItem })),
-        axios.get(`${API_BASE}/companies/${id}/profile`).catch(() => ({ data: { profile: {} } })),
-        axios.get(`${API_BASE}/companies/${id}/financials?limit=200`).catch(() => ({ data: { financials: [] } })),
+        axios.get(`${API_BASE}/companies/${id}${queryTk}`).catch(() => ({ data: fallbackItem })),
+        axios.get(`${API_BASE}/companies/${id}/profile${queryTk}`).catch(() => ({ data: { profile: {} } })),
+        axios.get(`${API_BASE}/companies/${id}/financials?limit=200${queryTkAmp}`).catch(() => ({ data: { financials: [] } })),
       ]);
       if (compRes.data) setSelectedCompany(compRes.data);
       if (profRes.data?.profile) setCompanyProfile(profRes.data.profile);
       if (finRes.data?.financials) setCompanyFinancials(finRes.data.financials);
-      axios.get(`${API_BASE}/companies/${id}/ai-analysis`)
+      axios.get(`${API_BASE}/companies/${id}/ai-analysis${queryTk}`)
         .then(r => setCompanyAiAnalysis(r.data))
         .catch(() => setCompanyAiAnalysis({ error: true }));
     } catch (e) {
