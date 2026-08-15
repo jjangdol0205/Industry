@@ -14,6 +14,10 @@ import {
 } from 'lucide-react';
 import './index.css';
 
+import staticUniverseData from '../public/universe_evaluated.json';
+import staticDeepdiveData from '../public/universal_deepdive_data.json';
+import staticAiAnalysesData from '../public/pregenerated_ai_analyses.json';
+
 const BACKEND_HOST = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:8000'
   : 'https://industry-l08j.onrender.com';
@@ -183,27 +187,11 @@ function App() {
     const ts = Date.now();
     const tk = (fallbackItem?.ticker || '').toUpperCase();
 
-    // ⚡ 1단계: 메모리 캐시 및 정적 파일 즉시 검색 (0.000초 초고속)
-    let deepItem = window.cachedDeepdives ? (window.cachedDeepdives[id] || window.cachedDeepdives[tk]) : null;
-    let aiItem = window.cachedAiAnalyses ? (window.cachedAiAnalyses[id] || window.cachedAiAnalyses[tk]) : null;
+    const idStr = String(id);
 
-    // 만약 메모리 캐시에 아직 없으면 비동기 1회 시도
-    if (!deepItem || !aiItem) {
-      try {
-        const [dRes, aRes] = await Promise.all([
-          axios.get(`./universal_deepdive_data.json?t=${ts}`).catch(() => null),
-          axios.get(`./pregenerated_ai_analyses.json?t=${ts}`).catch(() => null)
-        ]);
-        if (dRes?.data) {
-          window.cachedDeepdives = dRes.data;
-          deepItem = dRes.data[id] || dRes.data[tk];
-        }
-        if (aRes?.data) {
-          window.cachedAiAnalyses = aRes.data;
-          aiItem = aRes.data[id] || aRes.data[tk];
-        }
-      } catch (err) {}
-    }
+    // ⚡ 1단계: 번들 임포트 데이터 0.000초 즉시 조회 (HTTP 404/네트워크 오류 원천 차단)
+    const deepItem = staticDeepdiveData[idStr] || staticDeepdiveData[tk] || (window.cachedDeepdives ? (window.cachedDeepdives[idStr] || window.cachedDeepdives[tk]) : null);
+    const aiItem = staticAiAnalysesData[idStr] || staticAiAnalysesData[tk] || (window.cachedAiAnalyses ? (window.cachedAiAnalyses[idStr] || window.cachedAiAnalyses[tk]) : null);
 
     const targetCompany = fallbackItem || {
       id: id,
@@ -1512,27 +1500,23 @@ function DeepDiveSection({ company, profile }) {
 
   const fetchDeepdive = async () => {
     setLoading(true);
+    const cidStr = String(company?.id);
+    const tk = (company?.ticker || '').toUpperCase();
+
+    const staticItem = staticDeepdiveData[cidStr] || staticDeepdiveData[tk];
+    if (staticItem) {
+      setDeepData(staticItem);
+      setLoading(false);
+    }
+
     const ts = Date.now();
     try {
-      const res = await axios.get(`${API_BASE}/company/${company.id}/deepdive?t=${ts}`);
+      const res = await axios.get(`${API_BASE}/company/${company.id}/deepdive?t=${ts}`, { timeout: 3000 });
       if (res.data && !res.data.error && res.data.quote) {
         setDeepData(res.data);
-      } else {
-        const fb = await axios.get(`./universal_deepdive_data.json?t=${ts}`);
-        if (fb.data) {
-          const item = fb.data[company.id] || fb.data[company.ticker];
-          if (item) setDeepData(item);
-        }
       }
-    } catch (e) {
-      try {
-        const fb = await axios.get(`./universal_deepdive_data.json?t=${ts}`);
-        if (fb.data) {
-          const item = fb.data[company.id] || fb.data[company.ticker];
-          if (item) setDeepData(item);
-        }
-      } catch (err) {}
-    } finally {
+    } catch (e) {}
+    finally {
       setLoading(false);
     }
   };
@@ -1904,31 +1888,18 @@ function AgentWorkspace({ onSelectCompany }) {
 
   const fetchUniverse = async () => {
     setLoading(true);
+    if (staticUniverseData && Array.isArray(staticUniverseData)) {
+      setUniverseData({ universe: staticUniverseData });
+      setLoading(false);
+    }
     const ts = Date.now();
     try {
-      const r = await axios.get(`${API_BASE}/portfolio/universe?t=${ts}`);
+      const r = await axios.get(`${API_BASE}/portfolio/universe?t=${ts}`, { timeout: 3000 });
       if (r.data && r.data.universe && r.data.universe.length >= 240) {
         setUniverseData(r.data);
-      } else {
-        // Fallback to static universe JSON with cache-busting query
-        const fb = await axios.get(`./universe_evaluated.json?t=${ts}`);
-        if (fb.data && Array.isArray(fb.data)) {
-          setUniverseData({ universe: fb.data });
-        } else if (r.data) {
-          setUniverseData(r.data);
-        }
       }
-    } catch (e) {
-      console.error("Failed to load universe from API, using fallback", e);
-      try {
-        const fb = await axios.get(`./universe_evaluated.json?t=${ts}`);
-        if (fb.data && Array.isArray(fb.data)) {
-          setUniverseData({ universe: fb.data });
-        }
-      } catch (err) {
-        console.error("Fallback failed", err);
-      }
-    } finally {
+    } catch (e) {}
+    finally {
       setLoading(false);
     }
   };
