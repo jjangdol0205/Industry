@@ -35,17 +35,29 @@
     <meta property="og:description" content="자율주행·로봇·우주·코인 산업 밸류체인 심층 분석 및 기관급 AI 투자 리서치" />
     <meta property="og:image" content="/icon-512x512.png" />
 
-    <!-- 서비스 워커 등록 -->
+    <!-- Cache-Control (배포 즉시 최신 번들 로딩 보장) -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <!-- 서비스 워커 구버전 캐시 자동 정리 및 해제 -->
     <script>
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then(reg => console.log('SW registered:', reg.scope))
-            .catch(err => console.log('SW failed:', err));
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          for (let registration of registrations) {
+            registration.unregister().then(() => console.log('Legacy SW unregistered'));
+          }
+        });
+      }
+      if ('caches' in window) {
+        caches.keys().then(names => {
+          for (let name of names) {
+            caches.delete(name);
+          }
         });
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-DAiUCTh7.js"></script>
+    <script type="module" crossorigin src="/assets/index-DRGdKwBM.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-DzmF6JUy.css">
   </head>
   <body>
