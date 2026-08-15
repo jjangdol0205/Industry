@@ -1579,11 +1579,11 @@ function DeepDiveSection({ company, profile }) {
 
           <div style={{ background: 'rgba(0,0,0,0.3)', padding: '16px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
             <div style={{ fontSize: '0.78rem', color: '#c084fc', fontWeight: 700, marginBottom: '6px' }}>🛡️ 제2원칙: 독점 병목 해자</div>
-            <div style={{ fontSize: '1.1rem', color: 'white', fontWeight: 800, marginBottom: '4px' }}>
-              수술로봇 90%+ 독점
+            <div style={{ fontSize: '1.05rem', color: 'white', fontWeight: 800, marginBottom: '4px' }}>
+              {deepData.moat_title || principles.principle_2_moat?.title || company?.role_description || "글로벌 독점 1위 해자"}
             </div>
             <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.5' }}>
-              {principles.principle_2_moat?.details || "전 세계 3.5만 명 의사 수술 락인 + 수술당 $1,800~$3,200 소모품 자동 구매"}
+              {principles.principle_2_moat?.details || company?.principle_reason || company?.role_description || "대체 불가능한 독점적 기술 장벽 및 높은 전환 비용 해자 구축."}
             </div>
           </div>
 
