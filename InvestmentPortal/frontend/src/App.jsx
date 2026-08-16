@@ -1327,13 +1327,13 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
       </div>
 
       {/* ── Section -1: ISRG & Core/Satellite 4단계 딥다이브 ── */}
-      <DeepDiveSection company={company} profile={p} />
+      <ErrorBoundary><DeepDiveSection company={company} profile={p} /></ErrorBoundary>
 
       {/* ── Section 0: AI 기업 심층 분석 ──────────────── */}
-      <AiAnalysisSection data={aiAnalysis} company={company} />
+      <ErrorBoundary><AiAnalysisSection data={aiAnalysis} company={company} /></ErrorBoundary>
 
       {/* ── Section 0b: 비즈니스 모델 수익구조 ──────── */}
-      <BusinessModelSection latest={latest} profile={p} company={company} />
+      <ErrorBoundary><BusinessModelSection latest={latest} profile={p} company={company} /></ErrorBoundary>
 
       {/* ── Section 1: 밸류에이션 KPI 카드 ─────────────── */}
       <section style={{ marginBottom:'36px' }}>
@@ -1695,14 +1695,16 @@ function DeepDiveSection({ company, profile }) {
                       <Cell key={index} fill={entry.color} />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(val, name, entry) => [
-                    entry.payload ? (
+                  <Tooltip formatter={(val, name, entry) => {
+                    const vNum = safeNum(val, 0);
+                    const pctStr = entry?.payload?.pct != null ? entry.payload.pct : '0';
+                    return [
                       isKrw(company?.ticker)
-                        ? (val >= 100000 ? `₩${(val/100000).toFixed(1)}조 (${entry.payload.pct}%)` : `₩${(val).toFixed(0)}억 (${entry.payload.pct}%)`)
-                        : (val >= 1000 ? `$${(val/1000).toFixed(2)}B (${entry.payload.pct}%)` : `$${val.toFixed(1)}M (${entry.payload.pct}%)`)
-                    ) : `${val}`,
-                    name
-                  ]} />
+                        ? (vNum >= 100000 ? `₩${(vNum/100000).toFixed(1)}조 (${pctStr}%)` : `₩${vNum.toFixed(0)}억 (${pctStr}%)`)
+                        : (vNum >= 1000 ? `$${(vNum/1000).toFixed(2)}B (${pctStr}%)` : `$${vNum.toFixed(1)}M (${pctStr}%)`),
+                      name
+                    ];
+                  }} />
                 </PieChart>
               </ResponsiveContainer>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '10px' }}>
