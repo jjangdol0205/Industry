@@ -1598,7 +1598,7 @@ function DeepDiveSection({ company, profile }) {
             {/* 파이 차트: 2025년 세그먼트 매출 비중 */}
             <div style={{ background: 'rgba(0,0,0,0.2)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
               <div style={{ fontSize: '0.9rem', color: 'white', fontWeight: 700, marginBottom: '12px' }}>
-                🍰 2025년 세그먼트별 매출 비중 (반복 매출 75% 락인)
+                🍰 2025년 세그먼트별 매출 비중
               </div>
               <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
@@ -1607,7 +1607,14 @@ function DeepDiveSection({ company, profile }) {
                       <Cell key={index} fill={entry.color} />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(val, name, entry) => [`$${(val/1000).toFixed(2)}B (${entry.payload.pct}%)`, name]} />
+                  <Tooltip formatter={(val, name, entry) => [
+                    entry.payload ? (
+                      isKrw(company?.ticker)
+                        ? (val >= 100000 ? `₩${(val/100000).toFixed(1)}조 (${entry.payload.pct}%)` : `₩${(val).toFixed(0)}억 (${entry.payload.pct}%)`)
+                        : (val >= 1000 ? `$${(val/1000).toFixed(2)}B (${entry.payload.pct}%)` : `$${val.toFixed(1)}M (${entry.payload.pct}%)`)
+                    ) : `${val}`,
+                    name
+                  ]} />
                 </PieChart>
               </ResponsiveContainer>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '10px' }}>
@@ -1617,7 +1624,11 @@ function DeepDiveSection({ company, profile }) {
                       <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: seg.color }} />
                       <span style={{ color: 'rgba(255,255,255,0.8)' }}>{seg.name}</span>
                     </div>
-                    <span style={{ fontWeight: 700, color: 'white' }}>${(seg.value/1000).toFixed(2)}B ({seg.pct}%)</span>
+                    <span style={{ fontWeight: 700, color: 'white' }}>
+                      {isKrw(company?.ticker)
+                        ? (seg.value >= 100000 ? `₩${(seg.value/100000).toFixed(1)}조 (${seg.pct}%)` : `₩${(seg.value||0).toFixed(0)}억 (${seg.pct}%)`)
+                        : (seg.value >= 1000 ? `$${(seg.value/1000).toFixed(2)}B (${seg.pct}%)` : `$${(seg.value||0).toFixed(1)}M (${seg.pct}%)`)}
+                    </span>
                   </div>
                 ))}
               </div>
