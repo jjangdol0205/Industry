@@ -562,6 +562,7 @@ function App() {
               className={`nav-item ${selectedReport?.id===r.id?'active':''}`}
               onClick={() => { fetchReportDetails(r.id); setSelectedCompany(null); setCompanyProfile(null); setSidebarOpen(false); }}>
               <span style={{ width:'20px', height:'20px', borderRadius:'50%', background:'rgba(59,130,246,0.15)', color:'var(--accent-blue)', fontSize:'0.65rem', fontWeight:700, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>{idx+1}</span>
+              <span style={{ marginRight:'6px', fontSize:'0.9rem' }}>{INDUSTRY_ICONS[r.tag] || '📊'}</span>
               {r.tag || r.title}
             </div>
           ))}
@@ -2199,9 +2200,24 @@ function AgentWorkspace({ onSelectCompany }) {
 
 // ── HomeDashboard ─────────────────────────────────────────────
 const INDUSTRY_ICONS = {
-  '자율주행': '🚗', '로봇': '🤖', '에너지': '⚡', '우주': '🚀',
-  'AI': 'AI', '전력인프라': '🔌', '이차전지': '🔋', '온디바이스AI': '📱',
-  '반도체': '💎', '게임': '🎮', '엔터테인먼트': '🎬', '조선': '🚢',
+  '자율주행': '🚘',
+  '로봇': '🤖',
+  '우주': '🚀',
+  '코인': '🪙',
+  '에너지': '⚡',
+  '전력인프라': '🔌',
+  '이차전지': '🔋',
+  '온디바이스AI': '📱',
+  '반도체': '💻',
+  '게임': '🎮',
+  '음악': '🎵',
+  '조선': '🚢',
+  '운송': '🚚',
+  '제약': '💊',
+  '화장품': '💄',
+  '식음료': '🍜',
+  '엔터테인먼트': '🎬',
+  'AI': '🤖'
 };
 
 function HomeDashboard({ reports, onSelect }) {
