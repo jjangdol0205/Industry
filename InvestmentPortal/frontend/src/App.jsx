@@ -102,6 +102,7 @@ function App() {
   const [loadingDot, setLoadingDot] = useState(0);
   const [retryCount, setRetryCount] = useState(0);
   const [viewMode, setViewMode] = useState('research');
+  const [previousView, setPreviousView] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [installPrompt, setInstallPrompt] = useState(null);
   const [showInstallBanner, setShowInstallBanner] = useState(false);
@@ -109,17 +110,21 @@ function App() {
   const [loadingPhase, setLoadingPhase] = useState('wakeup');
   const [showUpdateBanner, setShowUpdateBanner] = useState(false);
 
-
   // 뒤로가기(Back) 버튼 핸들러
   useEffect(() => {
     const handlePopState = (e) => {
-      setViewMode('research');
-      setSelectedCompany(null);
-      setSidebarOpen(false);
+      if (selectedCompany) {
+        handleBackFromCompany();
+      } else {
+        setViewMode('research');
+        setSelectedCompany(null);
+        setSelectedReport(null);
+        setSidebarOpen(false);
+      }
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+  }, [selectedCompany, previousView]);
 
   const isHome = viewMode === 'research' && selectedCompany === null;
   const isHomeRef = React.useRef(isHome);
@@ -216,6 +221,10 @@ function App() {
 
   const fetchCompanyFull = async (id, fallbackItem = null) => {
     setSidebarOpen(false);
+    setPreviousView({
+      viewMode: viewMode,
+      selectedReport: selectedReport
+    });
     setViewMode('company');
 
     const ts = Date.now();
@@ -349,7 +358,22 @@ function App() {
     setCompanyFinancials(null);
     setCompanyAiAnalysis(null);
     setSelectedReport(null);
+    setPreviousView({ viewMode: 'research', selectedReport: null });
     setSidebarOpen(false);
+  };
+
+  const handleBackFromCompany = () => {
+    setSelectedCompany(null);
+    setCompanyProfile(null);
+    setCompanyFinancials(null);
+    setCompanyAiAnalysis(null);
+    if (previousView) {
+      setViewMode(previousView.viewMode || 'research');
+      setSelectedReport(previousView.selectedReport || null);
+    } else {
+      setViewMode('research');
+      setSelectedReport(null);
+    }
   };
 
   // ── 스플래시 로딩 화면 ─────────────────────────────────
@@ -582,7 +606,7 @@ function App() {
               profile={companyProfile}
               financials={companyFinancials}
               aiAnalysis={companyAiAnalysis}
-              onBack={() => { setSelectedCompany(null); setCompanyProfile(null); setCompanyFinancials(null); setCompanyAiAnalysis(null); }}
+              onBack={handleBackFromCompany}
               onSync={() => fetchCompanyFull(selectedCompany.id)}
             />
           </ErrorBoundary>
