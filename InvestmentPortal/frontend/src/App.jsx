@@ -1405,9 +1405,9 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
               <ComposedChart data={incomeChartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.07)" />
                 <XAxis dataKey="year" stroke="var(--text-secondary)" fontSize={12} />
-                <YAxis yAxisId="left" stroke="var(--text-secondary)" fontSize={12} tickFormatter={v => isKrwTicker ? v.toLocaleString() : v} />
+                <YAxis yAxisId="left" stroke="var(--text-secondary)" fontSize={12} tickFormatter={v => (v == null || isNaN(v)) ? '0' : (isKrwTicker ? Number(v).toLocaleString() : String(v))} />
                 <YAxis yAxisId="right" orientation="right" stroke="#00f2fe" fontSize={12} unit="%" />
-                <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.85rem' }} formatter={(v, name) => [isKrwTicker ? `₩${v.toLocaleString()}억` : `$${v}B`, name]} />
+                <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.85rem' }} formatter={(v, name) => [(v == null || isNaN(v)) ? '-' : (isKrwTicker ? `₩${Number(v).toLocaleString()}억` : `$${v}B`), name]} />
                 <Legend />
                 <Bar yAxisId="left" dataKey="매출" fill="var(--accent-blue)" radius={[4,4,0,0]} />
                 <Bar yAxisId="left" dataKey="영업이익" fill="var(--accent-purple)" radius={[4,4,0,0]} />
@@ -1443,8 +1443,8 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
                 <BarChart data={cashFlowData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.07)" />
                   <XAxis dataKey="year" stroke="var(--text-secondary)" fontSize={11} />
-                  <YAxis stroke="var(--text-secondary)" fontSize={11} tickFormatter={v => isKrwTicker ? v.toLocaleString() : v} />
-                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} formatter={(v) => [isKrwTicker ? `₩${v.toLocaleString()}억` : `$${v}B`]} />
+                  <YAxis stroke="var(--text-secondary)" fontSize={11} tickFormatter={v => (v == null || isNaN(v)) ? '0' : (isKrwTicker ? Number(v).toLocaleString() : String(v))} />
+                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} formatter={(v) => [(v == null || isNaN(v)) ? '-' : (isKrwTicker ? `₩${Number(v).toLocaleString()}억` : `$${v}B`)]} />
                   <Legend />
                   <Bar dataKey="OCF" fill="var(--accent-blue)" radius={[3,3,0,0]} />
                   <Bar dataKey="FCF" fill="var(--accent-green)" radius={[3,3,0,0]} />
@@ -1460,8 +1460,8 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
                 <ComposedChart data={balanceData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.07)" />
                   <XAxis dataKey="year" stroke="var(--text-secondary)" fontSize={11} />
-                  <YAxis stroke="var(--text-secondary)" fontSize={11} tickFormatter={v => isKrwTicker ? v.toLocaleString() : v} />
-                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} formatter={(v) => [isKrwTicker ? `₩${v.toLocaleString()}억` : `$${v}B`]} />
+                  <YAxis stroke="var(--text-secondary)" fontSize={11} tickFormatter={v => (v == null || isNaN(v)) ? '0' : (isKrwTicker ? Number(v).toLocaleString() : String(v))} />
+                  <RechartsTooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} formatter={(v) => [(v == null || isNaN(v)) ? '-' : (isKrwTicker ? `₩${Number(v).toLocaleString()}억` : `$${v}B`)]} />
                   <Legend />
                   <Bar dataKey="자산" fill="rgba(0,191,255,0.6)" radius={[3,3,0,0]} />
                   <Bar dataKey="자본" fill="rgba(0,255,100,0.6)" radius={[3,3,0,0]} />
