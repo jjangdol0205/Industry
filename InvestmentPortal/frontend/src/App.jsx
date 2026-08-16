@@ -1320,10 +1320,6 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
               <Globe size={14} /> <span className="btn-label">Website</span>
             </a>
           )}
-          <button onClick={handleSync} disabled={syncing} className="sync-btn">
-            <RefreshCw size={14} className={syncing?'spin':''} />
-            <span>{syncing ? '수집 중...' : '주가 최신화'}</span>
-          </button>
         </div>
       </div>
 
@@ -2043,9 +2039,6 @@ function AgentWorkspace({ onSelectCompany }) {
           </div>
           <h2 style={{ fontSize:'2.2rem', margin:0, background:'linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>🛡️ 4단계 투자원칙 기반 유니버스 모니터링</h2>
         </div>
-        <button className="run-btn" disabled={loading} onClick={fetchUniverse}>
-          {loading ? '⏳ 주가/MDD 갱신 중...' : '🔄 실시간 주가/MDD 재조회'}
-        </button>
       </div>
 
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'16px', marginBottom:'24px' }}>
