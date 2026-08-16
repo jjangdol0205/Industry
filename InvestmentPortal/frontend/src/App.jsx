@@ -62,6 +62,33 @@ const color = (v, good, bad) => {
   return v >= good ? 'var(--accent-green)' : v <= bad ? '#ff6b6b' : 'var(--text-primary)';
 };
 
+// ── ErrorBoundary ─────────────────────────────────────────
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(err, info) {
+    console.error("ErrorBoundary caught:", err, info);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding:'40px', textAlign:'center', color:'white' }}>
+          <h3>화면을 표시하는 중 일시적인 오류가 발생했습니다.</h3>
+          <button style={{ marginTop:'16px', padding:'10px 20px', borderRadius:'8px', background:'var(--accent-blue)', color:'white', border:'none', cursor:'pointer' }} onClick={() => this.setState({ hasError: false })}>
+            다시 불러오기
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 // ── 메인 앱 ─────────────────────────────────────────────
 function App() {
   const [reports, setReports] = useState([]);
@@ -548,14 +575,16 @@ function App() {
         ) : viewMode === 'pdf-library' ? (
           <PdfLibraryView />
         ) : selectedCompany ? (
-          <CompanyView
-            company={selectedCompany}
-            profile={companyProfile}
-            financials={companyFinancials}
-            aiAnalysis={companyAiAnalysis}
-            onBack={() => { setSelectedCompany(null); setCompanyProfile(null); setCompanyFinancials(null); setCompanyAiAnalysis(null); }}
-            onSync={() => fetchCompanyFull(selectedCompany.id)}
-          />
+          <ErrorBoundary key={selectedCompany.id}>
+            <CompanyView
+              company={selectedCompany}
+              profile={companyProfile}
+              financials={companyFinancials}
+              aiAnalysis={companyAiAnalysis}
+              onBack={() => { setSelectedCompany(null); setCompanyProfile(null); setCompanyFinancials(null); setCompanyAiAnalysis(null); }}
+              onSync={() => fetchCompanyFull(selectedCompany.id)}
+            />
+          </ErrorBoundary>
         ) : selectedReport ? (
           <IndustryView report={selectedReport} onSelectCompany={fetchCompanyFull} />
         ) : (
@@ -1141,24 +1170,32 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
     setSyncing(false);
   };
 
+  const getYear = (d) => {
+    if (!d) return '2025';
+    if (d.date && typeof d.date === 'string' && d.date.length >= 4) return d.date.substring(0, 4);
+    if (d.fiscal_year) return String(d.fiscal_year);
+    if (d.year) return String(d.year);
+    return '2025';
+  };
+
   // 연간 vs 분기 필터
   // 날짜 내림차순 정렬 후 연도별 중복 제거 (최신 레코드 우선)
   const annualRaw = (financials || [])
-    .filter(f => f.period_type === 'annual')
-    .sort((a,b) => new Date(b.date)-new Date(a.date)); // 최신순
+    .filter(f => f && f.period_type === 'annual')
+    .sort((a,b) => new Date(b.date || b.fiscal_year || '2025-01-01') - new Date(a.date || a.fiscal_year || '2025-01-01'));
   const annualMap = new Map();
   annualRaw.forEach(d => {
-    const yr = d.date.substring(0,4);
+    const yr = getYear(d);
     if (!annualMap.has(yr)) annualMap.set(yr, d); // 최신 레코드만 유지
   });
   // 차트용은 오름차순 (옛날→최신)
-  const annualData = Array.from(annualMap.values()).sort((a,b) => new Date(a.date)-new Date(b.date));
+  const annualData = Array.from(annualMap.values()).sort((a,b) => new Date(a.date || a.fiscal_year || '2025-01-01') - new Date(b.date || b.fiscal_year || '2025-01-01'));
   // 비즈니스 모델용 latest는 가장 최신 연간 레코드
   const latestRaw = annualRaw[0] || {};
 
   const quarterlyData = (financials || [])
-    .filter(f => f.period_type === 'quarterly')
-    .sort((a,b) => new Date(b.date)-new Date(a.date));
+    .filter(f => f && f.period_type === 'quarterly')
+    .sort((a,b) => new Date(b.date || b.fiscal_year || '2025-01-01') - new Date(a.date || a.fiscal_year || '2025-01-01'));
 
   const tableData = tab === 'annual' ? [...annualData].reverse() : quarterlyData;
 
@@ -1170,19 +1207,19 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
   const incomeChartData = annualData.slice(-6).map(d => {
     const scale = isKrwTicker ? 1e8 : 1e9;
     return {
-      year: d.date.substring(0,4),
-      매출: +(d.revenue / scale).toFixed(2),
+      year: getYear(d),
+      매출: +((d.revenue || 0) / scale).toFixed(2),
       영업이익: +((d.operating_income||0) / scale).toFixed(2),
       순이익: +((d.net_income||0) / scale).toFixed(2),
-      'OPM%': +(d.op_margin||0).toFixed(1),
-      'GPM%': +(d.gross_margin||0).toFixed(1),
+      'OPM%': +((d.op_margin||0)).toFixed(1),
+      'GPM%': +((d.gross_margin||0)).toFixed(1),
     };
   });
 
   const cashFlowData = annualData.slice(-6).map(d => {
     const scale = isKrwTicker ? 1e8 : 1e9;
     return {
-      year: d.date.substring(0,4),
+      year: getYear(d),
       OCF: +((d.operating_cash_flow||0) / scale).toFixed(2),
       CAPEX: +((d.capital_expenditure||0) / scale).toFixed(2),
       FCF: +((d.free_cash_flow||0) / scale).toFixed(2),
@@ -1192,7 +1229,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
   const balanceData = annualData.slice(-6).map(d => {
     const scale = isKrwTicker ? 1e8 : 1e9;
     return {
-      year: d.date.substring(0,4),
+      year: getYear(d),
       자산: +((d.total_assets||0) / scale).toFixed(2),
       부채: +((d.total_debt||0) / scale).toFixed(2),
       자본: +((d.shareholders_equity||0) / scale).toFixed(2),
