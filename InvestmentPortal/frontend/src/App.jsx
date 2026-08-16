@@ -1690,18 +1690,21 @@ function DeepDiveSection({ company, profile }) {
               </div>
               <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
-                  <Pie data={segments} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={50} outerRadius={80} paddingAngle={4}>
+                  <Pie data={segments.map(s => ({ ...s, pieVal: s.pct || (s.value > 0 ? s.value : 10) }))} dataKey="pieVal" nameKey="name" cx="50%" cy="50%" innerRadius={50} outerRadius={80} paddingAngle={4}>
                     {segments.map((entry, index) => (
-                      <Cell key={index} fill={entry.color} />
+                      <Cell key={index} fill={entry.color || (index === 0 ? '#3b82f6' : index === 1 ? '#8b5cf6' : '#10b981')} />
                     ))}
                   </Pie>
                   <Tooltip formatter={(val, name, entry) => {
-                    const vNum = safeNum(val, 0);
+                    const sVal = safeNum(entry?.payload?.value, 0);
                     const pctStr = entry?.payload?.pct != null ? entry.payload.pct : '0';
-                    return [
+                    const formattedVal = sVal > 0 ? (
                       isKrw(company?.ticker)
-                        ? (vNum >= 100000 ? `₩${(vNum/100000).toFixed(1)}조 (${pctStr}%)` : `₩${vNum.toFixed(0)}억 (${pctStr}%)`)
-                        : (vNum >= 1000 ? `$${(vNum/1000).toFixed(2)}B (${pctStr}%)` : `$${vNum.toFixed(1)}M (${pctStr}%)`),
+                        ? (sVal >= 100000 ? `₩${(sVal/100000).toFixed(1)}조` : `₩${sVal.toFixed(0)}억`)
+                        : (sVal >= 1000 ? `$${(sVal/1000).toFixed(2)}B` : `$${sVal.toFixed(1)}M`)
+                    ) : '';
+                    return [
+                      formattedVal ? `${formattedVal} (${pctStr}%)` : `${pctStr}%`,
                       name
                     ];
                   }} />
@@ -1711,13 +1714,15 @@ function DeepDiveSection({ company, profile }) {
                 {segments.map((seg, idx) => (
                   <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.78rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: seg.color }} />
+                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: seg.color || (idx === 0 ? '#3b82f6' : idx === 1 ? '#8b5cf6' : '#10b981') }} />
                       <span style={{ color: 'rgba(255,255,255,0.8)' }}>{seg.name}</span>
                     </div>
                     <span style={{ fontWeight: 700, color: 'white' }}>
-                      {isKrw(company?.ticker)
-                        ? (seg.value >= 100000 ? `₩${(seg.value/100000).toFixed(1)}조 (${seg.pct}%)` : `₩${(seg.value||0).toFixed(0)}억 (${seg.pct}%)`)
-                        : (seg.value >= 1000 ? `$${(seg.value/1000).toFixed(2)}B (${seg.pct}%)` : `$${(seg.value||0).toFixed(1)}M (${seg.pct}%)`)}
+                      {seg.value > 0 ? (
+                        isKrw(company?.ticker)
+                          ? (seg.value >= 100000 ? `₩${(seg.value/100000).toFixed(1)}조 (${seg.pct}%)` : `₩${(seg.value||0).toFixed(0)}억 (${seg.pct}%)`)
+                          : (seg.value >= 1000 ? `$${(seg.value/1000).toFixed(2)}B (${seg.pct}%)` : `$${(seg.value||0).toFixed(1)}M (${seg.pct}%)`)
+                      ) : `${seg.pct}%`}
                     </span>
                   </div>
                 ))}
