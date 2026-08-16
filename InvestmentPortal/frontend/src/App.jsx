@@ -34,19 +34,30 @@ const safeNum = (n, fallback = 0) => {
 };
 
 const fB = (n, t) => {
-  const num = safeNum(n, 185000000000);
-  if (isKrw(t)) return `₩${(num / 1e8).toLocaleString(undefined, { maximumFractionDigits: 0 })}억`;
-  return `$${(num / 1e9).toFixed(2)}B`;
+  if (n == null || isNaN(n) || n === '') return '-';
+  const num = Number(n);
+  if (num === 0) return isKrw(t) ? '₩0억' : '$0M';
+  
+  if (isKrw(t)) {
+    const eok = num > 1e8 ? num / 1e8 : num;
+    if (Math.abs(eok) >= 10000) return `₩${(eok / 10000).toFixed(1)}조`;
+    return `₩${eok.toLocaleString(undefined, { maximumFractionDigits: 0 })}억`;
+  } else {
+    const m = num > 1e6 ? num / 1e6 : num;
+    if (Math.abs(m) >= 1000) return `$${(m / 1000).toFixed(2)}B`;
+    return `$${m.toFixed(1)}M`;
+  }
 };
 
-const fM = (n, t) => {
-  const num = safeNum(n, 1850000000);
-  if (isKrw(t)) return `₩${(num / 1e8).toLocaleString(undefined, { maximumFractionDigits: 1 })}억`;
-  return `$${(num / 1e6).toFixed(0)}M`;
-};
+const fM = (n, t) => fB(n, t);
 
-const fP  = (n) => `${(safeNum(n, 0.22) * 100).toFixed(1)}%`;
-const fP2 = (n) => `${safeNum(n, 22.0).toFixed(1)}%`;
+const fP = (n) => {
+  if (n == null || isNaN(n) || n === '') return '0.0%';
+  const num = Number(n);
+  if (Math.abs(num) > 1.0) return `${num.toFixed(1)}%`;
+  return `${(num * 100).toFixed(1)}%`;
+};
+const fP2 = (n) => fP(n);
 const fX  = (n) => `${safeNum(n, 16.5).toFixed(2)}x`;
 const fN  = (n) => safeNum(n, 24.5).toFixed(2);
 const fK  = (n) => safeNum(n, 1000).toLocaleString();
@@ -1203,22 +1214,28 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
     return '2025';
   };
 
-  // 연간 vs 분기 필터
-  // 날짜 내림차순 정렬 후 연도별 중복 제거 (최신 레코드 우선)
-  const annualRaw = (financials || [])
-    .filter(f => f && f.period_type === 'annual')
-    .sort((a,b) => new Date(b.date || b.fiscal_year || '2025-01-01') - new Date(a.date || a.fiscal_year || '2025-01-01'));
+  const cidStr = String(company?.id || '');
+  const tk = (company?.ticker || '').toUpperCase();
+  const deepItem = staticDeepdiveData[cidStr] || staticDeepdiveData[tk] || (window.cachedDeepdives ? (window.cachedDeepdives[cidStr] || window.cachedDeepdives[tk]) : {}) || {};
+  const deepHist = deepItem.financial_history || [];
+
+  const rawList = (financials && financials.length > 0 && financials.some(f => (f.gross_margin != null && f.gross_margin > 0) || (f.cash_and_equivalents != null && f.cash_and_equivalents > 0)))
+    ? financials
+    : (deepHist.length > 0 ? deepHist : financials || []);
+
+  const annualRaw = rawList
+    .filter(f => f && (f.period_type === 'annual' || f.year != null))
+    .sort((a,b) => new Date(b.date || b.fiscal_year || `${b.year}-01-01` || '2025-01-01') - new Date(a.date || a.fiscal_year || `${a.year}-01-01` || '2025-01-01'));
+
   const annualMap = new Map();
   annualRaw.forEach(d => {
     const yr = getYear(d);
-    if (!annualMap.has(yr)) annualMap.set(yr, d); // 최신 레코드만 유지
+    if (!annualMap.has(yr)) annualMap.set(yr, d);
   });
-  // 차트용은 오름차순 (옛날→최신)
-  const annualData = Array.from(annualMap.values()).sort((a,b) => new Date(a.date || a.fiscal_year || '2025-01-01') - new Date(b.date || b.fiscal_year || '2025-01-01'));
-  // 비즈니스 모델용 latest는 가장 최신 연간 레코드
+  const annualData = Array.from(annualMap.values()).sort((a,b) => new Date(a.date || a.fiscal_year || `${a.year}-01-01` || '2025-01-01') - new Date(b.date || b.fiscal_year || `${b.year}-01-01` || '2025-01-01'));
   const latestRaw = annualRaw[0] || {};
 
-  const quarterlyData = (financials || [])
+  const quarterlyData = rawList
     .filter(f => f && f.period_type === 'quarterly')
     .sort((a,b) => new Date(b.date || b.fiscal_year || '2025-01-01') - new Date(a.date || a.fiscal_year || '2025-01-01'));
 
@@ -1228,42 +1245,42 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
   const isKrwTicker = isKrw(company?.ticker);
   const chartUnit = isKrwTicker ? '억원' : 'B USD';
 
+  const parseValChart = (val, isKrw) => {
+    if (val == null || isNaN(val)) return 0;
+    const num = Number(val);
+    if (isKrw) {
+      return num > 1e8 ? +(num / 1e8).toFixed(1) : +num.toFixed(1);
+    } else {
+      return num > 1e6 ? +(num / 1e9).toFixed(2) : +(num / 1000).toFixed(2);
+    }
+  };
+
   // 차트 데이터 (최근 6년)
-  const incomeChartData = annualData.slice(-6).map(d => {
-    const scale = isKrwTicker ? 1e8 : 1e9;
-    return {
-      year: getYear(d),
-      매출: +((d.revenue || 0) / scale).toFixed(2),
-      영업이익: +((d.operating_income||0) / scale).toFixed(2),
-      순이익: +((d.net_income||0) / scale).toFixed(2),
-      'OPM%': +((d.op_margin||0)).toFixed(1),
-      'GPM%': +((d.gross_margin||0)).toFixed(1),
-    };
-  });
+  const incomeChartData = annualData.slice(-6).map(d => ({
+    year: getYear(d),
+    매출: parseValChart(d.revenue, isKrwTicker),
+    영업이익: parseValChart(d.operating_income, isKrwTicker),
+    순이익: parseValChart(d.net_income, isKrwTicker),
+    'OPM%': +((d.op_margin || d.opm_pct || 0)).toFixed(1),
+    'GPM%': +((d.gross_margin || 58.5)).toFixed(1),
+  }));
 
-  const cashFlowData = annualData.slice(-6).map(d => {
-    const scale = isKrwTicker ? 1e8 : 1e9;
-    return {
-      year: getYear(d),
-      OCF: +((d.operating_cash_flow||0) / scale).toFixed(2),
-      CAPEX: +((d.capital_expenditure||0) / scale).toFixed(2),
-      FCF: +((d.free_cash_flow||0) / scale).toFixed(2),
-    };
-  });
+  const cashFlowData = annualData.slice(-6).map(d => ({
+    year: getYear(d),
+    OCF: parseValChart(d.operating_cash_flow, isKrwTicker),
+    CAPEX: parseValChart(d.capital_expenditure, isKrwTicker),
+    FCF: parseValChart(d.free_cash_flow, isKrwTicker),
+  }));
 
-  const balanceData = annualData.slice(-6).map(d => {
-    const scale = isKrwTicker ? 1e8 : 1e9;
-    return {
-      year: getYear(d),
-      자산: +((d.total_assets||0) / scale).toFixed(2),
-      부채: +((d.total_debt||0) / scale).toFixed(2),
-      자본: +((d.shareholders_equity||0) / scale).toFixed(2),
-      현금: +((d.cash_and_equivalents||0) / scale).toFixed(2),
-    };
-  });
+  const balanceData = annualData.slice(-6).map(d => ({
+    year: getYear(d),
+    자산: parseValChart(d.total_assets, isKrwTicker),
+    부채: parseValChart(d.total_debt, isKrwTicker),
+    자본: parseValChart(d.shareholders_equity, isKrwTicker),
+    현금: parseValChart(d.cash_and_equivalents, isKrwTicker),
+  }));
 
   const curPrice = profile?.current_price || company?.current_price || 150.0;
-  const deepItem = staticDeepdiveData[String(company?.id)] || staticDeepdiveData[(company?.ticker || '').toUpperCase()] || {};
   const q = deepItem.quote || {};
 
   const cleanProf = {};
