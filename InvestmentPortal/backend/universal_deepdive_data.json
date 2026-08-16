@@ -2,7 +2,7 @@
   "1": {
     "company_id": 154,
     "ticker": "NVDA",
-    "name": "NVIDIA",
+    "name": "NVIDIA Corporation",
     "korean_name": "NVIDIA",
     "moat_title": "AI 가속기 85%+ 독점",
     "quote": {
@@ -103,7 +103,7 @@
   "NVDA": {
     "company_id": 154,
     "ticker": "NVDA",
-    "name": "NVIDIA",
+    "name": "NVIDIA Corporation",
     "korean_name": "NVIDIA",
     "moat_title": "AI 가속기 85%+ 독점",
     "quote": {
@@ -204,7 +204,7 @@
   "2": {
     "company_id": 2,
     "ticker": "TSLA",
-    "name": "Tesla",
+    "name": "Tesla, Inc.",
     "korean_name": "Tesla",
     "moat_title": "FSD & ESS 독점 생태계",
     "quote": {
@@ -305,7 +305,7 @@
   "TSLA": {
     "company_id": 2,
     "ticker": "TSLA",
-    "name": "Tesla",
+    "name": "Tesla, Inc.",
     "korean_name": "Tesla",
     "moat_title": "FSD & ESS 독점 생태계",
     "quote": {
@@ -406,7 +406,7 @@
   "3": {
     "company_id": 165,
     "ticker": "GOOGL",
-    "name": "Alphabet (YouTube)",
+    "name": "Alphabet Inc.",
     "korean_name": "Alphabet (YouTube)",
     "moat_title": "검색 점유율 90%+ 네트워크",
     "quote": {
@@ -507,7 +507,7 @@
   "GOOGL": {
     "company_id": 165,
     "ticker": "GOOGL",
-    "name": "Alphabet (YouTube)",
+    "name": "Alphabet Inc.",
     "korean_name": "Alphabet (YouTube)",
     "moat_title": "검색 점유율 90%+ 네트워크",
     "quote": {
@@ -608,7 +608,7 @@
   "4": {
     "company_id": 4,
     "ticker": "UBER",
-    "name": "Uber",
+    "name": "Uber Technologies, Inc.",
     "korean_name": "Uber",
     "moat_title": "모빌리티 수요 플랫폼",
     "quote": {
@@ -709,7 +709,7 @@
   "UBER": {
     "company_id": 4,
     "ticker": "UBER",
-    "name": "Uber",
+    "name": "Uber Technologies, Inc.",
     "korean_name": "Uber",
     "moat_title": "모빌리티 수요 플랫폼",
     "quote": {
@@ -810,7 +810,7 @@
   "5": {
     "company_id": 118,
     "ticker": "QCOM",
-    "name": "Qualcomm",
+    "name": "Qualcomm Incorporated",
     "korean_name": "Qualcomm",
     "moat_title": "온디바이스 AI 칩셋 1위",
     "quote": {
@@ -911,7 +911,7 @@
   "QCOM": {
     "company_id": 118,
     "ticker": "QCOM",
-    "name": "Qualcomm",
+    "name": "Qualcomm Incorporated",
     "korean_name": "Qualcomm",
     "moat_title": "온디바이스 AI 칩셋 1위",
     "quote": {
@@ -1012,7 +1012,7 @@
   "6": {
     "company_id": 6,
     "ticker": "MBLY",
-    "name": "Mobileye",
+    "name": "Mobileye Global Inc.",
     "korean_name": "Mobileye",
     "moat_title": "ADAS 시장 지배적 시각 처리 알고리즘",
     "quote": {
@@ -1113,7 +1113,7 @@
   "MBLY": {
     "company_id": 6,
     "ticker": "MBLY",
-    "name": "Mobileye",
+    "name": "Mobileye Global Inc.",
     "korean_name": "Mobileye",
     "moat_title": "ADAS 시장 지배적 시각 처리 알고리즘",
     "quote": {
@@ -1214,7 +1214,7 @@
   "7": {
     "company_id": 7,
     "ticker": "APTV",
-    "name": "Aptiv",
+    "name": "Aptiv PLC",
     "korean_name": "Aptiv",
     "moat_title": "차량용 전장 시스템 및 SDV 솔루션 통합",
     "quote": {
@@ -1315,7 +1315,7 @@
   "APTV": {
     "company_id": 7,
     "ticker": "APTV",
-    "name": "Aptiv",
+    "name": "Aptiv PLC",
     "korean_name": "Aptiv",
     "moat_title": "차량용 전장 시스템 및 SDV 솔루션 통합",
     "quote": {
@@ -1416,7 +1416,7 @@
   "8": {
     "company_id": 8,
     "ticker": "NXPI",
-    "name": "NXP Semiconductors",
+    "name": "NXP Semiconductors N.V.",
     "korean_name": "NXP Semiconductors",
     "moat_title": "자동차 레이더, V2X, ADAS 범용 칩",
     "quote": {
@@ -1517,7 +1517,7 @@
   "NXPI": {
     "company_id": 8,
     "ticker": "NXPI",
-    "name": "NXP Semiconductors",
+    "name": "NXP Semiconductors N.V.",
     "korean_name": "NXP Semiconductors",
     "moat_title": "자동차 레이더, V2X, ADAS 범용 칩",
     "quote": {
@@ -1618,7 +1618,7 @@
   "9": {
     "company_id": 9,
     "ticker": "ON",
-    "name": "ON Semiconductor",
+    "name": "ON Semiconductor Corporation",
     "korean_name": "ON Semiconductor",
     "moat_title": "차량용 이미지 센서 및 SiC 전력 반도체",
     "quote": {
@@ -1719,7 +1719,7 @@
   "ON": {
     "company_id": 9,
     "ticker": "ON",
-    "name": "ON Semiconductor",
+    "name": "ON Semiconductor Corporation",
     "korean_name": "ON Semiconductor",
     "moat_title": "차량용 이미지 센서 및 SiC 전력 반도체",
     "quote": {
@@ -1819,7 +1819,7 @@
   },
   "10": {
     "ticker": "ISRG",
-    "name": "Intuitive Surgical",
+    "name": "Intuitive Surgical, Inc.",
     "korean_name": "인튜이티브 서지컬",
     "as_of_date": "2026-08-09",
     "quote": {
@@ -1938,7 +1938,7 @@
   },
   "ISRG": {
     "ticker": "ISRG",
-    "name": "Intuitive Surgical",
+    "name": "Intuitive Surgical, Inc.",
     "korean_name": "인튜이티브 서지컬",
     "as_of_date": "2026-08-09",
     "quote": {
@@ -2058,7 +2058,7 @@
   "11": {
     "company_id": 11,
     "ticker": "SYM",
-    "name": "Symbotic",
+    "name": "Symbotic Inc.",
     "korean_name": "Symbotic",
     "moat_title": "물류 창고 자동화 및 AI 분류 로봇 시스템",
     "quote": {
@@ -2159,7 +2159,7 @@
   "SYM": {
     "company_id": 11,
     "ticker": "SYM",
-    "name": "Symbotic",
+    "name": "Symbotic Inc.",
     "korean_name": "Symbotic",
     "moat_title": "물류 창고 자동화 및 AI 분류 로봇 시스템",
     "quote": {
@@ -2260,7 +2260,7 @@
   "12": {
     "company_id": 12,
     "ticker": "TER",
-    "name": "Teradyne",
+    "name": "Teradyne, Inc.",
     "korean_name": "Teradyne",
     "moat_title": "Universal Robots(협동로봇), MiR(물류로봇) 모회사",
     "quote": {
@@ -2361,7 +2361,7 @@
   "TER": {
     "company_id": 12,
     "ticker": "TER",
-    "name": "Teradyne",
+    "name": "Teradyne, Inc.",
     "korean_name": "Teradyne",
     "moat_title": "Universal Robots(협동로봇), MiR(물류로봇) 모회사",
     "quote": {
@@ -2462,7 +2462,7 @@
   "13": {
     "company_id": 13,
     "ticker": "ROK",
-    "name": "Rockwell Automation",
+    "name": "Rockwell Automation, Inc.",
     "korean_name": "Rockwell Automation",
     "moat_title": "산업용 제어 시스템, 소프트웨어 및 스마트팩토리",
     "quote": {
@@ -2563,7 +2563,7 @@
   "ROK": {
     "company_id": 13,
     "ticker": "ROK",
-    "name": "Rockwell Automation",
+    "name": "Rockwell Automation, Inc.",
     "korean_name": "Rockwell Automation",
     "moat_title": "산업용 제어 시스템, 소프트웨어 및 스마트팩토리",
     "quote": {
@@ -2664,7 +2664,7 @@
   "14": {
     "company_id": 14,
     "ticker": "ZBRA",
-    "name": "Zebra Technologies",
+    "name": "Zebra Technologies Corporation",
     "korean_name": "Zebra Technologies",
     "moat_title": "창고 내 물류 추적 및 바코드 머신 비전 시스템",
     "quote": {
@@ -2765,7 +2765,7 @@
   "ZBRA": {
     "company_id": 14,
     "ticker": "ZBRA",
-    "name": "Zebra Technologies",
+    "name": "Zebra Technologies Corporation",
     "korean_name": "Zebra Technologies",
     "moat_title": "창고 내 물류 추적 및 바코드 머신 비전 시스템",
     "quote": {
@@ -2866,7 +2866,7 @@
   "15": {
     "company_id": 15,
     "ticker": "PATH",
-    "name": "UiPath",
+    "name": "UiPath Inc.",
     "korean_name": "UiPath",
     "moat_title": "업무 자동화를 위한 RPA (소프트웨어 로보틱스)",
     "quote": {
@@ -2967,7 +2967,7 @@
   "PATH": {
     "company_id": 15,
     "ticker": "PATH",
-    "name": "UiPath",
+    "name": "UiPath Inc.",
     "korean_name": "UiPath",
     "moat_title": "업무 자동화를 위한 RPA (소프트웨어 로보틱스)",
     "quote": {
@@ -3068,7 +3068,7 @@
   "16": {
     "company_id": 16,
     "ticker": "CGNX",
-    "name": "Cognex",
+    "name": "Cognex Corporation",
     "korean_name": "Cognex",
     "moat_title": "제조 라인 결함 탐지 및 부품 인식용 2D/3D 머신 비전",
     "quote": {
@@ -3169,7 +3169,7 @@
   "CGNX": {
     "company_id": 16,
     "ticker": "CGNX",
-    "name": "Cognex",
+    "name": "Cognex Corporation",
     "korean_name": "Cognex",
     "moat_title": "제조 라인 결함 탐지 및 부품 인식용 2D/3D 머신 비전",
     "quote": {
@@ -3270,7 +3270,7 @@
   "17": {
     "company_id": 17,
     "ticker": "AVAV",
-    "name": "AeroVironment",
+    "name": "AeroVironment, Inc.",
     "korean_name": "AeroVironment",
     "moat_title": "드론, 무인기기 시스템 및 전술 로봇 솔루션",
     "quote": {
@@ -3371,7 +3371,7 @@
   "AVAV": {
     "company_id": 17,
     "ticker": "AVAV",
-    "name": "AeroVironment",
+    "name": "AeroVironment, Inc.",
     "korean_name": "AeroVironment",
     "moat_title": "드론, 무인기기 시스템 및 전술 로봇 솔루션",
     "quote": {
@@ -3472,7 +3472,7 @@
   "18": {
     "company_id": 154,
     "ticker": "NVDA",
-    "name": "NVIDIA",
+    "name": "NVIDIA Corporation",
     "korean_name": "NVIDIA",
     "moat_title": "AI 가속기 85%+ 독점",
     "quote": {
@@ -3573,7 +3573,7 @@
   "19": {
     "company_id": 19,
     "ticker": "RKLB",
-    "name": "Rocket Lab USA",
+    "name": "Rocket Lab USA, Inc.",
     "korean_name": "Rocket Lab USA",
     "moat_title": "소형 위성 전용 일렉트론 로켓 및 중형 뉴트론 개발 중",
     "quote": {
@@ -3674,7 +3674,7 @@
   "RKLB": {
     "company_id": 19,
     "ticker": "RKLB",
-    "name": "Rocket Lab USA",
+    "name": "Rocket Lab USA, Inc.",
     "korean_name": "Rocket Lab USA",
     "moat_title": "소형 위성 전용 일렉트론 로켓 및 중형 뉴트론 개발 중",
     "quote": {
@@ -3775,7 +3775,7 @@
   "20": {
     "company_id": 20,
     "ticker": "PL",
-    "name": "Planet Labs",
+    "name": "Planet Labs PBC",
     "korean_name": "Planet Labs",
     "moat_title": "매일 전 지구를 촬영하는 초소형 위성 군집 지구 관측 서비스",
     "quote": {
@@ -3876,7 +3876,7 @@
   "PL": {
     "company_id": 20,
     "ticker": "PL",
-    "name": "Planet Labs",
+    "name": "Planet Labs PBC",
     "korean_name": "Planet Labs",
     "moat_title": "매일 전 지구를 촬영하는 초소형 위성 군집 지구 관측 서비스",
     "quote": {
@@ -9027,7 +9027,7 @@
   "47": {
     "company_id": 47,
     "ticker": "HON",
-    "name": "Honeywell International",
+    "name": "Honeywell International Inc.",
     "korean_name": "Honeywell International",
     "moat_title": "산업 자동화·공정 제어·창고 로보틱스 종합 솔루션. Intelligrated 인수로 아마존·월마트 물류 자동화 핵심 공급사.",
     "quote": {
@@ -9128,7 +9128,7 @@
   "HON": {
     "company_id": 47,
     "ticker": "HON",
-    "name": "Honeywell International",
+    "name": "Honeywell International Inc.",
     "korean_name": "Honeywell International",
     "moat_title": "산업 자동화·공정 제어·창고 로보틱스 종합 솔루션. Intelligrated 인수로 아마존·월마트 물류 자동화 핵심 공급사.",
     "quote": {
@@ -9229,7 +9229,7 @@
   "48": {
     "company_id": 48,
     "ticker": "EMR",
-    "name": "Emerson Electric",
+    "name": "Emerson Electric Co.",
     "korean_name": "Emerson Electric",
     "moat_title": "공정 자동화·유량계·밸브·제어시스템 전문. 화학·석유·가스·식품 산업 자동화의 핵심 인프라.",
     "quote": {
@@ -9330,7 +9330,7 @@
   "EMR": {
     "company_id": 48,
     "ticker": "EMR",
-    "name": "Emerson Electric",
+    "name": "Emerson Electric Co.",
     "korean_name": "Emerson Electric",
     "moat_title": "공정 자동화·유량계·밸브·제어시스템 전문. 화학·석유·가스·식품 산업 자동화의 핵심 인프라.",
     "quote": {
@@ -13673,7 +13673,7 @@
   "70": {
     "company_id": 70,
     "ticker": "ETN",
-    "name": "Eaton Corporation",
+    "name": "Eaton Corporation plc",
     "korean_name": "Eaton Corporation",
     "moat_title": "미주 전력 인프라 1위",
     "quote": {
@@ -13781,7 +13781,7 @@
   "ETN": {
     "company_id": 70,
     "ticker": "ETN",
-    "name": "Eaton Corporation",
+    "name": "Eaton Corporation plc",
     "korean_name": "Eaton Corporation",
     "moat_title": "미주 전력 인프라 1위",
     "quote": {
@@ -13889,7 +13889,7 @@
   "71": {
     "company_id": 71,
     "ticker": "VRT",
-    "name": "Vertiv Holdings",
+    "name": "Vertiv Holdings Co",
     "korean_name": "Vertiv Holdings",
     "moat_title": "AI 하이퍼스케일 데이터센터 전용 UPS(무정전전원장치)·액체 냉각·전력 분배 장치(PDU) 글로벌 1위. 마이크로소프트·구글·아마존 등 빅테크 하이퍼스케일 데이터센터의 미션크리티컬 전력 인프라 핵심 독점 공급사.",
     "quote": {
@@ -13990,7 +13990,7 @@
   "VRT": {
     "company_id": 71,
     "ticker": "VRT",
-    "name": "Vertiv Holdings",
+    "name": "Vertiv Holdings Co",
     "korean_name": "Vertiv Holdings",
     "moat_title": "AI 하이퍼스케일 데이터센터 전용 UPS(무정전전원장치)·액체 냉각·전력 분배 장치(PDU) 글로벌 1위. 마이크로소프트·구글·아마존 등 빅테크 하이퍼스케일 데이터센터의 미션크리티컬 전력 인프라 핵심 독점 공급사.",
     "quote": {
@@ -14899,7 +14899,7 @@
   "76": {
     "company_id": 76,
     "ticker": "POWL",
-    "name": "Powell Industries",
+    "name": "Powell Industries, Inc.",
     "korean_name": "Powell Industries",
     "moat_title": "전력 분배용 스위치기어·모터 컨트롤 센터·배전반 전문 미국 제조사. 석유화학·LNG·데이터센터·유틸리티 등 고마진 산업용 전력 시스템 특화. 텍사스 주요 석유화학 단지 핵심 납품처.",
     "quote": {
@@ -15000,7 +15000,7 @@
   "POWL": {
     "company_id": 76,
     "ticker": "POWL",
-    "name": "Powell Industries",
+    "name": "Powell Industries, Inc.",
     "korean_name": "Powell Industries",
     "moat_title": "전력 분배용 스위치기어·모터 컨트롤 센터·배전반 전문 미국 제조사. 석유화학·LNG·데이터센터·유틸리티 등 고마진 산업용 전력 시스템 특화. 텍사스 주요 석유화학 단지 핵심 납품처.",
     "quote": {
@@ -22575,7 +22575,7 @@
   "118": {
     "company_id": 118,
     "ticker": "QCOM",
-    "name": "Qualcomm",
+    "name": "Qualcomm Incorporated",
     "korean_name": "Qualcomm",
     "moat_title": "온디바이스 AI 칩셋 1위",
     "quote": {
@@ -22676,7 +22676,7 @@
   "119": {
     "company_id": 163,
     "ticker": "AAPL",
-    "name": "Apple",
+    "name": "Apple Inc.",
     "korean_name": "Apple",
     "moat_title": "20억 대 기기 생태계 락인",
     "quote": {
@@ -22784,7 +22784,7 @@
   "AAPL": {
     "company_id": 163,
     "ticker": "AAPL",
-    "name": "Apple",
+    "name": "Apple Inc.",
     "korean_name": "Apple",
     "moat_title": "20억 대 기기 생태계 락인",
     "quote": {
@@ -23094,7 +23094,7 @@
   "121": {
     "company_id": 132,
     "ticker": "INTC",
-    "name": "Intel",
+    "name": "Intel Corporation",
     "korean_name": "Intel",
     "moat_title": "x86 CPU 강자이나 AI 전환기 고전 중. Gaudi3 AI 가속기 + IFS 파운드리 양립 전략. 18A 공정 성공이 관건.",
     "quote": {
@@ -23195,7 +23195,7 @@
   "INTC": {
     "company_id": 132,
     "ticker": "INTC",
-    "name": "Intel",
+    "name": "Intel Corporation",
     "korean_name": "Intel",
     "moat_title": "x86 CPU 강자이나 AI 전환기 고전 중. Gaudi3 AI 가속기 + IFS 파운드리 양립 전략. 18A 공정 성공이 관건.",
     "quote": {
@@ -23296,7 +23296,7 @@
   "122": {
     "company_id": 165,
     "ticker": "GOOGL",
-    "name": "Alphabet (YouTube)",
+    "name": "Alphabet Inc.",
     "korean_name": "Alphabet (YouTube)",
     "moat_title": "검색 점유율 90%+ 네트워크",
     "quote": {
@@ -23397,7 +23397,7 @@
   "123": {
     "company_id": 143,
     "ticker": "MSFT",
-    "name": "Microsoft (Xbox)",
+    "name": "Microsoft Corporation",
     "korean_name": "Microsoft (Xbox)",
     "moat_title": "B2B 클라우드 & OS 독점",
     "quote": {
@@ -23498,7 +23498,7 @@
   "MSFT": {
     "company_id": 143,
     "ticker": "MSFT",
-    "name": "Microsoft (Xbox)",
+    "name": "Microsoft Corporation",
     "korean_name": "Microsoft (Xbox)",
     "moat_title": "B2B 클라우드 & OS 독점",
     "quote": {
@@ -23599,7 +23599,7 @@
   "124": {
     "company_id": 134,
     "ticker": "005930.KS",
-    "name": "Samsung Electronics",
+    "name": "삼성전자",
     "korean_name": "Samsung Electronics",
     "moat_title": "메모리 반도체 글로벌 1위",
     "quote": {
@@ -23700,7 +23700,7 @@
   "005930.KS": {
     "company_id": 134,
     "ticker": "005930.KS",
-    "name": "Samsung Electronics",
+    "name": "삼성전자",
     "korean_name": "Samsung Electronics",
     "moat_title": "메모리 반도체 글로벌 1위",
     "quote": {
@@ -24003,7 +24003,7 @@
   "126": {
     "company_id": 126,
     "ticker": "META",
-    "name": "Meta Platforms",
+    "name": "Meta Platforms, Inc.",
     "korean_name": "Meta Platforms",
     "moat_title": "Quest 3/4 — 가장 대중적 XR 플랫폼. 온디바이스 AI로 공간 인식·번역·아바타 실시간 처리.",
     "quote": {
@@ -24104,7 +24104,7 @@
   "META": {
     "company_id": 126,
     "ticker": "META",
-    "name": "Meta Platforms",
+    "name": "Meta Platforms, Inc.",
     "korean_name": "Meta Platforms",
     "moat_title": "Quest 3/4 — 가장 대중적 XR 플랫폼. 온디바이스 AI로 공간 인식·번역·아바타 실시간 처리.",
     "quote": {
@@ -24407,7 +24407,7 @@
   "128": {
     "company_id": 154,
     "ticker": "NVDA",
-    "name": "NVIDIA",
+    "name": "NVIDIA Corporation",
     "korean_name": "NVIDIA",
     "moat_title": "AI 가속기 85%+ 독점",
     "quote": {
@@ -24508,7 +24508,7 @@
   "129": {
     "company_id": 129,
     "ticker": "AMD",
-    "name": "AMD",
+    "name": "Advanced Micro Devices, Inc.",
     "korean_name": "AMD",
     "moat_title": "MI300X AI GPU로 NVIDIA 추격. EPYC 서버 CPU에서 Intel 시장 점유율 지속 탈취. 데이터센터 듀얼 공급자.",
     "quote": {
@@ -24609,7 +24609,7 @@
   "AMD": {
     "company_id": 129,
     "ticker": "AMD",
-    "name": "AMD",
+    "name": "Advanced Micro Devices, Inc.",
     "korean_name": "AMD",
     "moat_title": "MI300X AI GPU로 NVIDIA 추격. EPYC 서버 CPU에서 Intel 시장 점유율 지속 탈취. 데이터센터 듀얼 공급자.",
     "quote": {
@@ -24710,7 +24710,7 @@
   "130": {
     "company_id": 130,
     "ticker": "AVGO",
-    "name": "Broadcom",
+    "name": "Broadcom Inc.",
     "korean_name": "Broadcom",
     "moat_title": "구글·메타·애플 등 하이퍼스케일러 맞춤 ASIC 설계 1위. 네트워킹 칩(Tomahawk, Jericho) AI 데이터센터 필수품.",
     "quote": {
@@ -24811,7 +24811,7 @@
   "AVGO": {
     "company_id": 130,
     "ticker": "AVGO",
-    "name": "Broadcom",
+    "name": "Broadcom Inc.",
     "korean_name": "Broadcom",
     "moat_title": "구글·메타·애플 등 하이퍼스케일러 맞춤 ASIC 설계 1위. 네트워킹 칩(Tomahawk, Jericho) AI 데이터센터 필수품.",
     "quote": {
@@ -25114,7 +25114,7 @@
   "132": {
     "company_id": 132,
     "ticker": "INTC",
-    "name": "Intel",
+    "name": "Intel Corporation",
     "korean_name": "Intel",
     "moat_title": "x86 CPU 강자이나 AI 전환기 고전 중. Gaudi3 AI 가속기 + IFS 파운드리 양립 전략. 18A 공정 성공이 관건.",
     "quote": {
@@ -25215,7 +25215,7 @@
   "133": {
     "company_id": 133,
     "ticker": "TSM",
-    "name": "TSMC",
+    "name": "Taiwan Semiconductor Manufacturing Co., Ltd.",
     "korean_name": "TSMC",
     "moat_title": "세계 최첨단 파운드리 독점(3nm·2nm). AI GPU의 90%+ 위탁 생산. CoWoS 패키징 용량이 AI 공급 병목.",
     "quote": {
@@ -25316,7 +25316,7 @@
   "TSM": {
     "company_id": 133,
     "ticker": "TSM",
-    "name": "TSMC",
+    "name": "Taiwan Semiconductor Manufacturing Co., Ltd.",
     "korean_name": "TSMC",
     "moat_title": "세계 최첨단 파운드리 독점(3nm·2nm). AI GPU의 90%+ 위탁 생산. CoWoS 패키징 용량이 AI 공급 병목.",
     "quote": {
@@ -25417,7 +25417,7 @@
   "134": {
     "company_id": 134,
     "ticker": "005930.KS",
-    "name": "Samsung Electronics",
+    "name": "삼성전자",
     "korean_name": "Samsung Electronics",
     "moat_title": "메모리 반도체 글로벌 1위",
     "quote": {
@@ -25518,7 +25518,7 @@
   "135": {
     "company_id": 135,
     "ticker": "000660.KS",
-    "name": "SK Hynix",
+    "name": "SK하이닉스",
     "korean_name": "SK Hynix",
     "moat_title": "HBM 메모리 반도체 1위",
     "quote": {
@@ -25619,7 +25619,7 @@
   "000660.KS": {
     "company_id": 135,
     "ticker": "000660.KS",
-    "name": "SK Hynix",
+    "name": "SK하이닉스",
     "korean_name": "SK Hynix",
     "moat_title": "HBM 메모리 반도체 1위",
     "quote": {
@@ -25720,7 +25720,7 @@
   "136": {
     "company_id": 136,
     "ticker": "MU",
-    "name": "Micron Technology",
+    "name": "Micron Technology, Inc.",
     "korean_name": "Micron Technology",
     "moat_title": "HBM3E 양산 NVIDIA 공급 개시(2024). NAND TLC → QLC 전환으로 원가 절감. 美 유일 DRAM 기업.",
     "quote": {
@@ -25821,7 +25821,7 @@
   "MU": {
     "company_id": 136,
     "ticker": "MU",
-    "name": "Micron Technology",
+    "name": "Micron Technology, Inc.",
     "korean_name": "Micron Technology",
     "moat_title": "HBM3E 양산 NVIDIA 공급 개시(2024). NAND TLC → QLC 전환으로 원가 절감. 美 유일 DRAM 기업.",
     "quote": {
@@ -25922,7 +25922,7 @@
   "137": {
     "company_id": 137,
     "ticker": "ASML",
-    "name": "ASML",
+    "name": "ASML Holding N.V.",
     "korean_name": "ASML",
     "moat_title": "EUV 노광장비 100% 독점",
     "quote": {
@@ -26023,7 +26023,7 @@
   "ASML": {
     "company_id": 137,
     "ticker": "ASML",
-    "name": "ASML",
+    "name": "ASML Holding N.V.",
     "korean_name": "ASML",
     "moat_title": "EUV 노광장비 100% 독점",
     "quote": {
@@ -26124,7 +26124,7 @@
   "138": {
     "company_id": 138,
     "ticker": "AMAT",
-    "name": "Applied Materials",
+    "name": "Applied Materials, Inc.",
     "korean_name": "Applied Materials",
     "moat_title": "CVD·PVD·ALD 증착 장비 세계 1위. 첨단 패키징(CoWoS) 장비 수혜. 연간 장비 매출 280억달러+.",
     "quote": {
@@ -26225,7 +26225,7 @@
   "AMAT": {
     "company_id": 138,
     "ticker": "AMAT",
-    "name": "Applied Materials",
+    "name": "Applied Materials, Inc.",
     "korean_name": "Applied Materials",
     "moat_title": "CVD·PVD·ALD 증착 장비 세계 1위. 첨단 패키징(CoWoS) 장비 수혜. 연간 장비 매출 280억달러+.",
     "quote": {
@@ -26326,7 +26326,7 @@
   "139": {
     "company_id": 139,
     "ticker": "LRCX",
-    "name": "Lam Research",
+    "name": "Lam Research Corporation",
     "korean_name": "Lam Research",
     "moat_title": "플라즈마 식각(Etch) + ALD 장비 세계 1위. NAND 레이어 증가에 비례 장비 수요 증가.",
     "quote": {
@@ -26427,7 +26427,7 @@
   "LRCX": {
     "company_id": 139,
     "ticker": "LRCX",
-    "name": "Lam Research",
+    "name": "Lam Research Corporation",
     "korean_name": "Lam Research",
     "moat_title": "플라즈마 식각(Etch) + ALD 장비 세계 1위. NAND 레이어 증가에 비례 장비 수요 증가.",
     "quote": {
@@ -27134,7 +27134,7 @@
   "143": {
     "company_id": 143,
     "ticker": "MSFT",
-    "name": "Microsoft (Xbox)",
+    "name": "Microsoft Corporation",
     "korean_name": "Microsoft (Xbox)",
     "moat_title": "B2B 클라우드 & OS 독점",
     "quote": {
@@ -28851,7 +28851,7 @@
   "152": {
     "company_id": 163,
     "ticker": "AAPL",
-    "name": "Apple",
+    "name": "Apple Inc.",
     "korean_name": "Apple",
     "moat_title": "20억 대 기기 생태계 락인",
     "quote": {
@@ -28959,7 +28959,7 @@
   "153": {
     "company_id": 165,
     "ticker": "GOOGL",
-    "name": "Alphabet (YouTube)",
+    "name": "Alphabet Inc.",
     "korean_name": "Alphabet (YouTube)",
     "moat_title": "검색 점유율 90%+ 네트워크",
     "quote": {
@@ -29060,7 +29060,7 @@
   "154": {
     "company_id": 154,
     "ticker": "NVDA",
-    "name": "NVIDIA",
+    "name": "NVIDIA Corporation",
     "korean_name": "NVIDIA",
     "moat_title": "AI 가속기 85%+ 독점",
     "quote": {
@@ -30777,7 +30777,7 @@
   "163": {
     "company_id": 163,
     "ticker": "AAPL",
-    "name": "Apple",
+    "name": "Apple Inc.",
     "korean_name": "Apple",
     "moat_title": "20억 대 기기 생태계 락인",
     "quote": {
@@ -31087,7 +31087,7 @@
   "165": {
     "company_id": 165,
     "ticker": "GOOGL",
-    "name": "Alphabet (YouTube)",
+    "name": "Alphabet Inc.",
     "korean_name": "Alphabet (YouTube)",
     "moat_title": "검색 점유율 90%+ 네트워크",
     "quote": {
@@ -31188,7 +31188,7 @@
   "166": {
     "company_id": 166,
     "ticker": "035720.KS",
-    "name": "Kakao Entertainment",
+    "name": "카카오",
     "korean_name": "Kakao Entertainment",
     "moat_title": "카카오엔터 — 멜론(국내 최대 음원 플랫폼) + SM엔터 지분 + 웹툰·웹소설 IP. K-Pop 국내 디지털 유통 독점.",
     "quote": {
@@ -31289,7 +31289,7 @@
   "035720.KS": {
     "company_id": 166,
     "ticker": "035720.KS",
-    "name": "Kakao Entertainment",
+    "name": "카카오",
     "korean_name": "Kakao Entertainment",
     "moat_title": "카카오엔터 — 멜론(국내 최대 음원 플랫폼) + SM엔터 지분 + 웹툰·웹소설 IP. K-Pop 국내 디지털 유통 독점.",
     "quote": {
@@ -36440,7 +36440,7 @@
   "193": {
     "company_id": 193,
     "ticker": "TMO",
-    "name": "써모 피셔",
+    "name": "Thermo Fisher Scientific Inc.",
     "korean_name": "써모 피셔",
     "moat_title": "배양 백, 분석 장비 등 전 세계 바이오 공정 소모품 및 장비 시장 장악 (골드러시의 곡괭이 판매상).",
     "quote": {
@@ -36541,7 +36541,7 @@
   "TMO": {
     "company_id": 193,
     "ticker": "TMO",
-    "name": "써모 피셔",
+    "name": "Thermo Fisher Scientific Inc.",
     "korean_name": "써모 피셔",
     "moat_title": "배양 백, 분석 장비 등 전 세계 바이오 공정 소모품 및 장비 시장 장악 (골드러시의 곡괭이 판매상).",
     "quote": {
@@ -36642,7 +36642,7 @@
   "194": {
     "company_id": 194,
     "ticker": "DHR",
-    "name": "다나허",
+    "name": "Danaher Corporation",
     "korean_name": "다나허",
     "moat_title": "생명과학 분석기기, 바이오프로세싱 전문 글로벌 기업. 고부가가치 진단 및 공정 인프라 꽉 쥠.",
     "quote": {
@@ -36743,7 +36743,7 @@
   "DHR": {
     "company_id": 194,
     "ticker": "DHR",
-    "name": "다나허",
+    "name": "Danaher Corporation",
     "korean_name": "다나허",
     "moat_title": "생명과학 분석기기, 바이오프로세싱 전문 글로벌 기업. 고부가가치 진단 및 공정 인프라 꽉 쥠.",
     "quote": {
@@ -41086,7 +41086,7 @@
   "251": {
     "company_id": 251,
     "ticker": "AMZN",
-    "name": "아마존",
+    "name": "Amazon.com, Inc.",
     "korean_name": "아마존",
     "moat_title": "글로벌 최대 이커머스. K-뷰티 핵심 온라인 유통 채널로 한국 브랜드 미국 데뷔의 필수 관문.",
     "quote": {
@@ -41187,7 +41187,7 @@
   "AMZN": {
     "company_id": 251,
     "ticker": "AMZN",
-    "name": "아마존",
+    "name": "Amazon.com, Inc.",
     "korean_name": "아마존",
     "moat_title": "글로벌 최대 이커머스. K-뷰티 핵심 온라인 유통 채널로 한국 브랜드 미국 데뷔의 필수 관문.",
     "quote": {
@@ -45934,7 +45934,7 @@
   "275": {
     "company_id": 275,
     "ticker": "PLTR",
-    "name": "Palantir Technologies",
+    "name": "Palantir Technologies Inc.",
     "korean_name": "Palantir Technologies",
     "moat_title": "정부/군사 AI 데이터 플랫폼(Gotham) 독점. AIP(AI Platform) 엔터프라이즈 확산, 상업 고객 YoY +55%.",
     "quote": {
@@ -46035,7 +46035,7 @@
   "PLTR": {
     "company_id": 275,
     "ticker": "PLTR",
-    "name": "Palantir Technologies",
+    "name": "Palantir Technologies Inc.",
     "korean_name": "Palantir Technologies",
     "moat_title": "정부/군사 AI 데이터 플랫폼(Gotham) 독점. AIP(AI Platform) 엔터프라이즈 확산, 상업 고객 YoY +55%.",
     "quote": {
@@ -46136,7 +46136,7 @@
   "276": {
     "company_id": 276,
     "ticker": "NOW",
-    "name": "ServiceNow",
+    "name": "ServiceNow, Inc.",
     "korean_name": "ServiceNow",
     "moat_title": "기업 IT 워크플로 자동화 플랫폼 1위. Now AI 에이전틱 AI 통합 확산. GRR 98%+의 초강력 락인.",
     "quote": {
@@ -46237,7 +46237,7 @@
   "NOW": {
     "company_id": 276,
     "ticker": "NOW",
-    "name": "ServiceNow",
+    "name": "ServiceNow, Inc.",
     "korean_name": "ServiceNow",
     "moat_title": "기업 IT 워크플로 자동화 플랫폼 1위. Now AI 에이전틱 AI 통합 확산. GRR 98%+의 초강력 락인.",
     "quote": {
@@ -46338,7 +46338,7 @@
   "277": {
     "company_id": 277,
     "ticker": "CRWD",
-    "name": "CrowdStrike",
+    "name": "CrowdStrike Holdings, Inc.",
     "korean_name": "CrowdStrike",
     "moat_title": "클라우드 엔드포인트 보안 1위(30%+ 점유). Falcon 플랫폼 AI 보안 탐지. GRR 120%+ 초과 수익 구조.",
     "quote": {
@@ -46439,7 +46439,7 @@
   "CRWD": {
     "company_id": 277,
     "ticker": "CRWD",
-    "name": "CrowdStrike",
+    "name": "CrowdStrike Holdings, Inc.",
     "korean_name": "CrowdStrike",
     "moat_title": "클라우드 엔드포인트 보안 1위(30%+ 점유). Falcon 플랫폼 AI 보안 탐지. GRR 120%+ 초과 수익 구조.",
     "quote": {
@@ -47146,7 +47146,7 @@
   "281": {
     "company_id": 281,
     "ticker": "ANET",
-    "name": "Arista Networks",
+    "name": "Arista Networks, Inc.",
     "korean_name": "Arista Networks",
     "moat_title": "AI 데이터센터 이더넷 스위치 1위(클라우드 하이퍼스케일러 점유율 35%+). EOS 네트워크 OS 독점.",
     "quote": {
@@ -47247,7 +47247,7 @@
   "ANET": {
     "company_id": 281,
     "ticker": "ANET",
-    "name": "Arista Networks",
+    "name": "Arista Networks, Inc.",
     "korean_name": "Arista Networks",
     "moat_title": "AI 데이터센터 이더넷 스위치 1위(클라우드 하이퍼스케일러 점유율 35%+). EOS 네트워크 OS 독점.",
     "quote": {
@@ -47550,7 +47550,7 @@
   "283": {
     "company_id": 283,
     "ticker": "PANW",
-    "name": "Palo Alto Networks",
+    "name": "Palo Alto Networks, Inc.",
     "korean_name": "Palo Alto Networks",
     "moat_title": "클라우드 보안 플랫폼 통합(SASE+XDR+SOAR) 1위. Cortex AI 위협 대응 자동화.",
     "quote": {
@@ -47651,7 +47651,7 @@
   "PANW": {
     "company_id": 283,
     "ticker": "PANW",
-    "name": "Palo Alto Networks",
+    "name": "Palo Alto Networks, Inc.",
     "korean_name": "Palo Alto Networks",
     "moat_title": "클라우드 보안 플랫폼 통합(SASE+XDR+SOAR) 1위. Cortex AI 위협 대응 자동화.",
     "quote": {
@@ -47752,7 +47752,7 @@
   "284": {
     "company_id": 284,
     "ticker": "SNOW",
-    "name": "Snowflake",
+    "name": "Snowflake Inc.",
     "korean_name": "Snowflake",
     "moat_title": "클라우드 데이터 플랫폼(Data Cloud) 1위. AI/ML 워크로드 급증, Cortex AI 분석 플랫폼 확산.",
     "quote": {
@@ -47853,7 +47853,7 @@
   "SNOW": {
     "company_id": 284,
     "ticker": "SNOW",
-    "name": "Snowflake",
+    "name": "Snowflake Inc.",
     "korean_name": "Snowflake",
     "moat_title": "클라우드 데이터 플랫폼(Data Cloud) 1위. AI/ML 워크로드 급증, Cortex AI 분석 플랫폼 확산.",
     "quote": {
@@ -51590,7 +51590,7 @@
   "WAYMO": {
     "company_id": 165,
     "ticker": "GOOGL",
-    "name": "Alphabet (YouTube)",
+    "name": "Alphabet Inc.",
     "korean_name": "Alphabet (YouTube)",
     "moat_title": "검색 점유율 90%+ 네트워크",
     "quote": {
