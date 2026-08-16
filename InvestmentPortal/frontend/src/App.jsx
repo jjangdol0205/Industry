@@ -24,6 +24,7 @@ const BACKEND_HOST = window.location.hostname === 'localhost' || window.location
 const API_BASE = `${BACKEND_HOST}/api`;
 
 // ── 포맷 유틸 ──────────────────────────────────────────
+const roundNum = (n, dec = 2) => (n == null || isNaN(n)) ? 0 : Number(Number(n).toFixed(dec));
 const isKrw = (ticker) => ticker && (ticker.endsWith('.KS') || ticker.endsWith('.KQ'));
 
 const fB = (n, t) => {
@@ -292,11 +293,17 @@ function App() {
     axios.get(`${API_BASE}/companies/${id}/profile${queryTk}`, { timeout: 5000 })
       .then(profRes => {
         if (profRes.data?.profile && profRes.data.profile.current_price) {
-          setCompanyProfile(prev => ({
-            ...prev,
-            ...profRes.data.profile,
-            current_price: profRes.data.profile.current_price || prev.current_price
-          }));
+          setCompanyProfile(prev => {
+            const updated = { ...prev };
+            const remote = profRes.data.profile;
+            for (const key in remote) {
+              if (remote[key] !== null && remote[key] !== undefined && remote[key] !== 0 && remote[key] !== "") {
+                updated[key] = remote[key];
+              }
+            }
+            updated.current_price = remote.current_price || prev?.current_price;
+            return updated;
+          });
         }
       })
       .catch(() => {});
@@ -1201,6 +1208,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
   }
 
   const p = {
+    ...cleanProf,
     current_price: curPrice,
     pe_ratio: cleanProf.pe_ratio || q.pe_ratio || roundNum(curPrice / 5.5, 2),
     pb_ratio: cleanProf.pb_ratio || q.pb_ratio || 6.8,
@@ -1225,8 +1233,7 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
     industry: cleanProf.industry || company?.role_description || "독점 리더십",
     ceo: cleanProf.ceo || "Executive Leadership",
     employees: cleanProf.employees || "15,000+",
-    website: cleanProf.website || "https://www.google.com/finance",
-    ...cleanProf
+    website: cleanProf.website || "https://www.google.com/finance"
   };
   // 최신 연간 레코드 사용 (COGS 등 최신값 보장)
   const latest = (() => {
