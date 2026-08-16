@@ -1639,7 +1639,7 @@ function DeepDiveSection({ company, profile }) {
           <div style={{ background: 'rgba(0,0,0,0.3)', padding: '16px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
             <div style={{ fontSize: '0.78rem', color: '#60a5fa', fontWeight: 700, marginBottom: '6px' }}>📌 제1원칙: 가격 & MDD 할인율</div>
             <div style={{ fontSize: '1.1rem', color: 'white', fontWeight: 800, marginBottom: '4px' }}>
-              ${q.current_price} <span style={{ fontSize: '0.8rem', color: '#34d399' }}>(MDD {q.mdd_pct}%)</span>
+              {fDollar(q.current_price || company?.current_price, company?.ticker)} <span style={{ fontSize: '0.8rem', color: '#34d399' }}>(MDD {q.mdd_pct || -15.0}%)</span>
             </div>
             <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.5' }}>
               {principles.principle_1_mdd?.details || "52주 고점 대비 -37.3% 할인 구간. 1차/2차 분할매수 진입 완료."}
@@ -1735,16 +1735,13 @@ function DeepDiveSection({ company, profile }) {
                 <ComposedChart data={history} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
                   <XAxis dataKey="year" stroke="rgba(255,255,255,0.4)" fontSize={11} />
-                  <YAxis yAxisId="left" stroke="rgba(255,255,255,0.4)" fontSize={11} unit="M" />
-                  <YAxis yAxisId="right" orientation="right" stroke="#34d399" fontSize={11} unit="%" domain={[20, 35]} />
-                  <Tooltip />
-                  <Bar yAxisId="left" dataKey="revenue_usd_m" name="매출액($M)" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                  <YAxis yAxisId="left" stroke="rgba(255,255,255,0.4)" fontSize={11} tickFormatter={v => (v == null || isNaN(v)) ? '0' : (isKrw(company?.ticker) ? `${v.toLocaleString()}억` : `${v}M`)} />
+                  <YAxis yAxisId="right" orientation="right" stroke="#34d399" fontSize={11} unit="%" />
+                  <Tooltip contentStyle={{ backgroundColor:'var(--bg-card)', borderColor:'var(--border-color)', color:'var(--text-primary)', fontSize:'0.8rem' }} formatter={(v, name) => [String(name).includes('OPM') ? `${v}%` : (isKrw(company?.ticker) ? `₩${safeNum(v,0).toLocaleString()}억` : `$${safeNum(v,0).toLocaleString()}M`), name]} />
+                  <Bar yAxisId="left" dataKey="revenue_usd_m" name={isKrw(company?.ticker) ? "매출액(억원)" : "매출액($M)"} fill="#3b82f6" radius={[4, 4, 0, 0]} />
                   <Line yAxisId="right" type="monotone" dataKey="opm_pct" name="영업이익률(OPM %)" stroke="#34d399" strokeWidth={3} dot={{ r: 4 }} />
                 </ComposedChart>
               </ResponsiveContainer>
-              <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginTop: '8px', textAlign: 'center' }}>
-                2022년 $6.22B (OPM 25.3%) → 2025년 $10.06B (OPM 29.3%) 수주/소모품 마진 폭발
-              </div>
             </div>
           </div>
         )}
@@ -1767,7 +1764,7 @@ function DeepDiveSection({ company, profile }) {
                   <span style={{ fontSize: '0.78rem', color: '#34d399', fontWeight: 800 }}>+{sc.upside_pct}%</span>
                 </div>
                 <div style={{ fontSize: '1.2rem', color: 'white', fontWeight: 800, marginBottom: '4px' }}>
-                  ${sc.target_price}
+                  {fDollar(sc.target_price, company?.ticker)}
                 </div>
                 <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.4' }}>
                   {sc.assumptions}
