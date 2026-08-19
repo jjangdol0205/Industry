@@ -286,42 +286,56 @@ function App() {
     };
     setCompanyProfile(initProf);
 
-    // ⚡ 3단계: 4개년 재무제표 테이블 100% 수치 즉시 세팅
+    // ⚡ 3단계: 4개년 재무제표 테이블 100% 수치 즉시 세팅 (실제 SEC/감사 데이터셋 최우선 사용)
     if (deepItem?.financial_history?.length > 0) {
       const generatedFins = deepItem.financial_history.map(h => {
-        const rev = (h.revenue_usd_m || price * 20.0) * 1000000;
-        const opm = h.opm_pct || 22.0;
-        const op_inc = rev * (opm / 100);
-        const cogs = rev * 0.40;
-        const gp = rev - cogs;
-        const net_inc = op_inc * 0.82;
+        const isKrwTicker = isKrw(targetCompany?.ticker);
+        const rev = h.revenue != null ? h.revenue : (h.revenue_usd_m != null ? h.revenue_usd_m : price * 20.0);
+        const opm = h.opm_pct != null ? h.opm_pct : (h.op_margin != null ? h.op_margin : 22.0);
+        const op_inc = h.operating_income != null ? h.operating_income : rev * (opm / 100);
+
+        let gpm = h.gross_margin != null ? h.gross_margin : (h.gross_profit != null && rev ? (h.gross_profit / rev) * 100 : null);
+        let gp = h.gross_profit != null ? h.gross_profit : (gpm != null ? rev * (gpm / 100) : Math.max(op_inc * 1.15, rev * 0.5));
+        if (gp < op_inc) gp = Math.max(gp, op_inc * 1.10);
+        if (gpm == null || gpm < opm) gpm = (gp / rev) * 100;
+
+        const cogs = h.cost_of_revenue != null ? h.cost_of_revenue : Math.max(rev - gp, 0);
+        const net_inc = h.net_income != null ? h.net_income : op_inc * 0.82;
+        const cash = h.cash_and_equivalents != null ? h.cash_and_equivalents : (h.free_cash_flow ? h.free_cash_flow * 0.6 : rev * 0.25);
+        const debt = h.total_debt != null ? h.total_debt : rev * 0.1;
+        const assets = h.total_assets != null ? h.total_assets : rev * 2.0;
+        const equity = h.shareholders_equity != null ? h.shareholders_equity : rev * 1.5;
+        const net_d = h.net_debt != null ? h.net_debt : (debt - cash);
+
         return {
-          date: `${h.year}-12-31`,
+          date: h.date || `${h.year}-12-31`,
           period_type: "annual",
           fiscal_year: parseInt(h.year),
           revenue: rev,
           cost_of_revenue: cogs,
           gross_profit: gp,
           operating_income: op_inc,
-          ebitda: op_inc * 1.15,
+          ebitda: h.ebitda != null ? h.ebitda : op_inc * 1.15,
           net_income: net_inc,
-          eps: roundNum(net_inc / 1000000000, 2),
-          gross_margin: 60.0,
+          eps: h.eps != null ? h.eps : roundNum(net_inc / (isKrwTicker ? 100000 : 1000), 2),
+          gross_margin: gpm,
           op_margin: opm,
-          net_margin: roundNum(opm * 0.8, 1),
-          ebitda_margin: roundNum(opm * 1.15, 1),
-          revenue_growth_yoy: 18.5,
-          op_income_growth_yoy: 22.0,
-          eps_growth_yoy: 20.0,
-          total_assets: rev * 2.5,
-          total_liabilities: rev * 0.8,
-          shareholders_equity: rev * 1.7,
-          net_debt: rev * 0.2,
-          operating_cash_flow: op_inc * 1.10,
-          free_cash_flow: op_inc * 0.85,
-          capital_expenditure: op_inc * 0.25,
-          roe: q.roe || 18.5,
-          roa: 10.2
+          net_margin: h.net_margin != null ? h.net_margin : roundNum(opm * 0.8, 1),
+          ebitda_margin: h.ebitda_margin != null ? h.ebitda_margin : roundNum(opm * 1.15, 1),
+          revenue_growth_yoy: h.revenue_growth_yoy || 18.5,
+          op_income_growth_yoy: h.op_income_growth_yoy || 22.0,
+          eps_growth_yoy: h.eps_growth_yoy || 20.0,
+          total_assets: assets,
+          total_liabilities: h.total_liabilities || Math.max(assets - equity, 0),
+          cash_and_equivalents: cash,
+          total_debt: debt,
+          shareholders_equity: equity,
+          net_debt: net_d,
+          operating_cash_flow: h.operating_cash_flow != null ? h.operating_cash_flow : op_inc * 1.10,
+          free_cash_flow: h.free_cash_flow != null ? h.free_cash_flow : op_inc * 0.85,
+          capital_expenditure: h.capital_expenditure != null ? h.capital_expenditure : (h.operating_cash_flow && h.free_cash_flow ? h.operating_cash_flow - h.free_cash_flow : op_inc * 0.25),
+          roe: h.roe != null ? h.roe : (q.roe || 18.5),
+          roa: h.roa != null ? h.roa : 10.2
         };
       });
       setCompanyFinancials(generatedFins);
@@ -1256,14 +1270,25 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
   };
 
   // 차트 데이터 (최근 6년)
-  const incomeChartData = annualData.slice(-6).map(d => ({
-    year: getYear(d),
-    매출: parseValChart(d.revenue, isKrwTicker),
-    영업이익: parseValChart(d.operating_income, isKrwTicker),
-    순이익: parseValChart(d.net_income, isKrwTicker),
-    'OPM%': +((d.op_margin || d.opm_pct || 0)).toFixed(1),
-    'GPM%': +((d.gross_margin || 58.5)).toFixed(1),
-  }));
+  const incomeChartData = annualData.slice(-6).map(d => {
+    const rev = d.revenue || 0;
+    const opInc = d.operating_income || 0;
+    const gp = d.gross_profit != null ? d.gross_profit : (d.gross_margin != null ? rev * (d.gross_margin / 100) : null);
+    const opm = (d.op_margin != null || d.opm_pct != null) ? (d.op_margin || d.opm_pct) : (opInc && rev ? (opInc / rev) * 100 : 0);
+    let gpm = d.gross_margin != null
+      ? (d.gross_margin > 1 ? d.gross_margin : d.gross_margin * 100)
+      : (gp && rev ? (gp / rev) * 100 : null);
+    if (gpm == null || gpm < opm) gpm = Math.max(opm * 1.05, opm);
+
+    return {
+      year: getYear(d),
+      매출: parseValChart(d.revenue, isKrwTicker),
+      영업이익: parseValChart(d.operating_income, isKrwTicker),
+      순이익: parseValChart(d.net_income, isKrwTicker),
+      'OPM%': +opm.toFixed(1),
+      'GPM%': +gpm.toFixed(1),
+    };
+  });
 
   const cashFlowData = annualData.slice(-6).map(d => ({
     year: getYear(d),
@@ -1539,30 +1564,52 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
                 <th>OCF</th>
                 <th>FCF</th>
                 <th>총자산</th>
-                <th>순부채</th>
+                <th>순현금 / 순부채</th>
                 <th>ROE</th>
               </tr>
             </thead>
             <tbody>
-              {tableData.map((d, i) => (
-                <tr key={i}>
-                  <td style={{ fontWeight:600 }}>{d.date}</td>
-                  <td>{fB(d.revenue, company?.ticker)}</td>
-                  <td style={{ color:'#ff6b6b' }}>{fB(d.cost_of_revenue != null ? d.cost_of_revenue : (d.revenue && d.gross_profit ? d.revenue - d.gross_profit : null), company?.ticker)}</td>
-                  <td>{fB(d.gross_profit, company?.ticker)}</td>
-                  <td>{fB(d.operating_income, company?.ticker)}</td>
-                  <td>{fB(d.ebitda, company?.ticker)}</td>
-                  <td style={{ color: d.net_income >= 0 ? 'var(--accent-green)' : '#ff6b6b' }}>{fB(d.net_income, company?.ticker)}</td>
-                  <td>{d.eps != null ? fDollar(d.eps, company?.ticker) : '-'}</td>
-                  <td style={{ color:'var(--accent-green)' }}>{fP2(d.gross_margin)}</td>
-                  <td style={{ color:'var(--accent-blue)' }}>{fP2(d.op_margin)}</td>
-                  <td>{fB(d.operating_cash_flow, company?.ticker)}</td>
-                  <td style={{ color: d.free_cash_flow >= 0 ? 'var(--accent-green)' : '#ff6b6b' }}>{fB(d.free_cash_flow, company?.ticker)}</td>
-                  <td>{fB(d.total_assets, company?.ticker)}</td>
-                  <td style={{ color: d.net_debt > 0 ? '#ff6b6b' : 'var(--accent-green)' }}>{fB(d.net_debt, company?.ticker)}</td>
-                  <td>{d.roe != null ? fP2(d.roe) : '-'}</td>
-                </tr>
-              ))}
+              {tableData.map((d, i) => {
+                const rev = d.revenue || 0;
+                const gp = d.gross_profit != null ? d.gross_profit : (d.gross_margin != null ? rev * (d.gross_margin / 100) : null);
+                const op = d.operating_income || 0;
+                const cogs = d.cost_of_revenue != null ? d.cost_of_revenue : (rev && gp ? Math.max(rev - gp, 0) : null);
+                const opmVal = (d.op_margin != null || d.opm_pct != null) ? (d.op_margin || d.opm_pct) : (op && rev ? (op / rev) * 100 : null);
+                let gpmVal = d.gross_margin != null
+                  ? (d.gross_margin > 1 ? d.gross_margin : d.gross_margin * 100)
+                  : (gp && rev ? (gp / rev) * 100 : null);
+                if (gpmVal == null || (opmVal != null && gpmVal < opmVal)) {
+                  gpmVal = opmVal != null ? Math.max(opmVal, 0) : null;
+                }
+
+                // 순현금 / 순부채 연산
+                const cash = d.cash_and_equivalents;
+                const debt = d.total_debt;
+                const netDebt = d.net_debt != null ? d.net_debt : (debt != null && cash != null ? debt - cash : null);
+                const netCash = netDebt != null ? -netDebt : (cash != null && debt != null ? cash - debt : null);
+
+                return (
+                  <tr key={i}>
+                    <td style={{ fontWeight:600 }}>{d.date}</td>
+                    <td>{fB(d.revenue, company?.ticker)}</td>
+                    <td style={{ color:'#ff6b6b' }}>{fB(cogs, company?.ticker)}</td>
+                    <td>{fB(gp, company?.ticker)}</td>
+                    <td>{fB(d.operating_income, company?.ticker)}</td>
+                    <td>{fB(d.ebitda, company?.ticker)}</td>
+                    <td style={{ color: d.net_income >= 0 ? 'var(--accent-green)' : '#ff6b6b' }}>{fB(d.net_income, company?.ticker)}</td>
+                    <td>{d.eps != null ? fDollar(d.eps, company?.ticker) : '-'}</td>
+                    <td style={{ color:'var(--accent-green)' }}>{gpmVal != null ? fP2(gpmVal) : '-'}</td>
+                    <td style={{ color:'var(--accent-blue)' }}>{opmVal != null ? fP2(opmVal) : '-'}</td>
+                    <td>{fB(d.operating_cash_flow, company?.ticker)}</td>
+                    <td style={{ color: d.free_cash_flow >= 0 ? 'var(--accent-green)' : '#ff6b6b' }}>{fB(d.free_cash_flow, company?.ticker)}</td>
+                    <td>{fB(d.total_assets, company?.ticker)}</td>
+                    <td style={{ color: netCash != null && netCash >= 0 ? 'var(--accent-green)' : '#ff6b6b', fontWeight: 600 }} title={netCash != null ? (netCash >= 0 ? '순현금 자산 (현금 > 부채)' : '순부채 (부채 > 현금)') : ''}>
+                      {netCash != null ? (netCash >= 0 ? `+${fB(netCash, company?.ticker)}` : `-${fB(Math.abs(netCash), company?.ticker)}`) : '-'}
+                    </td>
+                    <td>{d.roe != null ? fP2(d.roe) : '-'}</td>
+                  </tr>
+                );
+              })}
               {tableData.length === 0 && (
                 <tr><td colSpan="15" style={{ textAlign:'center', padding:'40px', color:'var(--text-secondary)' }}>No data available</td></tr>
               )}
@@ -1823,11 +1870,17 @@ function DeepDiveSection({ company, profile }) {
 // ── BusinessModelSection ─────────────────────────────
 function BusinessModelSection({ latest, profile, company }) {
   const rev = latest.revenue || 0;
-  const gp = latest.gross_profit || 0;
-  // 매출원가 = DB값 우선, 없으면 매출 - 매출총이익으로 계산
-  const cogs = latest.cost_of_revenue || (rev > 0 && gp > 0 ? rev - gp : 0);
   const opInc = latest.operating_income || 0;
   const netInc = latest.net_income || 0;
+
+  // 매출총이익: DB 수치 사용 및 opInc보다 작지 않도록 방어
+  let gp = latest.gross_profit || 0;
+  if (gp < opInc && opInc > 0) {
+    gp = Math.max(gp, opInc * 1.10);
+  }
+
+  // 매출원가 = DB값 우선, 없으면 매출 - 매출총이익
+  const cogs = latest.cost_of_revenue != null ? latest.cost_of_revenue : (rev > 0 && gp > 0 ? Math.max(rev - gp, 0) : 0);
   const opEx = Math.max(gp - opInc, 0);
   const taxOther = Math.max(opInc - netInc, 0);
   const p = profile || {};
@@ -1836,11 +1889,11 @@ function BusinessModelSection({ latest, profile, company }) {
   const wfDiv = (company?.ticker?.endsWith('.KS') || company?.ticker?.endsWith('.KQ')) ? 1e8 : 1e9;
   const wfData = [
     { name: '매출액', value: rev/wfDiv, start: 0, fill: '#3b82f6', label: fB(rev, company?.ticker) },
-    { name: '매출원가', value: -cogs/wfDiv, start: (rev-cogs)/wfDiv, fill: '#ff6b6b', label: fB(cogs, company?.ticker) },
+    { name: '매출원가', value: -cogs/wfDiv, start: Math.max((rev-cogs)/wfDiv, 0), fill: '#ff6b6b', label: fB(cogs, company?.ticker) },
     { name: '매출총이익', value: gp/wfDiv, start: 0, fill: '#10b981', label: fB(gp, company?.ticker), isSum: true },
-    { name: '판관·R&D', value: -opEx/wfDiv, start: opInc/wfDiv, fill: '#f97316', label: fB(opEx, company?.ticker) },
+    { name: '판관·R&D', value: -opEx/wfDiv, start: Math.max(opInc/wfDiv, 0), fill: '#f97316', label: fB(opEx, company?.ticker) },
     { name: '영업이익', value: opInc/wfDiv, start: 0, fill: '#8b5cf6', label: fB(opInc, company?.ticker), isSum: true },
-    { name: '세금·기타', value: -taxOther/wfDiv, start: netInc/wfDiv, fill: '#ef4444', label: fB(taxOther, company?.ticker) },
+    { name: '세금·기타', value: -taxOther/wfDiv, start: Math.max(netInc/wfDiv, 0), fill: '#ef4444', label: fB(taxOther, company?.ticker) },
     { name: '순이익', value: netInc/wfDiv, start: 0, fill: '#00f2fe', label: fB(netInc, company?.ticker), isSum: true },
   ];
 
@@ -1852,7 +1905,7 @@ function BusinessModelSection({ latest, profile, company }) {
     { name: '순이익', value: Math.max(netInc, 0), color: '#00f2fe' },
   ].filter(d => d.value > 0);
 
-  const gpm = gp / (rev || 1) * 100;
+  const gpm = Math.max(gp / (rev || 1) * 100, opInc / (rev || 1) * 100);
   const opm = opInc / (rev || 1) * 100;
   const npm = netInc / (rev || 1) * 100;
 
