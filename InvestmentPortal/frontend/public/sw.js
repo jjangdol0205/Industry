@@ -6,8 +6,8 @@
 //
 // 버전을 올리면 → 모든 기기에서 자동으로 구 캐시 삭제 + 새 버전 설치
 // ─────────────────────────────────────────────────────────────
-const CACHE_VERSION = 'v1002_purge';
-const CACHE_NAME = 'alpha-research-cache-v1002';
+const CACHE_VERSION = 'v1003_purge';
+const CACHE_NAME = 'alpha-research-cache-v1003';
 
 self.addEventListener('install', event => {
   self.skipWaiting();

@@ -87,14 +87,7 @@ class ErrorBoundary extends React.Component {
   }
   render() {
     if (this.state.hasError) {
-      return (
-        <div style={{ padding:'40px', textAlign:'center', color:'white' }}>
-          <h3>화면을 표시하는 중 일시적인 오류가 발생했습니다.</h3>
-          <button style={{ marginTop:'16px', padding:'10px 20px', borderRadius:'8px', background:'var(--accent-blue)', color:'white', border:'none', cursor:'pointer' }} onClick={() => this.setState({ hasError: false })}>
-            다시 불러오기
-          </button>
-        </div>
-      );
+      return null;
     }
     return this.props.children;
   }
