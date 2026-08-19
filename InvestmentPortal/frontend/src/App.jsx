@@ -361,7 +361,7 @@ function App() {
                 updated[key] = remote[key];
               }
             }
-            updated.current_price = remote.current_price || prev?.current_price;
+            updated.current_price = prev?.current_price || remote.current_price;
             return updated;
           });
         }

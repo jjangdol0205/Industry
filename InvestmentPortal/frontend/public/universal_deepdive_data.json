@@ -148,7 +148,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 217.56
   },
   "NVDA": {
     "company_id": 154,
@@ -299,7 +300,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 217.56
   },
   "2": {
     "company_id": 2,
@@ -450,7 +452,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 351.12
   },
   "TSLA": {
     "company_id": 2,
@@ -601,7 +604,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 351.12
   },
   "3": {
     "company_id": 165,
@@ -752,7 +756,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 344.72
   },
   "GOOGL": {
     "company_id": 165,
@@ -903,7 +908,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 344.72
   },
   "4": {
     "company_id": 4,
@@ -1054,7 +1060,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 78.04
   },
   "UBER": {
     "company_id": 4,
@@ -1205,7 +1212,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 78.04
   },
   "5": {
     "company_id": 118,
@@ -1356,7 +1364,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 161.91
   },
   "QCOM": {
     "company_id": 118,
@@ -1507,7 +1516,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 161.91
   },
   "6": {
     "company_id": 6,
@@ -1658,7 +1668,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9.1
   },
   "MBLY": {
     "company_id": 6,
@@ -1809,7 +1820,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9.1
   },
   "7": {
     "company_id": 7,
@@ -1960,7 +1972,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 48.92
   },
   "APTV": {
     "company_id": 7,
@@ -2111,7 +2124,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 48.92
   },
   "8": {
     "company_id": 8,
@@ -2262,7 +2276,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 226.02
   },
   "NXPI": {
     "company_id": 8,
@@ -2413,7 +2428,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 226.02
   },
   "9": {
     "company_id": 9,
@@ -2564,7 +2580,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 76.58
   },
   "ON": {
     "company_id": 9,
@@ -2715,7 +2732,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 76.58
   },
   "10": {
     "ticker": "ISRG",
@@ -2871,7 +2889,8 @@
         "assumptions": "중국/유럽 시장 침투율 2배 폭발, Ion 폐생검 로봇 고성장, OPM 34% 달성"
       }
     ],
-    "company_id": 10
+    "company_id": 10,
+    "current_price": 397.72
   },
   "ISRG": {
     "ticker": "ISRG",
@@ -3027,7 +3046,8 @@
         "assumptions": "중국/유럽 시장 침투율 2배 폭발, Ion 폐생검 로봇 고성장, OPM 34% 달성"
       }
     ],
-    "company_id": 10
+    "company_id": 10,
+    "current_price": 397.72
   },
   "11": {
     "company_id": 11,
@@ -3178,7 +3198,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 42.02
   },
   "SYM": {
     "company_id": 11,
@@ -3329,7 +3350,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 42.02
   },
   "12": {
     "company_id": 12,
@@ -3480,7 +3502,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 379.65
   },
   "TER": {
     "company_id": 12,
@@ -3631,7 +3654,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 379.65
   },
   "13": {
     "company_id": 13,
@@ -3782,7 +3806,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 433.27
   },
   "ROK": {
     "company_id": 13,
@@ -3933,7 +3958,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 433.27
   },
   "14": {
     "company_id": 14,
@@ -4084,7 +4110,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 354.65
   },
   "ZBRA": {
     "company_id": 14,
@@ -4235,7 +4262,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 354.65
   },
   "15": {
     "company_id": 15,
@@ -4386,7 +4414,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 15.78
   },
   "PATH": {
     "company_id": 15,
@@ -4537,7 +4566,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 15.78
   },
   "16": {
     "company_id": 16,
@@ -4688,7 +4718,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 60.64
   },
   "CGNX": {
     "company_id": 16,
@@ -4839,7 +4870,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 60.64
   },
   "17": {
     "company_id": 17,
@@ -4990,7 +5022,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 172.74
   },
   "AVAV": {
     "company_id": 17,
@@ -5141,7 +5174,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 172.74
   },
   "18": {
     "company_id": 154,
@@ -5292,7 +5326,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 217.56
   },
   "19": {
     "company_id": 19,
@@ -5443,7 +5478,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 75.84
   },
   "RKLB": {
     "company_id": 19,
@@ -5594,7 +5630,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 75.84
   },
   "20": {
     "company_id": 20,
@@ -5745,7 +5782,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 22.62
   },
   "PL": {
     "company_id": 20,
@@ -5896,7 +5934,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 22.62
   },
   "21": {
     "company_id": 21,
@@ -6047,7 +6086,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 76.67
   },
   "VSAT": {
     "company_id": 21,
@@ -6198,7 +6238,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 76.67
   },
   "22": {
     "company_id": 22,
@@ -6349,7 +6390,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 60.56
   },
   "KTOS": {
     "company_id": 22,
@@ -6500,7 +6542,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 60.56
   },
   "24": {
     "company_id": 24,
@@ -6651,7 +6694,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 277.11
   },
   "LHX": {
     "company_id": 24,
@@ -6802,7 +6846,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 277.11
   },
   "25": {
     "company_id": 25,
@@ -6953,7 +6998,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 582.84
   },
   "NOC": {
     "company_id": 25,
@@ -7104,7 +7150,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 582.84
   },
   "26": {
     "company_id": 26,
@@ -7255,7 +7302,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 3.21
   },
   "SPCE": {
     "company_id": 26,
@@ -7406,7 +7454,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 3.21
   },
   "27": {
     "company_id": 27,
@@ -7557,7 +7606,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 18.52
   },
   "LUNR": {
     "company_id": 27,
@@ -7708,7 +7758,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 18.52
   },
   "28": {
     "company_id": 28,
@@ -7859,7 +7910,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 589.15
   },
   "LMT": {
     "company_id": 28,
@@ -8010,7 +8062,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 589.15
   },
   "29": {
     "company_id": 29,
@@ -8161,7 +8214,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 160.2
   },
   "COIN": {
     "company_id": 29,
@@ -8312,7 +8366,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 160.2
   },
   "30": {
     "company_id": 30,
@@ -8463,7 +8518,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 104.25
   },
   "MSTR": {
     "company_id": 30,
@@ -8614,7 +8670,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 104.25
   },
   "31": {
     "company_id": 31,
@@ -8765,7 +8822,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9.65
   },
   "MARA": {
     "company_id": 31,
@@ -8916,7 +8974,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9.65
   },
   "32": {
     "company_id": 32,
@@ -9067,7 +9126,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 19.38
   },
   "RIOT": {
     "company_id": 32,
@@ -9218,7 +9278,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 19.38
   },
   "33": {
     "company_id": 33,
@@ -9369,7 +9430,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 11.67
   },
   "CLSK": {
     "company_id": 33,
@@ -9520,7 +9582,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 11.67
   },
   "34": {
     "company_id": 34,
@@ -9671,7 +9734,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 80.93
   },
   "XYZ": {
     "company_id": 34,
@@ -9822,7 +9886,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 80.93
   },
   "35": {
     "company_id": 35,
@@ -9973,7 +10038,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 95.77
   },
   "HOOD": {
     "company_id": 35,
@@ -10124,7 +10190,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 95.77
   },
   "36": {
     "company_id": 36,
@@ -10275,7 +10342,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 61.25
   },
   "PYPL": {
     "company_id": 36,
@@ -10426,7 +10494,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 61.25
   },
   "37": {
     "company_id": 37,
@@ -10577,7 +10646,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 0.24
   },
   "CAN": {
     "company_id": 37,
@@ -10728,7 +10798,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 0.24
   },
   "38": {
     "company_id": 38,
@@ -10879,7 +10950,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 82.08
   },
   "HUT": {
     "company_id": 38,
@@ -11030,7 +11102,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 82.08
   },
   "39": {
     "company_id": 39,
@@ -11181,7 +11254,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 18.72
   },
   "CORZ": {
     "company_id": 39,
@@ -11332,7 +11406,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 18.72
   },
   "40": {
     "company_id": 40,
@@ -11483,7 +11558,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 7.74
   },
   "BKKT": {
     "company_id": 40,
@@ -11634,7 +11710,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 7.74
   },
   "41": {
     "company_id": 41,
@@ -11785,7 +11862,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 15.89
   },
   "CIFR": {
     "company_id": 41,
@@ -11936,7 +12014,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 15.89
   },
   "42": {
     "company_id": 42,
@@ -12087,7 +12166,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 21.9
   },
   "GLXY": {
     "company_id": 42,
@@ -12238,7 +12318,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 21.9
   },
   "43": {
     "company_id": 43,
@@ -12389,7 +12470,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 78.59
   },
   "CRCL": {
     "company_id": 43,
@@ -12540,7 +12622,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 78.59
   },
   "44": {
     "company_id": 44,
@@ -12691,7 +12774,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 6.2
   },
   "AUR": {
     "company_id": 44,
@@ -12842,7 +12926,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 6.2
   },
   "45": {
     "company_id": 45,
@@ -12993,7 +13078,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 7.83
   },
   "PONY": {
     "company_id": 45,
@@ -13144,7 +13230,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 7.83
   },
   "46": {
     "company_id": 46,
@@ -13295,7 +13382,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 6.07
   },
   "WRD": {
     "company_id": 46,
@@ -13446,7 +13534,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 6.07
   },
   "47": {
     "company_id": 47,
@@ -13597,7 +13686,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 221.73
   },
   "HON": {
     "company_id": 47,
@@ -13748,7 +13838,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 221.73
   },
   "48": {
     "company_id": 48,
@@ -13899,7 +13990,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 157.6
   },
   "EMR": {
     "company_id": 48,
@@ -14050,7 +14142,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 157.6
   },
   "49": {
     "company_id": 49,
@@ -14201,7 +14294,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 29.9
   },
   "CEVA": {
     "company_id": 49,
@@ -14352,7 +14446,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 29.9
   },
   "50": {
     "company_id": 50,
@@ -14503,7 +14598,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 66.43
   },
   "ASTS": {
     "company_id": 50,
@@ -14654,7 +14750,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 66.43
   },
   "51": {
     "company_id": 51,
@@ -14805,7 +14902,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 48.71
   },
   "IRDM": {
     "company_id": 51,
@@ -14956,7 +15054,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 48.71
   },
   "52": {
     "company_id": 52,
@@ -15107,7 +15206,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 82.46
   },
   "GSAT": {
     "company_id": 52,
@@ -15258,7 +15358,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 82.46
   },
   "53": {
     "company_id": 53,
@@ -15409,7 +15510,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 13.7
   },
   "SPIR": {
     "company_id": 53,
@@ -15560,7 +15662,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 13.7
   },
   "54": {
     "company_id": 54,
@@ -15711,7 +15814,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 27.9
   },
   "BKSY": {
     "company_id": 54,
@@ -15862,7 +15966,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 27.9
   },
   "55": {
     "company_id": 55,
@@ -16013,7 +16118,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9.63
   },
   "BTDR": {
     "company_id": 55,
@@ -16164,7 +16270,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9.63
   },
   "56": {
     "company_id": 56,
@@ -16315,7 +16422,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 28.23
   },
   "APLD": {
     "company_id": 56,
@@ -16466,7 +16574,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 28.23
   },
   "57": {
     "company_id": 57,
@@ -16617,7 +16726,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 15.5
   },
   "WULF": {
     "company_id": 57,
@@ -16768,7 +16878,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 15.5
   },
   "58": {
     "company_id": 58,
@@ -16919,7 +17030,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 42.84
   },
   "IREN": {
     "company_id": 58,
@@ -17070,7 +17182,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 42.84
   },
   "59": {
     "company_id": 59,
@@ -17221,7 +17334,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1.4
   },
   "BTBT": {
     "company_id": 59,
@@ -17372,7 +17486,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1.4
   },
   "60": {
     "company_id": 60,
@@ -17523,7 +17638,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 77.59
   },
   "ACMR": {
     "company_id": 60,
@@ -17674,7 +17790,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 77.59
   },
   "61": {
     "company_id": 61,
@@ -17825,7 +17942,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 987.46
   },
   "GEV": {
     "company_id": 61,
@@ -17976,7 +18094,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 987.46
   },
   "62": {
     "company_id": 62,
@@ -18127,7 +18246,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 180.0
   },
   "SMEGF": {
     "company_id": 62,
@@ -18278,7 +18398,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 180.0
   },
   "63": {
     "company_id": 63,
@@ -18429,7 +18550,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 27.08
   },
   "MHVYF": {
     "company_id": 63,
@@ -18580,7 +18702,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 27.08
   },
   "64": {
     "company_id": 64,
@@ -18731,7 +18854,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9.29
   },
   "SMR": {
     "company_id": 64,
@@ -18882,7 +19006,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9.29
   },
   "65": {
     "company_id": 65,
@@ -19033,7 +19158,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 42.94
   },
   "OKLO": {
     "company_id": 65,
@@ -19184,7 +19310,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 42.94
   },
   "66": {
     "company_id": 66,
@@ -19335,7 +19462,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 274.17
   },
   "CEG": {
     "company_id": 66,
@@ -19486,7 +19614,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 274.17
   },
   "67": {
     "company_id": 67,
@@ -19637,7 +19766,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 183.68
   },
   "LEU": {
     "company_id": 67,
@@ -19788,7 +19918,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 183.68
   },
   "68": {
     "company_id": 68,
@@ -19939,7 +20070,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 162.26
   },
   "BWXT": {
     "company_id": 68,
@@ -20090,7 +20222,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 162.26
   },
   "69": {
     "company_id": 69,
@@ -20099,9 +20232,9 @@
     "korean_name": "Doosan Enerbility",
     "moat_title": "뉴스케일 등 글로벌 SMR 설계사들의 핵심 기자재를 전담 생산하는 세계 최고 수준의 원자력 파운드리. 용접부 없는 대형 압력 용기(원자로 껍데기)를 단번에 찍어내는 초대형 17,000톤 프레스 설비 보유.",
     "quote": {
-      "current_price": 77900.0,
-      "high_52w": 139200.0,
-      "mdd_pct": -44.04,
+      "current_price": 76200,
+      "high_52w": 139200,
+      "mdd_pct": -45.26,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -20241,7 +20374,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 76200
   },
   "034020.KS": {
     "company_id": 69,
@@ -20250,9 +20384,9 @@
     "korean_name": "Doosan Enerbility",
     "moat_title": "뉴스케일 등 글로벌 SMR 설계사들의 핵심 기자재를 전담 생산하는 세계 최고 수준의 원자력 파운드리. 용접부 없는 대형 압력 용기(원자로 껍데기)를 단번에 찍어내는 초대형 17,000톤 프레스 설비 보유.",
     "quote": {
-      "current_price": 77900.0,
-      "high_52w": 139200.0,
-      "mdd_pct": -44.04,
+      "current_price": 76200,
+      "high_52w": 139200,
+      "mdd_pct": -45.26,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -20392,7 +20526,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 76200
   },
   "70": {
     "company_id": 70,
@@ -20550,7 +20685,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 424.67
   },
   "ETN": {
     "company_id": 70,
@@ -20708,7 +20844,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 424.67
   },
   "71": {
     "company_id": 71,
@@ -20859,7 +20996,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 261.0
   },
   "VRT": {
     "company_id": 71,
@@ -21010,7 +21148,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 261.0
   },
   "72": {
     "company_id": 72,
@@ -21161,7 +21300,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 677.41
   },
   "PWR": {
     "company_id": 72,
@@ -21312,7 +21452,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 677.41
   },
   "73": {
     "company_id": 73,
@@ -21463,7 +21604,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 475.64
   },
   "HUBB": {
     "company_id": 73,
@@ -21614,7 +21756,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 475.64
   },
   "74": {
     "company_id": 74,
@@ -21765,7 +21908,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 343.85
   },
   "WCC": {
     "company_id": 74,
@@ -21916,7 +22060,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 343.85
   },
   "75": {
     "company_id": 75,
@@ -22067,7 +22212,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 93.43
   },
   "ATKR": {
     "company_id": 75,
@@ -22218,7 +22364,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 93.43
   },
   "76": {
     "company_id": 76,
@@ -22369,7 +22516,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 198.21
   },
   "POWL": {
     "company_id": 76,
@@ -22520,7 +22668,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 198.21
   },
   "77": {
     "company_id": 77,
@@ -22671,7 +22820,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 325.99
   },
   "MYRG": {
     "company_id": 77,
@@ -22822,7 +22972,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 325.99
   },
   "78": {
     "company_id": 78,
@@ -22973,7 +23124,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 156.88
   },
   "NVT": {
     "company_id": 78,
@@ -23124,7 +23276,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 156.88
   },
   "79": {
     "company_id": 79,
@@ -23275,7 +23428,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 434.74
   },
   "PLPC": {
     "company_id": 79,
@@ -23426,7 +23580,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 434.74
   },
   "80": {
     "company_id": 80,
@@ -23435,9 +23590,9 @@
     "korean_name": "포스코홀딩스",
     "moat_title": "글로벌 비중국 핵심 광물 제련 허브. 아르헨티나 염호와 호주 광산을 소유하여 리튬/니켈부터 양음극재까지 완벽한 수직계열화 구축.",
     "quote": {
-      "current_price": 324500.0,
-      "high_52w": 539577.65,
-      "mdd_pct": -39.86,
+      "current_price": 320000,
+      "high_52w": 539577,
+      "mdd_pct": -40.69,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -23577,7 +23732,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 320000
   },
   "005490.KS": {
     "company_id": 80,
@@ -23586,9 +23742,9 @@
     "korean_name": "포스코홀딩스",
     "moat_title": "글로벌 비중국 핵심 광물 제련 허브. 아르헨티나 염호와 호주 광산을 소유하여 리튬/니켈부터 양음극재까지 완벽한 수직계열화 구축.",
     "quote": {
-      "current_price": 324500.0,
-      "high_52w": 539577.65,
-      "mdd_pct": -39.86,
+      "current_price": 320000,
+      "high_52w": 539577,
+      "mdd_pct": -40.69,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -23728,7 +23884,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 320000
   },
   "81": {
     "company_id": 81,
@@ -23737,9 +23894,9 @@
     "korean_name": "고려아연",
     "moat_title": "세계 1위 비철금속 제련 기술을 바탕으로 황산니켈, 동박 등 이차전지 핵심 원소재 밸류체인 진입 및 올인원 제련소 운영.",
     "quote": {
-      "current_price": 1214000.0,
-      "high_52w": 2171096.02,
-      "mdd_pct": -44.08,
+      "current_price": 1145000,
+      "high_52w": 2171096,
+      "mdd_pct": -47.26,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -23879,7 +24036,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1145000
   },
   "010130.KS": {
     "company_id": 81,
@@ -23888,9 +24046,9 @@
     "korean_name": "고려아연",
     "moat_title": "세계 1위 비철금속 제련 기술을 바탕으로 황산니켈, 동박 등 이차전지 핵심 원소재 밸류체인 진입 및 올인원 제련소 운영.",
     "quote": {
-      "current_price": 1214000.0,
-      "high_52w": 2171096.02,
-      "mdd_pct": -44.08,
+      "current_price": 1145000,
+      "high_52w": 2171096,
+      "mdd_pct": -47.26,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -24030,7 +24188,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1145000
   },
   "82": {
     "company_id": 82,
@@ -24039,9 +24198,9 @@
     "korean_name": "에코프로비엠",
     "moat_title": "글로벌 1위 하이니켈 양극재 제조사. 전구체부터 양극재, 리사이클링까지 에코프로 그룹 내 클로즈드 루프 생태계 핵심 기업.",
     "quote": {
-      "current_price": 109100.0,
-      "high_52w": 259871.6,
-      "mdd_pct": -58.02,
+      "current_price": 109800,
+      "high_52w": 259871,
+      "mdd_pct": -57.75,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 26.5,
       "op_margin": 12.8,
@@ -24181,7 +24340,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 109800
   },
   "247540.KQ": {
     "company_id": 82,
@@ -24190,9 +24350,9 @@
     "korean_name": "에코프로비엠",
     "moat_title": "글로벌 1위 하이니켈 양극재 제조사. 전구체부터 양극재, 리사이클링까지 에코프로 그룹 내 클로즈드 루프 생태계 핵심 기업.",
     "quote": {
-      "current_price": 109100.0,
-      "high_52w": 259871.6,
-      "mdd_pct": -58.02,
+      "current_price": 109800,
+      "high_52w": 259871,
+      "mdd_pct": -57.75,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 26.5,
       "op_margin": 12.8,
@@ -24332,7 +24492,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 109800
   },
   "83": {
     "company_id": 83,
@@ -24341,9 +24502,9 @@
     "korean_name": "포스코퓨처엠",
     "moat_title": "국내 유일의 양·음극재 동시 생산 기업. 그룹사 내 광물 자원 내재화를 통해 가장 안정적인 원가 경쟁력 확보.",
     "quote": {
-      "current_price": 160400.0,
-      "high_52w": 299500.0,
-      "mdd_pct": -46.44,
+      "current_price": 160300,
+      "high_52w": 299500,
+      "mdd_pct": -46.48,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -24483,7 +24644,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 160300
   },
   "003670.KS": {
     "company_id": 83,
@@ -24492,9 +24654,9 @@
     "korean_name": "포스코퓨처엠",
     "moat_title": "국내 유일의 양·음극재 동시 생산 기업. 그룹사 내 광물 자원 내재화를 통해 가장 안정적인 원가 경쟁력 확보.",
     "quote": {
-      "current_price": 160400.0,
-      "high_52w": 299500.0,
-      "mdd_pct": -46.44,
+      "current_price": 160300,
+      "high_52w": 299500,
+      "mdd_pct": -46.48,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -24634,7 +24796,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 160300
   },
   "84": {
     "company_id": 84,
@@ -24643,9 +24806,9 @@
     "korean_name": "LG화학",
     "moat_title": "글로벌 탑티어 종합 전지 소재 회사. 양극재를 넘어 분리막, 탄소나노튜브(CNT) 등 4대 핵심 소재 전반의 포트폴리오 다각화.",
     "quote": {
-      "current_price": 270500.0,
-      "high_52w": 437500.0,
-      "mdd_pct": -38.17,
+      "current_price": 266000,
+      "high_52w": 437500,
+      "mdd_pct": -39.2,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -24785,7 +24948,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 266000
   },
   "051910.KS": {
     "company_id": 84,
@@ -24794,9 +24958,9 @@
     "korean_name": "LG화학",
     "moat_title": "글로벌 탑티어 종합 전지 소재 회사. 양극재를 넘어 분리막, 탄소나노튜브(CNT) 등 4대 핵심 소재 전반의 포트폴리오 다각화.",
     "quote": {
-      "current_price": 270500.0,
-      "high_52w": 437500.0,
-      "mdd_pct": -38.17,
+      "current_price": 266000,
+      "high_52w": 437500,
+      "mdd_pct": -39.2,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -24936,7 +25100,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 266000
   },
   "85": {
     "company_id": 85,
@@ -24945,9 +25110,9 @@
     "korean_name": "엔켐",
     "moat_title": "글로벌 4위권의 전해액 전문 기업. 전해액 특성상 유통기한이 짧아 고객사 배터리 공장 바로 옆에 온사이트(On-site) 생산 인프라 구축 필수.",
     "quote": {
-      "current_price": 21900.0,
-      "high_52w": 105000.0,
-      "mdd_pct": -79.14,
+      "current_price": 21350,
+      "high_52w": 105000,
+      "mdd_pct": -79.67,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -25087,7 +25252,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 21350
   },
   "348370.KQ": {
     "company_id": 85,
@@ -25096,9 +25262,9 @@
     "korean_name": "엔켐",
     "moat_title": "글로벌 4위권의 전해액 전문 기업. 전해액 특성상 유통기한이 짧아 고객사 배터리 공장 바로 옆에 온사이트(On-site) 생산 인프라 구축 필수.",
     "quote": {
-      "current_price": 21900.0,
-      "high_52w": 105000.0,
-      "mdd_pct": -79.14,
+      "current_price": 21350,
+      "high_52w": 105000,
+      "mdd_pct": -79.67,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -25238,7 +25404,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 21350
   },
   "86": {
     "company_id": 86,
@@ -25247,9 +25414,9 @@
     "korean_name": "LG에너지솔루션",
     "moat_title": "전 세계 최대 규모의 글로벌 생산 캐파와 다수의 완성차 합작법인(JV)을 보유한 글로벌 1위 배터리 셀 메이커.",
     "quote": {
-      "current_price": 351000.0,
-      "high_52w": 527000.0,
-      "mdd_pct": -33.4,
+      "current_price": 357500,
+      "high_52w": 527000,
+      "mdd_pct": -32.16,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -25389,7 +25556,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 357500
   },
   "373220.KS": {
     "company_id": 86,
@@ -25398,9 +25566,9 @@
     "korean_name": "LG에너지솔루션",
     "moat_title": "전 세계 최대 규모의 글로벌 생산 캐파와 다수의 완성차 합작법인(JV)을 보유한 글로벌 1위 배터리 셀 메이커.",
     "quote": {
-      "current_price": 351000.0,
-      "high_52w": 527000.0,
-      "mdd_pct": -33.4,
+      "current_price": 357500,
+      "high_52w": 527000,
+      "mdd_pct": -32.16,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -25540,7 +25708,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 357500
   },
   "87": {
     "company_id": 87,
@@ -25549,9 +25718,9 @@
     "korean_name": "삼성SDI",
     "moat_title": "수익성 우위의 질적 성장 전략을 추구하는 배터리 셀 메이커. 프리미엄 젠(Gen) 시리즈 및 각형 배터리 기술력 선도.",
     "quote": {
-      "current_price": 488000.0,
-      "high_52w": 723000.0,
-      "mdd_pct": -32.5,
+      "current_price": 487000,
+      "high_52w": 723000,
+      "mdd_pct": -32.64,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -25691,7 +25860,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 487000
   },
   "006400.KS": {
     "company_id": 87,
@@ -25700,9 +25870,9 @@
     "korean_name": "삼성SDI",
     "moat_title": "수익성 우위의 질적 성장 전략을 추구하는 배터리 셀 메이커. 프리미엄 젠(Gen) 시리즈 및 각형 배터리 기술력 선도.",
     "quote": {
-      "current_price": 488000.0,
-      "high_52w": 723000.0,
-      "mdd_pct": -32.5,
+      "current_price": 487000,
+      "high_52w": 723000,
+      "mdd_pct": -32.64,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -25842,7 +26012,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 487000
   },
   "88": {
     "company_id": 88,
@@ -25851,9 +26022,9 @@
     "korean_name": "성일하이텍",
     "moat_title": "국내 최초 배터리 리사이클링 전문 기업. 블랙파우더에서 니켈, 코발트, 리튬을 95% 이상 고순도로 추출하는 독보적 습식 제련 기술 보유.",
     "quote": {
-      "current_price": 35750.0,
-      "high_52w": 85500.0,
-      "mdd_pct": -58.19,
+      "current_price": 34450,
+      "high_52w": 85500,
+      "mdd_pct": -59.71,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -25993,7 +26164,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 34450
   },
   "365340.KQ": {
     "company_id": 88,
@@ -26002,9 +26174,9 @@
     "korean_name": "성일하이텍",
     "moat_title": "국내 최초 배터리 리사이클링 전문 기업. 블랙파우더에서 니켈, 코발트, 리튬을 95% 이상 고순도로 추출하는 독보적 습식 제련 기술 보유.",
     "quote": {
-      "current_price": 35750.0,
-      "high_52w": 85500.0,
-      "mdd_pct": -58.19,
+      "current_price": 34450,
+      "high_52w": 85500,
+      "mdd_pct": -59.71,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -26144,7 +26316,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 34450
   },
   "89": {
     "company_id": 89,
@@ -26153,9 +26326,9 @@
     "korean_name": "현대자동차",
     "moat_title": "국내 1위 완성차 기업. 보스턴다이나믹스·앱티브 합작 목티오날 등 대규모 자율주행 투자. 레벨3 자율주행 기능을 탑재한 G90 출시.",
     "quote": {
-      "current_price": 435000.0,
-      "high_52w": 783000.0,
-      "mdd_pct": -44.44,
+      "current_price": 414000,
+      "high_52w": 783000,
+      "mdd_pct": -47.13,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -26295,7 +26468,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 414000
   },
   "005380.KS": {
     "company_id": 89,
@@ -26304,9 +26478,9 @@
     "korean_name": "현대자동차",
     "moat_title": "국내 1위 완성차 기업. 보스턴다이나믹스·앱티브 합작 목티오날 등 대규모 자율주행 투자. 레벨3 자율주행 기능을 탑재한 G90 출시.",
     "quote": {
-      "current_price": 435000.0,
-      "high_52w": 783000.0,
-      "mdd_pct": -44.44,
+      "current_price": 414000,
+      "high_52w": 783000,
+      "mdd_pct": -47.13,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -26446,7 +26620,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 414000
   },
   "90": {
     "company_id": 90,
@@ -26455,9 +26630,9 @@
     "korean_name": "현대모비스",
     "moat_title": "현대차그룹 핵심 부품·모듈 계열사. 레이더·라이다·카메라 기반 자율주행 센서퓨전 시스템 및 코너 모듈 원천 기술 보유.",
     "quote": {
-      "current_price": 518000.0,
-      "high_52w": 819572.82,
-      "mdd_pct": -36.8,
+      "current_price": 509000,
+      "high_52w": 819572,
+      "mdd_pct": -37.89,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -26597,7 +26772,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 509000
   },
   "012330.KS": {
     "company_id": 90,
@@ -26606,9 +26782,9 @@
     "korean_name": "현대모비스",
     "moat_title": "현대차그룹 핵심 부품·모듈 계열사. 레이더·라이다·카메라 기반 자율주행 센서퓨전 시스템 및 코너 모듈 원천 기술 보유.",
     "quote": {
-      "current_price": 518000.0,
-      "high_52w": 819572.82,
-      "mdd_pct": -36.8,
+      "current_price": 509000,
+      "high_52w": 819572,
+      "mdd_pct": -37.89,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -26748,7 +26924,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 509000
   },
   "92": {
     "company_id": 92,
@@ -26899,7 +27076,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 0.35
   },
   "INVZ": {
     "company_id": 92,
@@ -27050,7 +27228,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 0.35
   },
   "93": {
     "company_id": 93,
@@ -27059,9 +27238,9 @@
     "korean_name": "두산로보틱스",
     "moat_title": "국내 1위 협동로봇(코봇) 기업. 산업용·서비스용·물류용 전 분야 라인업 보유. 두산그룹 계열 제조 노하우 기반.",
     "quote": {
-      "current_price": 74400.0,
-      "high_52w": 170000.0,
-      "mdd_pct": -56.24,
+      "current_price": 71500,
+      "high_52w": 170000,
+      "mdd_pct": -57.94,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -27201,7 +27380,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 71500
   },
   "454910.KQ": {
     "company_id": 93,
@@ -27210,9 +27390,9 @@
     "korean_name": "두산로보틱스",
     "moat_title": "국내 1위 협동로봇(코봇) 기업. 산업용·서비스용·물류용 전 분야 라인업 보유. 두산그룹 계열 제조 노하우 기반.",
     "quote": {
-      "current_price": 74400.0,
-      "high_52w": 170000.0,
-      "mdd_pct": -56.24,
+      "current_price": 71500,
+      "high_52w": 170000,
+      "mdd_pct": -57.94,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -27352,7 +27532,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 71500
   },
   "94": {
     "company_id": 94,
@@ -27361,9 +27542,9 @@
     "korean_name": "레인보우로보틱스",
     "moat_title": "삼성전자가 대주주인 이족보행·협동로봇 전문 기업. 국내 최초 이족보행 로봇 휴보 개발사 KAIST 출신.",
     "quote": {
-      "current_price": 470000.0,
-      "high_52w": 979000.0,
-      "mdd_pct": -51.99,
+      "current_price": 462500,
+      "high_52w": 979000,
+      "mdd_pct": -52.76,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 62.5,
       "op_margin": 22.5,
@@ -27503,7 +27684,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 462500
   },
   "277810.KQ": {
     "company_id": 94,
@@ -27512,9 +27694,9 @@
     "korean_name": "레인보우로보틱스",
     "moat_title": "삼성전자가 대주주인 이족보행·협동로봇 전문 기업. 국내 최초 이족보행 로봇 휴보 개발사 KAIST 출신.",
     "quote": {
-      "current_price": 470000.0,
-      "high_52w": 979000.0,
-      "mdd_pct": -51.99,
+      "current_price": 462500,
+      "high_52w": 979000,
+      "mdd_pct": -52.76,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 62.5,
       "op_margin": 22.5,
@@ -27654,7 +27836,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 462500
   },
   "97": {
     "company_id": 97,
@@ -27805,7 +27988,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 4.78
   },
   "SERV": {
     "company_id": 97,
@@ -27956,7 +28140,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 4.78
   },
   "98": {
     "company_id": 98,
@@ -27965,9 +28150,9 @@
     "korean_name": "한국항공우주",
     "moat_title": "KAI — 국내 유일 완제기(T-50·FA-50·KF-21) 및 위성체 개발·생산 기업. 한국형 발사체 누리호 위성 탑재부 제작 참여.",
     "quote": {
-      "current_price": 140000.0,
-      "high_52w": 214881.47,
-      "mdd_pct": -34.85,
+      "current_price": 135700,
+      "high_52w": 214881,
+      "mdd_pct": -36.85,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -28107,7 +28292,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 135700
   },
   "047810.KS": {
     "company_id": 98,
@@ -28116,9 +28302,9 @@
     "korean_name": "한국항공우주",
     "moat_title": "KAI — 국내 유일 완제기(T-50·FA-50·KF-21) 및 위성체 개발·생산 기업. 한국형 발사체 누리호 위성 탑재부 제작 참여.",
     "quote": {
-      "current_price": 140000.0,
-      "high_52w": 214881.47,
-      "mdd_pct": -34.85,
+      "current_price": 135700,
+      "high_52w": 214881,
+      "mdd_pct": -36.85,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -28258,7 +28444,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 135700
   },
   "99": {
     "company_id": 99,
@@ -28267,9 +28454,9 @@
     "korean_name": "LIG넥스원",
     "moat_title": "정밀유도무기·전자전·우주방위 전문 방산기업. 국내 최초 SAR 위성 개발 참여 및 위성 기반 정밀 항법 시스템 공급.",
     "quote": {
-      "current_price": 795000.0,
-      "high_52w": 1118000.0,
-      "mdd_pct": -28.89,
+      "current_price": 796000,
+      "high_52w": 1118000,
+      "mdd_pct": -28.8,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -28409,7 +28596,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 796000
   },
   "079550.KS": {
     "company_id": 99,
@@ -28418,9 +28606,9 @@
     "korean_name": "LIG넥스원",
     "moat_title": "정밀유도무기·전자전·우주방위 전문 방산기업. 국내 최초 SAR 위성 개발 참여 및 위성 기반 정밀 항법 시스템 공급.",
     "quote": {
-      "current_price": 795000.0,
-      "high_52w": 1118000.0,
-      "mdd_pct": -28.89,
+      "current_price": 796000,
+      "high_52w": 1118000,
+      "mdd_pct": -28.8,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -28560,7 +28748,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 796000
   },
   "100": {
     "company_id": 100,
@@ -28711,7 +28900,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 12.4
   },
   "RDW": {
     "company_id": 100,
@@ -28862,7 +29052,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 12.4
   },
   "101": {
     "company_id": 101,
@@ -29013,7 +29204,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 2.45
   },
   "SIDU": {
     "company_id": 101,
@@ -29164,7 +29356,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 2.45
   },
   "102": {
     "company_id": 102,
@@ -29173,9 +29366,9 @@
     "korean_name": "LS ELECTRIC",
     "moat_title": "변압기·배전반·에너지관리시스템(EMS) 국내 1위 전력 기기 기업. 국내외 데이터센터·재생에너지 연계 전력 기기 핵심 공급사.",
     "quote": {
-      "current_price": 209000.0,
-      "high_52w": 335000.0,
-      "mdd_pct": -37.61,
+      "current_price": 202000,
+      "high_52w": 335000,
+      "mdd_pct": -39.7,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -29315,7 +29508,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 202000
   },
   "010120.KS": {
     "company_id": 102,
@@ -29324,9 +29518,9 @@
     "korean_name": "LS ELECTRIC",
     "moat_title": "변압기·배전반·에너지관리시스템(EMS) 국내 1위 전력 기기 기업. 국내외 데이터센터·재생에너지 연계 전력 기기 핵심 공급사.",
     "quote": {
-      "current_price": 209000.0,
-      "high_52w": 335000.0,
-      "mdd_pct": -37.61,
+      "current_price": 202000,
+      "high_52w": 335000,
+      "mdd_pct": -39.7,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -29466,7 +29660,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 202000
   },
   "103": {
     "company_id": 103,
@@ -29475,9 +29670,9 @@
     "korean_name": "HD현대일렉트릭",
     "moat_title": "변압기·차단기·배전반 글로벌 수출 특화 전력 기기 기업. 미국 전력망 현대화 프로젝트 핵심 한국 공급업체.",
     "quote": {
-      "current_price": 785000.0,
-      "high_52w": 1426204.21,
-      "mdd_pct": -44.96,
+      "current_price": 752000,
+      "high_52w": 1426204,
+      "mdd_pct": -47.27,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -29617,7 +29812,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 752000
   },
   "267260.KS": {
     "company_id": 103,
@@ -29626,9 +29822,9 @@
     "korean_name": "HD현대일렉트릭",
     "moat_title": "변압기·차단기·배전반 글로벌 수출 특화 전력 기기 기업. 미국 전력망 현대화 프로젝트 핵심 한국 공급업체.",
     "quote": {
-      "current_price": 785000.0,
-      "high_52w": 1426204.21,
-      "mdd_pct": -44.96,
+      "current_price": 752000,
+      "high_52w": 1426204,
+      "mdd_pct": -47.27,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -29768,7 +29964,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 752000
   },
   "104": {
     "company_id": 104,
@@ -29777,9 +29974,9 @@
     "korean_name": "효성중공업",
     "moat_title": "초고압 변압기·차단기·STATCOM 전력 기기 전문 기업. 국내 최초 초전도 한류기 개발 및 친환경 가스절연개폐장치(GIS) 수출.",
     "quote": {
-      "current_price": 2984000.0,
-      "high_52w": 4742000.0,
-      "mdd_pct": -37.07,
+      "current_price": 2908000,
+      "high_52w": 4742000,
+      "mdd_pct": -38.68,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -29919,7 +30116,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 2908000
   },
   "298040.KS": {
     "company_id": 104,
@@ -29928,9 +30126,9 @@
     "korean_name": "효성중공업",
     "moat_title": "초고압 변압기·차단기·STATCOM 전력 기기 전문 기업. 국내 최초 초전도 한류기 개발 및 친환경 가스절연개폐장치(GIS) 수출.",
     "quote": {
-      "current_price": 2984000.0,
-      "high_52w": 4742000.0,
-      "mdd_pct": -37.07,
+      "current_price": 2908000,
+      "high_52w": 4742000,
+      "mdd_pct": -38.68,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -30070,7 +30268,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 2908000
   },
   "105": {
     "company_id": 105,
@@ -30079,9 +30278,9 @@
     "korean_name": "제룡전기",
     "moat_title": "국내 중소형 변압기 전문 제조사. 미국 수출 급증으로 K-변압기 붐의 최대 수혜 소형주. 생산 캐파 대비 수주잔고 급증.",
     "quote": {
-      "current_price": 46950.0,
-      "high_52w": 93800.0,
-      "mdd_pct": -49.95,
+      "current_price": 46850,
+      "high_52w": 93800,
+      "mdd_pct": -50.05,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -30221,7 +30420,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 46850
   },
   "033100.KQ": {
     "company_id": 105,
@@ -30230,9 +30430,9 @@
     "korean_name": "제룡전기",
     "moat_title": "국내 중소형 변압기 전문 제조사. 미국 수출 급증으로 K-변압기 붐의 최대 수혜 소형주. 생산 캐파 대비 수주잔고 급증.",
     "quote": {
-      "current_price": 46950.0,
-      "high_52w": 93800.0,
-      "mdd_pct": -49.95,
+      "current_price": 46850,
+      "high_52w": 93800,
+      "mdd_pct": -50.05,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -30372,7 +30572,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 46850
   },
   "106": {
     "company_id": 106,
@@ -30381,9 +30582,9 @@
     "korean_name": "비에이치아이",
     "moat_title": "폐열회수보일러(HRSG)·일반산업 열교환기 전문 제조사. 가스터빈·복합화력발전소 핵심 기자재 공급.",
     "quote": {
-      "current_price": 58900.0,
-      "high_52w": 114200.0,
-      "mdd_pct": -48.42,
+      "current_price": 60600,
+      "high_52w": 114200,
+      "mdd_pct": -46.94,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -30523,7 +30724,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 60600
   },
   "083650.KQ": {
     "company_id": 106,
@@ -30532,9 +30734,9 @@
     "korean_name": "비에이치아이",
     "moat_title": "폐열회수보일러(HRSG)·일반산업 열교환기 전문 제조사. 가스터빈·복합화력발전소 핵심 기자재 공급.",
     "quote": {
-      "current_price": 58900.0,
-      "high_52w": 114200.0,
-      "mdd_pct": -48.42,
+      "current_price": 60600,
+      "high_52w": 114200,
+      "mdd_pct": -46.94,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -30674,7 +30876,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 60600
   },
   "107": {
     "company_id": 107,
@@ -30825,7 +31028,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 134.28
   },
   "ALB": {
     "company_id": 107,
@@ -30976,7 +31180,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 134.28
   },
   "108": {
     "company_id": 108,
@@ -31127,7 +31332,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 3.0
   },
   "LAC": {
     "company_id": 108,
@@ -31278,7 +31484,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 3.0
   },
   "109": {
     "company_id": 109,
@@ -31429,7 +31636,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 12.07
   },
   "FLNC": {
     "company_id": 109,
@@ -31580,7 +31788,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 12.07
   },
   "110": {
     "company_id": 110,
@@ -31731,7 +31940,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 5.88
   },
   "QS": {
     "company_id": 110,
@@ -31882,7 +32092,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 5.88
   },
   "112": {
     "company_id": 112,
@@ -31891,9 +32102,9 @@
     "korean_name": "에코프로",
     "moat_title": "에코프로비엠의 모회사. 에코프로그룹 지주사로 양극재 사업 외에도 환경 플랜트, 대기오염 방지 사업 보유. 에코프로 밸류체인 종합 투자 수단.",
     "quote": {
-      "current_price": 87100.0,
-      "high_52w": 189804.79,
-      "mdd_pct": -54.11,
+      "current_price": 86200,
+      "high_52w": 189804,
+      "mdd_pct": -54.58,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -32033,7 +32244,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 86200
   },
   "086520.KQ": {
     "company_id": 112,
@@ -32042,9 +32254,9 @@
     "korean_name": "에코프로",
     "moat_title": "에코프로비엠의 모회사. 에코프로그룹 지주사로 양극재 사업 외에도 환경 플랜트, 대기오염 방지 사업 보유. 에코프로 밸류체인 종합 투자 수단.",
     "quote": {
-      "current_price": 87100.0,
-      "high_52w": 189804.79,
-      "mdd_pct": -54.11,
+      "current_price": 86200,
+      "high_52w": 189804,
+      "mdd_pct": -54.58,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -32184,7 +32396,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 86200
   },
   "113": {
     "company_id": 113,
@@ -32193,9 +32406,9 @@
     "korean_name": "새빗켐",
     "moat_title": "폐배터리 전처리(블랙파우더 제조) 전문기업. 성일하이텍과 함께 국내 배터리 리사이클링 투트랙 생태계 구성. 저비용 전처리 공정 특화.",
     "quote": {
-      "current_price": 2540.0,
-      "high_52w": 6083.55,
-      "mdd_pct": -58.25,
+      "current_price": 2425,
+      "high_52w": 6083,
+      "mdd_pct": -60.14,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -32335,7 +32548,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 2425
   },
   "256840.KQ": {
     "company_id": 113,
@@ -32344,9 +32558,9 @@
     "korean_name": "새빗켐",
     "moat_title": "폐배터리 전처리(블랙파우더 제조) 전문기업. 성일하이텍과 함께 국내 배터리 리사이클링 투트랙 생태계 구성. 저비용 전처리 공정 특화.",
     "quote": {
-      "current_price": 2540.0,
-      "high_52w": 6083.55,
-      "mdd_pct": -58.25,
+      "current_price": 2425,
+      "high_52w": 6083,
+      "mdd_pct": -60.14,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -32486,7 +32700,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 2425
   },
   "114": {
     "company_id": 114,
@@ -32637,7 +32852,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 40.06
   },
   "OUST": {
     "company_id": 114,
@@ -32788,7 +33004,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 40.06
   },
   "115": {
     "company_id": 115,
@@ -32939,7 +33156,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 62.67
   },
   "YASKY": {
     "company_id": 115,
@@ -33090,7 +33308,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 62.67
   },
   "116": {
     "company_id": 116,
@@ -33241,7 +33460,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 11.62
   },
   "KIGRY": {
     "company_id": 116,
@@ -33392,7 +33612,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 11.62
   },
   "117": {
     "company_id": 117,
@@ -33543,7 +33764,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 56.68
   },
   "MP": {
     "company_id": 117,
@@ -33694,7 +33916,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 56.68
   },
   "118": {
     "company_id": 118,
@@ -33845,7 +34068,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 161.91
   },
   "119": {
     "company_id": 163,
@@ -34003,7 +34227,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 316.83
   },
   "AAPL": {
     "company_id": 163,
@@ -34161,7 +34386,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 316.83
   },
   "120": {
     "company_id": 120,
@@ -34170,9 +34396,9 @@
     "korean_name": "MediaTek",
     "moat_title": "Dimensity 9400(35 TOPS) — 삼성·중화권 플래그십 탑재. 미드레인지 온디바이스 AI 대중화 선도.",
     "quote": {
-      "current_price": 3885.0,
+      "current_price": 3845.0,
       "high_52w": 4940.48,
-      "mdd_pct": -21.36,
+      "mdd_pct": -22.17,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -34312,7 +34538,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 3845.0
   },
   "2454.TW": {
     "company_id": 120,
@@ -34321,9 +34548,9 @@
     "korean_name": "MediaTek",
     "moat_title": "Dimensity 9400(35 TOPS) — 삼성·중화권 플래그십 탑재. 미드레인지 온디바이스 AI 대중화 선도.",
     "quote": {
-      "current_price": 3885.0,
+      "current_price": 3845.0,
       "high_52w": 4940.48,
-      "mdd_pct": -21.36,
+      "mdd_pct": -22.17,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -34463,7 +34690,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 3845.0
   },
   "121": {
     "company_id": 132,
@@ -34614,7 +34842,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 92.8
   },
   "INTC": {
     "company_id": 132,
@@ -34765,7 +34994,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 92.8
   },
   "122": {
     "company_id": 165,
@@ -34916,7 +35146,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 344.72
   },
   "123": {
     "company_id": 143,
@@ -35067,7 +35298,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 484.31
   },
   "MSFT": {
     "company_id": 143,
@@ -35218,7 +35450,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 484.31
   },
   "124": {
     "company_id": 134,
@@ -35227,9 +35460,9 @@
     "korean_name": "Samsung Electronics",
     "moat_title": "메모리 반도체 글로벌 1위",
     "quote": {
-      "current_price": 268500.0,
-      "high_52w": 374087.45,
-      "mdd_pct": -28.23,
+      "current_price": 247500,
+      "high_52w": 374087,
+      "mdd_pct": -33.84,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 38.5,
       "op_margin": 14.5,
@@ -35369,7 +35602,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 247500
   },
   "005930.KS": {
     "company_id": 134,
@@ -35378,9 +35612,9 @@
     "korean_name": "Samsung Electronics",
     "moat_title": "메모리 반도체 글로벌 1위",
     "quote": {
-      "current_price": 268500.0,
-      "high_52w": 374087.45,
-      "mdd_pct": -28.23,
+      "current_price": 247500,
+      "high_52w": 374087,
+      "mdd_pct": -33.84,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 38.5,
       "op_margin": 14.5,
@@ -35520,7 +35754,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 247500
   },
   "125": {
     "company_id": 125,
@@ -35529,9 +35764,9 @@
     "korean_name": "Lenovo",
     "moat_title": "세계 최대 PC 제조사. Copilot+ PC 라인업(ThinkPad X1 Fold AI 등) 가장 빠른 전환.",
     "quote": {
-      "current_price": 31.34,
+      "current_price": 30.12,
       "high_52w": 36.16,
-      "mdd_pct": -13.33,
+      "mdd_pct": -16.7,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -35671,7 +35906,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 30.12
   },
   "0992.HK": {
     "company_id": 125,
@@ -35680,9 +35916,9 @@
     "korean_name": "Lenovo",
     "moat_title": "세계 최대 PC 제조사. Copilot+ PC 라인업(ThinkPad X1 Fold AI 등) 가장 빠른 전환.",
     "quote": {
-      "current_price": 31.34,
+      "current_price": 30.12,
       "high_52w": 36.16,
-      "mdd_pct": -13.33,
+      "mdd_pct": -16.7,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -35822,7 +36058,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 30.12
   },
   "126": {
     "company_id": 126,
@@ -35973,7 +36210,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 546.03
   },
   "META": {
     "company_id": 126,
@@ -36124,7 +36362,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 546.03
   },
   "127": {
     "company_id": 127,
@@ -36275,7 +36514,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 5.24
   },
   "SNAP": {
     "company_id": 127,
@@ -36426,7 +36666,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 5.24
   },
   "128": {
     "company_id": 154,
@@ -36577,7 +36818,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 217.56
   },
   "129": {
     "company_id": 129,
@@ -36728,7 +36970,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 466.42
   },
   "AMD": {
     "company_id": 129,
@@ -36879,7 +37122,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 466.42
   },
   "130": {
     "company_id": 130,
@@ -37030,7 +37274,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 362.48
   },
   "AVGO": {
     "company_id": 130,
@@ -37181,7 +37426,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 362.48
   },
   "131": {
     "company_id": 131,
@@ -37332,7 +37578,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 237.27
   },
   "MRVL": {
     "company_id": 131,
@@ -37483,7 +37730,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 237.27
   },
   "132": {
     "company_id": 132,
@@ -37634,7 +37882,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 92.8
   },
   "133": {
     "company_id": 133,
@@ -37785,7 +38034,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 412.09
   },
   "TSM": {
     "company_id": 133,
@@ -37936,7 +38186,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 412.09
   },
   "134": {
     "company_id": 134,
@@ -37945,9 +38196,9 @@
     "korean_name": "Samsung Electronics",
     "moat_title": "메모리 반도체 글로벌 1위",
     "quote": {
-      "current_price": 268500.0,
-      "high_52w": 374087.45,
-      "mdd_pct": -28.23,
+      "current_price": 247500,
+      "high_52w": 374087,
+      "mdd_pct": -33.84,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 38.5,
       "op_margin": 14.5,
@@ -38087,7 +38338,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 247500
   },
   "135": {
     "company_id": 135,
@@ -38096,9 +38348,9 @@
     "korean_name": "SK Hynix",
     "moat_title": "HBM 메모리 반도체 1위",
     "quote": {
-      "current_price": 1662000.0,
-      "high_52w": 2987000.0,
-      "mdd_pct": -44.36,
+      "current_price": 1500000,
+      "high_52w": 2987000,
+      "mdd_pct": -49.78,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 52.4,
       "op_margin": 38.2,
@@ -38238,7 +38490,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1500000
   },
   "000660.KS": {
     "company_id": 135,
@@ -38247,9 +38500,9 @@
     "korean_name": "SK Hynix",
     "moat_title": "HBM 메모리 반도체 1위",
     "quote": {
-      "current_price": 1662000.0,
-      "high_52w": 2987000.0,
-      "mdd_pct": -44.36,
+      "current_price": 1500000,
+      "high_52w": 2987000,
+      "mdd_pct": -49.78,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 52.4,
       "op_margin": 38.2,
@@ -38389,7 +38642,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1500000
   },
   "136": {
     "company_id": 136,
@@ -38540,7 +38794,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 937.1
   },
   "MU": {
     "company_id": 136,
@@ -38691,7 +38946,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 937.1
   },
   "137": {
     "company_id": 137,
@@ -38842,7 +39098,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1751.73
   },
   "ASML": {
     "company_id": 137,
@@ -38993,7 +39250,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1751.73
   },
   "138": {
     "company_id": 138,
@@ -39144,7 +39402,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 496.17
   },
   "AMAT": {
     "company_id": 138,
@@ -39295,7 +39554,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 496.17
   },
   "139": {
     "company_id": 139,
@@ -39446,7 +39706,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 307.17
   },
   "LRCX": {
     "company_id": 139,
@@ -39597,7 +39858,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 307.17
   },
   "140": {
     "company_id": 140,
@@ -39748,7 +40010,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 187.27
   },
   "KLAC": {
     "company_id": 140,
@@ -39899,7 +40162,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 187.27
   },
   "141": {
     "company_id": 141,
@@ -40050,7 +40314,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 35.66
   },
   "ASX": {
     "company_id": 141,
@@ -40201,7 +40466,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 35.66
   },
   "142": {
     "company_id": 142,
@@ -40210,9 +40476,9 @@
     "korean_name": "Shin-Etsu Chemical",
     "moat_title": "반도체급 실리콘 웨이퍼 세계 1위 + 포토레지스트 주요 공급사. 소재 독점으로 고마진 유지.",
     "quote": {
-      "current_price": 6242.0,
+      "current_price": 6090.0,
       "high_52w": 7930.0,
-      "mdd_pct": -21.29,
+      "mdd_pct": -23.2,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -40352,7 +40618,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 6090.0
   },
   "4063.T": {
     "company_id": 142,
@@ -40361,9 +40628,9 @@
     "korean_name": "Shin-Etsu Chemical",
     "moat_title": "반도체급 실리콘 웨이퍼 세계 1위 + 포토레지스트 주요 공급사. 소재 독점으로 고마진 유지.",
     "quote": {
-      "current_price": 6242.0,
+      "current_price": 6090.0,
       "high_52w": 7930.0,
-      "mdd_pct": -21.29,
+      "mdd_pct": -23.2,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -40503,7 +40770,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 6090.0
   },
   "143": {
     "company_id": 143,
@@ -40654,7 +40922,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 484.31
   },
   "144": {
     "company_id": 144,
@@ -40805,7 +41074,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 237.04
   },
   "TTWO": {
     "company_id": 144,
@@ -40956,7 +41226,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 237.04
   },
   "145": {
     "company_id": 145,
@@ -41107,7 +41378,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 209.7
   },
   "EA": {
     "company_id": 145,
@@ -41258,7 +41530,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 209.7
   },
   "146": {
     "company_id": 146,
@@ -41409,7 +41682,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 23.49
   },
   "SONY": {
     "company_id": 146,
@@ -41560,7 +41834,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 23.49
   },
   "147": {
     "company_id": 147,
@@ -41569,9 +41844,9 @@
     "korean_name": "Capcom",
     "moat_title": "Monster Hunter·Resident Evil·Street Fighter·Devil May Cry. 멀티플랫폼 전략으로 높은 수익성.",
     "quote": {
-      "current_price": 4105.0,
+      "current_price": 4132.0,
       "high_52w": 4431.24,
-      "mdd_pct": -7.36,
+      "mdd_pct": -6.75,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -41711,7 +41986,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 4132.0
   },
   "9697.T": {
     "company_id": 147,
@@ -41720,9 +41996,9 @@
     "korean_name": "Capcom",
     "moat_title": "Monster Hunter·Resident Evil·Street Fighter·Devil May Cry. 멀티플랫폼 전략으로 높은 수익성.",
     "quote": {
-      "current_price": 4105.0,
+      "current_price": 4132.0,
       "high_52w": 4431.24,
-      "mdd_pct": -7.36,
+      "mdd_pct": -6.75,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -41862,7 +42138,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 4132.0
   },
   "148": {
     "company_id": 148,
@@ -41871,9 +42148,9 @@
     "korean_name": "Tencent",
     "moat_title": "글로벌 최대 게임사(매출 기준). Honor of Kings·PUBG Mobile·League of Legends(Riot 지분). Supercell·Epic 지분 보유.",
     "quote": {
-      "current_price": 442.4,
+      "current_price": 447.2,
       "high_52w": 675.13,
-      "mdd_pct": -34.47,
+      "mdd_pct": -33.76,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -42013,7 +42290,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 447.2
   },
   "0700.HK": {
     "company_id": 148,
@@ -42022,9 +42300,9 @@
     "korean_name": "Tencent",
     "moat_title": "글로벌 최대 게임사(매출 기준). Honor of Kings·PUBG Mobile·League of Legends(Riot 지분). Supercell·Epic 지분 보유.",
     "quote": {
-      "current_price": 442.4,
+      "current_price": 447.2,
       "high_52w": 675.13,
-      "mdd_pct": -34.47,
+      "mdd_pct": -33.76,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -42164,7 +42442,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 447.2
   },
   "149": {
     "company_id": 149,
@@ -42315,7 +42594,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 127.25
   },
   "NTES": {
     "company_id": 149,
@@ -42466,7 +42746,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 127.25
   },
   "150": {
     "company_id": 150,
@@ -42475,9 +42756,9 @@
     "korean_name": "Krafton",
     "moat_title": "PUBG 개발사 — 배틀그라운드 PC·모바일 글로벌 1위. 인도 BGMI, 중동·동남아 강세.",
     "quote": {
-      "current_price": 226500.0,
-      "high_52w": 341103.17,
-      "mdd_pct": -33.6,
+      "current_price": 221500,
+      "high_52w": 341103,
+      "mdd_pct": -35.06,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -42617,7 +42898,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 221500
   },
   "259960.KS": {
     "company_id": 150,
@@ -42626,9 +42908,9 @@
     "korean_name": "Krafton",
     "moat_title": "PUBG 개발사 — 배틀그라운드 PC·모바일 글로벌 1위. 인도 BGMI, 중동·동남아 강세.",
     "quote": {
-      "current_price": 226500.0,
-      "high_52w": 341103.17,
-      "mdd_pct": -33.6,
+      "current_price": 221500,
+      "high_52w": 341103,
+      "mdd_pct": -35.06,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -42768,7 +43050,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 221500
   },
   "151": {
     "company_id": 151,
@@ -42777,9 +43060,9 @@
     "korean_name": "Nexon",
     "moat_title": "던전앤파이터·메이플스토리 IP. 중국 던파 모바일이 단일 타이틀 최대 매출. 일본 상장.",
     "quote": {
-      "current_price": 3002.0,
+      "current_price": 2992.5,
       "high_52w": 4371.74,
-      "mdd_pct": -31.33,
+      "mdd_pct": -31.55,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -42919,7 +43202,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 2992.5
   },
   "3659.T": {
     "company_id": 151,
@@ -42928,9 +43212,9 @@
     "korean_name": "Nexon",
     "moat_title": "던전앤파이터·메이플스토리 IP. 중국 던파 모바일이 단일 타이틀 최대 매출. 일본 상장.",
     "quote": {
-      "current_price": 3002.0,
+      "current_price": 2992.5,
       "high_52w": 4371.74,
-      "mdd_pct": -31.33,
+      "mdd_pct": -31.55,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 52.0,
       "op_margin": 22.0,
@@ -43070,7 +43354,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 2992.5
   },
   "152": {
     "company_id": 163,
@@ -43228,7 +43513,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 316.83
   },
   "153": {
     "company_id": 165,
@@ -43379,7 +43665,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 344.72
   },
   "154": {
     "company_id": 154,
@@ -43530,7 +43817,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 217.56
   },
   "155": {
     "company_id": 155,
@@ -43681,7 +43969,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 47.11
   },
   "U": {
     "company_id": 155,
@@ -43832,7 +44121,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 47.11
   },
   "156": {
     "company_id": 156,
@@ -43983,7 +44273,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 14.88
   },
   "UMG.AS": {
     "company_id": 156,
@@ -44134,7 +44425,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 14.88
   },
   "157": {
     "company_id": 157,
@@ -44285,7 +44577,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 27.21
   },
   "WMG": {
     "company_id": 157,
@@ -44436,7 +44729,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 27.21
   },
   "158": {
     "company_id": 158,
@@ -44445,9 +44739,9 @@
     "korean_name": "HYBE",
     "moat_title": "BTS·세븐틴·뉴진스·르세라핌 등 멀티 레이블. 위버스 팬 플랫폼 글로벌 MAU 1,000만+. K-Pop IP 360도 수익화.",
     "quote": {
-      "current_price": 171800.0,
-      "high_52w": 404926.45,
-      "mdd_pct": -57.57,
+      "current_price": 172200,
+      "high_52w": 404926,
+      "mdd_pct": -57.47,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -44587,7 +44881,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 172200
   },
   "352820.KS": {
     "company_id": 158,
@@ -44596,9 +44891,9 @@
     "korean_name": "HYBE",
     "moat_title": "BTS·세븐틴·뉴진스·르세라핌 등 멀티 레이블. 위버스 팬 플랫폼 글로벌 MAU 1,000만+. K-Pop IP 360도 수익화.",
     "quote": {
-      "current_price": 171800.0,
-      "high_52w": 404926.45,
-      "mdd_pct": -57.57,
+      "current_price": 172200,
+      "high_52w": 404926,
+      "mdd_pct": -57.47,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -44738,7 +45033,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 172200
   },
   "159": {
     "company_id": 159,
@@ -44747,9 +45043,9 @@
     "korean_name": "SM Entertainment",
     "moat_title": "EXO·aespa·NCT·SHINEE 등 글로벌 K-Pop IP. SM 유니버스 세계관 기반 스토리텔링 전략.",
     "quote": {
-      "current_price": 71000.0,
-      "high_52w": 78600.0,
-      "mdd_pct": -9.67,
+      "current_price": 72800,
+      "high_52w": 78600,
+      "mdd_pct": -7.38,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -44889,7 +45185,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 72800
   },
   "041510.KS": {
     "company_id": 159,
@@ -44898,9 +45195,9 @@
     "korean_name": "SM Entertainment",
     "moat_title": "EXO·aespa·NCT·SHINEE 등 글로벌 K-Pop IP. SM 유니버스 세계관 기반 스토리텔링 전략.",
     "quote": {
-      "current_price": 71000.0,
-      "high_52w": 78600.0,
-      "mdd_pct": -9.67,
+      "current_price": 72800,
+      "high_52w": 78600,
+      "mdd_pct": -7.38,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -45040,7 +45337,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 72800
   },
   "160": {
     "company_id": 160,
@@ -45049,9 +45347,9 @@
     "korean_name": "JYP Entertainment",
     "moat_title": "TWICE·Stray Kids·ITZY·NiziU·NEXZ. 일본 현지화 성공 사례. 북미·동남아 레이블 확장 중.",
     "quote": {
-      "current_price": 39350.0,
-      "high_52w": 47850.0,
-      "mdd_pct": -17.76,
+      "current_price": 39950,
+      "high_52w": 47850,
+      "mdd_pct": -16.51,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -45191,7 +45489,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 39950
   },
   "035900.KS": {
     "company_id": 160,
@@ -45200,9 +45499,9 @@
     "korean_name": "JYP Entertainment",
     "moat_title": "TWICE·Stray Kids·ITZY·NiziU·NEXZ. 일본 현지화 성공 사례. 북미·동남아 레이블 확장 중.",
     "quote": {
-      "current_price": 39350.0,
-      "high_52w": 47850.0,
-      "mdd_pct": -17.76,
+      "current_price": 39950,
+      "high_52w": 47850,
+      "mdd_pct": -16.51,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -45342,7 +45641,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 39950
   },
   "161": {
     "company_id": 161,
@@ -45351,9 +45651,9 @@
     "korean_name": "YG Entertainment",
     "moat_title": "BLACKPINK·BIGBANG·WINNER·iKON 등. BLACKPINK 솔로 활동 및 재계약이 단기 촉매.",
     "quote": {
-      "current_price": 38650.0,
-      "high_52w": 44850.0,
-      "mdd_pct": -13.82,
+      "current_price": 39450,
+      "high_52w": 44850,
+      "mdd_pct": -12.04,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -45493,7 +45793,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 39450
   },
   "122870.KS": {
     "company_id": 161,
@@ -45502,9 +45803,9 @@
     "korean_name": "YG Entertainment",
     "moat_title": "BLACKPINK·BIGBANG·WINNER·iKON 등. BLACKPINK 솔로 활동 및 재계약이 단기 촉매.",
     "quote": {
-      "current_price": 38650.0,
-      "high_52w": 44850.0,
-      "mdd_pct": -13.82,
+      "current_price": 39450,
+      "high_52w": 44850,
+      "mdd_pct": -12.04,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -45644,7 +45945,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 39450
   },
   "162": {
     "company_id": 162,
@@ -45795,7 +46097,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 533.37
   },
   "SPOT": {
     "company_id": 162,
@@ -45946,7 +46249,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 533.37
   },
   "163": {
     "company_id": 163,
@@ -46104,7 +46408,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 316.83
   },
   "164": {
     "company_id": 164,
@@ -46255,7 +46560,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 184.19
   },
   "LYV": {
     "company_id": 164,
@@ -46406,7 +46712,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 184.19
   },
   "165": {
     "company_id": 165,
@@ -46557,7 +46864,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 344.72
   },
   "166": {
     "company_id": 166,
@@ -46566,9 +46874,9 @@
     "korean_name": "Kakao Entertainment",
     "moat_title": "카카오엔터 — 멜론(국내 최대 음원 플랫폼) + SM엔터 지분 + 웹툰·웹소설 IP. K-Pop 국내 디지털 유통 독점.",
     "quote": {
-      "current_price": 38250.0,
-      "high_52w": 69602.47,
-      "mdd_pct": -45.05,
+      "current_price": 37400,
+      "high_52w": 69602,
+      "mdd_pct": -46.27,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -46708,7 +47016,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 37400
   },
   "035720.KS": {
     "company_id": 166,
@@ -46717,9 +47026,9 @@
     "korean_name": "Kakao Entertainment",
     "moat_title": "카카오엔터 — 멜론(국내 최대 음원 플랫폼) + SM엔터 지분 + 웹툰·웹소설 IP. K-Pop 국내 디지털 유통 독점.",
     "quote": {
-      "current_price": 38250.0,
-      "high_52w": 69602.47,
-      "mdd_pct": -45.05,
+      "current_price": 37400,
+      "high_52w": 69602,
+      "mdd_pct": -46.27,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -46859,7 +47168,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 37400
   },
   "167": {
     "company_id": 167,
@@ -46868,9 +47178,9 @@
     "korean_name": "HD한국조선해양",
     "moat_title": "HD현대그룹 조선 중간 지주사. HD현대중공업·HD현대미포·HD현대삼호 등 3개 조선소를 총괄하며 선박 설계·엔진(Hi-ME)·LNG 화물창 기술을 내재화한 글로벌 1위 조선 그룹.",
     "quote": {
-      "current_price": 374500.0,
-      "high_52w": 480030.14,
-      "mdd_pct": -21.98,
+      "current_price": 367000,
+      "high_52w": 480030,
+      "mdd_pct": -23.55,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -47010,7 +47320,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 367000
   },
   "009540.KS": {
     "company_id": 167,
@@ -47019,9 +47330,9 @@
     "korean_name": "HD한국조선해양",
     "moat_title": "HD현대그룹 조선 중간 지주사. HD현대중공업·HD현대미포·HD현대삼호 등 3개 조선소를 총괄하며 선박 설계·엔진(Hi-ME)·LNG 화물창 기술을 내재화한 글로벌 1위 조선 그룹.",
     "quote": {
-      "current_price": 374500.0,
-      "high_52w": 480030.14,
-      "mdd_pct": -21.98,
+      "current_price": 367000,
+      "high_52w": 480030,
+      "mdd_pct": -23.55,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -47161,7 +47472,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 367000
   },
   "168": {
     "company_id": 168,
@@ -47170,9 +47482,9 @@
     "korean_name": "HD현대중공업",
     "moat_title": "세계 1위 조선사(수주잔고 기준). LNG선·VLCC·컨테이너선·특수선 전방위 포트폴리오. 울산 대형 도크 보유로 최대 규모 동시 건조 능력.",
     "quote": {
-      "current_price": 489500.0,
-      "high_52w": 755737.87,
-      "mdd_pct": -35.23,
+      "current_price": 474000,
+      "high_52w": 755737,
+      "mdd_pct": -37.28,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -47312,7 +47624,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 474000
   },
   "329180.KS": {
     "company_id": 168,
@@ -47321,9 +47634,9 @@
     "korean_name": "HD현대중공업",
     "moat_title": "세계 1위 조선사(수주잔고 기준). LNG선·VLCC·컨테이너선·특수선 전방위 포트폴리오. 울산 대형 도크 보유로 최대 규모 동시 건조 능력.",
     "quote": {
-      "current_price": 489500.0,
-      "high_52w": 755737.87,
-      "mdd_pct": -35.23,
+      "current_price": 474000,
+      "high_52w": 755737,
+      "mdd_pct": -37.28,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -47463,7 +47776,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 474000
   },
   "169": {
     "company_id": 169,
@@ -47472,9 +47786,9 @@
     "korean_name": "한화오션",
     "moat_title": "前 대우조선해양. 한화그룹 편입 후 방산(잠수함·상륙함) + 상선(LNG선·탱커) 투트랙 전략. 미국 필리조선소 인수로 미 해군 함정 MRO 시장 직접 진출.",
     "quote": {
-      "current_price": 90900.0,
-      "high_52w": 154800.0,
-      "mdd_pct": -41.28,
+      "current_price": 88100,
+      "high_52w": 154800,
+      "mdd_pct": -43.09,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -47614,7 +47928,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 88100
   },
   "042660.KS": {
     "company_id": 169,
@@ -47623,9 +47938,9 @@
     "korean_name": "한화오션",
     "moat_title": "前 대우조선해양. 한화그룹 편입 후 방산(잠수함·상륙함) + 상선(LNG선·탱커) 투트랙 전략. 미국 필리조선소 인수로 미 해군 함정 MRO 시장 직접 진출.",
     "quote": {
-      "current_price": 90900.0,
-      "high_52w": 154800.0,
-      "mdd_pct": -41.28,
+      "current_price": 88100,
+      "high_52w": 154800,
+      "mdd_pct": -43.09,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -47765,7 +48080,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 88100
   },
   "170": {
     "company_id": 170,
@@ -47774,9 +48090,9 @@
     "korean_name": "삼성중공업",
     "moat_title": "삼성그룹 계열 조선사. LNG선·드릴십(해저 시추선)·FLNG(부유식 LNG 생산설비) 분야 세계 최고 기술력 보유. 고부가 특수선 전문.",
     "quote": {
-      "current_price": 21250.0,
-      "high_52w": 35350.0,
-      "mdd_pct": -39.89,
+      "current_price": 20600,
+      "high_52w": 35350,
+      "mdd_pct": -41.73,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -47916,7 +48232,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 20600
   },
   "010140.KS": {
     "company_id": 170,
@@ -47925,9 +48242,9 @@
     "korean_name": "삼성중공업",
     "moat_title": "삼성그룹 계열 조선사. LNG선·드릴십(해저 시추선)·FLNG(부유식 LNG 생산설비) 분야 세계 최고 기술력 보유. 고부가 특수선 전문.",
     "quote": {
-      "current_price": 21250.0,
-      "high_52w": 35350.0,
-      "mdd_pct": -39.89,
+      "current_price": 20600,
+      "high_52w": 35350,
+      "mdd_pct": -41.73,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -48067,7 +48384,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 20600
   },
   "171": {
     "company_id": 175,
@@ -48076,9 +48394,9 @@
     "korean_name": "HMM",
     "moat_title": "국내 최대 컨테이너 선사. THE Alliance 가입, 아시아-유럽·아시아-미주 주요 항로 운영. 2024년 운임 급등 사이클 수혜.",
     "quote": {
-      "current_price": 22650.0,
-      "high_52w": 24950.0,
-      "mdd_pct": -9.22,
+      "current_price": 21700,
+      "high_52w": 24950,
+      "mdd_pct": -13.03,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -48218,7 +48536,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 21700
   },
   "011200.KS": {
     "company_id": 175,
@@ -48227,9 +48546,9 @@
     "korean_name": "HMM",
     "moat_title": "국내 최대 컨테이너 선사. THE Alliance 가입, 아시아-유럽·아시아-미주 주요 항로 운영. 2024년 운임 급등 사이클 수혜.",
     "quote": {
-      "current_price": 22650.0,
-      "high_52w": 24950.0,
-      "mdd_pct": -9.22,
+      "current_price": 21700,
+      "high_52w": 24950,
+      "mdd_pct": -13.03,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -48369,7 +48688,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 21700
   },
   "172": {
     "company_id": 185,
@@ -48378,9 +48698,9 @@
     "korean_name": "팬오션",
     "moat_title": "국내 1위 벌크선사. 철광석·석탄·곡물 등 건화물 벌크운송 전문. 하림그룹 계열.",
     "quote": {
-      "current_price": 6040.0,
-      "high_52w": 6600.0,
-      "mdd_pct": -8.48,
+      "current_price": 6010,
+      "high_52w": 6600,
+      "mdd_pct": -8.94,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -48520,7 +48840,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 6010
   },
   "028670.KS": {
     "company_id": 185,
@@ -48529,9 +48850,9 @@
     "korean_name": "팬오션",
     "moat_title": "국내 1위 벌크선사. 철광석·석탄·곡물 등 건화물 벌크운송 전문. 하림그룹 계열.",
     "quote": {
-      "current_price": 6040.0,
-      "high_52w": 6600.0,
-      "mdd_pct": -8.48,
+      "current_price": 6010,
+      "high_52w": 6600,
+      "mdd_pct": -8.94,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -48671,7 +48992,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 6010
   },
   "173": {
     "company_id": 173,
@@ -48822,7 +49144,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 311.76
   },
   "HII": {
     "company_id": 173,
@@ -48973,7 +49296,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 311.76
   },
   "174": {
     "company_id": 174,
@@ -49124,7 +49448,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 392.34
   },
   "GD": {
     "company_id": 174,
@@ -49275,7 +49600,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 392.34
   },
   "175": {
     "company_id": 175,
@@ -49284,9 +49610,9 @@
     "korean_name": "HMM",
     "moat_title": "국내 최대 컨테이너 선사. THE Alliance 가입, 아시아-유럽·아시아-미주 주요 항로 운영. 2024년 운임 급등 사이클 수혜.",
     "quote": {
-      "current_price": 22650.0,
-      "high_52w": 24950.0,
-      "mdd_pct": -9.22,
+      "current_price": 21700,
+      "high_52w": 24950,
+      "mdd_pct": -13.03,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -49426,7 +49752,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 21700
   },
   "176": {
     "company_id": 176,
@@ -49435,9 +49762,9 @@
     "korean_name": "대한항공",
     "moat_title": "국내 FSC(대형항공사) 1위. 여객·화물 복합 운영으로 반도체·바이오·전기차 배터리 항공화물 수요 강세 수혜.",
     "quote": {
-      "current_price": 25250.0,
-      "high_52w": 31200.0,
-      "mdd_pct": -19.07,
+      "current_price": 25050,
+      "high_52w": 31200,
+      "mdd_pct": -19.71,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -49577,7 +49904,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 25050
   },
   "003490.KS": {
     "company_id": 176,
@@ -49586,9 +49914,9 @@
     "korean_name": "대한항공",
     "moat_title": "국내 FSC(대형항공사) 1위. 여객·화물 복합 운영으로 반도체·바이오·전기차 배터리 항공화물 수요 강세 수혜.",
     "quote": {
-      "current_price": 25250.0,
-      "high_52w": 31200.0,
-      "mdd_pct": -19.07,
+      "current_price": 25050,
+      "high_52w": 31200,
+      "mdd_pct": -19.71,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -49728,7 +50056,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 25050
   },
   "177": {
     "company_id": 177,
@@ -49737,9 +50066,9 @@
     "korean_name": "현대글로비스",
     "moat_title": "현대기아차 완성차 전용선(PCC) 운영, 세계 PCC 시장 점유율 1위권. 자동차 해상운송·종합물류 통합 사업자.",
     "quote": {
-      "current_price": 206500.0,
-      "high_52w": 288584.02,
-      "mdd_pct": -28.44,
+      "current_price": 203500,
+      "high_52w": 288584,
+      "mdd_pct": -29.48,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -49879,7 +50208,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 203500
   },
   "086280.KS": {
     "company_id": 177,
@@ -49888,9 +50218,9 @@
     "korean_name": "현대글로비스",
     "moat_title": "현대기아차 완성차 전용선(PCC) 운영, 세계 PCC 시장 점유율 1위권. 자동차 해상운송·종합물류 통합 사업자.",
     "quote": {
-      "current_price": 206500.0,
-      "high_52w": 288584.02,
-      "mdd_pct": -28.44,
+      "current_price": 203500,
+      "high_52w": 288584,
+      "mdd_pct": -29.48,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -50030,7 +50360,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 203500
   },
   "178": {
     "company_id": 178,
@@ -50039,9 +50370,9 @@
     "korean_name": "CJ대한통운",
     "moat_title": "국내 택배시장 점유율 1위(약 40%). 국내 택배·해외 포워딩·3PL 종합물류 통합 사업자.",
     "quote": {
-      "current_price": 75300.0,
-      "high_52w": 152861.37,
-      "mdd_pct": -50.74,
+      "current_price": 73000,
+      "high_52w": 152861,
+      "mdd_pct": -52.24,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -50181,7 +50512,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 73000
   },
   "000120.KS": {
     "company_id": 178,
@@ -50190,9 +50522,9 @@
     "korean_name": "CJ대한통운",
     "moat_title": "국내 택배시장 점유율 1위(약 40%). 국내 택배·해외 포워딩·3PL 종합물류 통합 사업자.",
     "quote": {
-      "current_price": 75300.0,
-      "high_52w": 152861.37,
-      "mdd_pct": -50.74,
+      "current_price": 73000,
+      "high_52w": 152861,
+      "mdd_pct": -52.24,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -50332,7 +50664,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 73000
   },
   "179": {
     "company_id": 179,
@@ -50483,7 +50816,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 328.38
   },
   "FDX": {
     "company_id": 179,
@@ -50634,7 +50968,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 328.38
   },
   "180": {
     "company_id": 180,
@@ -50785,7 +51120,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 102.86
   },
   "UPS": {
     "company_id": 180,
@@ -50936,7 +51272,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 102.86
   },
   "181": {
     "company_id": 181,
@@ -51087,7 +51424,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 272.42
   },
   "JBHT": {
     "company_id": 181,
@@ -51238,7 +51576,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 272.42
   },
   "182": {
     "company_id": 182,
@@ -51389,7 +51728,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 205.08
   },
   "ODFL": {
     "company_id": 182,
@@ -51540,7 +51880,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 205.08
   },
   "183": {
     "company_id": 183,
@@ -51691,7 +52032,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 197.43
   },
   "XPO": {
     "company_id": 183,
@@ -51842,7 +52184,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 197.43
   },
   "184": {
     "company_id": 184,
@@ -51993,7 +52336,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 16.15
   },
   "AMKBY": {
     "company_id": 184,
@@ -52144,7 +52488,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 16.15
   },
   "185": {
     "company_id": 185,
@@ -52153,9 +52498,9 @@
     "korean_name": "팬오션",
     "moat_title": "국내 1위 벌크선사. 철광석·석탄·곡물 등 건화물 벌크운송 전문. 하림그룹 계열.",
     "quote": {
-      "current_price": 6040.0,
-      "high_52w": 6600.0,
-      "mdd_pct": -8.48,
+      "current_price": 6010,
+      "high_52w": 6600,
+      "mdd_pct": -8.94,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -52295,7 +52640,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 6010
   },
   "186": {
     "company_id": 186,
@@ -52446,7 +52792,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1280.34
   },
   "LLY": {
     "company_id": 186,
@@ -52597,7 +52944,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1280.34
   },
   "187": {
     "company_id": 187,
@@ -52748,7 +53096,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 152.2
   },
   "MRK": {
     "company_id": 187,
@@ -52899,7 +53248,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 152.2
   },
   "188": {
     "company_id": 188,
@@ -52908,9 +53258,9 @@
     "korean_name": "리가켐바이오",
     "moat_title": "독자적 ADC(항체-약물 접합체) 링커 및 페이로드 원천 기술 보유. 초기 임상 단계 글로벌 빅파마 수출 특화.",
     "quote": {
-      "current_price": 105100.0,
-      "high_52w": 225000.0,
-      "mdd_pct": -53.29,
+      "current_price": 104400,
+      "high_52w": 225000,
+      "mdd_pct": -53.6,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -53050,7 +53400,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 104400
   },
   "141080.KQ": {
     "company_id": 188,
@@ -53059,9 +53410,9 @@
     "korean_name": "리가켐바이오",
     "moat_title": "독자적 ADC(항체-약물 접합체) 링커 및 페이로드 원천 기술 보유. 초기 임상 단계 글로벌 빅파마 수출 특화.",
     "quote": {
-      "current_price": 105100.0,
-      "high_52w": 225000.0,
-      "mdd_pct": -53.29,
+      "current_price": 104400,
+      "high_52w": 225000,
+      "mdd_pct": -53.6,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -53201,7 +53552,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 104400
   },
   "189": {
     "company_id": 189,
@@ -53210,9 +53562,9 @@
     "korean_name": "알테오젠",
     "moat_title": "정맥주사(IV)를 피하주사(SC)로 바꾸는 원천 플랫폼 보유. 빅파마의 에버그리닝 특허 연장에 필수재 공급.",
     "quote": {
-      "current_price": 298000.0,
-      "high_52w": 437322.44,
-      "mdd_pct": -31.86,
+      "current_price": 303500,
+      "high_52w": 437322,
+      "mdd_pct": -30.6,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -53352,7 +53704,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 303500
   },
   "196170.KQ": {
     "company_id": 189,
@@ -53361,9 +53714,9 @@
     "korean_name": "알테오젠",
     "moat_title": "정맥주사(IV)를 피하주사(SC)로 바꾸는 원천 플랫폼 보유. 빅파마의 에버그리닝 특허 연장에 필수재 공급.",
     "quote": {
-      "current_price": 298000.0,
-      "high_52w": 437322.44,
-      "mdd_pct": -31.86,
+      "current_price": 303500,
+      "high_52w": 437322,
+      "mdd_pct": -30.6,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -53503,7 +53856,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 303500
   },
   "190": {
     "company_id": 190,
@@ -53654,7 +54008,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 249.28
   },
   "IQV": {
     "company_id": 190,
@@ -53805,7 +54160,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 249.28
   },
   "191": {
     "company_id": 191,
@@ -53956,7 +54312,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 61.73
   },
   "RPRX": {
     "company_id": 191,
@@ -54107,7 +54464,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 61.73
   },
   "192": {
     "company_id": 192,
@@ -54116,9 +54474,9 @@
     "korean_name": "드림씨아이에스",
     "moat_title": "한국 대표 CRO. 국내 제약/바이오텍의 아시아 및 글로벌 임상 진입 가교 역할 수행.",
     "quote": {
-      "current_price": 3390.0,
-      "high_52w": 8640.0,
-      "mdd_pct": -60.76,
+      "current_price": 3305,
+      "high_52w": 8640,
+      "mdd_pct": -61.75,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -54258,7 +54616,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 3305
   },
   "223250.KQ": {
     "company_id": 192,
@@ -54267,9 +54626,9 @@
     "korean_name": "드림씨아이에스",
     "moat_title": "한국 대표 CRO. 국내 제약/바이오텍의 아시아 및 글로벌 임상 진입 가교 역할 수행.",
     "quote": {
-      "current_price": 3390.0,
-      "high_52w": 8640.0,
-      "mdd_pct": -60.76,
+      "current_price": 3305,
+      "high_52w": 8640,
+      "mdd_pct": -61.75,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -54409,7 +54768,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 3305
   },
   "193": {
     "company_id": 193,
@@ -54560,7 +54920,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 613.54
   },
   "TMO": {
     "company_id": 193,
@@ -54711,7 +55072,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 613.54
   },
   "194": {
     "company_id": 194,
@@ -54862,7 +55224,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 211.5
   },
   "DHR": {
     "company_id": 194,
@@ -55013,7 +55376,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 211.5
   },
   "195": {
     "company_id": 195,
@@ -55022,9 +55386,9 @@
     "korean_name": "삼성바이오로직스",
     "moat_title": "세계 최대 바이오의약품 배양 용량을 갖춘 CDMO. 압도적 자본력(CAPEX)과 제조 실행력 입증.",
     "quote": {
-      "current_price": 1531000.0,
-      "high_52w": 1987000.0,
-      "mdd_pct": -22.95,
+      "current_price": 1544000,
+      "high_52w": 1987000,
+      "mdd_pct": -22.29,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -55164,7 +55528,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1544000
   },
   "207940.KS": {
     "company_id": 195,
@@ -55173,9 +55538,9 @@
     "korean_name": "삼성바이오로직스",
     "moat_title": "세계 최대 바이오의약품 배양 용량을 갖춘 CDMO. 압도적 자본력(CAPEX)과 제조 실행력 입증.",
     "quote": {
-      "current_price": 1531000.0,
-      "high_52w": 1987000.0,
-      "mdd_pct": -22.95,
+      "current_price": 1544000,
+      "high_52w": 1987000,
+      "mdd_pct": -22.29,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -55315,7 +55680,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1544000
   },
   "196": {
     "company_id": 196,
@@ -55324,9 +55690,9 @@
     "korean_name": "에스티팜",
     "moat_title": "올리고뉴클레오타이드(RNA 치료제 원료) 세계 1위권 CDMO. 저분자 합성 신약 특화 제조 역량.",
     "quote": {
-      "current_price": 100300.0,
-      "high_52w": 172100.0,
-      "mdd_pct": -41.72,
+      "current_price": 99300,
+      "high_52w": 172100,
+      "mdd_pct": -42.3,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -55466,7 +55832,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 99300
   },
   "237690.KQ": {
     "company_id": 196,
@@ -55475,9 +55842,9 @@
     "korean_name": "에스티팜",
     "moat_title": "올리고뉴클레오타이드(RNA 치료제 원료) 세계 1위권 CDMO. 저분자 합성 신약 특화 제조 역량.",
     "quote": {
-      "current_price": 100300.0,
-      "high_52w": 172100.0,
-      "mdd_pct": -41.72,
+      "current_price": 99300,
+      "high_52w": 172100,
+      "mdd_pct": -42.3,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -55617,7 +55984,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 99300
   },
   "197": {
     "company_id": 197,
@@ -55768,7 +56136,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 853.71
   },
   "MCK": {
     "company_id": 197,
@@ -55919,7 +56288,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 853.71
   },
   "198": {
     "company_id": 198,
@@ -56070,7 +56440,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 388.61
   },
   "UNH": {
     "company_id": 198,
@@ -56221,7 +56592,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 388.61
   },
   "199": {
     "company_id": 199,
@@ -56230,9 +56602,9 @@
     "korean_name": "셀트리온",
     "moat_title": "글로벌 바이오시밀러 선도 기업. 신약(짐펜트라 등) R&D를 넘어 미국 현지에 직접 유통망(직판) 구축.",
     "quote": {
-      "current_price": 195500.0,
-      "high_52w": 239047.62,
-      "mdd_pct": -18.22,
+      "current_price": 194100,
+      "high_52w": 239047,
+      "mdd_pct": -18.8,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 64.2,
       "op_margin": 28.5,
@@ -56372,7 +56744,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 194100
   },
   "068270.KS": {
     "company_id": 199,
@@ -56381,9 +56754,9 @@
     "korean_name": "셀트리온",
     "moat_title": "글로벌 바이오시밀러 선도 기업. 신약(짐펜트라 등) R&D를 넘어 미국 현지에 직접 유통망(직판) 구축.",
     "quote": {
-      "current_price": 195500.0,
-      "high_52w": 239047.62,
-      "mdd_pct": -18.22,
+      "current_price": 194100,
+      "high_52w": 239047,
+      "mdd_pct": -18.8,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 64.2,
       "op_margin": 28.5,
@@ -56523,7 +56896,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 194100
   },
   "200": {
     "company_id": 200,
@@ -56532,8 +56906,8 @@
     "korean_name": "유한양행",
     "moat_title": "한국 대표 제약사. 렉라자(폐암 치료제) 미국 FDA 승인 등 신약 R&D 및 직판/오픈이노베이션 역량 증명.",
     "quote": {
-      "current_price": 79600.0,
-      "high_52w": 128514.59,
+      "current_price": 79600,
+      "high_52w": 128514,
       "mdd_pct": -38.06,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
@@ -56674,7 +57048,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 79600
   },
   "000100.KS": {
     "company_id": 200,
@@ -56683,8 +57058,8 @@
     "korean_name": "유한양행",
     "moat_title": "한국 대표 제약사. 렉라자(폐암 치료제) 미국 FDA 승인 등 신약 R&D 및 직판/오픈이노베이션 역량 증명.",
     "quote": {
-      "current_price": 79600.0,
-      "high_52w": 128514.59,
+      "current_price": 79600,
+      "high_52w": 128514,
       "mdd_pct": -38.06,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
@@ -56825,7 +57200,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 79600
   },
   "236": {
     "company_id": 236,
@@ -56834,9 +57210,9 @@
     "korean_name": "선진뷰티사이언스",
     "moat_title": "화장품 원료(자외선 차단제, 마이크로비드 등) 제조 및 글로벌 수출 전문 기업. PDRN·시카 등 기능성 원료의 글로벌 공급망 장악.",
     "quote": {
-      "current_price": 8000.0,
-      "high_52w": 11880.0,
-      "mdd_pct": -32.66,
+      "current_price": 7800,
+      "high_52w": 11880,
+      "mdd_pct": -34.34,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -56976,7 +57352,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 7800
   },
   "086710.KQ": {
     "company_id": 236,
@@ -56985,9 +57362,9 @@
     "korean_name": "선진뷰티사이언스",
     "moat_title": "화장품 원료(자외선 차단제, 마이크로비드 등) 제조 및 글로벌 수출 전문 기업. PDRN·시카 등 기능성 원료의 글로벌 공급망 장악.",
     "quote": {
-      "current_price": 8000.0,
-      "high_52w": 11880.0,
-      "mdd_pct": -32.66,
+      "current_price": 7800,
+      "high_52w": 11880,
+      "mdd_pct": -34.34,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -57127,7 +57504,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 7800
   },
   "237": {
     "company_id": 237,
@@ -57136,9 +57514,9 @@
     "korean_name": "대봉엘에스",
     "moat_title": "화장품 소재 및 원료의약품 전문 기업. 피부 기능 개선 소재부터 의약품 원료까지 B2B 공급.",
     "quote": {
-      "current_price": 8160.0,
-      "high_52w": 13941.37,
-      "mdd_pct": -41.47,
+      "current_price": 7950,
+      "high_52w": 13941,
+      "mdd_pct": -42.98,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -57278,7 +57656,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 7950
   },
   "078140.KQ": {
     "company_id": 237,
@@ -57287,9 +57666,9 @@
     "korean_name": "대봉엘에스",
     "moat_title": "화장품 소재 및 원료의약품 전문 기업. 피부 기능 개선 소재부터 의약품 원료까지 B2B 공급.",
     "quote": {
-      "current_price": 8160.0,
-      "high_52w": 13941.37,
-      "mdd_pct": -41.47,
+      "current_price": 7950,
+      "high_52w": 13941,
+      "mdd_pct": -42.98,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -57429,7 +57808,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 7950
   },
   "238": {
     "company_id": 238,
@@ -57438,9 +57818,9 @@
     "korean_name": "케어젠",
     "moat_title": "펩타이드 기반 바이오 원료 및 화장품·의료기기 개발 전문 기업. 독자 합성 기술 기반 고기능 활성 성분 글로벌 공급.",
     "quote": {
-      "current_price": 55400.0,
-      "high_52w": 153323.84,
-      "mdd_pct": -63.87,
+      "current_price": 54000,
+      "high_52w": 153323,
+      "mdd_pct": -64.78,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -57580,7 +57960,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 54000
   },
   "214370.KQ": {
     "company_id": 238,
@@ -57589,9 +57970,9 @@
     "korean_name": "케어젠",
     "moat_title": "펩타이드 기반 바이오 원료 및 화장품·의료기기 개발 전문 기업. 독자 합성 기술 기반 고기능 활성 성분 글로벌 공급.",
     "quote": {
-      "current_price": 55400.0,
-      "high_52w": 153323.84,
-      "mdd_pct": -63.87,
+      "current_price": 54000,
+      "high_52w": 153323,
+      "mdd_pct": -64.78,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -57731,7 +58112,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 54000
   },
   "239": {
     "company_id": 239,
@@ -57740,9 +58122,9 @@
     "korean_name": "코스맥스",
     "moat_title": "글로벌 1위 화장품 ODM 전문 기업. 국내·중국·미국·동남아에 생산거점 보유. Fast Beauty 사이클 구현의 핵심 파트너.",
     "quote": {
-      "current_price": 239000.0,
-      "high_52w": 262000.0,
-      "mdd_pct": -8.78,
+      "current_price": 246000,
+      "high_52w": 262000,
+      "mdd_pct": -6.11,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -57882,7 +58264,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 246000
   },
   "192820.KS": {
     "company_id": 239,
@@ -57891,9 +58274,9 @@
     "korean_name": "코스맥스",
     "moat_title": "글로벌 1위 화장품 ODM 전문 기업. 국내·중국·미국·동남아에 생산거점 보유. Fast Beauty 사이클 구현의 핵심 파트너.",
     "quote": {
-      "current_price": 239000.0,
-      "high_52w": 262000.0,
-      "mdd_pct": -8.78,
+      "current_price": 246000,
+      "high_52w": 262000,
+      "mdd_pct": -6.11,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -58033,7 +58416,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 246000
   },
   "240": {
     "company_id": 240,
@@ -58042,9 +58426,9 @@
     "korean_name": "한국콜마",
     "moat_title": "화장품·제약·건강기능식품 글로벌 ODM 기업. 피부과학 기반 기능성 제형 특화, 색조부터 스킨케어까지 풀라인업.",
     "quote": {
-      "current_price": 129700.0,
-      "high_52w": 144000.0,
-      "mdd_pct": -9.93,
+      "current_price": 127800,
+      "high_52w": 144000,
+      "mdd_pct": -11.25,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -58184,7 +58568,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 127800
   },
   "161890.KS": {
     "company_id": 240,
@@ -58193,9 +58578,9 @@
     "korean_name": "한국콜마",
     "moat_title": "화장품·제약·건강기능식품 글로벌 ODM 기업. 피부과학 기반 기능성 제형 특화, 색조부터 스킨케어까지 풀라인업.",
     "quote": {
-      "current_price": 129700.0,
-      "high_52w": 144000.0,
-      "mdd_pct": -9.93,
+      "current_price": 127800,
+      "high_52w": 144000,
+      "mdd_pct": -11.25,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -58335,7 +58720,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 127800
   },
   "241": {
     "company_id": 241,
@@ -58344,9 +58730,9 @@
     "korean_name": "씨앤씨인터내셔널",
     "moat_title": "포인트 메이크업 색조 화장품 글로벌 ODM 기업. 쿠션·립스틱·아이제품 등 색조 특화 제형 기술 보유.",
     "quote": {
-      "current_price": 20700.0,
-      "high_52w": 45900.0,
-      "mdd_pct": -54.9,
+      "current_price": 20750,
+      "high_52w": 45900,
+      "mdd_pct": -54.79,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -58486,7 +58872,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 20750
   },
   "352480.KQ": {
     "company_id": 241,
@@ -58495,9 +58882,9 @@
     "korean_name": "씨앤씨인터내셔널",
     "moat_title": "포인트 메이크업 색조 화장품 글로벌 ODM 기업. 쿠션·립스틱·아이제품 등 색조 특화 제형 기술 보유.",
     "quote": {
-      "current_price": 20700.0,
-      "high_52w": 45900.0,
-      "mdd_pct": -54.9,
+      "current_price": 20750,
+      "high_52w": 45900,
+      "mdd_pct": -54.79,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -58637,7 +59024,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 20750
   },
   "242": {
     "company_id": 242,
@@ -58646,9 +59034,9 @@
     "korean_name": "브이티",
     "moat_title": "리들샷 등 마이크로니들 기반 화장품 브랜드. 일본·북미 등 글로벌 숏폼 바이럴로 초고속 성장. BTS 협업 팬덤 마케팅 선도.",
     "quote": {
-      "current_price": 12520.0,
-      "high_52w": 39350.0,
-      "mdd_pct": -68.18,
+      "current_price": 12210,
+      "high_52w": 39350,
+      "mdd_pct": -68.97,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -58788,7 +59176,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 12210
   },
   "018290.KQ": {
     "company_id": 242,
@@ -58797,9 +59186,9 @@
     "korean_name": "브이티",
     "moat_title": "리들샷 등 마이크로니들 기반 화장품 브랜드. 일본·북미 등 글로벌 숏폼 바이럴로 초고속 성장. BTS 협업 팬덤 마케팅 선도.",
     "quote": {
-      "current_price": 12520.0,
-      "high_52w": 39350.0,
-      "mdd_pct": -68.18,
+      "current_price": 12210,
+      "high_52w": 39350,
+      "mdd_pct": -68.97,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -58939,7 +59328,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 12210
   },
   "243": {
     "company_id": 243,
@@ -58948,9 +59338,9 @@
     "korean_name": "클리오",
     "moat_title": "색조 전문 뷰티 브랜드(클리오·구달·페리페라). 멀티브랜드 전략으로 K-뷰티 글로벌 확산 선도.",
     "quote": {
-      "current_price": 13500.0,
-      "high_52w": 15041.84,
-      "mdd_pct": -10.25,
+      "current_price": 12920,
+      "high_52w": 15041,
+      "mdd_pct": -14.11,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -59090,7 +59480,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 12920
   },
   "237880.KQ": {
     "company_id": 243,
@@ -59099,9 +59490,9 @@
     "korean_name": "클리오",
     "moat_title": "색조 전문 뷰티 브랜드(클리오·구달·페리페라). 멀티브랜드 전략으로 K-뷰티 글로벌 확산 선도.",
     "quote": {
-      "current_price": 13500.0,
-      "high_52w": 15041.84,
-      "mdd_pct": -10.25,
+      "current_price": 12920,
+      "high_52w": 15041,
+      "mdd_pct": -14.11,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -59241,7 +59632,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 12920
   },
   "244": {
     "company_id": 244,
@@ -59250,9 +59642,9 @@
     "korean_name": "마녀공장",
     "moat_title": "클렌징 오일 등 자연주의 스킨케어 브랜드. 클린뷰티 트렌드 선도, 아마존을 통한 미국 시장 직접 공략.",
     "quote": {
-      "current_price": 17200.0,
-      "high_52w": 21250.0,
-      "mdd_pct": -19.06,
+      "current_price": 16960,
+      "high_52w": 21250,
+      "mdd_pct": -20.19,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -59392,7 +59784,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 16960
   },
   "439090.KQ": {
     "company_id": 244,
@@ -59401,9 +59794,9 @@
     "korean_name": "마녀공장",
     "moat_title": "클렌징 오일 등 자연주의 스킨케어 브랜드. 클린뷰티 트렌드 선도, 아마존을 통한 미국 시장 직접 공략.",
     "quote": {
-      "current_price": 17200.0,
-      "high_52w": 21250.0,
-      "mdd_pct": -19.06,
+      "current_price": 16960,
+      "high_52w": 21250,
+      "mdd_pct": -20.19,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -59543,7 +59936,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 16960
   },
   "245": {
     "company_id": 245,
@@ -59552,9 +59946,9 @@
     "korean_name": "아이패밀리에스씨",
     "moat_title": "색조 브랜드 '롬앤' 운영. MZ세대 타겟 글로벌 팬덤 확보. 틱톡·인스타그램 바이럴 마케팅의 교과서적 성공 사례.",
     "quote": {
-      "current_price": 8690.0,
-      "high_52w": 26561.45,
-      "mdd_pct": -67.28,
+      "current_price": 9350,
+      "high_52w": 26561,
+      "mdd_pct": -64.8,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -59694,7 +60088,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9350
   },
   "114840.KQ": {
     "company_id": 245,
@@ -59703,9 +60098,9 @@
     "korean_name": "아이패밀리에스씨",
     "moat_title": "색조 브랜드 '롬앤' 운영. MZ세대 타겟 글로벌 팬덤 확보. 틱톡·인스타그램 바이럴 마케팅의 교과서적 성공 사례.",
     "quote": {
-      "current_price": 8690.0,
-      "high_52w": 26561.45,
-      "mdd_pct": -67.28,
+      "current_price": 9350,
+      "high_52w": 26561,
+      "mdd_pct": -64.8,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -59845,7 +60240,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9350
   },
   "246": {
     "company_id": 246,
@@ -59996,7 +60392,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 99.65
   },
   "ELF": {
     "company_id": 246,
@@ -60147,7 +60544,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 99.65
   },
   "247": {
     "company_id": 247,
@@ -60298,7 +60696,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 98.01
   },
   "EL": {
     "company_id": 247,
@@ -60449,7 +60848,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 98.01
   },
   "248": {
     "company_id": 248,
@@ -60600,7 +61000,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 3.03
   },
   "COTY": {
     "company_id": 248,
@@ -60751,7 +61152,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 3.03
   },
   "249": {
     "company_id": 249,
@@ -60760,9 +61162,9 @@
     "korean_name": "실리콘투",
     "moat_title": "K-뷰티 글로벌 이커머스 및 풀필먼트 유통 플랫폼(StyleKorean). 150개국 이상에 직매입 방식으로 K-뷰티 공급.",
     "quote": {
-      "current_price": 44500.0,
-      "high_52w": 55657.56,
-      "mdd_pct": -20.05,
+      "current_price": 45300,
+      "high_52w": 55657,
+      "mdd_pct": -18.61,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -60902,7 +61304,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 45300
   },
   "257720.KQ": {
     "company_id": 249,
@@ -60911,9 +61314,9 @@
     "korean_name": "실리콘투",
     "moat_title": "K-뷰티 글로벌 이커머스 및 풀필먼트 유통 플랫폼(StyleKorean). 150개국 이상에 직매입 방식으로 K-뷰티 공급.",
     "quote": {
-      "current_price": 44500.0,
-      "high_52w": 55657.56,
-      "mdd_pct": -20.05,
+      "current_price": 45300,
+      "high_52w": 55657,
+      "mdd_pct": -18.61,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 58.5,
       "op_margin": 24.5,
@@ -61053,7 +61456,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 45300
   },
   "250": {
     "company_id": 250,
@@ -61204,7 +61608,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 527.85
   },
   "ULTA": {
     "company_id": 250,
@@ -61355,7 +61760,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 527.85
   },
   "251": {
     "company_id": 251,
@@ -61506,7 +61912,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 265.84
   },
   "AMZN": {
     "company_id": 251,
@@ -61657,7 +62064,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 265.84
   },
   "252": {
     "company_id": 252,
@@ -61808,7 +62216,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 159.0
   },
   "TGT": {
     "company_id": 252,
@@ -61959,7 +62368,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 159.0
   },
   "253": {
     "company_id": 253,
@@ -62110,7 +62520,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 114.3
   },
   "WMT": {
     "company_id": 253,
@@ -62261,7 +62672,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 114.3
   },
   "254": {
     "company_id": 254,
@@ -62270,9 +62682,9 @@
     "korean_name": "CJ제일제당",
     "moat_title": "국내 최대 식품·바이오 기업. 라이신·트립토판 등 아미노산 글로벌 1위, 비비고 K-푸드 브랜드 해외 확장 선도.",
     "quote": {
-      "current_price": 183400.0,
-      "high_52w": 250169.5,
-      "mdd_pct": -26.69,
+      "current_price": 180100,
+      "high_52w": 250169,
+      "mdd_pct": -28.01,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -62412,7 +62824,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 180100
   },
   "097950.KS": {
     "company_id": 254,
@@ -62421,9 +62834,9 @@
     "korean_name": "CJ제일제당",
     "moat_title": "국내 최대 식품·바이오 기업. 라이신·트립토판 등 아미노산 글로벌 1위, 비비고 K-푸드 브랜드 해외 확장 선도.",
     "quote": {
-      "current_price": 183400.0,
-      "high_52w": 250169.5,
-      "mdd_pct": -26.69,
+      "current_price": 180100,
+      "high_52w": 250169,
+      "mdd_pct": -28.01,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -62563,7 +62976,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 180100
   },
   "255": {
     "company_id": 255,
@@ -62572,9 +62986,9 @@
     "korean_name": "대상",
     "moat_title": "종합식품 및 바이오 소재 기업. 청정원 브랜드 및 전분당·아미노산 글로벌 수출. 발효 기술 기반 고부가가치 식품 소재.",
     "quote": {
-      "current_price": 17510.0,
-      "high_52w": 23172.5,
-      "mdd_pct": -24.44,
+      "current_price": 17250,
+      "high_52w": 23172,
+      "mdd_pct": -25.56,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -62714,7 +63128,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 17250
   },
   "001680.KS": {
     "company_id": 255,
@@ -62723,9 +63138,9 @@
     "korean_name": "대상",
     "moat_title": "종합식품 및 바이오 소재 기업. 청정원 브랜드 및 전분당·아미노산 글로벌 수출. 발효 기술 기반 고부가가치 식품 소재.",
     "quote": {
-      "current_price": 17510.0,
-      "high_52w": 23172.5,
-      "mdd_pct": -24.44,
+      "current_price": 17250,
+      "high_52w": 23172,
+      "mdd_pct": -25.56,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -62865,7 +63280,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 17250
   },
   "256": {
     "company_id": 256,
@@ -63016,7 +63432,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 107.15
   },
   "INGR": {
     "company_id": 256,
@@ -63167,7 +63584,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 107.15
   },
   "257": {
     "company_id": 257,
@@ -63318,7 +63736,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 80.76
   },
   "ADM": {
     "company_id": 257,
@@ -63469,7 +63888,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 80.76
   },
   "258": {
     "company_id": 258,
@@ -63478,9 +63898,9 @@
     "korean_name": "삼양식품",
     "moat_title": "불닭볶음면 글로벌 신드롬 주도. K-라면 수출의 핵심 기업. 수출 비중 70%+ 달성하며 글로벌 식품 기업 도약.",
     "quote": {
-      "current_price": 1334000.0,
-      "high_52w": 1661517.29,
-      "mdd_pct": -19.71,
+      "current_price": 1304000,
+      "high_52w": 1661517,
+      "mdd_pct": -21.52,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -63620,7 +64040,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1304000
   },
   "003230.KS": {
     "company_id": 258,
@@ -63629,9 +64050,9 @@
     "korean_name": "삼양식품",
     "moat_title": "불닭볶음면 글로벌 신드롬 주도. K-라면 수출의 핵심 기업. 수출 비중 70%+ 달성하며 글로벌 식품 기업 도약.",
     "quote": {
-      "current_price": 1334000.0,
-      "high_52w": 1661517.29,
-      "mdd_pct": -19.71,
+      "current_price": 1304000,
+      "high_52w": 1661517,
+      "mdd_pct": -21.52,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -63771,7 +64192,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1304000
   },
   "259": {
     "company_id": 259,
@@ -63780,9 +64202,9 @@
     "korean_name": "농심",
     "moat_title": "신라면 등 글로벌 라면·스낵 제조 기업. 미국·중국·호주 현지 생산 체계 구축. 신라면 블랙 등 프리미엄 라인 전략.",
     "quote": {
-      "current_price": 420000.0,
-      "high_52w": 569748.34,
-      "mdd_pct": -26.28,
+      "current_price": 432500,
+      "high_52w": 569748,
+      "mdd_pct": -24.09,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -63922,7 +64344,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 432500
   },
   "004370.KS": {
     "company_id": 259,
@@ -63931,9 +64354,9 @@
     "korean_name": "농심",
     "moat_title": "신라면 등 글로벌 라면·스낵 제조 기업. 미국·중국·호주 현지 생산 체계 구축. 신라면 블랙 등 프리미엄 라인 전략.",
     "quote": {
-      "current_price": 420000.0,
-      "high_52w": 569748.34,
-      "mdd_pct": -26.28,
+      "current_price": 432500,
+      "high_52w": 569748,
+      "mdd_pct": -24.09,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -64073,7 +64496,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 432500
   },
   "260": {
     "company_id": 260,
@@ -64224,7 +64648,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 58.55
   },
   "TSN": {
     "company_id": 260,
@@ -64375,7 +64800,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 58.55
   },
   "261": {
     "company_id": 261,
@@ -64526,7 +64952,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 188.79
   },
   "HSY": {
     "company_id": 261,
@@ -64677,7 +65104,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 188.79
   },
   "262": {
     "company_id": 262,
@@ -64686,9 +65114,9 @@
     "korean_name": "풀무원",
     "moat_title": "건강기능식품 및 신선식품 기업. 미국·중국 두부·아시안푸드 유통망 확보. 미국 두부 시장 점유율 70%+ 장악.",
     "quote": {
-      "current_price": 9210.0,
-      "high_52w": 15921.65,
-      "mdd_pct": -42.15,
+      "current_price": 9060,
+      "high_52w": 15921,
+      "mdd_pct": -43.1,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -64828,7 +65256,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9060
   },
   "017810.KS": {
     "company_id": 262,
@@ -64837,9 +65266,9 @@
     "korean_name": "풀무원",
     "moat_title": "건강기능식품 및 신선식품 기업. 미국·중국 두부·아시안푸드 유통망 확보. 미국 두부 시장 점유율 70%+ 장악.",
     "quote": {
-      "current_price": 9210.0,
-      "high_52w": 15921.65,
-      "mdd_pct": -42.15,
+      "current_price": 9060,
+      "high_52w": 15921,
+      "mdd_pct": -43.1,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -64979,7 +65408,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 9060
   },
   "263": {
     "company_id": 263,
@@ -65130,7 +65560,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 56.48
   },
   "MKC": {
     "company_id": 263,
@@ -65281,7 +65712,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 56.48
   },
   "264": {
     "company_id": 264,
@@ -65432,7 +65864,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 82.46
   },
   "SYY": {
     "company_id": 264,
@@ -65583,7 +66016,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 82.46
   },
   "265": {
     "company_id": 265,
@@ -65592,9 +66026,9 @@
     "korean_name": "오리온",
     "moat_title": "초코파이 등 메가 IP 보유 K-제과 기업. 철저한 현지화로 중국·베트남·러시아 등 글로벌 제과 시장 장악.",
     "quote": {
-      "current_price": 125100.0,
-      "high_52w": 148054.24,
-      "mdd_pct": -15.5,
+      "current_price": 124100,
+      "high_52w": 148054,
+      "mdd_pct": -16.18,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -65734,7 +66168,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 124100
   },
   "271560.KS": {
     "company_id": 265,
@@ -65743,9 +66178,9 @@
     "korean_name": "오리온",
     "moat_title": "초코파이 등 메가 IP 보유 K-제과 기업. 철저한 현지화로 중국·베트남·러시아 등 글로벌 제과 시장 장악.",
     "quote": {
-      "current_price": 125100.0,
-      "high_52w": 148054.24,
-      "mdd_pct": -15.5,
+      "current_price": 124100,
+      "high_52w": 148054,
+      "mdd_pct": -16.18,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -65885,7 +66320,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 124100
   },
   "266": {
     "company_id": 266,
@@ -66036,7 +66472,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 64.16
   },
   "MDLZ": {
     "company_id": 266,
@@ -66187,7 +66624,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 64.16
   },
   "267": {
     "company_id": 267,
@@ -66338,7 +66776,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 32.26
   },
   "CELH": {
     "company_id": 267,
@@ -66489,7 +66928,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 32.26
   },
   "268": {
     "company_id": 268,
@@ -66498,9 +66938,9 @@
     "korean_name": "현대그린푸드",
     "moat_title": "단체급식·식자재 유통 및 프리미엄 HMR·케어푸드 사업 전개. 고령화 사회 특화 메디푸드·케어푸드 선도.",
     "quote": {
-      "current_price": 18390.0,
-      "high_52w": 19950.0,
-      "mdd_pct": -7.82,
+      "current_price": 18140,
+      "high_52w": 19950,
+      "mdd_pct": -9.07,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -66640,7 +67080,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 18140
   },
   "453340.KS": {
     "company_id": 268,
@@ -66649,9 +67090,9 @@
     "korean_name": "현대그린푸드",
     "moat_title": "단체급식·식자재 유통 및 프리미엄 HMR·케어푸드 사업 전개. 고령화 사회 특화 메디푸드·케어푸드 선도.",
     "quote": {
-      "current_price": 18390.0,
-      "high_52w": 19950.0,
-      "mdd_pct": -7.82,
+      "current_price": 18140,
+      "high_52w": 19950,
+      "mdd_pct": -9.07,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -66791,7 +67232,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 18140
   },
   "269": {
     "company_id": 269,
@@ -66800,9 +67242,9 @@
     "korean_name": "BGF리테일",
     "moat_title": "CU 편의점 운영. 즉석식품·밀키트 소비자 접점 장악. 편의점 PB 도시락·간편식 1위 플레이어.",
     "quote": {
-      "current_price": 143200.0,
-      "high_52w": 156600.0,
-      "mdd_pct": -8.56,
+      "current_price": 142800,
+      "high_52w": 156600,
+      "mdd_pct": -8.81,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -66942,7 +67384,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 142800
   },
   "282330.KS": {
     "company_id": 269,
@@ -66951,9 +67394,9 @@
     "korean_name": "BGF리테일",
     "moat_title": "CU 편의점 운영. 즉석식품·밀키트 소비자 접점 장악. 편의점 PB 도시락·간편식 1위 플레이어.",
     "quote": {
-      "current_price": 143200.0,
-      "high_52w": 156600.0,
-      "mdd_pct": -8.56,
+      "current_price": 142800,
+      "high_52w": 156600,
+      "mdd_pct": -8.81,
       "buy_signal": "HOLD (보유 및 추적)",
       "gross_margin": 48.0,
       "op_margin": 18.0,
@@ -67093,7 +67536,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 142800
   },
   "270": {
     "company_id": 270,
@@ -67244,7 +67688,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 16.22
   },
   "CAG": {
     "company_id": 270,
@@ -67395,7 +67840,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 16.22
   },
   "271": {
     "company_id": 271,
@@ -67546,7 +67992,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 365.54
   },
   "V": {
     "company_id": 271,
@@ -67697,7 +68144,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 365.54
   },
   "272": {
     "company_id": 272,
@@ -67848,7 +68296,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 573.72
   },
   "MA": {
     "company_id": 272,
@@ -67999,7 +68448,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 573.72
   },
   "273": {
     "company_id": 273,
@@ -68150,7 +68600,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 401.24
   },
   "SNPS": {
     "company_id": 273,
@@ -68301,7 +68752,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 401.24
   },
   "274": {
     "company_id": 274,
@@ -68452,7 +68904,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 314.98
   },
   "CDNS": {
     "company_id": 274,
@@ -68603,7 +69056,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 314.98
   },
   "275": {
     "company_id": 275,
@@ -68754,7 +69208,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 175.19
   },
   "PLTR": {
     "company_id": 275,
@@ -68905,7 +69360,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 175.19
   },
   "276": {
     "company_id": 276,
@@ -69056,7 +69512,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 127.2
   },
   "NOW": {
     "company_id": 276,
@@ -69207,7 +69664,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 127.2
   },
   "277": {
     "company_id": 277,
@@ -69358,7 +69816,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 201.63
   },
   "CRWD": {
     "company_id": 277,
@@ -69509,7 +69968,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 201.63
   },
   "278": {
     "company_id": 278,
@@ -69660,7 +70120,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 426.66
   },
   "SPGI": {
     "company_id": 278,
@@ -69811,7 +70272,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 426.66
   },
   "279": {
     "company_id": 279,
@@ -69962,7 +70424,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1222.91
   },
   "TDG": {
     "company_id": 279,
@@ -70113,7 +70576,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1222.91
   },
   "280": {
     "company_id": 280,
@@ -70264,7 +70728,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 213.0
   },
   "BKNG": {
     "company_id": 280,
@@ -70415,7 +70880,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 213.0
   },
   "281": {
     "company_id": 281,
@@ -70566,7 +71032,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 186.45
   },
   "ANET": {
     "company_id": 281,
@@ -70717,7 +71184,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 186.45
   },
   "282": {
     "company_id": 282,
@@ -70868,7 +71336,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 152.85
   },
   "FTNT": {
     "company_id": 282,
@@ -71019,7 +71488,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 152.85
   },
   "283": {
     "company_id": 283,
@@ -71170,7 +71640,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 359.76
   },
   "PANW": {
     "company_id": 283,
@@ -71321,7 +71792,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 359.76
   },
   "284": {
     "company_id": 284,
@@ -71472,7 +71944,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 325.01
   },
   "SNOW": {
     "company_id": 284,
@@ -71623,7 +72096,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 325.01
   },
   "285": {
     "company_id": 285,
@@ -71632,9 +72106,9 @@
     "korean_name": "현대오토에버",
     "moat_title": "SDV 차량용 SW 플랫폼 및 자율주행 내비게이션 독점",
     "quote": {
-      "current_price": 451000.0,
-      "high_52w": 1066000.0,
-      "mdd_pct": -57.69,
+      "current_price": 436500,
+      "high_52w": 1066000,
+      "mdd_pct": -59.05,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -71774,7 +72248,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 436500
   },
   "307950.KS": {
     "company_id": 285,
@@ -71783,9 +72258,9 @@
     "korean_name": "현대오토에버",
     "moat_title": "SDV 차량용 SW 플랫폼 및 자율주행 내비게이션 독점",
     "quote": {
-      "current_price": 451000.0,
-      "high_52w": 1066000.0,
-      "mdd_pct": -57.69,
+      "current_price": 436500,
+      "high_52w": 1066000,
+      "mdd_pct": -59.05,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -71925,7 +72400,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 436500
   },
   "286": {
     "company_id": 286,
@@ -71934,9 +72410,9 @@
     "korean_name": "퓨런티어",
     "moat_title": "자율주행 카메라 모듈 센싱 하우징/조립 장비 독점",
     "quote": {
-      "current_price": 6410.0,
-      "high_52w": 18930.0,
-      "mdd_pct": -66.14,
+      "current_price": 6300,
+      "high_52w": 18930,
+      "mdd_pct": -66.72,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -72076,7 +72552,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 6300
   },
   "370090.KQ": {
     "company_id": 286,
@@ -72085,9 +72562,9 @@
     "korean_name": "퓨런티어",
     "moat_title": "자율주행 카메라 모듈 센싱 하우징/조립 장비 독점",
     "quote": {
-      "current_price": 6410.0,
-      "high_52w": 18930.0,
-      "mdd_pct": -66.14,
+      "current_price": 6300,
+      "high_52w": 18930,
+      "mdd_pct": -66.72,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -72227,7 +72704,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 6300
   },
   "287": {
     "company_id": 287,
@@ -72236,9 +72714,9 @@
     "korean_name": "한화에어로스페이스",
     "moat_title": "누리호 발사체 총괄 주관 및 우주 발사체 엔진 독점",
     "quote": {
-      "current_price": 1146000.0,
-      "high_52w": 1655000.0,
-      "mdd_pct": -30.76,
+      "current_price": 1177000,
+      "high_52w": 1655000,
+      "mdd_pct": -28.88,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -72378,7 +72856,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1177000
   },
   "012450.KS": {
     "company_id": 287,
@@ -72387,9 +72866,9 @@
     "korean_name": "한화에어로스페이스",
     "moat_title": "누리호 발사체 총괄 주관 및 우주 발사체 엔진 독점",
     "quote": {
-      "current_price": 1146000.0,
-      "high_52w": 1655000.0,
-      "mdd_pct": -30.76,
+      "current_price": 1177000,
+      "high_52w": 1655000,
+      "mdd_pct": -28.88,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -72529,7 +73008,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 1177000
   },
   "288": {
     "company_id": 288,
@@ -72538,9 +73018,9 @@
     "korean_name": "세트렉아이",
     "moat_title": "초고해상도 위성 본체 및 체계 종합 독점 IP",
     "quote": {
-      "current_price": 77400.0,
-      "high_52w": 224000.0,
-      "mdd_pct": -65.45,
+      "current_price": 76900,
+      "high_52w": 224000,
+      "mdd_pct": -65.67,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -72680,7 +73160,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 76900
   },
   "099320.KQ": {
     "company_id": 288,
@@ -72689,9 +73170,9 @@
     "korean_name": "세트렉아이",
     "moat_title": "초고해상도 위성 본체 및 체계 종합 독점 IP",
     "quote": {
-      "current_price": 77400.0,
-      "high_52w": 224000.0,
-      "mdd_pct": -65.45,
+      "current_price": 76900,
+      "high_52w": 224000,
+      "mdd_pct": -65.67,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -72831,7 +73312,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 76900
   },
   "289": {
     "company_id": 289,
@@ -72840,9 +73322,9 @@
     "korean_name": "인텔리안테크",
     "moat_title": "저궤도(LEO) 위성 통신 안테나 글로벌 1위",
     "quote": {
-      "current_price": 69900.0,
-      "high_52w": 180200.0,
-      "mdd_pct": -61.21,
+      "current_price": 68300,
+      "high_52w": 180200,
+      "mdd_pct": -62.1,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -72982,7 +73464,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 68300
   },
   "189300.KQ": {
     "company_id": 289,
@@ -72991,9 +73474,9 @@
     "korean_name": "인텔리안테크",
     "moat_title": "저궤도(LEO) 위성 통신 안테나 글로벌 1위",
     "quote": {
-      "current_price": 69900.0,
-      "high_52w": 180200.0,
-      "mdd_pct": -61.21,
+      "current_price": 68300,
+      "high_52w": 180200,
+      "mdd_pct": -62.1,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -73133,7 +73616,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 68300
   },
   "290": {
     "company_id": 290,
@@ -73142,9 +73626,9 @@
     "korean_name": "한화솔루션",
     "moat_title": "북미 태양광 모듈 시장점유율 1위 (Qcell 독점)",
     "quote": {
-      "current_price": 34000.0,
-      "high_52w": 59300.0,
-      "mdd_pct": -42.66,
+      "current_price": 34650,
+      "high_52w": 59300,
+      "mdd_pct": -41.57,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -73284,7 +73768,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 34650
   },
   "009830.KS": {
     "company_id": 290,
@@ -73293,9 +73778,9 @@
     "korean_name": "한화솔루션",
     "moat_title": "북미 태양광 모듈 시장점유율 1위 (Qcell 독점)",
     "quote": {
-      "current_price": 34000.0,
-      "high_52w": 59300.0,
-      "mdd_pct": -42.66,
+      "current_price": 34650,
+      "high_52w": 59300,
+      "mdd_pct": -41.57,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -73435,7 +73920,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 34650
   },
   "291": {
     "company_id": 291,
@@ -73746,9 +74232,9 @@
     "korean_name": "씨에스윈드",
     "moat_title": "글로벌 풍력 타워 점유율 1위 독점 제조업체",
     "quote": {
-      "current_price": 45700.0,
-      "high_52w": 79400.0,
-      "mdd_pct": -42.44,
+      "current_price": 45950,
+      "high_52w": 79400,
+      "mdd_pct": -42.13,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -73888,7 +74374,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 45950
   },
   "112610.KS": {
     "company_id": 292,
@@ -73897,9 +74384,9 @@
     "korean_name": "씨에스윈드",
     "moat_title": "글로벌 풍력 타워 점유율 1위 독점 제조업체",
     "quote": {
-      "current_price": 45700.0,
-      "high_52w": 79400.0,
-      "mdd_pct": -42.44,
+      "current_price": 45950,
+      "high_52w": 79400,
+      "mdd_pct": -42.13,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -74039,7 +74526,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 45950
   },
   "293": {
     "company_id": 293,
@@ -74048,9 +74536,9 @@
     "korean_name": "엘앤에프",
     "moat_title": "테슬라 직공급 하이니켈 NCMA 양극재 독점력",
     "quote": {
-      "current_price": 105400.0,
-      "high_52w": 225000.0,
-      "mdd_pct": -53.16,
+      "current_price": 105000,
+      "high_52w": 225000,
+      "mdd_pct": -53.33,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -74190,7 +74678,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 105000
   },
   "066970.KS": {
     "company_id": 293,
@@ -74199,9 +74688,9 @@
     "korean_name": "엘앤에프",
     "moat_title": "테슬라 직공급 하이니켈 NCMA 양극재 독점력",
     "quote": {
-      "current_price": 105400.0,
-      "high_52w": 225000.0,
-      "mdd_pct": -53.16,
+      "current_price": 105000,
+      "high_52w": 225000,
+      "mdd_pct": -53.33,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -74341,7 +74830,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 105000
   },
   "294": {
     "company_id": 294,
@@ -74350,9 +74840,9 @@
     "korean_name": "리노공업",
     "moat_title": "온디바이스 AI 칩 소켓 및 LEAP 프로브 핀 글로벌 독점 1위",
     "quote": {
-      "current_price": 67800.0,
-      "high_52w": 129000.0,
-      "mdd_pct": -47.44,
+      "current_price": 67900,
+      "high_52w": 129000,
+      "mdd_pct": -47.36,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -74492,7 +74982,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 67900
   },
   "058470.KQ": {
     "company_id": 294,
@@ -74501,9 +74992,9 @@
     "korean_name": "리노공업",
     "moat_title": "온디바이스 AI 칩 소켓 및 LEAP 프로브 핀 글로벌 독점 1위",
     "quote": {
-      "current_price": 67800.0,
-      "high_52w": 129000.0,
-      "mdd_pct": -47.44,
+      "current_price": 67900,
+      "high_52w": 129000,
+      "mdd_pct": -47.36,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -74643,7 +75134,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 67900
   },
   "295": {
     "company_id": 295,
@@ -74652,9 +75144,9 @@
     "korean_name": "가온칩스",
     "moat_title": "삼성 파운드리 최상위 디자인솔루션파트너(DSP) 온디바이스 칩 설계 독점",
     "quote": {
-      "current_price": 46500.0,
-      "high_52w": 83200.0,
-      "mdd_pct": -44.11,
+      "current_price": 44550,
+      "high_52w": 83200,
+      "mdd_pct": -46.45,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -74794,7 +75286,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 44550
   },
   "399720.KQ": {
     "company_id": 295,
@@ -74803,9 +75296,9 @@
     "korean_name": "가온칩스",
     "moat_title": "삼성 파운드리 최상위 디자인솔루션파트너(DSP) 온디바이스 칩 설계 독점",
     "quote": {
-      "current_price": 46500.0,
-      "high_52w": 83200.0,
-      "mdd_pct": -44.11,
+      "current_price": 44550,
+      "high_52w": 83200,
+      "mdd_pct": -46.45,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -74945,7 +75438,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 44550
   },
   "296": {
     "company_id": 296,
@@ -74954,9 +75448,9 @@
     "korean_name": "오픈엣지테크놀로지",
     "moat_title": "온디바이스 AI NPU 및 메모리 컨트롤러 IP 글로벌 독점",
     "quote": {
-      "current_price": 9120.0,
-      "high_52w": 22700.0,
-      "mdd_pct": -59.82,
+      "current_price": 8920,
+      "high_52w": 22700,
+      "mdd_pct": -60.7,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -75096,7 +75590,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 8920
   },
   "394280.KQ": {
     "company_id": 296,
@@ -75105,9 +75600,9 @@
     "korean_name": "오픈엣지테크놀로지",
     "moat_title": "온디바이스 AI NPU 및 메모리 컨트롤러 IP 글로벌 독점",
     "quote": {
-      "current_price": 9120.0,
-      "high_52w": 22700.0,
-      "mdd_pct": -59.82,
+      "current_price": 8920,
+      "high_52w": 22700,
+      "mdd_pct": -60.7,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -75247,7 +75742,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 8920
   },
   "297": {
     "company_id": 297,
@@ -75256,9 +75752,9 @@
     "korean_name": "한미반도체",
     "moat_title": "HBM TC 본더(Dual TC Bonder) 글로벌 90%+ 독점",
     "quote": {
-      "current_price": 229000.0,
-      "high_52w": 426000.0,
-      "mdd_pct": -46.24,
+      "current_price": 221000,
+      "high_52w": 426000,
+      "mdd_pct": -48.12,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 44.5,
       "op_margin": 16.5,
@@ -75398,7 +75894,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 221000
   },
   "042700.KS": {
     "company_id": 297,
@@ -75407,9 +75904,9 @@
     "korean_name": "한미반도체",
     "moat_title": "HBM TC 본더(Dual TC Bonder) 글로벌 90%+ 독점",
     "quote": {
-      "current_price": 229000.0,
-      "high_52w": 426000.0,
-      "mdd_pct": -46.24,
+      "current_price": 221000,
+      "high_52w": 426000,
+      "mdd_pct": -48.12,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 44.5,
       "op_margin": 16.5,
@@ -75549,7 +76046,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 221000
   },
   "298": {
     "company_id": 298,
@@ -75558,9 +76056,9 @@
     "korean_name": "HPSP",
     "moat_title": "고압 수소 어닐링 장비 100% 세계 독점",
     "quote": {
-      "current_price": 42650.0,
-      "high_52w": 92000.0,
-      "mdd_pct": -53.64,
+      "current_price": 45700,
+      "high_52w": 92000,
+      "mdd_pct": -50.33,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -75700,7 +76198,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 45700
   },
   "403870.KQ": {
     "company_id": 298,
@@ -75709,9 +76208,9 @@
     "korean_name": "HPSP",
     "moat_title": "고압 수소 어닐링 장비 100% 세계 독점",
     "quote": {
-      "current_price": 42650.0,
-      "high_52w": 92000.0,
-      "mdd_pct": -53.64,
+      "current_price": 45700,
+      "high_52w": 92000,
+      "mdd_pct": -50.33,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -75851,7 +76350,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 45700
   },
   "299": {
     "company_id": 299,
@@ -75860,9 +76360,9 @@
     "korean_name": "JYP Ent.",
     "moat_title": "스트레이키즈/트와이스 글로벌 IP 및 극상의 ROE(30%+)",
     "quote": {
-      "current_price": 39350.0,
-      "high_52w": 87292.93,
-      "mdd_pct": -54.92,
+      "current_price": 39950,
+      "high_52w": 87292,
+      "mdd_pct": -54.23,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -76002,7 +76502,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 39950
   },
   "035900.KQ": {
     "company_id": 299,
@@ -76011,9 +76512,9 @@
     "korean_name": "JYP Ent.",
     "moat_title": "스트레이키즈/트와이스 글로벌 IP 및 극상의 ROE(30%+)",
     "quote": {
-      "current_price": 39350.0,
-      "high_52w": 87292.93,
-      "mdd_pct": -54.92,
+      "current_price": 39950,
+      "high_52w": 87292,
+      "mdd_pct": -54.23,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -76153,7 +76654,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 39950
   },
   "300": {
     "company_id": 300,
@@ -76464,9 +76966,9 @@
     "korean_name": "HSD엔진 (한화엔진)",
     "moat_title": "선박용 선박 엔진 글로벌 2위 독점 공급망",
     "quote": {
-      "current_price": 47100.0,
-      "high_52w": 94400.0,
-      "mdd_pct": -50.11,
+      "current_price": 46350,
+      "high_52w": 94400,
+      "mdd_pct": -50.9,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -76606,7 +77108,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 46350
   },
   "082740.KS": {
     "company_id": 301,
@@ -76615,9 +77118,9 @@
     "korean_name": "HSD엔진 (한화엔진)",
     "moat_title": "선박용 선박 엔진 글로벌 2위 독점 공급망",
     "quote": {
-      "current_price": 47100.0,
-      "high_52w": 94400.0,
-      "mdd_pct": -50.11,
+      "current_price": 46350,
+      "high_52w": 94400,
+      "mdd_pct": -50.9,
       "buy_signal": "BUY_READY (2차 분할매수 -30% 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -76757,7 +77260,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 46350
   },
   "302": {
     "company_id": 302,
@@ -76766,9 +77270,9 @@
     "korean_name": "에이피알",
     "moat_title": "뷰티 디바이스(메디큐브 AGE-R) 글로벌 1위 독점 IP",
     "quote": {
-      "current_price": 396500.0,
-      "high_52w": 469246.0,
-      "mdd_pct": -15.5,
+      "current_price": 383500,
+      "high_52w": 469246,
+      "mdd_pct": -18.27,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -76908,7 +77412,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 383500
   },
   "278470.KS": {
     "company_id": 302,
@@ -76917,9 +77422,9 @@
     "korean_name": "에이피알",
     "moat_title": "뷰티 디바이스(메디큐브 AGE-R) 글로벌 1위 독점 IP",
     "quote": {
-      "current_price": 396500.0,
-      "high_52w": 469246.0,
-      "mdd_pct": -15.5,
+      "current_price": 383500,
+      "high_52w": 469246,
+      "mdd_pct": -18.27,
       "buy_signal": "STRONG_BUY (1차 분할매수 진입)",
       "gross_margin": 34.0,
       "op_margin": 14.0,
@@ -77059,7 +77564,8 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 383500
   },
   "WAYMO": {
     "company_id": 165,
@@ -77160,6 +77666,7 @@
         "upside_pct": 85.0,
         "assumptions": "신규 시장 2배 확장 및 OPM J-커브 본격화"
       }
-    ]
+    ],
+    "current_price": 344.72
   }
 }
