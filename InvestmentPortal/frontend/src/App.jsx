@@ -205,12 +205,23 @@ function App() {
 
     try {
       const res = await axios.get(`${API_BASE}/reports`, { timeout: 4000 });
-      setReports(res.data);
+      let data = res.data;
+      if (staticUniverseData && Array.isArray(staticUniverseData) && Array.isArray(data)) {
+        data = data.map(rep => {
+          if (rep && Array.isArray(rep.companies)) {
+            rep.companies = rep.companies.map(comp => {
+              const st = staticUniverseData.find(s => String(s.id) === String(comp.id) || (s.ticker && s.ticker.toUpperCase() === (comp.ticker || '').toUpperCase()));
+              return st ? { ...comp, current_price: st.current_price || comp.current_price, high_52w: st.high_52w || comp.high_52w, mdd_pct: st.mdd_pct || comp.mdd_pct } : comp;
+            });
+          }
+          return rep;
+        });
+      }
+      setReports(data);
       setLoadingProgress(100);
-      if (res.data.length > 0) fetchReportDetails(res.data[0].id);
+      if (data.length > 0) fetchReportDetails(data[0].id);
       setTimeout(() => setLoading(false), 200);
     } catch (e) {
-      // API 응답 없거나 지연 시 1.5초 후 즉시 로딩 해제 (정적 데이터로 100% 작동)
       setLoadingProgress(100);
       setTimeout(() => setLoading(false), 200);
     }
@@ -2091,7 +2102,20 @@ function AgentWorkspace({ onSelectCompany }) {
     try {
       const r = await axios.get(`${API_BASE}/portfolio/universe?t=${ts}`, { timeout: 3000 });
       if (r.data && r.data.universe && r.data.universe.length >= 240) {
-        setUniverseData(r.data);
+        if (staticUniverseData && Array.isArray(staticUniverseData)) {
+          const mergedList = r.data.universe.map(ru => {
+            const st = staticUniverseData.find(s => String(s.id) === String(ru.id) || (s.ticker && s.ticker.toUpperCase() === (ru.ticker || '').toUpperCase()));
+            return st ? {
+              ...ru,
+              current_price: st.current_price || ru.current_price,
+              high_52w: st.high_52w || ru.high_52w,
+              mdd_pct: st.mdd_pct || ru.mdd_pct
+            } : ru;
+          });
+          setUniverseData({ universe: mergedList });
+        } else {
+          setUniverseData(r.data);
+        }
       }
     } catch (e) {}
     finally {
