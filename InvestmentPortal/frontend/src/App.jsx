@@ -1676,7 +1676,7 @@ function DeepDiveSection({ company, profile }) {
     const cidStr = String(company?.id);
     const tk = (company?.ticker || '').toUpperCase();
 
-    const staticItem = staticDeepdiveData[cidStr] || staticDeepdiveData[tk];
+    const staticItem = staticDeepdiveData[cidStr] || staticDeepdiveData[tk] || (window.cachedDeepdives ? (window.cachedDeepdives[cidStr] || window.cachedDeepdives[tk]) : null);
     if (staticItem) {
       setDeepData(staticItem);
       setLoading(false);
@@ -1686,7 +1686,15 @@ function DeepDiveSection({ company, profile }) {
     try {
       const res = await axios.get(`${API_BASE}/company/${company.id}/deepdive?t=${ts}`, { timeout: 3000 });
       if (res.data && !res.data.error && res.data.quote) {
-        setDeepData(res.data);
+        const localHist = staticItem?.financial_history || [];
+        const remoteHist = res.data.financial_history || [];
+        const mergedHist = localHist.length > 0 ? localHist : remoteHist;
+
+        setDeepData({
+          ...staticItem,
+          ...res.data,
+          financial_history: mergedHist
+        });
       }
     } catch (e) {}
     finally {
