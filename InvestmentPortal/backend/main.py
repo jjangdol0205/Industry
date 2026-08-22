@@ -408,6 +408,11 @@ def load_seed_data_if_needed():
                 "INSERT INTO industry_reports (id, title, summary, file_path, tag) VALUES (?,?,?,?,?)",
                 (rid, title, summary, fp, tag)
             )
+        else:
+            cur.execute(
+                "UPDATE industry_reports SET title=?, summary=?, file_path=?, tag=? WHERE id=?",
+                (title, summary, fp, tag, rid)
+            )
     conn.commit()
     print(f"[Seed] industry_reports 로드 완료: {len(sd.INDUSTRY_REPORTS)}개")
 

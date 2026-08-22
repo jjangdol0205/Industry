@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend,
   ResponsiveContainer, LineChart, Line, ComposedChart, Area,
@@ -774,7 +775,7 @@ function IndustryView({ report }) {
           <BookOpen size={22} /> Industry Overview
         </h3>
         <div className="markdown-body" style={{ color:'var(--text-primary)' }}>
-          <ReactMarkdown>{report.summary}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{report.summary}</ReactMarkdown>
         </div>
       </div>
     </div>
