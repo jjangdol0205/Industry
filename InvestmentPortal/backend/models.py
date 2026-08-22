@@ -110,6 +110,7 @@ class CompanyProfile(Base):
 
     # --- 업데이트 시각 ---
     last_updated = Column(String, nullable=True)
+    ai_analysis_json = Column(Text, nullable=True)
 
     company = relationship("Company", back_populates="profile")
 

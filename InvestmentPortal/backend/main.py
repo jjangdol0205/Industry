@@ -241,6 +241,8 @@ def run_startup_migrations():
                 cur.execute("ALTER TABLE company_profiles ADD COLUMN buy_signal TEXT DEFAULT 'WAIT'")
             if 'last_updated' not in prof_cols:
                 cur.execute("ALTER TABLE company_profiles ADD COLUMN last_updated TEXT")
+            if 'ai_analysis_json' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN ai_analysis_json TEXT")
 
         # ── 4단계 투자원칙 핵심 티어 데이터 자동 업데이트 ───────
         tier_updates = [
