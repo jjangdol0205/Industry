@@ -2053,10 +2053,13 @@ body {
 
 .markdown-body table {
   width: 100%;
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border-collapse: collapse;
   margin: 1.8rem 0;
   border-radius: 10px;
-  overflow: hidden;
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
@@ -2070,6 +2073,7 @@ body {
   padding: 12px 16px;
   border: 1px solid rgba(59, 130, 246, 0.2);
   text-align: left;
+  white-space: nowrap;
 }
 
 .markdown-body td {
@@ -2093,6 +2097,8 @@ body {
   font-size: 0.82rem;
   line-height: 1.65;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
   color: #38bdf8;
   margin: 1.6rem 0;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
@@ -2105,4 +2111,44 @@ body {
   border-radius: 4px;
   font-size: 0.85rem;
   color: #38bdf8;
+  word-break: break-word;
 }
+
+/* Mobile optimizations for markdown report */
+@media (max-width: 768px) {
+  .markdown-body {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    padding: 0 4px;
+  }
+  .markdown-body h1 {
+    font-size: 1.35rem;
+    margin-top: 1.6rem;
+  }
+  .markdown-body h2 {
+    font-size: 1.18rem;
+    margin-top: 1.4rem;
+  }
+  .markdown-body h3 {
+    font-size: 1.02rem;
+    margin-top: 1.2rem;
+  }
+  .markdown-body blockquote {
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    margin: 1.2rem 0;
+  }
+  .markdown-body pre {
+    font-size: 0.72rem;
+    padding: 12px 14px;
+    margin: 1.2rem 0;
+  }
+  .markdown-body table {
+    margin: 1.2rem 0;
+  }
+  .markdown-body th, .markdown-body td {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+}
+
