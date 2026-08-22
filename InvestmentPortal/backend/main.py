@@ -442,23 +442,52 @@ def load_seed_data_if_needed():
     print(f"[Seed] companies 로드 및 업데이트 완료: {len(sd.COMPANIES)}개")
 
     # company_profiles
-    for row in sd.COMPANY_PROFILES:
-        cid, curr, h52, mdd, sig, desc = row
-        cur.execute("SELECT id FROM company_profiles WHERE company_id=?", (cid,))
-        if not cur.fetchone():
+    if hasattr(sd, "COMPANY_PROFILES"):
+        for row in sd.COMPANY_PROFILES:
+            if len(row) == 42:
+                cur.execute("""
+                    INSERT OR REPLACE INTO company_profiles (
+                        company_id, sector, industry_classification, description, ceo, employees, website,
+                        market_cap, current_price, beta, pe_ratio, pb_ratio, ps_ratio, ev_ebitda, ev_sales,
+                        dcf_value, roe, roa, roic, gross_margin_ttm, op_margin_ttm, net_margin_ttm,
+                        ebitda_margin_ttm, revenue_growth, eps_growth, fcf_growth, op_income_growth,
+                        current_ratio, debt_to_equity, net_debt_to_ebitda, interest_coverage,
+                        dividend_yield, payout_ratio, asset_turnover, receivables_turnover, inventory_turnover,
+                        last_updated, description_ko, ai_analysis_json, high_52w, mdd_pct, buy_signal
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, row)
+            elif len(row) == 6:
+                cid, curr, h52, mdd, sig, desc = row
+                cur.execute("SELECT id FROM company_profiles WHERE company_id=?", (cid,))
+                if not cur.fetchone():
+                    cur.execute("""
+                        INSERT INTO company_profiles
+                          (company_id, current_price, high_52w, mdd_pct, buy_signal, description_ko)
+                        VALUES (?,?,?,?,?,?)
+                    """, (cid, curr, h52, mdd, sig, desc))
+                else:
+                    cur.execute("""
+                        UPDATE company_profiles
+                        SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?
+                        WHERE company_id=?
+                    """, (curr, h52, mdd, sig, cid))
+        conn.commit()
+        print(f"[Seed] company_profiles 로드 완료: {len(sd.COMPANY_PROFILES)}개")
+
+    # financial_data
+    if hasattr(sd, "FINANCIAL_DATA"):
+        for row in sd.FINANCIAL_DATA:
             cur.execute("""
-                INSERT INTO company_profiles
-                  (company_id, current_price, high_52w, mdd_pct, buy_signal, description_ko)
-                VALUES (?,?,?,?,?,?)
-            """, (cid, curr, h52, mdd, sig, desc))
-        else:
-            cur.execute("""
-                UPDATE company_profiles
-                SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?
-                WHERE company_id=?
-            """, (curr, h52, mdd, sig, cid))
-    conn.commit()
-    print(f"[Seed] company_profiles 로드 완료: {len(sd.COMPANY_PROFILES)}개")
+                INSERT OR REPLACE INTO financial_data (
+                    company_id, date, period_type, fiscal_year, revenue, cost_of_revenue, gross_profit,
+                    operating_income, ebitda, net_income, eps, gross_margin, op_margin, net_margin,
+                    ebitda_margin, revenue_growth_yoy, op_income_growth_yoy, eps_growth_yoy,
+                    total_assets, total_liabilities, shareholders_equity, net_debt, operating_cash_flow,
+                    free_cash_flow, capital_expenditure, roe, roa
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, row)
+        conn.commit()
+        print(f"[Seed] financial_data 로드 완료: {len(sd.FINANCIAL_DATA)}개")
 
     conn.close()
     print("[Seed] 전체 시드 로드 완료!")
