@@ -14,7 +14,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          BACKEND="https://industry-l08j.onrender.com"
+          BACKEND="https://industry-t5gt.onrender.com"
           echo "=== $(date -u) 백엔드 웜업 핑 ==="
 
           # 1) /ping 먼저 — 서버 깨우기 (최대 60초 대기)

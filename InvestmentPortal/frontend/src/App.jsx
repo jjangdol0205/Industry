@@ -20,7 +20,7 @@ import staticAiAnalysesData from '../public/pregenerated_ai_analyses.json';
 
 const BACKEND_HOST = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:8000'
-  : 'https://industry-l08j.onrender.com';
+  : 'https://industry-t5gt.onrender.com';
 const API_BASE = `${BACKEND_HOST}/api`;
 
 // ── 포맷 유틸 ──────────────────────────────────────────
