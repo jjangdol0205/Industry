@@ -108,8 +108,6 @@ function App() {
   const [viewMode, setViewMode] = useState('research');
   const [previousView, setPreviousView] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [installPrompt, setInstallPrompt] = useState(null);
-  const [showInstallBanner, setShowInstallBanner] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingPhase, setLoadingPhase] = useState('wakeup');
   const [showUpdateBanner, setShowUpdateBanner] = useState(false);
@@ -139,17 +137,6 @@ function App() {
     isHomeRef.current = isHome;
   }, [isHome]);
 
-  // PWA 설치 프롬프트 캡처 (Android Chrome)
-  useEffect(() => {
-    const handler = (e) => {
-      e.preventDefault();
-      setInstallPrompt(e);
-      setShowInstallBanner(true);
-    };
-    window.addEventListener('beforeinstallprompt', handler);
-    return () => window.removeEventListener('beforeinstallprompt', handler);
-  }, []);
-
   // SW 업데이트 감지 → 업데이트 배너 표시
   useEffect(() => {
     if (!('serviceWorker' in navigator)) return;
@@ -161,14 +148,6 @@ function App() {
     navigator.serviceWorker.addEventListener('message', handleMsg);
     return () => navigator.serviceWorker.removeEventListener('message', handleMsg);
   }, []);
-
-  const handleInstallClick = async () => {
-    if (!installPrompt) return;
-    installPrompt.prompt();
-    const { outcome } = await installPrompt.userChoice;
-    if (outcome === 'accepted') setShowInstallBanner(false);
-    setInstallPrompt(null);
-  };
 
 
   useEffect(() => {
@@ -535,35 +514,7 @@ function App() {
         </div>
       )}
 
-      {/* ── PWA 설치 배너 (Android Chrome) ── */}
-      {showInstallBanner && (
-        <div style={{
-          position: 'fixed', bottom: '80px', left: '50%', transform: 'translateX(-50%)',
-          zIndex: 9999, display: 'flex', alignItems: 'center', gap: '12px',
-          background: 'linear-gradient(135deg, #1e293b, #0f172a)',
-          border: '1px solid rgba(59,130,246,0.4)',
-          borderRadius: '16px', padding: '14px 18px',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,130,246,0.1)',
-          maxWidth: '340px', width: 'calc(100% - 32px)',
-        }}>
-          <img src="/icon-192x192.png" alt="icon" style={{ width: '44px', height: '44px', borderRadius: '10px' }} />
-          <div style={{ flex: 1 }}>
-            <div style={{ color: 'white', fontWeight: 700, fontSize: '0.9rem' }}>앱으로 설치하기</div>
-            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem' }}>홈 화면에 추가하면 앱처럼 사용할 수 있어요</div>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <button onClick={handleInstallClick} style={{
-              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-              border: 'none', borderRadius: '8px', color: 'white',
-              padding: '6px 14px', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
-            }}>설치</button>
-            <button onClick={() => setShowInstallBanner(false)} style={{
-              background: 'transparent', border: 'none',
-              color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', cursor: 'pointer',
-            }}>닫기</button>
-          </div>
-        </div>
-      )}
+
 
       {/* 모바일 상단 헤더 바 */}
 
