@@ -68,6 +68,13 @@ class CompanyProfile(Base):
     high_52w = Column(Float, nullable=True)         # 52주 최고가
     mdd_pct = Column(Float, nullable=True)          # 현재 MDD (고점 대비 %)
     buy_signal = Column(String, nullable=True)      # 4단계 제1원칙 매수신호
+    dca_stage = Column(String, nullable=True)       # 4단계 DCA 단계 (CORE_DCA_1, CORE_DCA_2 등)
+    moat_score = Column(Float, nullable=True)       # 100점 만점 해자 점수 (S_moat)
+    rsi_14 = Column(Float, nullable=True)           # 14일 RSI 지표
+    bollinger_pct_b = Column(Float, nullable=True)  # 볼린저 밴드 %B
+    rebound_score = Column(Float, nullable=True)    # 100점 만점 과매도 기술적 반등 점수
+    rebound_signal = Column(String, nullable=True)  # 기술적 반등 신호 (STRONG_REBOUND 등)
+    support_price = Column(Float, nullable=True)    # 하방 지지가격
     beta = Column(Float, nullable=True)             # 베타 (시장 민감도)
 
     # --- 밸류에이션 (TTM) ---

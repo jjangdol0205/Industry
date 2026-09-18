@@ -12,7 +12,10 @@ comprehensive_fetcher.py
 import os
 import requests
 import datetime
-from yahooquery import Ticker
+try:
+    from yahooquery import Ticker
+except ImportError:
+    Ticker = None
 
 FMP_API_KEY = os.environ.get("FMP_API_KEY", "qVib4aX1LQ1SimFf07f7m1PPHQzhESIh")
 FMP_BASE = "https://financialmodelingprep.com/api/v3"
@@ -490,6 +493,9 @@ def fetch_full_company_data(ticker: str) -> dict:
 
     print(f"  DONE [{ticker}] Source: {source}, Total records: {len(financials)}")
     return {"profile": profile, "financials": financials, "source": source}
+
+
+fetch_all_fmp_data = fetch_full_company_data
 
 
 

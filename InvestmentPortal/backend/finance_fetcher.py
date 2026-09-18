@@ -1,7 +1,10 @@
 import pandas as pd
 import requests
 from datetime import datetime, timedelta
-from yahooquery import Ticker
+try:
+    from yahooquery import Ticker
+except ImportError:
+    Ticker = None
 
 def safe_get(row, keys):
     for key in keys:

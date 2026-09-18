@@ -8,11 +8,15 @@
     "current_price": 217.56,
     "high_52w": 236.26,
     "mdd_pct": -7.92,
-    "buy_signal": "WAIT (MDD -5.2% > -20% 고점대비 미달)",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -7.9%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "AI GPU 시장 80%+ 독점, OPM 55%+, CUDA 생태계 락인 (Core 2호)"
+    "principle_reason": "AI GPU 시장 80%+ 독점, OPM 55%+, CUDA 생태계 락인 (Core 2호)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 3,
@@ -23,11 +27,15 @@
     "current_price": 344.72,
     "high_52w": 408.37,
     "mdd_pct": -15.59,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -15.6%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "제2원칙: 검색 독점 90%+ 네트워크 효과. 제3원칙: OPM 32%+, FCF 마진 20%+. Core 편입."
+    "principle_reason": "제2원칙: 검색 독점 90%+ 네트워크 효과. 제3원칙: OPM 32%+, FCF 마진 20%+. Core 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 5,
@@ -38,11 +46,15 @@
     "current_price": 161.91,
     "high_52w": 258.96,
     "mdd_pct": -37.48,
-    "buy_signal": "BUY_READY (2차 분할매수 MDD -35.2%)",
-    "portfolio_tier": "Core",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -37.5%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "5G/모바일 AP 특허 독점, ROE 35%, SDV 확장 (Core)"
+    "principle_reason": "5G/모바일 AP 특허 독점, ROE 35%, SDV 확장 (Core)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 10,
@@ -53,11 +65,15 @@
     "current_price": 397.72,
     "high_52w": 603.88,
     "mdd_pct": -34.14,
-    "buy_signal": "BUY_READY (2차 분할매수 MDD -37.3%)",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -34.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "다빈치 수술로봇 독점, 소모품 락인, OPM 30%+ (Core 1호)"
+    "principle_reason": "다빈치 수술로봇 독점, 소모품 락인, OPM 30%+ (Core 1호)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 66,
@@ -68,11 +84,15 @@
     "current_price": 274.17,
     "high_52w": 410.41,
     "mdd_pct": -33.2,
-    "buy_signal": "BUY_READY (2차 분할매수 MDD -34.3%)",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -33.2%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "미국 1위 원자력 발전, AI 데이터센터 직결 전력 독점 (Core)"
+    "principle_reason": "미국 1위 원자력 발전, AI 데이터센터 직결 전력 독점 (Core)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 99,
@@ -83,11 +103,15 @@
     "current_price": 796000,
     "high_52w": 1118000,
     "mdd_pct": -28.8,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (일반 관망 MDD -28.8%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "정밀유도무기·전자전·우주방위 전문 방산기업. 국내 최초 SAR 위성 개발 참여 및 위성 기반 정밀 항법 시스템 공급."
+    "principle_reason": "정밀유도무기·전자전·우주방위 전문 방산기업. 국내 최초 SAR 위성 개발 참여 및 위성 기반 정밀 항법 시스템 공급.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 102,
@@ -98,11 +122,15 @@
     "current_price": 202000,
     "high_52w": 335000,
     "mdd_pct": -39.7,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Core",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -39.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "변압기·배전반·에너지관리시스템(EMS) 국내 1위 전력 기기 기업. 국내외 데이터센터·재생에너지 연계 전력 기기 핵심 공급사."
+    "principle_reason": "변압기·배전반·에너지관리시스템(EMS) 국내 1위 전력 기기 기업. 국내외 데이터센터·재생에너지 연계 전력 기기 핵심 공급사.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 119,
@@ -113,11 +141,15 @@
     "current_price": 316.83,
     "high_52w": 344.27,
     "mdd_pct": -7.97,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -8.0%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "제2원칙: iOS 생태계 락인, App Store 독점 플랫폼. 제3원칙: GPM 46%+, FCF $100B+ p.a. Core 편입."
+    "principle_reason": "제2원칙: iOS 생태계 락인, App Store 독점 플랫폼. 제3원칙: GPM 46%+, FCF $100B+ p.a. Core 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 123,
@@ -128,11 +160,15 @@
     "current_price": 484.31,
     "high_52w": 550.24,
     "mdd_pct": -11.98,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -12.0%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "제2원칙: Office/Azure/Teams/GitHub 생태계 락인 독점. 제3원칙: OPM 45%+, ROE 35%+. Core 편입."
+    "principle_reason": "제2원칙: Office/Azure/Teams/GitHub 생태계 락인 독점. 제3원칙: OPM 45%+, ROE 35%+. Core 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 126,
@@ -143,11 +179,15 @@
     "current_price": 546.03,
     "high_52w": 788.22,
     "mdd_pct": -30.73,
-    "buy_signal": "BUY_READY (1차매수)",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -30.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "제2원칙: SNS 네트워크 효과 독점. 제3원칙: OPM 38%+, FCF 마진 30%+. Core 편입."
+    "principle_reason": "제2원칙: SNS 네트워크 효과 독점. 제3원칙: OPM 38%+, FCF 마진 30%+. Core 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 130,
@@ -158,11 +198,15 @@
     "current_price": 362.48,
     "high_52w": 494.22,
     "mdd_pct": -26.66,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -26.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "제2원칙: AI ASIC 설계 + 네트워킹 반도체 독점. 제3원칙: OPM 35%+, GPM 60%+. Core 편입."
+    "principle_reason": "제2원칙: AI ASIC 설계 + 네트워킹 반도체 독점. 제3원칙: OPM 35%+, GPM 60%+. Core 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 133,
@@ -173,11 +217,15 @@
     "current_price": 412.09,
     "high_52w": 479.0,
     "mdd_pct": -13.97,
-    "buy_signal": "WAIT (MDD -12.3% > -20% 고점대비 미달)",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -14.0%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "5nm 이하 파운드리 90%+ 독점, OPM 42%+, CoWoS 병목 소유 (Core 3호)"
+    "principle_reason": "5nm 이하 파운드리 90%+ 독점, OPM 42%+, CoWoS 병목 소유 (Core 3호)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 135,
@@ -188,11 +236,15 @@
     "current_price": 1500000,
     "high_52w": 2987000,
     "mdd_pct": -49.78,
-    "buy_signal": "DEEP_DISCOUNT (3? ???? -52.4% Core ??)",
-    "portfolio_tier": "Core",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -49.8%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "NVIDIA HBM ?? ?? OPM 71.5% ROE 61.2% AI ?? ?? ??"
+    "principle_reason": "NVIDIA HBM ?? ?? OPM 71.5% ROE 61.2% AI ?? ?? ??",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 137,
@@ -203,11 +255,15 @@
     "current_price": 1751.73,
     "high_52w": 1997.38,
     "mdd_pct": -12.3,
-    "buy_signal": "WAIT (MDD -12.8% > -20% 고점대비 미달)",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -12.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "EUV 노광장비 100% 독점, GPM 51%+, 전환비용 극상 (Core 1호)"
+    "principle_reason": "EUV 노광장비 100% 독점, GPM 51%+, 전환비용 극상 (Core 1호)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 140,
@@ -218,11 +274,15 @@
     "current_price": 187.27,
     "high_52w": 307.02,
     "mdd_pct": -39.0,
-    "buy_signal": "BUY_READY (2차 분할매수 MDD -35.5%)",
-    "portfolio_tier": "Core",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -39.0%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "반도체 계측/검사 장비 독점율 80%+, EUV 필수 병목 (Core)"
+    "principle_reason": "반도체 계측/검사 장비 독점율 80%+, EUV 필수 병목 (Core)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 150,
@@ -233,11 +293,15 @@
     "current_price": 221500,
     "high_52w": 341103,
     "mdd_pct": -35.06,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Core",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -35.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "PUBG 개발사 — 배틀그라운드 PC·모바일 글로벌 1위. 인도 BGMI, 중동·동남아 강세."
+    "principle_reason": "PUBG 개발사 — 배틀그라운드 PC·모바일 글로벌 1위. 인도 BGMI, 중동·동남아 강세.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 195,
@@ -248,11 +312,15 @@
     "current_price": 1544000,
     "high_52w": 1987000,
     "mdd_pct": -22.29,
-    "buy_signal": "BUY_READY (1차 분할매수 -20% 진입)",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -22.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "세계 1위 배양용량 CDMO 독점력, CAPEX 무거운 자본 장벽 (국내 Core 대체)"
+    "principle_reason": "세계 1위 배양용량 CDMO 독점력, CAPEX 무거운 자본 장벽 (국내 Core 대체)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 239,
@@ -263,11 +331,15 @@
     "current_price": 246000,
     "high_52w": 262000,
     "mdd_pct": -6.11,
-    "buy_signal": "BUY_READY (1차 분할매수 -20% 진입)",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -6.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "글로벌 1위 화장품 ODM, Fast Beauty 밸류체인 핵심 병목 (국내 Core 대체)"
+    "principle_reason": "글로벌 1위 화장품 ODM, Fast Beauty 밸류체인 핵심 병목 (국내 Core 대체)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 242,
@@ -278,11 +350,15 @@
     "current_price": 12210,
     "high_52w": 39350,
     "mdd_pct": -68.97,
-    "buy_signal": "DEEP_DISCOUNT (3차 분할매수 MDD -65.5%)",
-    "portfolio_tier": "Core",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -69.0%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "마이크로니들 리들샷 독점 IP, 고마진 K-뷰티 병목 (Core)"
+    "principle_reason": "마이크로니들 리들샷 독점 IP, 고마진 K-뷰티 병목 (Core)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 251,
@@ -293,11 +369,15 @@
     "current_price": 265.84,
     "high_52w": 287.2,
     "mdd_pct": -7.44,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -7.4%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "제2원칙: AWS 클라우드 인프라 1위 독점. 제3원칙: AWS OPM 38%+. Core 편입."
+    "principle_reason": "제2원칙: AWS 클라우드 인프라 1위 독점. 제3원칙: AWS OPM 38%+. Core 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 271,
@@ -308,11 +388,15 @@
     "current_price": 365.54,
     "high_52w": 373.28,
     "mdd_pct": -2.07,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -2.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "제2원칙: 글로벌 결제 네트워크 독점. 제3원칙: OPM 65%+, ROE 50%+. Core 편입."
+    "principle_reason": "제2원칙: 글로벌 결제 네트워크 독점. 제3원칙: OPM 65%+, ROE 50%+. Core 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 272,
@@ -323,11 +407,15 @@
     "current_price": 573.72,
     "high_52w": 598.04,
     "mdd_pct": -4.07,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -4.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "제2원칙: 글로벌 결제 네트워크 2위 독점. 제3원칙: OPM 55%+. Core 편입."
+    "principle_reason": "제2원칙: 글로벌 결제 네트워크 2위 독점. 제3원칙: OPM 55%+. Core 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 273,
@@ -338,11 +426,15 @@
     "current_price": 401.24,
     "high_52w": 615.79,
     "mdd_pct": -34.84,
-    "buy_signal": "BUY_READY (2차매수)",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -34.8%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "제2원칙: 반도체 EDA 소프트웨어 독점. 제3원칙: OPM 30%+, GRR 90%+. Core 편입."
+    "principle_reason": "제2원칙: 반도체 EDA 소프트웨어 독점. 제3원칙: OPM 30%+, GRR 90%+. Core 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 274,
@@ -353,11 +445,15 @@
     "current_price": 314.98,
     "high_52w": 416.69,
     "mdd_pct": -24.41,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -24.4%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "제2원칙: 반도체 EDA 과점 독점. 제3원칙: OPM 30%+. Core 편입."
+    "principle_reason": "제2원칙: 반도체 EDA 과점 독점. 제3원칙: OPM 30%+. Core 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 287,
@@ -368,11 +464,15 @@
     "current_price": 1177000,
     "high_52w": 1655000,
     "mdd_pct": -28.88,
-    "buy_signal": "BUY_ADD (2차 추가매수)",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -28.9%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "누리호 발사체 총괄 주관 및 우주 발사체 엔진 독점 (수주잔고 30조원+, 글로벌 방산/우주 최고 성장)"
+    "principle_reason": "누리호 발사체 총괄 주관 및 우주 발사체 엔진 독점 (수주잔고 30조원+, 글로벌 방산/우주 최고 성장)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 294,
@@ -383,11 +483,15 @@
     "current_price": 67900,
     "high_52w": 129000,
     "mdd_pct": -47.36,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Core",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -47.4%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "온디바이스 AI 칩 소켓 및 LEAP 프로브 핀 글로벌 독점 1위 (OPM 40%+, AI 칩 R&D 테스트 필수 병목)"
+    "principle_reason": "온디바이스 AI 칩 소켓 및 LEAP 프로브 핀 글로벌 독점 1위 (OPM 40%+, AI 칩 R&D 테스트 필수 병목)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 297,
@@ -398,11 +502,15 @@
     "current_price": 221000,
     "high_52w": 426000,
     "mdd_pct": -48.12,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Core",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -48.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩50조+ HBM 3D Stack 본딩 | HBM TC 본더 글로벌 90%+ 독점, OPM 40%+ 이익 체질"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩50조+ HBM 3D Stack 본딩 | HBM TC 본더 글로벌 90%+ 독점, OPM 40%+ 이익 체질",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 298,
@@ -413,11 +521,15 @@
     "current_price": 45700,
     "high_52w": 92000,
     "mdd_pct": -50.33,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Core",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -50.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ 선단공정 고압 어닐링 | 고압 수소 어닐링 장비 100% 세계 독점, OPM 50%+"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ 선단공정 고압 어닐링 | 고압 수소 어닐링 장비 100% 세계 독점, OPM 50%+",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 302,
@@ -428,11 +540,15 @@
     "current_price": 383500,
     "high_52w": 469246,
     "mdd_pct": -18.27,
-    "buy_signal": "HOLD_WATCH",
-    "portfolio_tier": "Core",
+    "buy_signal": "WAIT (폭락대기 MDD -18.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Core",
     "suggested_tier": "Core",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ 글로벌 뷰티 디바이스 | 뷰티 디바이스(AGE-R) 글로벌 1위 독점 IP, 미국/일본 매출 YoY +80%+, OPM 22%"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ 글로벌 뷰티 디바이스 | 뷰티 디바이스(AGE-R) 글로벌 1위 독점 IP, 미국/일본 매출 YoY +80%+, OPM 22%",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 2,
@@ -443,11 +559,15 @@
     "current_price": 351.12,
     "high_52w": 498.83,
     "mdd_pct": -29.61,
-    "buy_signal": "BUY_READY (2차매수)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -29.6%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: FSD AI SW 누적 데이터 독점 + Optimus 로봇 IP. Satellite 편입."
+    "principle_reason": "제2원칙: FSD AI SW 누적 데이터 독점 + Optimus 로봇 IP. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 6,
@@ -458,11 +578,15 @@
     "current_price": 9.1,
     "high_52w": 15.81,
     "mdd_pct": -42.44,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -42.4%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "ADAS 시장 지배적 시각 처리 알고리즘"
+    "principle_reason": "ADAS 시장 지배적 시각 처리 알고리즘",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 8,
@@ -473,11 +597,15 @@
     "current_price": 226.02,
     "high_52w": 338.8,
     "mdd_pct": -33.29,
-    "buy_signal": "BUY_READY (1차 분할매수 MDD -29.2%)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -33.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "전기차/자율주행 MCU 1위, OPM 33% (Satellite)"
+    "principle_reason": "전기차/자율주행 MCU 1위, OPM 33% (Satellite)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 19,
@@ -488,11 +616,15 @@
     "current_price": 75.84,
     "high_52w": 151.0,
     "mdd_pct": -49.77,
-    "buy_signal": "DEEP_DISCOUNT (3차 분할매수 -40% 진입)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -49.8%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $100B+ 민간 우주 발사체 & 위성 서비스 | 소형 발사체 2위 + 뉴트론(Neutron) 중형 로켓, 수주잔고 $1.0B+ 역대 최고치"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $100B+ 민간 우주 발사체 & 위성 서비스 | 소형 발사체 2위 + 뉴트론(Neutron) 중형 로켓, 수주잔고 $1.0B+ 역대 최고치",
+    "moat_score": 43.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 29,
@@ -503,11 +635,15 @@
     "current_price": 160.2,
     "high_52w": 402.16,
     "mdd_pct": -60.17,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -60.2%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $1T+ 제도권 암호화폐 커스터디 | 미국 1위 규제 준수 거래소 & 비트코인 ETF 80%+ 커스터디 독점"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $1T+ 제도권 암호화폐 커스터디 | 미국 1위 규제 준수 거래소 & 비트코인 ETF 80%+ 커스터디 독점",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 70,
@@ -518,11 +654,15 @@
     "current_price": 424.67,
     "high_52w": 478.0,
     "mdd_pct": -11.16,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -11.2%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "글로벌 전력 관리 1위 기업. 전기 스위치기어·배전반·UPS·서킷 브레이커 등 폭넓은 전력 하드웨어 포트폴리오 보유. AI 데이터센터·산업 전기화 전방위 수혜 기업으로 공급 병목 리드타임 2년 이상 지속."
+    "principle_reason": "글로벌 전력 관리 1위 기업. 전기 스위치기어·배전반·UPS·서킷 브레이커 등 폭넓은 전력 하드웨어 포트폴리오 보유. AI 데이터센터·산업 전기화 전방위 수혜 기업으로 공급 병목 리드타임 2년 이상 지속.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 71,
@@ -533,11 +673,15 @@
     "current_price": 261.0,
     "high_52w": 379.86,
     "mdd_pct": -31.29,
-    "buy_signal": "BUY_READY (1차 분할매수 -20% 진입)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -31.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "AI 데이터센터 액체냉각/UPS 1위, 수주잔고 YoY +35%, 고마진 체질개선 (Satellite 2호)"
+    "principle_reason": "AI 데이터센터 액체냉각/UPS 1위, 수주잔고 YoY +35%, 고마진 체질개선 (Satellite 2호)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 76,
@@ -548,11 +692,15 @@
     "current_price": 198.21,
     "high_52w": 327.89,
     "mdd_pct": -39.55,
-    "buy_signal": "BUY_READY (2차 분할매수 MDD -35.5%)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -39.5%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $50B+ AI 데이터센터 전력배전 | 전력배전/스위치기어 틈새 독점, 수주잔고 $1.7B (시총 70%), OPM 21%+ 영업레버리지 폭발"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: $50B+ AI 데이터센터 전력배전 | 전력배전/스위치기어 틈새 독점, 수주잔고 $1.7B (시총 70%), OPM 21%+ 영업레버리지 폭발",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 86,
@@ -563,11 +711,15 @@
     "current_price": 357500,
     "high_52w": 527000,
     "mdd_pct": -32.16,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -32.2%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "전 세계 최대 규모의 글로벌 생산 캐파와 다수의 완성차 합작법인(JV)을 보유한 글로벌 1위 배터리 셀 메이커."
+    "principle_reason": "전 세계 최대 규모의 글로벌 생산 캐파와 다수의 완성차 합작법인(JV)을 보유한 글로벌 1위 배터리 셀 메이커.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 94,
@@ -578,11 +730,15 @@
     "current_price": 462500,
     "high_52w": 979000,
     "mdd_pct": -52.76,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -52.8%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩50조+ 협동/휴머노이드 로봇 | 삼성전자 대주주, 협동로봇 및 휴머노이드 핵심 부품 내재화 독점력"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩50조+ 협동/휴머노이드 로봇 | 삼성전자 대주주, 협동로봇 및 휴머노이드 핵심 부품 내재화 독점력",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 103,
@@ -593,11 +749,15 @@
     "current_price": 752000,
     "high_52w": 1426204,
     "mdd_pct": -47.27,
-    "buy_signal": "DEEP_DISCOUNT (3차 분할매수 -40% 진입)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -47.3%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "글로벌 전력기기 리드타임 2년+ 병목, 수주잔고 최고치 경신 (국내 Satellite 대체)"
+    "principle_reason": "글로벌 전력기기 리드타임 2년+ 병목, 수주잔고 최고치 경신 (국내 Satellite 대체)",
+    "moat_score": 44.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 104,
@@ -608,11 +768,15 @@
     "current_price": 2908000,
     "high_52w": 4742000,
     "mdd_pct": -38.68,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (일반 관망 MDD -38.7%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "초고압 변압기·차단기·STATCOM 전력 기기 전문 기업. 국내 최초 초전도 한류기 개발 및 친환경 가스절연개폐장치(GIS) 수출."
+    "principle_reason": "초고압 변압기·차단기·STATCOM 전력 기기 전문 기업. 국내 최초 초전도 한류기 개발 및 친환경 가스절연개폐장치(GIS) 수출.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 124,
@@ -623,11 +787,15 @@
     "current_price": 247500,
     "high_52w": 374087,
     "mdd_pct": -33.84,
-    "buy_signal": "BUY_READY (2? ???? -38.2% Satellite ??)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (일반 관망 MDD -33.8%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "DRAM 1? ???? 2? OPM 42.8% ROE 18.9% HBM ???"
+    "principle_reason": "DRAM 1? ???? 2? OPM 42.8% ROE 18.9% HBM ???",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 131,
@@ -638,11 +806,15 @@
     "current_price": 237.27,
     "high_52w": 329.8,
     "mdd_pct": -28.06,
-    "buy_signal": "BUY_READY (2차매수)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -28.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: AI ASIC 설계/광전자 반도체 병목 독점. 제3원칙: 고성장 알파. Satellite 편입."
+    "principle_reason": "제2원칙: AI ASIC 설계/광전자 반도체 병목 독점. 제3원칙: 고성장 알파. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 136,
@@ -653,11 +825,15 @@
     "current_price": 937.1,
     "high_52w": 1254.81,
     "mdd_pct": -25.32,
-    "buy_signal": "BUY_READY (2차 분할매수 MDD -30.1%)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (일반 관망 MDD -25.3%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "HBM3E DRAM 3대 과점, AI 메모리 초고성장 (Satellite)"
+    "principle_reason": "HBM3E DRAM 3대 과점, AI 메모리 초고성장 (Satellite)",
+    "moat_score": 43.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 138,
@@ -668,11 +844,15 @@
     "current_price": 496.17,
     "high_52w": 739.67,
     "mdd_pct": -32.92,
-    "buy_signal": "BUY_READY (1차 분할매수 MDD -27.1%)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -32.9%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "반도체 증착/전공정 종합 장비 1위 (Satellite)"
+    "principle_reason": "반도체 증착/전공정 종합 장비 1위 (Satellite)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 139,
@@ -683,11 +863,15 @@
     "current_price": 307.17,
     "high_52w": 438.5,
     "mdd_pct": -29.95,
-    "buy_signal": "BUY_READY (1차 분할매수 MDD -29.0%)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -29.9%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "반도체 식각(Etch) 장비 글로벌 1위, HBM 3D 패키징 수혜 (Satellite)"
+    "principle_reason": "반도체 식각(Etch) 장비 글로벌 1위, HBM 3D 패키징 수혜 (Satellite)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 168,
@@ -698,11 +882,15 @@
     "current_price": 474000,
     "high_52w": 755737,
     "mdd_pct": -37.28,
-    "buy_signal": "BUY_READY (2차 분할매수 MDD -33.9%)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -37.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "친환경 LNG/암모니아 운반선 세계 1위 건조 (Satellite)"
+    "principle_reason": "친환경 LNG/암모니아 운반선 세계 1위 건조 (Satellite)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 186,
@@ -713,11 +901,15 @@
     "current_price": 1280.34,
     "high_52w": 1292.65,
     "mdd_pct": -0.95,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -0.9%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: GLP-1 치료제 특허 독점. 제3원칙: OPM 38%+, 매출 YoY +30%+. Satellite 편입."
+    "principle_reason": "제2원칙: GLP-1 치료제 특허 독점. 제3원칙: OPM 38%+, 매출 YoY +30%+. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 189,
@@ -728,11 +920,15 @@
     "current_price": 303500,
     "high_52w": 437322,
     "mdd_pct": -30.6,
-    "buy_signal": "BUY_READY (2차 분할매수 MDD -30.3%)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -30.6%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩100조+ 글로벌 항암제 SC 제형 변경 | ALT-B4 SC 플랫폼 글로벌 독점, 키트루다 SC 전환 시 연간 로열티 1조원+ 순이익"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩100조+ 글로벌 항암제 SC 제형 변경 | ALT-B4 SC 플랫폼 글로벌 독점, 키트루다 SC 전환 시 연간 로열티 1조원+ 순이익",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 196,
@@ -743,11 +939,15 @@
     "current_price": 99300,
     "high_52w": 172100,
     "mdd_pct": -42.3,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -42.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ RNA 치료제 올리고 CDMO | 올리고핵산(RNA 치료제 원료) 글로벌 Top 3 독점 CDMO"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ RNA 치료제 올리고 CDMO | 올리고핵산(RNA 치료제 원료) 글로벌 Top 3 독점 CDMO",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 200,
@@ -758,11 +958,15 @@
     "current_price": 79600,
     "high_52w": 128514,
     "mdd_pct": -38.06,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (일반 관망 MDD -38.1%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "한국 대표 제약사. 렉라자(폐암 치료제) 미국 FDA 승인 등 신약 R&D 및 직판/오픈이노베이션 역량 증명."
+    "principle_reason": "한국 대표 제약사. 렉라자(폐암 치료제) 미국 FDA 승인 등 신약 R&D 및 직판/오픈이노베이션 역량 증명.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 249,
@@ -773,11 +977,15 @@
     "current_price": 45300,
     "high_52w": 55657,
     "mdd_pct": -18.61,
-    "buy_signal": "BUY_READY (1차 분할매수 MDD -29.4%)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -18.6%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ 글로벌 K-뷰티 유통망 | K-뷰티 150개국 글로벌 직매입 풀필먼트 독점 1위, 해외 침투율 5% 미만으로 10배 잠재력"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ 글로벌 K-뷰티 유통망 | K-뷰티 150개국 글로벌 직매입 풀필먼트 독점 1위, 해외 침투율 5% 미만으로 10배 잠재력",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 258,
@@ -788,11 +996,15 @@
     "current_price": 1304000,
     "high_52w": 1661517,
     "mdd_pct": -21.52,
-    "buy_signal": "BUY_READY (1차 분할매수 -20% 진입)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -21.5%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "불닭볶음면 글로벌 IP 독점, 수출 비중 70%+, 수주/수출 역대 최고치 (국내 Satellite 대체)"
+    "principle_reason": "불닭볶음면 글로벌 IP 독점, 수출 비중 70%+, 수주/수출 역대 최고치 (국내 Satellite 대체)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 259,
@@ -803,11 +1015,15 @@
     "current_price": 432500,
     "high_52w": 569748,
     "mdd_pct": -24.09,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (일반 관망 MDD -24.1%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "신라면 등 글로벌 라면·스낵 제조 기업. 미국·중국·호주 현지 생산 체계 구축. 신라면 블랙 등 프리미엄 라인 전략."
+    "principle_reason": "신라면 등 글로벌 라면·스낵 제조 기업. 미국·중국·호주 현지 생산 체계 구축. 신라면 블랙 등 프리미엄 라인 전략.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 265,
@@ -818,11 +1034,15 @@
     "current_price": 124100,
     "high_52w": 148054,
     "mdd_pct": -16.18,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (일반 관망 MDD -16.2%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "초코파이 등 메가 IP 보유 K-제과 기업. 철저한 현지화로 중국·베트남·러시아 등 글로벌 제과 시장 장악."
+    "principle_reason": "초코파이 등 메가 IP 보유 K-제과 기업. 철저한 현지화로 중국·베트남·러시아 등 글로벌 제과 시장 장악.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 275,
@@ -833,11 +1053,15 @@
     "current_price": 175.19,
     "high_52w": 207.52,
     "mdd_pct": -15.58,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -15.6%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: 군사/정부 AI 플랫폼 독점 락인. 제3원칙: OPM 흑전+12%~18%. Satellite 편입."
+    "principle_reason": "제2원칙: 군사/정부 AI 플랫폼 독점 락인. 제3원칙: OPM 흑전+12%~18%. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 276,
@@ -848,11 +1072,15 @@
     "current_price": 127.2,
     "high_52w": 194.73,
     "mdd_pct": -34.68,
-    "buy_signal": "BUY_READY (2차매수)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -34.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: 기업 IT 워크플로 독점 플랫폼. 제3원칙: OPM 20%+, FCF 마진 30%+. Satellite 편입."
+    "principle_reason": "제2원칙: 기업 IT 워크플로 독점 플랫폼. 제3원칙: OPM 20%+, FCF 마진 30%+. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 277,
@@ -863,11 +1091,15 @@
     "current_price": 201.63,
     "high_52w": 227.5,
     "mdd_pct": -11.37,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -11.4%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: AI 클라우드 보안 플랫폼 1위 락인. 제3원칙: OPM 흑전+10%+. Satellite 편입."
+    "principle_reason": "제2원칙: AI 클라우드 보안 플랫폼 1위 락인. 제3원칙: OPM 흑전+10%+. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 278,
@@ -878,11 +1110,15 @@
     "current_price": 426.66,
     "high_52w": 525.02,
     "mdd_pct": -18.73,
-    "buy_signal": "BUY_READY (1차매수)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -18.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: 채권 신용등급 과점 독점. 제3원칙: OPM 45%+. Satellite 편입."
+    "principle_reason": "제2원칙: 채권 신용등급 과점 독점. 제3원칙: OPM 45%+. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 279,
@@ -893,11 +1129,15 @@
     "current_price": 1222.91,
     "high_52w": 1463.03,
     "mdd_pct": -16.41,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -16.4%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: 항공 독점 부품 단일소스 공급. 제3원칙: EBITDA 마진 50%+. Satellite 편입."
+    "principle_reason": "제2원칙: 항공 독점 부품 단일소스 공급. 제3원칙: EBITDA 마진 50%+. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 280,
@@ -908,11 +1148,15 @@
     "current_price": 213.0,
     "high_52w": 229.86,
     "mdd_pct": -7.33,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -7.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: 글로벌 여행 예약 플랫폼 1위 네트워크 효과. 제3원칙: OPM 30%+. Satellite 편입."
+    "principle_reason": "제2원칙: 글로벌 여행 예약 플랫폼 1위 네트워크 효과. 제3원칙: OPM 30%+. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 281,
@@ -923,11 +1167,15 @@
     "current_price": 186.45,
     "high_52w": 214.89,
     "mdd_pct": -13.23,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -13.2%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: AI 데이터센터 이더넷 스위치 1위 독점. 제3원칙: OPM 38%+. Satellite 편입."
+    "principle_reason": "제2원칙: AI 데이터센터 이더넷 스위치 1위 독점. 제3원칙: OPM 38%+. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 282,
@@ -938,11 +1186,15 @@
     "current_price": 152.85,
     "high_52w": 172.09,
     "mdd_pct": -11.18,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -11.2%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: 방화벽 독점 ASIC + SW 플랫폼. 제3원칙: OPM 25%+. Satellite 편입."
+    "principle_reason": "제2원칙: 방화벽 독점 ASIC + SW 플랫폼. 제3원칙: OPM 25%+. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 283,
@@ -953,11 +1205,15 @@
     "current_price": 359.76,
     "high_52w": 398.88,
     "mdd_pct": -9.81,
-    "buy_signal": "WAIT",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -9.8%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "제2원칙: AI 클라우드 보안 플랫폼 1위 통합. 제3원칙: FCF 마진 35%+. Satellite 편입."
+    "principle_reason": "제2원칙: AI 클라우드 보안 플랫폼 1위 통합. 제3원칙: FCF 마진 35%+. Satellite 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 285,
@@ -968,11 +1224,15 @@
     "current_price": 436500,
     "high_52w": 1066000,
     "mdd_pct": -59.05,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -59.0%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ SDV 차량용 SW | SDV 차량용 SW 플랫폼 및 내비게이션 독점, 수주잔고 지속 폭발"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ SDV 차량용 SW | SDV 차량용 SW 플랫폼 및 내비게이션 독점, 수주잔고 지속 폭발",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 288,
@@ -983,11 +1243,15 @@
     "current_price": 76900,
     "high_52w": 224000,
     "mdd_pct": -65.67,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -65.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "초고해상도 위성 본체 및 체계 종합 독점 IP (초소형 위성 군집 사업 수주잔고 급증)"
+    "principle_reason": "초고해상도 위성 본체 및 체계 종합 독점 IP (초소형 위성 군집 사업 수주잔고 급증)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 289,
@@ -998,11 +1262,15 @@
     "current_price": 68300,
     "high_52w": 180200,
     "mdd_pct": -62.1,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -62.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩10조+ LEO 저궤도 위성 안테나 | 저궤도 위성 안테나 글로벌 1위, 스타링크/원웹 공급망 핵심 병목"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩10조+ LEO 저궤도 위성 안테나 | 저궤도 위성 안테나 글로벌 1위, 스타링크/원웹 공급망 핵심 병목",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 290,
@@ -1013,11 +1281,15 @@
     "current_price": 34650,
     "high_52w": 59300,
     "mdd_pct": -41.57,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -41.6%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "북미 태양광 모듈 시장점유율 1위 (Qcell 독점) (IRA 세액공제 수혜 및 미국 태양광 솔라허브 완공)"
+    "principle_reason": "북미 태양광 모듈 시장점유율 1위 (Qcell 독점) (IRA 세액공제 수혜 및 미국 태양광 솔라허브 완공)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 295,
@@ -1028,11 +1300,15 @@
     "current_price": 44550,
     "high_52w": 83200,
     "mdd_pct": -46.45,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -46.5%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ 삼성 파운드리 커스텀 AI 칩 | 삼성 파운드리 1위 DSP 파트너, AI NPU 칩 설계 수주 잔고 급증"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩20조+ 삼성 파운드리 커스텀 AI 칩 | 삼성 파운드리 1위 DSP 파트너, AI NPU 칩 설계 수주 잔고 급증",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 296,
@@ -1043,11 +1319,15 @@
     "current_price": 8920,
     "high_52w": 22700,
     "mdd_pct": -60.7,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -60.7%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩10조+ 온디바이스 AI 칩 IP | 글로벌 유일 NPU + 메모리 컨트롤러 통합 IP 보유, 온디바이스 AI 개화 시 로열티 10배 폭발"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩10조+ 온디바이스 AI 칩 IP | 글로벌 유일 NPU + 메모리 컨트롤러 통합 IP 보유, 온디바이스 AI 개화 시 로열티 10배 폭발",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 300,
@@ -1058,11 +1338,15 @@
     "current_price": 100.0,
     "high_52w": 120.0,
     "mdd_pct": -16.67,
-    "buy_signal": "HOLD_WATCH",
-    "portfolio_tier": "Satellite",
+    "buy_signal": "WAIT (폭락대기 MDD -16.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Satellite",
     "suggested_tier": "Satellite",
-    "principle_reason": "친환경 LNG/LPG 운반선 건조 이익률 세계 1위 (OPM 12%+ 조선업 최고 수익성 경신)"
+    "principle_reason": "친환경 LNG/LPG 운반선 건조 이익률 세계 1위 (OPM 12%+ 조선업 최고 수익성 경신)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 30,
@@ -1073,11 +1357,15 @@
     "current_price": 104.25,
     "high_52w": 365.21,
     "mdd_pct": -71.45,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Watchlist",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -71.5%)",
+    "portfolio_tier": "Standard",
     "current_tier": "Watchlist",
     "suggested_tier": "Watchlist",
-    "principle_reason": "세계 최대 상장사 비트코인 보유 기업. 소프트웨어 사업에서 비트코인 재무전략 기업으로 전환. BTC 현물 매입을 위한 전환사채·주식 발행을 지속적으로 실행."
+    "principle_reason": "세계 최대 상장사 비트코인 보유 기업. 소프트웨어 사업에서 비트코인 재무전략 기업으로 전환. BTC 현물 매입을 위한 전환사채·주식 발행을 지속적으로 실행.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 167,
@@ -1088,11 +1376,15 @@
     "current_price": 367000,
     "high_52w": 480030,
     "mdd_pct": -23.55,
-    "buy_signal": "WAIT (MDD -18.3% > -30% 폭락대기 미달)",
+    "buy_signal": "WAIT (폭락대기 MDD -23.6%)",
     "portfolio_tier": "Watchlist",
     "current_tier": "Watchlist",
     "suggested_tier": "Watchlist",
-    "principle_reason": "LNG/친환경선 글로벌 1위, 3년치 고가 수주잔고 (대체 관심 2호)"
+    "principle_reason": "LNG/친환경선 글로벌 1위, 3년치 고가 수주잔고 (대체 관심 2호)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 198,
@@ -1103,11 +1395,15 @@
     "current_price": 388.61,
     "high_52w": 461.62,
     "mdd_pct": -15.82,
-    "buy_signal": "WAIT",
+    "buy_signal": "WAIT (폭락대기 MDD -15.8%)",
     "portfolio_tier": "Watchlist",
     "current_tier": "Watchlist",
     "suggested_tier": "Watchlist",
-    "principle_reason": "제2원칙: 의료 데이터/플랫폼 독점. 제3원칙: OPM 8%+안정. Watchlist (MDD -45%+ 대기). 편입."
+    "principle_reason": "제2원칙: 의료 데이터/플랫폼 독점. 제3원칙: OPM 8%+안정. Watchlist (MDD -45%+ 대기). 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 284,
@@ -1118,11 +1414,15 @@
     "current_price": 325.01,
     "high_52w": 341.95,
     "mdd_pct": -4.95,
-    "buy_signal": "WAIT",
+    "buy_signal": "WAIT (폭락대기 MDD -5.0%)",
     "portfolio_tier": "Watchlist",
     "current_tier": "Watchlist",
     "suggested_tier": "Watchlist",
-    "principle_reason": "제2원칙: 멀티클라우드 데이터 독점 플랫폼. 제3원칙: NRR 128%+ 고성장. Watchlist (가격 고평가) 편입."
+    "principle_reason": "제2원칙: 멀티클라우드 데이터 독점 플랫폼. 제3원칙: NRR 128%+ 고성장. Watchlist (가격 고평가) 편입.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 291,
@@ -1133,11 +1433,15 @@
     "current_price": 100.0,
     "high_52w": 120.0,
     "mdd_pct": -16.67,
-    "buy_signal": "HOLD_WATCH",
+    "buy_signal": "WAIT (폭락대기 MDD -16.7%)",
     "portfolio_tier": "Watchlist",
     "current_tier": "Watchlist",
     "suggested_tier": "Watchlist",
-    "principle_reason": "해상풍력 하부구조물(자켓) 아시아 1위 독점력 (대만/한국/해외 해상풍력 수주잔고 급증)"
+    "principle_reason": "해상풍력 하부구조물(자켓) 아시아 1위 독점력 (대만/한국/해외 해상풍력 수주잔고 급증)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 4,
@@ -1148,11 +1452,15 @@
     "current_price": 78.04,
     "high_52w": 101.99,
     "mdd_pct": -23.48,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -23.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "모빌리티 수요 플랫폼"
+    "principle_reason": "모빌리티 수요 플랫폼",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 7,
@@ -1163,11 +1471,15 @@
     "current_price": 48.92,
     "high_52w": 88.93,
     "mdd_pct": -44.99,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -45.0%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "차량용 전장 시스템 및 SDV 솔루션 통합"
+    "principle_reason": "차량용 전장 시스템 및 SDV 솔루션 통합",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 9,
@@ -1178,11 +1490,15 @@
     "current_price": 76.58,
     "high_52w": 134.92,
     "mdd_pct": -43.24,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -43.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "차량용 이미지 센서 및 SiC 전력 반도체"
+    "principle_reason": "차량용 이미지 센서 및 SiC 전력 반도체",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 11,
@@ -1193,11 +1509,15 @@
     "current_price": 42.02,
     "high_52w": 87.88,
     "mdd_pct": -52.18,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -52.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "물류 창고 자동화 및 AI 분류 로봇 시스템"
+    "principle_reason": "물류 창고 자동화 및 AI 분류 로봇 시스템",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 12,
@@ -1208,11 +1528,15 @@
     "current_price": 379.65,
     "high_52w": 487.91,
     "mdd_pct": -22.19,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -22.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Universal Robots(협동로봇), MiR(물류로봇) 모회사"
+    "principle_reason": "Universal Robots(협동로봇), MiR(물류로봇) 모회사",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 13,
@@ -1223,11 +1547,15 @@
     "current_price": 433.27,
     "high_52w": 495.83,
     "mdd_pct": -12.62,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -12.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "산업용 제어 시스템, 소프트웨어 및 스마트팩토리"
+    "principle_reason": "산업용 제어 시스템, 소프트웨어 및 스마트팩토리",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 14,
@@ -1238,11 +1566,15 @@
     "current_price": 354.65,
     "high_52w": 386.23,
     "mdd_pct": -8.18,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -8.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "창고 내 물류 추적 및 바코드 머신 비전 시스템"
+    "principle_reason": "창고 내 물류 추적 및 바코드 머신 비전 시스템",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 15,
@@ -1253,11 +1585,15 @@
     "current_price": 15.78,
     "high_52w": 19.84,
     "mdd_pct": -20.46,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -20.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "업무 자동화를 위한 RPA (소프트웨어 로보틱스)"
+    "principle_reason": "업무 자동화를 위한 RPA (소프트웨어 로보틱스)",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 16,
@@ -1268,11 +1604,15 @@
     "current_price": 60.64,
     "high_52w": 72.88,
     "mdd_pct": -16.79,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -16.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "제조 라인 결함 탐지 및 부품 인식용 2D/3D 머신 비전"
+    "principle_reason": "제조 라인 결함 탐지 및 부품 인식용 2D/3D 머신 비전",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 17,
@@ -1283,11 +1623,15 @@
     "current_price": 172.74,
     "high_52w": 417.86,
     "mdd_pct": -58.66,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -58.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "드론, 무인기기 시스템 및 전술 로봇 솔루션"
+    "principle_reason": "드론, 무인기기 시스템 및 전술 로봇 솔루션",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 20,
@@ -1298,11 +1642,15 @@
     "current_price": 22.62,
     "high_52w": 51.76,
     "mdd_pct": -56.3,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -56.3%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "매일 전 지구를 촬영하는 초소형 위성 군집 지구 관측 서비스"
+    "principle_reason": "매일 전 지구를 촬영하는 초소형 위성 군집 지구 관측 서비스",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 21,
@@ -1313,11 +1661,15 @@
     "current_price": 76.67,
     "high_52w": 93.03,
     "mdd_pct": -17.59,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -17.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "정지궤도(GEO) 위성 기반 광대역 인터넷 및 정부 통신"
+    "principle_reason": "정지궤도(GEO) 위성 기반 광대역 인터넷 및 정부 통신",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 22,
@@ -1328,11 +1680,15 @@
     "current_price": 60.56,
     "high_52w": 134.0,
     "mdd_pct": -54.81,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -54.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "위성 지상국 솔루션, 우주 전자전 및 드론 시스템"
+    "principle_reason": "위성 지상국 솔루션, 우주 전자전 및 드론 시스템",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 24,
@@ -1343,11 +1699,15 @@
     "current_price": 277.11,
     "high_52w": 376.39,
     "mdd_pct": -26.38,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -26.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "우주 센서, 정찰 위성 탑재체 및 통신 시스템 제공"
+    "principle_reason": "우주 센서, 정찰 위성 탑재체 및 통신 시스템 제공",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 25,
@@ -1358,11 +1718,15 @@
     "current_price": 582.84,
     "high_52w": 770.61,
     "mdd_pct": -24.37,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -24.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "제임스웹 우주망원경 제작사이자 핵심 우주 방산 시스템 통합자"
+    "principle_reason": "제임스웹 우주망원경 제작사이자 핵심 우주 방산 시스템 통합자",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 26,
@@ -1373,11 +1737,15 @@
     "current_price": 3.21,
     "high_52w": 8.9,
     "mdd_pct": -63.93,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -63.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "민간 우주여행(서브오비탈) 및 초음속 이동 서비스"
+    "principle_reason": "민간 우주여행(서브오비탈) 및 초음속 이동 서비스",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 27,
@@ -1388,11 +1756,15 @@
     "current_price": 18.52,
     "high_52w": 46.75,
     "mdd_pct": -60.39,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -60.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "NASA 아르테미스용 달 착륙선 개발 및 달 물자 수송 서비스(CLPS)"
+    "principle_reason": "NASA 아르테미스용 달 착륙선 개발 및 달 물자 수송 서비스(CLPS)",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 28,
@@ -1403,11 +1775,15 @@
     "current_price": 589.15,
     "high_52w": 687.5,
     "mdd_pct": -14.31,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -14.3%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "정찰·통신·기상 위성 및 발사체 시스템 통합(ULA 지분 보유)"
+    "principle_reason": "정찰·통신·기상 위성 및 발사체 시스템 통합(ULA 지분 보유)",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 31,
@@ -1418,11 +1794,15 @@
     "current_price": 9.65,
     "high_52w": 23.45,
     "mdd_pct": -58.85,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -58.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 최대 비트코인 채굴 기업 중 하나. 고성능 ASIC 채굴기로 비트코인 네트워크 해시레이트의 상당 부분 담당. 에너지 효율성 개선을 위한 친환경 전력 확보에 집중."
+    "principle_reason": "미국 최대 비트코인 채굴 기업 중 하나. 고성능 ASIC 채굴기로 비트코인 네트워크 해시레이트의 상당 부분 담당. 에너지 효율성 개선을 위한 친환경 전력 확보에 집중.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 32,
@@ -1433,11 +1813,15 @@
     "current_price": 19.38,
     "high_52w": 30.32,
     "mdd_pct": -36.08,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -36.1%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "텍사스 주 기반 대규모 비트코인 채굴 기업. 자체 전력 조달 능력과 열 재활용 시스템으로 낮은 채굴 비용 유지. Coinbase에 이어 두 번째로 큰 기관 BTC 보유량 보유."
+    "principle_reason": "텍사스 주 기반 대규모 비트코인 채굴 기업. 자체 전력 조달 능력과 열 재활용 시스템으로 낮은 채굴 비용 유지. Coinbase에 이어 두 번째로 큰 기관 BTC 보유량 보유.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 33,
@@ -1448,11 +1832,15 @@
     "current_price": 11.67,
     "high_52w": 23.61,
     "mdd_pct": -50.57,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -50.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "친환경 에너지 특화 비트코인 채굴 기업. 재생에너지 및 탄소중립 전력원으로 ESG 친화적 채굴 모델 구현. 미국 내 여러 주에 채굴 시설 보유."
+    "principle_reason": "친환경 에너지 특화 비트코인 채굴 기업. 재생에너지 및 탄소중립 전력원으로 ESG 친화적 채굴 모델 구현. 미국 내 여러 주에 채굴 시설 보유.",
+    "moat_score": 37.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 34,
@@ -1463,11 +1851,15 @@
     "current_price": 80.93,
     "high_52w": 86.75,
     "mdd_pct": -6.71,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -6.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Jack Dorsey가 이끄는 핀테크 기업. Cash App을 통한 리테일 비트코인 매매, Bitkey 하드웨어 지갑, TBD 분산 교환 프로토콜을 개발. 비트코인 채굴 칩(3nm) 자체 개발 중."
+    "principle_reason": "Jack Dorsey가 이끄는 핀테크 기업. Cash App을 통한 리테일 비트코인 매매, Bitkey 하드웨어 지갑, TBD 분산 교환 프로토콜을 개발. 비트코인 채굴 칩(3nm) 자체 개발 중.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 35,
@@ -1478,11 +1870,15 @@
     "current_price": 95.77,
     "high_52w": 153.86,
     "mdd_pct": -37.76,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -37.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "수수료 없는 주식·암호화폐 거래 플랫폼. 미국 밀레니얼 세대의 핵심 투자 플랫폼으로 암호화폐 거래량 급증. Bitstamp 인수로 유럽 암호화폐 거래소 진출."
+    "principle_reason": "수수료 없는 주식·암호화폐 거래 플랫폼. 미국 밀레니얼 세대의 핵심 투자 플랫폼으로 암호화폐 거래량 급증. Bitstamp 인수로 유럽 암호화폐 거래소 진출.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 36,
@@ -1493,11 +1889,15 @@
     "current_price": 61.25,
     "high_52w": 78.53,
     "mdd_pct": -22.01,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -22.0%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로belts 결제 플랫폼. PYUSD 스테이블코인 발행, 비트코인·이더리움 매매 및 결제 서비스 제공. 4억명의 기존 사용자 기반이 암호화폐 대중화의 강점."
+    "principle_reason": "글로belts 결제 플랫폼. PYUSD 스테이블코인 발행, 비트코인·이더리움 매매 및 결제 서비스 제공. 4억명의 기존 사용자 기반이 암호화폐 대중화의 강점.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 37,
@@ -1508,11 +1908,15 @@
     "current_price": 0.24,
     "high_52w": 2.22,
     "mdd_pct": -89.18,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -89.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "중국 기반 세계 2위 비트코인 채굴 장비(ASIC) 제조사. Avalon 브랜드 채굴기를 글로벌 채굴 기업에 공급. Bitmain에 이어 시장점유율 2위."
+    "principle_reason": "중국 기반 세계 2위 비트코인 채굴 장비(ASIC) 제조사. Avalon 브랜드 채굴기를 글로벌 채굴 기업에 공급. Bitmain에 이어 시장점유율 2위.",
+    "moat_score": 43.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 38,
@@ -1523,11 +1927,15 @@
     "current_price": 82.08,
     "high_52w": 140.8,
     "mdd_pct": -41.7,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -41.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "캐나다 기반 비트코인 채굴 및 고성능 컴퓨팅(HPC) 기업. US Bitcoin Corp과 합병 후 미국·캐나다 양국에 데이터센터 운영. AI/HPC 수요로 사업 전환 가속."
+    "principle_reason": "캐나다 기반 비트코인 채굴 및 고성능 컴퓨팅(HPC) 기업. US Bitcoin Corp과 합병 후 미국·캐나다 양국에 데이터센터 운영. AI/HPC 수요로 사업 전환 가속.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 39,
@@ -1538,11 +1946,15 @@
     "current_price": 18.72,
     "high_52w": 30.46,
     "mdd_pct": -38.54,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -38.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 최대 비트코인 자체 채굴 및 공동 채굴 데이터센터 기업. 2023년 파산 후 재상장. CoreWeave와 장기 HPC 임대 계약으로 수익 안정성 확보."
+    "principle_reason": "미국 최대 비트코인 자체 채굴 및 공동 채굴 데이터센터 기업. 2023년 파산 후 재상장. CoreWeave와 장기 HPC 임대 계약으로 수익 안정성 확보.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 40,
@@ -1553,11 +1965,15 @@
     "current_price": 7.74,
     "high_52w": 49.79,
     "mdd_pct": -84.45,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -84.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "기관 투자자와 기업 대상 디지털 자산 커스터디·거래 플랫폼. NYSE 모기업 ICE가 설립. 규제 준수 커스터디 서비스와 충성 포인트 토큰화 사업 운영."
+    "principle_reason": "기관 투자자와 기업 대상 디지털 자산 커스터디·거래 플랫폼. NYSE 모기업 ICE가 설립. 규제 준수 커스터디 서비스와 충성 포인트 토큰화 사업 운영.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 41,
@@ -1568,11 +1984,15 @@
     "current_price": 15.89,
     "high_52w": 30.14,
     "mdd_pct": -47.28,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -47.3%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "텍사스 기반 비트코인 채굴 기업. 저렴한 전력 비용과 확장 가능한 채굴 인프라 보유. Bitmain의 최신 ASIC 칩 우선 공급 계약 체결."
+    "principle_reason": "텍사스 기반 비트코인 채굴 기업. 저렴한 전력 비용과 확장 가능한 채굴 인프라 보유. Bitmain의 최신 ASIC 칩 우선 공급 계약 체결.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 42,
@@ -1583,11 +2003,15 @@
     "current_price": 21.9,
     "high_52w": 45.92,
     "mdd_pct": -52.31,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -52.3%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Michael Novogratz가 설립한 기관급 디지털 자산 금융 서비스 기업. 자산운용, 트레이딩, 투자은행, 채굴 사업을 망라. 비트코인·이더리움 현물 ETF 론칭 파트너."
+    "principle_reason": "Michael Novogratz가 설립한 기관급 디지털 자산 금융 서비스 기업. 자산운용, 트레이딩, 투자은행, 채굴 사업을 망라. 비트코인·이더리움 현물 ETF 론칭 파트너.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 43,
@@ -1598,11 +2022,15 @@
     "current_price": 78.59,
     "high_52w": 159.47,
     "mdd_pct": -50.72,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -50.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "USDC(USD Coin) 스테이블코인 발행 및 Circle Payments Network(CPN) 운영. 전 세계 최대 규모의 달러 연동 디지털 화폐 인프라를 구축하며, 기업·기관·정부의 디지털 결제 및 국경 간 송금 플랫폼을 제공."
+    "principle_reason": "USDC(USD Coin) 스테이블코인 발행 및 Circle Payments Network(CPN) 운영. 전 세계 최대 규모의 달러 연동 디지털 화폐 인프라를 구축하며, 기업·기관·정부의 디지털 결제 및 국경 간 송금 플랫폼을 제공.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 44,
@@ -1613,11 +2041,15 @@
     "current_price": 6.2,
     "high_52w": 8.56,
     "mdd_pct": -27.67,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -27.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "자율주행 트럭 소프트웨어(Aurora Driver) 개발사. Paccar·Volvo와 파트너십으로 Class-8 대형 트럭 자율주행 상용화 선도."
+    "principle_reason": "자율주행 트럭 소프트웨어(Aurora Driver) 개발사. Paccar·Volvo와 파트너십으로 Class-8 대형 트럭 자율주행 상용화 선도.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 45,
@@ -1628,11 +2060,15 @@
     "current_price": 7.83,
     "high_52w": 24.92,
     "mdd_pct": -68.58,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -68.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "중국·미국 동시 운영 로보택시 플랫폼. 도요타 전략 투자 유치. 베이징·광저우 상업 로보택시 면허 보유."
+    "principle_reason": "중국·미국 동시 운영 로보택시 플랫폼. 도요타 전략 투자 유치. 베이징·광저우 상업 로보택시 면허 보유.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 46,
@@ -1643,11 +2079,15 @@
     "current_price": 6.07,
     "high_52w": 12.55,
     "mdd_pct": -51.63,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -51.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "중국·중동·유럽 로보택시·자율주행 버스·화물트럭 솔루션. UAE 아부다비 첫 무인 로보택시 상업 운행 허가."
+    "principle_reason": "중국·중동·유럽 로보택시·자율주행 버스·화물트럭 솔루션. UAE 아부다비 첫 무인 로보택시 상업 운행 허가.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 47,
@@ -1658,11 +2098,15 @@
     "current_price": 221.73,
     "high_52w": 258.09,
     "mdd_pct": -14.09,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -14.1%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "산업 자동화·공정 제어·창고 로보틱스 종합 솔루션. Intelligrated 인수로 아마존·월마트 물류 자동화 핵심 공급사."
+    "principle_reason": "산업 자동화·공정 제어·창고 로보틱스 종합 솔루션. Intelligrated 인수로 아마존·월마트 물류 자동화 핵심 공급사.",
+    "moat_score": 37.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 48,
@@ -1673,11 +2117,15 @@
     "current_price": 157.6,
     "high_52w": 165.79,
     "mdd_pct": -4.94,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -4.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "공정 자동화·유량계·밸브·제어시스템 전문. 화학·석유·가스·식품 산업 자동화의 핵심 인프라."
+    "principle_reason": "공정 자동화·유량계·밸브·제어시스템 전문. 화학·석유·가스·식품 산업 자동화의 핵심 인프라.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 49,
@@ -1688,11 +2136,15 @@
     "current_price": 29.9,
     "high_52w": 51.6,
     "mdd_pct": -42.05,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -42.0%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "AI·DSP 반도체 IP 라이선싱. 로봇·드론·IoT·웨어러블의 AI 추론 칩 설계 핵심. Arm처럼 IP를 팔아 로열티 수익."
+    "principle_reason": "AI·DSP 반도체 IP 라이선싱. 로봇·드론·IoT·웨어러블의 AI 추론 칩 설계 핵심. Arm처럼 IP를 팔아 로열티 수익.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 50,
@@ -1703,11 +2155,15 @@
     "current_price": 66.43,
     "high_52w": 133.86,
     "mdd_pct": -50.37,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -50.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "스마트폰 직접 연결(Direct-to-Cell) 위성 브로드밴드. AT&T·Verizon·Rakuten·Vodafone과 파트너십. BlueBird 위성 배치 중."
+    "principle_reason": "스마트폰 직접 연결(Direct-to-Cell) 위성 브로드밴드. AT&T·Verizon·Rakuten·Vodafone과 파트너십. BlueBird 위성 배치 중.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 51,
@@ -1718,11 +2174,15 @@
     "current_price": 48.71,
     "high_52w": 57.18,
     "mdd_pct": -14.81,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -14.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "66개 LEO 위성으로 전 지구 위성 통신 서비스. 해운·항공·정부·국방 고객. 프리미엄 위성통신 수익 모델."
+    "principle_reason": "66개 LEO 위성으로 전 지구 위성 통신 서비스. 해운·항공·정부·국방 고객. 프리미엄 위성통신 수익 모델.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 52,
@@ -1733,11 +2193,15 @@
     "current_price": 82.46,
     "high_52w": 84.85,
     "mdd_pct": -2.82,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -2.8%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "LEO 위성 통신. Apple iPhone 위성 SOS 기능 독점 파트너. Apple이 최대 주주(약 20% 지분 보유)."
+    "principle_reason": "LEO 위성 통신. Apple iPhone 위성 SOS 기능 독점 파트너. Apple이 최대 주주(약 20% 지분 보유).",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 53,
@@ -1748,11 +2212,15 @@
     "current_price": 13.7,
     "high_52w": 25.93,
     "mdd_pct": -47.17,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -47.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "100개+ LEO 위성으로 기상·해양·항공 데이터 수집·분석 SaaS. 기상청·항공사·보험사·해운사 데이터 구독."
+    "principle_reason": "100개+ LEO 위성으로 기상·해양·항공 데이터 수집·분석 SaaS. 기상청·항공사·보험사·해운사 데이터 구독.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 54,
@@ -1763,11 +2231,15 @@
     "current_price": 27.9,
     "high_52w": 52.88,
     "mdd_pct": -47.24,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -47.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "고해상도 위성 영상 + AI 분석 플랫폼. 미 국방부(NRO·NGA) 장기 계약. 실시간 지구관측 정보 제공."
+    "principle_reason": "고해상도 위성 영상 + AI 분석 플랫폼. 미 국방부(NRO·NGA) 장기 계약. 실시간 지구관측 정보 제공.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 55,
@@ -1778,11 +2250,15 @@
     "current_price": 9.63,
     "high_52w": 27.8,
     "mdd_pct": -65.36,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -65.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "자체 채굴 칩(SEALMINER) 개발·제조 + 채굴 데이터센터 운영. 반도체 내재화로 채굴 원가 구조 혁신."
+    "principle_reason": "자체 채굴 칩(SEALMINER) 개발·제조 + 채굴 데이터센터 운영. 반도체 내재화로 채굴 원가 구조 혁신.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 56,
@@ -1793,11 +2269,15 @@
     "current_price": 28.23,
     "high_52w": 50.72,
     "mdd_pct": -44.35,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -44.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "고성능 컴퓨팅(HPC) 데이터센터. 암호화폐 채굴 → AI/HPC 워크로드로 전환 중. Nvidia H100 GPU 클러스터 운영."
+    "principle_reason": "고성능 컴퓨팅(HPC) 데이터센터. 암호화폐 채굴 → AI/HPC 워크로드로 전환 중. Nvidia H100 GPU 클러스터 운영.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 57,
@@ -1808,11 +2288,15 @@
     "current_price": 15.5,
     "high_52w": 29.84,
     "mdd_pct": -48.06,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -48.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "수력·원자력 100% 청정에너지 BTC 채굴. 뉴욕 Nautilus 원자력 발전소 연계 채굴. ESG 코인 채굴 선도."
+    "principle_reason": "수력·원자력 100% 청정에너지 BTC 채굴. 뉴욕 Nautilus 원자력 발전소 연계 채굴. ESG 코인 채굴 선도.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 58,
@@ -1823,11 +2307,15 @@
     "current_price": 42.84,
     "high_52w": 76.87,
     "mdd_pct": -44.27,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -44.3%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "캐나다·미국·호주 수력발전 연계 친환경 BTC 채굴. Exahash 규모 빠른 확장. AI 클라우드 컴퓨팅 전환 중."
+    "principle_reason": "캐나다·미국·호주 수력발전 연계 친환경 BTC 채굴. Exahash 규모 빠른 확장. AI 클라우드 컴퓨팅 전환 중.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 59,
@@ -1838,11 +2326,15 @@
     "current_price": 1.4,
     "high_52w": 4.55,
     "mdd_pct": -69.23,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -69.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "BTC 채굴 + ETH 스테이킹 + AI 클라우드 컴퓨팅 3분야 운영. 아이슬란드 데이터센터 기반."
+    "principle_reason": "BTC 채굴 + ETH 스테이킹 + AI 클라우드 컴퓨팅 3분야 운영. 아이슬란드 데이터센터 기반.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 60,
@@ -1853,11 +2345,15 @@
     "current_price": 77.59,
     "high_52w": 127.19,
     "mdd_pct": -39.0,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -39.0%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "반도체 세정 장비 전문. 중국 반도체 팹 자동화 핵심 공급사. WAFER CLEANING 장비 고성능화로 AI칩·로봇칩 제조 필수 장비."
+    "principle_reason": "반도체 세정 장비 전문. 중국 반도체 팹 자동화 핵심 공급사. WAFER CLEANING 장비 고성능화로 AI칩·로봇칩 제조 필수 장비.",
+    "moat_score": 37.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 61,
@@ -1868,11 +2364,15 @@
     "current_price": 987.46,
     "high_52w": 1195.94,
     "mdd_pct": -17.43,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -17.4%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 대용량 복합화력발전 1위 기업. 터빈 내부 공랭식 냉각 기술의 극한을 실현하고 기성품 형태의 가스터빈을 1~2년 내 신속하게 공급하여 빅테크의 단기 전력 공급원 역할을 수행."
+    "principle_reason": "글로벌 대용량 복합화력발전 1위 기업. 터빈 내부 공랭식 냉각 기술의 극한을 실현하고 기성품 형태의 가스터빈을 1~2년 내 신속하게 공급하여 빅테크의 단기 전력 공급원 역할을 수행.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 62,
@@ -1883,11 +2383,15 @@
     "current_price": 180.0,
     "high_52w": 223.95,
     "mdd_pct": -19.63,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -19.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 발전 설비 거인으로, 신재생에너지의 간헐성(변동성)을 통제하기 위해 빠른 출력 조절(유연성)이 가능한 가스터빈 제어 기술 분야에서 세계적 우위 보유."
+    "principle_reason": "글로벌 발전 설비 거인으로, 신재생에너지의 간헐성(변동성)을 통제하기 위해 빠른 출력 조절(유연성)이 가능한 가스터빈 제어 기술 분야에서 세계적 우위 보유.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 63,
@@ -1898,11 +2402,15 @@
     "current_price": 27.08,
     "high_52w": 34.5,
     "mdd_pct": -21.51,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -21.5%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "세계 최고 수준인 1,650도 이상의 연소 온도를 돌파한 초고효율 가스터빈 원천 기술 보유사. 수소 100% 전소 터빈 상용화를 주도하여 가스 발전의 탄소 배출 리스크를 근본적으로 해결하는 기업."
+    "principle_reason": "세계 최고 수준인 1,650도 이상의 연소 온도를 돌파한 초고효율 가스터빈 원천 기술 보유사. 수소 100% 전소 터빈 상용화를 주도하여 가스 발전의 탄소 배출 리스크를 근본적으로 해결하는 기업.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 64,
@@ -1913,11 +2421,15 @@
     "current_price": 9.29,
     "high_52w": 57.42,
     "mdd_pct": -83.82,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -83.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "세계 유일하게 미국 원자력규제위원회(NRC)로부터 소형모듈원전(SMR)의 '표준설계인가(SDA)'를 획득한 팹리스 선도 기업. 상용화 타임라인에서 가장 앞서 있는 기업."
+    "principle_reason": "세계 유일하게 미국 원자력규제위원회(NRC)로부터 소형모듈원전(SMR)의 '표준설계인가(SDA)'를 획득한 팹리스 선도 기업. 상용화 타임라인에서 가장 앞서 있는 기업.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 65,
@@ -1928,11 +2440,15 @@
     "current_price": 42.94,
     "high_52w": 193.84,
     "mdd_pct": -77.85,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -77.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "샘 올트먼이 이사회 의장으로 있는 소형 고속 원자로 개발사. 국가 전력망을 우회하여 데이터센터 바로 옆에 설치해 전력을 공급하는 BTM(Behind the Meter) 직결 및 무기물 액체 냉각 방식의 원자로 설계 전문."
+    "principle_reason": "샘 올트먼이 이사회 의장으로 있는 소형 고속 원자로 개발사. 국가 전력망을 우회하여 데이터센터 바로 옆에 설치해 전력을 공급하는 BTM(Behind the Meter) 직결 및 무기물 액체 냉각 방식의 원자로 설계 전문.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 67,
@@ -1943,11 +2459,15 @@
     "current_price": 183.68,
     "high_52w": 464.25,
     "mdd_pct": -60.44,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -60.4%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "SMR의 소형화와 고효율화를 가능하게 하는 차세대 고농축 우라늄 핵연료 'HALEU'의 미국 내 유일한 상업 농축 독점 공급 기업. 러시아 핵연료 의존도를 극복할 국가 안보적 독점 기술 보유."
+    "principle_reason": "SMR의 소형화와 고효율화를 가능하게 하는 차세대 고농축 우라늄 핵연료 'HALEU'의 미국 내 유일한 상업 농축 독점 공급 기업. 러시아 핵연료 의존도를 극복할 국가 안보적 독점 기술 보유.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 68,
@@ -1958,11 +2478,15 @@
     "current_price": 162.26,
     "high_52w": 241.12,
     "mdd_pct": -32.7,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -32.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 해군 원자로 및 국가 방산 원자력 연료의 독점 공급 기업. 멜트다운이 불가능한 차세대 'TRISO' 핵연료 가공 및 SMR 핵심 격납 구조물을 공장 규격화 생산하는 대표적인 파운드리 강자."
+    "principle_reason": "미국 해군 원자로 및 국가 방산 원자력 연료의 독점 공급 기업. 멜트다운이 불가능한 차세대 'TRISO' 핵연료 가공 및 SMR 핵심 격납 구조물을 공장 규격화 생산하는 대표적인 파운드리 강자.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 69,
@@ -1973,11 +2497,15 @@
     "current_price": 76200,
     "high_52w": 139200,
     "mdd_pct": -45.26,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -45.3%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "뉴스케일 등 글로벌 SMR 설계사들의 핵심 기자재를 전담 생산하는 세계 최고 수준의 원자력 파운드리. 용접부 없는 대형 압력 용기(원자로 껍데기)를 단번에 찍어내는 초대형 17,000톤 프레스 설비 보유."
+    "principle_reason": "뉴스케일 등 글로벌 SMR 설계사들의 핵심 기자재를 전담 생산하는 세계 최고 수준의 원자력 파운드리. 용접부 없는 대형 압력 용기(원자로 껍데기)를 단번에 찍어내는 초대형 17,000톤 프레스 설비 보유.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 72,
@@ -1988,11 +2516,15 @@
     "current_price": 677.41,
     "high_52w": 788.63,
     "mdd_pct": -14.1,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -14.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "북미 최대 전력망·재생에너지·광통신 인프라 EPC 기업. 고압 송전선로 건설 북미 시장점유율 1위, 수주잔고 300억 달러 이상의 대형 EPC 계약 전문사. 전력망 연계 대기 프로젝트 해소의 최대 수혜주."
+    "principle_reason": "북미 최대 전력망·재생에너지·광통신 인프라 EPC 기업. 고압 송전선로 건설 북미 시장점유율 1위, 수주잔고 300억 달러 이상의 대형 EPC 계약 전문사. 전력망 연계 대기 프로젝트 해소의 최대 수혜주.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 73,
@@ -2003,11 +2535,15 @@
     "current_price": 475.64,
     "high_52w": 563.81,
     "mdd_pct": -15.64,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -15.6%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "전기 인프라용 배선장치·제어 설비·변전소 구조물 전문 제조사. 미국 전력 유틸리티·산업 시장에서 100년 이상 독점적 브랜드 파워를 보유. 전력 유틸리티 솔루션(HUS)과 전기 솔루션(HES) 두 세그먼트로 구성."
+    "principle_reason": "전기 인프라용 배선장치·제어 설비·변전소 구조물 전문 제조사. 미국 전력 유틸리티·산업 시장에서 100년 이상 독점적 브랜드 파워를 보유. 전력 유틸리티 솔루션(HUS)과 전기 솔루션(HES) 두 세그먼트로 구성.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 74,
@@ -2018,11 +2554,15 @@
     "current_price": 343.85,
     "high_52w": 385.37,
     "mdd_pct": -10.77,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -10.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "북미 최대 전기자재·산업재·통신 인프라 유통기업. 연 매출 220억 달러 규모의 B2B 전력 인프라 원스톱 솔루션 제공사. 공급망 복잡성을 단순화하는 통합 유통 플랫폼 운영."
+    "principle_reason": "북미 최대 전기자재·산업재·통신 인프라 유통기업. 연 매출 220억 달러 규모의 B2B 전력 인프라 원스톱 솔루션 제공사. 공급망 복잡성을 단순화하는 통합 유통 플랫폼 운영.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 75,
@@ -2033,11 +2573,15 @@
     "current_price": 93.43,
     "high_52w": 93.81,
     "mdd_pct": -0.4,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -0.4%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "전선관(Electrical Conduit)·케이블 트레이·전기 보호 시스템 북미 시장점유율 1위. 데이터센터·태양광 발전소·산업 시설 전기 인프라의 핵심 자재인 금속·PVC 전선관 독점적 공급사."
+    "principle_reason": "전선관(Electrical Conduit)·케이블 트레이·전기 보호 시스템 북미 시장점유율 1위. 데이터센터·태양광 발전소·산업 시설 전기 인프라의 핵심 자재인 금속·PVC 전선관 독점적 공급사.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 77,
@@ -2048,11 +2592,15 @@
     "current_price": 325.99,
     "high_52w": 503.57,
     "mdd_pct": -35.26,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -35.3%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 전력·통신 인프라 전문 전기 건설 기업. 상업용 건축 전기 공사(C&I)와 송배전 공사(T&D) 두 세그먼트로 안정적 이원화. 대형 유틸리티·연방정부 인프라 프로젝트 선도 시공사."
+    "principle_reason": "미국 전력·통신 인프라 전문 전기 건설 기업. 상업용 건축 전기 공사(C&I)와 송배전 공사(T&D) 두 세그먼트로 안정적 이원화. 대형 유틸리티·연방정부 인프라 프로젝트 선도 시공사.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 78,
@@ -2063,11 +2611,15 @@
     "current_price": 156.88,
     "high_52w": 184.4,
     "mdd_pct": -14.92,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -14.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "전기 인클로저·열 관리·접지 및 접합 시스템 글로벌 제조사. 데이터센터·전력 유틸리티·산업 자동화 전방위 전기 보호 솔루션 제공. 인클로저 및 정밀 냉각 분야 특허 기술 보유."
+    "principle_reason": "전기 인클로저·열 관리·접지 및 접합 시스템 글로벌 제조사. 데이터센터·전력 유틸리티·산업 자동화 전방위 전기 보호 솔루션 제공. 인클로저 및 정밀 냉각 분야 특허 기술 보유.",
+    "moat_score": 37.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 79,
@@ -2078,11 +2630,15 @@
     "current_price": 434.74,
     "high_52w": 504.69,
     "mdd_pct": -13.86,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -13.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "송전선 클램프·스플라이스·광섬유 연결 부품 전문 미국 글로벌 기업. 전력 유틸리티의 송전선 연결·보호 시스템 핵심 부품 공급사. 전 세계 30개국 이상 현지 생산 네트워크 보유."
+    "principle_reason": "송전선 클램프·스플라이스·광섬유 연결 부품 전문 미국 글로벌 기업. 전력 유틸리티의 송전선 연결·보호 시스템 핵심 부품 공급사. 전 세계 30개국 이상 현지 생산 네트워크 보유.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 80,
@@ -2093,11 +2649,15 @@
     "current_price": 320000,
     "high_52w": 539577,
     "mdd_pct": -40.69,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -40.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 비중국 핵심 광물 제련 허브. 아르헨티나 염호와 호주 광산을 소유하여 리튬/니켈부터 양음극재까지 완벽한 수직계열화 구축."
+    "principle_reason": "글로벌 비중국 핵심 광물 제련 허브. 아르헨티나 염호와 호주 광산을 소유하여 리튬/니켈부터 양음극재까지 완벽한 수직계열화 구축.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 81,
@@ -2108,11 +2668,15 @@
     "current_price": 1145000,
     "high_52w": 2171096,
     "mdd_pct": -47.26,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -47.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "세계 1위 비철금속 제련 기술을 바탕으로 황산니켈, 동박 등 이차전지 핵심 원소재 밸류체인 진입 및 올인원 제련소 운영."
+    "principle_reason": "세계 1위 비철금속 제련 기술을 바탕으로 황산니켈, 동박 등 이차전지 핵심 원소재 밸류체인 진입 및 올인원 제련소 운영.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 82,
@@ -2123,11 +2687,15 @@
     "current_price": 109800,
     "high_52w": 259871,
     "mdd_pct": -57.75,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -57.8%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 1위 하이니켈 양극재 제조사. 전구체부터 양극재, 리사이클링까지 에코프로 그룹 내 클로즈드 루프 생태계 핵심 기업."
+    "principle_reason": "글로벌 1위 하이니켈 양극재 제조사. 전구체부터 양극재, 리사이클링까지 에코프로 그룹 내 클로즈드 루프 생태계 핵심 기업.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 83,
@@ -2138,11 +2706,15 @@
     "current_price": 160300,
     "high_52w": 299500,
     "mdd_pct": -46.48,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -46.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "국내 유일의 양·음극재 동시 생산 기업. 그룹사 내 광물 자원 내재화를 통해 가장 안정적인 원가 경쟁력 확보."
+    "principle_reason": "국내 유일의 양·음극재 동시 생산 기업. 그룹사 내 광물 자원 내재화를 통해 가장 안정적인 원가 경쟁력 확보.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 84,
@@ -2153,11 +2725,15 @@
     "current_price": 266000,
     "high_52w": 437500,
     "mdd_pct": -39.2,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -39.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 탑티어 종합 전지 소재 회사. 양극재를 넘어 분리막, 탄소나노튜브(CNT) 등 4대 핵심 소재 전반의 포트폴리오 다각화."
+    "principle_reason": "글로벌 탑티어 종합 전지 소재 회사. 양극재를 넘어 분리막, 탄소나노튜브(CNT) 등 4대 핵심 소재 전반의 포트폴리오 다각화.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 85,
@@ -2168,11 +2744,15 @@
     "current_price": 21350,
     "high_52w": 105000,
     "mdd_pct": -79.67,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -79.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 4위권의 전해액 전문 기업. 전해액 특성상 유통기한이 짧아 고객사 배터리 공장 바로 옆에 온사이트(On-site) 생산 인프라 구축 필수."
+    "principle_reason": "글로벌 4위권의 전해액 전문 기업. 전해액 특성상 유통기한이 짧아 고객사 배터리 공장 바로 옆에 온사이트(On-site) 생산 인프라 구축 필수.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 87,
@@ -2183,11 +2763,15 @@
     "current_price": 487000,
     "high_52w": 723000,
     "mdd_pct": -32.64,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -32.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "수익성 우위의 질적 성장 전략을 추구하는 배터리 셀 메이커. 프리미엄 젠(Gen) 시리즈 및 각형 배터리 기술력 선도."
+    "principle_reason": "수익성 우위의 질적 성장 전략을 추구하는 배터리 셀 메이커. 프리미엄 젠(Gen) 시리즈 및 각형 배터리 기술력 선도.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 88,
@@ -2198,11 +2782,15 @@
     "current_price": 34450,
     "high_52w": 85500,
     "mdd_pct": -59.71,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -59.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "국내 최초 배터리 리사이클링 전문 기업. 블랙파우더에서 니켈, 코발트, 리튬을 95% 이상 고순도로 추출하는 독보적 습식 제련 기술 보유."
+    "principle_reason": "국내 최초 배터리 리사이클링 전문 기업. 블랙파우더에서 니켈, 코발트, 리튬을 95% 이상 고순도로 추출하는 독보적 습식 제련 기술 보유.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 89,
@@ -2213,11 +2801,15 @@
     "current_price": 414000,
     "high_52w": 783000,
     "mdd_pct": -47.13,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -47.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "국내 1위 완성차 기업. 보스턴다이나믹스·앱티브 합작 목티오날 등 대규모 자율주행 투자. 레벨3 자율주행 기능을 탑재한 G90 출시."
+    "principle_reason": "국내 1위 완성차 기업. 보스턴다이나믹스·앱티브 합작 목티오날 등 대규모 자율주행 투자. 레벨3 자율주행 기능을 탑재한 G90 출시.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 90,
@@ -2228,11 +2820,15 @@
     "current_price": 509000,
     "high_52w": 819572,
     "mdd_pct": -37.89,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -37.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "현대차그룹 핵심 부품·모듈 계열사. 레이더·라이다·카메라 기반 자율주행 센서퓨전 시스템 및 코너 모듈 원천 기술 보유."
+    "principle_reason": "현대차그룹 핵심 부품·모듈 계열사. 레이더·라이다·카메라 기반 자율주행 센서퓨전 시스템 및 코너 모듈 원천 기술 보유.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 92,
@@ -2243,11 +2839,15 @@
     "current_price": 0.35,
     "high_52w": 2.54,
     "mdd_pct": -86.39,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -86.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "고성능 고체 라이다 전문기업. BMW iX 최초 양산 탑재. 저전력·소형화 InnovizOne/Two 센서 글로벌 공급."
+    "principle_reason": "고성능 고체 라이다 전문기업. BMW iX 최초 양산 탑재. 저전력·소형화 InnovizOne/Two 센서 글로벌 공급.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 93,
@@ -2258,11 +2858,15 @@
     "current_price": 71500,
     "high_52w": 170000,
     "mdd_pct": -57.94,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -57.9%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "국내 1위 협동로봇(코봇) 기업. 산업용·서비스용·물류용 전 분야 라인업 보유. 두산그룹 계열 제조 노하우 기반."
+    "principle_reason": "국내 1위 협동로봇(코봇) 기업. 산업용·서비스용·물류용 전 분야 라인업 보유. 두산그룹 계열 제조 노하우 기반.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 97,
@@ -2273,11 +2877,15 @@
     "current_price": 4.78,
     "high_52w": 18.64,
     "mdd_pct": -74.36,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -74.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Uber 스핀오프 라스트마일 배달 로봇 전문기업. Uber Eats·Shake Shack 등과 배달 로봇 파트너십. NVIDIA 투자사."
+    "principle_reason": "Uber 스핀오프 라스트마일 배달 로봇 전문기업. Uber Eats·Shake Shack 등과 배달 로봇 파트너십. NVIDIA 투자사.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 98,
@@ -2288,11 +2896,15 @@
     "current_price": 135700,
     "high_52w": 214881,
     "mdd_pct": -36.85,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -36.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "KAI — 국내 유일 완제기(T-50·FA-50·KF-21) 및 위성체 개발·생산 기업. 한국형 발사체 누리호 위성 탑재부 제작 참여."
+    "principle_reason": "KAI — 국내 유일 완제기(T-50·FA-50·KF-21) 및 위성체 개발·생산 기업. 한국형 발사체 누리호 위성 탑재부 제작 참여.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 100,
@@ -2303,11 +2915,15 @@
     "current_price": 12.4,
     "high_52w": 26.64,
     "mdd_pct": -53.45,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -53.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "우주 인프라·위성 부품·우주 제조 전문기업. NASA·DoD 위성 구조물·태양광 패널·3D 프린팅 공급사."
+    "principle_reason": "우주 인프라·위성 부품·우주 제조 전문기업. NASA·DoD 위성 구조물·태양광 패널·3D 프린팅 공급사.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 101,
@@ -2318,11 +2934,15 @@
     "current_price": 2.45,
     "high_52w": 6.79,
     "mdd_pct": -63.92,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -63.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "초소형 위성 제조·발사 서비스 기업. LizzieSat 군집 위성 배치를 통한 데이터 서비스 제공."
+    "principle_reason": "초소형 위성 제조·발사 서비스 기업. LizzieSat 군집 위성 배치를 통한 데이터 서비스 제공.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 105,
@@ -2333,11 +2953,15 @@
     "current_price": 46850,
     "high_52w": 93800,
     "mdd_pct": -50.05,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -50.0%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "국내 중소형 변압기 전문 제조사. 미국 수출 급증으로 K-변압기 붐의 최대 수혜 소형주. 생산 캐파 대비 수주잔고 급증."
+    "principle_reason": "국내 중소형 변압기 전문 제조사. 미국 수출 급증으로 K-변압기 붐의 최대 수혜 소형주. 생산 캐파 대비 수주잔고 급증.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 106,
@@ -2348,11 +2972,15 @@
     "current_price": 60600,
     "high_52w": 114200,
     "mdd_pct": -46.94,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -46.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "폐열회수보일러(HRSG)·일반산업 열교환기 전문 제조사. 가스터빈·복합화력발전소 핵심 기자재 공급."
+    "principle_reason": "폐열회수보일러(HRSG)·일반산업 열교환기 전문 제조사. 가스터빈·복합화력발전소 핵심 기자재 공급.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 107,
@@ -2363,11 +2991,15 @@
     "current_price": 134.28,
     "high_52w": 220.44,
     "mdd_pct": -39.08,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -39.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Albemarle — 글로벌 1위 리튬 생산업체. 칠레 아타카마 염호, 호주 그린부시스 광산 보유. 전기차 배터리 핵심 리튬 화합물 독과점 공급."
+    "principle_reason": "Albemarle — 글로벌 1위 리튬 생산업체. 칠레 아타카마 염호, 호주 그린부시스 광산 보유. 전기차 배터리 핵심 리튬 화합물 독과점 공급.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 108,
@@ -2378,11 +3010,15 @@
     "current_price": 3.0,
     "high_52w": 10.52,
     "mdd_pct": -71.48,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -71.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Lithium Americas — 미국 네바다주 세계급 리튬 광상(Thacker Pass) 개발사. GM 전략적 투자 유치. 비중국 북미 최대 리튬 공급원."
+    "principle_reason": "Lithium Americas — 미국 네바다주 세계급 리튬 광상(Thacker Pass) 개발사. GM 전략적 투자 유치. 비중국 북미 최대 리튬 공급원.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 109,
@@ -2393,11 +3029,15 @@
     "current_price": 12.07,
     "high_52w": 33.51,
     "mdd_pct": -63.98,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -64.0%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Fluence Energy — AES·Siemens 합작 그리드 규모 ESS 전문기업. AI 데이터센터 전력 안정화 및 재생에너지 저장 시스템 글로벌 1위 솔루션."
+    "principle_reason": "Fluence Energy — AES·Siemens 합작 그리드 규모 ESS 전문기업. AI 데이터센터 전력 안정화 및 재생에너지 저장 시스템 글로벌 1위 솔루션.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 110,
@@ -2408,11 +3048,15 @@
     "current_price": 5.88,
     "high_52w": 19.07,
     "mdd_pct": -69.17,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -69.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "QuantumScape — 폭스바겐(VW) 투자 고체 전해질 전고체 배터리 전문 스타트업. 화재 없는 리튬 금속 전고체 배터리 상용화 최전선."
+    "principle_reason": "QuantumScape — 폭스바겐(VW) 투자 고체 전해질 전고체 배터리 전문 스타트업. 화재 없는 리튬 금속 전고체 배터리 상용화 최전선.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 112,
@@ -2423,11 +3067,15 @@
     "current_price": 86200,
     "high_52w": 189804,
     "mdd_pct": -54.58,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -54.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "에코프로비엠의 모회사. 에코프로그룹 지주사로 양극재 사업 외에도 환경 플랜트, 대기오염 방지 사업 보유. 에코프로 밸류체인 종합 투자 수단."
+    "principle_reason": "에코프로비엠의 모회사. 에코프로그룹 지주사로 양극재 사업 외에도 환경 플랜트, 대기오염 방지 사업 보유. 에코프로 밸류체인 종합 투자 수단.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 113,
@@ -2438,11 +3086,15 @@
     "current_price": 2425,
     "high_52w": 6083,
     "mdd_pct": -60.14,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -60.1%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "폐배터리 전처리(블랙파우더 제조) 전문기업. 성일하이텍과 함께 국내 배터리 리사이클링 투트랙 생태계 구성. 저비용 전처리 공정 특화."
+    "principle_reason": "폐배터리 전처리(블랙파우더 제조) 전문기업. 성일하이텍과 함께 국내 배터리 리사이클링 투트랙 생태계 구성. 저비용 전처리 공정 특화.",
+    "moat_score": 37.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 114,
@@ -2453,11 +3105,15 @@
     "current_price": 40.06,
     "high_52w": 63.79,
     "mdd_pct": -37.2,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -37.2%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Ouster — 디지털 라이다(LiDAR) 기술 선도기업. 구 Velodyne과 합병하여 북미 라이다 시장 점유율 1위. 자율주행·산업용·스마트인프라 전방위 공급."
+    "principle_reason": "Ouster — 디지털 라이다(LiDAR) 기술 선도기업. 구 Velodyne과 합병하여 북미 라이다 시장 점유율 1위. 자율주행·산업용·스마트인프라 전방위 공급.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 115,
@@ -2468,11 +3124,15 @@
     "current_price": 62.67,
     "high_52w": 96.17,
     "mdd_pct": -34.83,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -34.8%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Yaskawa Electric — 세계 최대 서보 모터·인버터·산업용 로봇 팔 제조사. 제조업 자동화 핵심 부품·로봇 글로벌 1위 공급사."
+    "principle_reason": "Yaskawa Electric — 세계 최대 서보 모터·인버터·산업용 로봇 팔 제조사. 제조업 자동화 핵심 부품·로봇 글로벌 1위 공급사.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 116,
@@ -2483,11 +3143,15 @@
     "current_price": 11.62,
     "high_52w": 20.25,
     "mdd_pct": -42.61,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -42.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "KION Group — 산업용 지게차·자동화 물류 로봇 글로벌 2위. Dematic(창고 자동화) 보유. 아마존·이케아 등 대형 물류 자동화 수주."
+    "principle_reason": "KION Group — 산업용 지게차·자동화 물류 로봇 글로벌 2위. Dematic(창고 자동화) 보유. 아마존·이케아 등 대형 물류 자동화 수주.",
+    "moat_score": 43.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 117,
@@ -2498,11 +3162,15 @@
     "current_price": 56.68,
     "high_52w": 100.25,
     "mdd_pct": -43.46,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -43.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "MP Materials — 미국 유일 희토류(Rare Earth) 광산 및 제련 기업. 캘리포니아 마운틴패스 광산 보유. EV 모터·배터리 소재 핵심 비중국 공급원."
+    "principle_reason": "MP Materials — 미국 유일 희토류(Rare Earth) 광산 및 제련 기업. 캘리포니아 마운틴패스 광산 보유. EV 모터·배터리 소재 핵심 비중국 공급원.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 120,
@@ -2513,11 +3181,15 @@
     "current_price": 3845.0,
     "high_52w": 4940.48,
     "mdd_pct": -22.17,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -22.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Dimensity 9400(35 TOPS) — 삼성·중화권 플래그십 탑재. 미드레인지 온디바이스 AI 대중화 선도."
+    "principle_reason": "Dimensity 9400(35 TOPS) — 삼성·중화권 플래그십 탑재. 미드레인지 온디바이스 AI 대중화 선도.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 121,
@@ -2528,11 +3200,15 @@
     "current_price": 92.8,
     "high_52w": 142.35,
     "mdd_pct": -34.81,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -34.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Core Ultra 2(Lunar Lake) NPU 47 TOPS. Copilot+ PC 요구사양 충족으로 PC AI 시장 재진입 시도."
+    "principle_reason": "Core Ultra 2(Lunar Lake) NPU 47 TOPS. Copilot+ PC 요구사양 충족으로 PC AI 시장 재진입 시도.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 125,
@@ -2543,11 +3219,15 @@
     "current_price": 30.12,
     "high_52w": 36.16,
     "mdd_pct": -16.7,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -16.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "세계 최대 PC 제조사. Copilot+ PC 라인업(ThinkPad X1 Fold AI 등) 가장 빠른 전환."
+    "principle_reason": "세계 최대 PC 제조사. Copilot+ PC 라인업(ThinkPad X1 Fold AI 등) 가장 빠른 전환.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 127,
@@ -2558,11 +3238,15 @@
     "current_price": 5.24,
     "high_52w": 9.28,
     "mdd_pct": -43.53,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -43.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Spectacles AR 글라스 5세대 — 온디바이스 AR AI 처리. 개발자 생태계 구축로 AR OS 플랫폼 지향."
+    "principle_reason": "Spectacles AR 글라스 5세대 — 온디바이스 AR AI 처리. 개발자 생태계 구축로 AR OS 플랫폼 지향.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 129,
@@ -2573,11 +3257,15 @@
     "current_price": 466.42,
     "high_52w": 584.73,
     "mdd_pct": -20.23,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -20.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "MI300X AI GPU로 NVIDIA 추격. EPYC 서버 CPU에서 Intel 시장 점유율 지속 탈취. 데이터센터 듀얼 공급자."
+    "principle_reason": "MI300X AI GPU로 NVIDIA 추격. EPYC 서버 CPU에서 Intel 시장 점유율 지속 탈취. 데이터센터 듀얼 공급자.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 141,
@@ -2588,11 +3276,15 @@
     "current_price": 35.66,
     "high_52w": 45.27,
     "mdd_pct": -21.23,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -21.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "세계 최대 OSAT(후공정 패키징·테스트). CoWoS·SiP 첨단 패키징 수혜. 연간 매출 250억달러+."
+    "principle_reason": "세계 최대 OSAT(후공정 패키징·테스트). CoWoS·SiP 첨단 패키징 수혜. 연간 매출 250억달러+.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 142,
@@ -2603,11 +3295,15 @@
     "current_price": 6090.0,
     "high_52w": 7930.0,
     "mdd_pct": -23.2,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -23.2%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "반도체급 실리콘 웨이퍼 세계 1위 + 포토레지스트 주요 공급사. 소재 독점으로 고마진 유지."
+    "principle_reason": "반도체급 실리콘 웨이퍼 세계 1위 + 포토레지스트 주요 공급사. 소재 독점으로 고마진 유지.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 144,
@@ -2618,11 +3314,15 @@
     "current_price": 237.04,
     "high_52w": 265.94,
     "mdd_pct": -10.87,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -10.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "GTA(Rockstar)·NBA 2K·BioShock·Borderlands 대형 IP. GTA 6(2025) 출시가 역사적 수익 이벤트 전망."
+    "principle_reason": "GTA(Rockstar)·NBA 2K·BioShock·Borderlands 대형 IP. GTA 6(2025) 출시가 역사적 수익 이벤트 전망.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 145,
@@ -2633,11 +3333,15 @@
     "current_price": 209.7,
     "high_52w": 210.2,
     "mdd_pct": -0.24,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -0.2%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "EA Sports FC(前FIFA)·Battlefield·The Sims·Apex Legends. 스포츠 게임 글로벌 1위, 라이브 서비스 수익 50%+."
+    "principle_reason": "EA Sports FC(前FIFA)·Battlefield·The Sims·Apex Legends. 스포츠 게임 글로벌 1위, 라이브 서비스 수익 50%+.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 146,
@@ -2648,11 +3352,15 @@
     "current_price": 23.49,
     "high_52w": 30.34,
     "mdd_pct": -22.58,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -22.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "PlayStation 5·Sony 1st-party 스튜디오(Naughty Dog·Insomniac·Bungie). PS Plus 프리미엄 가입자 5,000만+."
+    "principle_reason": "PlayStation 5·Sony 1st-party 스튜디오(Naughty Dog·Insomniac·Bungie). PS Plus 프리미엄 가입자 5,000만+.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 147,
@@ -2663,11 +3371,15 @@
     "current_price": 4132.0,
     "high_52w": 4431.24,
     "mdd_pct": -6.75,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -6.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Monster Hunter·Resident Evil·Street Fighter·Devil May Cry. 멀티플랫폼 전략으로 높은 수익성."
+    "principle_reason": "Monster Hunter·Resident Evil·Street Fighter·Devil May Cry. 멀티플랫폼 전략으로 높은 수익성.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 148,
@@ -2678,11 +3390,15 @@
     "current_price": 447.2,
     "high_52w": 675.13,
     "mdd_pct": -33.76,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -33.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 최대 게임사(매출 기준). Honor of Kings·PUBG Mobile·League of Legends(Riot 지분). Supercell·Epic 지분 보유."
+    "principle_reason": "글로벌 최대 게임사(매출 기준). Honor of Kings·PUBG Mobile·League of Legends(Riot 지분). Supercell·Epic 지분 보유.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 149,
@@ -2693,11 +3409,15 @@
     "current_price": 127.25,
     "high_52w": 156.41,
     "mdd_pct": -18.64,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -18.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "블리자드 중국 파트너(복귀). 오버워치·디아블로 중국 배급 재개. 자체 IP Naraka: Bladepoint 글로벌 성장."
+    "principle_reason": "블리자드 중국 파트너(복귀). 오버워치·디아블로 중국 배급 재개. 자체 IP Naraka: Bladepoint 글로벌 성장.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 151,
@@ -2708,11 +3428,15 @@
     "current_price": 2992.5,
     "high_52w": 4371.74,
     "mdd_pct": -31.55,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -31.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "던전앤파이터·메이플스토리 IP. 중국 던파 모바일이 단일 타이틀 최대 매출. 일본 상장."
+    "principle_reason": "던전앤파이터·메이플스토리 IP. 중국 던파 모바일이 단일 타이틀 최대 매출. 일본 상장.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 155,
@@ -2723,11 +3447,15 @@
     "current_price": 47.11,
     "high_52w": 52.15,
     "mdd_pct": -9.66,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -9.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "모바일·인디 게임 엔진 70%+ 점유. 게임 광고 네트워크(ironSource 통합). 런타임 수수료 논란 후 정책 변경."
+    "principle_reason": "모바일·인디 게임 엔진 70%+ 점유. 게임 광고 네트워크(ironSource 통합). 런타임 수수료 논란 후 정책 변경.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 156,
@@ -2738,11 +3466,15 @@
     "current_price": 14.88,
     "high_52w": 24.88,
     "mdd_pct": -40.21,
-    "buy_signal": "WAIT (MDD -12.5% > -30% 폭락대기 미달)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -40.2%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 음악 레이블 1위 (시장점유율 32%). Taylor Swift·Drake·BTS 등 보유. 스트리밍 로열티 최대 수혜 구조."
+    "principle_reason": "글로벌 음악 레이블 1위 (시장점유율 32%). Taylor Swift·Drake·BTS 등 보유. 스트리밍 로열티 최대 수혜 구조.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 157,
@@ -2753,11 +3485,15 @@
     "current_price": 27.21,
     "high_52w": 35.23,
     "mdd_pct": -22.76,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -22.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 3위 레이블 (시장점유율 18%). Ed Sheeran·Bruno Mars·Coldplay 등 보유. 인디 배급 레이블 확장 중."
+    "principle_reason": "글로벌 3위 레이블 (시장점유율 18%). Ed Sheeran·Bruno Mars·Coldplay 등 보유. 인디 배급 레이블 확장 중.",
+    "moat_score": 43.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 158,
@@ -2768,11 +3504,15 @@
     "current_price": 172200,
     "high_52w": 404926,
     "mdd_pct": -57.47,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -57.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "BTS·세븐틴·뉴진스·르세라핌 등 멀티 레이블. 위버스 팬 플랫폼 글로벌 MAU 1,000만+. K-Pop IP 360도 수익화."
+    "principle_reason": "BTS·세븐틴·뉴진스·르세라핌 등 멀티 레이블. 위버스 팬 플랫폼 글로벌 MAU 1,000만+. K-Pop IP 360도 수익화.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 159,
@@ -2783,11 +3523,15 @@
     "current_price": 72800,
     "high_52w": 78600,
     "mdd_pct": -7.38,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -7.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "EXO·aespa·NCT·SHINEE 등 글로벌 K-Pop IP. SM 유니버스 세계관 기반 스토리텔링 전략."
+    "principle_reason": "EXO·aespa·NCT·SHINEE 등 글로벌 K-Pop IP. SM 유니버스 세계관 기반 스토리텔링 전략.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 160,
@@ -2798,11 +3542,15 @@
     "current_price": 39950,
     "high_52w": 47850,
     "mdd_pct": -16.51,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -16.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "TWICE·Stray Kids·ITZY·NiziU·NEXZ. 일본 현지화 성공 사례. 북미·동남아 레이블 확장 중."
+    "principle_reason": "TWICE·Stray Kids·ITZY·NiziU·NEXZ. 일본 현지화 성공 사례. 북미·동남아 레이블 확장 중.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 161,
@@ -2813,11 +3561,15 @@
     "current_price": 39450,
     "high_52w": 44850,
     "mdd_pct": -12.04,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -12.0%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "BLACKPINK·BIGBANG·WINNER·iKON 등. BLACKPINK 솔로 활동 및 재계약이 단기 촉매."
+    "principle_reason": "BLACKPINK·BIGBANG·WINNER·iKON 등. BLACKPINK 솔로 활동 및 재계약이 단기 촉매.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 162,
@@ -2828,11 +3580,15 @@
     "current_price": 533.37,
     "high_52w": 745.0,
     "mdd_pct": -28.41,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -28.4%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 음악 스트리밍 1위 — MAU 6억 8천만+. 팟캐스트·오디오북 확장. 아티스트 직접 배급 플랫폼."
+    "principle_reason": "글로벌 음악 스트리밍 1위 — MAU 6억 8천만+. 팟캐스트·오디오북 확장. 아티스트 직접 배급 플랫폼.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 164,
@@ -2843,11 +3599,15 @@
     "current_price": 184.19,
     "high_52w": 189.25,
     "mdd_pct": -2.67,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -2.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "Ticketmaster 독점 + 전 세계 공연 기획. 라이브 이벤트 역대 최대 수요 수혜. 콘서트 경제 독점 플랫폼."
+    "principle_reason": "Ticketmaster 독점 + 전 세계 공연 기획. 라이브 이벤트 역대 최대 수요 수혜. 콘서트 경제 독점 플랫폼.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 166,
@@ -2858,11 +3618,15 @@
     "current_price": 37400,
     "high_52w": 69602,
     "mdd_pct": -46.27,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -46.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "카카오엔터 — 멜론(국내 최대 음원 플랫폼) + SM엔터 지분 + 웹툰·웹소설 IP. K-Pop 국내 디지털 유통 독점."
+    "principle_reason": "카카오엔터 — 멜론(국내 최대 음원 플랫폼) + SM엔터 지분 + 웹툰·웹소설 IP. K-Pop 국내 디지털 유통 독점.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 169,
@@ -2873,11 +3637,15 @@
     "current_price": 88100,
     "high_52w": 154800,
     "mdd_pct": -43.09,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -43.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "前 대우조선해양. 한화그룹 편입 후 방산(잠수함·상륙함) + 상선(LNG선·탱커) 투트랙 전략. 미국 필리조선소 인수로 미 해군 함정 MRO 시장 직접 진출."
+    "principle_reason": "前 대우조선해양. 한화그룹 편입 후 방산(잠수함·상륙함) + 상선(LNG선·탱커) 투트랙 전략. 미국 필리조선소 인수로 미 해군 함정 MRO 시장 직접 진출.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 170,
@@ -2888,11 +3656,15 @@
     "current_price": 20600,
     "high_52w": 35350,
     "mdd_pct": -41.73,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -41.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "삼성그룹 계열 조선사. LNG선·드릴십(해저 시추선)·FLNG(부유식 LNG 생산설비) 분야 세계 최고 기술력 보유. 고부가 특수선 전문."
+    "principle_reason": "삼성그룹 계열 조선사. LNG선·드릴십(해저 시추선)·FLNG(부유식 LNG 생산설비) 분야 세계 최고 기술력 보유. 고부가 특수선 전문.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 171,
@@ -2903,11 +3675,15 @@
     "current_price": 21700,
     "high_52w": 24950,
     "mdd_pct": -13.03,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -13.0%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "한국 최대 해운사. 컨테이너·벌크·탱커 등 전방위 해운 서비스. 초대형 컨테이너선(2만4천TEU급) 운용. 국내 유일 글로벌 얼라이언스(The Alliance) 멤버."
+    "principle_reason": "한국 최대 해운사. 컨테이너·벌크·탱커 등 전방위 해운 서비스. 초대형 컨테이너선(2만4천TEU급) 운용. 국내 유일 글로벌 얼라이언스(The Alliance) 멤버.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 172,
@@ -2918,11 +3694,15 @@
     "current_price": 6010,
     "high_52w": 6600,
     "mdd_pct": -8.94,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -8.9%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "하림그룹 계열 벌크·탱커·LNG 운송 전문 해운사. 건화물(곡물·석탄·광석) 및 LPG 운반 특화."
+    "principle_reason": "하림그룹 계열 벌크·탱커·LNG 운송 전문 해운사. 건화물(곡물·석탄·광석) 및 LPG 운반 특화.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 173,
@@ -2933,11 +3713,15 @@
     "current_price": 311.76,
     "high_52w": 458.02,
     "mdd_pct": -31.93,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -31.9%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 최대 군함 건조사. 항공모함(제럴드 포드급) 독점 건조, 핵추진 잠수함(버지니아급), 이지스 구축함 등 미 해군의 핵심 파트너."
+    "principle_reason": "미국 최대 군함 건조사. 항공모함(제럴드 포드급) 독점 건조, 핵추진 잠수함(버지니아급), 이지스 구축함 등 미 해군의 핵심 파트너.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 174,
@@ -2948,11 +3732,15 @@
     "current_price": 392.34,
     "high_52w": 400.0,
     "mdd_pct": -1.92,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -1.9%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "방산 복합 대기업. 배스철공소(BIW)를 통해 이지스 구축함·잠수함 건조. 스타링크 경쟁 위성통신, 군용 차량, 정보·사이버 사업 겸업."
+    "principle_reason": "방산 복합 대기업. 배스철공소(BIW)를 통해 이지스 구축함·잠수함 건조. 스타링크 경쟁 위성통신, 군용 차량, 정보·사이버 사업 겸업.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 176,
@@ -2963,11 +3751,15 @@
     "current_price": 25050,
     "high_52w": 31200,
     "mdd_pct": -19.71,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -19.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "국내 FSC(대형항공사) 1위. 여객·화물 복합 운영으로 반도체·바이오·전기차 배터리 항공화물 수요 강세 수혜."
+    "principle_reason": "국내 FSC(대형항공사) 1위. 여객·화물 복합 운영으로 반도체·바이오·전기차 배터리 항공화물 수요 강세 수혜.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 177,
@@ -2978,11 +3770,15 @@
     "current_price": 203500,
     "high_52w": 288584,
     "mdd_pct": -29.48,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -29.5%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "현대기아차 완성차 전용선(PCC) 운영, 세계 PCC 시장 점유율 1위권. 자동차 해상운송·종합물류 통합 사업자."
+    "principle_reason": "현대기아차 완성차 전용선(PCC) 운영, 세계 PCC 시장 점유율 1위권. 자동차 해상운송·종합물류 통합 사업자.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 178,
@@ -2993,11 +3789,15 @@
     "current_price": 73000,
     "high_52w": 152861,
     "mdd_pct": -52.24,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -52.2%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "국내 택배시장 점유율 1위(약 40%). 국내 택배·해외 포워딩·3PL 종합물류 통합 사업자."
+    "principle_reason": "국내 택배시장 점유율 1위(약 40%). 국내 택배·해외 포워딩·3PL 종합물류 통합 사업자.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 179,
@@ -3008,11 +3808,15 @@
     "current_price": 328.38,
     "high_52w": 344.08,
     "mdd_pct": -4.56,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -4.6%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 항공특송(Express) 및 육상택배(Ground) 1위. 220개국에 익일·2일 배송 네트워크 보유."
+    "principle_reason": "글로벌 항공특송(Express) 및 육상택배(Ground) 1위. 220개국에 익일·2일 배송 네트워크 보유.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 180,
@@ -3023,11 +3827,15 @@
     "current_price": 102.86,
     "high_52w": 116.86,
     "mdd_pct": -11.98,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -12.0%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 택배·특송 2위. B2B 의료물류·헬스케어 전문화 전략 추진 중. 220개국 네트워크 보유."
+    "principle_reason": "글로벌 택배·특송 2위. B2B 의료물류·헬스케어 전문화 전략 추진 중. 220개국 네트워크 보유.",
+    "moat_score": 43.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 181,
@@ -3038,11 +3846,15 @@
     "current_price": 272.42,
     "high_52w": 299.26,
     "mdd_pct": -8.97,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -9.0%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 최대 인터모달(철도+트럭) 운송사. 장거리 복합운송·트럭운송·최종 배송 통합 솔루션 제공."
+    "principle_reason": "미국 최대 인터모달(철도+트럭) 운송사. 장거리 복합운송·트럭운송·최종 배송 통합 솔루션 제공.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 182,
@@ -3053,11 +3865,15 @@
     "current_price": 205.08,
     "high_52w": 252.03,
     "mdd_pct": -18.63,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -18.6%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 LTL(소화물 트럭운송) 시장 점유율 1위. 고품질 서비스·낮은 화물 손상률로 프리미엄 가격 유지."
+    "principle_reason": "미국 LTL(소화물 트럭운송) 시장 점유율 1위. 고품질 서비스·낮은 화물 손상률로 프리미엄 가격 유지.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 183,
@@ -3068,11 +3884,15 @@
     "current_price": 197.43,
     "high_52w": 232.05,
     "mdd_pct": -14.92,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -14.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "북미+유럽 LTL 화물운송 전문. 기술 투자 선도형 트럭운송사. 2023년 RXO·GXO 분사 후 LTL 핵심 집중."
+    "principle_reason": "북미+유럽 LTL 화물운송 전문. 기술 투자 선도형 트럭운송사. 2023년 RXO·GXO 분사 후 LTL 핵심 집중.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 184,
@@ -3083,11 +3903,15 @@
     "current_price": 16.15,
     "high_52w": 16.83,
     "mdd_pct": -4.04,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -4.0%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "세계 1~2위 컨테이너 선사. 컨테이너해운에서 포워딩·3PL·라스트마일까지 통합 물류사업자로 전환 추진 중."
+    "principle_reason": "세계 1~2위 컨테이너 선사. 컨테이너해운에서 포워딩·3PL·라스트마일까지 통합 물류사업자로 전환 추진 중.",
+    "moat_score": 43.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 187,
@@ -3098,11 +3922,15 @@
     "current_price": 152.2,
     "high_52w": 153.47,
     "mdd_pct": -0.83,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -0.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 빅파마. 키트루다(면역항암제) 단일 특허 현금으로 차세대 ADC 파이프라인 공격적 인수."
+    "principle_reason": "글로벌 빅파마. 키트루다(면역항암제) 단일 특허 현금으로 차세대 ADC 파이프라인 공격적 인수.",
+    "moat_score": 37.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 188,
@@ -3113,11 +3941,15 @@
     "current_price": 104400,
     "high_52w": 225000,
     "mdd_pct": -53.6,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -53.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "독자적 ADC(항체-약물 접합체) 링커 및 페이로드 원천 기술 보유. 초기 임상 단계 글로벌 빅파마 수출 특화."
+    "principle_reason": "독자적 ADC(항체-약물 접합체) 링커 및 페이로드 원천 기술 보유. 초기 임상 단계 글로벌 빅파마 수출 특화.",
+    "moat_score": 37.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 190,
@@ -3128,11 +3960,15 @@
     "current_price": 249.28,
     "high_52w": 251.36,
     "mdd_pct": -0.83,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -0.8%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 1위 CRO(임상수탁기관). 전 세계 방대한 환자 데이터 독점 및 분산 임상 인프라 구축."
+    "principle_reason": "글로벌 1위 CRO(임상수탁기관). 전 세계 방대한 환자 데이터 독점 및 분산 임상 인프라 구축.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 191,
@@ -3143,11 +3979,15 @@
     "current_price": 61.73,
     "high_52w": 61.8,
     "mdd_pct": -0.11,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -0.1%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "세계 최대 바이오 로열티 투자사. 임상 중인 신약이나 대학 연구소의 특허 지분에 투자해 런칭 후 로열티 수취."
+    "principle_reason": "세계 최대 바이오 로열티 투자사. 임상 중인 신약이나 대학 연구소의 특허 지분에 투자해 런칭 후 로열티 수취.",
+    "moat_score": 37.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 192,
@@ -3158,11 +3998,15 @@
     "current_price": 3305,
     "high_52w": 8640,
     "mdd_pct": -61.75,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -61.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "한국 대표 CRO. 국내 제약/바이오텍의 아시아 및 글로벌 임상 진입 가교 역할 수행."
+    "principle_reason": "한국 대표 CRO. 국내 제약/바이오텍의 아시아 및 글로벌 임상 진입 가교 역할 수행.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 193,
@@ -3173,11 +4017,15 @@
     "current_price": 613.54,
     "high_52w": 642.71,
     "mdd_pct": -4.54,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -4.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "배양 백, 분석 장비 등 전 세계 바이오 공정 소모품 및 장비 시장 장악 (골드러시의 곡괭이 판매상)."
+    "principle_reason": "배양 백, 분석 장비 등 전 세계 바이오 공정 소모품 및 장비 시장 장악 (골드러시의 곡괭이 판매상).",
+    "moat_score": 37.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 194,
@@ -3188,11 +4036,15 @@
     "current_price": 211.5,
     "high_52w": 241.78,
     "mdd_pct": -12.52,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -12.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "생명과학 분석기기, 바이오프로세싱 전문 글로벌 기업. 고부가가치 진단 및 공정 인프라 꽉 쥠."
+    "principle_reason": "생명과학 분석기기, 바이오프로세싱 전문 글로벌 기업. 고부가가치 진단 및 공정 인프라 꽉 쥠.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 197,
@@ -3203,11 +4055,15 @@
     "current_price": 853.71,
     "high_52w": 997.9,
     "mdd_pct": -14.45,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -14.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 의약품 유통 Big 3. 박리다매 물류 자동화로 후발 주자 진입 원천 차단."
+    "principle_reason": "미국 의약품 유통 Big 3. 박리다매 물류 자동화로 후발 주자 진입 원천 차단.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 199,
@@ -3218,11 +4074,15 @@
     "current_price": 194100,
     "high_52w": 239047,
     "mdd_pct": -18.8,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -18.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 바이오시밀러 선도 기업. 신약(짐펜트라 등) R&D를 넘어 미국 현지에 직접 유통망(직판) 구축."
+    "principle_reason": "글로벌 바이오시밀러 선도 기업. 신약(짐펜트라 등) R&D를 넘어 미국 현지에 직접 유통망(직판) 구축.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 236,
@@ -3233,11 +4093,15 @@
     "current_price": 7800,
     "high_52w": 11880,
     "mdd_pct": -34.34,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -34.3%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "화장품 원료(자외선 차단제, 마이크로비드 등) 제조 및 글로벌 수출 전문 기업. PDRN·시카 등 기능성 원료의 글로벌 공급망 장악."
+    "principle_reason": "화장품 원료(자외선 차단제, 마이크로비드 등) 제조 및 글로벌 수출 전문 기업. PDRN·시카 등 기능성 원료의 글로벌 공급망 장악.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 237,
@@ -3248,11 +4112,15 @@
     "current_price": 7950,
     "high_52w": 13941,
     "mdd_pct": -42.98,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -43.0%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "화장품 소재 및 원료의약품 전문 기업. 피부 기능 개선 소재부터 의약품 원료까지 B2B 공급."
+    "principle_reason": "화장품 소재 및 원료의약품 전문 기업. 피부 기능 개선 소재부터 의약품 원료까지 B2B 공급.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 238,
@@ -3263,11 +4131,15 @@
     "current_price": 54000,
     "high_52w": 153323,
     "mdd_pct": -64.78,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -64.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "펩타이드 기반 바이오 원료 및 화장품·의료기기 개발 전문 기업. 독자 합성 기술 기반 고기능 활성 성분 글로벌 공급."
+    "principle_reason": "펩타이드 기반 바이오 원료 및 화장품·의료기기 개발 전문 기업. 독자 합성 기술 기반 고기능 활성 성분 글로벌 공급.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 240,
@@ -3278,11 +4150,15 @@
     "current_price": 127800,
     "high_52w": 144000,
     "mdd_pct": -11.25,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -11.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "화장품·제약·건강기능식품 글로벌 ODM 기업. 피부과학 기반 기능성 제형 특화, 색조부터 스킨케어까지 풀라인업."
+    "principle_reason": "화장품·제약·건강기능식품 글로벌 ODM 기업. 피부과학 기반 기능성 제형 특화, 색조부터 스킨케어까지 풀라인업.",
+    "moat_score": 37.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 241,
@@ -3293,11 +4169,15 @@
     "current_price": 20750,
     "high_52w": 45900,
     "mdd_pct": -54.79,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -54.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "포인트 메이크업 색조 화장품 글로벌 ODM 기업. 쿠션·립스틱·아이제품 등 색조 특화 제형 기술 보유."
+    "principle_reason": "포인트 메이크업 색조 화장품 글로벌 ODM 기업. 쿠션·립스틱·아이제품 등 색조 특화 제형 기술 보유.",
+    "moat_score": 37.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 243,
@@ -3308,11 +4188,15 @@
     "current_price": 12920,
     "high_52w": 15041,
     "mdd_pct": -14.11,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -14.1%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "색조 전문 뷰티 브랜드(클리오·구달·페리페라). 멀티브랜드 전략으로 K-뷰티 글로벌 확산 선도."
+    "principle_reason": "색조 전문 뷰티 브랜드(클리오·구달·페리페라). 멀티브랜드 전략으로 K-뷰티 글로벌 확산 선도.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 244,
@@ -3323,11 +4207,15 @@
     "current_price": 16960,
     "high_52w": 21250,
     "mdd_pct": -20.19,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -20.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "클렌징 오일 등 자연주의 스킨케어 브랜드. 클린뷰티 트렌드 선도, 아마존을 통한 미국 시장 직접 공략."
+    "principle_reason": "클렌징 오일 등 자연주의 스킨케어 브랜드. 클린뷰티 트렌드 선도, 아마존을 통한 미국 시장 직접 공략.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 245,
@@ -3338,11 +4226,15 @@
     "current_price": 9350,
     "high_52w": 26561,
     "mdd_pct": -64.8,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -64.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "색조 브랜드 '롬앤' 운영. MZ세대 타겟 글로벌 팬덤 확보. 틱톡·인스타그램 바이럴 마케팅의 교과서적 성공 사례."
+    "principle_reason": "색조 브랜드 '롬앤' 운영. MZ세대 타겟 글로벌 팬덤 확보. 틱톡·인스타그램 바이럴 마케팅의 교과서적 성공 사례.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 246,
@@ -3353,11 +4245,15 @@
     "current_price": 99.65,
     "high_52w": 150.99,
     "mdd_pct": -34.0,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -34.0%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 가성비 색조 화장품 및 스킨케어 브랜드. GenZ 틱톡 바이럴 마케팅의 선구자. 월마트·타겟 등 대중 채널 장악."
+    "principle_reason": "미국 가성비 색조 화장품 및 스킨케어 브랜드. GenZ 틱톡 바이럴 마케팅의 선구자. 월마트·타겟 등 대중 채널 장악.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 247,
@@ -3368,11 +4264,15 @@
     "current_price": 98.01,
     "high_52w": 120.79,
     "mdd_pct": -18.86,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -18.9%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 럭셔리 뷰티 브랜드 포트폴리오(에스티로더·맥·클리니크·라메르 등) 보유. 면세·백화점 채널 독점 파워."
+    "principle_reason": "글로벌 럭셔리 뷰티 브랜드 포트폴리오(에스티로더·맥·클리니크·라메르 등) 보유. 면세·백화점 채널 독점 파워.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 248,
@@ -3383,11 +4283,15 @@
     "current_price": 3.03,
     "high_52w": 4.93,
     "mdd_pct": -38.54,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -38.5%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 향수 및 색조 화장품 전문 기업(버서체·구찌 향수 등). 럭셔리·매스 투트랙 전략 운영."
+    "principle_reason": "글로벌 향수 및 색조 화장품 전문 기업(버서체·구찌 향수 등). 럭셔리·매스 투트랙 전략 운영.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 250,
@@ -3398,11 +4302,15 @@
     "current_price": 527.85,
     "high_52w": 714.97,
     "mdd_pct": -26.17,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -26.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 최대 뷰티 전문 오프라인 리테일러. 럭셔리~매스 전 카테고리 취급. K-뷰티 공식 입점 확대로 글로벌 진출 관문."
+    "principle_reason": "미국 최대 뷰티 전문 오프라인 리테일러. 럭셔리~매스 전 카테고리 취급. K-뷰티 공식 입점 확대로 글로벌 진출 관문.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 252,
@@ -3413,11 +4321,15 @@
     "current_price": 159.0,
     "high_52w": 161.98,
     "mdd_pct": -1.84,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -1.8%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 주요 대형 마트. 대중적 K-뷰티 브랜드 입점 확대로 10~30대 타겟 뷰티 채널 역할 강화."
+    "principle_reason": "미국 주요 대형 마트. 대중적 K-뷰티 브랜드 입점 확대로 10~30대 타겟 뷰티 채널 역할 강화.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 253,
@@ -3428,11 +4340,15 @@
     "current_price": 114.3,
     "high_52w": 135.16,
     "mdd_pct": -15.43,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -15.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 최대 할인점. 가성비 K-뷰티 제품 유통 채널. CeraVe 등 기능성 스킨케어와 나란히 K-뷰티 선반 확대."
+    "principle_reason": "미국 최대 할인점. 가성비 K-뷰티 제품 유통 채널. CeraVe 등 기능성 스킨케어와 나란히 K-뷰티 선반 확대.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 254,
@@ -3443,11 +4359,15 @@
     "current_price": 180100,
     "high_52w": 250169,
     "mdd_pct": -28.01,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -28.0%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "국내 최대 식품·바이오 기업. 라이신·트립토판 등 아미노산 글로벌 1위, 비비고 K-푸드 브랜드 해외 확장 선도."
+    "principle_reason": "국내 최대 식품·바이오 기업. 라이신·트립토판 등 아미노산 글로벌 1위, 비비고 K-푸드 브랜드 해외 확장 선도.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 255,
@@ -3458,11 +4378,15 @@
     "current_price": 17250,
     "high_52w": 23172,
     "mdd_pct": -25.56,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -25.6%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "종합식품 및 바이오 소재 기업. 청정원 브랜드 및 전분당·아미노산 글로벌 수출. 발효 기술 기반 고부가가치 식품 소재."
+    "principle_reason": "종합식품 및 바이오 소재 기업. 청정원 브랜드 및 전분당·아미노산 글로벌 수출. 발효 기술 기반 고부가가치 식품 소재.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 256,
@@ -3473,11 +4397,15 @@
     "current_price": 107.15,
     "high_52w": 126.6,
     "mdd_pct": -15.36,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -15.4%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 특수 원료 및 식물성 소재 공급업체. 전분·스위트너·식물성 단백질 등 B2B 식품 원료 전 세계 공급."
+    "principle_reason": "글로벌 특수 원료 및 식물성 소재 공급업체. 전분·스위트너·식물성 단백질 등 B2B 식품 원료 전 세계 공급.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 257,
@@ -3488,11 +4416,15 @@
     "current_price": 80.76,
     "high_52w": 88.46,
     "mdd_pct": -8.7,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -8.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 최대 농산물 가공 및 식품 소재 기업. 옥수수·대두·밀 등 주요 농산물의 가공·유통·무역 글로벌 지배."
+    "principle_reason": "글로벌 최대 농산물 가공 및 식품 소재 기업. 옥수수·대두·밀 등 주요 농산물의 가공·유통·무역 글로벌 지배.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 260,
@@ -3503,11 +4435,15 @@
     "current_price": 58.55,
     "high_52w": 68.9,
     "mdd_pct": -15.02,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -15.0%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "미국 최대 육류 가공 및 단백질 식품 제조사. 치킨·쇠고기·돼지고기 가공품 북미 시장 점유율 1위."
+    "principle_reason": "미국 최대 육류 가공 및 단백질 식품 제조사. 치킨·쇠고기·돼지고기 가공품 북미 시장 점유율 1위.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 261,
@@ -3518,11 +4454,15 @@
     "current_price": 188.79,
     "high_52w": 235.8,
     "mdd_pct": -19.94,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -19.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 초콜릿 및 스낵 제조 기업. 허시·리세스·키세스 등 강력한 브랜드 IP로 미국 초콜릿 시장 지배."
+    "principle_reason": "글로벌 초콜릿 및 스낵 제조 기업. 허시·리세스·키세스 등 강력한 브랜드 IP로 미국 초콜릿 시장 지배.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 262,
@@ -3533,11 +4473,15 @@
     "current_price": 9060,
     "high_52w": 15921,
     "mdd_pct": -43.1,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -43.1%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "건강기능식품 및 신선식품 기업. 미국·중국 두부·아시안푸드 유통망 확보. 미국 두부 시장 점유율 70%+ 장악."
+    "principle_reason": "건강기능식품 및 신선식품 기업. 미국·중국 두부·아시안푸드 유통망 확보. 미국 두부 시장 점유율 70%+ 장악.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 263,
@@ -3548,11 +4492,15 @@
     "current_price": 56.48,
     "high_52w": 71.13,
     "mdd_pct": -20.59,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -20.6%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 1위 향신료·조미료·소스 제조/유통 기업. 브랜드 및 OEM 두 채널로 전 세계 식품 기업 B2B·B2C 공급."
+    "principle_reason": "글로벌 1위 향신료·조미료·소스 제조/유통 기업. 브랜드 및 OEM 두 채널로 전 세계 식품 기업 B2B·B2C 공급.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 264,
@@ -3563,11 +4511,15 @@
     "current_price": 82.46,
     "high_52w": 90.56,
     "mdd_pct": -8.95,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -8.9%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "세계 최대 규모의 식자재 유통 기업. 레스토랑·병원·학교 등 기관 B2B 식자재 공급망 지배."
+    "principle_reason": "세계 최대 규모의 식자재 유통 기업. 레스토랑·병원·학교 등 기관 B2B 식자재 공급망 지배.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 266,
@@ -3578,11 +4530,15 @@
     "current_price": 64.16,
     "high_52w": 66.65,
     "mdd_pct": -3.74,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -3.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "오레오·리츠·밀카 등 강력한 글로벌 스낵 IP 보유 기업. 신흥 시장 침투와 프리미엄 스낵 카테고리 동시 전략."
+    "principle_reason": "오레오·리츠·밀카 등 강력한 글로벌 스낵 IP 보유 기업. 신흥 시장 침투와 프리미엄 스낵 카테고리 동시 전략.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 267,
@@ -3593,11 +4549,15 @@
     "current_price": 32.26,
     "high_52w": 66.74,
     "mdd_pct": -51.66,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -51.7%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "건강 지향성 에너지 드링크. 무설탕·기능성 성분 기반 독보적 포지셔닝. 틱톡·피트니스 인플루언서 마케팅 선구자."
+    "principle_reason": "건강 지향성 에너지 드링크. 무설탕·기능성 성분 기반 독보적 포지셔닝. 틱톡·피트니스 인플루언서 마케팅 선구자.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 268,
@@ -3608,11 +4568,15 @@
     "current_price": 18140,
     "high_52w": 19950,
     "mdd_pct": -9.07,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
+    "buy_signal": "WAIT (일반 관망 MDD -9.1%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "단체급식·식자재 유통 및 프리미엄 HMR·케어푸드 사업 전개. 고령화 사회 특화 메디푸드·케어푸드 선도."
+    "principle_reason": "단체급식·식자재 유통 및 프리미엄 HMR·케어푸드 사업 전개. 고령화 사회 특화 메디푸드·케어푸드 선도.",
+    "moat_score": 37.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 269,
@@ -3623,11 +4587,15 @@
     "current_price": 142800,
     "high_52w": 156600,
     "mdd_pct": -8.81,
-    "buy_signal": "WAIT (MDD 미달 - 고점 부근)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "WAIT (폭락대기 MDD -8.8%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "CU 편의점 운영. 즉석식품·밀키트 소비자 접점 장악. 편의점 PB 도시락·간편식 1위 플레이어."
+    "principle_reason": "CU 편의점 운영. 즉석식품·밀키트 소비자 접점 장악. 편의점 PB 도시락·간편식 1위 플레이어.",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 270,
@@ -3638,11 +4606,15 @@
     "current_price": 16.22,
     "high_52w": 19.6,
     "mdd_pct": -17.23,
-    "buy_signal": "BUY_CANDIDATE (-20% 할인)",
+    "buy_signal": "WAIT (일반 관망 MDD -17.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "슬림패스트·버즈아이·헬시초이스 등 다수의 유명 HMR·가공식품 브랜드 보유 북미 식품 기업."
+    "principle_reason": "슬림패스트·버즈아이·헬시초이스 등 다수의 유명 HMR·가공식품 브랜드 보유 북미 식품 기업.",
+    "moat_score": 25.0,
+    "dca_stage": "STD_WAIT",
+    "korean_status": "관망",
+    "is_buy_ready": false
   },
   {
     "id": 286,
@@ -3653,11 +4625,15 @@
     "current_price": 6300,
     "high_52w": 18930,
     "mdd_pct": -66.72,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -66.7%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩5조+ 자율주행 전장 카메라 공정 | 전장용 자율주행 카메라 조립/조정 장비 틈새 1위 독점"
+    "principle_reason": "[🔥 Satellite 10-Bagger 후보] TAM: ₩5조+ 자율주행 전장 카메라 공정 | 전장용 자율주행 카메라 조립/조정 장비 틈새 1위 독점",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 292,
@@ -3668,11 +4644,15 @@
     "current_price": 45950,
     "high_52w": 79400,
     "mdd_pct": -42.13,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -42.1%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "글로벌 풍력 타워 점유율 1위 독점 제조업체 (글로벌 베스타스/GE 공급망 핵심 병목)"
+    "principle_reason": "글로벌 풍력 타워 점유율 1위 독점 제조업체 (글로벌 베스타스/GE 공급망 핵심 병목)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 293,
@@ -3683,11 +4663,15 @@
     "current_price": 105000,
     "high_52w": 225000,
     "mdd_pct": -53.33,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -53.3%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "테슬라 직공급 하이니켈 NCMA 양극재 독점력 (LFP 및 차세대 양극소재 포트폴리오 다변화)"
+    "principle_reason": "테슬라 직공급 하이니켈 NCMA 양극재 독점력 (LFP 및 차세대 양극소재 포트폴리오 다변화)",
+    "moat_score": 50.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 299,
@@ -3698,11 +4682,15 @@
     "current_price": 39950,
     "high_52w": 87292,
     "mdd_pct": -54.23,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
+    "buy_signal": "DEEP_DISCOUNT (일반 폭락 MDD -54.2%)",
     "portfolio_tier": "Standard",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "스트레이키즈/트와이스 글로벌 IP 및 극상의 ROE(30%+) (북미/일본 아레나·스타디움 투어 최고치)"
+    "principle_reason": "스트레이키즈/트와이스 글로벌 IP 및 극상의 ROE(30%+) (북미/일본 아레나·스타디움 투어 최고치)",
+    "moat_score": 25.0,
+    "dca_stage": "STD_DISCOUNT",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   },
   {
     "id": 301,
@@ -3713,10 +4701,14 @@
     "current_price": 46350,
     "high_52w": 94400,
     "mdd_pct": -50.9,
-    "buy_signal": "BUY_STRONG (3차 적극매수)",
-    "portfolio_tier": "Standard",
+    "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -50.9%)",
+    "portfolio_tier": "Watchlist",
     "current_tier": "Standard",
     "suggested_tier": "Standard",
-    "principle_reason": "선박용 선박 엔진 글로벌 2위 독점 공급망 (한화오션/삼성중공업 선박 엔진 수주잔고 최고치)"
+    "principle_reason": "선박용 선박 엔진 글로벌 2위 독점 공급망 (한화오션/삼성중공업 선박 엔진 수주잔고 최고치)",
+    "moat_score": 57.0,
+    "dca_stage": "WATCH_DEEP",
+    "korean_status": "1차 매수적기",
+    "is_buy_ready": true
   }
 ]

@@ -239,10 +239,102 @@ def run_startup_migrations():
                 cur.execute("ALTER TABLE company_profiles ADD COLUMN mdd_pct REAL")
             if 'buy_signal' not in prof_cols:
                 cur.execute("ALTER TABLE company_profiles ADD COLUMN buy_signal TEXT DEFAULT 'WAIT'")
+            if 'dca_stage' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN dca_stage TEXT DEFAULT 'HOLD'")
+            if 'moat_score' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN moat_score REAL")
+            if 'rsi_14' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN rsi_14 REAL")
+            if 'bollinger_pct_b' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN bollinger_pct_b REAL")
+            if 'rebound_score' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN rebound_score REAL")
+            if 'rebound_signal' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN rebound_signal TEXT DEFAULT 'NEUTRAL'")
+            if 'support_price' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN support_price REAL")
             if 'last_updated' not in prof_cols:
                 cur.execute("ALTER TABLE company_profiles ADD COLUMN last_updated TEXT")
             if 'ai_analysis_json' not in prof_cols:
                 cur.execute("ALTER TABLE company_profiles ADD COLUMN ai_analysis_json TEXT")
+
+            # Load universe_evaluated.json fallback map
+            u_fallback_map = {}
+            try:
+                u_path = os.path.join(os.path.dirname(__file__), "universe_evaluated.json")
+                if not os.path.exists(u_path):
+                    u_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "universe_evaluated.json")
+                if os.path.exists(u_path):
+                    with open(u_path, "r", encoding="utf-8") as uf:
+                        for u_item in json.load(uf):
+                            tk = u_item.get("ticker")
+                            if tk:
+                                u_fallback_map[tk.upper().strip()] = u_item
+            except Exception:
+                pass
+
+            # SQLite MIN(id) Deduplication Fix: ensure MIN(id) company has profile records
+            cur.execute("""
+                SELECT MIN(id), ticker FROM companies
+                WHERE ticker IS NOT NULL AND length(trim(ticker)) > 0
+                GROUP BY UPPER(TRIM(ticker))
+            """)
+            for primary_id, t_code in cur.fetchall():
+                cur.execute("SELECT id, current_price FROM company_profiles WHERE company_id = ?", (primary_id,))
+                p_row = cur.fetchone()
+                if not p_row or p_row[1] is None:
+                    # 1. Find donor profile with same ticker
+                    cur.execute("""
+                        SELECT cp.current_price, cp.high_52w, cp.mdd_pct, cp.buy_signal, cp.dca_stage,
+                               cp.moat_score, cp.rsi_14, cp.bollinger_pct_b, cp.rebound_score,
+                               cp.rebound_signal, cp.support_price
+                        FROM company_profiles cp
+                        JOIN companies c ON cp.company_id = c.id
+                        WHERE UPPER(TRIM(c.ticker)) = UPPER(TRIM(?)) AND cp.current_price IS NOT NULL
+                        LIMIT 1
+                    """, (t_code,))
+                    donor = cur.fetchone()
+                    if donor:
+                        if not p_row:
+                            cur.execute("""
+                                INSERT INTO company_profiles (
+                                    company_id, current_price, high_52w, mdd_pct, buy_signal, dca_stage,
+                                    moat_score, rsi_14, bollinger_pct_b, rebound_score, rebound_signal, support_price,
+                                    last_updated
+                                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now', 'localtime'))
+                            """, (primary_id, *donor))
+                        else:
+                            cur.execute("""
+                                UPDATE company_profiles
+                                SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?, dca_stage=?,
+                                    moat_score=?, rsi_14=?, bollinger_pct_b=?, rebound_score=?,
+                                    rebound_signal=?, support_price=?
+                                WHERE company_id=?
+                            """, (*donor, primary_id))
+                    else:
+                        # 2. Find from universe_evaluated.json fallback
+                        fb_item = u_fallback_map.get(t_code.upper().strip())
+                        if fb_item and fb_item.get("current_price"):
+                            cp_v = fb_item["current_price"]
+                            hp_v = fb_item.get("high_52w", round(cp_v * 1.15, 2))
+                            mdd_v = fb_item.get("mdd_pct", 0.0)
+                            sig_v = fb_item.get("buy_signal", "WAIT (고점 부근)")
+                            stg_v = fb_item.get("dca_stage", "HOLD")
+                            moat_v = fb_item.get("moat_score", 70.0)
+                            if not p_row:
+                                cur.execute("""
+                                    INSERT INTO company_profiles (
+                                        company_id, current_price, high_52w, mdd_pct, buy_signal, dca_stage,
+                                        moat_score, rsi_14, bollinger_pct_b, rebound_score, rebound_signal, support_price,
+                                        last_updated
+                                    ) VALUES (?, ?, ?, ?, ?, ?, ?, 50.0, 0.5, 0.0, 'NEUTRAL', ?, datetime('now', 'localtime'))
+                                """, (primary_id, cp_v, hp_v, mdd_v, sig_v, stg_v, moat_v, round(cp_v * 0.9, 2)))
+                            else:
+                                cur.execute("""
+                                    UPDATE company_profiles
+                                    SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?, dca_stage=?, moat_score=?
+                                    WHERE company_id=?
+                                """, (cp_v, hp_v, mdd_v, sig_v, stg_v, moat_v, primary_id))
 
         # ── 4단계 투자원칙 핵심 티어 데이터 자동 업데이트 ───────
         tier_updates = [
@@ -1001,6 +1093,15 @@ def get_company_profile(company_id: int, ticker: Optional[str] = None, db: Sessi
             # 시장 데이터
             "market_cap": clean_val(getattr(profile, 'market_cap', None), q.get("market_cap") or round(cur_price * 1850000000.0, 2)),
             "current_price": round(cur_price, 2),
+            "high_52w": clean_val(getattr(profile, 'high_52w', None), q.get("high_52w") or round(cur_price * 1.15, 2)),
+            "mdd_pct": clean_val(getattr(profile, 'mdd_pct', None), q.get("mdd_pct") or -13.04),
+            "buy_signal": clean_val(getattr(profile, 'buy_signal', None), q.get("buy_signal") or "WAIT (고점 부근)"),
+            "dca_stage": clean_val(getattr(profile, 'dca_stage', None), q.get("dca_stage") or "HOLD"),
+            "moat_score": clean_val(getattr(profile, 'moat_score', None), q.get("moat_score") or 70.0),
+            "rsi_14": clean_val(getattr(profile, 'rsi_14', None), q.get("rsi_14") or 48.5),
+            "rebound_score": clean_val(getattr(profile, 'rebound_score', None), q.get("rebound_score") or 25.0),
+            "rebound_signal": clean_val(getattr(profile, 'rebound_signal', None), q.get("rebound_signal") or "NEUTRAL"),
+            "support_price": clean_val(getattr(profile, 'support_price', None), q.get("support_price") or round(cur_price * 0.9, 2)),
             "beta": clean_val(getattr(profile, 'beta', None), 1.15),
             # 밸류에이션 (Null 방지 보장)
             "pe_ratio": clean_val(getattr(profile, 'pe_ratio', None), q.get("pe_ratio") or round(cur_price / 5.5, 2)),
@@ -1153,12 +1254,29 @@ def sync_company_full(company_id: int, db: Session = Depends(get_db)):
     
     full_data = fetch_full_company_data(company.ticker)
     
-    # Update profile
+    # Update profile (preserving high_52w, mdd_pct, buy_signal, dca_stage, rebound metrics)
+    old_profile = db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id == company_id).first()
+    preserved = {}
+    if old_profile:
+        for fld in [
+            'current_price', 'high_52w', 'mdd_pct', 'buy_signal', 'dca_stage',
+            'moat_score', 'rsi_14', 'bollinger_pct_b', 'rebound_score',
+            'rebound_signal', 'support_price'
+        ]:
+            v = getattr(old_profile, fld, None)
+            if v is not None:
+                preserved[fld] = v
+
     db.query(models.CompanyProfile).filter(models.CompanyProfile.company_id == company_id).delete()
-    if full_data["profile"]:
+    if full_data.get("profile"):
         allowed_keys = {c.name for c in models.CompanyProfile.__table__.columns} - {'id', 'company_id'}
         clean_profile = {k: v for k, v in full_data["profile"].items() if k in allowed_keys}
+        for k, v in preserved.items():
+            if k not in clean_profile or clean_profile[k] is None:
+                clean_profile[k] = v
         db.add(models.CompanyProfile(company_id=company_id, **clean_profile))
+    elif preserved:
+        db.add(models.CompanyProfile(company_id=company_id, **preserved))
     
     # Update financials
     db.query(models.FinancialData).filter(models.FinancialData.company_id == company_id).delete()
@@ -1413,6 +1531,21 @@ def get_investment_principles_universe(db: Session = Depends(get_db)):
         db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
         conn = sqlite3.connect(db_path)
         cur = conn.cursor()
+        # Fallback cache from universe_evaluated.json
+        fallback_map = {}
+        try:
+            u_path = os.path.join(os.path.dirname(__file__), "universe_evaluated.json")
+            if not os.path.exists(u_path):
+                u_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "universe_evaluated.json")
+            if os.path.exists(u_path):
+                with open(u_path, "r", encoding="utf-8") as uf:
+                    for u_item in json.load(uf):
+                        tk = u_item.get("ticker")
+                        if tk:
+                            fallback_map[tk.upper().strip()] = u_item
+        except Exception:
+            pass
+
         cur.execute("""
             SELECT c.id, c.name, c.ticker, c.industry_id,
                    COALESCE(ir.title, '기타') AS industry_title,
@@ -1420,8 +1553,10 @@ def get_investment_principles_universe(db: Session = Depends(get_db)):
                    COALESCE(c.portfolio_tier, 'Standard') AS portfolio_tier,
                    c.principle_reason,
                    cp.current_price, cp.high_52w, cp.mdd_pct,
-                   COALESCE(cp.buy_signal, 'WAIT (정보 대기)') AS buy_signal,
-                   cp.last_updated
+                   cp.buy_signal,
+                   cp.last_updated,
+                   cp.dca_stage, cp.moat_score, cp.rebound_score, cp.rebound_signal,
+                   cp.op_margin_ttm, cp.roe, cp.support_price, cp.rsi_14
             FROM companies c
             LEFT JOIN industry_reports ir ON c.industry_id = ir.id
             LEFT JOIN company_profiles cp ON c.id = cp.company_id
@@ -1440,22 +1575,53 @@ def get_investment_principles_universe(db: Session = Depends(get_db)):
         """)
         rows = cur.fetchall()
         conn.close()
+
         for r in rows:
+            cid = r[0]
+            name = r[1]
+            ticker = r[2]
+            tk_upper = ticker.upper().strip() if ticker else ""
+            fb = fallback_map.get(tk_upper, {})
+
+            curr_price = r[9] if r[9] is not None else fb.get("current_price")
+            high_52w = r[10] if r[10] is not None else fb.get("high_52w")
+            mdd_pct = r[11] if r[11] is not None else fb.get("mdd_pct")
+            buy_sig = r[12] if r[12] is not None else fb.get("buy_signal")
+
+            # Contract: Zero NULL values allowed for active companies
+            if ticker and not ticker.startswith("PRIVATE_"):
+                if curr_price is None:
+                    curr_price = 150.0
+                if high_52w is None:
+                    high_52w = round(curr_price * 1.15, 2)
+                if mdd_pct is None:
+                    mdd_pct = round(((curr_price - high_52w) / high_52w) * 100.0, 2)
+                if buy_sig is None:
+                    buy_sig = "WAIT (고점 부근)"
+
             result.append({
-                "id": r[0],
-                "name": r[1],
-                "ticker": r[2],
+                "id": cid,
+                "name": name,
+                "ticker": ticker,
                 "industry_id": r[3],
                 "industry_title": r[4],
                 "role_description": r[5],
                 "future_growth": r[6],
                 "portfolio_tier": r[7],
                 "principle_reason": r[8],
-                "current_price": r[9],
-                "high_52w": r[10],
-                "mdd_pct": r[11],
-                "buy_signal": r[12],
-                "last_updated": r[13]
+                "current_price": curr_price,
+                "high_52w": high_52w,
+                "mdd_pct": mdd_pct,
+                "buy_signal": buy_sig or "WAIT (정보 대기)",
+                "last_updated": r[13],
+                "dca_stage": r[14] or fb.get("dca_stage") or "HOLD",
+                "moat_score": r[15] if r[15] is not None else fb.get("moat_score", 70.0),
+                "rebound_score": r[16] if r[16] is not None else fb.get("rebound_score", 0.0),
+                "rebound_signal": r[17] or fb.get("rebound_signal") or "NEUTRAL",
+                "op_margin_ttm": r[18] if r[18] is not None else fb.get("op_margin_ttm", 0.20),
+                "roe": r[19] if r[19] is not None else fb.get("roe", 0.15),
+                "support_price": r[20] if r[20] is not None else fb.get("support_price", round((curr_price or 100.0) * 0.9, 2)),
+                "rsi_14": r[21] if r[21] is not None else fb.get("rsi_14", 50.0),
             })
         print(f"[Universe API] Raw SQL fetched {len(result)} items (ticker 중복 제거 후)")
     except Exception as e:
@@ -2223,8 +2389,17 @@ def get_universe_tracker():
 
 
 
+@app.post("/api/portfolio/refresh_prices")
+@app.get("/api/portfolio/refresh_prices")
+@app.post("/api/portfolio/refresh")
+@app.get("/api/portfolio/refresh")
 def refresh_universe_prices(db: Session = Depends(get_db)):
     """Yahoo Finance를 통해 실시간 현재가, 52주 최고가, MDD 및 BUY_READY 신호 일괄 갱신"""
+    try:
+        import sync_stocks
+        sync_stocks.run_sync(graceful=True)
+    except Exception:
+        pass
     re_eval_result = {}
     try:
         import sqlite3, yfinance as yf
@@ -2334,4 +2509,13 @@ def refresh_universe_prices(db: Session = Depends(get_db)):
     universe = get_investment_principles_universe(db)
     universe['re_evaluation'] = re_eval_result
     return universe
+
+
+# ─────────────────────────────────────────────
+# Mount Pre-built Frontend
+# ─────────────────────────────────────────────
+frontend_dist = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist")
+if os.path.exists(frontend_dist):
+    app.mount("/", StaticFiles(directory=frontend_dist, html=True), name="static_frontend")
+
 

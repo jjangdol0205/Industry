@@ -191,7 +191,7 @@ function App() {
           if (rep && Array.isArray(rep.companies)) {
             rep.companies = rep.companies.map(comp => {
               const st = staticUniverseData.find(s => String(s.id) === String(comp.id) || (s.ticker && s.ticker.toUpperCase() === (comp.ticker || '').toUpperCase()));
-              return st ? { ...comp, current_price: st.current_price || comp.current_price, high_52w: st.high_52w || comp.high_52w, mdd_pct: st.mdd_pct || comp.mdd_pct } : comp;
+              return st ? { ...comp, current_price: comp.current_price || st.current_price, high_52w: comp.high_52w || st.high_52w, mdd_pct: comp.mdd_pct || st.mdd_pct } : comp;
             });
           }
           return rep;
@@ -352,7 +352,7 @@ function App() {
                 updated[key] = remote[key];
               }
             }
-            updated.current_price = prev?.current_price || remote.current_price;
+            updated.current_price = remote.current_price || prev?.current_price;
             return updated;
           });
         }
@@ -1834,9 +1834,10 @@ function AgentWorkspace({ onSelectCompany }) {
             const st = staticUniverseData.find(s => String(s.id) === String(ru.id) || (s.ticker && s.ticker.toUpperCase() === (ru.ticker || '').toUpperCase()));
             return st ? {
               ...ru,
-              current_price: st.current_price || ru.current_price,
-              high_52w: st.high_52w || ru.high_52w,
-              mdd_pct: st.mdd_pct || ru.mdd_pct
+              current_price: ru.current_price || st.current_price,
+              high_52w: ru.high_52w || st.high_52w,
+              mdd_pct: ru.mdd_pct || st.mdd_pct,
+              buy_signal: ru.buy_signal || st.buy_signal
             } : ru;
           });
           setUniverseData({ universe: mergedList });
@@ -1858,7 +1859,13 @@ function AgentWorkspace({ onSelectCompany }) {
     if (selectedTier === 'Core' && itemTier !== 'Core') return false;
     if (selectedTier === 'Satellite' && itemTier !== 'Satellite') return false;
     if (selectedTier === 'Watchlist' && itemTier !== 'Watchlist') return false;
-    if (selectedTier === 'BUY_READY' && !item.buy_signal?.includes('BUY_READY') && !item.buy_signal?.includes('DEEP_DISCOUNT')) return false;
+    if (selectedTier === 'BUY_READY') {
+      const sig = item.buy_signal || '';
+      const isBuy = sig.includes('BUY_READY') || sig.includes('DEEP_DISCOUNT') ||
+                    sig.includes('매수적기') || sig.includes('1차') || sig.includes('2차') || sig.includes('극단폭락') ||
+                    item.is_buy_ready === true;
+      if (!isBuy) return false;
+    }
 
     if (searchQuery.trim() !== '') {
       const q = searchQuery.toLowerCase();
@@ -1921,8 +1928,10 @@ function AgentWorkspace({ onSelectCompany }) {
             const isCore = itemTier === 'Core';
             const isSat = itemTier === 'Satellite';
             const isWatch = itemTier === 'Watchlist';
-            const isBuyReady = item.buy_signal?.includes('BUY_READY') || item.buy_signal?.includes('DEEP_DISCOUNT');
-            const isDeepDiscount = item.buy_signal?.includes('DEEP_DISCOUNT');
+            const isBuyReady = item.buy_signal?.includes('BUY_READY') || item.buy_signal?.includes('DEEP_DISCOUNT') ||
+                               item.buy_signal?.includes('매수적기') || item.buy_signal?.includes('1차') || item.buy_signal?.includes('2차') || item.buy_signal?.includes('극단폭락') ||
+                               item.is_buy_ready === true;
+            const isDeepDiscount = item.buy_signal?.includes('DEEP_DISCOUNT') || item.buy_signal?.includes('2차') || item.buy_signal?.includes('극단폭락');
 
             let [badgeBg, badgeBorder, badgeText] = isBuyReady ? ['rgba(16, 185, 129, 0.15)', 'rgba(16, 185, 129, 0.4)', '#34d399'] : ['rgba(239, 68, 68, 0.15)', 'rgba(239, 68, 68, 0.4)', '#f87171'];
             if (isDeepDiscount) [badgeBg, badgeBorder, badgeText] = ['rgba(59, 130, 246, 0.2)', 'rgba(59, 130, 246, 0.5)', '#60a5fa'];
@@ -1940,13 +1949,23 @@ function AgentWorkspace({ onSelectCompany }) {
                 display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
               }}>
                 <div>
-                  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px' }}>
-                    <span style={{
-                      padding:'3px 8px', borderRadius:'6px', background:tierTagBg, color:tierTagText,
-                      fontSize:'0.75rem', fontWeight:700
-                    }}>
-                      {isCore ? '🏆 Core (독점)' : isSat ? '🚀 Satellite (성장)' : isWatch ? '✨ Watchlist' : '🏢 Standard'}
-                    </span>
+                  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px', flexWrap:'wrap', gap:'6px' }}>
+                    <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
+                      <span style={{
+                        padding:'3px 8px', borderRadius:'6px', background:tierTagBg, color:tierTagText,
+                        fontSize:'0.75rem', fontWeight:700
+                      }}>
+                        {isCore ? '🏆 Core (독점)' : isSat ? '🚀 Satellite (성장)' : isWatch ? '✨ Watchlist' : '🏢 Standard'}
+                      </span>
+                      {(item.rebound_score >= 50 || item.rebound_signal === 'STRONG_REBOUND' || item.rebound_signal === 'MODERATE_REBOUND') && (
+                        <span style={{
+                          padding:'3px 8px', borderRadius:'10px', background:'rgba(249, 115, 22, 0.2)',
+                          border:'1px solid rgba(249, 115, 22, 0.5)', color:'#fb923c', fontSize:'0.72rem', fontWeight:700
+                        }}>
+                          🔥 과매도 반등 적기 {item.rebound_score ? `(${item.rebound_score}점)` : ''}
+                        </span>
+                      )}
+                    </div>
                     <span style={{
                       padding:'3px 10px', borderRadius:'12px', background:badgeBg, border:`1px solid ${badgeBorder}`,
                       color:badgeText, fontSize:'0.75rem', fontWeight:700
