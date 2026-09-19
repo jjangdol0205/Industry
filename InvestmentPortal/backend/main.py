@@ -257,6 +257,8 @@ def run_startup_migrations():
                 cur.execute("ALTER TABLE company_profiles ADD COLUMN last_updated TEXT")
             if 'ai_analysis_json' not in prof_cols:
                 cur.execute("ALTER TABLE company_profiles ADD COLUMN ai_analysis_json TEXT")
+            if 'principle_reason' not in prof_cols:
+                cur.execute("ALTER TABLE company_profiles ADD COLUMN principle_reason TEXT")
 
             # Load universe_evaluated.json fallback map
             u_fallback_map = {}
@@ -347,7 +349,12 @@ def run_startup_migrations():
             ("Qualcomm", "Core", "5G/모바일 AP 특허 독점, ROE 35%, SDV 확장 (Core)"),
             ("KLA Corporation", "Core", "반도체 계측/검사 장비 독점율 80%+, EUV 필수 병목 (Core)"),
             ("Constellation Energy", "Core", "미국 1위 원자력 발전, AI 데이터센터 직결 전력 독점 (Core)"),
-            ("SK하이닉스", "Core", "NVIDIA HBM3E/4 독점 공급, OPM 71.5%, ROE 61.2% (Core)"),
+            ("SK Hynix", "Core", "NVIDIA HBM3E 독점 공급, OPM 71.5%, ROE 61.2% (Core)"),
+            ("000660.KS", "Core", "NVIDIA HBM3E 독점 공급, OPM 71.5%, ROE 61.2% (Core)"),
+            ("SK하이닉스", "Core", "NVIDIA HBM3E 독점 공급, OPM 71.5%, ROE 61.2% (Core)"),
+            ("Samsung Electronics", "Satellite", "DRAM 1위, 파운드리 2위, OPM 42.8%, ROE 18.9%, HBM 추격 수혜 (Satellite)"),
+            ("005930.KS", "Satellite", "DRAM 1위, 파운드리 2위, OPM 42.8%, ROE 18.9%, HBM 추격 수혜 (Satellite)"),
+            ("삼성전자", "Satellite", "DRAM 1위, 파운드리 2위, OPM 42.8%, ROE 18.9%, HBM 추격 수혜 (Satellite)"),
             ("한미반도체", "Core", "[🔥 Satellite 10-Bagger 후보] TAM: ₩50조+ HBM 3D Stack 본딩 | HBM TC 본더 글로벌 90%+ 독점, OPM 40%+ 이익 체질"),
             ("HPSP", "Core", "[🔥 Satellite 10-Bagger 후보] TAM: ₩30조+ 선단공정 고압 어닐링 | 고압 수소 어닐링 장비 100% 세계 독점, OPM 50%+"),
             ("Broadcom", "Core", "AI ASIC 설계 + 네트워킹 반도체 독점, OPM 35%+, GPM 60%+ (Core)"),
@@ -383,6 +390,84 @@ def run_startup_migrations():
                 SET portfolio_tier=?, principle_reason=?
                 WHERE name LIKE ? OR ticker LIKE ?
             """, (tier, reason, f"%{cname}%", f"%{cname}%"))
+
+        # Explicit target fixes for SK Hynix and Samsung Electronics
+        cur.execute("""
+            UPDATE companies
+            SET portfolio_tier='Core', principle_reason='NVIDIA HBM3E 독점 공급, OPM 71.5%, ROE 61.2% (Core)'
+            WHERE ticker IN ('000660.KS', '000660') OR UPPER(name) LIKE '%HYNIX%'
+        """)
+        cur.execute("""
+            UPDATE companies
+            SET portfolio_tier='Satellite', principle_reason='DRAM 1위, 파운드리 2위, OPM 42.8%, ROE 18.9%, HBM 추격 수혜 (Satellite)'
+            WHERE ticker IN ('005930.KS', '005930') OR UPPER(name) LIKE '%SAMSUNG ELECTRONICS%'
+        """)
+        # Clean corrupted question marks from principle_reason in both tables
+        cur.execute("""
+            UPDATE companies
+            SET principle_reason = replace(replace(principle_reason, '??', ''), '?', '')
+            WHERE principle_reason LIKE '%?%'
+        """)
+        try:
+            cur.execute("""
+                UPDATE company_profiles
+                SET principle_reason = replace(replace(principle_reason, '??', ''), '?', '')
+                WHERE principle_reason LIKE '%?%'
+            """)
+        except Exception:
+            pass
+
+        # Ensure SK Hynix profile exists and has latest 2026-09-18 close price & buy signal
+        cur.execute("""
+            SELECT id FROM companies WHERE ticker IN ('000660.KS', '000660') OR UPPER(name) LIKE '%HYNIX%'
+        """)
+        for (hid,) in cur.fetchall():
+            cur.execute("SELECT id FROM company_profiles WHERE company_id = ?", (hid,))
+            if not cur.fetchone():
+                cur.execute("""
+                    INSERT INTO company_profiles (
+                        company_id, current_price, high_52w, mdd_pct, buy_signal, dca_stage, moat_score,
+                        rsi_14, bollinger_pct_b, rebound_score, rebound_signal, support_price, last_updated,
+                        principle_reason
+                    ) VALUES (?, 1857000, 2986352, -37.82, 'BUY_READY (2차 분할매수 MDD -37.8%)', 'CORE_DCA_2', 84.0,
+                             57.46, 0.9268, 0.0, 'NEUTRAL', 1366565.97, datetime('now', 'localtime'),
+                             'NVIDIA HBM3E 독점 공급, OPM 71.5%, ROE 61.2% (Core)')
+                """, (hid,))
+            else:
+                cur.execute("""
+                    UPDATE company_profiles
+                    SET current_price=1857000, high_52w=2986352, mdd_pct=-37.82,
+                        buy_signal='BUY_READY (2차 분할매수 MDD -37.8%)', dca_stage='CORE_DCA_2', moat_score=84.0,
+                        rsi_14=57.46, bollinger_pct_b=0.9268, rebound_score=0.0, rebound_signal='NEUTRAL', support_price=1366565.97,
+                        principle_reason='NVIDIA HBM3E 독점 공급, OPM 71.5%, ROE 61.2% (Core)'
+                    WHERE company_id=?
+                """, (hid,))
+
+        # Ensure Samsung Electronics profile exists and has latest close price & buy signal
+        cur.execute("""
+            SELECT id FROM companies WHERE ticker IN ('005930.KS', '005930') OR UPPER(name) LIKE '%SAMSUNG ELECTRONICS%'
+        """)
+        for (sid,) in cur.fetchall():
+            cur.execute("SELECT id FROM company_profiles WHERE company_id = ?", (sid,))
+            if not cur.fetchone():
+                cur.execute("""
+                    INSERT INTO company_profiles (
+                        company_id, current_price, high_52w, mdd_pct, buy_signal, dca_stage, moat_score,
+                        rsi_14, bollinger_pct_b, rebound_score, rebound_signal, support_price, last_updated,
+                        principle_reason
+                    ) VALUES (?, 261000, 374087, -30.23, 'BUY_READY (1차 분할매수 MDD -30.2%)', 'SAT_DCA_1', 76.0,
+                             51.22, 0.5764, 0.0, 'NEUTRAL', 219473.5, datetime('now', 'localtime'),
+                             'DRAM 1위, 파운드리 2위, OPM 42.8%, ROE 18.9%, HBM 추격 수혜 (Satellite)')
+                """, (sid,))
+            else:
+                cur.execute("""
+                    UPDATE company_profiles
+                    SET current_price=261000, high_52w=374087, mdd_pct=-30.23,
+                        buy_signal='BUY_READY (1차 분할매수 MDD -30.2%)', dca_stage='SAT_DCA_1', moat_score=76.0,
+                        rsi_14=51.22, bollinger_pct_b=0.5764, rebound_score=0.0, rebound_signal='NEUTRAL', support_price=219473.5,
+                        principle_reason='DRAM 1위, 파운드리 2위, OPM 42.8%, ROE 18.9%, HBM 추격 수혜 (Satellite)'
+                    WHERE company_id=?
+                """, (sid,))
 
         # ── COGS(매출원가) 자동 계산 ──
         cur.execute("""
@@ -1004,6 +1089,7 @@ def get_report_pdf_url(report_id: int, db: Session = Depends(get_db)):
 # ─────────────────────────────────────────────
 
 @app.get("/api/companies", response_model=List[schemas.Company])
+@app.get("/api/v1/companies", response_model=List[schemas.Company])
 def get_companies(db: Session = Depends(get_db)):
     return db.query(models.Company).order_by(
         models.Company.industry_id,

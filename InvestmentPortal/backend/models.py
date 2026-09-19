@@ -45,6 +45,30 @@ class Company(Base):
     financials = relationship("FinancialData", back_populates="company")
     profile = relationship("CompanyProfile", back_populates="company", uselist=False)
 
+    @property
+    def current_price(self):
+        return self.profile.current_price if self.profile else None
+
+    @property
+    def high_52w(self):
+        return self.profile.high_52w if self.profile else None
+
+    @property
+    def mdd_pct(self):
+        return self.profile.mdd_pct if self.profile else None
+
+    @property
+    def buy_signal(self):
+        return self.profile.buy_signal if self.profile else None
+
+    @property
+    def dca_stage(self):
+        return self.profile.dca_stage if self.profile else None
+
+    @property
+    def moat_score(self):
+        return self.profile.moat_score if self.profile else None
+
 
 class CompanyProfile(Base):
     """TTM 기준 밸류에이션·프로파일 (FMP API)"""
@@ -75,6 +99,7 @@ class CompanyProfile(Base):
     rebound_score = Column(Float, nullable=True)    # 100점 만점 과매도 기술적 반등 점수
     rebound_signal = Column(String, nullable=True)  # 기술적 반등 신호 (STRONG_REBOUND 등)
     support_price = Column(Float, nullable=True)    # 하방 지지가격
+    principle_reason = Column(Text, nullable=True)  # 4단계 투자원칙 충족 근거
     beta = Column(Float, nullable=True)             # 베타 (시장 민감도)
 
     # --- 밸류에이션 (TTM) ---

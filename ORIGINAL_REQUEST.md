@@ -41,3 +41,40 @@ Integrity mode: development
 - [ ] 전 유니버스 종목에 대해 Core / Satellite / Watchlist / Standard 분류 및 티어별 MDD 분할매수 상태(1차 매수적기, 2차 매수적기, 관망, 홀딩)가 일관된 수식에 의해 자동 계산됨
 - [ ] 계산된 결과가 `investment_portal.db` 및 `universe_evaluated.json`에 결측치(NULL) 없이 기록됨
 - [ ] 웹 대시보드 유니버스 화면에서 최신 주가와 4단계 매수 시그널 배지가 실시간으로 정확히 표시됨
+
+## 2026-09-19T07:03:13Z
+
+This is a single self-contained fix; keep it small and focused.
+투자 포털(TrendPulse)의 최신 종가 동기화 반영 누락 및 SK하이닉스를 비롯한 유니버스 종목들의 '원칙 근거' 인코딩 깨짐(`??`)과 미갱신 문제를 해결하고 데이터베이스와 프론트엔드 전반의 데이터 정합성을 확보합니다.
+
+Working directory: d:\Industry
+Integrity mode: development
+
+## Requirements
+
+### R1. 최신 거래일 종가 및 투자 지표 동기화 정상화
+- 2026-09-18 등 최신 거래일 종가 기준으로 유니버스 전체 종목의 주가, 52주 최고가, MDD 및 DCA 분할매수 시그널이 온전히 계산되고 갱신되어야 합니다.
+- SQLite 데이터베이스(`company_profiles`), `universe_evaluated.json`의 4개 배포 경로, `universal_deepdive_data.json`의 3개 배포 경로에 최신 종가가 즉각 누락 없이 반영되어야 합니다.
+
+### R2. SK하이닉스 및 유니버스 종목 '원칙 근거' 인코딩 복원 및 갱신 파이프라인 수립
+- SK하이닉스를 포함해 데이터베이스와 JSON 내에 물음표(`??`)로 깨져 있는 `principle_reason` 필드를 올바른 UTF-8 한국어 텍스트(예: "NVIDIA HBM3E 독점 공급, OPM 71.5%, ROE 61.2% (Core)")로 복구합니다.
+- 주가 동기화 엔진(`sync_stocks.py` / `investment_engine.py`) 실행 시 기존 원칙 근거가 손실되거나 왜곡되지 않고 온전하게 보존 및 동기화되도록 조치합니다.
+
+### R3. 백엔드 API 및 프론트엔드 대시보드 정합성 검증
+- 웹 포털 대시보드(http://localhost:8000) 및 FastAPI API(`/api/v1/companies`, `/universe_evaluated.json`)에서 SK하이닉스의 최신 종가와 정상 복원된 원칙 근거 카드가 정확히 렌더링되는지 확인합니다.
+- Windows 환경에서 포털 구동(`run.ps1`/`run.bat`) 및 백그라운드 동기화 스케줄 태스크가 오류 없이 최신 데이터를 로드하는지 확인합니다.
+
+## Acceptance Criteria
+
+### 최신 종가 및 유니버스 데이터 정합성
+- [ ] SK하이닉스(000660.KS)의 주가가 최신 종가(1,857,000원)로 갱신되어 있고, NULL 또는 0원인 종목이 없어야 함
+- [ ] SQLite DB `company_profiles`와 4개 경로의 `universe_evaluated.json` 간 주가 및 MDD 데이터가 100% 일치해야 함
+
+### 원칙 근거 및 텍스트 인코딩 무결성
+- [ ] `universe_evaluated.json` 및 DB `companies`/`company_profiles`에서 SK하이닉스의 `principle_reason`에 깨진 물음표(`??`)가 전혀 없어야 함
+- [ ] SK하이닉스의 원칙 근거에 HBM 독점 및 OPM/ROE 이익 체질 내용이 명확한 한글 문장으로 기재되어 있어야 함
+
+### 동기화 자동화 및 시스템 검증
+- [ ] `python sync_stocks.py` 실행 시 오류 없이 정상 완료되며, 모든 배포 대상 JSON 파일이 원자적으로 갱신되어야 함
+- [ ] 기존 E2E 테스트 스위트(`pytest tests/e2e/test_f1_sync_engine.py` 등)가 에러 없이 통과해야 함
+

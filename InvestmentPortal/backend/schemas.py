@@ -54,6 +54,12 @@ class Company(CompanyBase):
     leading_breakdown: Optional[dict] = None
     # 성장성 기반 기업가치 업사이드 점수 (런타임 계산)
     upside_score: Optional[float] = None
+    current_price: Optional[float] = None
+    high_52w: Optional[float] = None
+    mdd_pct: Optional[float] = None
+    buy_signal: Optional[str] = None
+    dca_stage: Optional[str] = None
+    moat_score: Optional[float] = None
 
     class Config:
         from_attributes = True

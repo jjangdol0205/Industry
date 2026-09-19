@@ -13,6 +13,7 @@ Authoritative Reference:
 """
 
 from typing import Dict, Tuple, Any, Optional, List
+import re
 import pandas as pd
 import numpy as np
 
@@ -183,6 +184,17 @@ def calculate_moat_score(profile: dict) -> Tuple[float, dict]:
 
     opm = normalize_percentage(raw_opm)
     if opm is None:
+        text_corpus = " ".join([
+            str(profile.get(k, ''))
+            for k in ('principle_reason', 'role_description', 'future_growth', 'moat_title', 'description')
+        ])
+        m_opm = re.search(r'OPM\s*([0-9]+(?:\.[0-9]+)?)\s*%', text_corpus, re.IGNORECASE)
+        if m_opm:
+            try:
+                opm = float(m_opm.group(1))
+            except Exception:
+                opm = None
+    if opm is None:
         opm = 10.0  # Industry median fallback
         imputed_fields.append('op_margin_ttm')
 
@@ -211,6 +223,17 @@ def calculate_moat_score(profile: dict) -> Tuple[float, dict]:
 
     roe = normalize_percentage(raw_roe)
     if roe is None:
+        text_corpus = " ".join([
+            str(profile.get(k, ''))
+            for k in ('principle_reason', 'role_description', 'future_growth', 'moat_title', 'description')
+        ])
+        m_roe = re.search(r'ROE\s*([0-9]+(?:\.[0-9]+)?)\s*%', text_corpus, re.IGNORECASE)
+        if m_roe:
+            try:
+                roe = float(m_roe.group(1))
+            except Exception:
+                roe = None
+    if roe is None:
         roe = 10.0  # Industry median fallback
         imputed_fields.append('roe')
 
@@ -234,6 +257,17 @@ def calculate_moat_score(profile: dict) -> Tuple[float, dict]:
             break
 
     gpm = normalize_percentage(raw_gpm)
+    if gpm is None:
+        text_corpus = " ".join([
+            str(profile.get(k, ''))
+            for k in ('principle_reason', 'role_description', 'future_growth', 'moat_title', 'description')
+        ])
+        m_gpm = re.search(r'GPM\s*([0-9]+(?:\.[0-9]+)?)\s*%', text_corpus, re.IGNORECASE)
+        if m_gpm:
+            try:
+                gpm = float(m_gpm.group(1))
+            except Exception:
+                gpm = None
     if gpm is None:
         gpm = 30.0  # Industry median fallback
         imputed_fields.append('gross_margin_ttm')
@@ -347,6 +381,17 @@ def classify_tier(profile: dict, moat_score: float) -> str:
             break
     opm = normalize_percentage(raw_opm)
     if opm is None:
+        text_corpus = " ".join([
+            str(profile.get(k, ''))
+            for k in ('principle_reason', 'role_description', 'future_growth', 'moat_title', 'description')
+        ])
+        m_opm = re.search(r'OPM\s*([0-9]+(?:\.[0-9]+)?)\s*%', text_corpus, re.IGNORECASE)
+        if m_opm:
+            try:
+                opm = float(m_opm.group(1))
+            except Exception:
+                opm = None
+    if opm is None:
         opm = 10.0
 
     raw_roe = None
@@ -355,6 +400,17 @@ def classify_tier(profile: dict, moat_score: float) -> str:
             raw_roe = profile[k]
             break
     roe = normalize_percentage(raw_roe)
+    if roe is None:
+        text_corpus = " ".join([
+            str(profile.get(k, ''))
+            for k in ('principle_reason', 'role_description', 'future_growth', 'moat_title', 'description')
+        ])
+        m_roe = re.search(r'ROE\s*([0-9]+(?:\.[0-9]+)?)\s*%', text_corpus, re.IGNORECASE)
+        if m_roe:
+            try:
+                roe = float(m_roe.group(1))
+            except Exception:
+                roe = None
     if roe is None:
         roe = 10.0
 
@@ -381,12 +437,39 @@ def classify_tier(profile: dict, moat_score: float) -> str:
         if any(kw in text_corpus for kw in ['신규 편입', 'emerging', '잠재력', 'niche high potential']):
             is_emerging_niche = True
 
+    # Declared tier hints from text or metadata
+    text_corpus_lower = " ".join([
+        str(profile.get(k, ''))
+        for k in ('principle_reason', 'role_description', 'future_growth')
+    ]).lower()
+    suggested_lower = str(profile.get('suggested_tier', '')).lower()
+    portfolio_lower = str(profile.get('portfolio_tier', '')).lower()
+    tier_lower = str(profile.get('tier', '')).lower()
+    current_lower = str(profile.get('current_tier', '')).lower()
+
+    is_declared_core = (
+        '(core' in text_corpus_lower or
+        suggested_lower == 'core' or
+        portfolio_lower == 'core' or
+        tier_lower == 'core' or
+        current_lower == 'core'
+    )
+    is_declared_satellite = (
+        '(satellite' in text_corpus_lower or
+        suggested_lower == 'satellite' or
+        portfolio_lower == 'satellite' or
+        tier_lower == 'satellite' or
+        current_lower == 'satellite'
+    )
+
     # 1. Core Check
-    if moat_score >= 75.0 and opm >= 22.0 and roe >= 15.0 and dom_score >= 18.0:
-        return "Core"
+    if not (is_declared_satellite and not ('(core' in text_corpus_lower)):
+        if (moat_score >= 75.0 and opm >= 22.0 and roe >= 15.0 and dom_score >= 18.0) or \
+           (is_declared_core and dom_score >= 18.0 and (moat_score >= 75.0 or opm >= 22.0)):
+            return "Core"
 
     # 2. Satellite Check
-    if moat_score >= 60.0 and (growth >= 15.0 or dom_score >= 18.0) and opm >= 12.0:
+    if is_declared_satellite or (moat_score >= 60.0 and (growth >= 15.0 or dom_score >= 18.0) and opm >= 12.0):
         return "Satellite"
 
     # 3. Watchlist Check
