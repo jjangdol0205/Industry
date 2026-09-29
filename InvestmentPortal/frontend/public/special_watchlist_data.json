@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "updated_at": "2026-09-29T17:25:17.916546+09:00",
+  "updated_at": "2026-09-29T17:47:33.249546+09:00",
   "stocks": [
     {
       "id": 1,
@@ -52,7 +52,7 @@
         "portfolio_tier": "Standard",
         "buy_signal": "WAIT (일반 관망 MDD -32.7%)",
         "dca_stage": "STD_WAIT",
-        "last_updated": "2026-09-29 17:25:17"
+        "last_updated": "2026-09-29 17:47:33"
       },
       "timeline": [
         {
@@ -124,7 +124,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-29 17:25:17"
+      "updated_at": "2026-09-29 17:47:33"
     },
     {
       "id": 2,
@@ -176,7 +176,7 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -77.6%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-09-29 17:25:17"
+        "last_updated": "2026-09-29 17:47:33"
       },
       "timeline": [
         {
@@ -248,7 +248,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-29 17:25:17"
+      "updated_at": "2026-09-29 17:47:33"
     },
     {
       "id": 3,
@@ -300,7 +300,7 @@
         "portfolio_tier": "Satellite",
         "buy_signal": "BUY_READY (2차 분할매수 MDD -50.7%)",
         "dca_stage": "SAT_DCA_2",
-        "last_updated": "2026-09-29 17:25:17"
+        "last_updated": "2026-09-29 17:47:33"
       },
       "timeline": [
         {
@@ -372,7 +372,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-29 17:25:17"
+      "updated_at": "2026-09-29 17:47:33"
     },
     {
       "id": 4,
@@ -424,7 +424,7 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -60.3%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-09-29 17:25:17"
+        "last_updated": "2026-09-29 17:47:33"
       },
       "timeline": [
         {
@@ -496,7 +496,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-29 17:25:17"
+      "updated_at": "2026-09-29 17:47:33"
     },
     {
       "id": 5,
@@ -548,7 +548,7 @@
         "portfolio_tier": "Satellite",
         "buy_signal": "BUY_READY (1차 분할매수 MDD -28.3%)",
         "dca_stage": "SAT_DCA_1",
-        "last_updated": "2026-09-29 17:25:17"
+        "last_updated": "2026-09-29 17:47:33"
       },
       "timeline": [
         {
@@ -620,7 +620,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-29 17:25:17"
+      "updated_at": "2026-09-29 17:47:33"
     },
     {
       "id": 6,
@@ -672,7 +672,7 @@
         "portfolio_tier": "Core",
         "buy_signal": "BUY_READY (2차 분할매수 MDD -48.9%)",
         "dca_stage": "CORE_DCA_2",
-        "last_updated": "2026-09-29 17:25:17"
+        "last_updated": "2026-09-29 17:47:33"
       },
       "timeline": [
         {
@@ -744,7 +744,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-29 17:25:17"
+      "updated_at": "2026-09-29 17:47:33"
     },
     {
       "id": 7,
@@ -796,7 +796,7 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -58.1%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-09-29 17:25:17"
+        "last_updated": "2026-09-29 17:47:33"
       },
       "timeline": [
         {
@@ -868,7 +868,7 @@
           "created_at": "2026-09-29 17:05:50"
         }
       ],
-      "updated_at": "2026-09-29 17:25:17"
+      "updated_at": "2026-09-29 17:47:33"
     },
     {
       "id": 8,
@@ -920,7 +920,7 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -58.0%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-09-29 17:25:17"
+        "last_updated": "2026-09-29 17:47:33"
       },
       "timeline": [
         {
@@ -992,7 +992,7 @@
           "created_at": "2026-09-29 17:05:50"
         }
       ],
-      "updated_at": "2026-09-29 17:25:17"
+      "updated_at": "2026-09-29 17:47:33"
     }
   ]
 }

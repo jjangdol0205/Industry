@@ -9,7 +9,7 @@ import {
   PieChart, Pie, Cell, Tooltip
 } from 'recharts';
 import { 
-  TrendingUp, Database, FileText, ArrowLeft, Activity, DollarSign, Target,
+  TrendingUp, Database, FileText, ArrowLeft, ArrowRight, ChevronLeft, Activity, DollarSign, Target,
   BookOpen, BarChart2, BarChart3, Shield, Zap, RefreshCw, ExternalLink, Users, Globe,
   FolderOpen, ChevronDown, ChevronRight, Package, Layers, AlertTriangle, Star
 } from 'lucide-react';
@@ -2179,17 +2179,17 @@ function SpecialWatchlistView({ onSelectCompany }) {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [refreshStatus, setRefreshStatus] = useState('');
+  const [selectedTicker, setSelectedTicker] = useState('ALL');
   const [expandedTimelines, setExpandedTimelines] = useState({
     UBER: true,
-    FLNC: false,
-    MBLY: false,
-    UPST: false,
-    TSLA: false,
-    '402340.KS': false,
-    ENPH: false,
-    CELH: false,
+    FLNC: true,
+    MBLY: true,
+    UPST: true,
+    TSLA: true,
+    '402340.KS': true,
+    ENPH: true,
+    CELH: true,
   });
-  const [sentimentFilter, setSentimentFilter] = useState('ALL');
   const [mediaFilter, setMediaFilter] = useState('ALL'); // 'ALL' | 'NEWS' | 'YOUTUBE'
   const [searchQuery, setSearchQuery] = useState('');
   const [toast, setToast] = useState(null);
@@ -2264,8 +2264,58 @@ function SpecialWatchlistView({ onSelectCompany }) {
     setExpandedTimelines(prev => ({ ...prev, [ticker]: !prev[ticker] }));
   };
 
+  // 8개 종목 네비게이션 탭 정의
+  const COMPANY_TABS = [
+    { ticker: 'ALL', name_ko: '전체 8선', icon: '🌐', tag: '통합 비교' },
+    { ticker: 'UBER', name_ko: '우버', icon: '🚗', tag: '로보택시' },
+    { ticker: 'FLNC', name_ko: '플루언스', icon: '⚡', tag: 'BESS' },
+    { ticker: 'MBLY', name_ko: '모빌아이', icon: '👁️', tag: 'EyeQ6H' },
+    { ticker: 'UPST', name_ko: '업스타트', icon: '🤖', tag: 'AI대출' },
+    { ticker: 'TSLA', name_ko: '테슬라', icon: '🚀', tag: '사이버캡' },
+    { ticker: '402340.KS', name_ko: 'SK스퀘어', icon: '💎', tag: 'HBM지분' },
+    { ticker: 'ENPH', name_ko: '엔페이즈', icon: '☀️', tag: 'GaN인버터' },
+    { ticker: 'CELH', name_ko: '셀시우스', icon: '🥤', tag: '펩시DSD' },
+  ];
+
+  const handleSelectCompanyTab = (ticker) => {
+    setSelectedTicker(ticker);
+    if (ticker !== 'ALL') {
+      setExpandedTimelines(prev => ({ ...prev, [ticker]: true }));
+    }
+  };
+
+  // 포커스 모드 시 이전/다음 기업 이동
+  const tickerList = ['UBER', 'FLNC', 'MBLY', 'UPST', 'TSLA', '402340.KS', 'ENPH', 'CELH'];
+  const currentIndex = tickerList.indexOf(selectedTicker);
+  const handlePrevCompany = () => {
+    if (currentIndex <= 0) {
+      handleSelectCompanyTab(tickerList[tickerList.length - 1]);
+    } else {
+      handleSelectCompanyTab(tickerList[currentIndex - 1]);
+    }
+  };
+  const handleNextCompany = () => {
+    if (currentIndex < 0 || currentIndex >= tickerList.length - 1) {
+      handleSelectCompanyTab(tickerList[0]);
+    } else {
+      handleSelectCompanyTab(tickerList[currentIndex + 1]);
+    }
+  };
+
+  // 전체 집계 카운트 (외신 vs 유튜브)
+  const totalTimelineCount = stocks.reduce((acc, s) => acc + (s.timeline?.length || 0), 0);
+  const totalNewsCount = stocks.reduce((acc, s) => acc + (s.timeline || []).filter(item => {
+    const isYt = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
+    return !isYt;
+  }).length, 0);
+  const totalYoutubeCount = stocks.reduce((acc, s) => acc + (s.timeline || []).filter(item => {
+    const isYt = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
+    return isYt;
+  }).length, 0);
+
   // Filter stocks
-  const filteredStocks = stocks.filter(stock => {
+  const displayedStocks = stocks.filter(stock => {
+    if (selectedTicker !== 'ALL' && stock.ticker !== selectedTicker) return false;
     if (searchQuery.trim() !== '') {
       const q = searchQuery.toLowerCase();
       const matchText = `${stock.name || ''} ${stock.name_ko || ''} ${stock.ticker || ''} ${stock.sector || ''} ${stock.business_model || ''} ${stock.moat_analysis || ''} ${stock.key_risks || ''}`.toLowerCase();
@@ -2290,7 +2340,7 @@ function SpecialWatchlistView({ onSelectCompany }) {
       )}
 
       {/* ── Page Header ── */}
-      <div className="page-header" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '24px', marginBottom: '28px' }}>
+      <div className="page-header" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '24px', marginBottom: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
@@ -2332,51 +2382,180 @@ function SpecialWatchlistView({ onSelectCompany }) {
         </div>
       </div>
 
-      {/* ── Search & Filter Controls ── */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '14px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-          {/* Media Type Filter Tabs */}
-          <div style={{ display: 'flex', gap: '4px', background: 'rgba(0,0,0,0.35)', padding: '3px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.08)' }}>
+      {/* ── 1. Company Navigation Selector Bar (각 기업별 전용 버튼 탭) ── */}
+      <div style={{
+        background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.12)',
+        borderRadius: '16px', padding: '16px 20px', marginBottom: '22px',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '0.92rem', fontWeight: 800, color: '#fde68a' }}>🎯 기업별 원클릭 심층 바로가기</span>
+            <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+              버튼을 클릭하면 해당 기업의 독점 해자·재무·외신·유튜브 영상이 즉시 집중 분석됩니다.
+            </span>
+          </div>
+          {selectedTicker !== 'ALL' && (
+            <button
+              onClick={() => handleSelectCompanyTab('ALL')}
+              style={{
+                background: 'rgba(59, 130, 246, 0.15)', border: '1px solid rgba(59, 130, 246, 0.35)',
+                color: '#93c5fd', padding: '4px 12px', borderRadius: '8px', fontSize: '0.78rem',
+                cursor: 'pointer', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px'
+              }}
+            >
+              <span>🌐 8선 전체 비교보기로 전환</span>
+            </button>
+          )}
+        </div>
+
+        {/* Company Tab Buttons List */}
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
+          {COMPANY_TABS.map(tab => {
+            const isSelected = selectedTicker === tab.ticker;
+            const stockObj = stocks.find(s => s.ticker === tab.ticker);
+            const mdd = stockObj?.mdd_pct;
+            const priceStr = stockObj ? fDollar(stockObj.current_price, stockObj.ticker) : '';
+
+            return (
+              <button
+                key={tab.ticker}
+                onClick={() => handleSelectCompanyTab(tab.ticker)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '8px',
+                  padding: '10px 14px', borderRadius: '12px', cursor: 'pointer',
+                  background: isSelected
+                    ? 'linear-gradient(135deg, rgba(245, 158, 11, 0.3) 0%, rgba(59, 130, 246, 0.3) 100%)'
+                    : 'rgba(255, 255, 255, 0.04)',
+                  border: isSelected ? '1.5px solid #f59e0b' : '1px solid rgba(255, 255, 255, 0.1)',
+                  color: isSelected ? '#ffffff' : 'var(--text-secondary)',
+                  boxShadow: isSelected ? '0 0 16px rgba(245, 158, 11, 0.3)' : 'none',
+                  transition: 'all 0.15s ease',
+                  flex: '0 0 auto'
+                }}
+              >
+                <span style={{ fontSize: '1.2rem' }}>{tab.icon}</span>
+                <div style={{ textAlign: 'left', lineHeight: '1.25' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <span style={{ fontSize: '0.88rem', fontWeight: isSelected ? 800 : 700, color: isSelected ? '#ffffff' : 'var(--text-primary)' }}>
+                      {tab.name_ko}
+                    </span>
+                    {tab.ticker !== 'ALL' && (
+                      <span style={{ fontSize: '0.72rem', color: isSelected ? '#93c5fd' : 'rgba(255,255,255,0.45)', fontWeight: 600 }}>
+                        {tab.ticker}
+                      </span>
+                    )}
+                  </div>
+                  {tab.ticker !== 'ALL' && stockObj && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px', fontSize: '0.72rem' }}>
+                      <span style={{ color: 'rgba(255,255,255,0.75)', fontWeight: 600 }}>{priceStr}</span>
+                      {mdd != null && (
+                        <span style={{ color: mdd <= -25 ? '#34d399' : '#f87171', fontWeight: 700 }}>
+                          ({mdd.toFixed(1)}%)
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  {tab.ticker === 'ALL' && (
+                    <div style={{ fontSize: '0.7rem', color: isSelected ? '#fde68a' : 'rgba(255,255,255,0.45)', marginTop: '2px' }}>
+                      {stocks.length}개 종목 종합
+                    </div>
+                  )}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── 2. Focused Company Sub-Bar (단독 집중 모드 시 이전/다음 탐색) ── */}
+      {selectedTicker !== 'ALL' && (
+        <div style={{
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          background: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: '12px', padding: '10px 18px', marginBottom: '20px'
+        }}>
+          <button
+            onClick={() => handleSelectCompanyTab('ALL')}
+            style={{
+              background: 'transparent', border: 'none', color: '#60a5fa',
+              display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer',
+              fontSize: '0.85rem', fontWeight: 700
+            }}
+          >
+            <ArrowLeft size={16} />
+            <span>8선 전체 보기로 돌아가기</span>
+          </button>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              기업 이동 ({currentIndex + 1} / {tickerList.length}):
+            </span>
+            <button
+              onClick={handlePrevCompany}
+              style={{
+                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
+                color: 'white', padding: '5px 12px', borderRadius: '8px', fontSize: '0.8rem',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600
+              }}
+            >
+              <ChevronLeft size={14} />
+              <span>이전 기업</span>
+            </button>
+            <button
+              onClick={handleNextCompany}
+              style={{
+                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
+                color: 'white', padding: '5px 12px', borderRadius: '8px', fontSize: '0.8rem',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600
+              }}
+            >
+              <span>다음 기업</span>
+              <ChevronRight size={14} />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── 3. Media Filter & Search Bar ── */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '22px', flexWrap: 'wrap', gap: '14px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-secondary)', marginRight: '4px' }}>
+            콘텐츠 필터:
+          </span>
+          <div style={{ display: 'flex', gap: '4px', background: 'rgba(0,0,0,0.4)', padding: '3px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)' }}>
             {[
-              { id: 'ALL', label: '전체 (All)', icon: '🌐' },
-              { id: 'NEWS', label: '외신 뉴스', icon: '📰' },
-              { id: 'YOUTUBE', label: '유튜브 인사이트', icon: '🎥' },
+              { id: 'ALL', label: `전체 타임라인 (${totalTimelineCount}건)`, icon: '🌐' },
+              { id: 'NEWS', label: `📰 외신 뉴스 (${totalNewsCount}건)`, icon: '' },
+              { id: 'YOUTUBE', label: `🎥 유튜브 영상 & 인사이트 (${totalYoutubeCount}건)`, icon: '' },
             ].map(m => (
               <button
                 key={m.id}
-                onClick={() => setMediaFilter(m.id)}
+                onClick={() => {
+                  setMediaFilter(m.id);
+                  // Ensure all timelines open so user immediately sees results!
+                  setExpandedTimelines(prev => {
+                    const next = { ...prev };
+                    stocks.forEach(s => { next[s.ticker] = true; });
+                    return next;
+                  });
+                }}
                 style={{
-                  padding: '6px 14px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer',
-                  background: mediaFilter === m.id ? (m.id === 'YOUTUBE' ? 'rgba(239, 68, 68, 0.25)' : 'rgba(59, 130, 246, 0.25)') : 'transparent',
-                  color: mediaFilter === m.id ? (m.id === 'YOUTUBE' ? '#fca5a5' : '#60a5fa') : 'var(--text-secondary)',
-                  border: mediaFilter === m.id ? (m.id === 'YOUTUBE' ? '1px solid #ef4444' : '1px solid #3b82f6') : '1px solid transparent',
+                  padding: '7px 14px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer',
+                  background: mediaFilter === m.id
+                    ? (m.id === 'YOUTUBE' ? 'rgba(239, 68, 68, 0.28)' : 'rgba(59, 130, 246, 0.28)')
+                    : 'transparent',
+                  color: mediaFilter === m.id
+                    ? (m.id === 'YOUTUBE' ? '#fca5a5' : '#93c5fd')
+                    : 'var(--text-secondary)',
+                  border: mediaFilter === m.id
+                    ? (m.id === 'YOUTUBE' ? '1px solid #ef4444' : '1px solid #3b82f6')
+                    : '1px solid transparent',
+                  boxShadow: mediaFilter === m.id ? '0 0 12px rgba(59, 130, 246, 0.2)' : 'none',
                   transition: 'all 0.15s'
                 }}
               >
                 {m.icon} {m.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Sentiment Filter Buttons */}
-          <div style={{ display: 'flex', gap: '6px' }}>
-            {[
-              { id: 'ALL', label: '전체 센티먼트' },
-              { id: 'POSITIVE', label: '🟢 호재 뉴스' },
-              { id: 'NEGATIVE', label: '🔴 리스크/악재' },
-              { id: 'NEUTRAL', label: '⚪ 중립 분석' },
-            ].map(f => (
-              <button
-                key={f.id}
-                onClick={() => setSentimentFilter(f.id)}
-                style={{
-                  padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer',
-                  background: sentimentFilter === f.id ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255,255,255,0.04)',
-                  color: sentimentFilter === f.id ? '#60a5fa' : 'var(--text-secondary)',
-                  border: sentimentFilter === f.id ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.08)'
-                }}
-              >
-                {f.label}
               </button>
             ))}
           </div>
@@ -2388,27 +2567,42 @@ function SpecialWatchlistView({ onSelectCompany }) {
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
           style={{
-            padding: '8px 14px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.15)',
-            background: 'rgba(15,23,42,0.6)', color: 'white', fontSize: '0.85rem', width: '280px', outline: 'none'
+            padding: '9px 16px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.15)',
+            background: 'rgba(15,23,42,0.7)', color: 'white', fontSize: '0.85rem', width: '280px', outline: 'none'
           }}
         />
       </div>
 
-      {/* ── Stock Cards Grid ── */}
+      {/* ── 4. Stock Cards Grid ── */}
       {loading ? (
         <div className="glass-panel" style={{ padding: '60px', textAlign: 'center', color: 'var(--text-secondary)' }}>
           <RefreshCw size={32} style={{ animation: 'spin 1s linear infinite', margin: '0 auto 16px', display: 'block', color: 'var(--accent-blue)' }} />
           특별 관심종목 심층 스터디 데이터를 로드 중입니다...
         </div>
+      ) : displayedStocks.length === 0 ? (
+        <div className="glass-panel" style={{ padding: '50px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+          선택한 검색 조건에 일치하는 종목이 없습니다.
+        </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-          {filteredStocks.map(stock => {
+          {displayedStocks.map(stock => {
             const isTimelineOpen = !!expandedTimelines[stock.ticker];
-            const timelineList = (stock.timeline || []).filter(item => {
+            const stockTimeline = stock.timeline || [];
+            
+            // Sub-counts for this stock
+            const stockNewsCount = stockTimeline.filter(item => {
+              const isYt = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
+              return !isYt;
+            }).length;
+            const stockYoutubeCount = stockTimeline.filter(item => {
+              const isYt = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
+              return isYt;
+            }).length;
+
+            const timelineList = stockTimeline.filter(item => {
               const isYouTube = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
               if (mediaFilter === 'NEWS' && isYouTube) return false;
               if (mediaFilter === 'YOUTUBE' && !isYouTube) return false;
-              if (sentimentFilter !== 'ALL' && item.sentiment !== sentimentFilter) return false;
               return true;
             });
 
@@ -2425,14 +2619,14 @@ function SpecialWatchlistView({ onSelectCompany }) {
                 {/* 1. Card Top: Identity, Badges, Price/MDD */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '20px' }}>
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', flexWrap: 'wrap' }}>
                       <span 
-                        style={{ fontSize: '1.4rem', fontWeight: 800, color: 'white', cursor: onSelectCompany ? 'pointer' : 'default' }}
+                        style={{ fontSize: '1.45rem', fontWeight: 800, color: 'white', cursor: onSelectCompany ? 'pointer' : 'default' }}
                         onClick={() => onSelectCompany && onSelectCompany(stock.id, stock)}
                       >
                         {stock.name_ko}
                       </span>
-                      <span style={{ fontSize: '1rem', color: '#60a5fa', fontWeight: 700 }}>{stock.ticker}</span>
+                      <span style={{ fontSize: '1.05rem', color: '#60a5fa', fontWeight: 800 }}>{stock.ticker}</span>
                       <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', background: 'rgba(255,255,255,0.06)', padding: '2px 8px', borderRadius: '6px' }}>
                         {stock.exchange || (isKrw(stock.ticker) ? 'KRX' : 'NASDAQ')}
                       </span>
@@ -2443,21 +2637,37 @@ function SpecialWatchlistView({ onSelectCompany }) {
                       }}>
                         {stock.portfolio_tier}
                       </span>
+
+                      {/* 단독 심층분석 모드 전환 버튼 (전체 보기일 때) */}
+                      {selectedTicker === 'ALL' && (
+                        <button
+                          onClick={() => handleSelectCompanyTab(stock.ticker)}
+                          style={{
+                            background: 'rgba(245, 158, 11, 0.15)', border: '1px solid rgba(245, 158, 11, 0.35)',
+                            color: '#fde68a', borderRadius: '8px', padding: '3px 10px', fontSize: '0.76rem',
+                            cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 700
+                          }}
+                        >
+                          <span>🔍 이 기업 단독 집중보기</span>
+                          <ArrowRight size={12} />
+                        </button>
+                      )}
+
                       {onSelectCompany && (
                         <button
                           onClick={() => onSelectCompany(stock.id, stock)}
                           style={{
                             background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)',
-                            color: '#60a5fa', borderRadius: '6px', padding: '2px 8px', fontSize: '0.75rem',
+                            color: '#60a5fa', borderRadius: '6px', padding: '3px 8px', fontSize: '0.75rem',
                             cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px'
                           }}
                         >
-                          <span>기업 상세</span>
+                          <span>리서치 포털 이동</span>
                           <ExternalLink size={11} />
                         </button>
                       )}
                     </div>
-                    <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+                    <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)' }}>
                       {stock.name} · {stock.sector}
                     </div>
                   </div>
@@ -2542,23 +2752,71 @@ function SpecialWatchlistView({ onSelectCompany }) {
                   </div>
                 </div>
 
-                {/* 3. Interactive Expandable Timeline Section */}
-                <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '16px' }}>
+                {/* 3. Interactive Expandable Timeline Section with In-Place Filters */}
+                <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '18px' }}>
                   <div
                     onClick={() => toggleTimeline(stock.ticker)}
                     style={{
                       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                      padding: '10px 16px', borderRadius: '10px', background: 'rgba(59, 130, 246, 0.08)',
-                      cursor: 'pointer', transition: 'all 0.2s', border: '1px solid rgba(59, 130, 246, 0.2)'
+                      padding: '12px 18px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.08)',
+                      cursor: 'pointer', transition: 'all 0.2s', border: '1px solid rgba(59, 130, 246, 0.2)',
+                      flexWrap: 'wrap', gap: '10px'
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#60a5fa', fontWeight: 700, fontSize: '0.9rem' }}>
-                      <Activity size={16} />
-                      <span>시계열 외신 리포트 & 유튜브 인사이트 ({timelineList.length}건 누적)</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#60a5fa', fontWeight: 800, fontSize: '0.92rem' }}>
+                      <Activity size={18} />
+                      <span>{stock.name_ko} 시계열 외신 리포트 & 유튜브 인사이트 ({stockTimeline.length}건 누적)</span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-secondary)', fontSize: '0.82rem' }}>
-                      <span>{isTimelineOpen ? '접기' : '펼쳐보기'}</span>
-                      {isTimelineOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+
+                    {/* Inline Filter Controls inside Timeline Header */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} onClick={e => e.stopPropagation()}>
+                      <button
+                        onClick={() => {
+                          setMediaFilter('ALL');
+                          setExpandedTimelines(prev => ({ ...prev, [stock.ticker]: true }));
+                        }}
+                        style={{
+                          padding: '4px 10px', borderRadius: '6px', fontSize: '0.74rem', fontWeight: 700, cursor: 'pointer',
+                          background: mediaFilter === 'ALL' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(255,255,255,0.05)',
+                          color: mediaFilter === 'ALL' ? '#93c5fd' : 'var(--text-secondary)',
+                          border: mediaFilter === 'ALL' ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.1)'
+                        }}
+                      >
+                        전체 ({stockTimeline.length})
+                      </button>
+                      <button
+                        onClick={() => {
+                          setMediaFilter('NEWS');
+                          setExpandedTimelines(prev => ({ ...prev, [stock.ticker]: true }));
+                        }}
+                        style={{
+                          padding: '4px 10px', borderRadius: '6px', fontSize: '0.74rem', fontWeight: 700, cursor: 'pointer',
+                          background: mediaFilter === 'NEWS' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(255,255,255,0.05)',
+                          color: mediaFilter === 'NEWS' ? '#60a5fa' : 'var(--text-secondary)',
+                          border: mediaFilter === 'NEWS' ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.1)'
+                        }}
+                      >
+                        📰 외신 ({stockNewsCount})
+                      </button>
+                      <button
+                        onClick={() => {
+                          setMediaFilter('YOUTUBE');
+                          setExpandedTimelines(prev => ({ ...prev, [stock.ticker]: true }));
+                        }}
+                        style={{
+                          padding: '4px 10px', borderRadius: '6px', fontSize: '0.74rem', fontWeight: 700, cursor: 'pointer',
+                          background: mediaFilter === 'YOUTUBE' ? 'rgba(239, 68, 68, 0.3)' : 'rgba(255,255,255,0.05)',
+                          color: mediaFilter === 'YOUTUBE' ? '#fca5a5' : 'var(--text-secondary)',
+                          border: mediaFilter === 'YOUTUBE' ? '1px solid #ef4444' : '1px solid rgba(255,255,255,0.1)'
+                        }}
+                      >
+                        🎥 유튜브 ({stockYoutubeCount})
+                      </button>
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginLeft: '6px', color: 'var(--text-secondary)', fontSize: '0.8rem' }} onClick={() => toggleTimeline(stock.ticker)}>
+                        <span>{isTimelineOpen ? '접기' : '펼쳐보기'}</span>
+                        {isTimelineOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                      </div>
                     </div>
                   </div>
 
@@ -2566,8 +2824,13 @@ function SpecialWatchlistView({ onSelectCompany }) {
                   {isTimelineOpen && (
                     <div style={{ marginTop: '16px', paddingLeft: '12px', borderLeft: '2px dashed rgba(59, 130, 246, 0.3)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                       {timelineList.length === 0 ? (
-                        <div style={{ padding: '16px', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                          선택한 필터 조건에 부합하는 타임라인 항목이 없습니다.
+                        <div style={{
+                          padding: '24px', textAlign: 'center', background: 'rgba(0,0,0,0.2)',
+                          borderRadius: '10px', color: 'var(--text-secondary)', fontSize: '0.88rem'
+                        }}>
+                          {mediaFilter === 'YOUTUBE' ? '🎥 해당 종목의 유튜브 분석 영상 항목이 없습니다.' :
+                           mediaFilter === 'NEWS' ? '📰 해당 종목의 외신 뉴스 리포트 항목이 없습니다.' :
+                           '선택한 필터 조건에 부합하는 타임라인 항목이 없습니다.'}
                         </div>
                       ) : (
                         timelineList.map((item, idx) => {
@@ -2579,11 +2842,11 @@ function SpecialWatchlistView({ onSelectCompany }) {
                             <div
                               key={item.news_id || idx}
                               style={{
-                                background: isYouTube ? 'linear-gradient(145deg, rgba(239,68,68,0.06), rgba(15,23,42,0.85))' : 'rgba(15,23,42,0.6)',
+                                background: isYouTube ? 'linear-gradient(145deg, rgba(239,68,68,0.07), rgba(15,23,42,0.9))' : 'rgba(15,23,42,0.65)',
                                 padding: '18px 22px', borderRadius: '12px',
-                                border: isYouTube ? '1px solid rgba(239, 68, 68, 0.25)' : '1px solid rgba(255,255,255,0.06)',
+                                border: isYouTube ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid rgba(255,255,255,0.07)',
                                 position: 'relative',
-                                boxShadow: isYouTube ? '0 4px 16px rgba(239, 68, 68, 0.08)' : 'none'
+                                boxShadow: isYouTube ? '0 4px 16px rgba(239, 68, 68, 0.1)' : 'none'
                               }}
                             >
                               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', marginBottom: '10px', flexWrap: 'wrap' }}>
@@ -2610,10 +2873,10 @@ function SpecialWatchlistView({ onSelectCompany }) {
                                     rel="noreferrer"
                                     style={{
                                       display: 'inline-flex', alignItems: 'center', gap: '4px',
-                                      padding: '3px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700,
-                                      background: isYouTube ? 'rgba(239,68,68,0.18)' : 'rgba(59,130,246,0.15)',
+                                      padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700,
+                                      background: isYouTube ? 'rgba(239,68,68,0.22)' : 'rgba(59,130,246,0.18)',
                                       color: isYouTube ? '#fca5a5' : '#93c5fd',
-                                      border: isYouTube ? '1px solid rgba(239,68,68,0.35)' : '1px solid rgba(59,130,246,0.3)',
+                                      border: isYouTube ? '1px solid rgba(239,68,68,0.4)' : '1px solid rgba(59,130,246,0.35)',
                                       textDecoration: 'none', transition: 'all 0.15s'
                                     }}
                                   >
@@ -2627,14 +2890,14 @@ function SpecialWatchlistView({ onSelectCompany }) {
                                 {item.headline}
                               </h4>
 
-                              <p style={{ margin: '0 0 12px 0', fontSize: '0.86rem', color: 'rgba(255,255,255,0.85)', lineHeight: '1.65' }}>
+                              <p style={{ margin: '0 0 12px 0', fontSize: '0.86rem', color: 'rgba(255,255,255,0.88)', lineHeight: '1.65' }}>
                                 {item.summary}
                               </p>
 
                               {(item.key_takeaways || item.takeaways) && (
                                 <div style={{
-                                  background: isYouTube ? 'rgba(245, 158, 11, 0.08)' : 'rgba(255,255,255,0.03)',
-                                  border: isYouTube ? '1px solid rgba(245, 158, 11, 0.25)' : 'none',
+                                  background: isYouTube ? 'rgba(245, 158, 11, 0.09)' : 'rgba(255,255,255,0.03)',
+                                  border: isYouTube ? '1px solid rgba(245, 158, 11, 0.28)' : 'none',
                                   padding: '12px 16px', borderRadius: '8px', marginBottom: '10px',
                                   fontSize: '0.82rem', color: isYouTube ? '#fde68a' : '#a5b4fc', lineHeight: '1.6', whiteSpace: 'pre-line'
                                 }}>
