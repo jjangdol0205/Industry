@@ -695,6 +695,114 @@ SEED_TIMELINE_EVENTS = [
         "sentiment_score": 0.89,
         "price_impact": "출하량과 소비량 간의 단기 미스매치로 빚어진 과매도(MDD -58%)는 장기 투자자에게 과거 몬스터 음료 초기 성장기와 맞먹는 절호의 진입 기회 제공.",
         "url": "https://www.youtube.com/watch?v=CelsiusPepsiCoInventoryDeepDive2026"
+    },
+
+    # ==========================================================================
+    # Global Top-Tier IB Research Reports (Goldman Sachs & Morgan Stanley)
+    # ==========================================================================
+    # UBER - Goldman Sachs Research
+    {
+        "ticker": "UBER",
+        "publish_date": "2026-09-23",
+        "headline": "[글로벌 IB 리포트] 골드만삭스: 자율주행 모빌리티의 승자는 차량 제조사가 아닌 '로보택시 마켓플레이스' 우버 - 투자의견 Buy & 목표가 $85 유지",
+        "source": "Goldman Sachs Research",
+        "summary": "골드만삭스 모빌리티/테크 리서치팀(Mark Delaney)의 자율주행 로보택시 산업 심층 보고서. 2035년까지 글로벌 로보택시 시장이 4,150억 달러로 성장하고 600만 대의 무인 차량이 배치되는 과정에서, 승객 수요 밀도와 배차 유동성을 독점한 우버가 웨이모/크루즈 등 제조사들을 플랫폼에 통합하며 30~50%의 고마진 테이크레이트를 수취하는 '로보택시 마켓플레이스' 독점 지위를 공고히 할 것으로 분석했습니다.",
+        "key_takeaways": "• 🎯 투자의견 & 목표가: Buy (목표주가 $85, 상승여력 +25%)\n• 📊 Bull / Base / Bear 시나리오: Bull $110 (웨이모 외 복수 파트너 전국 확대 및 광고 비중 5%) / Base $85 (연간 FCF $6B+ 안착) / Bear $52 (각국 긱노동 규제 강화 및 자체 네트워크 OEM 출현)\n• 💡 핵심 투자 논점: 자율주행 시대에도 핵심 병목은 '하드웨어 제조'가 아닌 '수요-공급 매칭 플랫폼 밀도'이며, 우버의 1.5억 명 활성 이용자가 로보택시 함대의 유휴시간을 최소화하는 유일한 열쇠",
+        "sentiment": "POSITIVE",
+        "sentiment_score": 0.92,
+        "price_impact": "로보택시 기술 진보가 우버를 도태시키는 것이 아니라 고마진 소프트웨어 플랫폼으로 진화시키는 기폭제임을 확인. $65~$70 구간 강력 분할매수 추천.",
+        "url": "https://www.goldmansachs.com/insights/goldman-sachs-research?hl=ko-KR"
+    },
+    # FLNC - Goldman Sachs Research
+    {
+        "ticker": "FLNC",
+        "publish_date": "2026-09-25",
+        "headline": "[글로벌 IB 리포트] 골드만삭스: AI 데이터센터 전력 수요 175% 폭증과 전력망 안정성의 필수재 BESS - 투자의견 Buy & 목표가 $28 제시",
+        "source": "Goldman Sachs Research",
+        "summary": "골드만삭스 글로벌 클린테크 및 유틸리티 리서치팀의 AI 전력 인프라 특별 보고서. 2030년까지 글로벌 데이터센터 전력 수요가 175% 급증하고 미국 전력 수요 순증의 40%를 차지하는 가운데, AI 고부하 연산의 불규칙한 피크 전력 스파이크를 흡수하기 위한 필수 솔루션으로 '온사이트 BESS(배터리 에너지 저장 시스템)'가 전력망 운영사들의 필수 규격으로 채택되고 있음을 분석했습니다.",
+        "key_takeaways": "• 🎯 투자의견 & 목표가: Buy (목표주가 $28, 상승여력 +100%+)\n• 📊 Bull / Base / Bear 시나리오: Bull $38 (하이퍼스케일러 BESS 표준 채택 가속 및 수주잔고 $6B 돌파) / Base $28 (GAAP 흑자 턴어라운드 및 Fluence IQ ARR 40% 성장) / Bear $12 (전력망 계통 연계 지연 장기화)\n• 💡 핵심 투자 논점: AI 데이터센터 구축의 최대 병목은 3~5년 걸리는 송배전망 신설이며, 플루언스의 고밀도 BESS는 1년 이내 전력 가동을 가능케 하는 'Speed-to-Power' 독점 솔루션",
+        "sentiment": "POSITIVE",
+        "sentiment_score": 0.95,
+        "price_impact": "극단 과매도(MDD -55%) 상태에서 AI 전력난 해소의 핵심 수혜주로 기관 리레이팅 자금 유입 촉매.",
+        "url": "https://www.goldmansachs.com/insights/goldman-sachs-research?hl=ko-KR"
+    },
+    # MBLY - Morgan Stanley Research
+    {
+        "ticker": "MBLY",
+        "publish_date": "2026-09-22",
+        "headline": "[글로벌 IB 리포트] 모건스탠리: 오토모티브 테크 인플렉션 - EyeQ6H 칩 전환과 레벨 2+ SuperVision 양산 본격화 - 투자의견 Overweight & 목표가 $22",
+        "source": "Morgan Stanley Research",
+        "summary": "모건스탠리 자동차/테크 수석 애널리스트 아담 조나스(Adam Jonas)의 모빌아이 심층 보고서. 2024~2025년 Tier-1 완성차 고객사들의 구형 EyeQ4/5 재고 조정이 마침내 종료되었으며, 차세대 EyeQ6H 기반 SuperVision 및 Chauffeur 계약이 폭스바겐, 포르쉐, 지리 등 글로벌 탑티어 OEM 양산 모델에 대거 탑재되면서 2026년부터 대당 평균 판가(ASP)와 잉여현금흐름 마진이 급격히 확장될 것으로 전망했습니다.",
+        "key_takeaways": "• 🎯 투자의견 & 목표가: Overweight (목표주가 $22, 상승여력 +90%+)\n• 📊 Bull / Base / Bear 시나리오: Bull $32 (글로벌 톱3 OEM의 SuperVision 전 차종 기본 탑재) / Base $22 (2026년 출하량 4,500만 개 돌파 및 FCF 마진 30% 회복) / Bear $9 (중국 전기차 시장 내 저가 ADAS 칩 경쟁 심화)\n• 💡 핵심 투자 논점: 고가 라이다 없이 11대 카메라와 REM 클라우드 실시간 도로 지도로 레벨3 핸즈프리를 구현하는 유일한 양산형 공학 아키텍처",
+        "sentiment": "POSITIVE",
+        "sentiment_score": 0.89,
+        "price_impact": "인텔 지분 매각 오버행 노이즈로 짓눌린 주가에 강력한 펀더멘털 안전마진 제공. 역사적 저점 분할매수 구간.",
+        "url": "https://www.morganstanley.com/ideas"
+    },
+    # UPST - Goldman Sachs Research
+    {
+        "ticker": "UPST",
+        "publish_date": "2026-09-21",
+        "headline": "[글로벌 IB 리포트] 골드만삭스 & JP모건: 연준 금리인하 피벗과 AI 대출 언더라이팅의 극적 부활 - 투자의견 Buy Speculative & 목표가 $55 상향",
+        "source": "Goldman Sachs Research",
+        "summary": "골드만삭스 핀테크 리서치팀의 금리 사이클 분석 보고서. 미 연방준비제도(Fed)의 기준금리 인하 사이클이 본격화됨에 따라 개인 대출 차입 비용이 감소하고, 자본시장(ABS 및 사모 크레딧 펀드)의 대출 채권 인수 유동성이 가파르게 회복되고 있습니다. 업스타트의 18세대 AI 모델(M18)은 전통 FICO 점수 대비 44% 높은 승인율과 35% 낮은 부도율을 입증하며, 대출 취급액이 과거 고점 수준으로 V자 반등하는 실적 레버리지를 누릴 것으로 분석되었습니다.",
+        "key_takeaways": "• 🎯 투자의견 & 목표가: Buy Speculative (목표주가 $55 상향, 상승여력 +50%)\n• 📊 Bull / Base / Bear 시나리오: Bull $75 (연속 금리인하 및 주택담보대출 HELOC 취급액 100% 폭증) / Base $55 (분기 대출 취급액 $2.5B 회복 및 OPM 15%) / Bear $25 (경기 침체 및 차주 연체율 급등)\n• 💡 핵심 투자 논점: 한계비용이 제로에 가까운 1초 완전 자동 승인(Instant Automated 89%) 소프트웨어 플랫폼으로, 금리 인하 시 영업이익률 회복 속도가 핀테크 중 가장 가파름",
+        "sentiment": "POSITIVE",
+        "sentiment_score": 0.91,
+        "price_impact": "숏스퀴즈 모멘텀과 기관 자금 재유입이 결합되며 높은 주가 탄력성 발휘 전망.",
+        "url": "https://www.goldmansachs.com/insights/goldman-sachs-research?hl=ko-KR"
+    },
+    # TSLA - Goldman Sachs Research
+    {
+        "ticker": "TSLA",
+        "publish_date": "2026-09-20",
+        "headline": "[글로벌 IB 리포트] 골드만삭스: 테슬라 사이버캡의 마일당 $0.20 원가 파괴력과 메가팩 에너지 사업부의 재평가 - 투자의견 Neutral & 목표가 $250 유지",
+        "source": "Goldman Sachs Research",
+        "summary": "골드만삭스 자동차/AI 선임 애널리스트 마크 딜레이니(Mark Delaney) 팀의 테슬라 심층 가치평가 리포트. 기가캐스팅과 언박스드(Unboxed) 공정을 도입한 사이버캡(Cybercab)의 대당 생산 단가는 $20,000~$30,000 수준으로 경쟁사 대비 마일당 5~30센트의 압도적 원가 우위를 지닐 것으로 추정했습니다. 한편 상하이 메가팩토리 가동으로 연간 40GWh로 확대된 메가팩(BESS) 에너지 사업부는 전기차 마진 둔화를 완벽히 방어하며 독립 가치만 1,600억 달러에 달한다고 평가했습니다.",
+        "key_takeaways": "• 🎯 투자의견 & 목표가: Neutral (목표주가 $250, 단기 밸류에이션 충실 반영)\n• 📊 Bull / Base / Bear 시나리오: Bull $350 (FSD v13 감독 해제 규제 승인 및 사이버캡 상용 서비스 개시) / Base $250 (에너지 메가팩 고성장 지속 및 보급형 EV 런칭) / Bear $160 (중국 전기차 가격 전쟁 심화 및 FSD 규제 지연)\n• 💡 핵심 투자 논점: 단순 하드웨어 자동차 제조업이 아닌 End-to-End 신경망 기반 피지컬 AI 및 전력망 에너지 플랫폼으로의 구조적 전환 진행 중",
+        "sentiment": "NEUTRAL",
+        "sentiment_score": 0.50,
+        "price_impact": "단기 전기차 인도량 변동성 속에서도 메가팩 고마진과 FSD 기술 해자가 주가 하방 지지력 발휘.",
+        "url": "https://www.goldmansachs.com/insights/goldman-sachs-research?hl=ko-KR"
+    },
+    # 402340.KS - Morgan Stanley Research
+    {
+        "ticker": "402340.KS",
+        "publish_date": "2026-09-24",
+        "headline": "[글로벌 IB 리포트] 모건스탠리: 코리아 밸류업 지주사의 정점 SK스퀘어 - SK하이닉스 HBM 독점 지분 가치 대비 NAV 할인율 55%의 비정상적 기회 - 투자의견 Overweight & 목표가 120,000원",
+        "source": "Morgan Stanley Research",
+        "summary": "모건스탠리 한국 주식 전략 및 반도체 팀(Shawn Kim)의 SK스퀘어 인스티튜셔널 리포트. 글로벌 AI 가속기 시장의 핵심 병목인 HBM3E를 엔비디아에 독점 납품하는 SK하이닉스의 시가총액이 130조 원을 돌파한 반면, 지분 20.07%를 보유한 SK스퀘어의 시총은 11조 원대에 머물며 55~60%에 달하는 극단적인 지주사 NAV 할인이 지속되고 있음을 지적했습니다. 정부 밸류업 지수 편입과 SK하이닉스 배당금 기반의 자사주 전량 소각 이행으로 할인율이 40%로 축소되는 리레이팅 레버리지가 확실시된다고 분석했습니다.",
+        "key_takeaways": "• 🎯 투자의견 & 목표가: Overweight (목표주가 120,000원, 상승여력 +45%)\n• 📊 Bull / Base / Bear 시나리오: Bull 150,000원 (HBM4 공급 독점 유지 및 자사주 5,000억 원 추가 소각) / Base 120,000원 (NAV 할인율 40%로 정상화) / Bear 65,000원 (글로벌 메모리 반도체 다운사이클 조기 진입)\n• 💡 핵심 투자 논점: SK하이닉스 직접 매수 대비 지주사 디스카운트 해소에 따른 주가 상승 탄력(Beta)이 훨씬 크며, 막대한 순현금과 배당 기반 자사주 소각으로 하방 안전마진이 철벽",
+        "sentiment": "POSITIVE",
+        "sentiment_score": 0.96,
+        "price_impact": "국내외 연기금 및 글로벌 밸류업 패시브 펀드의 기계적 매수 유입을 견인하는 최우선 담보 종목.",
+        "url": "https://www.morganstanley.com/ideas"
+    },
+    # ENPH - Goldman Sachs Research
+    {
+        "ticker": "ENPH",
+        "publish_date": "2026-09-21",
+        "headline": "[글로벌 IB 리포트] 골드만삭스: 태양광 사이클 바닥 통과와 차세대 800V DC 데이터센터 아키텍처 수혜 - 투자의견 Buy & 목표가 $47 유지",
+        "source": "Goldman Sachs Research",
+        "summary": "골드만삭스 클린에너지 수석 애널리스트 브라이언 리(Brian K. Lee)의 엔페이즈 에너지 인스티튜셔널 업데이트. 미국 및 유럽 주거용 태양광 설치업체들의 18개월간에 걸친 채널 재고 조정(Destocking)이 완전히 종료되어 출하량이 설치 수요와 1:1로 일치하는 정상화 궤도에 진입했습니다. 특히 차세대 질화갈륨(GaN) IQ9 마이크로인버터와 AI 데이터센터가 800V 직류(DC) 전력망 아키텍처로 전환함에 따라 엔페이즈의 솔리드스테이트 트랜스포머(SST) 및 분산 전력 소프트웨어(VPP)가 신규 고마진 성장 축으로 부상하고 있다고 강조했습니다.",
+        "key_takeaways": "• 🎯 투자의견 & 목표가: Buy (목표주가 $47, 상승여력 +50%+)\n• 📊 Bull / Base / Bear 시나리오: Bull $68 (금리 인하 가속 및 데이터센터 800V DC 상업용 SST 대량 납품) / Base $47 (채널 재고 정상화 및 연간 FCF $350M 회복) / Bear $32 (고금리 장기화에 따른 미국 비캘리포니아 주택용 태양광 정체)\n• 💡 핵심 투자 논점: 300만 개 주택용 레퍼런스와 2,000개 공인 설치업체 네트워크의 전환 비용(Switching Costs) 해자가 건재하며, IRA 45X 첨단 제조 세액공제로 마이크로인버터당 $30 이상의 현금 보조금 유입 본격화",
+        "sentiment": "POSITIVE",
+        "sentiment_score": 0.88,
+        "price_impact": "주가 고점 대비 -70% 급락으로 최악의 업황이 주가에 100% 선반영. 업황 바닥 통과(Cycle Trough) 확인에 따른 기관 롱 포지션 구축 적기.",
+        "url": "https://www.goldmansachs.com/insights/goldman-sachs-research?hl=ko-KR"
+    },
+    # CELH - Morgan Stanley Research
+    {
+        "ticker": "CELH",
+        "publish_date": "2026-09-18",
+        "headline": "[글로벌 IB 리포트] 모건스탠리 & 골드만삭스: 펩시코 DSD 일시적 채널 노이즈 vs 에너지 음료 시장 20% 점유율의 진실 - 투자의견 Overweight & 목표가 $42 유지",
+        "source": "Morgan Stanley Research",
+        "summary": "모건스탠리 음료/소비재 수석 애널리스트 에릭 세로타(Eric Serotta) 팀과 골드만삭스의 셀시우스 합동 점검 리포트. 최근 주가 조정을 유발한 펩시코(PepsiCo)의 도매 출하량 감소는 실제 소비자 수요 위축이 아니라 펩시의 자체 물류망 재고 일수 합리화(Inventory Optimization)에 기인한 일시적(Transient) 현상임을 닐슨 스캔 데이터로 실증했습니다. 셀시우스는 미국 3위 에너지 음료 브랜드로 20%의 점유율을 확고히 다졌으며, 2041년까지 보장된 펩시코 글로벌 DSD 유통망을 통해 프랑스, 호주, 영국 등 해외 시장에서 제2의 성장기를 맞이하고 있다고 평가했습니다.",
+        "key_takeaways": "• 🎯 투자의견 & 목표가: Overweight (목표주가 $42, 상승여력 +50%)\n• 📊 Bull / Base / Bear 시나리오: Bull $58 (해외 매출 비중 15% 돌파 및 펩시 DSD 재고 정상화 완료) / Base $42 (미국 매대 점유율 14% 안착 및 OPM 20% 유지) / Bear $24 (몬스터/레드불의 웰니스 경쟁 제품 공세 및 출하 지연 장기화)\n• 💡 핵심 투자 논점: 자본적 지출이 거의 없는 외주 생산(Co-Packing) 기반의 경량화 모델로 연간 2억 달러 이상의 잉여현금흐름을 창출하며, 무차입 순현금 체질로 다운사이드가 매우 견고함",
+        "sentiment": "POSITIVE",
+        "sentiment_score": 0.90,
+        "price_impact": "출하량과 최종 소비 간의 단기 미스매치로 빚어진 과매도(MDD -58%)는 장기 가치투자자에게 절호의 안전마진 확보 기회.",
+        "url": "https://www.morganstanley.com/ideas"
     }
 ]
 

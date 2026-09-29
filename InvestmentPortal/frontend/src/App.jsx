@@ -2302,16 +2302,27 @@ function SpecialWatchlistView({ onSelectCompany }) {
     }
   };
 
-  // 전체 집계 카운트 (외신 vs 유튜브)
+  // 글로벌 IB 3단 시나리오 밴드 맵
+  const IB_SCENARIOS = {
+    UBER: { firm: 'Goldman Sachs', rating: 'Buy', bear: 52.0, base: 85.0, bull: 110.0, thesis: '로보택시 마켓플레이스 독점 & FCF $6B+ 안착' },
+    FLNC: { firm: 'Goldman Sachs', rating: 'Buy', bear: 12.0, base: 28.0, bull: 38.0, thesis: 'AI 데이터센터 전력 175% 급증 & 온사이트 BESS 필수재' },
+    MBLY: { firm: 'Morgan Stanley', rating: 'Overweight', bear: 9.0, base: 22.0, bull: 32.0, thesis: 'EyeQ6H 칩 전환 & SuperVision L2+ 양산 본격화' },
+    UPST: { firm: 'Goldman Sachs', rating: 'Buy Speculative', bear: 25.0, base: 55.0, bull: 75.0, thesis: '금리인하 사이클 & 18세대 AI 언더라이팅 승인율 44%+ 반등' },
+    TSLA: { firm: 'Goldman Sachs', rating: 'Neutral', bear: 160.0, base: 250.0, bull: 350.0, thesis: '사이버캡 마일당 $0.20 원가 우위 & 메가팩 독립 가치 $1,600억' },
+    '402340.KS': { firm: 'Morgan Stanley', rating: 'Overweight', bear: 65000.0, base: 120000.0, bull: 150000.0, thesis: 'SK하이닉스 HBM 지분 대비 NAV 할인율 55% 축소 레버리지' },
+    ENPH: { firm: 'Goldman Sachs', rating: 'Buy', bear: 32.0, base: 47.0, bull: 68.0, thesis: '태양광 재고조정 완료 & 데이터센터 800V DC GaN IQ9 수혜' },
+    CELH: { firm: 'Morgan Stanley', rating: 'Overweight', bear: 24.0, base: 42.0, bull: 58.0, thesis: '펩시 DSD 재고 정상화 & 웰니스 음료 20% 점유율 수성' },
+  };
+
+  // 콘텐츠 유형 판별 함수
+  const isIbReportItem = (item) => (item.source && (item.source.toLowerCase().includes('goldman') || item.source.toLowerCase().includes('morgan') || item.source.toLowerCase().includes('research'))) || (item.headline && item.headline.includes('글로벌 IB 리포트'));
+  const isYouTubeItem = (item) => !isIbReportItem(item) && ((item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com')));
+
+  // 전체 집계 카운트 (외신 vs 유튜브 vs 글로벌 IB 리포트)
   const totalTimelineCount = stocks.reduce((acc, s) => acc + (s.timeline?.length || 0), 0);
-  const totalNewsCount = stocks.reduce((acc, s) => acc + (s.timeline || []).filter(item => {
-    const isYt = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
-    return !isYt;
-  }).length, 0);
-  const totalYoutubeCount = stocks.reduce((acc, s) => acc + (s.timeline || []).filter(item => {
-    const isYt = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
-    return isYt;
-  }).length, 0);
+  const totalIbCount = stocks.reduce((acc, s) => acc + (s.timeline || []).filter(isIbReportItem).length, 0);
+  const totalYoutubeCount = stocks.reduce((acc, s) => acc + (s.timeline || []).filter(isYouTubeItem).length, 0);
+  const totalNewsCount = stocks.reduce((acc, s) => acc + (s.timeline || []).filter(item => !isIbReportItem(item) && !isYouTubeItem(item)).length, 0);
 
   // Filter stocks
   const displayedStocks = stocks.filter(stock => {
@@ -2392,7 +2403,7 @@ function SpecialWatchlistView({ onSelectCompany }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '0.92rem', fontWeight: 800, color: '#fde68a' }}>🎯 기업별 원클릭 심층 바로가기</span>
             <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-              버튼을 클릭하면 해당 기업의 독점 해자·재무·외신·유튜브 영상이 즉시 집중 분석됩니다.
+              버튼을 클릭하면 해당 기업의 독점 해자·골드만삭스 밸류에이션 밴드·외신·유튜브 영상이 즉시 집중 분석됩니다.
             </span>
           </div>
           {selectedTicker !== 'ALL' && (
@@ -2517,7 +2528,7 @@ function SpecialWatchlistView({ onSelectCompany }) {
         </div>
       )}
 
-      {/* ── 3. Media Filter & Search Bar ── */}
+      {/* ── 3. Media Filter & Search Bar (글로벌 IB 리포트 4대 필터) ── */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '22px', flexWrap: 'wrap', gap: '14px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-secondary)', marginRight: '4px' }}>
@@ -2526,8 +2537,9 @@ function SpecialWatchlistView({ onSelectCompany }) {
           <div style={{ display: 'flex', gap: '4px', background: 'rgba(0,0,0,0.4)', padding: '3px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)' }}>
             {[
               { id: 'ALL', label: `전체 타임라인 (${totalTimelineCount}건)`, icon: '🌐' },
+              { id: 'IB_REPORT', label: `📑 글로벌 IB 리포트 (${totalIbCount}건)`, icon: '' },
               { id: 'NEWS', label: `📰 외신 뉴스 (${totalNewsCount}건)`, icon: '' },
-              { id: 'YOUTUBE', label: `🎥 유튜브 영상 & 인사이트 (${totalYoutubeCount}건)`, icon: '' },
+              { id: 'YOUTUBE', label: `🎥 유튜브 영상 (${totalYoutubeCount}건)`, icon: '' },
             ].map(m => (
               <button
                 key={m.id}
@@ -2543,15 +2555,15 @@ function SpecialWatchlistView({ onSelectCompany }) {
                 style={{
                   padding: '7px 14px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer',
                   background: mediaFilter === m.id
-                    ? (m.id === 'YOUTUBE' ? 'rgba(239, 68, 68, 0.28)' : 'rgba(59, 130, 246, 0.28)')
+                    ? (m.id === 'IB_REPORT' ? 'rgba(245, 158, 11, 0.28)' : m.id === 'YOUTUBE' ? 'rgba(239, 68, 68, 0.28)' : 'rgba(59, 130, 246, 0.28)')
                     : 'transparent',
                   color: mediaFilter === m.id
-                    ? (m.id === 'YOUTUBE' ? '#fca5a5' : '#93c5fd')
+                    ? (m.id === 'IB_REPORT' ? '#fde68a' : m.id === 'YOUTUBE' ? '#fca5a5' : '#93c5fd')
                     : 'var(--text-secondary)',
                   border: mediaFilter === m.id
-                    ? (m.id === 'YOUTUBE' ? '1px solid #ef4444' : '1px solid #3b82f6')
+                    ? (m.id === 'IB_REPORT' ? '1px solid #f59e0b' : m.id === 'YOUTUBE' ? '1px solid #ef4444' : '1px solid #3b82f6')
                     : '1px solid transparent',
-                  boxShadow: mediaFilter === m.id ? '0 0 12px rgba(59, 130, 246, 0.2)' : 'none',
+                  boxShadow: mediaFilter === m.id ? '0 0 12px rgba(245, 158, 11, 0.25)' : 'none',
                   transition: 'all 0.15s'
                 }}
               >
@@ -2563,7 +2575,7 @@ function SpecialWatchlistView({ onSelectCompany }) {
 
         <input
           type="text"
-          placeholder="종목명, 티커, 해자, 유튜브 채널, 인사이트 검색..."
+          placeholder="종목명, 티커, 골드만삭스, 모건스탠리, 해자 검색..."
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
           style={{
@@ -2588,21 +2600,21 @@ function SpecialWatchlistView({ onSelectCompany }) {
           {displayedStocks.map(stock => {
             const isTimelineOpen = !!expandedTimelines[stock.ticker];
             const stockTimeline = stock.timeline || [];
+            const ibScenario = IB_SCENARIOS[stock.ticker];
             
             // Sub-counts for this stock
-            const stockNewsCount = stockTimeline.filter(item => {
-              const isYt = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
-              return !isYt;
-            }).length;
-            const stockYoutubeCount = stockTimeline.filter(item => {
-              const isYt = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
-              return isYt;
-            }).length;
+            const stockIbCount = stockTimeline.filter(isIbReportItem).length;
+            const stockYoutubeCount = stockTimeline.filter(isYouTubeItem).length;
+            const stockNewsCount = stockTimeline.filter(item => !isIbReportItem(item) && !isYouTubeItem(item)).length;
 
             const timelineList = stockTimeline.filter(item => {
-              const isYouTube = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
-              if (mediaFilter === 'NEWS' && isYouTube) return false;
-              if (mediaFilter === 'YOUTUBE' && !isYouTube) return false;
+              const isIb = isIbReportItem(item);
+              const isYt = isYouTubeItem(item);
+              const isNews = !isIb && !isYt;
+
+              if (mediaFilter === 'NEWS' && !isNews) return false;
+              if (mediaFilter === 'YOUTUBE' && !isYt) return false;
+              if (mediaFilter === 'IB_REPORT' && !isIb) return false;
               return true;
             });
 
@@ -2705,6 +2717,74 @@ function SpecialWatchlistView({ onSelectCompany }) {
                   </div>
                 </div>
 
+                {/* 1.5. Global IB Bull/Base/Bear Scenario Band Widget */}
+                {ibScenario && (
+                  <div style={{
+                    background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(59, 130, 246, 0.08) 100%)',
+                    border: '1px solid rgba(245, 158, 11, 0.25)', borderRadius: '12px',
+                    padding: '14px 18px', marginBottom: '20px'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontSize: '0.86rem', fontWeight: 800, color: '#fde68a' }}>
+                          🏛️ {ibScenario.firm} 목표주가 시나리오 & 밸류에이션 밴드
+                        </span>
+                        <span style={{
+                          fontSize: '0.72rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px',
+                          background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.4)'
+                        }}>
+                          {ibScenario.rating}
+                        </span>
+                      </div>
+                      <div style={{ fontSize: '0.78rem', color: '#93c5fd' }}>
+                        💡 {ibScenario.thesis}
+                      </div>
+                    </div>
+
+                    {/* Scenario Spectrum Bar */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px' }}>
+                      {/* Bear */}
+                      <div style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '8px', padding: '8px 12px' }}>
+                        <div style={{ fontSize: '0.7rem', color: '#fca5a5', fontWeight: 700 }}>🔴 Bear (하방 지지선 / 비관)</div>
+                        <div style={{ fontSize: '1rem', fontWeight: 800, color: '#f87171', marginTop: '2px' }}>
+                          {fDollar(ibScenario.bear, stock.ticker)}
+                        </div>
+                        <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>최악의 시나리오 안전마진</div>
+                      </div>
+
+                      {/* Base */}
+                      <div style={{ background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '8px', padding: '8px 12px' }}>
+                        <div style={{ fontSize: '0.7rem', color: '#93c5fd', fontWeight: 700 }}>🟡 Base (기본 목표가 / 적정)</div>
+                        <div style={{ fontSize: '1rem', fontWeight: 800, color: '#60a5fa', marginTop: '2px' }}>
+                          {fDollar(ibScenario.base, stock.ticker)}
+                        </div>
+                        <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>정상 업황 목표 밸류</div>
+                      </div>
+
+                      {/* Bull */}
+                      <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '8px', padding: '8px 12px' }}>
+                        <div style={{ fontSize: '0.7rem', color: '#6ee7b7', fontWeight: 700 }}>🟢 Bull (낙관 성장선 / 업사이드)</div>
+                        <div style={{ fontSize: '1rem', fontWeight: 800, color: '#34d399', marginTop: '2px' }}>
+                          {fDollar(ibScenario.bull, stock.ticker)}
+                        </div>
+                        <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>신성장 시장 침투 시</div>
+                      </div>
+
+                      {/* Safety Margin Indicator */}
+                      <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', padding: '8px 12px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>현재 주가 안전마진 진단</div>
+                        <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#fde68a', marginTop: '2px' }}>
+                          {stock.current_price <= ibScenario.bear * 1.15
+                            ? '🛡️ Bear 하방 지지선 부근 (안전마진 극대화)'
+                            : stock.current_price <= ibScenario.base
+                            ? '📈 Base 목표가 하회 (분할매수 매력적)'
+                            : '⏳ Base 목표가 근접 (보유 및 분할매도 검토)'}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* 2. Deep Study 5-Dimension Grid */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px', marginBottom: '20px' }}>
                   {/* Moat */}
@@ -2786,6 +2866,20 @@ function SpecialWatchlistView({ onSelectCompany }) {
                       </button>
                       <button
                         onClick={() => {
+                          setMediaFilter('IB_REPORT');
+                          setExpandedTimelines(prev => ({ ...prev, [stock.ticker]: true }));
+                        }}
+                        style={{
+                          padding: '4px 10px', borderRadius: '6px', fontSize: '0.74rem', fontWeight: 700, cursor: 'pointer',
+                          background: mediaFilter === 'IB_REPORT' ? 'rgba(245, 158, 11, 0.3)' : 'rgba(255,255,255,0.05)',
+                          color: mediaFilter === 'IB_REPORT' ? '#fde68a' : 'var(--text-secondary)',
+                          border: mediaFilter === 'IB_REPORT' ? '1px solid #f59e0b' : '1px solid rgba(255,255,255,0.1)'
+                        }}
+                      >
+                        📑 글로벌 IB ({stockIbCount})
+                      </button>
+                      <button
+                        onClick={() => {
                           setMediaFilter('NEWS');
                           setExpandedTimelines(prev => ({ ...prev, [stock.ticker]: true }));
                         }}
@@ -2828,31 +2922,49 @@ function SpecialWatchlistView({ onSelectCompany }) {
                           padding: '24px', textAlign: 'center', background: 'rgba(0,0,0,0.2)',
                           borderRadius: '10px', color: 'var(--text-secondary)', fontSize: '0.88rem'
                         }}>
-                          {mediaFilter === 'YOUTUBE' ? '🎥 해당 종목의 유튜브 분석 영상 항목이 없습니다.' :
+                          {mediaFilter === 'IB_REPORT' ? '📑 해당 종목의 글로벌 IB 리서치 리포트 항목이 없습니다.' :
+                           mediaFilter === 'YOUTUBE' ? '🎥 해당 종목의 유튜브 분석 영상 항목이 없습니다.' :
                            mediaFilter === 'NEWS' ? '📰 해당 종목의 외신 뉴스 리포트 항목이 없습니다.' :
                            '선택한 필터 조건에 부합하는 타임라인 항목이 없습니다.'}
                         </div>
                       ) : (
                         timelineList.map((item, idx) => {
+                          const isIb = isIbReportItem(item);
+                          const isYouTube = isYouTubeItem(item);
                           const sentColor = item.sentiment === 'POSITIVE' ? '#10b981' : item.sentiment === 'NEGATIVE' ? '#ef4444' : '#94a3b8';
                           const sentText = item.sentiment === 'POSITIVE' ? '호재 (Positive)' : item.sentiment === 'NEGATIVE' ? '악재 (Risk)' : '중립 (Neutral)';
-                          const isYouTube = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
 
                           return (
                             <div
                               key={item.news_id || idx}
                               style={{
-                                background: isYouTube ? 'linear-gradient(145deg, rgba(239,68,68,0.07), rgba(15,23,42,0.9))' : 'rgba(15,23,42,0.65)',
+                                background: isIb
+                                  ? 'linear-gradient(145deg, rgba(245,158,11,0.08), rgba(15,23,42,0.92))'
+                                  : isYouTube
+                                  ? 'linear-gradient(145deg, rgba(239,68,68,0.07), rgba(15,23,42,0.9))'
+                                  : 'rgba(15,23,42,0.65)',
                                 padding: '18px 22px', borderRadius: '12px',
-                                border: isYouTube ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid rgba(255,255,255,0.07)',
+                                border: isIb
+                                  ? '1px solid rgba(245, 158, 11, 0.35)'
+                                  : isYouTube
+                                  ? '1px solid rgba(239, 68, 68, 0.3)'
+                                  : '1px solid rgba(255,255,255,0.07)',
                                 position: 'relative',
-                                boxShadow: isYouTube ? '0 4px 16px rgba(239, 68, 68, 0.1)' : 'none'
+                                boxShadow: isIb
+                                  ? '0 4px 18px rgba(245, 158, 11, 0.12)'
+                                  : isYouTube
+                                  ? '0 4px 16px rgba(239, 68, 68, 0.1)'
+                                  : 'none'
                               }}
                             >
                               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', marginBottom: '10px', flexWrap: 'wrap' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                                   <span style={{ fontSize: '0.75rem', color: '#60a5fa', fontWeight: 700 }}>📅 {item.publish_date || item.date}</span>
-                                  {isYouTube ? (
+                                  {isIb ? (
+                                    <span style={{ fontSize: '0.75rem', background: 'rgba(245,158,11,0.2)', border: '1px solid rgba(245,158,11,0.45)', padding: '2px 8px', borderRadius: '4px', color: '#fde68a', fontWeight: 800 }}>
+                                      📑 {item.source}
+                                    </span>
+                                  ) : isYouTube ? (
                                     <span style={{ fontSize: '0.75rem', background: 'rgba(239,68,68,0.2)', border: '1px solid rgba(239,68,68,0.4)', padding: '2px 8px', borderRadius: '4px', color: '#fca5a5', fontWeight: 700 }}>
                                       🎥 {item.source}
                                     </span>
@@ -2874,13 +2986,25 @@ function SpecialWatchlistView({ onSelectCompany }) {
                                     style={{
                                       display: 'inline-flex', alignItems: 'center', gap: '4px',
                                       padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700,
-                                      background: isYouTube ? 'rgba(239,68,68,0.22)' : 'rgba(59,130,246,0.18)',
-                                      color: isYouTube ? '#fca5a5' : '#93c5fd',
-                                      border: isYouTube ? '1px solid rgba(239,68,68,0.4)' : '1px solid rgba(59,130,246,0.35)',
+                                      background: isIb
+                                        ? 'rgba(245,158,11,0.22)'
+                                        : isYouTube
+                                        ? 'rgba(239,68,68,0.22)'
+                                        : 'rgba(59,130,246,0.18)',
+                                      color: isIb
+                                        ? '#fde68a'
+                                        : isYouTube
+                                        ? '#fca5a5'
+                                        : '#93c5fd',
+                                      border: isIb
+                                        ? '1px solid rgba(245,158,11,0.45)'
+                                        : isYouTube
+                                        ? '1px solid rgba(239,68,68,0.4)'
+                                        : '1px solid rgba(59,130,246,0.35)',
                                       textDecoration: 'none', transition: 'all 0.15s'
                                     }}
                                   >
-                                    <span>{isYouTube ? '▶️ 유튜브 영상 바로가기' : '원문 기사'}</span>
+                                    <span>{isIb ? '📑 원문 리서치 리포트' : isYouTube ? '▶️ 유튜브 영상 바로가기' : '원문 기사'}</span>
                                     <ExternalLink size={11} />
                                   </a>
                                 )}
@@ -2896,13 +3020,21 @@ function SpecialWatchlistView({ onSelectCompany }) {
 
                               {(item.key_takeaways || item.takeaways) && (
                                 <div style={{
-                                  background: isYouTube ? 'rgba(245, 158, 11, 0.09)' : 'rgba(255,255,255,0.03)',
-                                  border: isYouTube ? '1px solid rgba(245, 158, 11, 0.28)' : 'none',
+                                  background: isIb
+                                    ? 'rgba(245, 158, 11, 0.12)'
+                                    : isYouTube
+                                    ? 'rgba(245, 158, 11, 0.09)'
+                                    : 'rgba(255,255,255,0.03)',
+                                  border: isIb
+                                    ? '1px solid rgba(245, 158, 11, 0.35)'
+                                    : isYouTube
+                                    ? '1px solid rgba(245, 158, 11, 0.28)'
+                                    : 'none',
                                   padding: '12px 16px', borderRadius: '8px', marginBottom: '10px',
-                                  fontSize: '0.82rem', color: isYouTube ? '#fde68a' : '#a5b4fc', lineHeight: '1.6', whiteSpace: 'pre-line'
+                                  fontSize: '0.82rem', color: (isIb || isYouTube) ? '#fde68a' : '#a5b4fc', lineHeight: '1.6', whiteSpace: 'pre-line'
                                 }}>
-                                  <div style={{ fontWeight: 800, color: isYouTube ? '#fbbf24' : '#818cf8', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                    <span>{isYouTube ? '💡 핵심 투자 인사이트:' : '📌 핵심 시사점:'}</span>
+                                  <div style={{ fontWeight: 800, color: (isIb || isYouTube) ? '#fbbf24' : '#818cf8', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <span>{isIb ? '💡 글로벌 IB 핵심 분석 & Bull/Bear 시나리오:' : isYouTube ? '💡 핵심 투자 인사이트:' : '📌 핵심 시사점:'}</span>
                                   </div>
                                   {item.key_takeaways || item.takeaways}
                                 </div>
