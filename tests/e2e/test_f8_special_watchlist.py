@@ -1,7 +1,7 @@
 """
 Tier 1: Feature 8 - Special Watchlist Deep Study & Time-Series News Timeline Tests.
 Validates:
-- [F8-01]: Data completeness & UTF-8 Korean integrity for all 6 tickers (UBER, FLNC, MBLY, UPST, TSLA, 402340.KS).
+- [F8-01]: Data completeness & UTF-8 Korean integrity for all 8 tickers (UBER, FLNC, MBLY, UPST, TSLA, 402340.KS, ENPH, CELH).
   Verifies 5-dimension institutional research (business_model, moat_analysis, tam_growth_drivers,
   financial_margins, key_risks), quantitative metrics (current_price, mdd_pct, buy_signal), and zero '??' encoding corruption.
 - [F8-02]: Time-series timeline deduplication & reverse-chronological ordering (latest date first)
@@ -23,7 +23,7 @@ from unittest.mock import patch
 
 from tests.e2e.test_helpers import PROJECT_ROOT, APP_JSX_PATH
 
-TARGET_TICKERS = ["UBER", "FLNC", "MBLY", "UPST", "TSLA", "402340.KS"]
+TARGET_TICKERS = ["UBER", "FLNC", "MBLY", "UPST", "TSLA", "402340.KS", "ENPH", "CELH"]
 
 CANONICAL_DIST_PATHS = [
     PROJECT_ROOT / "special_watchlist_data.json",
@@ -34,7 +34,7 @@ CANONICAL_DIST_PATHS = [
 
 
 class TestF8SpecialWatchlist(unittest.TestCase):
-    """E2E Test Suite for Feature 8 (Special Watchlist 6 Stocks & Timeline Tracking)."""
+    """E2E Test Suite for Feature 8 (Special Watchlist 8 Stocks & Timeline Tracking)."""
 
     def setUp(self):
         self.data_file = PROJECT_ROOT / "special_watchlist_data.json"
@@ -66,14 +66,14 @@ class TestF8SpecialWatchlist(unittest.TestCase):
 
     def test_f8_01_six_stocks_data_completeness_and_encoding(self):
         """
-        [F8-01] Verifies that all 6 tickers (UBER, FLNC, MBLY, UPST, TSLA, 402340.KS)
+        [F8-01] Verifies that all 8 tickers (UBER, FLNC, MBLY, UPST, TSLA, 402340.KS, ENPH, CELH)
         exist in special_watchlist_data.json and have complete 5-dimension study fields
         without question mark ('??') encoding corruption.
         """
         _, stocks = self._load_canonical_data()
         self.assertGreaterEqual(
-            len(stocks), 6,
-            f"Must contain at least 6 special watchlist stocks, found {len(stocks)}"
+            len(stocks), 8,
+            f"Must contain at least 8 special watchlist stocks, found {len(stocks)}"
         )
 
         found_map = {}
@@ -246,7 +246,7 @@ class TestF8SpecialWatchlist(unittest.TestCase):
         data_get = res_get.json()
         stocks = data_get.get("stocks", data_get) if isinstance(data_get, dict) else data_get
         self.assertIsInstance(stocks, list, "API response must contain 'stocks' list")
-        self.assertGreaterEqual(len(stocks), 6, "API must return at least 6 special watchlist stocks")
+        self.assertGreaterEqual(len(stocks), 8, "API must return at least 8 special watchlist stocks")
 
         returned_tickers = {s.get("ticker") for s in stocks if s.get("ticker")}
         for tk in TARGET_TICKERS:
@@ -313,8 +313,8 @@ class TestF8SpecialWatchlist(unittest.TestCase):
             stocks = payload.get("stocks", payload) if isinstance(payload, dict) else payload
             self.assertIsInstance(stocks, list, f"File at {p} must contain a list of stocks")
             self.assertGreaterEqual(
-                len(stocks), 6,
-                f"File at {p} must contain at least 6 stocks, found {len(stocks)}"
+                len(stocks), 8,
+                f"File at {p} must contain at least 8 stocks, found {len(stocks)}"
             )
 
     def test_f8_06_cli_runner_execution_contract(self):

@@ -24,7 +24,7 @@ if str(BACKEND_DIR) not in sys.path:
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-TARGET_TICKERS = ["UBER", "FLNC", "MBLY", "UPST", "TSLA", "402340.KS"]
+TARGET_TICKERS = ["UBER", "FLNC", "MBLY", "UPST", "TSLA", "402340.KS", "ENPH", "CELH"]
 
 
 class TestSpecialWatchlistApiAndResilience(unittest.TestCase):
@@ -57,7 +57,7 @@ class TestSpecialWatchlistApiAndResilience(unittest.TestCase):
         self.assertIn("stocks", data, "Response must contain 'stocks' list")
 
         stocks = data["stocks"]
-        self.assertGreaterEqual(len(stocks), 6, f"Expected at least 6 stocks, found {len(stocks)}")
+        self.assertGreaterEqual(len(stocks), 8, f"Expected at least 8 stocks, found {len(stocks)}")
 
         stock_map = {s.get("ticker"): s for s in stocks}
         for tk in TARGET_TICKERS:

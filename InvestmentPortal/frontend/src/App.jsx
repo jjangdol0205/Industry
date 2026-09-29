@@ -557,7 +557,7 @@ function App() {
             onClick={() => { setViewMode('special-watchlist'); setSelectedCompany(null); setSelectedReport(null); setSidebarOpen(false); }}
           >
             <Star size={16} color="#fbbf24" />
-            <span>🌟 특별 관심종목 (6선)</span>
+            <span>🌟 특별 관심종목 (8선)</span>
           </button>
           <div style={{ display:'flex', gap:'6px' }}>
             <button className={`tab-btn ${viewMode==='research'?'active':''}`}
@@ -2173,7 +2173,7 @@ function HomeDashboard({ reports, onSelect }) {
   );
 }
 
-// ── SpecialWatchlistView (Milestone 2: 특별 관심종목 6선 전용 심층 뷰) ──────────────
+// ── SpecialWatchlistView (특별 관심종목 8선 전용 심층 뷰) ──────────────
 function SpecialWatchlistView({ onSelectCompany }) {
   const [stocks, setStocks] = useState(staticSpecialWatchlistData?.stocks || []);
   const [loading, setLoading] = useState(false);
@@ -2186,8 +2186,11 @@ function SpecialWatchlistView({ onSelectCompany }) {
     UPST: false,
     TSLA: false,
     '402340.KS': false,
+    ENPH: false,
+    CELH: false,
   });
   const [sentimentFilter, setSentimentFilter] = useState('ALL');
+  const [mediaFilter, setMediaFilter] = useState('ALL'); // 'ALL' | 'NEWS' | 'YOUTUBE'
   const [searchQuery, setSearchQuery] = useState('');
   const [toast, setToast] = useState(null);
 
@@ -2245,7 +2248,7 @@ function SpecialWatchlistView({ onSelectCompany }) {
       } else {
         await loadSpecialWatchlist();
       }
-      setToast({ type: 'success', msg: '✨ 6개 특별 관심종목 외신 리포트 및 타임라인 최신화가 완료되었습니다!' });
+      setToast({ type: 'success', msg: '✨ 8개 특별 관심종목 외신 리포트 및 타임라인 최신화가 완료되었습니다!' });
     } catch (err) {
       console.warn("Refresh fallback:", err);
       setToast({ type: 'warning', msg: '네트워크 지연 발생. 직전 캐시된 외신 히스토리를 유지합니다.' });
@@ -2292,7 +2295,7 @@ function SpecialWatchlistView({ onSelectCompany }) {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
               <span style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '4px 12px', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 700 }}>
-                🌟 SPECIAL WATCHLIST 6선
+                🌟 SPECIAL WATCHLIST 8선
               </span>
               <span style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>전용 심층 스터디 & 시계열 외신 리포트 타임라인 트래커</span>
             </div>
@@ -2300,7 +2303,7 @@ function SpecialWatchlistView({ onSelectCompany }) {
               🌟 특별 관심종목 전용 심층 포털
             </h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '6px' }}>
-              우버(UBER) · 플루언스에너지(FLNC) · 모빌아이(MBLY) · 업스타트(UPST) · 테슬라(TSLA) · SK스퀘어(402340.KS)
+              우버(UBER) · 플루언스에너지(FLNC) · 모빌아이(MBLY) · 업스타트(UPST) · 테슬라(TSLA) · SK스퀘어(402340.KS) · 엔페이즈에너지(ENPH) · 셀시우스(CELH)
             </p>
           </div>
 
@@ -2330,31 +2333,58 @@ function SpecialWatchlistView({ onSelectCompany }) {
       </div>
 
       {/* ── Search & Filter Controls ── */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          {[
-            { id: 'ALL', label: '전체 외신' },
-            { id: 'POSITIVE', label: '🟢 호재 뉴스' },
-            { id: 'NEGATIVE', label: '🔴 리스크/악재' },
-            { id: 'NEUTRAL', label: '⚪ 중립 분석' },
-          ].map(f => (
-            <button
-              key={f.id}
-              onClick={() => setSentimentFilter(f.id)}
-              style={{
-                padding: '6px 14px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
-                background: sentimentFilter === f.id ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255,255,255,0.04)',
-                color: sentimentFilter === f.id ? '#60a5fa' : 'var(--text-secondary)',
-                border: sentimentFilter === f.id ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.08)'
-              }}
-            >
-              {f.label}
-            </button>
-          ))}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '14px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          {/* Media Type Filter Tabs */}
+          <div style={{ display: 'flex', gap: '4px', background: 'rgba(0,0,0,0.35)', padding: '3px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            {[
+              { id: 'ALL', label: '전체 (All)', icon: '🌐' },
+              { id: 'NEWS', label: '외신 뉴스', icon: '📰' },
+              { id: 'YOUTUBE', label: '유튜브 인사이트', icon: '🎥' },
+            ].map(m => (
+              <button
+                key={m.id}
+                onClick={() => setMediaFilter(m.id)}
+                style={{
+                  padding: '6px 14px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer',
+                  background: mediaFilter === m.id ? (m.id === 'YOUTUBE' ? 'rgba(239, 68, 68, 0.25)' : 'rgba(59, 130, 246, 0.25)') : 'transparent',
+                  color: mediaFilter === m.id ? (m.id === 'YOUTUBE' ? '#fca5a5' : '#60a5fa') : 'var(--text-secondary)',
+                  border: mediaFilter === m.id ? (m.id === 'YOUTUBE' ? '1px solid #ef4444' : '1px solid #3b82f6') : '1px solid transparent',
+                  transition: 'all 0.15s'
+                }}
+              >
+                {m.icon} {m.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Sentiment Filter Buttons */}
+          <div style={{ display: 'flex', gap: '6px' }}>
+            {[
+              { id: 'ALL', label: '전체 센티먼트' },
+              { id: 'POSITIVE', label: '🟢 호재 뉴스' },
+              { id: 'NEGATIVE', label: '🔴 리스크/악재' },
+              { id: 'NEUTRAL', label: '⚪ 중립 분석' },
+            ].map(f => (
+              <button
+                key={f.id}
+                onClick={() => setSentimentFilter(f.id)}
+                style={{
+                  padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer',
+                  background: sentimentFilter === f.id ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255,255,255,0.04)',
+                  color: sentimentFilter === f.id ? '#60a5fa' : 'var(--text-secondary)',
+                  border: sentimentFilter === f.id ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.08)'
+                }}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
         </div>
+
         <input
           type="text"
-          placeholder="종목명, 티커, 해자, BM, 리스크 검색..."
+          placeholder="종목명, 티커, 해자, 유튜브 채널, 인사이트 검색..."
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
           style={{
@@ -2375,8 +2405,11 @@ function SpecialWatchlistView({ onSelectCompany }) {
           {filteredStocks.map(stock => {
             const isTimelineOpen = !!expandedTimelines[stock.ticker];
             const timelineList = (stock.timeline || []).filter(item => {
-              if (sentimentFilter === 'ALL') return true;
-              return item.sentiment === sentimentFilter;
+              const isYouTube = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
+              if (mediaFilter === 'NEWS' && isYouTube) return false;
+              if (mediaFilter === 'YOUTUBE' && !isYouTube) return false;
+              if (sentimentFilter !== 'ALL' && item.sentiment !== sentimentFilter) return false;
+              return true;
             });
 
             return (
@@ -2521,7 +2554,7 @@ function SpecialWatchlistView({ onSelectCompany }) {
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#60a5fa', fontWeight: 700, fontSize: '0.9rem' }}>
                       <Activity size={16} />
-                      <span>시계열 외신 리포트 히스토리 ({timelineList.length}건 누적)</span>
+                      <span>시계열 외신 리포트 & 유튜브 인사이트 ({timelineList.length}건 누적)</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-secondary)', fontSize: '0.82rem' }}>
                       <span>{isTimelineOpen ? '접기' : '펼쳐보기'}</span>
@@ -2534,48 +2567,88 @@ function SpecialWatchlistView({ onSelectCompany }) {
                     <div style={{ marginTop: '16px', paddingLeft: '12px', borderLeft: '2px dashed rgba(59, 130, 246, 0.3)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                       {timelineList.length === 0 ? (
                         <div style={{ padding: '16px', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                          선택한 필터 조건에 부합하는 외신 기사가 없습니다.
+                          선택한 필터 조건에 부합하는 타임라인 항목이 없습니다.
                         </div>
                       ) : (
                         timelineList.map((item, idx) => {
                           const sentColor = item.sentiment === 'POSITIVE' ? '#10b981' : item.sentiment === 'NEGATIVE' ? '#ef4444' : '#94a3b8';
                           const sentText = item.sentiment === 'POSITIVE' ? '호재 (Positive)' : item.sentiment === 'NEGATIVE' ? '악재 (Risk)' : '중립 (Neutral)';
+                          const isYouTube = (item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com'));
 
                           return (
                             <div
                               key={item.news_id || idx}
                               style={{
-                                background: 'rgba(15,23,42,0.6)', padding: '16px 20px', borderRadius: '10px',
-                                border: '1px solid rgba(255,255,255,0.06)', position: 'relative'
+                                background: isYouTube ? 'linear-gradient(145deg, rgba(239,68,68,0.06), rgba(15,23,42,0.85))' : 'rgba(15,23,42,0.6)',
+                                padding: '18px 22px', borderRadius: '12px',
+                                border: isYouTube ? '1px solid rgba(239, 68, 68, 0.25)' : '1px solid rgba(255,255,255,0.06)',
+                                position: 'relative',
+                                boxShadow: isYouTube ? '0 4px 16px rgba(239, 68, 68, 0.08)' : 'none'
                               }}
                             >
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
-                                <span style={{ fontSize: '0.75rem', color: '#60a5fa', fontWeight: 700 }}>📅 {item.publish_date || item.date}</span>
-                                <span style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.08)', padding: '2px 8px', borderRadius: '4px', color: 'white', fontWeight: 600 }}>
-                                  {item.source}
-                                </span>
-                                <span style={{ fontSize: '0.75rem', color: sentColor, border: `1px solid ${sentColor}40`, padding: '2px 8px', borderRadius: '10px', fontWeight: 700 }}>
-                                  {sentText}
-                                </span>
+                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', marginBottom: '10px', flexWrap: 'wrap' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                                  <span style={{ fontSize: '0.75rem', color: '#60a5fa', fontWeight: 700 }}>📅 {item.publish_date || item.date}</span>
+                                  {isYouTube ? (
+                                    <span style={{ fontSize: '0.75rem', background: 'rgba(239,68,68,0.2)', border: '1px solid rgba(239,68,68,0.4)', padding: '2px 8px', borderRadius: '4px', color: '#fca5a5', fontWeight: 700 }}>
+                                      🎥 {item.source}
+                                    </span>
+                                  ) : (
+                                    <span style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.08)', padding: '2px 8px', borderRadius: '4px', color: 'white', fontWeight: 600 }}>
+                                      📰 {item.source}
+                                    </span>
+                                  )}
+                                  <span style={{ fontSize: '0.75rem', color: sentColor, border: `1px solid ${sentColor}40`, padding: '2px 8px', borderRadius: '10px', fontWeight: 700 }}>
+                                    {sentText}
+                                  </span>
+                                </div>
+
+                                {item.url && (
+                                  <a
+                                    href={item.url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{
+                                      display: 'inline-flex', alignItems: 'center', gap: '4px',
+                                      padding: '3px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700,
+                                      background: isYouTube ? 'rgba(239,68,68,0.18)' : 'rgba(59,130,246,0.15)',
+                                      color: isYouTube ? '#fca5a5' : '#93c5fd',
+                                      border: isYouTube ? '1px solid rgba(239,68,68,0.35)' : '1px solid rgba(59,130,246,0.3)',
+                                      textDecoration: 'none', transition: 'all 0.15s'
+                                    }}
+                                  >
+                                    <span>{isYouTube ? '▶️ 유튜브 영상 바로가기' : '원문 기사'}</span>
+                                    <ExternalLink size={11} />
+                                  </a>
+                                )}
                               </div>
 
-                              <h4 style={{ margin: '0 0 8px 0', fontSize: '1rem', color: 'white', fontWeight: 700 }}>
+                              <h4 style={{ margin: '0 0 10px 0', fontSize: '1.02rem', color: 'white', fontWeight: 700, lineHeight: '1.4' }}>
                                 {item.headline}
                               </h4>
 
-                              <p style={{ margin: '0 0 10px 0', fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.6' }}>
+                              <p style={{ margin: '0 0 12px 0', fontSize: '0.86rem', color: 'rgba(255,255,255,0.85)', lineHeight: '1.65' }}>
                                 {item.summary}
                               </p>
 
                               {(item.key_takeaways || item.takeaways) && (
-                                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '10px 14px', borderRadius: '8px', marginBottom: '8px', fontSize: '0.8rem', color: '#a5b4fc', lineHeight: '1.5', whiteSpace: 'pre-line' }}>
-                                  <strong>📌 핵심 시사점:</strong> {item.key_takeaways || item.takeaways}
+                                <div style={{
+                                  background: isYouTube ? 'rgba(245, 158, 11, 0.08)' : 'rgba(255,255,255,0.03)',
+                                  border: isYouTube ? '1px solid rgba(245, 158, 11, 0.25)' : 'none',
+                                  padding: '12px 16px', borderRadius: '8px', marginBottom: '10px',
+                                  fontSize: '0.82rem', color: isYouTube ? '#fde68a' : '#a5b4fc', lineHeight: '1.6', whiteSpace: 'pre-line'
+                                }}>
+                                  <div style={{ fontWeight: 800, color: isYouTube ? '#fbbf24' : '#818cf8', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <span>{isYouTube ? '💡 핵심 투자 인사이트:' : '📌 핵심 시사점:'}</span>
+                                  </div>
+                                  {item.key_takeaways || item.takeaways}
                                 </div>
                               )}
 
                               {item.price_impact && (
-                                <div style={{ fontSize: '0.8rem', color: '#34d399', fontWeight: 600 }}>
-                                  💡 <strong>주가 영향 분석:</strong> {item.price_impact}
+                                <div style={{ fontSize: '0.82rem', color: '#34d399', fontWeight: 600, display: 'flex', alignItems: 'flex-start', gap: '6px' }}>
+                                  <span>📈</span>
+                                  <span><strong>주가 영향 및 매매 시사점:</strong> {item.price_impact}</span>
                                 </div>
                               )}
                             </div>

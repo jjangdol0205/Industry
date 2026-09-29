@@ -24,7 +24,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 import sync_special_watchlist as sw
 
-TARGET_TICKERS = ["UBER", "FLNC", "MBLY", "UPST", "TSLA", "402340.KS"]
+TARGET_TICKERS = ["UBER", "FLNC", "MBLY", "UPST", "TSLA", "402340.KS", "ENPH", "CELH"]
 CANONICAL_JSON_PATHS = [
     PROJECT_ROOT / "special_watchlist_data.json",
     PROJECT_ROOT / "InvestmentPortal" / "backend" / "special_watchlist_data.json",
@@ -274,7 +274,7 @@ class TestChallengerBackendSync(unittest.TestCase):
                 data = json.load(f)
 
             stocks = data.get("stocks", [])
-            self.assertEqual(len(stocks), 6, f"File at {p} must contain exactly 6 stocks, got {len(stocks)}")
+            self.assertEqual(len(stocks), 8, f"File at {p} must contain exactly 8 stocks, got {len(stocks)}")
 
             tickers = [s["ticker"] for s in stocks]
             self.assertEqual(tickers, TARGET_TICKERS, f"Ticker order mismatch at {p}: {tickers}")

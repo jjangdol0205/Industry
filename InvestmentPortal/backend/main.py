@@ -530,7 +530,7 @@ def run_startup_migrations():
         conn.close()
         print("[Migration] Startup DB migration complete.")
 
-        # Special Watchlist 6-Stock Initialization and JSON Distribution
+        # Special Watchlist 8-Stock Initialization and JSON Distribution
         try:
             try:
                 import sync_special_watchlist
@@ -2611,15 +2611,15 @@ def refresh_universe_prices(db: Session = Depends(get_db)):
 
 
 # ─────────────────────────────────────────────
-# Special Watchlist (6 Stocks) Endpoints
+# Special Watchlist (8 Stocks) Endpoints
 # ─────────────────────────────────────────────
 @app.get("/api/v1/special-watchlist")
 @app.get("/api/special-watchlist")
 def get_special_watchlist(db: Session = Depends(get_db)):
     """
     Returns institutional deep study data and reverse-chronological news timeline
-    for the 6 Special Watchlist stocks:
-      UBER, FLNC, MBLY, UPST, TSLA, 402340.KS
+    for the 8 Special Watchlist stocks:
+      UBER, FLNC, MBLY, UPST, TSLA, 402340.KS, ENPH, CELH
     """
     try:
         try:
@@ -2661,7 +2661,7 @@ def refresh_special_watchlist(
     background: bool = False,
 ):
     """
-    Triggers on-demand news ingestion and price recalculation for the 6 Special Watchlist stocks.
+    Triggers on-demand news ingestion and price recalculation for the 8 Special Watchlist stocks.
     Supports both synchronous and background asynchronous modes.
     """
     req_force = force
