@@ -95,3 +95,73 @@ class IndustryReport(IndustryReportBase):
 
     class Config:
         from_attributes = True
+
+
+class SpecialWatchlistTimelineItem(BaseModel):
+    id: Optional[int] = None
+    news_id: str
+    ticker: Optional[str] = None
+    publish_date: str
+    date: Optional[str] = None
+    headline: str
+    source: str
+    summary: str
+    key_takeaways: Optional[str] = None
+    takeaways: Optional[str] = None
+    sentiment: str
+    sentiment_score: Optional[float] = None
+    price_impact: Optional[str] = None
+    url: Optional[str] = None
+    created_at: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+
+class SpecialWatchlistStudySchema(BaseModel):
+    id: Optional[int] = None
+    ticker: str
+    name: str
+    name_ko: str
+    exchange: Optional[str] = None
+    sector: Optional[str] = None
+    portfolio_tier: Optional[str] = "Watchlist"
+    current_price: Optional[float] = None
+    high_52w: Optional[float] = None
+    mdd_pct: Optional[float] = None
+    buy_signal: Optional[str] = None
+    dca_stage: Optional[str] = None
+    business_model: str
+    moat_analysis: str
+    moat_bottleneck: Optional[str] = None
+    tam_growth_drivers: str
+    financial_margins: Optional[str] = None
+    opm: Optional[float] = None
+    roe: Optional[float] = None
+    gross_margin: Optional[float] = None
+    fcf_status: Optional[str] = None
+    key_risks: str
+    catalysts: Optional[str] = None
+    valuation_thesis: Optional[str] = None
+    institutional_verdict: Optional[str] = None
+    target_price: Optional[float] = None
+    study: Optional[dict] = None
+    study_json: Optional[str] = None
+    timeline: List[SpecialWatchlistTimelineItem] = []
+    created_at: Optional[str] = None
+    updated_at: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+
+class SpecialWatchlistResponse(BaseModel):
+    status: str = "success"
+    updated_at: str
+    stocks: List[SpecialWatchlistStudySchema]
+
+
+class SpecialWatchlistRefreshRequest(BaseModel):
+    force: Optional[bool] = False
+    background: Optional[bool] = False
+

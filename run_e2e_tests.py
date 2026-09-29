@@ -48,6 +48,7 @@ FEATURE_TEST_MAP = {
     "F5": ["test_f5_mdd_rebound.py"],
     "F6": ["test_f6_backend_api.py"],
     "F7": ["test_f7_frontend_integrity.py"],
+    "F8": ["test_f8_special_watchlist.py"],
 }
 
 TIER_TEST_MAP = {
@@ -59,6 +60,7 @@ TIER_TEST_MAP = {
         "test_f5_mdd_rebound.py",
         "test_f6_backend_api.py",
         "test_f7_frontend_integrity.py",
+        "test_f8_special_watchlist.py",
     ],
     2: ["test_tier2_boundaries.py"],
     3: ["test_tier3_combinations.py"],
@@ -75,6 +77,7 @@ MILESTONE_TEST_MAP = {
         "test_f7_frontend_integrity.py", "test_tier2_boundaries.py",
         "test_tier3_combinations.py", "test_tier4_scenarios.py"
     ],
+    "M5": ["test_f8_special_watchlist.py"],
 }
 
 
@@ -105,7 +108,7 @@ def load_selected_tests(tier=None, feature=None, milestone=None):
         if m_upper in MILESTONE_TEST_MAP:
             target_files.update(MILESTONE_TEST_MAP[m_upper])
         else:
-            print(f"Unknown milestone '{milestone}'. Supported: M1, M2, M3, M4")
+            print(f"Unknown milestone '{milestone}'. Supported: {list(MILESTONE_TEST_MAP.keys())}")
             sys.exit(1)
 
     else:
@@ -128,8 +131,8 @@ def load_selected_tests(tier=None, feature=None, milestone=None):
 def main():
     parser = argparse.ArgumentParser(description="TrendPulse E2E Test Suite Runner")
     parser.add_argument("--tier", type=int, choices=[1, 2, 3, 4], help="Execute a specific testing tier")
-    parser.add_argument("--feature", type=str, choices=["F1", "F2", "F3", "F4", "F5", "F6", "F7", "f1", "f2", "f3", "f4", "f5", "f6", "f7"], help="Execute a specific feature test suite")
-    parser.add_argument("--milestone", type=str, choices=["M1", "M2", "M3", "M4", "m1", "m2", "m3", "m4"], help="Execute tests for a specific implementation milestone")
+    parser.add_argument("--feature", type=str, choices=["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8"], help="Execute a specific feature test suite")
+    parser.add_argument("--milestone", type=str, choices=["M1", "M2", "M3", "M4", "M5", "m1", "m2", "m3", "m4", "m5"], help="Execute tests for a specific implementation milestone")
     parser.add_argument("-v", "--verbose", action="store_true", help="Verbose test execution output")
     args = parser.parse_args()
 

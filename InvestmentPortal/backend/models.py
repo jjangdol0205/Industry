@@ -235,3 +235,66 @@ class OrchestrationReport(Base):
     title = Column(String)
     content = Column(Text)
     created_at = Column(String)
+
+
+class SpecialWatchlistStudy(Base):
+    """6개 특별 관심종목 심층 스터디 5개 차원 모델 (Requirement R1)"""
+    __tablename__ = "special_watchlist_studies"
+
+    id = Column(Integer, primary_key=True, index=True)
+    ticker = Column(String, unique=True, index=True, nullable=False)
+    name = Column(String, nullable=False)
+    name_ko = Column(String, nullable=False)
+    exchange = Column(String, nullable=True)
+    sector = Column(String, nullable=True)
+    portfolio_tier = Column(String, default="Watchlist", nullable=True)
+
+    current_price = Column(Float, nullable=True)
+    high_52w = Column(Float, nullable=True)
+    mdd_pct = Column(Float, nullable=True)
+    buy_signal = Column(String, nullable=True)
+    dca_stage = Column(String, nullable=True)
+
+    business_model = Column(Text, nullable=False)
+    moat_analysis = Column(Text, nullable=False)
+    moat_bottleneck = Column(Text, nullable=True)
+    tam_growth_drivers = Column(Text, nullable=False)
+    financial_margins = Column(Text, nullable=True)
+    opm = Column(Float, nullable=True)
+    roe = Column(Float, nullable=True)
+    gross_margin = Column(Float, nullable=True)
+    fcf_status = Column(Text, nullable=True)
+
+    key_risks = Column(Text, nullable=False)
+    catalysts = Column(Text, nullable=True)
+    valuation_thesis = Column(Text, nullable=True)
+    institutional_verdict = Column(Text, nullable=True)
+    target_price = Column(Float, nullable=True)
+    study_json = Column(Text, nullable=True)
+
+    created_at = Column(String, nullable=True)
+    updated_at = Column(String, nullable=True)
+
+    timeline = relationship("SpecialWatchlistTimeline", back_populates="study", cascade="all, delete-orphan", order_by="desc(SpecialWatchlistTimeline.publish_date)")
+
+
+class SpecialWatchlistTimeline(Base):
+    """6개 특별 관심종목 시계열 외신 리포트 및 타임라인 (Requirement R2)"""
+    __tablename__ = "special_watchlist_timeline"
+
+    id = Column(Integer, primary_key=True, index=True)
+    ticker = Column(String, ForeignKey("special_watchlist_studies.ticker"), index=True, nullable=False)
+    news_id = Column(String, unique=True, index=True, nullable=False)
+    publish_date = Column(String, nullable=False)  # YYYY-MM-DD
+    headline = Column(Text, nullable=False)
+    source = Column(String, nullable=False)
+    summary = Column(Text, nullable=False)
+    key_takeaways = Column(Text, nullable=True)
+    sentiment = Column(String, nullable=False)  # POSITIVE, NEGATIVE, NEUTRAL
+    sentiment_score = Column(Float, nullable=True)
+    price_impact = Column(Text, nullable=True)
+    url = Column(String, nullable=True)
+    created_at = Column(String, nullable=True)
+
+    study = relationship("SpecialWatchlistStudy", back_populates="timeline")
+

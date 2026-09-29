@@ -461,6 +461,14 @@ def classify_tier(profile: dict, moat_score: float) -> str:
         tier_lower == 'satellite' or
         current_lower == 'satellite'
     )
+    is_declared_watchlist = (
+        '(watchlist' in text_corpus_lower or
+        suggested_lower == 'watchlist' or
+        portfolio_lower == 'watchlist' or
+        tier_lower == 'watchlist' or
+        current_lower == 'watchlist' or
+        '관심' in text_corpus_lower
+    )
 
     # 1. Core Check
     if not (is_declared_satellite and not ('(core' in text_corpus_lower)):
@@ -473,7 +481,7 @@ def classify_tier(profile: dict, moat_score: float) -> str:
         return "Satellite"
 
     # 3. Watchlist Check
-    if moat_score >= 50.0 or is_emerging_niche:
+    if is_declared_watchlist or moat_score >= 50.0 or is_emerging_niche:
         return "Watchlist"
 
     # 4. Standard

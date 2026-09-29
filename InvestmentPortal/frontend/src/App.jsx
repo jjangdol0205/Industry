@@ -18,6 +18,7 @@ import './index.css';
 import staticUniverseData from '../public/universe_evaluated.json';
 import staticDeepdiveData from '../public/universal_deepdive_data.json';
 import staticAiAnalysesData from '../public/pregenerated_ai_analyses.json';
+import staticSpecialWatchlistData from '../public/special_watchlist_data.json';
 
 const BACKEND_HOST = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:8000'
@@ -542,6 +543,22 @@ function App() {
         <h1 onClick={handleHomeClick}><TrendingUp size={24} color="var(--accent-blue)" /> Alpha Research</h1>
         
         <div style={{ display:'flex', flexDirection:'column', gap:'6px', margin:'20px 0', borderBottom:'1px solid var(--border-color)', paddingBottom:'16px' }}>
+          <button 
+            className={`tab-btn ${viewMode === 'special-watchlist' ? 'active' : ''}`}
+            style={{
+              width: '100%', padding: '10px 14px', fontSize: '0.85rem', cursor: 'pointer',
+              background: viewMode === 'special-watchlist' 
+                ? 'linear-gradient(135deg, rgba(245,158,11,0.25), rgba(139,92,246,0.25))' 
+                : 'rgba(255,255,255,0.03)',
+              border: viewMode === 'special-watchlist' ? '1px solid #f59e0b' : '1px solid rgba(255,255,255,0.1)',
+              color: viewMode === 'special-watchlist' ? '#fbbf24' : 'var(--text-primary)',
+              fontWeight: 700, borderRadius: '10px', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '8px'
+            }}
+            onClick={() => { setViewMode('special-watchlist'); setSelectedCompany(null); setSelectedReport(null); setSidebarOpen(false); }}
+          >
+            <Star size={16} color="#fbbf24" />
+            <span>🌟 특별 관심종목 (6선)</span>
+          </button>
           <div style={{ display:'flex', gap:'6px' }}>
             <button className={`tab-btn ${viewMode==='research'?'active':''}`}
               style={{ flex:1, padding:'8px', fontSize:'0.8rem', cursor:'pointer' }}
@@ -576,7 +593,9 @@ function App() {
 
       {/* Main */}
       <div className="main-content">
-        {viewMode === 'agent-workspace' ? (
+        {viewMode === 'special-watchlist' ? (
+          <SpecialWatchlistView onSelectCompany={fetchCompanyFull} />
+        ) : viewMode === 'agent-workspace' ? (
           <AgentWorkspace onSelectCompany={fetchCompanyFull} />
         ) : viewMode === 'pdf-library' ? (
           <PdfLibraryView />
@@ -2150,6 +2169,427 @@ function HomeDashboard({ reports, onSelect }) {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+// ── SpecialWatchlistView (Milestone 2: 특별 관심종목 6선 전용 심층 뷰) ──────────────
+function SpecialWatchlistView({ onSelectCompany }) {
+  const [stocks, setStocks] = useState(staticSpecialWatchlistData?.stocks || []);
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [refreshStatus, setRefreshStatus] = useState('');
+  const [expandedTimelines, setExpandedTimelines] = useState({
+    UBER: true,
+    FLNC: false,
+    MBLY: false,
+    UPST: false,
+    TSLA: false,
+    '402340.KS': false,
+  });
+  const [sentimentFilter, setSentimentFilter] = useState('ALL');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [toast, setToast] = useState(null);
+
+  useEffect(() => {
+    loadSpecialWatchlist();
+  }, []);
+
+  const loadSpecialWatchlist = async () => {
+    try {
+      // 1. Fetch from authoritative API
+      const res = await axios.get(`${API_BASE}/v1/special-watchlist`, { timeout: 5000 });
+      if (res.data?.stocks && Array.isArray(res.data.stocks) && res.data.stocks.length > 0) {
+        setStocks(res.data.stocks);
+        return;
+      }
+    } catch (e) {
+      try {
+        const res2 = await axios.get(`${API_BASE}/special-watchlist`, { timeout: 5000 });
+        if (res2.data?.stocks && Array.isArray(res2.data.stocks) && res2.data.stocks.length > 0) {
+          setStocks(res2.data.stocks);
+          return;
+        }
+      } catch (e2) {}
+    }
+
+    // 2. Graceful fallback to static JSON
+    try {
+      const staticRes = await axios.get(`./special_watchlist_data.json?t=${Date.now()}`);
+      if (staticRes.data?.stocks && Array.isArray(staticRes.data.stocks) && staticRes.data.stocks.length > 0) {
+        setStocks(staticRes.data.stocks);
+        return;
+      }
+    } catch (err) {
+      if (staticSpecialWatchlistData?.stocks) {
+        setStocks(staticSpecialWatchlistData.stocks);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleTriggerRefresh = async () => {
+    if (refreshing) return;
+    setRefreshing(true);
+    setRefreshStatus('글로벌 외신(Bloomberg/Reuters/CNBC) 증분 수집 및 AI 타임라인 분석 중...');
+    try {
+      let res;
+      try {
+        res = await axios.post(`${API_BASE}/v1/special-watchlist/refresh`, {}, { timeout: 45000 });
+      } catch (err1) {
+        res = await axios.post(`${API_BASE}/special-watchlist/refresh`, {}, { timeout: 45000 });
+      }
+      if (res?.data?.stocks && Array.isArray(res.data.stocks) && res.data.stocks.length > 0) {
+        setStocks(res.data.stocks);
+      } else {
+        await loadSpecialWatchlist();
+      }
+      setToast({ type: 'success', msg: '✨ 6개 특별 관심종목 외신 리포트 및 타임라인 최신화가 완료되었습니다!' });
+    } catch (err) {
+      console.warn("Refresh fallback:", err);
+      setToast({ type: 'warning', msg: '네트워크 지연 발생. 직전 캐시된 외신 히스토리를 유지합니다.' });
+      await loadSpecialWatchlist();
+    } finally {
+      setRefreshing(false);
+      setRefreshStatus('');
+      setTimeout(() => setToast(null), 5000);
+    }
+  };
+
+  const toggleTimeline = (ticker) => {
+    setExpandedTimelines(prev => ({ ...prev, [ticker]: !prev[ticker] }));
+  };
+
+  // Filter stocks
+  const filteredStocks = stocks.filter(stock => {
+    if (searchQuery.trim() !== '') {
+      const q = searchQuery.toLowerCase();
+      const matchText = `${stock.name || ''} ${stock.name_ko || ''} ${stock.ticker || ''} ${stock.sector || ''} ${stock.business_model || ''} ${stock.moat_analysis || ''} ${stock.key_risks || ''}`.toLowerCase();
+      if (!matchText.includes(q)) return false;
+    }
+    return true;
+  });
+
+  return (
+    <div className="special-watchlist-view" style={{ animation: 'fadeIn 0.3s ease', paddingBottom: '60px' }}>
+      {/* ── Top Toast Notification ── */}
+      {toast && (
+        <div style={{
+          position: 'fixed', top: '24px', right: '24px', zIndex: 9999,
+          background: toast.type === 'success' ? 'rgba(16, 185, 129, 0.95)' : 'rgba(245, 158, 11, 0.95)',
+          color: 'white', padding: '12px 20px', borderRadius: '10px', fontWeight: 600,
+          boxShadow: '0 8px 24px rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', gap: '10px'
+        }}>
+          <span>{toast.type === 'success' ? '✅' : '⚠️'}</span>
+          <span>{toast.msg}</span>
+        </div>
+      )}
+
+      {/* ── Page Header ── */}
+      <div className="page-header" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '24px', marginBottom: '28px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+              <span style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '4px 12px', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 700 }}>
+                🌟 SPECIAL WATCHLIST 6선
+              </span>
+              <span style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>전용 심층 스터디 & 시계열 외신 리포트 타임라인 트래커</span>
+            </div>
+            <h2 style={{ fontSize: '2.2rem', margin: 0, background: 'linear-gradient(135deg, #ffffff 0%, #fde68a 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              🌟 특별 관심종목 전용 심층 포털
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '6px' }}>
+              우버(UBER) · 플루언스에너지(FLNC) · 모빌아이(MBLY) · 업스타트(UPST) · 테슬라(TSLA) · SK스퀘어(402340.KS)
+            </p>
+          </div>
+
+          {/* ── One-Click Trigger Button (Requirement R3) ── */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
+            <button
+              onClick={handleTriggerRefresh}
+              disabled={refreshing}
+              style={{
+                background: refreshing ? 'rgba(59, 130, 246, 0.4)' : 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+                color: 'white', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '12px',
+                padding: '12px 22px', fontSize: '0.95rem', fontWeight: 800, cursor: refreshing ? 'not-allowed' : 'pointer',
+                display: 'flex', alignItems: 'center', gap: '10px', boxShadow: '0 4px 20px rgba(59, 130, 246, 0.4)',
+                transition: 'all 0.2s'
+              }}
+            >
+              <RefreshCw size={18} style={{ animation: refreshing ? 'spin 1s linear infinite' : 'none' }} />
+              <span>🔄 시계열 외신 최신화 (특별 관심종목 돌려줘)</span>
+            </button>
+            {refreshing && (
+              <span style={{ fontSize: '0.78rem', color: '#60a5fa', animation: 'pulse 1.5s infinite' }}>
+                {refreshStatus}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Search & Filter Controls ── */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          {[
+            { id: 'ALL', label: '전체 외신' },
+            { id: 'POSITIVE', label: '🟢 호재 뉴스' },
+            { id: 'NEGATIVE', label: '🔴 리스크/악재' },
+            { id: 'NEUTRAL', label: '⚪ 중립 분석' },
+          ].map(f => (
+            <button
+              key={f.id}
+              onClick={() => setSentimentFilter(f.id)}
+              style={{
+                padding: '6px 14px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
+                background: sentimentFilter === f.id ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255,255,255,0.04)',
+                color: sentimentFilter === f.id ? '#60a5fa' : 'var(--text-secondary)',
+                border: sentimentFilter === f.id ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.08)'
+              }}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+        <input
+          type="text"
+          placeholder="종목명, 티커, 해자, BM, 리스크 검색..."
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+          style={{
+            padding: '8px 14px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.15)',
+            background: 'rgba(15,23,42,0.6)', color: 'white', fontSize: '0.85rem', width: '280px', outline: 'none'
+          }}
+        />
+      </div>
+
+      {/* ── Stock Cards Grid ── */}
+      {loading ? (
+        <div className="glass-panel" style={{ padding: '60px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+          <RefreshCw size={32} style={{ animation: 'spin 1s linear infinite', margin: '0 auto 16px', display: 'block', color: 'var(--accent-blue)' }} />
+          특별 관심종목 심층 스터디 데이터를 로드 중입니다...
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+          {filteredStocks.map(stock => {
+            const isTimelineOpen = !!expandedTimelines[stock.ticker];
+            const timelineList = (stock.timeline || []).filter(item => {
+              if (sentimentFilter === 'ALL') return true;
+              return item.sentiment === sentimentFilter;
+            });
+
+            return (
+              <div
+                key={stock.ticker}
+                className="glass-panel special-stock-card"
+                style={{
+                  borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)',
+                  background: 'linear-gradient(145deg, rgba(26,29,36,0.95), rgba(15,17,21,0.98))',
+                  padding: '24px', overflow: 'hidden'
+                }}
+              >
+                {/* 1. Card Top: Identity, Badges, Price/MDD */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '20px' }}>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                      <span 
+                        style={{ fontSize: '1.4rem', fontWeight: 800, color: 'white', cursor: onSelectCompany ? 'pointer' : 'default' }}
+                        onClick={() => onSelectCompany && onSelectCompany(stock.id, stock)}
+                      >
+                        {stock.name_ko}
+                      </span>
+                      <span style={{ fontSize: '1rem', color: '#60a5fa', fontWeight: 700 }}>{stock.ticker}</span>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', background: 'rgba(255,255,255,0.06)', padding: '2px 8px', borderRadius: '6px' }}>
+                        {stock.exchange || (isKrw(stock.ticker) ? 'KRX' : 'NASDAQ')}
+                      </span>
+                      <span style={{
+                        fontSize: '0.75rem', fontWeight: 700, padding: '2px 8px', borderRadius: '6px',
+                        background: stock.portfolio_tier === 'Core' ? 'rgba(59,130,246,0.2)' : stock.portfolio_tier === 'Satellite' ? 'rgba(139,92,246,0.2)' : stock.portfolio_tier === 'Watchlist' ? 'rgba(245,158,11,0.2)' : 'rgba(255,255,255,0.08)',
+                        color: stock.portfolio_tier === 'Core' ? '#60a5fa' : stock.portfolio_tier === 'Satellite' ? '#c084fc' : stock.portfolio_tier === 'Watchlist' ? '#fbbf24' : '#94a3b8'
+                      }}>
+                        {stock.portfolio_tier}
+                      </span>
+                      {onSelectCompany && (
+                        <button
+                          onClick={() => onSelectCompany(stock.id, stock)}
+                          style={{
+                            background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)',
+                            color: '#60a5fa', borderRadius: '6px', padding: '2px 8px', fontSize: '0.75rem',
+                            cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px'
+                          }}
+                        >
+                          <span>기업 상세</span>
+                          <ExternalLink size={11} />
+                        </button>
+                      )}
+                    </div>
+                    <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+                      {stock.name} · {stock.sector}
+                    </div>
+                  </div>
+
+                  {/* Price & MDD Metrics */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', background: 'rgba(0,0,0,0.3)', padding: '10px 18px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
+                    <div>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>현재가</div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'white' }}>
+                        {fDollar(stock.current_price, stock.ticker)}
+                      </div>
+                    </div>
+                    <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '14px' }}>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>52주 최고가</div>
+                      <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'rgba(255,255,255,0.8)' }}>
+                        {fDollar(stock.high_52w, stock.ticker)}
+                      </div>
+                    </div>
+                    <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '14px' }}>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>고점대비 MDD</div>
+                      <div style={{ fontSize: '1rem', fontWeight: 800, color: (stock.mdd_pct || 0) <= -25 ? '#34d399' : '#f87171' }}>
+                        {stock.mdd_pct != null ? `${stock.mdd_pct.toFixed(1)}%` : '-'}
+                      </div>
+                    </div>
+                    <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '14px' }}>
+                      <span style={{
+                        padding: '4px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700,
+                        background: (stock.buy_signal?.includes('BUY_READY') || stock.buy_signal?.includes('매수적기') || stock.buy_signal?.includes('극단폭락')) ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.2)',
+                        color: (stock.buy_signal?.includes('BUY_READY') || stock.buy_signal?.includes('매수적기') || stock.buy_signal?.includes('극단폭락')) ? '#34d399' : '#f87171',
+                        border: (stock.buy_signal?.includes('BUY_READY') || stock.buy_signal?.includes('매수적기') || stock.buy_signal?.includes('극단폭락')) ? '1px solid rgba(16,185,129,0.4)' : '1px solid rgba(239,68,68,0.4)'
+                      }}>
+                        {stock.buy_signal || 'WAIT'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Deep Study 5-Dimension Grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px', marginBottom: '20px' }}>
+                  {/* Moat */}
+                  <div style={{ background: 'rgba(0,0,0,0.25)', padding: '16px', borderRadius: '12px', borderLeft: '3px solid #8b5cf6' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#c084fc', marginBottom: '6px' }}>🛡️ 독점 병목 해자</div>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', lineHeight: '1.6' }}>
+                      {stock.moat_analysis || stock.study?.moat_analysis || stock.moat_bottleneck}
+                    </div>
+                  </div>
+
+                  {/* Business Model */}
+                  <div style={{ background: 'rgba(0,0,0,0.25)', padding: '16px', borderRadius: '12px', borderLeft: '3px solid #3b82f6' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#60a5fa', marginBottom: '6px' }}>💼 비즈니스 모델 & 가치 창출</div>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', lineHeight: '1.6' }}>
+                      {stock.business_model || stock.study?.business_model}
+                    </div>
+                  </div>
+
+                  {/* TAM & Growth */}
+                  <div style={{ background: 'rgba(0,0,0,0.25)', padding: '16px', borderRadius: '12px', borderLeft: '3px solid #10b981' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#34d399', marginBottom: '6px' }}>🚀 TAM 및 구조적 성장 동력</div>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', lineHeight: '1.6' }}>
+                      {stock.tam_growth_drivers || stock.study?.tam_growth_drivers}
+                    </div>
+                  </div>
+
+                  {/* Financial Margins */}
+                  <div style={{ background: 'rgba(0,0,0,0.25)', padding: '16px', borderRadius: '12px', borderLeft: '3px solid #f59e0b' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fbbf24', marginBottom: '6px' }}>💰 재무 체질 & 이익률 (OPM/ROE)</div>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', lineHeight: '1.6' }}>
+                      <div style={{ marginBottom: '6px', color: '#fde68a', fontWeight: 600 }}>
+                        <strong>OPM:</strong> {stock.opm != null ? `${stock.opm.toFixed(1)}%` : (stock.study?.opm != null ? `${stock.study.opm.toFixed(1)}%` : '-')} | <strong>ROE:</strong> {stock.roe != null ? `${stock.roe.toFixed(1)}%` : (stock.study?.roe != null ? `${stock.study.roe.toFixed(1)}%` : '-')}
+                        {stock.fcf_status && <span style={{ marginLeft: '8px', fontSize: '0.8rem', color: '#93c5fd' }}>({stock.fcf_status})</span>}
+                      </div>
+                      <div>{stock.financial_margins || stock.study?.financial_margins}</div>
+                    </div>
+                  </div>
+
+                  {/* Risks */}
+                  <div style={{ background: 'rgba(0,0,0,0.25)', padding: '16px', borderRadius: '12px', borderLeft: '3px solid #ef4444' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#f87171', marginBottom: '6px' }}>⚠️ 핵심 투자 리스크 & 모니터링</div>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', lineHeight: '1.6' }}>
+                      {stock.key_risks || stock.study?.key_risks}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Interactive Expandable Timeline Section */}
+                <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '16px' }}>
+                  <div
+                    onClick={() => toggleTimeline(stock.ticker)}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                      padding: '10px 16px', borderRadius: '10px', background: 'rgba(59, 130, 246, 0.08)',
+                      cursor: 'pointer', transition: 'all 0.2s', border: '1px solid rgba(59, 130, 246, 0.2)'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#60a5fa', fontWeight: 700, fontSize: '0.9rem' }}>
+                      <Activity size={16} />
+                      <span>시계열 외신 리포트 히스토리 ({timelineList.length}건 누적)</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-secondary)', fontSize: '0.82rem' }}>
+                      <span>{isTimelineOpen ? '접기' : '펼쳐보기'}</span>
+                      {isTimelineOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                    </div>
+                  </div>
+
+                  {/* Expandable Timeline Feed */}
+                  {isTimelineOpen && (
+                    <div style={{ marginTop: '16px', paddingLeft: '12px', borderLeft: '2px dashed rgba(59, 130, 246, 0.3)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      {timelineList.length === 0 ? (
+                        <div style={{ padding: '16px', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                          선택한 필터 조건에 부합하는 외신 기사가 없습니다.
+                        </div>
+                      ) : (
+                        timelineList.map((item, idx) => {
+                          const sentColor = item.sentiment === 'POSITIVE' ? '#10b981' : item.sentiment === 'NEGATIVE' ? '#ef4444' : '#94a3b8';
+                          const sentText = item.sentiment === 'POSITIVE' ? '호재 (Positive)' : item.sentiment === 'NEGATIVE' ? '악재 (Risk)' : '중립 (Neutral)';
+
+                          return (
+                            <div
+                              key={item.news_id || idx}
+                              style={{
+                                background: 'rgba(15,23,42,0.6)', padding: '16px 20px', borderRadius: '10px',
+                                border: '1px solid rgba(255,255,255,0.06)', position: 'relative'
+                              }}
+                            >
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
+                                <span style={{ fontSize: '0.75rem', color: '#60a5fa', fontWeight: 700 }}>📅 {item.publish_date || item.date}</span>
+                                <span style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.08)', padding: '2px 8px', borderRadius: '4px', color: 'white', fontWeight: 600 }}>
+                                  {item.source}
+                                </span>
+                                <span style={{ fontSize: '0.75rem', color: sentColor, border: `1px solid ${sentColor}40`, padding: '2px 8px', borderRadius: '10px', fontWeight: 700 }}>
+                                  {sentText}
+                                </span>
+                              </div>
+
+                              <h4 style={{ margin: '0 0 8px 0', fontSize: '1rem', color: 'white', fontWeight: 700 }}>
+                                {item.headline}
+                              </h4>
+
+                              <p style={{ margin: '0 0 10px 0', fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.6' }}>
+                                {item.summary}
+                              </p>
+
+                              {(item.key_takeaways || item.takeaways) && (
+                                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '10px 14px', borderRadius: '8px', marginBottom: '8px', fontSize: '0.8rem', color: '#a5b4fc', lineHeight: '1.5', whiteSpace: 'pre-line' }}>
+                                  <strong>📌 핵심 시사점:</strong> {item.key_takeaways || item.takeaways}
+                                </div>
+                              )}
+
+                              {item.price_impact && (
+                                <div style={{ fontSize: '0.8rem', color: '#34d399', fontWeight: 600 }}>
+                                  💡 <strong>주가 영향 분석:</strong> {item.price_impact}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

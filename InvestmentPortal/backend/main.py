@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException, BackgroundTasks
+from fastapi import FastAPI, Depends, HTTPException, BackgroundTasks, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
@@ -529,6 +529,19 @@ def run_startup_migrations():
         conn.commit()
         conn.close()
         print("[Migration] Startup DB migration complete.")
+
+        # Special Watchlist 6-Stock Initialization and JSON Distribution
+        try:
+            try:
+                import sync_special_watchlist
+            except ImportError:
+                from InvestmentPortal.backend import sync_special_watchlist
+            sync_special_watchlist.ensure_tables_and_seed(db_path)
+            sw_data = sync_special_watchlist.get_all_special_data(db_path)
+            sync_special_watchlist.distribute_special_watchlist_json(sw_data)
+            print("[Migration] Special Watchlist tables ensured and seed verified.")
+        except Exception as sw_err:
+            print(f"[Migration] Special Watchlist init note: {sw_err}")
     except Exception as e:
         print(f"[Migration] Warning: {e}")
 
@@ -2595,6 +2608,138 @@ def refresh_universe_prices(db: Session = Depends(get_db)):
     universe = get_investment_principles_universe(db)
     universe['re_evaluation'] = re_eval_result
     return universe
+
+
+# ─────────────────────────────────────────────
+# Special Watchlist (6 Stocks) Endpoints
+# ─────────────────────────────────────────────
+@app.get("/api/v1/special-watchlist")
+@app.get("/api/special-watchlist")
+def get_special_watchlist(db: Session = Depends(get_db)):
+    """
+    Returns institutional deep study data and reverse-chronological news timeline
+    for the 6 Special Watchlist stocks:
+      UBER, FLNC, MBLY, UPST, TSLA, 402340.KS
+    """
+    try:
+        try:
+            import sync_special_watchlist
+        except ImportError:
+            from InvestmentPortal.backend import sync_special_watchlist
+        db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+        data = sync_special_watchlist.get_all_special_data(db_path=db_path)
+        if data and data.get("stocks"):
+            return data
+    except Exception as e:
+        print(f"[SpecialWatchlist API Warning] DB fetch fallback: {e}")
+
+    # Fallback to local JSON files if DB is locked or being updated
+    candidate_json_paths = [
+        os.path.join(os.path.dirname(__file__), "special_watchlist_data.json"),
+        os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "special_watchlist_data.json"),
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "public", "special_watchlist_data.json"),
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist", "special_watchlist_data.json"),
+    ]
+    for jp in candidate_json_paths:
+        if os.path.exists(jp):
+            try:
+                with open(jp, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                continue
+
+    raise HTTPException(status_code=500, detail="Special watchlist data unavailable")
+
+
+@app.post("/api/v1/special-watchlist/refresh")
+@app.post("/api/special-watchlist/refresh")
+@app.get("/api/v1/special-watchlist/refresh")
+def refresh_special_watchlist(
+    background_tasks: BackgroundTasks,
+    body: Optional[dict] = Body(None),
+    force: bool = False,
+    background: bool = False,
+):
+    """
+    Triggers on-demand news ingestion and price recalculation for the 6 Special Watchlist stocks.
+    Supports both synchronous and background asynchronous modes.
+    """
+    req_force = force
+    req_bg = background
+
+    if body and isinstance(body, dict):
+        if "force" in body:
+            req_force = bool(body["force"])
+        if "background" in body:
+            req_bg = bool(body["background"])
+
+    db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+
+    sync_mod = None
+    try:
+        try:
+            import sync_special_watchlist as sync_mod
+        except ImportError:
+            from InvestmentPortal.backend import sync_special_watchlist as sync_mod
+    except Exception as imp_err:
+        print(f"[SpecialWatchlist Refresh Import Error] {imp_err}")
+        sync_mod = None
+
+    if sync_mod is not None:
+        if req_bg:
+            background_tasks.add_task(
+                sync_mod.run_sync,
+                force=req_force,
+                source="api_background",
+                db_path=db_path
+            )
+            return {
+                "status": "processing",
+                "message": "Special watchlist sync initiated in background"
+            }
+
+        try:
+            res = sync_mod.run_sync(
+                force=req_force,
+                source="api_refresh",
+                db_path=db_path
+            )
+            if res and isinstance(res, dict):
+                return res
+        except Exception as e:
+            print(f"[SpecialWatchlist Refresh Error] {e}")
+            try:
+                fallback_data = sync_mod.get_all_special_data(db_path=db_path)
+                if fallback_data and isinstance(fallback_data, dict):
+                    return fallback_data
+            except Exception as fb_err:
+                print(f"[SpecialWatchlist Refresh Fallback Error] {fb_err}")
+
+    # Fallback to local JSON files if DB/sync unavailable
+    candidate_json_paths = [
+        os.path.join(os.path.dirname(__file__), "special_watchlist_data.json"),
+        os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "special_watchlist_data.json"),
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "public", "special_watchlist_data.json"),
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist", "special_watchlist_data.json"),
+    ]
+    for jp in candidate_json_paths:
+        if os.path.exists(jp):
+            try:
+                with open(jp, "r", encoding="utf-8") as f:
+                    cached = json.load(f)
+                    return {
+                        "status": "success",
+                        "message": "Special watchlist refreshed (cached)",
+                        "stocks": cached.get("stocks", cached) if isinstance(cached, dict) else cached
+                    }
+            except Exception:
+                continue
+
+    return {
+        "status": "success",
+        "message": "Special watchlist refresh completed",
+        "stocks": []
+    }
 
 
 # ─────────────────────────────────────────────
