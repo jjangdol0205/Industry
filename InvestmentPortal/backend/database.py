@@ -7,8 +7,21 @@ _DB_PATH = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "investme
 SQLALCHEMY_DATABASE_URL = f"sqlite:///{_DB_PATH}"
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+    SQLALCHEMY_DATABASE_URL,
+    connect_args={"check_same_thread": False, "timeout": 30.0}
 )
+
+from sqlalchemy import event
+
+@event.listens_for(engine, "connect")
+def set_sqlite_pragma(dbapi_connection, connection_record):
+    cursor = dbapi_connection.cursor()
+    try:
+        cursor.execute("PRAGMA busy_timeout = 30000;")
+    except Exception:
+        pass
+    cursor.close()
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()

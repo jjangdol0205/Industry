@@ -145,6 +145,8 @@ class SpecialWatchlistStudySchema(BaseModel):
     valuation_thesis: Optional[str] = None
     institutional_verdict: Optional[str] = None
     target_price: Optional[float] = None
+    technical_cockpit: Optional[dict] = None
+    industry_dynamics: Optional[dict] = None
     study: Optional[dict] = None
     study_json: Optional[str] = None
     timeline: List[SpecialWatchlistTimelineItem] = []

@@ -57,6 +57,16 @@ except ImportError:
     except ImportError:
         ie = None
 
+
+def get_db_connection(target_path: Union[str, Path], timeout: float = 30.0) -> sqlite3.Connection:
+    """Creates a SQLite connection with 30s busy timeout to prevent 'database is locked' errors."""
+    conn = sqlite3.connect(str(target_path), timeout=timeout)
+    try:
+        conn.execute("PRAGMA busy_timeout = 30000;")
+    except Exception:
+        pass
+    return conn
+
 # ==============================================================================
 # 1. Curated Institutional Research Baseline (5 Dimensions)
 # ==============================================================================
@@ -136,7 +146,36 @@ SEED_STUDIES = {   'UBER': {   'ticker': 'UBER',
                                          'stop_loss': {'price': 64.0, 'desc': '$65 심리적 마디가 및 전저점 하향 이탈 시 (-7.7%)'},
                                          'risk_reward_ratio': '1:2.9',
                                          'tactical_action': '$66~$67 볼린저 하단 지지 확인 시 1차 분할 매수. $73.5 돌파 시 2차 비중 확대. $64 '
-                                                            '손절선 철저 준수.'}},
+                                                            '손절선 철저 준수.'},
+                'industry_dynamics': {
+                    'industry_name': '글로벌 모빌리티 & 라스트마일 딜리버리 플랫폼',
+                    'tam_current': '$1,500B (2024년)',
+                    'tam_current_val': 1500,
+                    'tam_current_unit': 'USD B',
+                    'tam_2030': '$5,000B (2030년 예상)',
+                    'tam_2030_val': 5000,
+                    'cagr_2030': 17.5,
+                    'cagr_display': '+17.5%',
+                    'market_share_pct': 74.0,
+                    'market_share_display': '74.0%',
+                    'market_rank': '글로벌 1위 독점적 과점 플랫폼 (북미 74%)',
+                    'segment_scope': '북미 라이드헤일링 & 글로벌 딜리버리 플랫폼',
+                    'share_outlook': '확대 우세 (Expanding)',
+                    'share_outlook_badge': '확대 우세',
+                    'defense_rating': '최상급 (S등급)',
+                    'defense_score': 96,
+                    'research_sources': 'Goldman Sachs, Bloomberg Intelligence, McKinsey',
+                    'expansion_drivers': [
+                        '글로벌 70개국 1.5억 명 MAU 기반 압도적 양면 네트워크 효과 및 우버 원(Uber One) 멤버십 락인',
+                        '웨이모(Waymo) 등 선도 AV 제조사의 독점적 플랫폼 제휴로 로보택시 디스패처 병목 지위 선점',
+                        '고마진 광고 사업 연 40%+ 성장 및 모빌리티-배달(Uber Eats) 간 크로스셀링 효율 극대화',
+                    ],
+                    'threat_factors': [
+                        '테슬라(사이버캡) 등 자체 앱 기반 독립 로보택시 플릿 구축을 추진하는 OEM의 플랫폼 우회 리스크',
+                        '각국 정부의 긱 워커(Gig-Worker) 노동자성 인정 입법 및 플랫폼 수수료율 상한 규제',
+                    ],
+                    'defense_rationale': '로보택시 경제학의 본질은 차량 제조가 아닌 승객 수요 밀도(Demand Density)이며, 제조사가 독자 앱을 운영하면 공차율이 급증해 채산성이 악화되므로 우버 플랫폼 합류가 구조적 필연입니다.',
+                }},
     'FLNC': {   'ticker': 'FLNC',
                 'name': 'Fluence Energy',
                 'name_ko': '플루언스에너지',
@@ -210,7 +249,36 @@ SEED_STUDIES = {   'UBER': {   'ticker': 'UBER',
                                          'stop_loss': {'price': 6.5, 'desc': '역사적 신저점 이탈 시 리스크 관리 손절 (-16.9%)'},
                                          'risk_reward_ratio': '1:5.4',
                                          'tactical_action': 'MDD -76.7% 및 RSI 26.8 극단 과매도 구간. $7.0~$7.5 분할 매집 개시. '
-                                                            '$8.90 돌파 시 추세 전환 확인.'}},
+                                                            '$8.90 돌파 시 추세 전환 확인.'},
+                'industry_dynamics': {
+                    'industry_name': '유틸리티급 대규모 BESS(에너지저장장치) & AI 그리드 인프라',
+                    'tam_current': '$55B (2024년)',
+                    'tam_current_val': 55,
+                    'tam_current_unit': 'USD B',
+                    'tam_2030': '$150B (2030년 예상)',
+                    'tam_2030_val': 150,
+                    'cagr_2030': 27.2,
+                    'cagr_display': '+27.2%',
+                    'market_share_pct': 22.0,
+                    'market_share_display': '22.0%',
+                    'market_rank': '글로벌 유틸리티 BESS 시스템 통합 1위 (Non-China 1위)',
+                    'segment_scope': '글로벌 유틸리티급 BESS 솔루션 & AI 전력 소프트웨어',
+                    'share_outlook': '확대 우세 (Expanding)',
+                    'share_outlook_badge': '확대 우세',
+                    'defense_rating': '우수 (A+등급)',
+                    'defense_score': 88,
+                    'research_sources': 'Bloomberg NEF (BNEF), Wood Mackenzie, Goldman Sachs',
+                    'expansion_drivers': [
+                        '지멘스 & AES 합작 혈통 기반 글로벌 47개국 20GW+ 전력망 계통 연계(Interconnection) 인허가 독점 트랙레코드',
+                        'AI 전력 거래 최적화 SaaS(Fluence IQ) 플랫폼을 통한 전환 비용(Switching Costs) 해자 및 10년 구독 ARR',
+                        '미국 유타주 현지 조립 라인 가동(Made in USA)으로 IRA 45X 보조금 수혜 및 대중 관세 장벽 완벽 회피',
+                    ],
+                    'threat_factors': [
+                        '테슬라 메가팩(Megapack)의 수직계열화 공장 증설 기반 공격적 가격 인하 및 납기 단축 경쟁',
+                        'CATL, BYD 등 중국산 저가 LFP 셀 기반 글로벌 SI 기업들의 저가 출혈 수주 공세',
+                    ],
+                    'defense_rationale': '전력망 유틸리티 시장은 단순 배터리 조립이 아닌 전력 계통 신뢰성과 인허가가 핵심 병목이며, Fluence IQ 소프트웨어를 결합한 입찰 최적화로 경쟁사 대비 20~30% 높은 수익성을 발전사에 보장합니다.',
+                }},
     'MBLY': {   'ticker': 'MBLY',
                 'name': 'Mobileye Global',
                 'name_ko': '모빌아이',
@@ -285,7 +353,36 @@ SEED_STUDIES = {   'UBER': {   'ticker': 'UBER',
                                          'stop_loss': {'price': 6.9, 'desc': '$7.0 라운드넘버 지지선 붕괴 시 (-8.9%)'},
                                          'risk_reward_ratio': '1:4.3',
                                          'tactical_action': '볼린저 하단(%b 0.10) 바닥권. $7.30~$7.50 구간 적극 분할 진입. $8.10 돌파 시 '
-                                                            '스윙 홀딩.'}},
+                                                            '스윙 홀딩.'},
+                'industry_dynamics': {
+                    'industry_name': '글로벌 ADAS 카메라 SoC 및 자율주행(AV) 솔루션',
+                    'tam_current': '$28B (2024년)',
+                    'tam_current_val': 28,
+                    'tam_current_unit': 'USD B',
+                    'tam_2030': '$95B (2030년 예상)',
+                    'tam_2030_val': 95,
+                    'cagr_2030': 22.5,
+                    'cagr_display': '+22.5%',
+                    'market_share_pct': 68.0,
+                    'market_share_display': '68.0%',
+                    'market_rank': '글로벌 ADAS 비전 SoC 시장 1위 (누적 1.8억 대 공급)',
+                    'segment_scope': '글로벌 승용차 ADAS(L1~L2+) 전방 카메라 & 서라운드 비전',
+                    'share_outlook': '현상 유지 및 수성 (Defending)',
+                    'share_outlook_badge': '수성',
+                    'defense_rating': '안정적 (A등급)',
+                    'defense_score': 84,
+                    'research_sources': 'Gartner, TrendForce, Morgan Stanley, S&P Global Mobility',
+                    'expansion_drivers': [
+                        '글로벌 50개 이상 OEM에 걸쳐 검증된 1.8억 대 실차 탑재 트랙레코드 및 자동차 기능 안전성(ASIL-D) 표준 선점',
+                        '크라우드소싱 기반 실시간 고정밀 지도인 REM(Road Experience Management) 340억 km 데이터 자산',
+                        'EyeQ6 Lite/High 차세대 칩 양산 본격화 및 폭스바겐·포르쉐 SuperVision L2+ 대량 채택',
+                    ],
+                    'threat_factors': [
+                        '엔비디아(Drive Thor) 및 퀄컴(Snapdragon Ride)의 중앙집중형 고성능 자율주행 SoC 공세',
+                        '중국 전기차 OEM(샤오미, 화웨이, 비야디 등)의 자체 자율주행 칩 및 알고리즘 내재화 가속',
+                    ],
+                    'defense_rationale': '중앙집중형 컴퓨팅 칩셋 대비 1/3 이하의 가격과 저전력 강점으로 글로벌 대중차 세그먼트의 기본 ADAS 시장을 완벽 방어하고 있으며, 고마진 SuperVision 확대로 ASP 상승을 도모합니다.',
+                }},
     'UPST': {   'ticker': 'UPST',
                 'name': 'Upstart Holdings',
                 'name_ko': '업스타트홀딩스',
@@ -357,7 +454,36 @@ SEED_STUDIES = {   'UBER': {   'ticker': 'UBER',
                                          'stop_loss': {'price': 21.5, 'desc': '직전 최저점 이탈 시 즉시 손절 (-7.1%)'},
                                          'risk_reward_ratio': '1:7.6',
                                          'tactical_action': 'RSI 32.3 과매도 도달. $22.60 전후로 스윙 물량 1차 확보. $21.50 손절 라인 철저 '
-                                                            '준수.'}},
+                                                            '준수.'},
+                'industry_dynamics': {
+                    'industry_name': 'AI 머신러닝 기반 신용평가 및 대출 언더라이팅 플랫폼',
+                    'tam_current': '$820B (2024년)',
+                    'tam_current_val': 820,
+                    'tam_current_unit': 'USD B',
+                    'tam_2030': '$1,800B (2030년 예상)',
+                    'tam_2030_val': 1800,
+                    'cagr_2030': 14.0,
+                    'cagr_display': '+14.0%',
+                    'market_share_pct': 11.5,
+                    'market_share_display': '11.5%',
+                    'market_rank': '미국 AI 비은행 신용평가 대출 플랫폼 1위 (100+ 은행 제휴)',
+                    'segment_scope': '미국 비은행 개인 신용대출, 오토론 및 소액 HELOC',
+                    'share_outlook': '확대 우세 (Expanding)',
+                    'share_outlook_badge': '확대 우세',
+                    'defense_rating': '보통 (B+등급)',
+                    'defense_score': 78,
+                    'research_sources': 'Goldman Sachs, Federal Reserve Consumer Credit Data, TransUnion',
+                    'expansion_drivers': [
+                        '18세대 AI 모델과 2,000만 건 이상 상환 데이터 기반 FICO 대비 연체율 53% 감소 실증',
+                        '미국 연준(Fed) 기준금리 인하 사이클 도래에 따른 기관 대출 채권 매입 자금(Private Credit) 재유입',
+                        '오토론 및 소액 주택담보대출(HELOC) 신규 세그먼트 급성장 및 91% 무서류 자동 승인률',
+                    ],
+                    'threat_factors': [
+                        'JP모건, 웰스파고 등 초대형 상업은행의 자체 AI 언더라이팅 모델 내재화 개발 추진',
+                        '거시경제 급랭 및 고용 충격 시 서브프라임 차주 연체율 급등에 따른 펀딩 파트너 이탈 리스크',
+                    ],
+                    'defense_rationale': '100여 개 미국 중소형 은행 및 신협들은 자체 AI 모델을 구축할 데이터와 자본이 없으므로 업스타트 모델 도입이 최선이며, 금리 인하 국면에서 대출 취급액 레버리지가 극대화됩니다.',
+                }},
     'TSLA': {   'ticker': 'TSLA',
                 'name': 'Tesla',
                 'name_ko': '테슬라',
@@ -430,7 +556,36 @@ SEED_STUDIES = {   'UBER': {   'ticker': 'UBER',
                                          'stop_loss': {'price': 335.0, 'desc': '주요 횡보 박스권 하단 이탈 시 (-5.1%)'},
                                          'risk_reward_ratio': '1:3.7',
                                          'tactical_action': '350달러 지지력 확인 후 1차 매수. 366달러 20일선 돌파 시 추세 추종 매수. 335달러 손절가 '
-                                                            '설정.'}},
+                                                            '설정.'},
+                'industry_dynamics': {
+                    'industry_name': '차세대 EV, BESS 메가팩, FSD 자율주행 및 피지컬 AI(휴머노이드)',
+                    'tam_current': '$700B (2024년)',
+                    'tam_current_val': 700,
+                    'tam_current_unit': 'USD B',
+                    'tam_2030': '$4,500B (2030년 예상)',
+                    'tam_2030_val': 4500,
+                    'cagr_2030': 36.4,
+                    'cagr_display': '+36.4%',
+                    'market_share_pct': 51.0,
+                    'market_share_display': '51.0%',
+                    'market_rank': '미국 EV 시장 1위 (51%), 글로벌 자율주행 데이터 함대 1위',
+                    'segment_scope': '미국/글로벌 프리미엄 EV, 유틸리티 BESS 메가팩, FSD/로보택시',
+                    'share_outlook': '확대 우세 (Expanding)',
+                    'share_outlook_badge': '확대 우세',
+                    'defense_rating': '최상급 (S등급)',
+                    'defense_score': 97,
+                    'research_sources': 'Bloomberg NEF, Goldman Sachs, Ark Invest, Morgan Stanley',
+                    'expansion_drivers': [
+                        '600만 대 이상의 글로벌 실차 주행 데이터와 엔드투엔드(End-to-End) 신경망 기반 압도적 FSD AI 기술 격차',
+                        '연간 100%+ 폭발적 성장세를 기록 중인 유틸리티 BESS 메가팩(Megapack)의 수직계열화 고수익성',
+                        '언박스드(Unboxed) 프로세스 및 4680 배터리 양산을 통한 마일당 $0.20의 로보택시(Cybercab) 원가 파괴',
+                    ],
+                    'threat_factors': [
+                        '중국 BYD 등 현지 EV 제조사들의 초저가 전기차 글로벌 수출 공세 및 점유율 잠식 시도',
+                        '로보택시(Cybercab) 무인 상용화에 대한 각국 교통 규제 승인 지연 및 책임 소재 법제화 이슈',
+                    ],
+                    'defense_rationale': '차량 제조, 전용 AI 슈퍼컴퓨터(Dojo/Cortex), 분산 전력망(Megapack)을 수직 통합한 유일한 기업으로, 경쟁사들이 도달할 수 없는 원가 구조와 데이터 피드백 루프를 장악하고 있습니다.',
+                }},
     '402340.KS': {   'ticker': '402340.KS',
                      'name': 'SK Square',
                      'name_ko': 'SK스퀘어',
@@ -513,7 +668,36 @@ SEED_STUDIES = {   'UBER': {   'ticker': 'UBER',
                                                                'desc': '60일선 및 최근 저점 지지선 이탈 시 (-8.7%)'},
                                               'risk_reward_ratio': '1:6.7',
                                               'tactical_action': '110만 원 지지선 확인 후 분할 매수. 120만 원 돌파 시 추가 '
-                                                                 '불타기(Pyramiding) 진입. 손절가 104만 원 엄수.'}},
+                                                                 '불타기(Pyramiding) 진입. 손절가 104만 원 엄수.'},
+                'industry_dynamics': {
+                    'industry_name': '차세대 고대역폭메모리(HBM), 선단 AI 반도체 & 디지털 플랫폼 투자',
+                    'tam_current': '₩280조 ($210B, 2024년)',
+                    'tam_current_val': 210,
+                    'tam_current_unit': 'KRW 조',
+                    'tam_2030': '₩980조 ($720B, 2030년 예상)',
+                    'tam_2030_val': 720,
+                    'cagr_2030': 32.8,
+                    'cagr_display': '+32.8%',
+                    'market_share_pct': 53.0,
+                    'market_share_display': '53.0%',
+                    'market_rank': '글로벌 HBM 시장 1위 독점적 공급자 (SK하이닉스 20.07% 지배)',
+                    'segment_scope': '글로벌 AI 가속기용 선단 HBM3E/HBM4 및 서버용 DRAM',
+                    'share_outlook': '확대 우세 (Expanding)',
+                    'share_outlook_badge': '확대 우세',
+                    'defense_rating': '최상급 (S등급)',
+                    'defense_score': 98,
+                    'research_sources': 'TrendForce, Gartner, Macquarie Research, Morgan Stanley',
+                    'expansion_drivers': [
+                        '엔비디아 블랙웰(Blackwell)/루빈(Rubin) AI 가속기 향 HBM3E 8단/12단 독점적 메인 벤더 지위 확고',
+                        '독보적인 MR-MUF 어드밴스드 패키징 공정 수율 격차로 경쟁사(삼성전자·마이크론) 대비 발열/신뢰성 완승',
+                        'SK하이닉스 280조 원 규모 주주환원/배당금 수취 및 지주사 자체 자사주 매입/소각을 통한 NAV 할인율(70%→30%) 압축',
+                    ],
+                    'threat_factors': [
+                        '삼성전자와 마이크론의 HBM3E/HBM4 엔비디아 차기 플랫폼 납품 퀄 통과 및 점유율 양분 시도',
+                        '글로벌 AI 데이터센터 설비투자(CAPEX) 속도 조절 시 메모리 가격 변동성 확대',
+                    ],
+                    'defense_rationale': 'HBM은 범용 메모리가 아닌 엔비디아 GPU 설계 단계부터 긴밀히 맞춤 개발되는 커스텀 수주 반도체이며, MR-MUF 패키징의 기술적 진입 장벽으로 향후 3년간 1위 지배력이 유지됩니다.',
+                }},
     'ENPH': {   'ticker': 'ENPH',
                 'name': 'Enphase Energy',
                 'name_ko': '엔페이즈에너지',
@@ -592,7 +776,36 @@ SEED_STUDIES = {   'UBER': {   'ticker': 'UBER',
                                          'stop_loss': {'price': 29.5, 'desc': '30달러 심리적 마디가 붕괴 시 (-7.3%)'},
                                          'risk_reward_ratio': '1:6.3',
                                          'tactical_action': 'RSI 22.6 극단 과매도 침체. 31달러 부근 적극 분할 저점 매수. 29.50달러 손절가 필수 '
-                                                            '설정.'}},
+                                                            '설정.'},
+                'industry_dynamics': {
+                    'industry_name': '주거용 분산형 태양광 마이크로인버터 및 스마트 BESS 솔루션',
+                    'tam_current': '$12B (2024년)',
+                    'tam_current_val': 12,
+                    'tam_current_unit': 'USD B',
+                    'tam_2030': '$38B (2030년 예상)',
+                    'tam_2030_val': 38,
+                    'cagr_2030': 21.2,
+                    'cagr_display': '+21.2%',
+                    'market_share_pct': 48.0,
+                    'market_share_display': '48.0%',
+                    'market_rank': '미국 주거용 태양광 인버터 1위 (점유율 48%)',
+                    'segment_scope': '미국 및 유럽 주거용/소형 상업용 분산 전력 인버터 & 배터리',
+                    'share_outlook': '현상 유지 및 수성 (Defending)',
+                    'share_outlook_badge': '수성',
+                    'defense_rating': '우수 (A-등급)',
+                    'defense_score': 82,
+                    'research_sources': 'Wood Mackenzie, Goldman Sachs, Bloomberg NEF',
+                    'expansion_drivers': [
+                        '고전압 직류(DC) 화재 위험을 차단하는 모듈 레벨 급속 차단(Rapid Shutdown) 안전 규격 독점 특허',
+                        '차세대 GaN(질화갈륨) 기반 IQ9 인버터 출시로 초고효율 달성 및 데이터센터 800V DC 적용 다변화',
+                        '미국 및 유럽 유통 채널 재고 조정 완료에 따른 출하량 회복 및 4분기 턴어라운드 진입',
+                    ],
+                    'threat_factors': [
+                        '테슬라 파워월(Powerwall) 등 스트링 인버터 내장형 올인원 가정용 배터리의 가격 공세',
+                        '캘리포니아 NEM 3.0 요금제 개편 및 고금리 장기화에 따른 미국 가정용 태양광 설치 수요 둔화',
+                    ],
+                    'defense_rationale': '미국 전역 수천 개 주거용 태양광 설치업체(Installers)들이 엔페이즈의 플러그앤플레이(Plug-and-Play) 배선 간소화와 신뢰성(불량률 0.05% 미만)에 락인되어 있어 높은 방어력을 유지합니다.',
+                }},
     'CELH': {   'ticker': 'CELH',
                 'name': 'Celsius Holdings',
                 'name_ko': '셀시우스',
@@ -668,7 +881,36 @@ SEED_STUDIES = {   'UBER': {   'ticker': 'UBER',
                                          'stop_loss': {'price': 24.5, 'desc': '전저점 25달러 이탈 시 (-11.6%)'},
                                          'risk_reward_ratio': '1:2.6',
                                          'tactical_action': '26~27달러 구간 지지선 확인 후 분할 매수. 29.60달러 돌파 시 불타기. 24.50달러 손절가 '
-                                                            '설정.'}}}
+                                                            '설정.'},
+                'industry_dynamics': {
+                    'industry_name': '글로벌 기능성 피트니스 & 웰니스 클린 에너지 드링크',
+                    'tam_current': '$42B (2024년)',
+                    'tam_current_val': 42,
+                    'tam_current_unit': 'USD B',
+                    'tam_2030': '$90B (2030년 예상)',
+                    'tam_2030_val': 90,
+                    'cagr_2030': 13.5,
+                    'cagr_display': '+13.5%',
+                    'market_share_pct': 11.8,
+                    'market_share_display': '11.8%',
+                    'market_rank': '미국 에너지 드링크 3위 (천연 피트니스 부문 독보적 1위)',
+                    'segment_scope': '북미 및 글로벌 편의점/대형마트 기능성 피트니스 음료',
+                    'share_outlook': '확대 우세 (Expanding)',
+                    'share_outlook_badge': '확대 우세',
+                    'defense_rating': '보통 (B+등급)',
+                    'defense_score': 80,
+                    'research_sources': 'Euromonitor, Goldman Sachs, Morgan Stanley, Nielsen/Circana',
+                    'expansion_drivers': [
+                        '펩시코(PepsiCo)와의 북미 및 글로벌 독점 DSD 직배송 물류망 제휴를 통한 오프라인 매대 점유율(Share of Shelf) 장악',
+                        '아마존 에너지 음료 카테고리 21.5% 점유율 1위 및 MZ세대/여성 피트니스 고객층의 강력한 브랜드 로열티',
+                        '영국, 캐나다, 호주, 프랑스 등 펩시 글로벌 유통망을 통한 해외 인터내셔널 진출 본격화',
+                    ],
+                    'threat_factors': [
+                        '몬스터(Monster Energy)의 뱅(Bang) 인수 및 레드불(Red Bull)의 무설탕 제로 라인업 대대적 마케팅 공세',
+                        '펩시코의 도매 채널 재고 최적화 작업에 따른 단기 주문량 급변동 및 변동성',
+                    ],
+                    'defense_rationale': '자산 경량화(Asset-Light) 외주 생산 모델로 20% 수준의 높은 OPM과 무차입 순현금을 보유하고 있으며, 닐슨 POS 실구매 데이터에서 20%+ 최종 소비자 수요 증가세가 견고하게 유지되고 있습니다.',
+                }}}
 
 # ==============================================================================
 # 2. Curated Seed Time-Series News Timeline
@@ -1319,13 +1561,16 @@ def ensure_tables_and_seed(db_path: Optional[Union[str, Path]] = None) -> None:
     populates institutional seed research and seed timeline events,
     and registers UPST and 402340.KS into companies/company_profiles.
     """
-    paths_to_sync = [Path(db_path)] if db_path else [AUTHORITATIVE_DB_PATH] + [p for p in REPLICA_DB_PATHS if p.exists()]
+    if not db_path or Path(db_path).resolve() == AUTHORITATIVE_DB_PATH.resolve():
+        paths_to_sync = [AUTHORITATIVE_DB_PATH] + [p for p in REPLICA_DB_PATHS if p.exists()]
+    else:
+        paths_to_sync = [Path(db_path)]
 
     for target_path in paths_to_sync:
         if not target_path.parent.exists():
             target_path.parent.mkdir(parents=True, exist_ok=True)
 
-        conn = sqlite3.connect(str(target_path))
+        conn = get_db_connection(target_path)
         cur = conn.cursor()
 
         # 1. Create special_watchlist_studies table
@@ -1357,12 +1602,17 @@ def ensure_tables_and_seed(db_path: Optional[Union[str, Path]] = None) -> None:
                 valuation_thesis TEXT,
                 institutional_verdict TEXT,
                 target_price REAL,
+                industry_dynamics TEXT,
                 study_json TEXT,
                 created_at TEXT DEFAULT (datetime('now', 'localtime')),
                 updated_at TEXT DEFAULT (datetime('now', 'localtime'))
             );
         """)
         cur.execute("CREATE INDEX IF NOT EXISTS idx_sw_studies_ticker ON special_watchlist_studies(ticker);")
+        try:
+            cur.execute("ALTER TABLE special_watchlist_studies ADD COLUMN industry_dynamics TEXT;")
+        except sqlite3.OperationalError:
+            pass
 
         # 2. Create special_watchlist_timeline table
         cur.execute("""
@@ -1389,6 +1639,7 @@ def ensure_tables_and_seed(db_path: Optional[Union[str, Path]] = None) -> None:
         now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         for ticker, data in SEED_STUDIES.items():
             study_json_str = json.dumps(data, ensure_ascii=False)
+            ind_dyn_str = json.dumps(data.get("industry_dynamics", {}), ensure_ascii=False)
             cur.execute("""
                 INSERT INTO special_watchlist_studies (
                     ticker, name, name_ko, exchange, sector, portfolio_tier,
@@ -1396,8 +1647,8 @@ def ensure_tables_and_seed(db_path: Optional[Union[str, Path]] = None) -> None:
                     business_model, moat_analysis, moat_bottleneck, tam_growth_drivers,
                     financial_margins, opm, roe, gross_margin, fcf_status,
                     key_risks, catalysts, valuation_thesis, institutional_verdict,
-                    target_price, study_json, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    target_price, industry_dynamics, study_json, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(ticker) DO UPDATE SET
                     name=excluded.name,
                     name_ko=excluded.name_ko,
@@ -1422,6 +1673,7 @@ def ensure_tables_and_seed(db_path: Optional[Union[str, Path]] = None) -> None:
                     valuation_thesis=excluded.valuation_thesis,
                     institutional_verdict=excluded.institutional_verdict,
                     target_price=excluded.target_price,
+                    industry_dynamics=excluded.industry_dynamics,
                     study_json=excluded.study_json,
                     updated_at=excluded.updated_at
             """, (
@@ -1430,7 +1682,7 @@ def ensure_tables_and_seed(db_path: Optional[Union[str, Path]] = None) -> None:
                 data["business_model"], data["moat_analysis"], data.get("moat_bottleneck", data["moat_analysis"]), data["tam_growth_drivers"],
                 data.get("financial_margins"), data.get("opm"), data.get("roe"), data.get("gross_margin"), data.get("fcf_status"),
                 data["key_risks"], data.get("catalysts"), data.get("valuation_thesis"), data.get("institutional_verdict"),
-                data.get("target_price"), study_json_str, now_str
+                data.get("target_price"), ind_dyn_str, study_json_str, now_str
             ))
 
         # 4. Seed initial time-series timeline events with SHA-256 deduplication
@@ -1639,7 +1891,7 @@ def sync_stock_prices(tickers: List[str], db_path: Optional[Union[str, Path]] = 
     Falls back gracefully to database/cached values if offline.
     """
     updated_quotes = {}
-    conn = sqlite3.connect(str(db_path or AUTHORITATIVE_DB_PATH))
+    conn = get_db_connection(db_path or AUTHORITATIVE_DB_PATH)
     cur = conn.cursor()
 
     try:
@@ -1717,6 +1969,35 @@ def sync_stock_prices(tickers: List[str], db_path: Optional[Union[str, Path]] = 
 
     conn.commit()
     conn.close()
+
+    # Replicate updated quotes to existing replica databases
+    if not db_path or Path(db_path).resolve() == AUTHORITATIVE_DB_PATH.resolve():
+        for rep in REPLICA_DB_PATHS:
+            if rep.exists() and rep.resolve() != AUTHORITATIVE_DB_PATH.resolve():
+                try:
+                    rep_conn = get_db_connection(rep)
+                    rep_cur = rep_conn.cursor()
+                    for t, q in updated_quotes.items():
+                        clean_tk = t.replace('.KS', '')
+                        rep_cur.execute("""
+                            UPDATE special_watchlist_studies
+                            SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?, dca_stage=?, updated_at=datetime('now', 'localtime')
+                            WHERE ticker=?
+                        """, (q.get("current_price"), q.get("high_52w"), q.get("mdd_pct"), q.get("buy_signal"), q.get("dca_stage"), t))
+                        try:
+                            rep_cur.execute("""
+                                UPDATE company_profiles
+                                SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?, dca_stage=?, last_updated=datetime('now', 'localtime')
+                                WHERE company_id IN (SELECT id FROM companies WHERE ticker=? OR ticker=?)
+                            """, (q.get("current_price"), q.get("high_52w"), q.get("mdd_pct"), q.get("buy_signal"), q.get("dca_stage"), t, clean_tk))
+                        except sqlite3.OperationalError:
+                            pass
+                    rep_conn.commit()
+                    rep_conn.close()
+                except Exception as rep_err:
+                    if not silent:
+                        print(f"[SpecialSync] Note: replica quote sync skipped ({rep_err})")
+
     return updated_quotes
 
 
@@ -1726,7 +2007,7 @@ def fetch_live_news_incremental(tickers: List[str], db_path: Optional[Union[str,
     deduplicates using SHA-256 hash, and inserts new events into special_watchlist_timeline.
     Returns count of newly inserted news articles.
     """
-    conn = sqlite3.connect(str(db_path or AUTHORITATIVE_DB_PATH))
+    conn = get_db_connection(db_path or AUTHORITATIVE_DB_PATH)
     cur = conn.cursor()
     new_count = 0
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -1799,7 +2080,7 @@ def get_all_special_data(db_path: Optional[Union[str, Path]] = None) -> Dict[str
     # If DB doesn't have tables, ensure them first
     ensure_tables_and_seed(resolved_db)
 
-    conn = sqlite3.connect(str(resolved_db))
+    conn = get_db_connection(resolved_db)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
 
@@ -1868,6 +2149,18 @@ def get_all_special_data(db_path: Optional[Union[str, Path]] = None) -> Dict[str
         risk_mit = study_extra.get("risk_mitigation", {})
         tech_cockpit = study_extra.get("technical_cockpit", {})
 
+        # Extract industry_dynamics
+        ind_dyn = {}
+        if "industry_dynamics" in s.keys() and s["industry_dynamics"]:
+            try:
+                ind_dyn = json.loads(s["industry_dynamics"]) if isinstance(s["industry_dynamics"], str) else s["industry_dynamics"]
+            except Exception:
+                pass
+        if not ind_dyn and study_extra:
+            ind_dyn = study_extra.get("industry_dynamics", {})
+        if not ind_dyn:
+            ind_dyn = SEED_STUDIES.get(tk, {}).get("industry_dynamics", {})
+
         study_dict = {
             "business_model": s["business_model"],
             "moat_analysis": moat_text,
@@ -1886,7 +2179,8 @@ def get_all_special_data(db_path: Optional[Union[str, Path]] = None) -> Dict[str
             "investment_points": inv_points,
             "risk_points": risk_pts,
             "risk_mitigation": risk_mit,
-            "technical_cockpit": tech_cockpit
+            "technical_cockpit": tech_cockpit,
+            "industry_dynamics": ind_dyn
         }
 
         quote_dict = {
@@ -1930,6 +2224,7 @@ def get_all_special_data(db_path: Optional[Union[str, Path]] = None) -> Dict[str
             "risk_points": risk_pts,
             "risk_mitigation": risk_mit,
             "technical_cockpit": tech_cockpit,
+            "industry_dynamics": ind_dyn,
             "study": study_dict,
             "quote": quote_dict,
             "timeline": timeline_items,
@@ -2001,7 +2296,7 @@ def run_sync(
 
     # 2. Database Schema & Seed Verification
     resolved_db = Path(db_path) if db_path else AUTHORITATIVE_DB_PATH
-    ensure_tables_and_seed(resolved_db)
+    ensure_tables_and_seed(db_path)
 
     # 3. Synchronize Prices, 52w High & MDD
     price_results = sync_stock_prices(ticker_list, db_path=resolved_db, silent=silent)

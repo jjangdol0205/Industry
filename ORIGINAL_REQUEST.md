@@ -203,3 +203,48 @@ Integrity mode: development
 - [ ] 웹 대시보드 타임라인에서 유튜브 배지와 바로가기 링크 버튼이 정상 동작해야 함
 - [ ] 미디어 필터 탭(`전체 | 외신 뉴스 | 유튜브 인사이트`) 클릭 시 해당 미디어 항목만 즉각 필터링되어야 함
 - [ ] 전체 E2E 테스트 89개 100% 통과 및 프로덕션 빌드 성공
+
+## 2026-09-30T08:14:05Z
+
+This is a single self-contained feature; keep it small and focused.
+특별 관심종목 8개 기업의 산업별 시장 규모(TAM), 2030년 예상 연평균 성장률(CAGR), 현재 시장 점유율(Market Share) 및 향후 점유율 확대(Expand) vs 축소(Contract) 경쟁 역학 분석을 데이터베이스, 4대 정규 JSON, 그리고 포털 프론트엔드 대시보드(상단 8선 한눈에 보는 비교 매트릭스 표 + 각 기업별 상세 카드 전용 위젯)에 완벽하게 구축하고 E2E 회귀 테스트를 완료합니다.
+
+Working directory: d:\Industry
+Integrity mode: development
+
+## Requirements
+
+### R1. 8개 특별 관심종목 산업 규모(TAM) 및 예상 성장률(CAGR) 정량 데이터 모델링
+- 8개 종목(UBER, FLNC, MBLY, UPST, TSLA, 402340.KS, ENPH, CELH) 각각의 주력 산업 카테고리에 대해 현재 글로벌 시장 규모(TAM, USD/KRW)와 2030년까지의 예상 연평균 성장률(CAGR %)을 공신력 있는 시장조사기관(Bloomberg, Goldman Sachs, Gartner, TrendForce 등) 데이터에 기반하여 정량 수치로 모델링합니다.
+
+### R2. 현재 시장 점유율(Market Share) 및 경쟁 순위(Rank) 정량화
+- 각 기업의 주력 시장/핵심 세그먼트 내 실질 시장 점유율(Market Share %)과 시장 내 지위(글로벌 1위, 과점 지배자 등)를 정량 필드로 명시합니다.
+
+### R3. 점유율 향방(확대 우세 vs 축소 우려) 및 경쟁 역학(Dynamics) 분석
+- 점유율 전망 판정: `확대 우세 (Expanding)` / `현상 유지 및 수성 (Defending)` / `잠식 리스크 (Contracting Risk)`
+- 점유율 확대 요인(기술적 병목 해자, 네트워크 효과, 원가 파괴, 배타적 파트너십)과 점유율 위협 요인(빅테크/OEM 자체 내재화, 가격 출혈 경쟁, 규제 및 대체재)을 대조 분석하여 종합 방어력을 도출합니다.
+
+### R4. DB 영속화, 4대 정규 JSON 동기화 및 React UI 대시보드 연동
+- `sync_special_watchlist.py`에 산업 동학(`industry_dynamics`) 스키마를 영속화하고, `special_watchlist_studies.study_json` 및 4대 배포 경로(`special_watchlist_data.json` Root, Backend, Frontend Public, Frontend Dist)에 원자적으로 동기화합니다.
+- `App.jsx` 내 `<SpecialWatchlistView />`에:
+  1. 상단에 **[📊 8선 한눈에 보는 산업 규모·성장률·점유율 비교 매트릭스 표]**를 배치하여 8개 기업의 시장 지위와 성장성을 한눈에 조망하도록 합니다.
+  2. 각 기업별 카드 내에 **[📊 산업 규모·성장률 & 시장 점유율 동학 분석기]** 전용 위젯을 추가하여 점유율 프로그레스 게이지, 확대/축소 판정 배지, 확대 동인 및 위협 요인을 상세 시각화합니다.
+
+### R5. E2E 회귀 테스트 스위트 및 프로덕션 빌드 검증
+- `test_f8_special_watchlist.py` 및 전체 E2E 테스트(89개 테스트)가 100% 완전 통과(`OK`)하도록 보장하고, Vite 프로덕션 빌드(`npm run build`)를 성공적으로 완료합니다.
+
+## Acceptance Criteria
+
+### 데이터 완성도 및 무결성
+- [ ] 8개 전 종목에 대해 산업 규모(TAM), 예상 성장률(CAGR), 현재 시장 점유율(%), 점유율 전망 판정(`확대 우세`/`수성`/`축소 우려`), 확대 동인 및 위협 요인이 누락 없이 구축되어야 함
+- [ ] `special_watchlist_data.json` 4개 정규 경로(Root, Backend, Frontend Public, Frontend Dist)에 오류 없이 동기화되어야 함
+
+### UI 시각화 및 인터랙션
+- [ ] 웹 대시보드 특별 관심종목 뷰 상단에 8개 기업의 산업 규모, CAGR, 점유율, 전망 판정을 비교하는 요약 매트릭스 표가 표시되어야 함
+- [ ] 각 기업별 카드 내에 산업 규모, CAGR, 점유율 게이지, 점유율 확대/축소 판정 배지가 직관적으로 렌더링되어야 함
+- [ ] 단독 기업 집중 모드 및 전체 8선 보기 모드 모두에서 깨짐 없이 반응형으로 표시되어야 함
+
+### 빌드 및 테스트 통과
+- [ ] `npm run build` 번들링이 에러 없이 완료되어야 함
+- [ ] 전체 E2E 회귀 테스트(`run_e2e_tests.py`)가 89/89 ALL PASS를 유지해야 함
+

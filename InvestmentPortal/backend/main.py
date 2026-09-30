@@ -19,8 +19,12 @@ def run_startup_migrations():
     import sqlite3
     db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
     try:
-        conn = sqlite3.connect(db_path)
+        conn = sqlite3.connect(db_path, timeout=30.0)
         cur = conn.cursor()
+        try:
+            cur.execute("PRAGMA busy_timeout = 30000;")
+        except Exception:
+            pass
 
         # 코인 Vol.1 → 통합 리포트로 업데이트
         cur.execute("SELECT title FROM industry_reports WHERE id=4")
@@ -162,6 +166,7 @@ def run_startup_migrations():
                 print(f"[Migration] company {co[0]} ({co[1]}) inserted")
             else:
                 cur.execute("UPDATE companies SET display_order=? WHERE ticker=? AND industry_id=6", (co[6], co[1]))
+        conn.commit()
 
         # ── 이차전지 산업(id=7) 초기화 ────────────────────────────
         try:

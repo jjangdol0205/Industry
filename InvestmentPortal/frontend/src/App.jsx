@@ -2318,18 +2318,88 @@ function SpecialWatchlistView({ onSelectCompany }) {
   const isIbReportItem = (item) => (item.source && (item.source.toLowerCase().includes('goldman') || item.source.toLowerCase().includes('morgan') || item.source.toLowerCase().includes('macquarie') || item.source.toLowerCase().includes('bofa') || item.source.toLowerCase().includes('research'))) || (item.headline && item.headline.includes('글로벌 IB 리포트'));
   const isYouTubeItem = (item) => !isIbReportItem(item) && ((item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com')));
 
+  // 한글 IB 및 리서치 기관 검색 키워드 매핑
+  const IB_KOREAN_ALIASES = {
+    'Goldman Sachs': '골드만삭스 골드만 goldman sachs',
+    'Morgan Stanley': '모건스탠리 모건 morgan stanley',
+    'Macquarie & Morgan Stanley': '맥쿼리 모건스탠리 모건 macquarie morgan',
+  };
+  const RESEARCH_KOREAN_ALIASES = {
+    'Bloomberg': '블룸버그 bloomberg',
+    'Gartner': '가트너 gartner',
+    'TrendForce': '트렌드포스 trendforce',
+    'Wood Mackenzie': '우드맥킨지 wood mackenzie',
+    'McKinsey': '맥킨지 mckinsey',
+  };
+
   // 전체 집계 카운트 (외신 vs 유튜브 vs 글로벌 IB 리포트)
   const totalTimelineCount = stocks.reduce((acc, s) => acc + (s.timeline?.length || 0), 0);
   const totalIbCount = stocks.reduce((acc, s) => acc + (s.timeline || []).filter(isIbReportItem).length, 0);
   const totalYoutubeCount = stocks.reduce((acc, s) => acc + (s.timeline || []).filter(isYouTubeItem).length, 0);
   const totalNewsCount = stocks.reduce((acc, s) => acc + (s.timeline || []).filter(item => !isIbReportItem(item) && !isYouTubeItem(item)).length, 0);
 
+  // Safe industry_dynamics accessor (handles JSON string vs object)
+  const getDyn = (stock) => {
+    const raw = stock?.industry_dynamics || stock?.study?.industry_dynamics || {};
+    if (typeof raw === 'string') {
+      try { return JSON.parse(raw); } catch (e) { return {}; }
+    }
+    return raw && typeof raw === 'object' ? raw : {};
+  };
+
   // Filter stocks
   const displayedStocks = stocks.filter(stock => {
     if (selectedTicker !== 'ALL' && stock.ticker !== selectedTicker) return false;
     if (searchQuery.trim() !== '') {
       const q = searchQuery.toLowerCase();
-      const matchText = `${stock.name || ''} ${stock.name_ko || ''} ${stock.ticker || ''} ${stock.sector || ''} ${stock.business_model || ''} ${stock.moat_analysis || ''} ${stock.key_risks || ''}`.toLowerCase();
+      const dyn = getDyn(stock);
+      const ib = IB_SCENARIOS[stock.ticker] || {};
+      const ibKr = IB_KOREAN_ALIASES[ib.firm] || '';
+      const researchSources = dyn.research_sources || '';
+      const resKr = Object.entries(RESEARCH_KOREAN_ALIASES)
+        .filter(([k]) => researchSources.includes(k))
+        .map(([, v]) => v)
+        .join(' ');
+      const timelineText = (stock.timeline || []).map(t => `${t.headline || ''} ${t.source || ''} ${t.summary || ''} ${t.key_takeaways || ''}`).join(' ');
+
+      const matchText = [
+        stock.name || '',
+        stock.name_ko || '',
+        stock.ticker || '',
+        stock.sector || '',
+        stock.business_model || '',
+        stock.moat_analysis || '',
+        stock.moat_bottleneck || '',
+        stock.tam_growth_drivers || '',
+        stock.financial_margins || '',
+        stock.key_risks || '',
+        stock.catalysts || '',
+        stock.valuation_thesis || '',
+        stock.institutional_verdict || '',
+        dyn.industry_name || '',
+        dyn.market_rank || '',
+        dyn.tam_current || '',
+        dyn.tam_2030 || '',
+        dyn.cagr_display || '',
+        dyn.cagr_2030 ? `${dyn.cagr_2030}%` : '',
+        dyn.market_share_display || '',
+        dyn.market_share_pct ? `${dyn.market_share_pct}%` : '',
+        dyn.research_sources || '',
+        resKr,
+        dyn.segment_scope || '',
+        dyn.share_outlook || '',
+        dyn.share_outlook_badge || '',
+        dyn.defense_rationale || '',
+        dyn.defense_rating || '',
+        dyn.defense_score != null ? `${dyn.defense_score}점` : '',
+        ...(dyn.expansion_drivers || []),
+        ...(dyn.threat_factors || []),
+        ...(stock.investment_points || []),
+        ib.firm || '',
+        ibKr,
+        ib.thesis || '',
+        timelineText
+      ].join(' ').toLowerCase();
       if (!matchText.includes(q)) return false;
     }
     return true;
@@ -2527,6 +2597,196 @@ function SpecialWatchlistView({ onSelectCompany }) {
           </div>
         </div>
       )}
+
+      {/* ── 2.5 [📊 8선 한눈에 보는 산업 규모·성장률·점유율 비교 매트릭스 표] (Requirement R4) ── */}
+      <div style={{
+        background: 'rgba(15, 23, 42, 0.8)',
+        border: '1px solid rgba(255, 255, 255, 0.12)',
+        borderRadius: '16px',
+        padding: '20px',
+        marginBottom: '24px',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.35)'
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '1.15rem' }}>📊</span>
+              <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 800, color: '#fde68a' }}>
+                8선 한눈에 보는 산업 규모·성장률·점유율 비교 매트릭스 표
+              </h3>
+            </div>
+            <p style={{ margin: '4px 0 0 0', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              공신력 있는 글로벌 리서치(Bloomberg, Goldman Sachs, Gartner, TrendForce 등) 기반 TAM · 2030 CAGR · 시장점유율 · 향후 경쟁역학(확대 vs 축소)
+            </p>
+          </div>
+
+          {selectedTicker !== 'ALL' && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '0.78rem', color: '#93c5fd', background: 'rgba(59, 130, 246, 0.15)', padding: '4px 10px', borderRadius: '6px', border: '1px solid rgba(59, 130, 246, 0.3)' }}>
+                🎯 현재 선택: <strong>{selectedTicker}</strong> 집중 모드
+              </span>
+              <button
+                onClick={() => handleSelectCompanyTab('ALL')}
+                style={{
+                  background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)',
+                  color: 'white', padding: '4px 10px', borderRadius: '6px', fontSize: '0.76rem', cursor: 'pointer', fontWeight: 700
+                }}
+              >
+                전체 8선 보기
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div style={{ overflowX: 'auto', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem', textAlign: 'left' }}>
+            <thead>
+              <tr style={{ background: 'rgba(30, 41, 59, 0.85)', color: '#94a3b8', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                <th style={{ padding: '12px 14px', fontWeight: 700 }}>종목 / 기업</th>
+                <th style={{ padding: '12px 14px', fontWeight: 700 }}>주력 산업 카테고리</th>
+                <th style={{ padding: '12px 14px', fontWeight: 700 }}>현재 TAM</th>
+                <th style={{ padding: '12px 14px', fontWeight: 700 }}>2030 예상 TAM</th>
+                <th style={{ padding: '12px 14px', fontWeight: 700, textAlign: 'center' }}>2030 CAGR</th>
+                <th style={{ padding: '12px 14px', fontWeight: 700 }}>시장 점유율 (M/S)</th>
+                <th style={{ padding: '12px 14px', fontWeight: 700 }}>시장 내 지위</th>
+                <th style={{ padding: '12px 14px', fontWeight: 700, textAlign: 'center' }}>점유율 전망 판정</th>
+                <th style={{ padding: '12px 14px', fontWeight: 700, textAlign: 'center' }}>해자 방어력</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stocks.length === 0 ? (
+                <tr>
+                  <td colSpan={9} style={{ textAlign: 'center', padding: '24px', color: 'var(--text-secondary)' }}>
+                    {loading ? '특별 관심종목 데이터를 불러오는 중입니다...' : '표시할 특별 관심종목 데이터가 없습니다.'}
+                  </td>
+                </tr>
+              ) : (
+                stocks.map((s, idx) => {
+                  const dyn = getDyn(s);
+                  const isSelected = selectedTicker === s.ticker;
+                  const outlook = dyn.share_outlook || '';
+                  const isExpanding = outlook.includes('확대');
+                  const isDefending = outlook.includes('수성') || outlook.includes('유지');
+                  const isContracting = outlook.includes('잠식') || outlook.includes('축소');
+                  const badgeBg = isExpanding ? 'rgba(16, 185, 129, 0.2)' : isDefending ? 'rgba(59, 130, 246, 0.2)' : isContracting ? 'rgba(239, 68, 68, 0.2)' : 'rgba(245, 158, 11, 0.2)';
+                  const badgeBorder = isExpanding ? 'rgba(16, 185, 129, 0.4)' : isDefending ? 'rgba(59, 130, 246, 0.4)' : isContracting ? 'rgba(239, 68, 68, 0.4)' : 'rgba(245, 158, 11, 0.4)';
+                  const badgeColor = isExpanding ? '#34d399' : isDefending ? '#60a5fa' : isContracting ? '#f87171' : '#fbbf24';
+                  const badgeIcon = isExpanding ? '🟢' : isDefending ? '🔵' : isContracting ? '🔴' : '🟡';
+                  const badgeLabel = dyn.share_outlook || (dyn.cagr_2030 ? '분석 중' : '-');
+                  const iconMap = { UBER: '🚗', FLNC: '⚡', MBLY: '👁️', UPST: '🤖', TSLA: '🚀', '402340.KS': '💎', ENPH: '☀️', CELH: '🥤' };
+
+                  return (
+                    <tr
+                      key={s.ticker}
+                      onClick={() => handleSelectCompanyTab(selectedTicker === s.ticker ? 'ALL' : s.ticker)}
+                      style={{
+                        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                        background: isSelected
+                          ? 'linear-gradient(90deg, rgba(245, 158, 11, 0.18) 0%, rgba(59, 130, 246, 0.12) 100%)'
+                          : (idx % 2 === 0 ? 'rgba(0, 0, 0, 0.15)' : 'transparent'),
+                        cursor: 'pointer',
+                        transition: 'background 0.15s ease'
+                      }}
+                      onMouseEnter={e => {
+                        if (!isSelected) e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
+                      }}
+                      onMouseLeave={e => {
+                        if (!isSelected) e.currentTarget.style.background = idx % 2 === 0 ? 'rgba(0, 0, 0, 0.15)' : 'transparent';
+                      }}
+                    >
+                      {/* Ticker & Name */}
+                      <td style={{ padding: '12px 14px', whiteSpace: 'nowrap' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span style={{ fontSize: '1.1rem' }}>{iconMap[s.ticker] || '📈'}</span>
+                          <div>
+                            <div style={{ fontWeight: 800, color: isSelected ? '#fde68a' : 'white' }}>
+                              {s.name_ko}
+                            </div>
+                            <div style={{ fontSize: '0.72rem', color: isSelected ? '#93c5fd' : 'var(--text-secondary)' }}>
+                              {s.ticker}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+
+                      {/* Industry */}
+                      <td style={{ padding: '12px 14px', color: 'rgba(255, 255, 255, 0.85)', minWidth: '160px' }}>
+                        <div style={{ lineHeight: '1.3' }}>{dyn.industry_name || s.sector}</div>
+                      </td>
+
+                      {/* Current TAM */}
+                      <td style={{ padding: '12px 14px', fontWeight: 700, color: '#fde68a', whiteSpace: 'nowrap' }}>
+                        {dyn.tam_current || '-'}
+                      </td>
+
+                      {/* 2030 TAM */}
+                      <td style={{ padding: '12px 14px', fontWeight: 700, color: '#60a5fa', whiteSpace: 'nowrap' }}>
+                        {dyn.tam_2030 || '-'}
+                      </td>
+
+                      {/* CAGR */}
+                      <td style={{ padding: '12px 14px', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                        <span style={{
+                          background: 'rgba(16, 185, 129, 0.18)', color: '#34d399',
+                          border: '1px solid rgba(16, 185, 129, 0.35)', padding: '2px 8px', borderRadius: '6px', fontWeight: 800
+                        }}>
+                          {dyn.cagr_display || (dyn.cagr_2030 ? `+${dyn.cagr_2030}%` : '-')}
+                        </span>
+                      </td>
+
+                      {/* Market Share & Gauge */}
+                      <td style={{ padding: '12px 14px', minWidth: '140px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                          <span style={{ fontWeight: 800, color: (dyn.market_share_pct || 0) >= 50 ? '#34d399' : (dyn.market_share_pct || 0) >= 20 ? '#60a5fa' : '#fbbf24' }}>
+                            {dyn.market_share_display || `${dyn.market_share_pct || 0}%`}
+                          </span>
+                        </div>
+                        <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '3px', overflow: 'hidden' }}>
+                          <div style={{
+                            width: `${Math.min(dyn.market_share_pct || 0, 100)}%`, height: '100%',
+                            background: (dyn.market_share_pct || 0) >= 50
+                              ? 'linear-gradient(90deg, #10b981, #059669)'
+                              : (dyn.market_share_pct || 0) >= 20
+                              ? 'linear-gradient(90deg, #3b82f6, #6366f1)'
+                              : 'linear-gradient(90deg, #f59e0b, #d97706)',
+                            borderRadius: '3px'
+                          }} />
+                        </div>
+                      </td>
+
+                      {/* Market Rank */}
+                      <td style={{ padding: '12px 14px', color: '#e2e8f0', fontSize: '0.78rem', minWidth: '150px' }}>
+                        {dyn.market_rank || '-'}
+                      </td>
+
+                      {/* Share Outlook Badge */}
+                      <td style={{ padding: '12px 14px', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                        <span style={{
+                          background: badgeBg, border: `1px solid ${badgeBorder}`, color: badgeColor,
+                          padding: '3px 10px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: '4px'
+                        }}>
+                          <span>{badgeIcon}</span>
+                          <span>{badgeLabel}</span>
+                        </span>
+                      </td>
+
+                      {/* Moat Defense Score */}
+                      <td style={{ padding: '12px 14px', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                        <span style={{
+                          background: 'rgba(245, 158, 11, 0.15)', border: '1px solid rgba(245, 158, 11, 0.3)',
+                          color: '#fde68a', padding: '2px 8px', borderRadius: '4px', fontWeight: 700, fontSize: '0.75rem'
+                        }}>
+                          {dyn.defense_rating ? `${dyn.defense_rating.split(' ')[0]}${dyn.defense_score != null ? ` (${dyn.defense_score}점)` : ''}` : (dyn.defense_score != null ? `${dyn.defense_score}점` : '-')}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       {/* ── 3. Media Filter & Search Bar (글로벌 IB 리포트 4대 필터) ── */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '22px', flexWrap: 'wrap', gap: '14px' }}>
@@ -2784,6 +3044,188 @@ function SpecialWatchlistView({ onSelectCompany }) {
                     </div>
                   </div>
                 )}
+
+                {/* 1.55. [📊 산업 규모·성장률 & 시장 점유율 동학 분석기] 전용 위젯 (Requirement R4) */}
+                {(() => {
+                  const dyn = getDyn(stock);
+                  if (!dyn || Object.keys(dyn).length === 0) return null;
+
+                  const isExpanding = dyn.share_outlook?.includes('확대');
+                  const isDefending = dyn.share_outlook?.includes('수성') || dyn.share_outlook?.includes('유지');
+                  const isContracting = dyn.share_outlook?.includes('잠식') || dyn.share_outlook?.includes('축소');
+                  const outlookBadgeStyle = isExpanding
+                    ? { bg: 'rgba(16, 185, 129, 0.2)', border: 'rgba(16, 185, 129, 0.45)', color: '#34d399', icon: '🟢', label: '확대 우세 (Expanding)' }
+                    : isDefending
+                    ? { bg: 'rgba(59, 130, 246, 0.2)', border: 'rgba(59, 130, 246, 0.45)', color: '#60a5fa', icon: '🔵', label: '현상 유지 및 수성 (Defending)' }
+                    : isContracting
+                    ? { bg: 'rgba(239, 68, 68, 0.2)', border: 'rgba(239, 68, 68, 0.45)', color: '#f87171', icon: '🔴', label: '잠식 리스크 (Contracting Risk)' }
+                    : { bg: 'rgba(245, 158, 11, 0.2)', border: 'rgba(245, 158, 11, 0.45)', color: '#fbbf24', icon: '🟡', label: dyn.share_outlook || '분석 중' };
+
+                  return (
+                    <div style={{
+                      background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%)',
+                      border: '1px solid rgba(59, 130, 246, 0.25)',
+                      borderRadius: '14px',
+                      padding: '18px 20px',
+                      marginBottom: '20px',
+                      boxShadow: '0 6px 24px rgba(0, 0, 0, 0.25)'
+                    }}>
+                      {/* Widget Header */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                          <span style={{ fontSize: '1.05rem' }}>📊</span>
+                          <span style={{ fontSize: '0.94rem', fontWeight: 800, color: '#93c5fd' }}>
+                            산업 규모·성장률 & 시장 점유율 동학 분석기
+                          </span>
+                          <span style={{
+                            fontSize: '0.74rem', fontWeight: 800, padding: '3px 10px', borderRadius: '6px',
+                            background: outlookBadgeStyle.bg, border: `1px solid ${outlookBadgeStyle.border}`, color: outlookBadgeStyle.color,
+                            display: 'flex', alignItems: 'center', gap: '4px'
+                          }}>
+                            <span>{outlookBadgeStyle.icon}</span>
+                            <span>점유율 전망: {dyn.share_outlook || outlookBadgeStyle.label}</span>
+                          </span>
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.76rem' }}>
+                          <span style={{ color: 'var(--text-secondary)' }}>해자 방어력:</span>
+                          <span style={{
+                            background: 'rgba(245, 158, 11, 0.2)', border: '1px solid rgba(245, 158, 11, 0.4)',
+                            color: '#fde68a', padding: '2px 8px', borderRadius: '4px', fontWeight: 800
+                          }}>
+                            {dyn.defense_rating ? `${dyn.defense_rating}${dyn.defense_score != null ? ` (${dyn.defense_score}점)` : ''}` : (dyn.defense_score != null ? `${dyn.defense_score}점` : '-')}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* 4 Quantitative Metric Cards Grid */}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: '10px', marginBottom: '14px' }}>
+                        {/* 1. Industry Category & Current TAM */}
+                        <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 14px' }}>
+                          <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>주력 산업 & 현재 TAM (글로벌)</div>
+                          <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fde68a', marginTop: '2px' }}>
+                            {dyn.tam_current || '-'}
+                          </div>
+                          <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.7)', marginTop: '3px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            {dyn.industry_name || stock.sector || '-'}
+                          </div>
+                        </div>
+
+                        {/* 2. 2030 Expected TAM & CAGR */}
+                        <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 14px' }}>
+                          <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>2030년 예상 TAM & CAGR 성장률</div>
+                          <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#60a5fa', marginTop: '2px' }}>
+                            {dyn.tam_2030 || '-'}
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '3px' }}>
+                            <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>예상 연평균:</span>
+                            <span style={{
+                              fontSize: '0.75rem', fontWeight: 800, color: '#34d399',
+                              background: 'rgba(16, 185, 129, 0.15)', padding: '1px 6px', borderRadius: '4px'
+                            }}>
+                              CAGR {dyn.cagr_display || (dyn.cagr_2030 ? `+${dyn.cagr_2030}%` : '-')}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* 3. Market Share & Progress Gauge */}
+                        <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 14px' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>현재 시장 점유율 (M/S)</span>
+                            <span style={{ fontSize: '1.05rem', fontWeight: 800, color: (dyn.market_share_pct || 0) >= 50 ? '#34d399' : (dyn.market_share_pct || 0) >= 20 ? '#60a5fa' : '#f59e0b' }}>
+                              {dyn.market_share_display || `${dyn.market_share_pct || 0}%`}
+                            </span>
+                          </div>
+                          {/* Progress Gauge */}
+                          <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden', marginTop: '6px' }}>
+                            <div style={{
+                              width: `${Math.min(dyn.market_share_pct || 0, 100)}%`, height: '100%',
+                              background: (dyn.market_share_pct || 0) >= 50
+                                ? 'linear-gradient(90deg, #10b981, #059669)'
+                                : (dyn.market_share_pct || 0) >= 20
+                                ? 'linear-gradient(90deg, #3b82f6, #6366f1)'
+                                : 'linear-gradient(90deg, #f59e0b, #d97706)',
+                              borderRadius: '4px',
+                              transition: 'width 0.5s ease-in-out'
+                            }} />
+                          </div>
+                          <div style={{ fontSize: '0.68rem', color: 'var(--text-secondary)', marginTop: '4px', textAlign: 'right' }}>
+                            세그먼트 내 실질 지배력 게이지
+                          </div>
+                        </div>
+
+                        {/* 4. Market Rank & Position */}
+                        <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 14px' }}>
+                          <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>시장 내 지위 & 경쟁 순위</div>
+                          <div style={{ fontSize: '0.92rem', fontWeight: 800, color: '#e2e8f0', marginTop: '3px', lineHeight: '1.3' }}>
+                            👑 {dyn.market_rank || '-'}
+                          </div>
+                          <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '4px' }}>
+                            범위: {dyn.segment_scope || '-'}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* 2-Column Expansion Drivers vs Threat Factors */}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '12px', marginBottom: '12px' }}>
+                        {/* Expansion Drivers */}
+                        <div style={{
+                          background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.25)',
+                          borderRadius: '10px', padding: '12px 14px'
+                        }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+                            <span style={{ fontSize: '0.85rem' }}>🚀</span>
+                            <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#6ee7b7' }}>
+                              점유율 확대 요인 (Expansion Drivers)
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                            {(dyn.expansion_drivers || []).map((drv, dIdx) => (
+                              <div key={dIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', fontSize: '0.78rem', color: 'rgba(255,255,255,0.88)', lineHeight: '1.45', wordBreak: 'break-word' }}>
+                                <span style={{ color: '#10b981', fontWeight: 800, flexShrink: 0 }}>✓</span>
+                                <span>{drv}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Threat Factors */}
+                        <div style={{
+                          background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.25)',
+                          borderRadius: '10px', padding: '12px 14px'
+                        }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+                            <span style={{ fontSize: '0.85rem' }}>⚠️</span>
+                            <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#fca5a5' }}>
+                              점유율 위협 및 경쟁 리스크 요인 (Threats & Competition Risks)
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                            {(dyn.threat_factors || []).map((th, tIdx) => (
+                              <div key={tIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', fontSize: '0.78rem', color: 'rgba(255,255,255,0.88)', lineHeight: '1.45', wordBreak: 'break-word' }}>
+                                <span style={{ color: '#ef4444', fontWeight: 800, flexShrink: 0 }}>⚠</span>
+                                <span>{th}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Bottom Rationale & Citation */}
+                      <div style={{
+                        background: 'rgba(0,0,0,0.25)', borderLeft: '3px solid #3b82f6',
+                        borderRadius: '6px', padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: '4px', wordBreak: 'break-word'
+                      }}>
+                        <div style={{ fontSize: '0.78rem', color: '#93c5fd', fontWeight: 700 }}>
+                          🛡️ 종합 방어력 메커니즘: {dyn.defense_rationale || '-'}
+                        </div>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
+                          📋 인용 리서치 기관: {dyn.research_sources || '-'}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
 
                 {/* 1.6. Technical Execution Cockpit (기술적 매수/매도 타점 계측기) */}
                 {stock.technical_cockpit && (
