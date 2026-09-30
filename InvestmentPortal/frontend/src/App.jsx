@@ -2785,6 +2785,241 @@ function SpecialWatchlistView({ onSelectCompany }) {
                   </div>
                 )}
 
+                {/* 1.6. Technical Execution Cockpit (기술적 매수/매도 타점 계측기) */}
+                {stock.technical_cockpit && (
+                  <div style={{
+                    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.07) 0%, rgba(15, 23, 42, 0.95) 100%)',
+                    border: '1px solid rgba(16, 185, 129, 0.28)', borderRadius: '14px',
+                    padding: '16px 20px', marginBottom: '20px', boxShadow: '0 4px 20px rgba(0,0,0,0.25)'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontSize: '0.92rem', fontWeight: 800, color: '#6ee7b7' }}>
+                          🎯 기술적 매수/매도 타점 계측기 (Technical Cockpit)
+                        </span>
+                        <span style={{
+                          fontSize: '0.74rem', fontWeight: 800, padding: '3px 10px', borderRadius: '6px',
+                          background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.4)'
+                        }}>
+                          {stock.technical_cockpit.status}
+                        </span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.78rem' }}>
+                        <span style={{ color: 'var(--text-secondary)' }}>손익비 (Risk/Reward):</span>
+                        <span style={{ color: '#fde68a', fontWeight: 800, background: 'rgba(245, 158, 11, 0.2)', padding: '2px 8px', borderRadius: '4px', border: '1px solid rgba(245, 158, 11, 0.4)' }}>
+                          {stock.technical_cockpit.risk_reward_ratio}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Technical Indicator Stats Chips */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '14px' }}>
+                      <div style={{ background: 'rgba(0,0,0,0.3)', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                        <div style={{ fontSize: '0.68rem', color: 'var(--text-secondary)' }}>RSI (14일)</div>
+                        <div style={{ fontSize: '0.92rem', fontWeight: 800, color: (stock.technical_cockpit.rsi_14 || 50) <= 30 ? '#34d399' : (stock.technical_cockpit.rsi_14 || 50) >= 70 ? '#f87171' : '#93c5fd' }}>
+                          {stock.technical_cockpit.rsi_14} ({stock.technical_cockpit.rsi_state})
+                        </div>
+                      </div>
+                      <div style={{ background: 'rgba(0,0,0,0.3)', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                        <div style={{ fontSize: '0.68rem', color: 'var(--text-secondary)' }}>20일 / 60일 이평선</div>
+                        <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'white' }}>
+                          {fDollar(stock.technical_cockpit.ma20, stock.ticker)} / {fDollar(stock.technical_cockpit.ma60, stock.ticker)}
+                        </div>
+                      </div>
+                      <div style={{ background: 'rgba(0,0,0,0.3)', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                        <div style={{ fontSize: '0.68rem', color: 'var(--text-secondary)' }}>볼린저밴드 하단 ~ 상단</div>
+                        <div style={{ fontSize: '0.86rem', fontWeight: 700, color: '#c084fc' }}>
+                          {fDollar(stock.technical_cockpit.bollinger_band?.lower, stock.ticker)} ~ {fDollar(stock.technical_cockpit.bollinger_band?.upper, stock.ticker)}
+                        </div>
+                      </div>
+                      <div style={{ background: 'rgba(0,0,0,0.3)', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                        <div style={{ fontSize: '0.68rem', color: 'var(--text-secondary)' }}>밴드 위치 (%b)</div>
+                        <div style={{ fontSize: '0.92rem', fontWeight: 800, color: (stock.technical_cockpit.bollinger_band?.percent_b || 0.5) <= 0.2 ? '#34d399' : '#fbbf24' }}>
+                          {stock.technical_cockpit.bollinger_band?.percent_b != null ? `${(stock.technical_cockpit.bollinger_band.percent_b * 100).toFixed(0)}% (하단지지)` : '-'}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Visual Levels Spectrum Bar (5-Tier Target Cards) */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '8px', marginBottom: '12px' }}>
+                      {/* Stop Loss */}
+                      <div style={{ background: 'rgba(239, 68, 68, 0.12)', border: '1px solid rgba(239, 68, 68, 0.35)', borderRadius: '8px', padding: '10px 12px' }}>
+                        <div style={{ fontSize: '0.68rem', color: '#fca5a5', fontWeight: 700 }}>🛡️ 손절가 (Stop Loss)</div>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#f87171', marginTop: '2px' }}>
+                          {fDollar(stock.technical_cockpit.stop_loss?.price, stock.ticker)}
+                        </div>
+                        <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>
+                          {stock.technical_cockpit.stop_loss?.desc}
+                        </div>
+                      </div>
+
+                      {/* Entry 1 */}
+                      <div style={{ background: 'rgba(16, 185, 129, 0.12)', border: '1.5px solid rgba(16, 185, 129, 0.45)', borderRadius: '8px', padding: '10px 12px' }}>
+                        <div style={{ fontSize: '0.68rem', color: '#6ee7b7', fontWeight: 800 }}>🎯 1차 매수가 (저점 매집)</div>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#34d399', marginTop: '2px' }}>
+                          {fDollar(stock.technical_cockpit.buy_targets?.entry_1, stock.ticker)}
+                        </div>
+                        <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.65)', marginTop: '2px' }}>
+                          {stock.technical_cockpit.buy_targets?.entry_1_desc}
+                        </div>
+                      </div>
+
+                      {/* Entry 2 */}
+                      <div style={{ background: 'rgba(59, 130, 246, 0.12)', border: '1px solid rgba(59, 130, 246, 0.35)', borderRadius: '8px', padding: '10px 12px' }}>
+                        <div style={{ fontSize: '0.68rem', color: '#93c5fd', fontWeight: 700 }}>🎯 2차 매수가 (돌파 확인)</div>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#60a5fa', marginTop: '2px' }}>
+                          {fDollar(stock.technical_cockpit.buy_targets?.entry_2, stock.ticker)}
+                        </div>
+                        <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>
+                          {stock.technical_cockpit.buy_targets?.entry_2_desc}
+                        </div>
+                      </div>
+
+                      {/* TP 1 */}
+                      <div style={{ background: 'rgba(245, 158, 11, 0.12)', border: '1px solid rgba(245, 158, 11, 0.35)', borderRadius: '8px', padding: '10px 12px' }}>
+                        <div style={{ fontSize: '0.68rem', color: '#fde68a', fontWeight: 700 }}>🚀 1차 목표가 (단기 스윙)</div>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fbbf24', marginTop: '2px' }}>
+                          {fDollar(stock.technical_cockpit.profit_targets?.tp_1, stock.ticker)}
+                        </div>
+                        <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>
+                          {stock.technical_cockpit.profit_targets?.tp_1_desc}
+                        </div>
+                      </div>
+
+                      {/* TP 2 */}
+                      <div style={{ background: 'rgba(168, 85, 247, 0.12)', border: '1px solid rgba(168, 85, 247, 0.35)', borderRadius: '8px', padding: '10px 12px' }}>
+                        <div style={{ fontSize: '0.68rem', color: '#e9d5ff', fontWeight: 700 }}>💎 2차 목표가 (중장기 랠리)</div>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#c084fc', marginTop: '2px' }}>
+                          {fDollar(stock.technical_cockpit.profit_targets?.tp_2, stock.ticker)}
+                        </div>
+                        <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>
+                          {stock.technical_cockpit.profit_targets?.tp_2_desc}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Tactical Action Box */}
+                    <div style={{
+                      background: 'rgba(0,0,0,0.3)', border: '1px dashed rgba(16, 185, 129, 0.35)',
+                      borderRadius: '8px', padding: '8px 14px', display: 'flex', alignItems: 'center', gap: '8px'
+                    }}>
+                      <span style={{ fontSize: '0.82rem' }}>💡</span>
+                      <span style={{ fontSize: '0.78rem', color: '#6ee7b7', fontWeight: 600 }}>
+                        <strong>실전 매매 전략:</strong> {stock.technical_cockpit.tactical_action}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* 1.7. Investment Points vs Risks & Mitigation Matrix */}
+                {(stock.investment_points || stock.risk_points || stock.risk_mitigation) && (
+                  <div style={{
+                    display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '14px', marginBottom: '20px'
+                  }}>
+                    {/* 1. Key Investment Points */}
+                    <div style={{
+                      background: 'linear-gradient(145deg, rgba(59, 130, 246, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%)',
+                      border: '1px solid rgba(59, 130, 246, 0.28)', borderRadius: '14px', padding: '16px 18px',
+                      display: 'flex', flexDirection: 'column'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                        <span style={{ fontSize: '1rem' }}>🌟</span>
+                        <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#93c5fd' }}>
+                          핵심 투자 포인트 (Investment Theses)
+                        </span>
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1 }}>
+                        {(stock.investment_points || stock.study?.investment_points || []).map((pt, idx) => (
+                          <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.82rem', color: 'rgba(255,255,255,0.9)', lineHeight: '1.5' }}>
+                            <span style={{ color: '#3b82f6', fontWeight: 800, flexShrink: 0 }}>✓</span>
+                            <span>{pt}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 2. Key Risk Factors */}
+                    <div style={{
+                      background: 'linear-gradient(145deg, rgba(239, 68, 68, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%)',
+                      border: '1px solid rgba(239, 68, 68, 0.28)', borderRadius: '14px', padding: '16px 18px',
+                      display: 'flex', flexDirection: 'column'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                        <span style={{ fontSize: '1rem' }}>⚠️</span>
+                        <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#fca5a5' }}>
+                          핵심 리스크 요인 (Key Risk Factors)
+                        </span>
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1 }}>
+                        {(stock.risk_points || stock.study?.risk_points || []).map((rk, idx) => (
+                          <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.82rem', color: 'rgba(255,255,255,0.9)', lineHeight: '1.5' }}>
+                            <span style={{ color: '#ef4444', fontWeight: 800, flexShrink: 0 }}>⚠</span>
+                            <span>{rk}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 3. Risk Mitigation & Catalysts */}
+                    <div style={{
+                      background: 'linear-gradient(145deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%)',
+                      border: '1px solid rgba(245, 158, 11, 0.28)', borderRadius: '14px', padding: '16px 18px',
+                      display: 'flex', flexDirection: 'column'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', flexWrap: 'wrap', gap: '6px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span style={{ fontSize: '1rem' }}>🛡️</span>
+                          <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#fde68a' }}>
+                            리스크 극복 가능성 평가
+                          </span>
+                        </div>
+                        {stock.risk_mitigation?.feasibility_rating && (
+                          <span style={{
+                            fontSize: '0.74rem', fontWeight: 800, padding: '3px 8px', borderRadius: '6px',
+                            background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.4)'
+                          }}>
+                            {stock.risk_mitigation.feasibility_rating}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Progress Bar for Feasibility */}
+                      {stock.risk_mitigation?.feasibility_score && (
+                        <div style={{ marginBottom: '10px' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>
+                            <span>극복 확신도 (Confidence)</span>
+                            <span style={{ fontWeight: 800, color: '#34d399' }}>{stock.risk_mitigation.feasibility_score}%</span>
+                          </div>
+                          <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '3px', overflow: 'hidden' }}>
+                            <div style={{
+                              width: `${stock.risk_mitigation.feasibility_score}%`, height: '100%',
+                              background: 'linear-gradient(90deg, #10b981, #f59e0b)', borderRadius: '3px'
+                            }} />
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Overcome Rationale */}
+                      <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.85)', lineHeight: '1.55', marginBottom: '10px', flex: 1 }}>
+                        <div style={{ fontWeight: 700, color: '#fbbf24', fontSize: '0.76rem', marginBottom: '2px' }}>
+                          💡 극복 메커니즘:
+                        </div>
+                        {stock.risk_mitigation?.overcome_rationale}
+                      </div>
+
+                      {/* Key Catalyst */}
+                      {stock.risk_mitigation?.key_catalyst && (
+                        <div style={{
+                          background: 'rgba(0,0,0,0.25)', borderLeft: '3px solid #10b981',
+                          padding: '6px 10px', borderRadius: '4px', fontSize: '0.76rem', color: '#6ee7b7'
+                        }}>
+                          <strong>핵심 촉매:</strong> {stock.risk_mitigation.key_catalyst}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 {/* 2. Deep Study 5-Dimension Grid */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px', marginBottom: '20px' }}>
                   {/* Moat */}
