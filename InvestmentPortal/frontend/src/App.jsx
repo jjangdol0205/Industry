@@ -2309,13 +2309,13 @@ function SpecialWatchlistView({ onSelectCompany }) {
     MBLY: { firm: 'Morgan Stanley', rating: 'Overweight', bear: 9.0, base: 22.0, bull: 32.0, thesis: 'EyeQ6H 칩 전환 & SuperVision L2+ 양산 본격화' },
     UPST: { firm: 'Goldman Sachs', rating: 'Buy Speculative', bear: 25.0, base: 55.0, bull: 75.0, thesis: '금리인하 사이클 & 18세대 AI 언더라이팅 승인율 44%+ 반등' },
     TSLA: { firm: 'Goldman Sachs', rating: 'Neutral', bear: 160.0, base: 250.0, bull: 350.0, thesis: '사이버캡 마일당 $0.20 원가 우위 & 메가팩 독립 가치 $1,600억' },
-    '402340.KS': { firm: 'Morgan Stanley', rating: 'Overweight', bear: 65000.0, base: 120000.0, bull: 150000.0, thesis: 'SK하이닉스 HBM 지분 대비 NAV 할인율 55% 축소 레버리지' },
+    '402340.KS': { firm: 'Macquarie & Morgan Stanley', rating: 'Outperform', bear: 850000.0, base: 1800000.0, bull: 2500000.0, thesis: 'SK하이닉스 280조 소각 + HBM ASP 121% 급등 수혜, NAV 할인율 70%→30% 압축' },
     ENPH: { firm: 'Goldman Sachs', rating: 'Buy', bear: 32.0, base: 47.0, bull: 68.0, thesis: '태양광 재고조정 완료 & 데이터센터 800V DC GaN IQ9 수혜' },
     CELH: { firm: 'Morgan Stanley', rating: 'Overweight', bear: 24.0, base: 42.0, bull: 58.0, thesis: '펩시 DSD 재고 정상화 & 웰니스 음료 20% 점유율 수성' },
   };
 
   // 콘텐츠 유형 판별 함수
-  const isIbReportItem = (item) => (item.source && (item.source.toLowerCase().includes('goldman') || item.source.toLowerCase().includes('morgan') || item.source.toLowerCase().includes('research'))) || (item.headline && item.headline.includes('글로벌 IB 리포트'));
+  const isIbReportItem = (item) => (item.source && (item.source.toLowerCase().includes('goldman') || item.source.toLowerCase().includes('morgan') || item.source.toLowerCase().includes('macquarie') || item.source.toLowerCase().includes('bofa') || item.source.toLowerCase().includes('research'))) || (item.headline && item.headline.includes('글로벌 IB 리포트'));
   const isYouTubeItem = (item) => !isIbReportItem(item) && ((item.source && item.source.toLowerCase().includes('youtube')) || (item.url && item.url.toLowerCase().includes('youtube.com')));
 
   // 전체 집계 카운트 (외신 vs 유튜브 vs 글로벌 IB 리포트)

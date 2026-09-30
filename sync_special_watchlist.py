@@ -69,10 +69,10 @@ SEED_STUDIES = {
         "exchange": "NYSE",
         "sector": "글로벌 모빌리티 & 딜리버리 플랫폼",
         "portfolio_tier": "Standard",
-        "current_price": 69.22,
+        "current_price": 69.36,
         "high_52w": 101.29,
-        "mdd_pct": -31.66,
-        "buy_signal": "BUY_READY (1차 매수적기 MDD -31.7%)",
+        "mdd_pct": -31.52,
+        "buy_signal": "BUY_READY (1차 매수적기 MDD -31.5%)",
         "dca_stage": "SAT_DCA_1",
         "business_model": "우버는 모빌리티(Mobility), 배달(Delivery - Uber Eats), 화물(Freight)을 아우르는 글로벌 최대의 양면 플랫폼(Two-Sided Platform)입니다. 드라이버와 탑승객, 가맹점과 소비자를 연결하는 알고리즘 기반 다이내믹 프라이싱 및 매칭 기술을 통해 거래액(Gross Bookings)의 28~30%를 테이크레이트(Take-Rate)로 수취합니다. 최근에는 플랫폼 트래픽을 활용한 고마진 광고(Advertising) 사업이 연간 $1B+ 런레이트로 급성장하며 영업 레버리지를 극대화하고 있습니다.",
         "moat_analysis": "글로벌 70여 개국에서 구축된 압도적인 양면 네트워크 효과(Network Effect)와 데이터 피드백 루프가 핵심 해자입니다. 모빌리티와 배달 간 크로스셀링(Cross-Platform)을 통한 고객 획득 비용(CAC) 절감과 우버 원(Uber One) 멤버십 락인 효과가 경쟁사 대비 월등합니다. 최근 웨이모(Waymo)와의 전략적 파트너십을 통해 자율주행 로보택시 함대 운영 및 배치 플랫폼(Fleet Dispatcher)으로 독점적 지위를 선점, '로보택시 시대에도 플랫폼 병목은 우버'라는 강력한 구조적 해자를 증명했습니다.",
@@ -96,16 +96,16 @@ SEED_STUDIES = {
         "exchange": "NASDAQ",
         "sector": "AI 데이터센터 전력망 BESS(에너지저장장치)",
         "portfolio_tier": "Watchlist",
-        "current_price": 7.46,
+        "current_price": 7.82,
         "high_52w": 33.51,
-        "mdd_pct": -77.74,
-        "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -77.7%)",
+        "mdd_pct": -76.66,
+        "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -76.7%)",
         "dca_stage": "WATCH_DEEP",
         "business_model": "지멘스(Siemens)와 AES의 합작법인으로 설립된 유틸리티급 배터리 에너지 저장 시스템(BESS) 글로벌 1위 공급사입니다. 배터리 하드웨어 패키징(Cube 시리즈) 공급뿐만 아니라, 전력 거래 최적화 AI 소프트웨어 플랫폼(Fluence OS 및 Nispera, Fluence IQ)을 SaaS 구독 모델로 제공하여 하드웨어 설치 이후에도 지속적인 고마진 순환 매출(Recurring Revenue)을 창출합니다.",
         "moat_analysis": "전 세계 47개국 20GW+ 규모의 압도적인 현장 운영 트랙레코드와 글로벌 전력망 연계 규제 인허가 노하우가 독점적 병목 해자입니다. 특히 AI 데이터센터 급증에 따른 전력망 병목(Grid Bottleneck) 현상을 해결하는 지능형 전력 분배 알고리즘(Fluence IQ)은 발전 사업자의 전력 경매 수익을 20~30% 극대화하여 대체 불가능한 전환 비용(Switching Costs)을 구축했습니다.",
         "moat_bottleneck": "전 세계 47개국 20GW+ 규모의 압도적인 현장 운영 트랙레코드와 글로벌 전력망 연계 규제 인허가 노하우가 독점적 병목 해자입니다. 특히 AI 데이터센터 급증에 따른 전력망 병목(Grid Bottleneck) 현상을 해결하는 지능형 전력 분배 알고리즘(Fluence IQ)은 발전 사업자의 전력 경매 수익을 20~30% 극대화하여 대체 불가능한 전환 비용(Switching Costs)을 구축했습니다.",
         "tam_growth_drivers": "글로벌 유틸리티 BESS 시장은 2030년까지 연평균 27% 이상 성장하여 TAM $150B에 달할 전망입니다. 빅테크(MS, 구글, 아마존)의 무탄소 24/7 전력 구매(PPA) 요구와 재생에너지의 간헐성 해소를 위한 전력망 필수 인프라로 자리매김하고 있으며, 미국 IRA 세액공제(ITC) 혜택이 강력한 정책적 촉매로 작용합니다.",
-        "financial_margins": "영업이익률(OPM) 5.8%, 자기자본이익률(ROE) 8.2%. 하드웨어 원가 절감(LFP 공급망 다변화)과 고마진 소프트웨어 매출 비중 확대로 매출총이익률(GPM)이 두 자릿수로 안착했습니다. 52주 고점($33.51) 대비 -77.7% 폭락하여 밸류에이션 부담이 완전히 해소된 극단 과매도 구간입니다.",
+        "financial_margins": "영업이익률(OPM) 5.8%, 자기자본이익률(ROE) 8.2%. 하드웨어 원가 절감(LFP 공급망 다변화)과 고마진 소프트웨어 매출 비중 확대로 매출총이익률(GPM)이 두 자릿수로 안착했습니다. 52주 고점($33.51) 대비 -76.7% 폭락하여 밸류에이션 부담이 완전히 해소된 극단 과매도 구간입니다.",
         "opm": 5.8,
         "roe": 8.2,
         "gross_margin": 13.5,
@@ -123,16 +123,16 @@ SEED_STUDIES = {
         "exchange": "NASDAQ",
         "sector": "자율주행 ADAS 칩셋 & 컴퓨터비전 솔루션",
         "portfolio_tier": "Satellite",
-        "current_price": 12.18,
-        "high_52w": 31.42,
-        "mdd_pct": -61.23,
-        "buy_signal": "BUY_READY (2차 분할매수 MDD -61.2%)",
+        "current_price": 7.57,
+        "high_52w": 15.81,
+        "mdd_pct": -52.12,
+        "buy_signal": "BUY_READY (2차 분할매수 MDD -52.1%)",
         "dca_stage": "SAT_DCA_2",
         "business_model": "인텔에서 분사한 글로벌 첨단운전자보조시스템(ADAS) 및 자율주행 컴퓨팅 솔루션 1위 기업입니다. 자체 설계 EyeQ 시스템온칩(SoC)과 특허 컴퓨터 비전 알고리즘을 글로벌 완성차 OEM(BMW, 폭스바겐, 지리, 포드 등)에 Tier-1 부품사를 통해 턴키(Turnkey) 형태로 판매합니다. 나아가 크라우드소싱 고정밀 지도 기술인 REM(Road Experience Management) 데이터 라이선싱과 레벨 3/4 솔루션인 SuperVision 및 Chauffeur로 시스템당 단가(ASP)를 10배 이상 확장하고 있습니다.",
         "moat_analysis": "전 세계 1억 8,000만 대 이상의 차량에 탑재된 독보적인 레퍼런스와 주행 데이터베이스가 가장 강력한 진입장벽입니다. 완성차 OEM들이 안전 규제(Euro NCAP 등) 5스타를 획득하기 위해 모빌아이 검증 칩셋을 채택할 수밖에 없는 안전 표준 독점 병목을 쥐고 있습니다. 또한 수십억 마일의 실시간 도로 지도 데이터(REM)는 경쟁 팹리스들이 단기간에 결코 복제할 수 없는 구조적 해자입니다.",
         "moat_bottleneck": "전 세계 1억 8,000만 대 이상의 차량에 탑재된 독보적인 레퍼런스와 주행 데이터베이스가 가장 강력한 진입장벽입니다. 완성차 OEM들이 안전 규제(Euro NCAP 등) 5스타를 획득하기 위해 모빌아이 검증 칩셋을 채택할 수밖에 없는 안전 표준 독점 병목을 쥐고 있습니다. 또한 수십억 마일의 실시간 도로 지도 데이터(REM)는 경쟁 팹리스들이 단기간에 결코 복제할 수 없는 구조적 해자입니다.",
         "tam_growth_drivers": "차량용 반도체 및 자율주행 ADAS TAM은 2030년 $60B에 도달할 것으로 전망됩니다. 전통적인 저가형 ADAS(대당 $50)에서 SuperVision($1,000~2,000) 및 Chauffeur($3,000+)로의 믹스 개선에 따른 급격한 매출 증대와 최신 EyeQ6 High 칩셋 양산 본격화가 핵심 드라이버입니다.",
-        "financial_margins": "조정 영업이익률(Adjusted OPM) 21.4%, 총마진율 48.2%. 2024년 상반기 고객사 재고 조정(Tier-1 재고 축적 사이클 해소)이 마무리 단계에 접어들며 출하량이 정상화 궤도에 진입했습니다. 고점 대비 -60% 이상 하락하여 레벨 3 자율주행 밸류가 주가에 완전히 무시된 안전마진 영역입니다.",
+        "financial_margins": "조정 영업이익률(Adjusted OPM) 21.4%, 총마진율 48.2%. 2024년 상반기 고객사 재고 조정(Tier-1 재고 축적 사이클 해소)이 마무리 단계에 접어들며 출하량이 정상화 궤도에 진입했습니다. 고점 대비 -52% 이상 하락하여 레벨 3 자율주행 밸류가 주가에 완전히 무시된 안전마진 영역입니다.",
         "opm": 21.4,
         "roe": 12.6,
         "gross_margin": 48.2,
@@ -150,10 +150,10 @@ SEED_STUDIES = {
         "exchange": "NASDAQ",
         "sector": "AI 신용평가 대출 언더라이팅 플랫폼",
         "portfolio_tier": "Watchlist",
-        "current_price": 36.85,
-        "high_52w": 86.50,
-        "mdd_pct": -57.40,
-        "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -57.4%)",
+        "current_price": 23.14,
+        "high_52w": 55.22,
+        "mdd_pct": -58.09,
+        "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -58.1%)",
         "dca_stage": "WATCH_DEEP",
         "business_model": "기존 전통적인 FICO 신용점수의 한계를 혁신하는 선도적 클라우드 AI 대출 플랫폼입니다. 1,600개 이상의 정량/대안 변수와 5,800만 건 이상의 상환 데이터를 머신러닝 알고리즘으로 분석하여 은행 및 신협 파트너에게 정밀한 언더라이팅 모델을 공급합니다. 대출 건당 수수료(Platform Fee)를 수취하는 자본 효율적(Capital-Light) 마켓플레이스 모델을 추구합니다.",
         "moat_analysis": "전통 은행권 대비 승인율을 44% 높이면서도 부도율을 35% 이상 낮추는 정밀한 AI 신용평가 모델의 예측력이 핵심 해자입니다. 전체 대출의 88% 이상이 상담원 개입 없이 완전 자동화(Instant Automated Approval)되어 파트너 금융기관의 대출 실행 비용을 획기적으로 절감합니다. 데이터가 축적될수록 신용평가 모델이 정교해지는 플라이휠 효과를 보유하고 있습니다.",
@@ -177,11 +177,11 @@ SEED_STUDIES = {
         "exchange": "NASDAQ",
         "sector": "전기차 & 휴머노이드 FSD 피지컬 AI",
         "portfolio_tier": "Satellite",
-        "current_price": 218.40,
-        "high_52w": 271.00,
-        "mdd_pct": -19.41,
-        "buy_signal": "WAIT (고점 부근 MDD -19.4%)",
-        "dca_stage": "SAT_HOLD",
+        "current_price": 352.84,
+        "high_52w": 498.83,
+        "mdd_pct": -29.27,
+        "buy_signal": "BUY_READY (1차 분할매수 MDD -29.3%)",
+        "dca_stage": "SAT_DCA_1",
         "business_model": "전기차(EV) 하드웨어 제조 및 충전 인프라(슈퍼차저) 판매를 넘어, End-to-End 신경망 기반 자율주행(FSD) 소프트웨어 구독, 에너지 저장 장치(Megapack/Powerwall), 차세대 휴머노이드 로봇(Optimus)을 아우르는 피지컬 AI(Physical AI) 생태계 통합 기업입니다. 차량 판매 이후에도 무선 업데이트(OTA)를 통한 FSD 라이선스 판매로 소프트웨어형 고마진을 실현합니다.",
         "moat_analysis": "실제 도로를 주행하는 600만 대 이상의 글로벌 커넥티드 차량 함대에서 수집되는 압도적인 비디오 주행 데이터와 초대형 AI 슈퍼컴퓨터(Cortex/Dojo 클러스터)가 대체 불가능한 독점 해자입니다. 하드웨어 제조 원가를 파괴하는 기가캐스팅(Giga-Casting) 공정 혁신, 북미 충전 표준(NACS) 장악, 자체 배터리 팩 설계 역량이 결합되어 전통 OEM과의 격차를 유지합니다.",
         "moat_bottleneck": "실제 도로를 주행하는 600만 대 이상의 글로벌 커넥티드 차량 함대에서 수집되는 압도적인 비디오 주행 데이터와 초대형 AI 슈퍼컴퓨터(Cortex/Dojo 클러스터)가 대체 불가능한 독점 해자입니다. 하드웨어 제조 원가를 파괴하는 기가캐스팅(Giga-Casting) 공정 혁신, 북미 충전 표준(NACS) 장악, 자체 배터리 팩 설계 역량이 결합되어 전통 OEM과의 격차를 유지합니다.",
@@ -204,25 +204,25 @@ SEED_STUDIES = {
         "exchange": "KRX",
         "sector": "반도체/ICT 투자전문 지주회사 (SK하이닉스 모회사)",
         "portfolio_tier": "Core",
-        "current_price": 82400.0,
-        "high_52w": 94200.0,
-        "mdd_pct": -12.53,
-        "buy_signal": "WAIT (고점 부근 MDD -12.5%)",
-        "dca_stage": "CORE_HOLD",
+        "current_price": 1139000.0,
+        "high_52w": 2189000.0,
+        "mdd_pct": -47.97,
+        "buy_signal": "BUY_READY (2차 분할매수 MDD -48.0%)",
+        "dca_stage": "CORE_DCA_2",
         "business_model": "SK텔레콤에서 인적분할된 반도체 및 ICT 전문 투자 지주회사입니다. 글로벌 AI 메모리 HBM 1위 기업인 SK하이닉스(000660.KS) 지분 20.07%를 보유한 실질적 모회사이며, 11번가, 티맵모빌리티, 원스토어, 드림어스컴퍼니 등 ICT 포트폴리오를 보유하고 있습니다. 포트폴리오 밸류업 및 적극적인 배당·자사주 매입/소각을 통해 주주가치를 극대화하는 투자 전문 지주 모델입니다.",
-        "moat_analysis": "엔비디아(NVIDIA)에 HBM3E를 독점 공급하며 AI 반도체 메모리 병목을 장악한 SK하이닉스의 지분 가치를 가장 안전하고 저렴하게 확보할 수 있는 지배구조적 통로입니다. 순자산가치(NAV) 대비 55~60%에 달하는 극단적인 지주사 할인율(NAV Discount)은 하방 경직성을 제공하는 동시에, 정부 밸류업 프로그램 및 주주환원 정책 강화에 따른 할인율 축소(De-discounting) 레버리지라는 독점적 투자 해자를 구성합니다.",
-        "moat_bottleneck": "엔비디아(NVIDIA)에 HBM3E를 독점 공급하며 AI 반도체 메모리 병목을 장악한 SK하이닉스의 지분 가치를 가장 안전하고 저렴하게 확보할 수 있는 지배구조적 통로입니다. 순자산가치(NAV) 대비 55~60%에 달하는 극단적인 지주사 할인율(NAV Discount)은 하방 경직성을 제공하는 동시에, 정부 밸류업 프로그램 및 주주환원 정책 강화에 따른 할인율 축소(De-discounting) 레버리지라는 독점적 투자 해자를 구성합니다.",
-        "tam_growth_drivers": "엔비디아 블랙웰(Blackwell) 및 루빈(Rubin) 아키텍처 출시와 더불어 폭증하는 글로벌 HBM TAM(연평균 45%+ 성장)의 직접적인 수혜체입니다. 1) SK하이닉스의 사상 최대 분기 영업이익 경신에 따른 지분법 손익 폭증, 2) 적극적인 경상 배당 재원 기반 자사주 매입 및 전량 소각 이행, 3) 크래프톤, 티맵 등 비핵심 포트폴리오 지분 유동화를 통한 차세대 반도체 M&A 실탄 확보가 핵심 성장 동력입니다.",
+        "moat_analysis": "엔비디아(NVIDIA)에 HBM3E를 독점 공급하며 AI 반도체 메모리 병목을 장악한 SK하이닉스의 지분 가치를 가장 안전하고 저렴하게 확보할 수 있는 지배구조적 통로입니다. 순자산가치(NAV) 대비 55~70%에 달하는 극단적인 지주사 할인율(NAV Discount)은 하방 경직성을 제공하는 동시에, 정부 밸류업 프로그램 및 주주환원 정책 강화에 따른 할인율 축소(De-discounting) 레버리지라는 독점적 투자 해자를 구성합니다.",
+        "moat_bottleneck": "엔비디아(NVIDIA)에 HBM3E를 독점 공급하며 AI 반도체 메모리 병목을 장악한 SK하이닉스의 지분 가치를 가장 안전하고 저렴하게 확보할 수 있는 지배구조적 통로입니다. 순자산가치(NAV) 대비 55~70%에 달하는 극단적인 지주사 할인율(NAV Discount)은 하방 경직성을 제공하는 동시에, 정부 밸류업 프로그램 및 주주환원 정책 강화에 따른 할인율 축소(De-discounting) 레버리지라는 독점적 투자 해자를 구성합니다.",
+        "tam_growth_drivers": "엔비디아 블랙웰(Blackwell) 및 루빈(Rubin) 아키텍처 출시와 더불어 폭증하는 글로벌 HBM TAM(연평균 45%+ 성장)의 직접적인 수혜체입니다. 1) SK하이닉스의 사상 최대 분기 영업이익 경신에 따른 지분법 손익 폭증, 2) 맥쿼리 추정 향후 2년간 280조 원 규모 하이닉스 자사주 소각에 따른 스퀘어 실질 지분율 25%+ 자동 상승, 3) 적극적인 경상 배당 재원 기반 자사주 매입 및 전량 소각 이행, 4) 크래프톤, 티맵 등 비핵심 포트폴리오 지분 유동화를 통한 차세대 반도체 M&A 실탄 확보가 핵심 성장 동력입니다.",
         "financial_margins": "지분법 이익 반영 기준 영업이익률(OPM) 68.4%, 자기자본이익률(ROE) 24.1%. 반도체 슈퍼사이클 도래로 연결 순이익이 조 단위로 급증하고 있으며, 순차입금 비율이 극히 낮아 우량한 재무 구조를 보유하고 있습니다.",
         "opm": 68.4,
         "roe": 24.1,
         "gross_margin": 72.0,
         "fcf_status": "SK하이닉스 지분법 이익 폭증 및 비핵심 자산 유동화로 1조 원+ 현금 유입, 대규모 자사주 소각 이행",
         "key_risks": "1) 국내 복합기업 지주사 특유의 구조적 디스카운트 지속 가능성, 2) 글로벌 메모리 반도체 경기 사이클 둔화, 3) 커머스 부문(11번가 등) 매각 지연 및 지분법 손실.",
-        "catalysts": "정부 밸류업 지수 편입 및 3,000억 원+ 규모 자사주 매입 소각 공시, SK하이닉스 분기 사상 최대 실적 발표, 포트폴리오 리밸런싱 완료.",
-        "valuation_thesis": "SK하이닉스 지분가치만 30조 원을 상회하나 시가총액은 11조 원대에 불과. 목표 할인율 40% 적용 시 적정주가 120,000~140,000원.",
+        "catalysts": "정부 밸류업 지수 편입 및 자사주 매입 소각 공시, SK하이닉스 280조 원 자사주 소각 집행, HBM ASP 121% 급등 수혜, 포트폴리오 리밸런싱 완료.",
+        "valuation_thesis": "SK하이닉스 지분가치만 259조~496조 원에 달하나 시가총액은 147조 원(113만 원대)에 불과. 맥쿼리 280조 원 자사주 소각 및 HBM ASP 121% 폭등 반영 시 NAV 할인율 축소(45%→30%)로 적정주가 1,800,000~2,500,000원.",
         "institutional_verdict": "STRONG_BUY (AI HBM 대장주 SK하이닉스 모회사 & 밸류업 최대 수혜 지주사)",
-        "target_price": 130000.0
+        "target_price": 1800000.0
     },
     "ENPH": {
         "ticker": "ENPH",
@@ -231,10 +231,10 @@ SEED_STUDIES = {
         "exchange": "NASDAQ",
         "sector": "마이크로인버터 및 분산형 ESS 1위",
         "portfolio_tier": "Watchlist",
-        "current_price": 30.91,
+        "current_price": 31.83,
         "high_52w": 73.74,
-        "mdd_pct": -58.08,
-        "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -58.1%)",
+        "mdd_pct": -56.83,
+        "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -56.8%)",
         "dca_stage": "WATCH_DEEP",
         "business_model": "엔페이즈 에너지는 글로벌 주거용 및 상업용 분산 태양광 마이크로인버터(Microinverter) 시스템 분야의 글로벌 1위 기업입니다. 패널 단위로 직류(DC)를 교류(AC)로 즉각 변환하는 독자적인 반도체 기반 마이크로인버터(IQ 시리즈)와 배터리 에너지 저장 장치(IQ Battery), 그리고 전력 관리 스마트 소프트웨어(Enphase App & Enlighten)를 결합한 통합 홈 에너지 시스템을 제공합니다. 모듈 레벨 파워 일렉트로닉스(MLPE) 시장에서 하드웨어 판매뿐 아니라 클라우드 전력 관리 및 가상발전소(VPP) 소프트웨어 플랫폼 구독을 통해 장기 고마진 순환 매출을 창출합니다.",
         "moat_analysis": "전 세계 300만 개 이상의 주거용 시스템에 7,500만 개 이상의 마이크로인버터를 보급한 독보적인 설치 레퍼런스와 특허 ASIC 칩셋 기술이 핵심 해자입니다. 전통적인 중앙 집중식 스트링(String) 인버터 대비 단일 패널 음영 발생 시에도 전체 시스템 효율 저하가 없는 아키텍처적 우위와 화재 위험이 원천 차단된 고전압 직류(DC) 배제 안전 표준을 선점했습니다. 또한 글로벌 2,000개 이상의 충성도 높은 공인 설치업체(Installer Network) 생태계 락인 효과로 신규 진입자가 쉽게 깰 수 없는 강력한 전환 비용(Switching Costs)을 구축했습니다.",
@@ -247,7 +247,7 @@ SEED_STUDIES = {
         "fcf_status": "채널 재고 정상화 및 운전자본 회수로 연간 $300M+ 잉여현금흐름(FCF) 창출 체력 회복",
         "key_risks": "1) 고금리 환경 지속에 따른 주거용 태양광 리스 및 할부 대출 금융 비용 부담, 2) 미국 및 유럽의 태양광 넷미터링(NEM) 정책 개정에 따른 단기 수요 변동성, 3) 테슬라 파워월(Powerwall) 및 솔라엣지(SolarEdge) 등 경쟁사들과의 가격 경쟁.",
         "catalysts": "유럽 및 미국 유통 채널 재고 소진 완료에 따른 분기 출하량 V자 반등, IRA 45X 제조 보조금 현금 유입 본격화, IQ Battery 5P 판매 호조.",
-        "valuation_thesis": "주가 고점 대비 -70%+ 급락으로 업황 바닥 통과 국면, 재고 정상화 확인 시 목표가 $110~$135.",
+        "valuation_thesis": "주가 고점 대비 -56% 급락으로 업황 바닥 통과 국면, 재고 정상화 확인 시 목표가 $110~$135.",
         "institutional_verdict": "BUY_ON_DIP (글로벌 1위 마이크로인버터 및 분산형 ESS 플랫폼 독점 수혜)",
         "target_price": 120.0
     },
@@ -258,10 +258,10 @@ SEED_STUDIES = {
         "exchange": "NASDAQ",
         "sector": "기능성 피트니스 에너지 드링크 1위",
         "portfolio_tier": "Watchlist",
-        "current_price": 28.00,
+        "current_price": 27.71,
         "high_52w": 66.74,
-        "mdd_pct": -58.05,
-        "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -58.0%)",
+        "mdd_pct": -58.48,
+        "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -58.5%)",
         "dca_stage": "WATCH_DEEP",
         "business_model": "셀시우스 홀딩스는 천연 추출물, 무설탕, 신진대사 촉진 및 열량 연소(MetaPlus) 기능성을 결합한 글로벌 1위 피트니스 에너지 드링크 전문 기업입니다. 전통적인 고당도·고카페인 에너지 드링크(레드불, 몬스터 등)와 차별화된 클린 라벨(Clean-Label) 웰니스 음료 카테고리를 개척했습니다. 펩시코(PepsiCo)와의 글로벌 독점 유통 파트너십을 통해 미국 내 마트, 편의점, 체육관, 대학가 및 해외 시장으로 유통망을 급격히 확장하는 자본 효율적(Asset-Light) 외주 생산(Co-Packing) 모델을 운영합니다.",
         "moat_analysis": "글로벌 음료 거인 펩시코(PepsiCo)의 DSD(Direct-Store-Delivery) 직배송 물류망을 독점 활용하여 북미 유통 매대 점유율(Share of Shelf)을 장악한 유통 병목 해자가 핵심입니다. 또한 피트니스·헬스·MZ세대 소비자층에서 형성된 강력한 브랜드 로열티와 아마존 에너지 드링크 카테고리 1위(점유율 20%+)의 독보적인 디지털 D2C 침투율이 전통 브랜드들의 진입을 차단하는 강력한 브랜드 해자를 구축했습니다.",
@@ -512,6 +512,18 @@ SEED_TIMELINE_EVENTS = [
         "price_impact": "패시브 수급 개선 및 장기 가치투자 기관의 비중 확대 유도",
         "url": "https://www.cnbc.com/2026/06/15/krx-value-up-index-sk-square.html"
     },
+    {
+        "ticker": "402340.KS",
+        "publish_date": "2026-09-29",
+        "headline": "[외신 긴급분석] 로이터: 앤트로픽 700조 원(5,180억$) AI 인프라 중 80% '취소 불가(Take-or-Pay)' - 삼성전자 D램 30% 잠식 & 2027년 HBM ASP +121% 쇼티지 확정",
+        "source": "Reuters",
+        "summary": "로이터 비공개 IPO 투자설명서 단독 보도에 따르면 앤트로픽의 5,180억 달러(약 700조 원) 인프라 계획 중 약 80%가 실제 사용 여부와 관계없이 지급해야 하는 '취소 불가능한(Take-or-Pay)' 계약으로 밝혀졌으며, 'AI 성장의 유일한 제약은 수요가 아니라 컴퓨팅 자원 부족'이라고 공식 선언했습니다. 브로드컴 커스텀 ASIC 장비 리스 1,612억 달러 등도 포함되어 HBM 수요처가 다변화되었습니다. 또한 삼성전자 김태우 부사장의 공식 확인대로 2027년 HBM이 전체 D램 웨이퍼 30%를 잠식하고, 3배 다이 페널티로 일반 서버용 DDR5 공급 절벽이 확정되었으며, 트렌드포스는 2027년 HBM 혼합 ASP가 121% 급등할 것으로 추정했습니다. 씨티 역시 HBM 수급 적자가 2027년 -21%에서 2028년 -36%로 심화될 것으로 전망했습니다.",
+        "key_takeaways": "• 앤트로픽 700조 원 인프라 약정 80% 취소 불가(Take-or-Pay): AI CAPEX 과잉투자론 및 주문 취소 우려 원천 무력화\n• '다이 페널티 3배'의 수학: HBM 다이 1개 면적 ≈ DDR5 3GB 면적으로 HBM 30% 잠식 시 일반 D램 공급 60% 이상 증발\n• HBM4 ASP 121% 폭등과 DDR5 동반 쇼티지로 SK하이닉스 2026~2027년 영업이익률 50~60% 사상 최대 정점 달성 가시화",
+        "sentiment": "POSITIVE",
+        "sentiment_score": 0.95,
+        "price_impact": "피크아웃론 완전 폐기 및 트윈 슈퍼사이클 확정으로 SK하이닉스-SK스퀘어 밸류에이션 펀더멘털 보증수표 확보.",
+        "url": "https://www.reuters.com/business/anthropics-518-billion-ai-buildout-hinges-largely-deals-that-cannot-be-canceled-2026-09-29/"
+    },
 
     # ENPH
     {
@@ -670,6 +682,18 @@ SEED_TIMELINE_EVENTS = [
         "price_impact": "SK하이닉스에 직접 투자하는 것보다 지주사 할인율 축소(De-discounting) 레버리지로 인해 더 높은 주가 상승률과 하방 안전마진을 동시 제공. 적정주가 125,000원.",
         "url": "https://www.youtube.com/watch?v=SKSquareValueUpSampro2026"
     },
+    {
+        "ticker": "402340.KS",
+        "publish_date": "2026-09-30",
+        "headline": "[유튜브 심층분석] 미국 주식 채널 에디: 마이크론 실적 프리뷰 & 백악관 AI 헌법 서명 - SK하이닉스 177만 원 삼각수렴 지지선과 4분기 폭등 신호탄",
+        "source": "YouTube (미국 주식 채널 - 에디 Eddie)",
+        "summary": "미국 주식 전문 채널 에디(Eddie)의 마이크론 실적 프리뷰 및 백악관 AI 서밋 분석 영상. 월가 애널리스트 61명 중 57명이 매수를 제시한 마이크론 실적 발표와 트럼프 대통령 주재 빅테크 수장 회동(젠슨 황, 일론 머스크, 산제이 메로트라, 샘 올트먼 등)을 통한 'AI 헌법(자율규제 & 인프라 전폭 지원)' 서명 이벤트를 심층 분석했습니다. 미국 10년물 국채 5.3% 급등에 따른 시장 조정은 공포가 아닌 절호의 저가 매수 기회이며, SK하이닉스가 177만 원 삼각수렴 하단에서 견고한 지지력을 확인한 만큼 상방 돌파 시 SK스퀘어의 45% 할인율 축소 랠리가 가속화될 것으로 진단했습니다.",
+        "key_takeaways": "• 마이크론 실적 발표 직전: 월가 57개 매수 의견, 평균 목표가 $1,600로 AI 메모리 호실적 지속 가시화\n• 백악관 빅테크 총집결: 'AI 헌법' 서명으로 정부 규제 배제 및 전력망/데이터센터 연방정부 전폭 지원 합의\n• 기술적 분석: SK하이닉스 177만 원 삼각수렴 지지선 확인 후 200만 원 안착 시도, SK스퀘어 동반 반등 기대",
+        "sentiment": "POSITIVE",
+        "sentiment_score": 0.92,
+        "price_impact": "마이크론 호실적 기대 및 백악관 정책 모멘텀이 4분기 반도체 랠리를 촉발하며 110만 원대 바닥을 다진 SK스퀘어의 강한 반등 견인.",
+        "url": "https://www.youtube.com/watch?v=SS1CLjwx2Fc"
+    },
     # ENPH - YouTube Insight
     {
         "ticker": "ENPH",
@@ -777,6 +801,32 @@ SEED_TIMELINE_EVENTS = [
         "sentiment_score": 0.96,
         "price_impact": "국내외 연기금 및 글로벌 밸류업 패시브 펀드의 기계적 매수 유입을 견인하는 최우선 담보 종목.",
         "url": "https://www.morganstanley.com/ideas"
+    },
+    # 402340.KS - Macquarie & BofA Research
+    {
+        "ticker": "402340.KS",
+        "publish_date": "2026-09-30",
+        "headline": "[글로벌 IB 리포트] 맥쿼리: SK하이닉스 목표가 340만 원 & 2년간 280조 원 자사주 소각 - SK스퀘어 NAV 할인율 70% 비정상적 괴리 해소 전망",
+        "source": "Macquarie & BofA Research",
+        "summary": "맥쿼리 글로벌 테크 리서치팀의 메모리 반도체 심층 보고서. SK하이닉스 목표주가 3,400,000원(Outperform)을 제시하며, 빅테크의 HBM 50%+ 가격 인상 수용 불가피성과 누적 잉여현금흐름(FCF) 50% 주주환원 원칙에 따라 향후 2년간 280조 원 규모의 자사주 매입 및 소각을 단행할 것으로 추정했습니다. 하이닉스 시가총액이 2,475조 원에 도달할 경우 SK스퀘어의 20.07% 지분가치만 496조 원에 달하게 되며, 280조 원 소각 시 스퀘어의 실질 지분율은 25%+로 자동 상승합니다. 한편 BofA 역시 2030년 데이터센터 메모리 TAM을 1.3조 달러로 상향하며 글로벌 반도체 상향분의 100%가 메모리에서 발생한다고 분석했습니다.",
+        "key_takeaways": "• 🎯 맥쿼리 하이닉스 TP 3,400,000원 & 2년간 280조 원 자사주 소각 (유통 주식 22% 소멸)\n• 📊 시나리오: 하이닉스 시총 2,475조 원 도달 시 스퀘어 지분가치 496조 원 vs 현재 스퀘어 시총 147조 원(113만 원대)의 기형적 괴리\n• 💡 핵심 투자 논점: 자회사 280조 원 소각으로 스퀘어 지분율 20%→25%+ 자동 상승 및 조 단위 배당 유입, BofA 메모리 슈퍼사이클 1.3조 달러 수혜로 NAV 할인율 70%→30% 압축 전망",
+        "sentiment": "POSITIVE",
+        "sentiment_score": 0.98,
+        "price_impact": "기초자산 하이닉스의 수백조 원대 자본환원과 지분가치 폭등으로 지주사 NAV 할인율 축소 레버리지 폭발. 적정주가 1,800,000~2,500,000원.",
+        "url": "https://www.macquarie.com/insights"
+    },
+    # 402340.KS - Goldman Sachs & KB Research
+    {
+        "ticker": "402340.KS",
+        "publish_date": "2026-09-30",
+        "headline": "[글로벌 IB 리포트] 골드만삭스: 외국인 지분율 -2.1σ 역사적 바닥(완전한 빈집) & PER 4.7배 극단적 저평가 - 실적 확인 시 강제 숏커버링 랠리",
+        "source": "Goldman Sachs Research",
+        "summary": "골드만삭스 아시아-태평양 전략팀 리포트 '한국 반도체 저평가는 함정인가 기회인가?'. 외국인 보유 비중이 역사적 평균 대비 -2.1 표준편차(-2.1σ, 하위 1.8% 미만 완전한 빈집)까지 하락한 반면, 2027년 기술주 EPS 전망치는 6개월간 122% 상향되어 비대칭적 보상 구간(Asymmetric Upside)에 진입했다고 진단했습니다. KB증권(이은택) 역시 미국 10년물 국채 5.2% 급등은 CTA 숏 쏠림에 기인하며 매크로 피봇 시 채권 숏스퀴즈와 함께 한국 반도체로의 강력한 바이 코리아 랠리가 촉발될 것으로 전망했습니다. 하이닉스 저평가 위에 지주사 할인율 45%가 겹쳐진 SK스퀘어(실질 PER 4.5배)의 더블 리레이팅(Double Re-rating)이 임박했습니다.",
+        "key_takeaways": "• 🎯 골드만삭스: 외국인 지분율 -2.1σ 극단적 매도 고갈(Capitulation) 도달, 잠재적 매수 여력 역사상 최대\n• 📊 EPS +122% 상향 vs PER 4.7배: 실적 확인 즉시 글로벌 벤치마크 추종 펀드의 강제 숏커버링 유입 필연\n• 💡 SK스퀘어: 하이닉스 PER 7배 + 지주사 할인율 45% = 실질 PER 4.5배 극단적 바닥, 금리 노이즈 해소 시 가장 강한 우상향 탄성",
+        "sentiment": "POSITIVE",
+        "sentiment_score": 0.96,
+        "price_impact": "외국인 수급의 통계적 바닥 통과 및 매크로 금리 공포 정점 통과로 지주사 할인율 압축 매수세 집중.",
+        "url": "https://www.goldmansachs.com/insights/goldman-sachs-research?hl=ko-KR"
     },
     # ENPH - Goldman Sachs Research
     {
@@ -963,6 +1013,11 @@ def ensure_tables_and_seed(db_path: Optional[Union[str, Path]] = None) -> None:
                     name_ko=excluded.name_ko,
                     exchange=excluded.exchange,
                     sector=excluded.sector,
+                    current_price=excluded.current_price,
+                    high_52w=excluded.high_52w,
+                    mdd_pct=excluded.mdd_pct,
+                    buy_signal=excluded.buy_signal,
+                    dca_stage=excluded.dca_stage,
                     business_model=excluded.business_model,
                     moat_analysis=excluded.moat_analysis,
                     moat_bottleneck=excluded.moat_bottleneck,
@@ -1054,8 +1109,16 @@ def _register_missing_universe_companies(cur: sqlite3.Cursor) -> None:
             INSERT INTO company_profiles (
                 company_id, sector, description_ko, current_price, high_52w, mdd_pct, buy_signal, dca_stage, moat_score,
                 last_updated, principle_reason, op_margin_ttm, roe
-            ) VALUES (?, 'Technology', '클라우드 기반 인공지능(AI) 대출 플랫폼', 36.85, 86.50, -57.40, 'BUY_READY (극단폭락 진입검토 MDD -57.4%)', 'WATCH_DEEP', 58.0,
+            ) VALUES (?, 'Technology', '클라우드 기반 인공지능(AI) 대출 플랫폼', 23.14, 55.22, -58.09, 'BUY_READY (극단폭락 진입검토 MDD -58.1%)', 'WATCH_DEEP', 58.0,
                      datetime('now', 'localtime'), 'AI 언더라이팅 모델 승인율 44%+ 개선, FCF 흑자 전환 국면 (Watchlist)', 11.8, 9.5)
+        """, (upst_id,))
+    else:
+        cur.execute("""
+            UPDATE company_profiles
+            SET current_price=23.14, high_52w=55.22, mdd_pct=-58.09,
+                buy_signal='BUY_READY (극단폭락 진입검토 MDD -58.1%)', dca_stage='WATCH_DEEP',
+                last_updated=datetime('now', 'localtime')
+            WHERE company_id = ?
         """, (upst_id,))
 
     # 402340.KS Registration
@@ -1064,11 +1127,18 @@ def _register_missing_universe_companies(cur: sqlite3.Cursor) -> None:
     if not sq_row:
         cur.execute("""
             INSERT INTO companies (industry_id, name, ticker, role_description, future_growth, display_order, portfolio_tier, principle_reason)
-            VALUES (?, 'SK Square', '402340.KS', '반도체/ICT 투자전문 지주회사 (SK하이닉스 모회사)', 'SK하이닉스 HBM3E 독점 지분법 이익 급증 및 자사주 4,000억 원 전량 소각', 45, 'Core', 'SK하이닉스 HBM3E 독점 모회사, NAV 대비 55% 디스카운트 해소 수혜, OPM 68.4%, ROE 24.1% (Core)')
+            VALUES (?, 'SK Square', '402340.KS', '반도체/ICT 투자전문 지주회사 (SK하이닉스 모회사)', 'SK하이닉스 HBM 독점 지분법 이익 및 280조 원 자사주 소각 수혜', 45, 'Core', 'SK하이닉스 HBM 독점 모회사, NAV 대비 70% 디스카운트 해소 수혜, OPM 68.4%, ROE 24.1% (Core)')
         """, (default_ind_id,))
         sq_id = cur.lastrowid
     else:
         sq_id = sq_row[0]
+        cur.execute("""
+            UPDATE companies
+            SET role_description='반도체/ICT 투자전문 지주회사 (SK하이닉스 모회사)',
+                future_growth='SK하이닉스 HBM 독점 지분법 이익 및 280조 원 자사주 소각 수혜',
+                principle_reason='SK하이닉스 HBM 독점 모회사, NAV 대비 70% 디스카운트 해소 수혜, OPM 68.4%, ROE 24.1% (Core)'
+            WHERE id = ?
+        """, (sq_id,))
 
     cur.execute("SELECT id FROM company_profiles WHERE company_id = ?", (sq_id,))
     if not cur.fetchone():
@@ -1076,8 +1146,17 @@ def _register_missing_universe_companies(cur: sqlite3.Cursor) -> None:
             INSERT INTO company_profiles (
                 company_id, sector, description_ko, current_price, high_52w, mdd_pct, buy_signal, dca_stage, moat_score,
                 last_updated, principle_reason, op_margin_ttm, roe
-            ) VALUES (?, 'Holding / Technology', '반도체 및 ICT 투자 지주회사 (SK하이닉스 최대주주)', 82400.0, 94200.0, -12.53, 'WAIT (고점 부근 MDD -12.5%)', 'CORE_HOLD', 82.0,
-                     datetime('now', 'localtime'), 'SK하이닉스 HBM3E 독점 모회사, NAV 대비 55% 디스카운트 해소 수혜, OPM 68.4%, ROE 24.1% (Core)', 68.4, 24.1)
+            ) VALUES (?, 'Holding / Technology', '반도체 및 ICT 투자 지주회사 (SK하이닉스 최대주주)', 1139000.0, 2189000.0, -47.97, 'BUY_READY (2차 분할매수 MDD -48.0%)', 'CORE_DCA_2', 82.0,
+                     datetime('now', 'localtime'), 'SK하이닉스 HBM 독점 모회사, NAV 대비 70% 디스카운트 해소 수혜, OPM 68.4%, ROE 24.1% (Core)', 68.4, 24.1)
+        """, (sq_id,))
+    else:
+        cur.execute("""
+            UPDATE company_profiles
+            SET current_price=1139000.0, high_52w=2189000.0, mdd_pct=-47.97,
+                buy_signal='BUY_READY (2차 분할매수 MDD -48.0%)', dca_stage='CORE_DCA_2',
+                principle_reason='SK하이닉스 HBM 독점 모회사, NAV 대비 70% 디스카운트 해소 수혜, OPM 68.4%, ROE 24.1% (Core)',
+                last_updated=datetime('now', 'localtime')
+            WHERE company_id = ?
         """, (sq_id,))
 
     # ENPH Registration
@@ -1101,8 +1180,16 @@ def _register_missing_universe_companies(cur: sqlite3.Cursor) -> None:
             INSERT INTO company_profiles (
                 company_id, sector, description_ko, current_price, high_52w, mdd_pct, buy_signal, dca_stage, moat_score,
                 last_updated, principle_reason, op_margin_ttm, roe
-            ) VALUES (?, 'Clean Energy / Technology', '글로벌 1위 태양광 마이크로인버터 및 분산형 ESS 솔루션 공급사', 30.91, 73.74, -58.08, 'BUY_READY (극단폭락 진입검토 MDD -58.1%)', 'WATCH_DEEP', 76.0,
+            ) VALUES (?, 'Clean Energy / Technology', '글로벌 1위 태양광 마이크로인버터 및 분산형 ESS 솔루션 공급사', 31.83, 73.74, -56.83, 'BUY_READY (극단폭락 진입검토 MDD -56.8%)', 'WATCH_DEEP', 76.0,
                      datetime('now', 'localtime'), '글로벌 1위 마이크로인버터 독점 병목 및 분산형 ESS 플랫폼, 채널 재고 정상화 진입 (Watchlist)', 14.2, 16.5)
+        """, (enph_id,))
+    else:
+        cur.execute("""
+            UPDATE company_profiles
+            SET current_price=31.83, high_52w=73.74, mdd_pct=-56.83,
+                buy_signal='BUY_READY (극단폭락 진입검토 MDD -56.8%)', dca_stage='WATCH_DEEP',
+                last_updated=datetime('now', 'localtime')
+            WHERE company_id = ?
         """, (enph_id,))
 
     # CELH Registration / Verification
@@ -1135,7 +1222,7 @@ def _register_missing_universe_companies(cur: sqlite3.Cursor) -> None:
             INSERT INTO company_profiles (
                 company_id, sector, description_ko, current_price, high_52w, mdd_pct, buy_signal, dca_stage, moat_score,
                 last_updated, principle_reason, op_margin_ttm, roe
-            ) VALUES (?, 'Consumer Defensive / Beverages', '글로벌 1위 기능성 피트니스 웰니스 에너지 드링크 기업', 28.00, 66.74, -58.05, 'BUY_READY (극단폭락 진입검토 MDD -58.0%)', 'WATCH_DEEP', 74.0,
+            ) VALUES (?, 'Consumer Defensive / Beverages', '글로벌 1위 기능성 피트니스 웰니스 에너지 드링크 기업', 27.71, 66.74, -58.48, 'BUY_READY (극단폭락 진입검토 MDD -58.5%)', 'WATCH_DEEP', 74.0,
                      datetime('now', 'localtime'), '기능성 웰니스 피트니스 음료 1위 및 펩시코 DSD 유통 병목 해자, OPM 19.8%, ROE 22.4% (Watchlist)', 19.8, 22.4)
         """, (celh_id,))
     else:
@@ -1143,8 +1230,8 @@ def _register_missing_universe_companies(cur: sqlite3.Cursor) -> None:
             UPDATE company_profiles
             SET sector='Consumer Defensive / Beverages',
                 description_ko='글로벌 1위 기능성 피트니스 웰니스 에너지 드링크 기업',
-                current_price=28.00, high_52w=66.74, mdd_pct=-58.05,
-                buy_signal='BUY_READY (극단폭락 진입검토 MDD -58.0%)', dca_stage='WATCH_DEEP', moat_score=74.0,
+                current_price=27.71, high_52w=66.74, mdd_pct=-58.48,
+                buy_signal='BUY_READY (극단폭락 진입검토 MDD -58.5%)', dca_stage='WATCH_DEEP', moat_score=74.0,
                 principle_reason='기능성 웰니스 피트니스 음료 1위 및 펩시코 DSD 유통 병목 해자, OPM 19.8%, ROE 22.4% (Watchlist)',
                 op_margin_ttm=19.8, roe=22.4,
                 last_updated=datetime('now', 'localtime')
@@ -1211,6 +1298,14 @@ def sync_stock_prices(tickers: List[str], db_path: Optional[Union[str, Path]] = 
                     SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?, dca_stage=?, updated_at=datetime('now', 'localtime')
                     WHERE ticker=?
                 """, (curr_price, high_52w, mdd, buy_sig, dca_stg, t))
+                
+                # Update company_profiles to maintain universe synchronization
+                clean_tk = t.replace('.KS', '')
+                cur.execute("""
+                    UPDATE company_profiles
+                    SET current_price=?, high_52w=?, mdd_pct=?, buy_signal=?, dca_stage=?, last_updated=datetime('now', 'localtime')
+                    WHERE company_id IN (SELECT id FROM companies WHERE ticker=? OR ticker=?)
+                """, (curr_price, high_52w, mdd, buy_sig, dca_stg, t, clean_tk))
     except Exception as e:
         if not silent:
             print(f"[SpecialSync] yfinance download unavailable ({e}); maintaining authoritative cached quotes.")
