@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "updated_at": "2026-10-09T23:29:11.454024+09:00",
+  "updated_at": "2026-10-09T23:57:59.841723+09:00",
   "stocks": [
     {
       "id": 1,
@@ -210,9 +210,60 @@
         "portfolio_tier": "Standard",
         "buy_signal": "BUY_READY (1차 매수적기 MDD -31.5%)",
         "dca_stage": "SAT_DCA_1",
-        "last_updated": "2026-10-09 23:29:11"
+        "last_updated": "2026-10-09 23:57:59"
       },
       "timeline": [
+        {
+          "id": 53,
+          "news_id": "2533c3859819d487",
+          "ticker": "UBER",
+          "publish_date": "2026-10-08",
+          "date": "2026-10-08",
+          "headline": "[글로벌 IB 컨센서스] 월가 40여 개 기관, 우버 52주 신저가 부근 손익비 1:4.0 이상 형성 진단 - Forward P/E 15배대 극심한 저평가 & 평균 목표가 $101~$103",
+          "source": "Goldman Sachs & MarketBeat",
+          "summary": "월가 40여 개 기관은 우버에 대해 평균 목표주가 $101~$103(상승여력 +48%)과 'Strong Buy' 의견을 재확인했습니다. 52주 신저가($65.41) 부근인 $68선은 하방 리스크(-5~10%) 대비 상방 기대치가 비대칭적으로 우수한 최적의 분할 매수 구간으로 평가되었습니다.",
+          "key_takeaways": "• 월가 평균 목표가 $101~$103 (+48%), Bull Case $120~$130 (+80%)\n• Forward P/E 15배, PEG 0.74로 플랫폼 동종 피어(도어대시 90배대) 대비 절대 저평가\n• 연간 $5.4B+ FCF 및 $7B 자사주 매입 프로그램이 강력한 하방 방어",
+          "takeaways": "• 월가 평균 목표가 $101~$103 (+48%), Bull Case $120~$130 (+80%)\n• Forward P/E 15배, PEG 0.74로 플랫폼 동종 피어(도어대시 90배대) 대비 절대 저평가\n• 연간 $5.4B+ FCF 및 $7B 자사주 매입 프로그램이 강력한 하방 방어",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.91,
+          "price_impact": "과도한 자율주행 디스럽션 공포 선반영 후 손익비 최상위 구간 진입",
+          "url": "https://www.marketbeat.com/stocks/NYSE/UBER/forecast",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 54,
+          "news_id": "799d7c7c247b3809",
+          "ticker": "UBER",
+          "publish_date": "2026-09-29",
+          "date": "2026-09-29",
+          "headline": "[유럽 최초 완전 무인 로보택시 상용화] 다라 코스로샤히 CEO, 크로아티아 자그레브에서 무인 우버 직접 탑승 & 유럽 2,000대 배치 로드맵 가동",
+          "source": "Uber Official & X (@dkhos)",
+          "summary": "우버의 다라 코스로샤히 CEO는 리막(Rimac) 산하 베르네(Verne) 및 포니에이아이(Pony.ai)와 협력하여 유럽 최초로 상용화된 완전 무인(Driverless) 자율주행 우버 택시에 직접 탑승하고 상용 서비스를 공식 개시했습니다. 유럽 전역에 2,000대 이상의 무인 PBV 차량을 우버 플랫폼에 배치할 계획입니다.",
+          "key_takeaways": "• 크로아티아 자그레브에서 유럽 최초 무인 자율주행 우버 상용화 성공\n• 베르네(PBV 하드웨어) + 포니에이아이(L4 가상드라이버) + 우버(배차·수요 플랫폼) 3자 분업\n• 우버는 거대한 차량 CAPEX 없이 중개 수수료(Take-rate)만 취하는 에셋라이트 모델 증명",
+          "takeaways": "• 크로아티아 자그레브에서 유럽 최초 무인 자율주행 우버 상용화 성공\n• 베르네(PBV 하드웨어) + 포니에이아이(L4 가상드라이버) + 우버(배차·수요 플랫폼) 3자 분업\n• 우버는 거대한 차량 CAPEX 없이 중개 수수료(Take-rate)만 취하는 에셋라이트 모델 증명",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.95,
+          "price_impact": "'로보택시가 우버를 죽인다'는 비관론을 정면 반박하는 실물 승리",
+          "url": "https://x.com/dkhos/status/2104882972700876810",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 55,
+          "news_id": "e999c993c2db426b",
+          "ticker": "UBER",
+          "publish_date": "2026-09-28",
+          "date": "2026-09-28",
+          "headline": "[글로벌 M&A] 우버, 딜리버리 히어로(배달의민족) 148억 달러 현금 공개매수 공식 개시 - 'Go anywhere, Get anything' 글로벌 슈퍼앱 완성",
+          "source": "TIKR & Reuters",
+          "summary": "우버가 유럽·아시아 1위 배달 기업인 딜리버리 히어로(Delivery Hero)에 대한 148억 달러(주당 41.50유로) 전액 현금 공개매수를 본격화했습니다. 한국 배달의민족과 글로벌 라스트마일 인프라를 흡수하여 'Go anywhere, Get anything' 글로벌 슈퍼앱 및 우버원(Uber One) 생태계를 완성하게 됩니다.",
+          "key_takeaways": "• 148억 달러 공개매수로 글로벌 최대 배달-모빌리티 통합 플랫폼 탄생\n• 한국 배달의민족 라스트마일 인프라와 우버 택시 간 강력한 크로스셀링 창출\n• 우버원 멤버십 LTV 극대화 및 지역별 출혈경쟁 종식",
+          "takeaways": "• 148억 달러 공개매수로 글로벌 최대 배달-모빌리티 통합 플랫폼 탄생\n• 한국 배달의민족 라스트마일 인프라와 우버 택시 간 강력한 크로스셀링 창출\n• 우버원 멤버십 LTV 극대화 및 지역별 출혈경쟁 종식",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.86,
+          "price_impact": "단기 현금 소진 부담 소화 후 장기 EBITDA 및 글로벌 테이크레이트 지배력 확대",
+          "url": "https://www.tikr.com/blog/uber-launches-its-14-8-billion-delivery-hero-tender-heres-what-it-means",
+          "created_at": "2026-10-09 23:56:52"
+        },
         {
           "id": 25,
           "news_id": "f23063fb0c21f2f4",
@@ -265,6 +316,23 @@
           "created_at": "2026-09-29 18:13:03"
         },
         {
+          "id": 56,
+          "news_id": "d7105d50090f580a",
+          "ticker": "UBER",
+          "publish_date": "2026-09-20",
+          "date": "2026-09-20",
+          "headline": "[유튜브 단독대담] 미키피디아 돔 테일러 APAC 대표: 자율주행의 본질은 차량 제조가 아닌 가동률(Utilization) - AV 제조사의 우버 입점 필연성",
+          "source": "YouTube (미키피디아)",
+          "summary": "미키 김의 유튜브 채널에 출연한 돔 테일러 우버 아시아태평양 총괄 대표는 AV 개발사들이 우버 플랫폼에 입점할 수밖에 없는 유닛 이코노믹스를 설명했습니다. 자율주행차는 거대한 고정비 자산이므로 피크 수요와 평일 낮의 수요 갭을 메우려면 1.5억 명 우버 네트워크가 필수적이며, 향후 15년간 유인 운전자와 AV가 공존하는 하이브리드 마켓플레이스가 전개될 것이라고 밝혔습니다.",
+          "key_takeaways": "• 자율주행 차량은 가동률 100%여야 흑자 달성, 제조사 독자 앱은 적자 필연\n• 우버의 15년 하이브리드 마켓플레이스 로드맵: 상시 AV + 피크 타임 유인 운전자\n• 한국 시장 'Uber Taxi' 리브랜딩 이후 외국인 관광객 폭증으로 APAC 최고 성장세",
+          "takeaways": "• 자율주행 차량은 가동률 100%여야 흑자 달성, 제조사 독자 앱은 적자 필연\n• 우버의 15년 하이브리드 마켓플레이스 로드맵: 상시 AV + 피크 타임 유인 운전자\n• 한국 시장 'Uber Taxi' 리브랜딩 이후 외국인 관광객 폭증으로 APAC 최고 성장세",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.92,
+          "price_impact": "우버 플랫폼의 독점적 디스패처 병목 해자를 정량적으로 입증",
+          "url": "https://youtu.be/-DHn6GEwmbk",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
           "id": 2,
           "news_id": "0c0b28bbe0e7fa85",
           "ticker": "UBER",
@@ -299,7 +367,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-10-09 23:29:11"
+      "updated_at": "2026-10-09 23:57:59"
     },
     {
       "id": 2,
@@ -509,9 +577,43 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -76.7%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-10-09 23:29:11"
+        "last_updated": "2026-10-09 23:57:59"
       },
       "timeline": [
+        {
+          "id": 61,
+          "news_id": "e32dabe69bd3e8f3",
+          "ticker": "FLNC",
+          "publish_date": "2026-10-07",
+          "date": "2026-10-07",
+          "headline": "[초대형 BESS 수주] 우드맥킨지: 플루언스 에너지, 호주 및 영국 1.2GW/4.8GWh 초대형 전력망 BESS 신규 계약 수주 (총 수주잔고 $4.5B 돌파)",
+          "source": "Wood Mackenzie & PR Newswire",
+          "summary": "플루언스 에너지가 호주 퀸즐랜드 및 영국 국립 그리드 연계 초대형 BESS(배터리 에너지 저장장치) 프로젝트를 수주하며 수주 잔고(Backlog)가 $4.5B를 돌파했습니다. 빅테크 AI 데이터센터 연계 백업 전원 공급 계약도 본격화되고 있습니다.",
+          "key_takeaways": "• 호주·영국 1.2GW 초대형 그리드 안정화 프로젝트 수주\n• 총 수주 잔고 $4.5B 돌파로 2026-2027년 매출 가시성 확보\n• AI 데이터센터 24/7 무탄소 전력 공급(PPA) 파트너십 확대",
+          "takeaways": "• 호주·영국 1.2GW 초대형 그리드 안정화 프로젝트 수주\n• 총 수주 잔고 $4.5B 돌파로 2026-2027년 매출 가시성 확보\n• AI 데이터센터 24/7 무탄소 전력 공급(PPA) 파트너십 확대",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.92,
+          "price_impact": "수주 모멘텀 가속화 및 연간 EBITDA 흑자 폭 확대 전망",
+          "url": "https://www.woodmac.com/news/fluence-grid-scale-contracts-2026",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 62,
+          "news_id": "2413a88b073f6f40",
+          "ticker": "FLNC",
+          "publish_date": "2026-10-01",
+          "date": "2026-10-01",
+          "headline": "[AI 전력 인프라 수혜] 로이터: 빅테크 데이터센터 전력망 연결 병목에 즉시 투입 가능한 유틸리티 BESS 주문 폭증",
+          "source": "Reuters",
+          "summary": "미국 내 전력망 연결 대기(Interconnection Queue)가 심화되면서 마이크로소프트·구글 등이 신규 원전이나 가스발전 대신 즉시 투입 가능한 대용량 BESS 설치를 의무화함에 따라 플루언스의 솔루션 수요가 급증하고 있습니다.",
+          "key_takeaways": "• 데이터센터 전력 접속 지연의 즉각적 해결책으로 BESS 부상\n• Fluence OS 소프트웨어 기반 반복 구독 매출(ARR) 40% 성장\n• 지멘스·AES 조인트벤처 기반의 글로벌 신인도 우위",
+          "takeaways": "• 데이터센터 전력 접속 지연의 즉각적 해결책으로 BESS 부상\n• Fluence OS 소프트웨어 기반 반복 구독 매출(ARR) 40% 성장\n• 지멘스·AES 조인트벤처 기반의 글로벌 신인도 우위",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.88,
+          "price_impact": "AI 인프라 전력 수혜주로의 섹터 리레이팅 촉매",
+          "url": "https://www.reuters.com/business/energy/ai-data-center-bess-demand-surge",
+          "created_at": "2026-10-09 23:56:52"
+        },
         {
           "id": 26,
           "news_id": "93f31ca400d30dbf",
@@ -598,7 +700,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-10-09 23:29:11"
+      "updated_at": "2026-10-09 23:57:59"
     },
     {
       "id": 3,
@@ -808,9 +910,43 @@
         "portfolio_tier": "Satellite",
         "buy_signal": "BUY_READY (2차 분할매수 MDD -52.1%)",
         "dca_stage": "SAT_DCA_2",
-        "last_updated": "2026-10-09 23:29:11"
+        "last_updated": "2026-10-09 23:57:59"
       },
       "timeline": [
+        {
+          "id": 57,
+          "news_id": "9cf726ff2b79e8ef",
+          "ticker": "MBLY",
+          "publish_date": "2026-10-08",
+          "date": "2026-10-08",
+          "headline": "[글로벌 전략 리포트] 블룸버그 & 시킹알파: 모빌아이 $8선 바닥 다지기 - 중국 로컬 칩 경쟁 및 인텔 오버행 vs 서구 OEM SuperVision 채택 확대 (손익비 진단)",
+          "source": "Bloomberg & Seeking Alpha",
+          "summary": "모빌아이는 중국 전기차의 로컬 칩 전환과 모회사 인텔의 지분 매각(오버행) 리스크로 고점 대비 70% 이상 하락한 $8선에서 거래되고 있습니다. 셀시우스 대비 하방 리스크는 높으나, 폭스바겐·포드 등 서구 OEM의 SuperVision 채택 확대 시 2~3배 이상의 비대칭적 상방 잠재력을 지닌 복권형 공격수 포지션으로 평가되었습니다.",
+          "key_takeaways": "• 현재가 $8, 시총 $64억으로 밸류에이션 하단 진입\n• 인텔 지분 매각 오버행 및 중국 BYD/샤오펑 이탈 리스크 상존\n• 서구권 완성차 레벨 2+/3 채택 가속 시 비대칭적 레버리지 기대",
+          "takeaways": "• 현재가 $8, 시총 $64억으로 밸류에이션 하단 진입\n• 인텔 지분 매각 오버행 및 중국 BYD/샤오펑 이탈 리스크 상존\n• 서구권 완성차 레벨 2+/3 채택 가속 시 비대칭적 레버리지 기대",
+          "sentiment": "NEUTRAL",
+          "sentiment_score": 0.35,
+          "price_impact": "고위험·고수익 소액 공격수 포트폴리오 적합",
+          "url": "https://www.bloomberg.com/quote/MBLY:US",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 58,
+          "news_id": "69c9aed5ef926036",
+          "ticker": "MBLY",
+          "publish_date": "2026-09-29",
+          "date": "2026-09-29",
+          "headline": "[차세대 칩 양산] 모빌아이, EyeQ6L 7nm 초저전력 칩 본격 양산 개시 & 글로벌 OEM 1,400만 대 수주 잔고 재확인",
+          "source": "Reuters",
+          "summary": "모빌아이는 7nm 초저전력 EyeQ6L ADAS 칩의 본격 대량 양산을 개시했으며, 2026-2028년 글로벌 완성차 납품 계약이 차질 없이 진행 중이라고 밝혔습니다. 가격 경쟁력 개선을 통해 중국계 로컬 칩에 대응하는 방어선을 구축했습니다.",
+          "key_takeaways": "• EyeQ6L 7nm 공정 기반 초저전력·고효율 ADAS 칩 양산 개시\n• 서구권 주요 OEM과의 1,400만 대 장기 공급 파트너십 유효\n• 가격 경쟁력 개선을 통한 로컬 칩 방어선 구축",
+          "takeaways": "• EyeQ6L 7nm 공정 기반 초저전력·고효율 ADAS 칩 양산 개시\n• 서구권 주요 OEM과의 1,400만 대 장기 공급 파트너십 유효\n• 가격 경쟁력 개선을 통한 로컬 칩 방어선 구축",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.8,
+          "price_impact": "실적 바닥 통과 기대감 및 단기 낙폭과대 숏커버링 유입",
+          "url": "https://www.reuters.com/technology/mobileye-eyeq6-mass-production",
+          "created_at": "2026-10-09 23:56:52"
+        },
         {
           "id": 27,
           "news_id": "49a1de8dc56f8cb5",
@@ -897,7 +1033,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-10-09 23:29:11"
+      "updated_at": "2026-10-09 23:57:59"
     },
     {
       "id": 4,
@@ -1107,9 +1243,43 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -58.1%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-10-09 23:29:11"
+        "last_updated": "2026-10-09 23:57:59"
       },
       "timeline": [
+        {
+          "id": 63,
+          "news_id": "f053c8ae91ee224c",
+          "ticker": "UPST",
+          "publish_date": "2026-10-08",
+          "date": "2026-10-08",
+          "headline": "[연준 50bp 빅컷 수혜] 시킹알파: 업스타트 AI 플랫폼, 연준 기준금리 인하 사이클로 개인 신용대출 전환율 급등 및 은행 자금조달 비용 대폭 완화",
+          "source": "Seeking Alpha",
+          "summary": "연준의 50bp 기준금리 인하 사이클 진입으로 은행 파트너들의 대출 기준(Credit Standards)이 완화되기 시작하면서 업스타트 AI 대출 플랫폼의 승인율과 전환율이 뚜렷한 반등세를 보이고 있습니다.",
+          "key_takeaways": "• 기준금리 인하로 자산담보부증권(ABS) 발행 스프레드 축소\n• 파트너 금융기관의 대출 공급 한도 확대\n• 분기 거래액(Transaction Volume) 두 자릿수 회복 전망",
+          "takeaways": "• 기준금리 인하로 자산담보부증권(ABS) 발행 스프레드 축소\n• 파트너 금융기관의 대출 공급 한도 확대\n• 분기 거래액(Transaction Volume) 두 자릿수 회복 전망",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.86,
+          "price_impact": "금리 인하 최대 수혜 핀테크 플랫폼으로 단기 숏스퀴즈 모멘텀",
+          "url": "https://seekingalpha.com/news/upstart-fed-rate-cut-loan-surge",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 64,
+          "news_id": "20daa2d7adc6b379",
+          "ticker": "UPST",
+          "publish_date": "2026-10-02",
+          "date": "2026-10-02",
+          "headline": "[차세대 AI 모델 배포] PR Newswire: 업스타트, 대출 손실률 14% 추가 절감하는 18세대 AI 언더라이팅 모델 'M18' 전면 가동",
+          "source": "PR Newswire",
+          "summary": "업스타트는 대출 손실률을 기존 대비 14% 추가 절감하는 차세대 AI 신용평가 모델 M18을 배포하여 프라임 및 니어프라임 차주에 대한 가격 경쟁력을 획기적으로 개선했다고 발표했습니다.",
+          "key_takeaways": "• M18 모델로 대출 부실 예측 정확도 14% 향상\n• 자동 승인(Automated Approval) 비율 91% 돌파\n• 소형 지역은행 및 신용협동조합 신규 고객사 5곳 추가 영입",
+          "takeaways": "• M18 모델로 대출 부실 예측 정확도 14% 향상\n• 자동 승인(Automated Approval) 비율 91% 돌파\n• 소형 지역은행 및 신용협동조합 신규 고객사 5곳 추가 영입",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.84,
+          "price_impact": "AI 신용평가 해자 강화 및 대출 마진율 개선 기대",
+          "url": "https://www.prnewswire.com/news-releases/upstart-m18-ai-model-deployment",
+          "created_at": "2026-10-09 23:56:52"
+        },
         {
           "id": 28,
           "news_id": "80d9cc1eb9f0046e",
@@ -1196,7 +1366,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-10-09 23:29:11"
+      "updated_at": "2026-10-09 23:57:59"
     },
     {
       "id": 5,
@@ -1406,9 +1576,43 @@
         "portfolio_tier": "Satellite",
         "buy_signal": "BUY_READY (1차 분할매수 MDD -29.3%)",
         "dca_stage": "SAT_DCA_1",
-        "last_updated": "2026-10-09 23:29:11"
+        "last_updated": "2026-10-09 23:57:59"
       },
       "timeline": [
+        {
+          "id": 59,
+          "news_id": "679555f5bc2e8b43",
+          "ticker": "TSLA",
+          "publish_date": "2026-10-08",
+          "date": "2026-10-08",
+          "headline": "[로보택시 공개 카운트다운] CNBC: 테슬라 'We, Robot' 사이버캡 공개 행사 프리뷰 및 FSD v13 비전 온리 상용화 기대감",
+          "source": "CNBC & Electrek",
+          "summary": "테슬라가 워너브러더스 스튜디오에서 개최되는 전용 무인 로보택시 '사이버캡(Cybercab)' 공개 행사를 앞두고 월가의 이목이 집중되고 있습니다. 골드만삭스와 모건스탠리는 하드웨어 공개 외에 규제 승인 로드맵과 마일당 운행 원가가 핵심 관전 포인트라고 지적했습니다.",
+          "key_takeaways": "• 전용 2인승 로보택시 사이버캡 및 FSD v13 언베일 임박\n• 비전 온리(Vision-only) 자율주행의 안전성 규제 통과 여부가 상용화 관건\n• 메가팩(Megapack) 에너지 사업부의 분기 영업이익 기여도 사상 최대 전망",
+          "takeaways": "• 전용 2인승 로보택시 사이버캡 및 FSD v13 언베일 임박\n• 비전 온리(Vision-only) 자율주행의 안전성 규제 통과 여부가 상용화 관건\n• 메가팩(Megapack) 에너지 사업부의 분기 영업이익 기여도 사상 최대 전망",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.85,
+          "price_impact": "이벤트 기대감에 따른 변동성 확대 및 단기 기술적 저항선 테스트",
+          "url": "https://www.cnbc.com/2026/10/08/tesla-robotaxi-event-preview.html",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 60,
+          "news_id": "d43874cd35c868fb",
+          "ticker": "TSLA",
+          "publish_date": "2026-10-02",
+          "date": "2026-10-02",
+          "headline": "[3분기 인도량 발표] 블룸버그: 테슬라 3Q 글로벌 인도량 462,890대(+6.4%)로 플러스 성장 복귀 및 메가팩 6.9GWh 설치 호조",
+          "source": "Bloomberg",
+          "summary": "테슬라는 3분기 글로벌 차량 인도량이 462,890대를 기록해 시장 컨센서스에 부합하며 올해 들어 첫 분기 플러스(+) 성장으로 전환했다고 발표했습니다. 에너지 저장장치(Megapack)는 6.9 GWh를 설치하며 역대 2위 기록을 달성했습니다.",
+          "key_takeaways": "• 3Q 인도량 46.2만 대 (전년 대비 +6.4% 증가)\n• 중국 시장 인센티브 효과로 모델 Y 판매량 견조\n• 에너지 저장장치(Megapack) 분기 6.9 GWh 설치로 역대 2위 기록",
+          "takeaways": "• 3Q 인도량 46.2만 대 (전년 대비 +6.4% 증가)\n• 중국 시장 인센티브 효과로 모델 Y 판매량 견조\n• 에너지 저장장치(Megapack) 분기 6.9 GWh 설치로 역대 2위 기록",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.78,
+          "price_impact": "전기차 수요 둔화 우려 완화 및 실적 턴어라운드 기반 확보",
+          "url": "https://www.bloomberg.com/news/articles/2026-10-02/tesla-deliveries-rise-q3",
+          "created_at": "2026-10-09 23:56:52"
+        },
         {
           "id": 29,
           "news_id": "1b3d1b97ba83566c",
@@ -1495,7 +1699,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-10-09 23:29:11"
+      "updated_at": "2026-10-09 23:57:59"
     },
     {
       "id": 6,
@@ -1505,10 +1709,10 @@
       "exchange": "KRX",
       "sector": "반도체/ICT 투자전문 지주회사 (SK하이닉스 모회사)",
       "portfolio_tier": "Core",
-      "current_price": 1139000.0,
+      "current_price": 1050000.0,
       "high_52w": 2189000.0,
-      "mdd_pct": -47.97,
-      "buy_signal": "BUY_READY (2차 분할매수 MDD -48.0%)",
+      "mdd_pct": -52.03,
+      "buy_signal": "BUY_READY (극단적 NAV 할인율 43.4~49.2% 과매도 바닥)",
       "dca_stage": "CORE_DCA_2",
       "business_model": "SK텔레콤에서 인적분할된 반도체 및 ICT 전문 투자 지주회사입니다. 글로벌 AI 메모리 HBM 1위 기업인 SK하이닉스(000660.KS) 지분 20.07%를 보유한 실질적 모회사이며, 11번가, 티맵모빌리티, 원스토어, 드림어스컴퍼니 등 ICT 포트폴리오를 보유하고 있습니다. 포트폴리오 밸류업 및 적극적인 배당·자사주 매입/소각을 통해 주주가치를 극대화하는 투자 전문 지주 모델입니다.",
       "moat_analysis": "엔비디아(NVIDIA)에 HBM3E를 독점 공급하며 AI 반도체 메모리 병목을 장악한 SK하이닉스의 지분 가치를 가장 안전하고 저렴하게 확보할 수 있는 지배구조적 통로입니다. 순자산가치(NAV) 대비 55~70%에 달하는 극단적인 지주사 할인율(NAV Discount)은 하방 경직성을 제공하는 동시에, 정부 밸류업 프로그램 및 주주환원 정책 강화에 따른 할인율 축소(De-discounting) 레버리지라는 독점적 투자 해자를 구성합니다.",
@@ -1699,15 +1903,83 @@
         }
       },
       "quote": {
-        "current_price": 1139000.0,
+        "current_price": 1050000.0,
         "high_52w": 2189000.0,
-        "mdd_pct": -47.97,
+        "mdd_pct": -52.03,
         "portfolio_tier": "Core",
-        "buy_signal": "BUY_READY (2차 분할매수 MDD -48.0%)",
+        "buy_signal": "BUY_READY (극단적 NAV 할인율 43.4~49.2% 과매도 바닥)",
         "dca_stage": "CORE_DCA_2",
-        "last_updated": "2026-10-09 23:29:11"
+        "last_updated": "2026-10-09 23:57:59"
       },
       "timeline": [
+        {
+          "id": 45,
+          "news_id": "86304d0a212edfb7",
+          "ticker": "402340.KS",
+          "publish_date": "2026-10-09",
+          "date": "2026-10-09",
+          "headline": "[글로벌 IB 리포트] 모건스탠리 & 씨티: AI 메모리 쇼티지 2030년까지 미해결 경고 & 2027년 HBM4 판가 100~150% 폭등 공식화",
+          "source": "Morgan Stanley & Citi Research",
+          "summary": "모건스탠리와 씨티는 최신 AI 인프라 보고서를 통해 2030년까지 AI 지출의 56%가 추론(Inference)에 집중되며, 에이전틱 AI 확산으로 메모리 병목이 지속될 것임을 경고했습니다. 씨티는 HBM4 12단 단가가 $2에서 $45로 2배 이상 폭등할 것으로 전망하며, SK스퀘어가 지분 20.07%를 보유한 SK하이닉스의 3분기 영업이익률이 80% 벽을 돌파할 것으로 분석했습니다.",
+          "key_takeaways": "• 모건스탠리: 추론용 에이전틱 AI 확산으로 메모리 공급 부족 2030년까지 장기화\n• 씨티(Citi): 2027년 HBM4 12단 판가 100~150% 급등 전망\n• SK하이닉스 3Q 영업이익률 80% 돌파 기대감 및 스퀘어 지분가치 재평가",
+          "takeaways": "• 모건스탠리: 추론용 에이전틱 AI 확산으로 메모리 공급 부족 2030년까지 장기화\n• 씨티(Citi): 2027년 HBM4 12단 판가 100~150% 급등 전망\n• SK하이닉스 3Q 영업이익률 80% 돌파 기대감 및 스퀘어 지분가치 재평가",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.95,
+          "price_impact": "HBM4 판가 폭등과 추론 메모리 쇼티지 공식화로 NAV 할인율 43~49% 극단치 해소 가속화",
+          "url": "https://news.futunn.com/en/post/1000700401/morgan-stanley-analysis-ai-memory-shortage-remains-unresolved-why-is",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 48,
+          "news_id": "90e17abb027f8512",
+          "ticker": "402340.KS",
+          "publish_date": "2026-10-08",
+          "date": "2026-10-08",
+          "headline": "[글로벌 팩트체크] 오픈AI 연환산 매출(Net ARR) 단 2달 만에 300억 ➡️ 500억 달러(+67%) 폭증 - AI 수요 둔화 루머 종식과 빅테크 CAPEX 지속성 보장",
+          "source": "Bloomberg & Telegram",
+          "summary": "오픈AI의 9월 말 연환산 매출이 Net 기준 500억 달러(약 67조 원)를 달성한 것으로 공식 확인되었습니다. 앤스로픽(Gross)과 오픈AI(Net)의 회계 인식 차이에 따른 시장의 일시적 의구심을 불식시켰으며, 7월 300억 달러 대비 67% 폭증하고 B2B 엔터프라이즈 부문은 107% 폭증하여 AI 소프트웨어의 실질 수익화와 빅테크 CAPEX 지속성을 완벽히 입증했습니다.",
+          "key_takeaways": "• Net 기준 ARR: 7월 $300억 ➡️ 9월 $500억 (+66.7% 폭증, 3분기 전체 +77%)\n• Gross 환산 시 $680억 달러 규모로 앤스로픽 대비 압도적 성장\n• AI 소프트웨어 현금 유입 입증으로 메모리(HBM/eSSD) CAPEX 감축 우려 완전 해소",
+          "takeaways": "• Net 기준 ARR: 7월 $300억 ➡️ 9월 $500억 (+66.7% 폭증, 3분기 전체 +77%)\n• Gross 환산 시 $680억 달러 규모로 앤스로픽 대비 압도적 성장\n• AI 소프트웨어 현금 유입 입증으로 메모리(HBM/eSSD) CAPEX 감축 우려 완전 해소",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.94,
+          "price_impact": "AI 인프라 버블 회의론 불식 및 한국 메모리 밸류체인 수혜 확인",
+          "url": "https://t.me/Samsung_Global_AI_SW",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 47,
+          "news_id": "a52afe71bd1ce37b",
+          "ticker": "402340.KS",
+          "publish_date": "2026-10-08",
+          "date": "2026-10-08",
+          "headline": "[유튜브 기술분석] 언더스탠딩 김진영 엑시나 대표: 천재 개발자의 경고 '메모리 1만 배 필요' - HBM 용량 한계와 CXL·솔리다임 134조 eSSD 패권",
+          "source": "YouTube (언더스탠딩)",
+          "summary": "전 삼성·하이닉스 CXL 수석 출신 김진영 엑시나 대표는 AI 인프라 확장에 따라 요구 메모리량이 10×10×10×10 = 10,000배 폭증한다고 분석했습니다. HBM은 패키징과 발열 한계로 용량 확장에 한계가 있어, CXL 기반 공유 메모리와 초고용량 64TB/128TB eSSD(솔리다임)가 데이터센터의 필수 핵심 병목으로 부상하고 있다고 밝혔습니다.",
+          "key_takeaways": "• 모델 파라미터·트래픽·컨텍스트·에이전트 4중 결합으로 메모리 수요 10,000배 폭증\n• HBM 용량 한계 보완을 위해 CXL 메모리 풀링 및 초고용량 eSSD 필수화\n• SK하이닉스-솔리다임의 eSSD 134조 나스닥 상장 추진은 AI 메모리 패권의 결정판",
+          "takeaways": "• 모델 파라미터·트래픽·컨텍스트·에이전트 4중 결합으로 메모리 수요 10,000배 폭증\n• HBM 용량 한계 보완을 위해 CXL 메모리 풀링 및 초고용량 eSSD 필수화\n• SK하이닉스-솔리다임의 eSSD 134조 나스닥 상장 추진은 AI 메모리 패권의 결정판",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.96,
+          "price_impact": "HBM+CXL+eSSD 풀스택 패권 확인, 스퀘어 보유 하이닉스-솔리다임 가치 부각",
+          "url": "https://youtu.be/5cOS2mK4l_M",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 46,
+          "news_id": "eb0befb5cb37d611",
+          "ticker": "402340.KS",
+          "publish_date": "2026-10-08",
+          "date": "2026-10-08",
+          "headline": "[유튜브 심층분석] 삼프로TV 김장열·이권희: 10/8 마감 폭락(-8%)의 90%는 옵션만기 파생 수급… 외인 27조 매도는 자사주와 1:1 맞교환 종료",
+          "source": "YouTube (삼프로TV)",
+          "summary": "삼프로TV 클로징벨에서 김장열 센터장과 이권희 대표는 10월 8일 코스피 -2.62% 급락과 SK스퀘어의 -8.06%(1,050,000원) 밀림은 옵션만기일 파생 세력의 콜 매도 수익 극대화와 ETF 리밸런싱이 겹친 기계적 수급 왜곡이라고 규명했습니다. 또한 최근 한 달간 외국인이 던진 27조 원은 삼성전자·SK하이닉스의 자사주 매입 27조 원과 1원 단위까지 일치하며, 다음 주 하이닉스 40조 자사주 소각 결의와 함께 외인 매도 족쇄가 완전히 끝난다고 밝혔습니다.",
+          "key_takeaways": "• 10/8 스퀘어 -8% 급락은 펀더멘털 무관, 외국계 4대 창구 38만 주 기계적 매도\n• 외국인 27조 매도는 자사주 매입 창구를 향한 1:1 엑시트였으며 다음 주 완전 종료\n• 하이닉스 40조 자사주 소각 결의 시 스퀘어 지분율 20.7%로 영구 상향 (NAV +9.5조 순증)",
+          "takeaways": "• 10/8 스퀘어 -8% 급락은 펀더멘털 무관, 외국계 4대 창구 38만 주 기계적 매도\n• 외국인 27조 매도는 자사주 매입 창구를 향한 1:1 엑시트였으며 다음 주 완전 종료\n• 하이닉스 40조 자사주 소각 결의 시 스퀘어 지분율 20.7%로 영구 상향 (NAV +9.5조 순증)",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.92,
+          "price_impact": "만기일 수급 왜곡 정상화 및 다음 주 110만~115만 원대 기술적 갭 메우기 기대",
+          "url": "https://youtu.be/252GJnx2Jd4",
+          "created_at": "2026-10-09 23:56:52"
+        },
         {
           "id": 44,
           "news_id": "cdf1984dee5fe225",
@@ -1862,7 +2134,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-10-09 23:29:11"
+      "updated_at": "2026-10-09 23:57:59"
     },
     {
       "id": 7,
@@ -2072,9 +2344,43 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -56.8%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-10-09 23:29:11"
+        "last_updated": "2026-10-09 23:57:59"
       },
       "timeline": [
+        {
+          "id": 65,
+          "news_id": "3b47a5415775738b",
+          "ticker": "ENPH",
+          "publish_date": "2026-10-08",
+          "date": "2026-10-08",
+          "headline": "[글로벌 시장 확장] PV Magazine: 엔페이즈, 인도 및 유럽 시장에 차세대 IQ8 마이크로인버터 및 모듈형 배터리 시스템 전격 출시",
+          "source": "PV Magazine",
+          "summary": "엔페이즈 에너지는 고성장하는 인도 및 유럽 주거용 시장을 겨냥해 현지 그리드 규격에 최적화된 IQ8 마이크로인버터와 소형 IQ Battery 5P를 공식 출시했습니다.",
+          "key_takeaways": "• 전력 단가가 급등하는 인도 및 동유럽 주거용 태양광 시장 본격 침투\n• 마이크로인버터와 배터리 번들 판매로 시스템당 매출(ASP) 증대\n• 글로벌 유통 파트너 네트워크 120개사 확보",
+          "takeaways": "• 전력 단가가 급등하는 인도 및 동유럽 주거용 태양광 시장 본격 침투\n• 마이크로인버터와 배터리 번들 판매로 시스템당 매출(ASP) 증대\n• 글로벌 유통 파트너 네트워크 120개사 확보",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.85,
+          "price_impact": "미국 내수 의존도 탈피 및 글로벌 분산 매출 확대 긍정적",
+          "url": "https://www.pv-magazine.com/2026/10/08/enphase-launches-iq8-india-europe",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 66,
+          "news_id": "925f862d38a57a9b",
+          "ticker": "ENPH",
+          "publish_date": "2026-10-03",
+          "date": "2026-10-03",
+          "headline": "[채널 재고 정상화] 로스MKM: 캘리포니아 NEM 3.0 적응 완료 및 배터리 부착률 50% 돌파로 미국 주거용 태양광 1년 반 만에 바닥 통과 확인",
+          "source": "Roth MKM Research",
+          "summary": "로스MKM 리서치는 미국 유통 채널 내 마이크로인버터 재고가 정상화되었으며, 캘리포니아 배터리 부착률(Attach Rate)이 50%를 돌파하여 4분기부터 완만한 출하량 반등이 시작될 것으로 분석했습니다.",
+          "key_takeaways": "• 유통 채널 과잉 재고 1년 반 만에 정상 수준(8~10주) 복귀\n• 배터리 동시 설치율 50% 돌파로 단위 시스템 수익성 방어\n• 금리 인하에 따른 주거용 태양광 대출/리스 상품 리파이낸싱 활성화",
+          "takeaways": "• 유통 채널 과잉 재고 1년 반 만에 정상 수준(8~10주) 복귀\n• 배터리 동시 설치율 50% 돌파로 단위 시스템 수익성 방어\n• 금리 인하에 따른 주거용 태양광 대출/리스 상품 리파이낸싱 활성화",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.82,
+          "price_impact": "1년 이상 지속된 재고조정 터널 종료 및 바닥권 탈출 신호",
+          "url": "https://www.streetinsider.com/Analyst+Comments/Enphase+Energy+Channel+Inventory+Normalized+Roth+MKM/27142010.html",
+          "created_at": "2026-10-09 23:56:52"
+        },
         {
           "id": 31,
           "news_id": "99cc5af08710e0bc",
@@ -2161,7 +2467,7 @@
           "created_at": "2026-09-29 17:05:50"
         }
       ],
-      "updated_at": "2026-10-09 23:29:11"
+      "updated_at": "2026-10-09 23:57:59"
     },
     {
       "id": 8,
@@ -2371,9 +2677,77 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -58.5%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-10-09 23:29:11"
+        "last_updated": "2026-10-09 23:57:59"
       },
       "timeline": [
+        {
+          "id": 49,
+          "news_id": "2f8633cafbba5412",
+          "ticker": "CELH",
+          "publish_date": "2026-10-09",
+          "date": "2026-10-09",
+          "headline": "[글로벌 퀀트 리포트] 잭스 리서치(Zacks): 셀시우스(CELH) 퀀트 투자의견 'Strong Sell' 탈피 ➡️ 'Hold' 전격 상향, 월가 평균 목표가 $43.29 유지",
+          "source": "Zacks Research",
+          "summary": "잭스 리서치는 셀시우스에 대한 정량 퀀트 투자의견을 기존 #5(Strong Sell)에서 #3(Hold)로 전격 상향 조정했습니다. 월가 애널리스트들의 실적 추정치 하향 사이클이 일단락되었으며, 월가 전체 컨센서스 평균 목표주가는 $43.29(상승여력 +58%)와 'Moderate Buy'를 유지하고 있습니다.",
+          "key_takeaways": "• 잭스 퀀트 등급 Strong Sell(#5) 탈피 ➡️ Hold(#3) 상향\n• 월가 애널리스트들의 실적 하향(Revision) 압력 종료 확인\n• 컨센서스 평균 목표가 $43.29 대비 58% 저평가 상태",
+          "takeaways": "• 잭스 퀀트 등급 Strong Sell(#5) 탈피 ➡️ Hold(#3) 상향\n• 월가 애널리스트들의 실적 하향(Revision) 압력 종료 확인\n• 컨센서스 평균 목표가 $43.29 대비 58% 저평가 상태",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.88,
+          "price_impact": "퀀트 및 알고리즘 공매도 매도 압력 완화, 기술적 반등 기반 마련",
+          "url": "https://www.marketbeat.com/instant-alerts/analyst-celsius-nasdaq-celh-raised-to-hold-at-zacks-research-2026-10-08/",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 50,
+          "news_id": "f9db9c55dcca630f",
+          "ticker": "CELH",
+          "publish_date": "2026-10-06",
+          "date": "2026-10-06",
+          "headline": "[글로벌 IB 리포트] 제프리스(Jefferies): 카우밀 가즈라왈라, 3Q 실적 앞두고 목표가 $42 미세 조정하나 'Buy' 강력 유지 & CEO 사재 매입 호평",
+          "source": "Jefferies Research",
+          "summary": "제프리스는 11월 3분기 실적 발표를 앞두고 편의점 매대 경쟁 및 판촉비 지출을 반영해 목표주가를 $44에서 $42로 미세 조정했으나 'Buy(매수)' 투자의견을 확고히 유지했습니다. CEO 존 필들리의 최근 장내 자사주 매수를 내부 확신의 결정적 증거로 평가했습니다.",
+          "key_takeaways": "• 제프리스 투자의견 'Buy' 유지, 목표주가 $42 제시 (상승여력 +53%)\n• 단기 판촉비 부담에 따른 'Cautious into print' 기조 반영\n• 최고경영진의 장내 자사주 매수를 펀더멘털 바닥 확신으로 해석",
+          "takeaways": "• 제프리스 투자의견 'Buy' 유지, 목표주가 $42 제시 (상승여력 +53%)\n• 단기 판촉비 부담에 따른 'Cautious into print' 기조 반영\n• 최고경영진의 장내 자사주 매수를 펀더멘털 바닥 확신으로 해석",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.82,
+          "price_impact": "글로벌 메이저 IB의 $40대 목표가 재확인으로 $27선 지지선 강화",
+          "url": "https://www.streetinsider.com/Analyst+Comments/Celsius+Holdings+%28CELH%29+PT+Lowered+to+%2442+at+Jefferies%2C+Cautious+into+the+print/27151040.html",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 51,
+          "news_id": "ce67ea42c54fbbe0",
+          "ticker": "CELH",
+          "publish_date": "2026-10-04",
+          "date": "2026-10-04",
+          "headline": "[내부자 매수 공시] CEO 존 필들리 $27.44에 18,000주 사재 매입 확인 & 월스트리트 젠 투자의견 'Hold' 상향",
+          "source": "MarketBeat & SEC Form 4",
+          "summary": "SEC 공시를 통해 존 필들리 CEO가 평균단가 $27.44에 18,000주를 장내 직접 매수하고 핵심 임원 4인이 매수에 동참한 사실이 확인되었습니다. 이와 함께 월스트리트 젠(Wall Street Zen)은 셀시우스 투자의견을 'Sell'에서 'Hold'로 상향 조정했습니다.",
+          "key_takeaways": "• CEO 존 필들리 $27.44에 18,000주 장내 매수 (사재 투입 확신)\n• 뱅크오브아메리카·BNY멜론 등 메이저 기관 27~28달러선 신규 매수\n• 월스트리트 젠 Sell ➡️ Hold 상향으로 매도 일색 심리 반전",
+          "takeaways": "• CEO 존 필들리 $27.44에 18,000주 장내 매수 (사재 투입 확신)\n• 뱅크오브아메리카·BNY멜론 등 메이저 기관 27~28달러선 신규 매수\n• 월스트리트 젠 Sell ➡️ Hold 상향으로 매도 일색 심리 반전",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.9,
+          "price_impact": "경영진 사재 매입이 증명하는 가장 확실한 밸류에이션 바닥 확인",
+          "url": "https://www.marketbeat.com/instant-alerts/analyst-celsius-nasdaq-celh-raised-to-hold-at-wall-street-zen-2026-10-04/",
+          "created_at": "2026-10-09 23:56:52"
+        },
+        {
+          "id": 52,
+          "news_id": "4e218609b383101e",
+          "ticker": "CELH",
+          "publish_date": "2026-10-02",
+          "date": "2026-10-02",
+          "headline": "[글로벌 밸류에이션 분석] 심플리 월스트리트: 주가 53% 급락 후 밸류에이션 진단 - P/S 2.2배 전통 음료주 멀티플로 비관론 전액 선반영",
+          "source": "Simply Wall St",
+          "summary": "심플리 월스트리트는 셀시우스의 선행 PER이 19배, P/S가 2.2배로 닥터페퍼(KDP 2.3배) 수준까지 내려왔음을 분석했습니다. 시장은 유통망 재고 충격 해소 시 51% 저평가(Bull)와 코어 역성장 정체(Bear)로 갈려 있으나, 하방 안전판 대비 상방 잠재력이 월등한 비대칭 구간이라고 진단했습니다.",
+          "key_takeaways": "• 선행 P/E 19배, P/S 2.2배로 과거 100배 고PER 거품 완전 소멸\n• 펩시 재고 조정 종료 시 51% 저평가 회복 시나리오 유효\n• 3Q 코어 브랜드 역성장 축소 여부가 턴어라운드의 핵심 잣대",
+          "takeaways": "• 선행 P/E 19배, P/S 2.2배로 과거 100배 고PER 거품 완전 소멸\n• 펩시 재고 조정 종료 시 51% 저평가 회복 시나리오 유효\n• 3Q 코어 브랜드 역성장 축소 여부가 턴어라운드의 핵심 잣대",
+          "sentiment": "POSITIVE",
+          "sentiment_score": 0.75,
+          "price_impact": "전통 음료 대기업 수준의 밸류에이션 하방 경직성 확보",
+          "url": "https://simplywall.st/stocks/us/food-beverage-tobacco/nasdaq-celh/celsius-holdings/news/celsius-celh-stock-looks-overvalued-even-after-a-53-fall",
+          "created_at": "2026-10-09 23:56:52"
+        },
         {
           "id": 32,
           "news_id": "1089080f15f701cf",
@@ -2460,7 +2834,7 @@
           "created_at": "2026-09-29 17:05:50"
         }
       ],
-      "updated_at": "2026-10-09 23:29:11"
+      "updated_at": "2026-10-09 23:57:59"
     }
   ]
 }

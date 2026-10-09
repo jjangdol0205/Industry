@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "updated_at": "2026-10-09T23:29:24.757194+09:00",
+  "updated_at": "2026-10-09T23:58:14.133878+09:00",
   "theses": [
     {
       "id": "models_and_safety",
@@ -499,8 +499,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.75,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -545,8 +545,8 @@
       "sentiment": "NEUTRAL",
       "sentiment_score": 0.2,
       "source_type": "QUARTERLY_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -591,8 +591,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.7,
       "source_type": "PERSPECTIVE",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -632,8 +632,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.65,
       "source_type": "MEMO",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -668,8 +668,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.8,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -714,8 +714,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -760,8 +760,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.6,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     }
   ],
@@ -803,8 +803,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.75,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -849,8 +849,8 @@
       "sentiment": "NEUTRAL",
       "sentiment_score": 0.2,
       "source_type": "QUARTERLY_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -895,8 +895,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.7,
       "source_type": "PERSPECTIVE",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -936,8 +936,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.65,
       "source_type": "MEMO",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -972,8 +972,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.8,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -1018,8 +1018,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -1064,8 +1064,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.6,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     }
   ],
@@ -1385,8 +1385,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1433,8 +1433,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.95,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1476,8 +1476,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.8,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1524,8 +1524,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1572,8 +1572,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.95,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1615,8 +1615,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1658,8 +1658,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.9,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     }
   ],
@@ -1703,8 +1703,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1751,8 +1751,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.95,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1794,8 +1794,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.8,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1842,8 +1842,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1890,8 +1890,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.95,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1933,8 +1933,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -1976,8 +1976,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.9,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     }
   ],
@@ -2021,8 +2021,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2069,8 +2069,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.95,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2112,8 +2112,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.8,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2160,8 +2160,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2208,8 +2208,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.95,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2251,8 +2251,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2294,8 +2294,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.9,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     }
   ],
@@ -2337,8 +2337,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.75,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -2380,8 +2380,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2428,8 +2428,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.95,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2474,8 +2474,8 @@
       "sentiment": "NEUTRAL",
       "sentiment_score": 0.2,
       "source_type": "QUARTERLY_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -2517,8 +2517,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.8,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2565,8 +2565,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2611,8 +2611,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.7,
       "source_type": "PERSPECTIVE",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -2659,8 +2659,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.95,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2700,8 +2700,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.65,
       "source_type": "MEMO",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -2743,8 +2743,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2779,8 +2779,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.8,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -2822,8 +2822,8 @@
       },
       "sentiment": "BULLISH",
       "sentiment_score": 0.9,
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "TECH_INTERVIEW"
     },
     {
@@ -2868,8 +2868,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.85,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     },
     {
@@ -2914,8 +2914,8 @@
       "sentiment": "BULLISH",
       "sentiment_score": 0.6,
       "source_type": "ANNUAL_LETTER",
-      "created_at": "2026-10-09 23:29:24",
-      "updated_at": "2026-10-09 23:29:24",
+      "created_at": "2026-10-09 23:58:14",
+      "updated_at": "2026-10-09 23:58:14",
       "item_type": "GURU_LETTER"
     }
   ],
@@ -2962,8 +2962,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -3008,8 +3008,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -3049,8 +3049,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -3095,8 +3095,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -3141,8 +3141,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -3184,8 +3184,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -3230,8 +3230,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -3271,8 +3271,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -3317,8 +3317,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -3363,8 +3363,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -3408,8 +3408,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3456,8 +3456,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3499,8 +3499,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3547,8 +3547,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3595,8 +3595,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3638,8 +3638,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3681,8 +3681,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -3726,8 +3726,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3774,8 +3774,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3817,8 +3817,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3865,8 +3865,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3913,8 +3913,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3956,8 +3956,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -3999,8 +3999,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -4044,8 +4044,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4092,8 +4092,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4135,8 +4135,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4183,8 +4183,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4231,8 +4231,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4274,8 +4274,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4317,8 +4317,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -4360,8 +4360,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -4403,8 +4403,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4451,8 +4451,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4494,8 +4494,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4542,8 +4542,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4588,8 +4588,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -4636,8 +4636,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4677,8 +4677,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -4720,8 +4720,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4763,8 +4763,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -4809,8 +4809,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -4855,8 +4855,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ]
@@ -4908,8 +4908,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -4954,8 +4954,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -4995,8 +4995,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -5031,8 +5031,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -5077,8 +5077,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -5123,8 +5123,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -5171,8 +5171,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -5217,8 +5217,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -5258,8 +5258,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -5294,8 +5294,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -5340,8 +5340,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -5386,8 +5386,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -5436,8 +5436,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -5479,8 +5479,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -5527,8 +5527,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -5577,8 +5577,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -5620,8 +5620,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -5668,8 +5668,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -5718,8 +5718,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -5761,8 +5761,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -5809,8 +5809,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -5859,8 +5859,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -5905,8 +5905,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -5948,8 +5948,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -5994,8 +5994,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -6042,8 +6042,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -6083,8 +6083,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -6119,8 +6119,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -6165,8 +6165,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -6211,8 +6211,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ]
@@ -6259,8 +6259,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -6305,8 +6305,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -6348,8 +6348,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -6394,8 +6394,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -6439,8 +6439,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -6484,8 +6484,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -6529,8 +6529,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -6572,8 +6572,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -6615,8 +6615,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -6661,8 +6661,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ]
@@ -6714,8 +6714,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -6762,8 +6762,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -6807,8 +6807,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -6852,8 +6852,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -6897,8 +6897,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -6945,8 +6945,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -6988,8 +6988,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ]
@@ -7041,8 +7041,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -7087,8 +7087,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -7135,8 +7135,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -7181,8 +7181,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -7231,8 +7231,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7279,8 +7279,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7327,8 +7327,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7370,8 +7370,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -7420,8 +7420,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7468,8 +7468,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7516,8 +7516,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7559,8 +7559,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -7609,8 +7609,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7657,8 +7657,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7705,8 +7705,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7748,8 +7748,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -7798,8 +7798,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7844,8 +7844,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -7892,8 +7892,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7940,8 +7940,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -7983,8 +7983,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -8029,8 +8029,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ]
@@ -8082,8 +8082,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -8130,8 +8130,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -8175,8 +8175,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -8220,8 +8220,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -8265,8 +8265,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -8310,8 +8310,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -8356,8 +8356,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ]
@@ -8409,8 +8409,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -8457,8 +8457,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -8507,8 +8507,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -8555,8 +8555,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -8603,8 +8603,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -8653,8 +8653,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -8701,8 +8701,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -8749,8 +8749,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -8799,8 +8799,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -8847,8 +8847,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -8895,8 +8895,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -8945,8 +8945,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -8993,8 +8993,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -9039,8 +9039,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -9087,8 +9087,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ]
@@ -9135,8 +9135,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -9181,8 +9181,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -9217,8 +9217,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -9263,8 +9263,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -9306,8 +9306,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -9352,8 +9352,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -9388,8 +9388,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -9434,8 +9434,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -9479,8 +9479,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -9527,8 +9527,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -9570,8 +9570,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -9615,8 +9615,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -9663,8 +9663,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -9706,8 +9706,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -9751,8 +9751,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -9799,8 +9799,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -9842,8 +9842,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -9885,8 +9885,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -9928,8 +9928,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -9976,8 +9976,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -10022,8 +10022,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -10065,8 +10065,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -10101,8 +10101,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -10147,8 +10147,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ]
@@ -10200,8 +10200,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -10241,8 +10241,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -10289,8 +10289,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -10330,8 +10330,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -10375,8 +10375,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -10420,8 +10420,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -10465,8 +10465,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -10510,8 +10510,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -10556,8 +10556,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -10597,8 +10597,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ]
@@ -10645,8 +10645,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -10691,8 +10691,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -10732,8 +10732,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -10778,8 +10778,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -10824,8 +10824,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -10867,8 +10867,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -10913,8 +10913,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -10954,8 +10954,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -11000,8 +11000,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -11046,8 +11046,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -11091,8 +11091,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11139,8 +11139,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11182,8 +11182,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11230,8 +11230,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11278,8 +11278,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11321,8 +11321,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11364,8 +11364,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -11409,8 +11409,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11457,8 +11457,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11500,8 +11500,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11548,8 +11548,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11596,8 +11596,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11639,8 +11639,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11682,8 +11682,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -11727,8 +11727,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11775,8 +11775,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11818,8 +11818,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11866,8 +11866,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11914,8 +11914,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -11957,8 +11957,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -12000,8 +12000,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -12043,8 +12043,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.75,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12086,8 +12086,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -12134,8 +12134,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -12177,8 +12177,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -12225,8 +12225,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -12271,8 +12271,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12319,8 +12319,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -12360,8 +12360,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12403,8 +12403,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -12446,8 +12446,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.9,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -12492,8 +12492,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12538,8 +12538,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ]
@@ -12591,8 +12591,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12637,8 +12637,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12678,8 +12678,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12714,8 +12714,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12760,8 +12760,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12806,8 +12806,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -12854,8 +12854,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12900,8 +12900,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12941,8 +12941,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -12977,8 +12977,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -13023,8 +13023,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -13069,8 +13069,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ],
@@ -13119,8 +13119,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -13162,8 +13162,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -13210,8 +13210,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -13260,8 +13260,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -13303,8 +13303,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -13351,8 +13351,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -13401,8 +13401,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -13444,8 +13444,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -13492,8 +13492,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         }
       ],
@@ -13542,8 +13542,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -13588,8 +13588,8 @@
           "sentiment": "NEUTRAL",
           "sentiment_score": 0.2,
           "source_type": "QUARTERLY_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -13631,8 +13631,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -13677,8 +13677,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.7,
           "source_type": "PERSPECTIVE",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -13725,8 +13725,8 @@
           },
           "sentiment": "BULLISH",
           "sentiment_score": 0.95,
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "TECH_INTERVIEW"
         },
         {
@@ -13766,8 +13766,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.65,
           "source_type": "MEMO",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -13802,8 +13802,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.8,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -13848,8 +13848,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.85,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         },
         {
@@ -13894,8 +13894,8 @@
           "sentiment": "BULLISH",
           "sentiment_score": 0.6,
           "source_type": "ANNUAL_LETTER",
-          "created_at": "2026-10-09 23:29:24",
-          "updated_at": "2026-10-09 23:29:24",
+          "created_at": "2026-10-09 23:58:14",
+          "updated_at": "2026-10-09 23:58:14",
           "item_type": "GURU_LETTER"
         }
       ]
