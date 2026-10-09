@@ -49,6 +49,8 @@ FEATURE_TEST_MAP = {
     "F6": ["test_f6_backend_api.py"],
     "F7": ["test_f7_frontend_integrity.py"],
     "F8": ["test_f8_special_watchlist.py"],
+    "F9": ["test_macro_module.py"],
+    "F10": ["test_insights_module.py"],
 }
 
 TIER_TEST_MAP = {
@@ -123,7 +125,12 @@ def load_selected_tests(tier=None, feature=None, milestone=None):
             mod_tests = loader.discover(str(TESTS_DIR), pattern=filename)
             suite.addTests(mod_tests)
         else:
-            print(f"Warning: Test file {filename} does not exist yet at {filepath}")
+            alt_path = PROJECT_ROOT / "tests" / filename
+            if alt_path.exists():
+                mod_tests = loader.discover(str(PROJECT_ROOT / "tests"), pattern=filename)
+                suite.addTests(mod_tests)
+            else:
+                print(f"Warning: Test file {filename} does not exist yet at {filepath}")
 
     return suite
 
@@ -131,7 +138,7 @@ def load_selected_tests(tier=None, feature=None, milestone=None):
 def main():
     parser = argparse.ArgumentParser(description="TrendPulse E2E Test Suite Runner")
     parser.add_argument("--tier", type=int, choices=[1, 2, 3, 4], help="Execute a specific testing tier")
-    parser.add_argument("--feature", type=str, choices=["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8"], help="Execute a specific feature test suite")
+    parser.add_argument("--feature", type=str, choices=["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10"], help="Execute a specific feature test suite")
     parser.add_argument("--milestone", type=str, choices=["M1", "M2", "M3", "M4", "M5", "m1", "m2", "m3", "m4", "m5"], help="Execute tests for a specific implementation milestone")
     parser.add_argument("-v", "--verbose", action="store_true", help="Verbose test execution output")
     args = parser.parse_args()

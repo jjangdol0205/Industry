@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "updated_at": "2026-09-30T18:44:39.969560+09:00",
+  "updated_at": "2026-10-09T23:29:11.454024+09:00",
   "stocks": [
     {
       "id": 1,
@@ -210,7 +210,7 @@
         "portfolio_tier": "Standard",
         "buy_signal": "BUY_READY (1차 매수적기 MDD -31.5%)",
         "dca_stage": "SAT_DCA_1",
-        "last_updated": "2026-09-30 18:44:39"
+        "last_updated": "2026-10-09 23:29:11"
       },
       "timeline": [
         {
@@ -299,7 +299,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-30 18:44:39"
+      "updated_at": "2026-10-09 23:29:11"
     },
     {
       "id": 2,
@@ -509,7 +509,7 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -76.7%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-09-30 18:44:39"
+        "last_updated": "2026-10-09 23:29:11"
       },
       "timeline": [
         {
@@ -598,7 +598,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-30 18:44:39"
+      "updated_at": "2026-10-09 23:29:11"
     },
     {
       "id": 3,
@@ -808,7 +808,7 @@
         "portfolio_tier": "Satellite",
         "buy_signal": "BUY_READY (2차 분할매수 MDD -52.1%)",
         "dca_stage": "SAT_DCA_2",
-        "last_updated": "2026-09-30 18:44:39"
+        "last_updated": "2026-10-09 23:29:11"
       },
       "timeline": [
         {
@@ -897,7 +897,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-30 18:44:39"
+      "updated_at": "2026-10-09 23:29:11"
     },
     {
       "id": 4,
@@ -1107,7 +1107,7 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -58.1%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-09-30 18:44:39"
+        "last_updated": "2026-10-09 23:29:11"
       },
       "timeline": [
         {
@@ -1196,7 +1196,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-30 18:44:39"
+      "updated_at": "2026-10-09 23:29:11"
     },
     {
       "id": 5,
@@ -1406,7 +1406,7 @@
         "portfolio_tier": "Satellite",
         "buy_signal": "BUY_READY (1차 분할매수 MDD -29.3%)",
         "dca_stage": "SAT_DCA_1",
-        "last_updated": "2026-09-30 18:44:39"
+        "last_updated": "2026-10-09 23:29:11"
       },
       "timeline": [
         {
@@ -1495,7 +1495,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-30 18:44:39"
+      "updated_at": "2026-10-09 23:29:11"
     },
     {
       "id": 6,
@@ -1705,7 +1705,7 @@
         "portfolio_tier": "Core",
         "buy_signal": "BUY_READY (2차 분할매수 MDD -48.0%)",
         "dca_stage": "CORE_DCA_2",
-        "last_updated": "2026-09-30 18:44:39"
+        "last_updated": "2026-10-09 23:29:11"
       },
       "timeline": [
         {
@@ -1862,7 +1862,7 @@
           "created_at": "2026-09-29 16:59:23"
         }
       ],
-      "updated_at": "2026-09-30 18:44:39"
+      "updated_at": "2026-10-09 23:29:11"
     },
     {
       "id": 7,
@@ -2072,7 +2072,7 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -56.8%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-09-30 18:44:39"
+        "last_updated": "2026-10-09 23:29:11"
       },
       "timeline": [
         {
@@ -2161,7 +2161,7 @@
           "created_at": "2026-09-29 17:05:50"
         }
       ],
-      "updated_at": "2026-09-30 18:44:39"
+      "updated_at": "2026-10-09 23:29:11"
     },
     {
       "id": 8,
@@ -2371,7 +2371,7 @@
         "portfolio_tier": "Watchlist",
         "buy_signal": "BUY_READY (극단폭락 진입검토 MDD -58.5%)",
         "dca_stage": "WATCH_DEEP",
-        "last_updated": "2026-09-30 18:44:39"
+        "last_updated": "2026-10-09 23:29:11"
       },
       "timeline": [
         {
@@ -2460,7 +2460,7 @@
           "created_at": "2026-09-29 17:05:50"
         }
       ],
-      "updated_at": "2026-09-30 18:44:39"
+      "updated_at": "2026-10-09 23:29:11"
     }
   ]
 }

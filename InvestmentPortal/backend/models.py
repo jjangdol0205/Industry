@@ -298,3 +298,148 @@ class SpecialWatchlistTimeline(Base):
 
     study = relationship("SpecialWatchlistStudy", back_populates="timeline")
 
+
+class GuruLetter(Base):
+    """7대 투자 거장 공식 서한 및 메모 모델 (Requirement R1, R3)"""
+    __tablename__ = "guru_letters"
+
+    id = Column(Integer, primary_key=True, index=True)
+    letter_id = Column(String, unique=True, index=True, nullable=False)
+    guru_name = Column(String, index=True, nullable=False)
+    guru_name_en = Column(String, nullable=False)
+    firm = Column(String, nullable=False)
+    title = Column(String, nullable=False)
+    publish_date = Column(String, index=True, nullable=False)  # YYYY-MM-DD
+    url = Column(String, nullable=True)
+    summary = Column(Text, nullable=False)
+    original_quote = Column(Text, nullable=False)
+    original_quote_ko = Column(Text, nullable=False)
+    core_thesis = Column(Text, nullable=False)
+    thesis_pillar = Column(String, index=True, nullable=False)
+    deep_concept_guide = Column(Text, nullable=False)
+    related_tickers = Column(Text, nullable=False)  # JSON encoded list
+    ticker_implications = Column(Text, nullable=False)  # JSON encoded dict
+    sentiment = Column(String, default="NEUTRAL", index=True)
+    sentiment_score = Column(Float, default=0.0)
+    source_type = Column(String, default="MEMO")
+    created_at = Column(String, nullable=True)
+    updated_at = Column(String, nullable=True)
+
+
+class TechLeaderInterview(Base):
+    """7대 글로벌 AI & 테크 리더 인터뷰 모델 (Requirement R1, R3)"""
+    __tablename__ = "tech_leader_interviews"
+
+    id = Column(Integer, primary_key=True, index=True)
+    interview_id = Column(String, unique=True, index=True, nullable=False)
+    leader_name = Column(String, index=True, nullable=False)
+    leader_name_en = Column(String, nullable=False)
+    company = Column(String, nullable=False)
+    role = Column(String, nullable=False)
+    title = Column(String, nullable=False)
+    publish_date = Column(String, index=True, nullable=False)  # YYYY-MM-DD
+    media_source = Column(String, nullable=False)
+    url = Column(String, nullable=True)
+    summary = Column(Text, nullable=False)
+    original_quote = Column(Text, nullable=False)
+    original_quote_ko = Column(Text, nullable=False)
+    core_thesis = Column(Text, nullable=False)
+    thesis_pillar = Column(String, index=True, nullable=False)
+    tech_concept_guide = Column(Text, nullable=False)
+    supply_chain_impact = Column(Text, nullable=False)
+    related_tickers = Column(Text, nullable=False)  # JSON encoded list
+    ticker_implications = Column(Text, nullable=False)  # JSON encoded dict
+    sentiment = Column(String, default="BULLISH", index=True)
+    sentiment_score = Column(Float, default=0.0)
+    created_at = Column(String, nullable=True)
+    updated_at = Column(String, nullable=True)
+
+
+# ─────────────────────────────────────────────
+# Macro Intelligence Module Models (Milestone 2)
+# ─────────────────────────────────────────────
+class MacroReport(Base):
+    """
+    연준(FOMC) 및 연은(NY/St.Louis Fed) 리서치 보고서 영속화 모델
+    SQLite 테이블: macro_reports
+    """
+    __tablename__ = "macro_reports"
+
+    id = Column(Integer, primary_key=True, index=True)
+    report_id = Column(String, unique=True, index=True, nullable=False)
+    source = Column(String, index=True, nullable=False)              # FOMC, NY Fed, St. Louis Fed
+    category = Column(String, index=True, nullable=False)            # FOMC Statement, Liberty Street Economics 등
+    title = Column(String, nullable=False)
+    publish_date = Column(String, index=True, nullable=False)        # YYYY-MM-DD
+    url = Column(String, nullable=True)
+    summary = Column(Text, nullable=False)
+    key_takeaways = Column(Text, nullable=True)                      # JSON-encoded List[str]
+    discount_rate_impact = Column(Text, nullable=False)              # ① 매크로 할인율 및 증시 밸류에이션
+    factor_style_impact = Column(Text, nullable=False)               # ② 스타일/팩터 영향 (대형 퀄리티 vs 중소형)
+    sector_industry_impact = Column(Text, nullable=False)            # ③ 주요 섹터 및 산업 영향
+    fx_liquidity_flow_impact = Column(Text, nullable=False)          # ④ 외환 및 외국인 수급
+    sentiment = Column(String, index=True, nullable=False)           # DOVISH, HAWKISH, NEUTRAL
+    sentiment_score = Column(Float, default=0.0)
+    pe_impact_pct_estimate = Column(Float, default=0.0)
+    favored_factor = Column(String, nullable=True)
+    unfavored_factor = Column(String, nullable=True)
+    overweight_sectors = Column(Text, nullable=True)                 # JSON-encoded List[str]
+    underweight_sectors = Column(Text, nullable=True)                # JSON-encoded List[str]
+    created_at = Column(String, nullable=True)
+    updated_at = Column(String, nullable=True)
+
+
+class MacroIndicator(Base):
+    """
+    거시 금리 및 유동성 일별 지표 시계열 모델
+    SQLite 테이블: macro_indicators
+    """
+    __tablename__ = "macro_indicators"
+
+    id = Column(Integer, primary_key=True, index=True)
+    indicator_date = Column(String, unique=True, index=True, nullable=False)  # YYYY-MM-DD
+    us_10y_yield = Column(Float, nullable=False)
+    us_2y_yield = Column(Float, nullable=False)
+    yield_spread_10y_2y = Column(Float, nullable=False)                       # 10Y - 2Y (%)
+    yield_curve_state = Column(String, nullable=False)                        # INVERTED, FLAT, NORMAL, STEEP
+    curve_shift_type = Column(String, nullable=False)                         # BULL_STEEPENER, BEAR_STEEPENER 등
+    fed_funds_rate = Column(Float, nullable=False)
+    real_neutral_rate_r_star = Column(Float, nullable=False)                  # r* 추정치 (기본 1.10%)
+    core_pce_inflation = Column(Float, nullable=False)
+    policy_restrictiveness_gap = Column(Float, nullable=False)                # (FFR - Core PCE) - r*
+    tga_balance_billion = Column(Float, nullable=False)                       # 재무부 일반계정 ($B)
+    on_rrp_balance_billion = Column(Float, nullable=False)                    # 역레포 잔고 ($B)
+    fed_total_assets_trillion = Column(Float, nullable=False)                 # 연준 총자산 ($T)
+    net_liquidity_billion = Column(Float, nullable=False)                     # Assets - TGA - RRP ($B)
+    net_liquidity_change_30d = Column(Float, default=0.0)
+    net_liquidity_change_90d = Column(Float, default=0.0)
+    dxy_index = Column(Float, nullable=True)                                  # 달러 인덱스
+    usdkrw_exchange_rate = Column(Float, nullable=True)                       # 원/달러 환율
+    vix_index = Column(Float, nullable=True)                                  # 변동성 지수
+    recorded_at = Column(String, nullable=True)
+    updated_at = Column(String, nullable=True)
+
+
+class MacroRegime(Base):
+    """
+    거시 경제 국면 판정 및 켄 피셔 시그널 영속화 모델
+    SQLite 테이블: macro_regime
+    """
+    __tablename__ = "macro_regime"
+
+    id = Column(Integer, primary_key=True, index=True)
+    regime_id = Column(String, unique=True, index=True, nullable=False)       # 'CURRENT' 또는 일자별 식별자
+    as_of_date = Column(String, index=True, nullable=False)                   # 기준 일자 (YYYY-MM-DD)
+    current_regime = Column(String, nullable=False)                           # 국면 국문 명칭
+    regime_code = Column(String, nullable=False)                              # TRANSITION_UNINVERSION 등
+    regime_description = Column(Text, nullable=False)
+    per_multiple_outlook = Column(String, nullable=False)                     # COMPRESSION, EXPANSION, NEUTRAL
+    pe_expansion_compression_pct = Column(Float, default=0.0)
+    ken_fisher_signal = Column(String, nullable=False)                        # HIGH_RECESSION_DEFENSE_ALERT 등
+    rimp_model_analysis = Column(Text, nullable=False)                        # NY Fed 기업 이질성 분석
+    factor_allocations_json = Column(Text, nullable=False)                    # 포트폴리오 비중 (JSON)
+    sector_matrix_json = Column(Text, nullable=False)                         # 섹터 민감도 매트릭스 (JSON)
+    created_at = Column(String, nullable=True)
+    updated_at = Column(String, nullable=True)
+
+

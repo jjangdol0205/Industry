@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, BackgroundTasks, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
-from typing import List, Optional
+from typing import List, Optional, Dict, Any, Union
 import os, json
 from dotenv import load_dotenv
 load_dotenv()  # .env 파일에서 환경변수 자동 로드
@@ -547,6 +547,32 @@ def run_startup_migrations():
             print("[Migration] Special Watchlist tables ensured and seed verified.")
         except Exception as sw_err:
             print(f"[Migration] Special Watchlist init note: {sw_err}")
+
+        # Thought Leaders & Gurus Hub Initialization and JSON Distribution
+        try:
+            try:
+                import sync_insights
+            except ImportError:
+                from InvestmentPortal.backend import sync_insights
+            sync_insights.ensure_tables_and_seed(db_path)
+            in_data = sync_insights.get_all_insights_data(db_path)
+            sync_insights.distribute_insights_json(in_data)
+            print("[Migration] Thought Leaders & Gurus Hub tables ensured and seed verified.")
+        except Exception as in_err:
+            print(f"[Migration] Thought Leaders & Gurus Hub init note: {in_err}")
+
+        # Macro Intelligence Initialization and JSON Distribution
+        try:
+            try:
+                import sync_macro
+            except ImportError:
+                from InvestmentPortal.backend import sync_macro
+            sync_macro.ensure_tables_and_seed(db_path)
+            macro_data = sync_macro.get_all_macro_data(db_path)
+            sync_macro.distribute_macro_json(macro_data)
+            print("[Migration] Macro Intelligence tables ensured and seed verified.")
+        except Exception as macro_err:
+            print(f"[Migration] Macro Intelligence init note: {macro_err}")
     except Exception as e:
         print(f"[Migration] Warning: {e}")
 
@@ -2744,6 +2770,616 @@ def refresh_special_watchlist(
         "status": "success",
         "message": "Special watchlist refresh completed",
         "stocks": []
+    }
+
+
+# ─────────────────────────────────────────────
+# Thought Leaders & Gurus Hub (인사이트 센터) Endpoints
+# ─────────────────────────────────────────────
+def _get_insights_cached_fallback():
+    candidate_json_paths = [
+        os.path.join(os.path.dirname(__file__), "insights_data.json"),
+        os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "insights_data.json"),
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "public", "insights_data.json"),
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist", "insights_data.json"),
+    ]
+    for jp in candidate_json_paths:
+        if os.path.exists(jp):
+            try:
+                with open(jp, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                if isinstance(data, dict) and (data.get("feed") or data.get("guru_letters") or data.get("gurus")):
+                    return data
+            except Exception:
+                continue
+    return {}
+
+
+@app.get("/api/v1/insights/feed")
+@app.get("/api/insights/feed")
+def get_insights_feed(
+    pillar: Optional[str] = None,
+    ticker: Optional[str] = None,
+    sentiment: Optional[str] = None,
+    limit: Optional[int] = None,
+    db: Session = Depends(get_db),
+):
+    """
+    Returns consolidated reverse-chronological thought leadership feed
+    combining Guru letters and Tech Leader interviews with multi-criteria filtering.
+    """
+    data = None
+    try:
+        try:
+            import sync_insights
+        except ImportError:
+            from InvestmentPortal.backend import sync_insights
+        db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+        data = sync_insights.get_all_insights_data(db_path=db_path)
+    except Exception as e:
+        print(f"[Insights Feed Warning] DB fetch fallback: {e}")
+
+    if not data or not data.get("feed"):
+        data = _get_insights_cached_fallback()
+
+    items = list(data.get("feed", [])) if data else []
+
+    # Filter by thesis pillar
+    if pillar:
+        clean_pillar = pillar.strip()
+        items = [it for it in items if clean_pillar in str(it.get("thesis_pillar", "") or it.get("core_thesis", ""))]
+
+    # Filter by ticker (normalized)
+    if ticker:
+        raw_tk = ticker.strip().upper()
+        candidates = {raw_tk}
+        if raw_tk.endswith(".KS"):
+            candidates.add(raw_tk[:-3])
+        elif raw_tk.isdigit() and len(raw_tk) == 6:
+            candidates.add(f"{raw_tk}.KS")
+        items = [it for it in items if any(c in it.get("related_tickers", []) for c in candidates)]
+
+    # Filter by sentiment
+    if sentiment:
+        clean_sent = sentiment.strip().upper()
+        items = [it for it in items if str(it.get("sentiment", "")).strip().upper() == clean_sent]
+
+    # Limit
+    if limit is not None and limit > 0:
+        items = items[:limit]
+
+    return {
+        "status": "success",
+        "total": len(items),
+        "items": items,
+        "updated_at": data.get("updated_at") if data else None
+    }
+
+
+@app.get("/api/v1/insights/gurus")
+@app.get("/api/insights/gurus")
+def get_insights_gurus(
+    guru: Optional[str] = None,
+    pillar: Optional[str] = None,
+    limit: Optional[int] = None,
+    db: Session = Depends(get_db),
+):
+    """
+    Returns 7 Investment Gurus profiles and official shareholder letters/memos.
+    """
+    data = None
+    try:
+        try:
+            import sync_insights
+        except ImportError:
+            from InvestmentPortal.backend import sync_insights
+        db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+        data = sync_insights.get_all_insights_data(db_path=db_path)
+    except Exception as e:
+        print(f"[Insights Gurus Warning] DB fetch fallback: {e}")
+
+    if not data or not data.get("guru_letters"):
+        data = _get_insights_cached_fallback()
+
+    letters = list(data.get("guru_letters", data.get("letters", []))) if data else []
+    gurus = list(data.get("gurus", [])) if data else []
+
+    if guru:
+        clean_g = guru.strip().lower()
+        letters = [l for l in letters if clean_g in l.get("guru_name", "").lower() or clean_g in l.get("guru_name_en", "").lower()]
+        gurus = [g for g in gurus if clean_g in g.get("guru_name", g.get("name_ko", "")).lower() or clean_g in g.get("guru_name_en", g.get("name_en", "")).lower()]
+
+    if pillar:
+        clean_p = pillar.strip()
+        letters = [l for l in letters if clean_p in str(l.get("thesis_pillar", "") or l.get("core_thesis", ""))]
+
+    if limit is not None and limit > 0:
+        letters = letters[:limit]
+
+    return {
+        "status": "success",
+        "total": len(letters),
+        "gurus": gurus,
+        "letters": letters,
+        "guru_letters": letters,
+        "updated_at": data.get("updated_at") if data else None
+    }
+
+
+@app.get("/api/v1/insights/tech-leaders")
+@app.get("/api/insights/tech-leaders")
+def get_insights_tech_leaders(
+    leader: Optional[str] = None,
+    pillar: Optional[str] = None,
+    limit: Optional[int] = None,
+    db: Session = Depends(get_db),
+):
+    """
+    Returns 7 AI & Tech Leaders profiles and key interview insights.
+    """
+    data = None
+    try:
+        try:
+            import sync_insights
+        except ImportError:
+            from InvestmentPortal.backend import sync_insights
+        db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+        data = sync_insights.get_all_insights_data(db_path=db_path)
+    except Exception as e:
+        print(f"[Insights Tech Leaders Warning] DB fetch fallback: {e}")
+
+    if not data or not data.get("tech_interviews"):
+        data = _get_insights_cached_fallback()
+
+    interviews = list(data.get("tech_interviews", data.get("tech_leader_interviews", data.get("interviews", [])))) if data else []
+    leaders = list(data.get("tech_leaders", data.get("leaders", []))) if data else []
+
+    if leader:
+        clean_l = leader.strip().lower()
+        interviews = [i for i in interviews if clean_l in i.get("leader_name", "").lower() or clean_l in i.get("leader_name_en", "").lower()]
+        leaders = [l for l in leaders if clean_l in l.get("leader_name", l.get("name_ko", "")).lower() or clean_l in l.get("leader_name_en", l.get("name_en", "")).lower()]
+
+    if pillar:
+        clean_p = pillar.strip()
+        interviews = [i for i in interviews if clean_p in str(i.get("thesis_pillar", "") or i.get("core_thesis", ""))]
+
+    if limit is not None and limit > 0:
+        interviews = interviews[:limit]
+
+    return {
+        "status": "success",
+        "total": len(interviews),
+        "leaders": leaders,
+        "tech_leaders": leaders,
+        "interviews": interviews,
+        "tech_interviews": interviews,
+        "updated_at": data.get("updated_at") if data else None
+    }
+
+
+@app.get("/api/v1/insights/ticker/{ticker}")
+@app.get("/api/insights/ticker/{ticker}")
+def get_insights_by_ticker(ticker: str, db: Session = Depends(get_db)):
+    """
+    Symmetrically returns all Guru letters and Tech Leader interviews linked to the requested ticker.
+    Supports normalized lookup (e.g. 000660 vs 000660.KS, 402340 vs 402340.KS).
+    """
+    res = None
+    try:
+        try:
+            import sync_insights
+        except ImportError:
+            from InvestmentPortal.backend import sync_insights
+        db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+        res = sync_insights.get_insights_by_ticker(ticker, db_path=db_path)
+    except Exception as e:
+        print(f"[Insights Ticker Warning] DB fetch fallback: {e}")
+
+    if res and isinstance(res, dict) and res.get("status") == "success" and res.get("total", 0) > 0:
+        return res
+
+    # Fallback to cached JSON mapping
+    raw_tk = (ticker or "").strip().upper()
+    canonical_candidates = [raw_tk]
+    if raw_tk.endswith(".KS"):
+        canonical_candidates.append(raw_tk[:-3])
+    elif raw_tk.isdigit() and len(raw_tk) == 6:
+        canonical_candidates.append(f"{raw_tk}.KS")
+
+    cached_data = _get_insights_cached_fallback()
+    if cached_data:
+        by_ticker_map = cached_data.get("by_ticker", {})
+        for c_tk in canonical_candidates:
+            if c_tk in by_ticker_map:
+                entry = by_ticker_map[c_tk]
+                return {
+                    "status": "success",
+                    "ticker": entry.get("ticker", raw_tk),
+                    "total": entry.get("total", len(entry.get("consolidated", []))),
+                    "total_insights": entry.get("total_insights", len(entry.get("consolidated", []))),
+                    "guru_letters": entry.get("guru_letters", entry.get("gurus", [])),
+                    "gurus": entry.get("gurus", entry.get("guru_letters", [])),
+                    "tech_interviews": entry.get("tech_interviews", entry.get("interviews", [])),
+                    "tech_leader_interviews": entry.get("tech_leader_interviews", entry.get("tech_interviews", [])),
+                    "tech_leaders": entry.get("tech_leaders", entry.get("tech_interviews", [])),
+                    "consolidated": entry.get("consolidated", [])
+                }
+
+    if res and isinstance(res, dict):
+        return res
+
+    return {
+        "status": "success",
+        "ticker": raw_tk,
+        "total": 0,
+        "total_insights": 0,
+        "guru_letters": [],
+        "gurus": [],
+        "tech_interviews": [],
+        "tech_leader_interviews": [],
+        "tech_leaders": [],
+        "consolidated": []
+    }
+
+
+@app.post("/api/v1/insights/refresh")
+@app.post("/api/insights/refresh")
+@app.get("/api/v1/insights/refresh")
+@app.get("/api/insights/refresh")
+def refresh_insights(
+    background_tasks: BackgroundTasks,
+    body: Optional[dict] = Body(None),
+    force: bool = False,
+    background: bool = False,
+):
+    """
+    Triggers on-demand synchronization and distribution of Thought Leaders & Gurus Hub insights.
+    Supports both synchronous and background asynchronous modes.
+    """
+    req_force = force
+    req_bg = background
+
+    if body and isinstance(body, dict):
+        if "force" in body:
+            req_force = bool(body["force"])
+        if "background" in body:
+            req_bg = bool(body["background"])
+
+    db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+
+    sync_mod = None
+    try:
+        try:
+            import sync_insights as sync_mod
+        except ImportError:
+            from InvestmentPortal.backend import sync_insights as sync_mod
+    except Exception as imp_err:
+        print(f"[Insights Refresh Import Error] {imp_err}")
+        sync_mod = None
+
+    if sync_mod is not None:
+        if req_bg:
+            background_tasks.add_task(
+                sync_mod.run_sync,
+                force=req_force,
+                source="api_background",
+                db_path=db_path
+            )
+            return {
+                "status": "processing",
+                "message": "Thought leaders insights sync initiated in background"
+            }
+
+        try:
+            res = sync_mod.run_sync(
+                force=req_force,
+                source="api_refresh",
+                db_path=db_path
+            )
+            if res and isinstance(res, dict):
+                return {
+                    "status": "success",
+                    "message": "Thought leaders insights refreshed successfully",
+                    "data": res
+                }
+        except Exception as e:
+            print(f"[Insights Refresh Error] {e}")
+            try:
+                fallback_data = sync_mod.get_all_insights_data(db_path=db_path)
+                if fallback_data and isinstance(fallback_data, dict):
+                    return {
+                        "status": "success",
+                        "message": "Thought leaders insights refreshed (fallback)",
+                        "data": fallback_data
+                    }
+            except Exception as fb_err:
+                print(f"[Insights Refresh Fallback Error] {fb_err}")
+
+    cached_data = _get_insights_cached_fallback()
+    return {
+        "status": "success",
+        "message": "Thought leaders insights refresh completed (cached fallback)",
+        "data": cached_data
+    }
+
+
+# ─────────────────────────────────────────────
+# Macro Intelligence Module (Milestone 2 Endpoints)
+# ─────────────────────────────────────────────
+import threading
+import time
+
+_MACRO_CACHE = {
+    "data": None,
+    "timestamp": 0.0,
+    "ttl": 60.0,  # 60 seconds
+}
+_MACRO_CACHE_LOCK = threading.Lock()
+
+
+def _get_macro_cached_fallback() -> Dict[str, Any]:
+    """
+    Reads authoritative macro JSON payload across canonical fallback paths.
+    """
+    backend_dir = os.path.dirname(__file__)
+    portal_dir = os.path.dirname(backend_dir)
+    root_dir = os.path.dirname(portal_dir)
+
+    candidate_json_paths = [
+        os.path.join(backend_dir, "macro_intelligence_data.json"),
+        os.path.join(root_dir, "macro_intelligence_data.json"),
+        os.path.join(portal_dir, "macro_intelligence_data.json"),
+        os.path.join(portal_dir, "frontend", "public", "macro_intelligence_data.json"),
+        os.path.join(portal_dir, "frontend", "dist", "macro_intelligence_data.json"),
+        os.path.join(root_dir, "data", "macro_analysis.json"),
+        os.path.join(backend_dir, "data", "macro_analysis.json"),
+        os.path.join(portal_dir, "data", "macro_analysis.json"),
+    ]
+    for jp in candidate_json_paths:
+        if os.path.exists(jp):
+            try:
+                with open(jp, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                if isinstance(data, dict) and (data.get("regime") or data.get("indicators") or data.get("reports")):
+                    return data
+            except Exception:
+                continue
+    return {}
+
+
+def _get_cached_macro_data(force_refresh: bool = False) -> Dict[str, Any]:
+    """
+    Thread-safe retrieval of macroeconomic data with 60s in-memory TTL and JSON fallback.
+    """
+    global _MACRO_CACHE
+    now = time.time()
+
+    with _MACRO_CACHE_LOCK:
+        if not force_refresh and _MACRO_CACHE["data"] is not None:
+            if (now - _MACRO_CACHE["timestamp"]) < _MACRO_CACHE["ttl"]:
+                return _MACRO_CACHE["data"]
+
+    # Fetch from SQLite via sync_macro
+    data = None
+    try:
+        try:
+            import sync_macro
+        except ImportError:
+            from InvestmentPortal.backend import sync_macro
+        db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+        data = sync_macro.get_all_macro_data(db_or_path=db_path)
+    except Exception as e:
+        print(f"[Macro API Warning] DB fetch failed, falling back to JSON: {e}")
+
+    if not data or not data.get("regime") or not data.get("indicators"):
+        data = _get_macro_cached_fallback()
+
+    if data:
+        with _MACRO_CACHE_LOCK:
+            _MACRO_CACHE["data"] = data
+            _MACRO_CACHE["timestamp"] = time.time()
+        return data
+
+    return _MACRO_CACHE["data"] or {}
+
+
+def _invalidate_macro_cache():
+    """Immediately invalidates the in-memory macro cache."""
+    global _MACRO_CACHE
+    with _MACRO_CACHE_LOCK:
+        _MACRO_CACHE["data"] = None
+        _MACRO_CACHE["timestamp"] = 0.0
+
+
+@app.get("/api/v1/macro/summary")
+@app.get("/api/macro/summary")
+def get_macro_summary():
+    """
+    Returns latest macro regime, Ken Fisher signal, P/E multiple outlook,
+    policy stance, and key liquidity metrics.
+    """
+    data = _get_cached_macro_data()
+    regime = data.get("regime", {})
+    indicators = data.get("indicators", {})
+
+    liquidity_metrics = {
+        "net_liquidity_billion": indicators.get("net_liquidity_billion"),
+        "net_liquidity_change_30d": indicators.get("net_liquidity_change_30d"),
+        "net_liquidity_change_90d": indicators.get("net_liquidity_change_90d"),
+        "tga_balance_billion": indicators.get("tga_balance_billion"),
+        "on_rrp_balance_billion": indicators.get("on_rrp_balance_billion"),
+        "on_rrp_buffer_status": indicators.get("on_rrp_buffer_status"),
+        "on_rrp_depletion_alert": indicators.get("on_rrp_depletion_alert"),
+        "fed_total_assets_trillion": indicators.get("fed_total_assets_trillion"),
+    }
+
+    indicators_summary = {
+        "us_10y_yield": indicators.get("us_10y_yield"),
+        "us_2y_yield": indicators.get("us_2y_yield"),
+        "yield_spread_10y_2y": indicators.get("yield_spread_10y_2y"),
+        "yield_curve_state": indicators.get("yield_curve_state"),
+        "curve_shift_type": indicators.get("curve_shift_type"),
+        "fed_funds_rate": indicators.get("fed_funds_rate"),
+        "real_neutral_rate_r_star": indicators.get("real_neutral_rate_r_star"),
+        "core_pce_inflation": indicators.get("core_pce_inflation"),
+        "policy_restrictiveness_gap": indicators.get("policy_restrictiveness_gap"),
+    }
+
+    return {
+        "status": "success",
+        "updated_at": data.get("updated_at"),
+        "as_of_date": regime.get("as_of_date"),
+        "regime": regime,
+        "ken_fisher_signal": regime.get("ken_fisher_signal"),
+        "per_multiple_outlook": regime.get("per_multiple_outlook"),
+        "pe_expansion_compression_pct": regime.get("pe_expansion_compression_pct"),
+        "policy_stance": indicators.get("policy_stance"),
+        "policy_stance_ko": indicators.get("policy_stance_ko"),
+        "liquidity_metrics": liquidity_metrics,
+        "indicators_summary": indicators_summary,
+    }
+
+
+@app.get("/api/v1/macro/timeline")
+@app.get("/api/macro/timeline")
+def get_macro_timeline(
+    source: Optional[str] = None,
+    category: Optional[str] = None,
+    sentiment: Optional[str] = None,
+    limit: Optional[int] = None,
+):
+    """
+    Returns research reports with optional query params (source, category, sentiment, limit).
+    """
+    data = _get_cached_macro_data()
+    reports = list(data.get("reports", []))
+
+    if source:
+        clean_src = source.strip().lower()
+        reports = [r for r in reports if clean_src in str(r.get("source", "")).strip().lower()]
+
+    if category:
+        clean_cat = category.strip().lower()
+        reports = [r for r in reports if clean_cat in str(r.get("category", "")).strip().lower()]
+
+    if sentiment:
+        clean_sent = sentiment.strip().upper()
+        reports = [r for r in reports if str(r.get("sentiment", "")).strip().upper() == clean_sent]
+
+    if limit is not None and limit > 0:
+        reports = reports[:limit]
+
+    return {
+        "status": "success",
+        "total": len(reports),
+        "items": reports,
+        "updated_at": data.get("updated_at"),
+    }
+
+
+@app.get("/api/v1/macro/indicators")
+@app.get("/api/macro/indicators")
+def get_macro_indicators():
+    """
+    Returns latest and historical macro indicators (US 10Y, 2Y, spread, Net Liquidity, TGA, ON RRP, r*).
+    """
+    data = _get_cached_macro_data()
+    indicators = data.get("indicators", {})
+    history = indicators.get("history", [])
+
+    return {
+        "status": "success",
+        "latest": {k: v for k, v in indicators.items() if k != "history"},
+        "indicators": indicators,
+        "history": history,
+        "updated_at": data.get("updated_at"),
+    }
+
+
+@app.post("/api/v1/macro/refresh")
+@app.post("/api/macro/refresh")
+@app.get("/api/v1/macro/refresh")
+@app.get("/api/macro/refresh")
+def refresh_macro_data(
+    background_tasks: BackgroundTasks,
+    body: Optional[dict] = Body(None),
+    force: bool = False,
+    background: bool = False,
+):
+    """
+    Triggers sync_macro.run_sync(), invalidates in-memory cache, and returns refreshed summary.
+    Supports both synchronous execution and background tasks.
+    """
+    req_force = force
+    req_bg = background
+
+    if body and isinstance(body, dict):
+        if "force" in body:
+            req_force = bool(body["force"])
+        if "background" in body:
+            req_bg = bool(body["background"])
+
+    db_path = os.path.join(os.path.dirname(__file__), "investment_portal.db")
+
+    sync_mod = None
+    try:
+        try:
+            import sync_macro as sync_mod
+        except ImportError:
+            from InvestmentPortal.backend import sync_macro as sync_mod
+    except Exception as imp_err:
+        print(f"[Macro Refresh Import Error] {imp_err}")
+
+    # Invalidate current in-memory cache
+    _invalidate_macro_cache()
+
+    if sync_mod is not None:
+        if req_bg:
+            background_tasks.add_task(
+                sync_mod.run_sync,
+                force=req_force,
+                source="api_background",
+                db_path=db_path
+            )
+            return {
+                "status": "processing",
+                "message": "Macro intelligence sync initiated in background"
+            }
+
+        try:
+            sync_res = sync_mod.run_sync(
+                force=req_force,
+                source="api_refresh",
+                db_path=db_path
+            )
+            fresh_data = _get_cached_macro_data(force_refresh=True)
+            summary_info = {
+                "regime_code": fresh_data.get("regime", {}).get("regime_code"),
+                "ken_fisher_signal": fresh_data.get("regime", {}).get("ken_fisher_signal"),
+                "reports_count": len(fresh_data.get("reports", [])),
+                "updated_at": fresh_data.get("updated_at"),
+            }
+            return {
+                "status": "success",
+                "message": "Macro intelligence data refreshed successfully",
+                "summary": summary_info,
+                "data": sync_res
+            }
+        except Exception as e:
+            print(f"[Macro Refresh Error] {e}")
+
+    # Fallback response
+    fallback_data = _get_cached_macro_data(force_refresh=True)
+    return {
+        "status": "success",
+        "message": "Macro intelligence refreshed (fallback)",
+        "summary": {
+            "regime_code": fallback_data.get("regime", {}).get("regime_code"),
+            "ken_fisher_signal": fallback_data.get("regime", {}).get("ken_fisher_signal"),
+            "reports_count": len(fallback_data.get("reports", [])),
+            "updated_at": fallback_data.get("updated_at"),
+        },
+        "data": fallback_data
     }
 
 

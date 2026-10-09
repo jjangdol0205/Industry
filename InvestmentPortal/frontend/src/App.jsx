@@ -11,7 +11,7 @@ import {
 import { 
   TrendingUp, Database, FileText, ArrowLeft, ArrowRight, ChevronLeft, Activity, DollarSign, Target,
   BookOpen, BarChart2, BarChart3, Shield, Zap, RefreshCw, ExternalLink, Users, Globe,
-  FolderOpen, ChevronDown, ChevronRight, Package, Layers, AlertTriangle, Star
+  FolderOpen, ChevronDown, ChevronRight, Package, Layers, AlertTriangle, Star, Sparkles
 } from 'lucide-react';
 import './index.css';
 
@@ -19,6 +19,8 @@ import staticUniverseData from '../public/universe_evaluated.json';
 import staticDeepdiveData from '../public/universal_deepdive_data.json';
 import staticAiAnalysesData from '../public/pregenerated_ai_analyses.json';
 import staticSpecialWatchlistData from '../public/special_watchlist_data.json';
+import InsightCenterView, { GuruTechInsightsWidget } from './InsightCenterView';
+import MacroIntelligenceView from './MacroIntelligenceView';
 
 const BACKEND_HOST = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:8000'
@@ -543,6 +545,40 @@ function App() {
         <h1 onClick={handleHomeClick}><TrendingUp size={24} color="var(--accent-blue)" /> Alpha Research</h1>
         
         <div style={{ display:'flex', flexDirection:'column', gap:'6px', margin:'20px 0', borderBottom:'1px solid var(--border-color)', paddingBottom:'16px' }}>
+          {/* 인사이트 센터 (Thought Leaders & Gurus Hub) Tab */}
+          <button 
+            className={`tab-btn ${viewMode === 'insights' ? 'active' : ''}`}
+            style={{
+              width: '100%', padding: '10px 14px', fontSize: '0.85rem', cursor: 'pointer',
+              background: viewMode === 'insights' 
+                ? 'linear-gradient(135deg, rgba(139,92,246,0.3), rgba(59,130,246,0.3))' 
+                : 'rgba(255,255,255,0.03)',
+              border: viewMode === 'insights' ? '1px solid #8b5cf6' : '1px solid rgba(255,255,255,0.1)',
+              color: viewMode === 'insights' ? '#c084fc' : 'var(--text-primary)',
+              fontWeight: 700, borderRadius: '10px', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '8px'
+            }}
+            onClick={() => { setViewMode('insights'); setSelectedCompany(null); setSelectedReport(null); setSidebarOpen(false); }}
+          >
+            <Sparkles size={16} color="#c084fc" />
+            <span>💡 인사이트 센터</span>
+          </button>
+          {/* 매크로 인텔리전스 (Macro Intelligence & Fed Watch) Tab */}
+          <button 
+            className={`tab-btn ${viewMode === 'macro' ? 'active' : ''}`}
+            style={{
+              width: '100%', padding: '10px 14px', fontSize: '0.85rem', cursor: 'pointer',
+              background: viewMode === 'macro' 
+                ? 'linear-gradient(135deg, rgba(14,165,233,0.3), rgba(59,130,246,0.3))' 
+                : 'rgba(255,255,255,0.03)',
+              border: viewMode === 'macro' ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.1)',
+              color: viewMode === 'macro' ? '#38bdf8' : 'var(--text-primary)',
+              fontWeight: 700, borderRadius: '10px', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '8px'
+            }}
+            onClick={() => { setViewMode('macro'); setSelectedCompany(null); setSelectedReport(null); setSidebarOpen(false); }}
+          >
+            <Globe size={16} color="#38bdf8" />
+            <span>🌐 매크로 인텔리전스</span>
+          </button>
           <button 
             className={`tab-btn ${viewMode === 'special-watchlist' ? 'active' : ''}`}
             style={{
@@ -593,7 +629,11 @@ function App() {
 
       {/* Main */}
       <div className="main-content">
-        {viewMode === 'special-watchlist' ? (
+        {viewMode === 'insights' ? (
+          <InsightCenterView onSelectCompany={fetchCompanyFull} />
+        ) : viewMode === 'macro' ? (
+          <MacroIntelligenceView onSelectCompany={fetchCompanyFull} />
+        ) : viewMode === 'special-watchlist' ? (
           <SpecialWatchlistView onSelectCompany={fetchCompanyFull} />
         ) : viewMode === 'agent-workspace' ? (
           <AgentWorkspace onSelectCompany={fetchCompanyFull} />
@@ -1141,6 +1181,15 @@ function CompanyView({ company, profile, financials, aiAnalysis, onBack, onSync 
 
       {/* ── Section -1: ISRG & Core/Satellite 4단계 딥다이브 ── */}
       <ErrorBoundary><DeepDiveSection company={company} profile={p} /></ErrorBoundary>
+
+      {/* ── Section -0.5: 글로벌 투자 거장 & AI 테크 리더 인사이트 연동 ── */}
+      <ErrorBoundary>
+        <GuruTechInsightsWidget
+          ticker={company?.ticker}
+          companyName={company?.name}
+          onSelectCompany={onSync}
+        />
+      </ErrorBoundary>
 
       {/* ── Section 0: AI 기업 심층 분석 ──────────────── */}
       <ErrorBoundary><AiAnalysisSection data={aiAnalysis} company={company} /></ErrorBoundary>

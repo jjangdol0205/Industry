@@ -248,3 +248,97 @@ Integrity mode: development
 - [ ] `npm run build` 번들링이 에러 없이 완료되어야 함
 - [ ] 전체 E2E 회귀 테스트(`run_e2e_tests.py`)가 89/89 ALL PASS를 유지해야 함
 
+
+
+## 2026-10-09T08:08:19Z
+
+투자 분석 포털(`TrendPulse` / `d:\Industry`) 내에 연준(FOMC) 공식 발표 자료, 뉴욕·세인트루이스 연은 리서치, 거시 유동성 및 국채금리 지표를 자동으로 수집·구조화하고, 주식 시장 할인율, 팩터(퀄리티 대형주 vs 중소형주) 및 섹터 영향도를 시각화하는 풀스택 **'매크로 인텔리전스 모듈(Macro Intelligence Module)'**을 구축한다.
+
+Working directory: d:\Industry
+Integrity mode: development
+
+## Requirements
+
+### R1. 연준(Fed/FOMC) 및 뉴욕·세인트루이스 연은 리서치 수집 및 주식 영향도 구조화 파이프라인
+- 연방준비제도(Board of Governors), FOMC 성명서/의사록/경제전망(SEP), 뉴욕연은(Liberty Street Economics), 세인트루이스연은(FRED/Economic Synopses)의 최신 연구 보고서와 의사록을 수집하고, 중복 수집 방지(SHA-256 해시) 메커니즘을 적용한다.
+- 수집된 보고서마다 주식 시장 중심의 4대 핵심 관점(① 매크로 할인율 및 증시 밸류에이션, ② 스타일/팩터 영향, ③ 주요 섹터 및 산업 영향, ④ 외환 및 외국인 수급)으로 분석·구조화하여 SQLite DB에 영속화한다.
+
+### R2. 거시 유동성 및 금리 지표 정량화 엔진
+- 미 국채 10년물/2년물 금리 및 스프레드, 재무부 일반계정(TGA), 역레포(ON RRP) 잔고, 실질 중립금리(r*) 추정치 등 핵심 거시 유동성 지표를 정량화한다.
+- 켄 피셔(Ken Fisher) 100년 백테스트 및 최신 연은 연구(기업 이질성 RIMP 모델)를 기반으로, 거시 환경 국면(Macro Regime)에 따른 주식 시장 멀티플(PER 확장/압축) 및 팩터(대형 퀄리티 우량주 vs 중소형 한계기업) 기대 수익률을 산출한다.
+
+### R3. 백엔드 API 및 정합성 보장 파이프라인
+- SQLite DB 내 매크로 전용 테이블(`macro_reports`, `macro_indicators`, `macro_regime`)을 구축하고, 독립 실행 가능한 CLI 동기화 스크립트(`sync_macro.py`) 및 배포용 JSON(`macro_intelligence_data.json`) 갱신 파이프라인을 제공한다.
+- FastAPI 백엔드에 매크로 종합 요약(`/api/v1/macro/summary`), 시계열 리서치 타임라인(`/api/v1/macro/timeline`), 금리/유동성 지표(`/api/v1/macro/indicators`) 엔드포인트를 구현하고 기존 포털 API와 정합성을 유지한다.
+
+### R4. 프론트엔드 React 대시보드 ('매크로 인텔리전스' 탭) 구현
+- 기존 유니버스 및 특별 관심종목 네비게이션에 신규 **'매크로 인텔리전스'** 탭을 추가한다.
+- 대시보드 화면에 ① 거시 유동성 및 금리 상태 게이지(Rate & Liquidity Dashboard), ② 연은 리서치 시계열 피드(최신순 카드 뷰), ③ 스타일·팩터 및 섹터 영향도 매트릭스(Heatmap/Card)를 직관적이고 반응형으로 렌더링한다.
+
+## Acceptance Criteria
+
+### 매크로 데이터 수집 및 DB 무결성
+- [ ] `sync_macro.py` 실행 시 오류 없이 동작하며, SQLite DB(`investment_portal.db`) 내 `macro_reports` 및 `macro_indicators` 테이블에 데이터가 정상 적재됨
+- [ ] 수집된 리서치 데이터에 4대 관점(할인율, 팩터, 섹터, 외환/수급) 분석 필드가 결측치(NULL) 없이 기록됨
+- [ ] 배포용 JSON(`macro_intelligence_data.json`)이 4개 대상 경로에 원자적으로 동기화됨
+
+### 백엔드 엔드포인트 무결성
+- [ ] FastAPI 서버 구동 시 `/api/v1/macro/summary` 및 `/api/v1/macro/timeline` 요청이 200 OK와 함께 유효한 스키마의 JSON을 반환함
+- [ ] 신규 데이터 갱신 시 캐시 무효화 및 실시간 최신 데이터 조회가 보장됨
+
+### 프론트엔드 UI 대시보드 완성도
+- [ ] React 빌드(`pnpm run build` 또는 `npm run build`)가 타입/린트 오류 없이 통과함
+- [ ] 브라우저에서 '매크로 인텔리전스' 탭 클릭 시 거시 지표 게이지와 연은 리서치 카드 타임라인이 시각적으로 올바르게 표출됨
+- [ ] 기존 유니버스 모니터링 및 특별 관심종목 기능과 간섭 없이 매끄럽게 동작함
+
+### 회귀 및 통합 테스트
+- [ ] 매크로 모듈 단위 및 통합 테스트 스위트(`pytest tests/test_macro_module.py`)가 작성되어 100% 통과함
+
+
+## 2026-10-09T08:24:50Z
+
+투자 분석 포털(`TrendPulse` / `d:\Industry`) 내에 세계적인 **투자 거장 7인**(하워드 막스, 워런 버핏, 테리 스미스, 빌 애크먼, 데이비드 아인혼, 세스 클라만, 클리프 아스네스)의 공식 서한과 **글로벌 AI & 테크 리더 7인**(샘 알트만, 일론 머스크, 젠슨 황, 마크 저커버그, 리사 수, 곽노정, 다리오 아모데이)의 핵심 인터뷰를 실시간 수집·분석하고, 유니버스 종목(SK스퀘어, SK하이닉스, 테슬라, 우버 등)과 연계하는 풀스택 **'인사이트 센터(Thought Leaders & Gurus Hub)'**를 구축한다.
+
+Working directory: d:\Industry
+Integrity mode: development
+
+## Requirements
+
+### R1. 투자 거장 서한 및 AI·테크 리더 인터뷰 듀얼 수집 파이프라인
+- 투자 거장 7인의 공식 서한/메모 및 테크 리더 7인의 공식 인터뷰(유튜브, 테크 팟캐스트, 백악관 회동, 경제 방송)를 모니터링하여 수집하는 통합 파이프라인(`sync_insights.py`)을 구축한다.
+- SHA-256 해시 기반의 중복 수집 방지 메커니즘을 적용하고, 역연대순 시계열 타임라인으로 적재한다.
+- 각 콘텐츠마다 원문 인용 및 한글 요약과 함께, ① 서한/인터뷰 개요, ② 핵심 테제(3대 축: 모델·안전성/반도체·에너지 인프라/플랫폼 비즈니스), ③ 심층 금융·회계 및 기술 개념 해설서, ④ 포털 종목별 시사점을 정형화 추출한다.
+
+### R2. 포털 유니버스 종목 간의 양방향 연동 엔진
+- 투자 거장들의 핵심 철학(자본배치, ROCE/FCF, 사이클, 안전마진) 및 테크 리더들의 발언(HBM 공급 부족, 에너지 스케일링, FSD, Llama 오픈소스 등)을 포털 내 보유 및 관심 종목(SK스퀘어, SK하이닉스, 테슬라, 우버, 셀시우스 등)의 평가 데이터와 상호 매핑한다.
+- 종목별 상세 화면 조회 시 관련 거장 및 테크 리더의 최신 인사이트가 자동으로 결합되어 표출되도록 한다.
+
+### R3. 백엔드 API 및 SQLite DB 무결성 영속화
+- SQLite DB(`investment_portal.db`) 내 `guru_letters` 및 `tech_leader_interviews` 테이블을 구축하고, 배포용 JSON(`insights_data.json`) 4개 경로 원자적 갱신 파이프라인을 지원한다.
+- FastAPI 백엔드에 통합 인사이트 피드(`/api/v1/insights/feed`), 거장 서한 목록(`/api/v1/insights/gurus`), 테크 리더 인터뷰 목록(`/api/v1/insights/tech-leaders`), 종목별 연관 발언(`/api/v1/insights/ticker/{ticker}`) 엔드포인트를 구현한다.
+
+### R4. 프론트엔드 React 대시보드 ('인사이트 센터' 탭) 구현
+- 포털 메인 네비게이션에 신규 **'인사이트 센터(Thought Leaders)'** 탭을 신설한다.
+- 내부 서브 탭 전환 UI를 제공한다:
+  - 서브 탭 1: **[투자 거장의 서한]** (구루별 필터, 서한 타임라인 카드, 심층 용어 해설 모달)
+  - 서브 탭 2: **[AI & 테크 리더 레이더]** (리더별 프로필 필터, 인터뷰 핵심 발언 카드, 영상/원문 링크, 공급망 영향도 태그)
+- 유니버스 모니터링 및 특별 관심종목 상세 모달/패널 내에 '거장 & 테크 리더 인사이트' 연동 위젯을 렌더링한다.
+
+## Acceptance Criteria
+
+### 데이터 파이프라인 및 DB 영속화 무결성
+- [ ] `sync_insights.py` 실행 시 7대 거장의 기발표 서한 및 테크 리더들의 최신 인터뷰 데이터가 SQLite DB(`investment_portal.db`)에 정상 적재됨
+- [ ] 수집된 데이터에 원문 인용, 핵심 테제, 개념 해설, 종목 시사점 필드가 결측치(NULL) 없이 파싱됨
+- [ ] 배포용 JSON(`insights_data.json`)이 4개 대상 경로에 원자적으로 동기화됨
+
+### 백엔드 엔드포인트 무결성
+- [ ] FastAPI 서버 구동 시 `/api/v1/insights/feed`, `/api/v1/insights/gurus`, `/api/v1/insights/tech-leaders` 요청이 200 OK와 함께 유효한 JSON을 반환함
+- [ ] 특정 종목 조회 시(예: `/api/v1/insights/ticker/402340.KS` 또는 `000660.KS`) 관련 코멘트(곽노정 사장 2030 메모리 공급 부족, 하워드 막스 사이클 원칙 등)가 정상 반환됨
+
+### 프론트엔드 UI 대시보드 완성도
+- [ ] React 빌드(`pnpm run build` 또는 `npm run build`)가 타입/린트 오류 없이 통과함
+- [ ] 브라우저에서 '인사이트 센터' 탭 진입 시 [투자 거장 서한]과 [AI & 테크 리더] 서브 탭 전환이 매끄럽게 동작하고 카드가 직관적으로 표출됨
+- [ ] 기존 유니버스 모니터링 및 매크로 인텔리전스 기능과 간섭 없이 일관된 테마 디자인을 유지함
+
+### 회귀 및 통합 테스트
+- [ ] 단위 및 통합 테스트 스위트(`pytest tests/test_insights_module.py`)가 작성되어 100% 통과함

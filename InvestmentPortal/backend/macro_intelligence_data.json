@@ -1,0 +1,760 @@
+{
+  "status": "success",
+  "updated_at": "2026-10-09T23:29:15.252814+09:00",
+  "regime": {
+    "regime_id": "CURRENT",
+    "as_of_date": "2026-10-09",
+    "current_regime": "역전 해소 과도기: 불 스티프너 침체 경보 (Recession Defense)",
+    "regime_code": "TRANSITION_UNINVERSION",
+    "regime_description": "수익률 곡선 역전이 비상 금리 인하로 해소되는 위험 국면. 방어적 우량주와 현금 확보 권고.",
+    "per_multiple_outlook": "COMPRESSION",
+    "pe_expansion_compression_pct": -5.0,
+    "ken_fisher_signal": "HIGH_RECESSION_DEFENSE_ALERT",
+    "rimp_model_analysis": "긴축 격차 +1.03%p 하에서 고정금리 85%+ 우량 대형주는 5%대 현금 이자수익 수혜를 누리는 반면, 변동금리 45%+ 한계 중소형주는 이자비용 폭증으로 마진이 압박받음. Core 우량주의 기대 알파 스프레드는 +15.61%p로 압도적 우위 시현.",
+    "factor_allocations": {
+      "core_pct": 60.0,
+      "satellite_pct": 15.0,
+      "cash_pct": 25.0,
+      "favored": "우량 대형주 (Core Quality / OPM 22%+ 독점 플랫폼)",
+      "unfavored": "한계 중소형주 (변동금리 부채 과다 기업 / 적자 중소형)",
+      "quality_alpha_spread_pct": 15.61
+    },
+    "sector_matrix": [
+      {
+        "sector": "AI 반도체 / 빅테크",
+        "sensitivity": "HIGH",
+        "rating": "OVERWEIGHT",
+        "score": 1,
+        "rationale": "해자 기업 중심의 선별적 실적 집중 및 Capex 지속"
+      },
+      {
+        "sector": "금융 / 은행",
+        "sensitivity": "MODERATE",
+        "rating": "OVERWEIGHT",
+        "score": 1,
+        "rationale": "수익률 곡선 정상화에 따른 순이자마진(NIM) 턴어라운드"
+      },
+      {
+        "sector": "필수소비재 / 헬스케어",
+        "sensitivity": "LOW",
+        "rating": "OVERWEIGHT",
+        "score": 1,
+        "rationale": "침체 경계 국면 시 하방 지지력 및 배당 안전판"
+      },
+      {
+        "sector": "방위산업 / 인프라",
+        "sensitivity": "MODERATE",
+        "rating": "OVERWEIGHT",
+        "score": 1,
+        "rationale": "지정학적 리스크 지속에 따른 수주 잔고 방어"
+      },
+      {
+        "sector": "신재생에너지 / 유틸리티",
+        "sensitivity": "HIGH",
+        "rating": "NEUTRAL",
+        "score": 0,
+        "rationale": "금리 고점 통과 및 인하 전환 기대감 형성"
+      },
+      {
+        "sector": "부동산 / 상업용 리츠",
+        "sensitivity": "VERY_HIGH",
+        "rating": "UNDERWEIGHT",
+        "score": -1,
+        "rationale": "여전히 높은 공실률 및 재계약 위험"
+      }
+    ],
+    "updated_at": "2026-10-09T23:29:15.181788+09:00"
+  },
+  "indicators": {
+    "indicator_date": "2026-10-09",
+    "us_10y_yield": 4.12,
+    "us_2y_yield": 3.85,
+    "yield_spread_10y_2y": 0.27,
+    "yield_curve_state": "NORMAL",
+    "curve_shift_type": "BULL_STEEPENER",
+    "fed_funds_rate": 4.83,
+    "real_neutral_rate_r_star": 1.1,
+    "core_pce_inflation": 2.7,
+    "policy_restrictiveness_gap": 1.03,
+    "policy_stance": "SIGNIFICANTLY_RESTRICTIVE",
+    "policy_stance_ko": "강력한 긴축 국면 (Significantly Restrictive)",
+    "tga_balance_billion": 782.3,
+    "on_rrp_balance_billion": 184.6,
+    "on_rrp_depletion_alert": false,
+    "on_rrp_buffer_status": "ADEQUATE_BUFFER",
+    "fed_total_assets_trillion": 7.08,
+    "net_liquidity_billion": 6113.6,
+    "net_liquidity_change_30d": -12.5,
+    "net_liquidity_change_90d": -10.0,
+    "dxy_index": 102.5,
+    "usdkrw_exchange_rate": 1342.0,
+    "vix_index": 15.8,
+    "recorded_at": "2026-10-09T09:00:00",
+    "history": [
+      {
+        "indicator_date": "2026-09-10",
+        "us_10y_yield": 3.95,
+        "us_2y_yield": 4.05,
+        "yield_spread_10y_2y": -0.1,
+        "yield_curve_state": "INVERTED",
+        "net_liquidity_billion": 6160.0
+      },
+      {
+        "indicator_date": "2026-09-11",
+        "us_10y_yield": 3.96,
+        "us_2y_yield": 4.04,
+        "yield_spread_10y_2y": -0.08,
+        "yield_curve_state": "INVERTED",
+        "net_liquidity_billion": 6159.8
+      },
+      {
+        "indicator_date": "2026-09-12",
+        "us_10y_yield": 3.96,
+        "us_2y_yield": 4.04,
+        "yield_spread_10y_2y": -0.08,
+        "yield_curve_state": "INVERTED",
+        "net_liquidity_billion": 6159.6
+      },
+      {
+        "indicator_date": "2026-09-13",
+        "us_10y_yield": 3.97,
+        "us_2y_yield": 4.03,
+        "yield_spread_10y_2y": -0.06,
+        "yield_curve_state": "INVERTED",
+        "net_liquidity_billion": 6159.3
+      },
+      {
+        "indicator_date": "2026-09-14",
+        "us_10y_yield": 3.97,
+        "us_2y_yield": 4.02,
+        "yield_spread_10y_2y": -0.05,
+        "yield_curve_state": "INVERTED",
+        "net_liquidity_billion": 6149.0
+      },
+      {
+        "indicator_date": "2026-09-15",
+        "us_10y_yield": 3.98,
+        "us_2y_yield": 4.02,
+        "yield_spread_10y_2y": -0.04,
+        "yield_curve_state": "INVERTED",
+        "net_liquidity_billion": 6148.8
+      },
+      {
+        "indicator_date": "2026-09-16",
+        "us_10y_yield": 3.99,
+        "us_2y_yield": 4.01,
+        "yield_spread_10y_2y": -0.02,
+        "yield_curve_state": "INVERTED",
+        "net_liquidity_billion": 6148.6
+      },
+      {
+        "indicator_date": "2026-09-17",
+        "us_10y_yield": 3.99,
+        "us_2y_yield": 4.0,
+        "yield_spread_10y_2y": -0.01,
+        "yield_curve_state": "INVERTED",
+        "net_liquidity_billion": 6148.3
+      },
+      {
+        "indicator_date": "2026-09-18",
+        "us_10y_yield": 4.0,
+        "us_2y_yield": 3.99,
+        "yield_spread_10y_2y": 0.01,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6148.1
+      },
+      {
+        "indicator_date": "2026-09-19",
+        "us_10y_yield": 4.0,
+        "us_2y_yield": 3.99,
+        "yield_spread_10y_2y": 0.01,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6147.9
+      },
+      {
+        "indicator_date": "2026-09-20",
+        "us_10y_yield": 4.01,
+        "us_2y_yield": 3.98,
+        "yield_spread_10y_2y": 0.03,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6147.7
+      },
+      {
+        "indicator_date": "2026-09-21",
+        "us_10y_yield": 4.01,
+        "us_2y_yield": 3.97,
+        "yield_spread_10y_2y": 0.04,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6137.3
+      },
+      {
+        "indicator_date": "2026-09-22",
+        "us_10y_yield": 4.02,
+        "us_2y_yield": 3.97,
+        "yield_spread_10y_2y": 0.05,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6137.1
+      },
+      {
+        "indicator_date": "2026-09-23",
+        "us_10y_yield": 4.03,
+        "us_2y_yield": 3.96,
+        "yield_spread_10y_2y": 0.07,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6136.9
+      },
+      {
+        "indicator_date": "2026-09-24",
+        "us_10y_yield": 4.03,
+        "us_2y_yield": 3.95,
+        "yield_spread_10y_2y": 0.08,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6136.7
+      },
+      {
+        "indicator_date": "2026-09-25",
+        "us_10y_yield": 4.04,
+        "us_2y_yield": 3.95,
+        "yield_spread_10y_2y": 0.09,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6136.4
+      },
+      {
+        "indicator_date": "2026-09-26",
+        "us_10y_yield": 4.04,
+        "us_2y_yield": 3.94,
+        "yield_spread_10y_2y": 0.1,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6136.2
+      },
+      {
+        "indicator_date": "2026-09-27",
+        "us_10y_yield": 4.05,
+        "us_2y_yield": 3.93,
+        "yield_spread_10y_2y": 0.12,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6136.0
+      },
+      {
+        "indicator_date": "2026-09-28",
+        "us_10y_yield": 4.06,
+        "us_2y_yield": 3.93,
+        "yield_spread_10y_2y": 0.13,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6135.8
+      },
+      {
+        "indicator_date": "2026-09-29",
+        "us_10y_yield": 4.06,
+        "us_2y_yield": 3.92,
+        "yield_spread_10y_2y": 0.14,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6125.4
+      },
+      {
+        "indicator_date": "2026-09-30",
+        "us_10y_yield": 4.07,
+        "us_2y_yield": 3.91,
+        "yield_spread_10y_2y": 0.16,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6125.2
+      },
+      {
+        "indicator_date": "2026-10-01",
+        "us_10y_yield": 4.07,
+        "us_2y_yield": 3.91,
+        "yield_spread_10y_2y": 0.16,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6125.0
+      },
+      {
+        "indicator_date": "2026-10-02",
+        "us_10y_yield": 4.08,
+        "us_2y_yield": 3.9,
+        "yield_spread_10y_2y": 0.18,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6124.8
+      },
+      {
+        "indicator_date": "2026-10-03",
+        "us_10y_yield": 4.08,
+        "us_2y_yield": 3.89,
+        "yield_spread_10y_2y": 0.19,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6124.5
+      },
+      {
+        "indicator_date": "2026-10-04",
+        "us_10y_yield": 4.09,
+        "us_2y_yield": 3.88,
+        "yield_spread_10y_2y": 0.21,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6124.3
+      },
+      {
+        "indicator_date": "2026-10-05",
+        "us_10y_yield": 4.1,
+        "us_2y_yield": 3.88,
+        "yield_spread_10y_2y": 0.22,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6124.1
+      },
+      {
+        "indicator_date": "2026-10-06",
+        "us_10y_yield": 4.1,
+        "us_2y_yield": 3.87,
+        "yield_spread_10y_2y": 0.23,
+        "yield_curve_state": "FLAT",
+        "net_liquidity_billion": 6113.8
+      },
+      {
+        "indicator_date": "2026-10-07",
+        "us_10y_yield": 4.11,
+        "us_2y_yield": 3.86,
+        "yield_spread_10y_2y": 0.25,
+        "yield_curve_state": "NORMAL",
+        "net_liquidity_billion": 6113.5
+      },
+      {
+        "indicator_date": "2026-10-08",
+        "us_10y_yield": 4.11,
+        "us_2y_yield": 3.86,
+        "yield_spread_10y_2y": 0.25,
+        "yield_curve_state": "NORMAL",
+        "net_liquidity_billion": 6113.3
+      },
+      {
+        "indicator_date": "2026-10-09",
+        "us_10y_yield": 4.12,
+        "us_2y_yield": 3.85,
+        "yield_spread_10y_2y": 0.27,
+        "yield_curve_state": "NORMAL",
+        "net_liquidity_billion": 6113.6
+      }
+    ]
+  },
+  "reports": [
+    {
+      "id": 1,
+      "report_id": "5ffcef96a1432fe3",
+      "source": "FOMC",
+      "category": "FOMC Statement",
+      "title": "FOMC Statement: 50bps Rate Cut and Policy Calibration",
+      "publish_date": "2026-09-17",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20260917.htm",
+      "summary": "연준(FOMC)은 기준금리를 4.75%~5.00%로 50bp 전격 인하하며 본격적인 통화정책 완화 사이클에 진입했습니다. 고용 시장 둔화 리스크에 대한 선제적 방어와 인플레이션 2% 회귀 신뢰도 증가를 금리 인하의 핵심 근거로 제시했습니다.",
+      "key_takeaways": [
+        "기준금리 50bp 인하(4.75%~5.00%)로 중립금리 회귀 가속화",
+        "인플레이션 둔화 진전에 따른 고용 둔화 방어 선제 조치",
+        "양적긴축(QT) 대차대조표 축소 기조는 계획대로 병행 지속",
+        "향후 경제 지표에 따라 완화 속도를 유연하게 조율하는 점진적 정상화 기조"
+      ],
+      "perspectives": {
+        "discount_rate_impact": "미 국채 10년물 금리의 안정화와 단기물 금리 급락으로 주식시장 할인율(Equity Discount Rate)이 하락 압력을 받습니다. Gordon 성장 모델 기준 무위험수익률(Rf) 하락으로 KOSPI 12M Fwd P/E 멀티플은 약 +4.5% 확장(Expansion) 여력을 확보하며 성장주 전반의 밸류에이션 부담이 대폭 경감됩니다.",
+        "factor_style_impact": "단기 조달금리 하락으로 고부채 중소형주의 이자비용 부담이 완화되나, 실물 경기 둔화 우려가 상존하므로 잉여현금흐름(FCF)이 탄탄한 'Core Quality' 대형주가 여전히 시장 수익률을 상회할 것으로 전망됩니다. RIMP 모델상 대형 우량주와 한계 중소형주 간의 기대 알파 스프레드는 약 +8.5% 수준을 유지합니다.",
+        "sector_industry_impact": "Capex 조달 부담 완화로 빅테크향 HBM·AI 반도체 밸류체인의 강한 반등이 예상되며, 금리 인하 수혜가 직접적인 바이오 및 신재생에너지 섹터의 리레이팅이 가시화됩니다. 반면 은행/금융 섹터는 순이자마진(NIM) 축소 압력으로 단기 횡보세가 불가피합니다.",
+        "fx_liquidity_flow_impact": "한미 기준금리 역전폭이 축소(최대 2.00%p -> 1.50%p)되면서 원/달러(USD/KRW) 환율의 하방 안정화(1,320원대 안착)를 유도합니다. 환차손 부담이 완화된 외국인 투자자의 KOSPI 전기전자 및 시총 상위 대형주 순매수 유입 강도가 강화됩니다."
+      },
+      "discount_rate_impact": "미 국채 10년물 금리의 안정화와 단기물 금리 급락으로 주식시장 할인율(Equity Discount Rate)이 하락 압력을 받습니다. Gordon 성장 모델 기준 무위험수익률(Rf) 하락으로 KOSPI 12M Fwd P/E 멀티플은 약 +4.5% 확장(Expansion) 여력을 확보하며 성장주 전반의 밸류에이션 부담이 대폭 경감됩니다.",
+      "factor_style_impact": "단기 조달금리 하락으로 고부채 중소형주의 이자비용 부담이 완화되나, 실물 경기 둔화 우려가 상존하므로 잉여현금흐름(FCF)이 탄탄한 'Core Quality' 대형주가 여전히 시장 수익률을 상회할 것으로 전망됩니다. RIMP 모델상 대형 우량주와 한계 중소형주 간의 기대 알파 스프레드는 약 +8.5% 수준을 유지합니다.",
+      "sector_industry_impact": "Capex 조달 부담 완화로 빅테크향 HBM·AI 반도체 밸류체인의 강한 반등이 예상되며, 금리 인하 수혜가 직접적인 바이오 및 신재생에너지 섹터의 리레이팅이 가시화됩니다. 반면 은행/금융 섹터는 순이자마진(NIM) 축소 압력으로 단기 횡보세가 불가피합니다.",
+      "fx_liquidity_flow_impact": "한미 기준금리 역전폭이 축소(최대 2.00%p -> 1.50%p)되면서 원/달러(USD/KRW) 환율의 하방 안정화(1,320원대 안착)를 유도합니다. 환차손 부담이 완화된 외국인 투자자의 KOSPI 전기전자 및 시총 상위 대형주 순매수 유입 강도가 강화됩니다.",
+      "sentiment": "DOVISH",
+      "sentiment_score": -0.75,
+      "pe_impact_pct_estimate": 4.5,
+      "favored_factor": "Core Quality Large-Cap & Growth",
+      "unfavored_factor": "High Floating-Debt Small-Cap",
+      "overweight_sectors": [
+        "AI Semiconductor",
+        "Bio / Healthcare",
+        "Renewables"
+      ],
+      "underweight_sectors": [
+        "Commercial Banks",
+        "High-Dividend Utilities"
+      ],
+      "created_at": "2026-09-17T18:00:00Z",
+      "updated_at": "2026-10-09T23:29:15.181788+09:00"
+    },
+    {
+      "id": 2,
+      "report_id": "29596ef3ca462b7d",
+      "source": "St. Louis Fed",
+      "category": "Economic Synopses",
+      "title": "Economic Synopses: Assessing the Equilibrium Real Neutral Rate (r*) Post-Pandemic",
+      "publish_date": "2026-09-02",
+      "url": "https://research.stlouisfed.org/publications/economic-synopses/2026/09/assessing-neutral-rate-r-star.html",
+      "summary": "세인트루이스 연은은 Laubach-Williams(LW) 및 Holston-Laubach-Williams(HLW) 모델을 적용하여 팬데믹 이후 구조적 실질 중립금리(r*)를 0.9%~1.2% 수준으로 재평가했습니다. 정부 부채 증가, AI 생산성 향상, 에너지 전환 투자 수요가 구조적 중립금리를 팬데믹 이전(0.5%) 대비 끌어올렸음을 밝혔습니다.",
+      "key_takeaways": [
+        "추정 실질 중립금리 r* 범위: 0.9% ~ 1.2% (중앙값 1.05%)",
+        "현재 실질 정책금리(FFR - Core PCE)는 약 +2.5% 수준으로 통화정책은 여전히 유의미한 긴축 영역(Restrictive Gap > +1.3%p)",
+        "장기 명목 터미널 레이트는 3.0%~3.25% 수준에서 형성될 가능성",
+        "과거 2010년대의 초저금리(Zero-bound) 시대로의 회귀는 구조적으로 어려움"
+      ],
+      "perspectives": {
+        "discount_rate_impact": "중립금리 r*의 상향은 영구 할인율 바닥이 과거보다 높아졌음을 의미합니다. 무차별적인 성장주 멀티플 팽창 시대는 종료되었으며, 실질 이익 성장(EPS Growth)이 뒷받침되지 않는 멀티플은 지속 불가능합니다.",
+        "factor_style_impact": "고금리 뉴노멀 환경에서는 밸류에이션(Value)과 높은 이익 잉여금(FCF Yield)을 겸비한 GARP(Growth at a Reasonable Price) 팩터가 장기 아웃퍼폼할 것으로 평가됩니다.",
+        "sector_industry_impact": "구조적 생산성 혁신을 견인하는 AI 및 반도체 섹터는 r* 상승을 능가하는 초과 ROE를 창출하여 정당화됩니다. 반면 고정 배당 매력에 의존하던 전통 유틸리티는 상대적 매력도가 감소합니다.",
+        "fx_liquidity_flow_impact": "미국의 높은 실질 중립금리는 달러화 자산의 기본 기대수익률을 지지하여 달러화의 장기 구조적 강세를 뒷받침합니다. 원화 등 신흥국 통화는 과거 대비 높은 금리 프리미엄을 유지해야 자본 유출을 방어할 수 있습니다."
+      },
+      "discount_rate_impact": "중립금리 r*의 상향은 영구 할인율 바닥이 과거보다 높아졌음을 의미합니다. 무차별적인 성장주 멀티플 팽창 시대는 종료되었으며, 실질 이익 성장(EPS Growth)이 뒷받침되지 않는 멀티플은 지속 불가능합니다.",
+      "factor_style_impact": "고금리 뉴노멀 환경에서는 밸류에이션(Value)과 높은 이익 잉여금(FCF Yield)을 겸비한 GARP(Growth at a Reasonable Price) 팩터가 장기 아웃퍼폼할 것으로 평가됩니다.",
+      "sector_industry_impact": "구조적 생산성 혁신을 견인하는 AI 및 반도체 섹터는 r* 상승을 능가하는 초과 ROE를 창출하여 정당화됩니다. 반면 고정 배당 매력에 의존하던 전통 유틸리티는 상대적 매력도가 감소합니다.",
+      "fx_liquidity_flow_impact": "미국의 높은 실질 중립금리는 달러화 자산의 기본 기대수익률을 지지하여 달러화의 장기 구조적 강세를 뒷받침합니다. 원화 등 신흥국 통화는 과거 대비 높은 금리 프리미엄을 유지해야 자본 유출을 방어할 수 있습니다.",
+      "sentiment": "HAWKISH",
+      "sentiment_score": 0.35,
+      "pe_impact_pct_estimate": -1.5,
+      "favored_factor": "GARP (Growth at a Reasonable Price) & High ROE",
+      "unfavored_factor": "Unprofitable High-Multiple Story Tech",
+      "overweight_sectors": [
+        "AI Semiconductor",
+        "Defense / Aerospace",
+        "Financials"
+      ],
+      "underweight_sectors": [
+        "High-Dividend Traditional Utilities",
+        "Bond-Proxy REITs"
+      ],
+      "created_at": "2026-09-02T18:00:00Z",
+      "updated_at": "2026-10-09T23:29:15.181788+09:00"
+    },
+    {
+      "id": 3,
+      "report_id": "3c47379687c4b243",
+      "source": "St. Louis Fed",
+      "category": "Economic Synopses",
+      "title": "Economic Synopses: Yield Curve Un-Inversion Dynamics: Bull Steepener vs Bear Steepener Historical Regimes",
+      "publish_date": "2026-08-20",
+      "url": "https://research.stlouisfed.org/publications/economic-synopses/2026/08/yield-curve-uninversion-dynamics.html",
+      "summary": "10년물과 2년물 국채 수익률 역전(Inversion) 해소 과정의 역사적 패턴을 켄 피셔(Ken Fisher) 및 연은 백테스트를 통해 비교 분석한 연구입니다. 단기 금리 급락에 의한 '불 스티프너(Bull Steepener)'는 역사적으로 경기침체 위험의 방아쇠였던 반면, 장기 금리 상승에 의한 '베어 스티프너(Bear Steepener)'는 강력한 경기 확장 시그널임을 입증했습니다.",
+      "key_takeaways": [
+        "역전 해소 국면(Un-inversion)의 성격 규명이 주식시장 생존의 핵심",
+        "불 스티프너(단기채 금리 하락 폭 > 장기채 금리 하락): 경기 급랭 및 침체 방어 경보(Recession Defense Alert)",
+        "베어 스티프너(장기채 금리 상승 폭 > 단기채 금리 상승): 성장 가속 및 위험자산 선호 시그널(Growth Expansion Signal)",
+        "역전 그 자체보다 '역전의 정상화 과정'에서 주식시장 변동성 최고조 도달"
+      ],
+      "perspectives": {
+        "discount_rate_impact": "불 스티프너 un-inversion 발생 시 단기 유동성은 공급되나 위험 프리미엄(ERP)의 급격한 확대로 주식 밸류에이션이 압축될 수 있습니다. 반면 연착륙 기반 완만한 스티프닝은 멀티플 확장을 지지합니다.",
+        "factor_style_impact": "불 스티프너 국면에서는 경기방어주(Defensive), 무차입 대형 퀄리티주 비중을 극대화해야 하며 스몰캡 레버리지 투자를 배제해야 합니다. 베어 스티프너 국면에서는 시클리컬(Cyclical) 및 가치주(Value) 비중 확대가 유리합니다.",
+        "sector_industry_impact": "수익률 곡선 정상화로 은행업종의 예대마진이 점진적으로 회복될 여지가 열립니다. 경기 침체 동반 불 스티프너 시 필수소비재/헬스케어가 아웃퍼폼하며, 경기 확장 베어 스티프너 시 산업재/반도체가 급등합니다.",
+        "fx_liquidity_flow_impact": "불 스티프너는 안전자산 선호(Risk-Off)를 촉발하여 신흥국 환율 변동성을 확대시키고 KOSPI 외국인 매도세를 야기할 수 있으나, 선제적 금리 인하로 연착륙 성공 시 대규모 외국인 재유입의 전주곡이 됩니다."
+      },
+      "discount_rate_impact": "불 스티프너 un-inversion 발생 시 단기 유동성은 공급되나 위험 프리미엄(ERP)의 급격한 확대로 주식 밸류에이션이 압축될 수 있습니다. 반면 연착륙 기반 완만한 스티프닝은 멀티플 확장을 지지합니다.",
+      "factor_style_impact": "불 스티프너 국면에서는 경기방어주(Defensive), 무차입 대형 퀄리티주 비중을 극대화해야 하며 스몰캡 레버리지 투자를 배제해야 합니다. 베어 스티프너 국면에서는 시클리컬(Cyclical) 및 가치주(Value) 비중 확대가 유리합니다.",
+      "sector_industry_impact": "수익률 곡선 정상화로 은행업종의 예대마진이 점진적으로 회복될 여지가 열립니다. 경기 침체 동반 불 스티프너 시 필수소비재/헬스케어가 아웃퍼폼하며, 경기 확장 베어 스티프너 시 산업재/반도체가 급등합니다.",
+      "fx_liquidity_flow_impact": "불 스티프너는 안전자산 선호(Risk-Off)를 촉발하여 신흥국 환율 변동성을 확대시키고 KOSPI 외국인 매도세를 야기할 수 있으나, 선제적 금리 인하로 연착륙 성공 시 대규모 외국인 재유입의 전주곡이 됩니다.",
+      "sentiment": "DOVISH",
+      "sentiment_score": -0.3,
+      "pe_impact_pct_estimate": 2.0,
+      "favored_factor": "Macro Regime-Adaptive Quality",
+      "unfavored_factor": "High Debt Speculative Small-Cap",
+      "overweight_sectors": [
+        "Financials",
+        "AI Semis",
+        "Healthcare"
+      ],
+      "underweight_sectors": [
+        "High-Leverage Real Estate",
+        "Cyclical Commodities"
+      ],
+      "created_at": "2026-08-20T18:00:00Z",
+      "updated_at": "2026-10-09T23:29:15.181788+09:00"
+    },
+    {
+      "id": 4,
+      "report_id": "412511430ee04a5c",
+      "source": "NY Fed",
+      "category": "Liberty Street Economics",
+      "title": "Liberty Street Economics: Firm Heterogeneity in Monetary Transmission (RIMP Model Analysis)",
+      "publish_date": "2026-08-14",
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/08/firm-heterogeneity-rimp-model.html",
+      "summary": "뉴욕 연은 연구진은 통화정책의 기업 간 비대칭적 파급효과를 실증 분석한 RIMP(Research on Firm Heterogeneity) 모델을 발표했습니다. 금리 긴축기 동안 대차대조표가 건전한 대형 퀄리티 기업과 변동금리 부채 비중이 높은 한계 중소기업 간의 실적 및 주가 격차가 극단적으로 확대됨을 규명했습니다.",
+      "key_takeaways": [
+        "RIMP 모델: 긴축적 통화환경에서 대형 우량주 vs 취약 중소형주 수익률 스프레드 +12%~+15% 도출",
+        "현금 보유 비중 상위 10% 기업은 고금리 하에서 이자 순수익 증가로 OPM 마진 방어",
+        "변동금리 단기채무 의존 기업의 이자보상배율 1.0 미만 급증 위험 경고",
+        "통화정책 정상화 국면에서도 퀄리티 팩터의 구조적 초과수익 유지 확인"
+      ],
+      "perspectives": {
+        "discount_rate_impact": "거시 할인율 상승 충격이 기업 신용 스프레드(Credit Spread)로 전이될 때, 무차입 우량 기업은 할인율 충격을 자체 잉여현금흐름으로 흡수하여 주가 방어력이 월등합니다. 반면 하위 등급 기업의 실질 자본비용(Cost of Capital)은 기하급수적으로 증가합니다.",
+        "factor_style_impact": "★ 핵심 팩터 시사점: 'Core Quality' 대형주에 대한 비중 확대와 'Fragile Small-Cap'에 대한 철저한 비중 축소 전략이 필수적입니다. 무차입 구조와 과점적 가격결정력을 보유한 빅테크 및 반도체 선도 기업이 시장 알파를 독식합니다.",
+        "sector_industry_impact": "영업현금흐름 창출력이 압도적인 글로벌 테크(AI 반도체 파운드리/메모리)와 경기방어 헬스케어가 강력한 수혜를 받으며, 바이오 벤처 및 한계 건설/유통사는 구조조정 리스크에 직면합니다.",
+        "fx_liquidity_flow_impact": "글로벌 패시브 펀드는 위험 회피를 위해 KOSPI 시장 내에서도 삼성전자, SK하이닉스 등 시총 최상위 핵심 퀄리티 종목으로만 수급을 제한적으로 집중하는 양극화 장세를 유발합니다."
+      },
+      "discount_rate_impact": "거시 할인율 상승 충격이 기업 신용 스프레드(Credit Spread)로 전이될 때, 무차입 우량 기업은 할인율 충격을 자체 잉여현금흐름으로 흡수하여 주가 방어력이 월등합니다. 반면 하위 등급 기업의 실질 자본비용(Cost of Capital)은 기하급수적으로 증가합니다.",
+      "factor_style_impact": "★ 핵심 팩터 시사점: 'Core Quality' 대형주에 대한 비중 확대와 'Fragile Small-Cap'에 대한 철저한 비중 축소 전략이 필수적입니다. 무차입 구조와 과점적 가격결정력을 보유한 빅테크 및 반도체 선도 기업이 시장 알파를 독식합니다.",
+      "sector_industry_impact": "영업현금흐름 창출력이 압도적인 글로벌 테크(AI 반도체 파운드리/메모리)와 경기방어 헬스케어가 강력한 수혜를 받으며, 바이오 벤처 및 한계 건설/유통사는 구조조정 리스크에 직면합니다.",
+      "fx_liquidity_flow_impact": "글로벌 패시브 펀드는 위험 회피를 위해 KOSPI 시장 내에서도 삼성전자, SK하이닉스 등 시총 최상위 핵심 퀄리티 종목으로만 수급을 제한적으로 집중하는 양극화 장세를 유발합니다.",
+      "sentiment": "HAWKISH",
+      "sentiment_score": 0.5,
+      "pe_impact_pct_estimate": -3.0,
+      "favored_factor": "Core Quality Large-Cap (High FCF, Low Debt)",
+      "unfavored_factor": "Fragile Small-Cap (High Floating Debt)",
+      "overweight_sectors": [
+        "AI Semiconductor",
+        "Global Mega Tech",
+        "Healthcare"
+      ],
+      "underweight_sectors": [
+        "Small-Cap Capital Goods",
+        "Construction",
+        "Speculative Biotech"
+      ],
+      "created_at": "2026-08-14T18:00:00Z",
+      "updated_at": "2026-10-09T23:29:15.181788+09:00"
+    },
+    {
+      "id": 5,
+      "report_id": "217f173e26404942",
+      "source": "FOMC",
+      "category": "FOMC Statement",
+      "title": "FOMC Statement: Benchmark Rate Unchanged at 5.25%-5.50% Pending Further Inflation Progress",
+      "publish_date": "2026-07-31",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20260731.htm",
+      "summary": "연준은 기준금리를 5.25%~5.50%로 동결하며 물가상승률 2% 목표 달성에 대한 추가 확신이 필요함을 재확인했습니다. 노동시장의 견조함과 디스인플레이션의 완만한 속도를 지목하며 Higher-for-Longer 기조를 유지했습니다.",
+      "key_takeaways": [
+        "기준금리 5.25%~5.50% 만장일치 동결",
+        "물가 2% 회귀 확신 도달 전까지 금리 인하 시기상조 입장 견지",
+        "경제활동 견고한 확장세 지속, 실업률 여전히 낮은 수준 유지",
+        "인플레이션 리스크에 대한 고도의 주의 집중 지속"
+      ],
+      "perspectives": {
+        "discount_rate_impact": "고금리 장기화 기조로 인해 10년물 국채금리가 4.2% 상단에서 경직성을 보이며, 증시 주식 위험 프리미엄(ERP) 축소와 맞물려 밸류에이션 멀티플 압축(Compression -2.5%) 압력이 잔존합니다.",
+        "factor_style_impact": "고금리 환경의 장기화는 재무 레버리지가 높고 이자보상배율이 취약한 중소형주에 심각한 할인 요인으로 작용합니다. 반면 풍부한 현금성 자산으로 이자수익을 창출하는 'Core Quality' 초대형 우량주로의 수급 쏠림이 심화됩니다.",
+        "sector_industry_impact": "금리 상승에 따른 고마진 예대마진 방어가 가능한 대형 금융주와 경기방어 필수소비재가 견조한 흐름을 유지합니다. 반면 프로젝트 파이낸싱 및 대규모 설비투자가 필수적인 유틸리티 및 신재생 업종은 조달비용 압박을 받습니다.",
+        "fx_liquidity_flow_impact": "연준의 매파적 동결로 달러 인덱스(DXY)가 강세를 보이며, 원/달러 환율이 1,380원선 상단 압력을 받습니다. 외국인 투자자는 환율 변동성 회피를 위해 KOSPI 현물 비중 확대를 유보하고 방어적 포지션을 유지합니다."
+      },
+      "discount_rate_impact": "고금리 장기화 기조로 인해 10년물 국채금리가 4.2% 상단에서 경직성을 보이며, 증시 주식 위험 프리미엄(ERP) 축소와 맞물려 밸류에이션 멀티플 압축(Compression -2.5%) 압력이 잔존합니다.",
+      "factor_style_impact": "고금리 환경의 장기화는 재무 레버리지가 높고 이자보상배율이 취약한 중소형주에 심각한 할인 요인으로 작용합니다. 반면 풍부한 현금성 자산으로 이자수익을 창출하는 'Core Quality' 초대형 우량주로의 수급 쏠림이 심화됩니다.",
+      "sector_industry_impact": "금리 상승에 따른 고마진 예대마진 방어가 가능한 대형 금융주와 경기방어 필수소비재가 견조한 흐름을 유지합니다. 반면 프로젝트 파이낸싱 및 대규모 설비투자가 필수적인 유틸리티 및 신재생 업종은 조달비용 압박을 받습니다.",
+      "fx_liquidity_flow_impact": "연준의 매파적 동결로 달러 인덱스(DXY)가 강세를 보이며, 원/달러 환율이 1,380원선 상단 압력을 받습니다. 외국인 투자자는 환율 변동성 회피를 위해 KOSPI 현물 비중 확대를 유보하고 방어적 포지션을 유지합니다.",
+      "sentiment": "HAWKISH",
+      "sentiment_score": 0.45,
+      "pe_impact_pct_estimate": -2.5,
+      "favored_factor": "Core Quality Cash-Rich Large-Cap",
+      "unfavored_factor": "Unprofitable High-Debt Speculative Tech",
+      "overweight_sectors": [
+        "Financials",
+        "Consumer Staples",
+        "Defense"
+      ],
+      "underweight_sectors": [
+        "Renewables",
+        "High-Leverage Real Estate"
+      ],
+      "created_at": "2026-07-31T18:00:00Z",
+      "updated_at": "2026-10-09T23:29:15.181788+09:00"
+    },
+    {
+      "id": 6,
+      "report_id": "1e3dfd07e40918bd",
+      "source": "FOMC",
+      "category": "Economic Projections (SEP)",
+      "title": "Summary of Economic Projections (SEP): Median Fed Funds Rate Revised and Core PCE Path",
+      "publish_date": "2026-06-12",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomcprojtabl20260612.htm",
+      "summary": "FOMC 위원들의 경제전망(SEP) 점도표에서 2026년 말 기준금리 중앙값이 하향 조정되었으며, Core PCE 인플레이션 전망치는 2.6%로 점진적 둔화 경로를 나타냈습니다. 장기 중립금리(r*) 추정치는 종전 2.5%에서 2.8%로 소폭 상향되었습니다.",
+      "key_takeaways": [
+        "2026년 말 기준금리 중앙값 연내 1~2회 인하 경로 반영",
+        "근원 PCE 물가상승률 2026년 말 2.6%, 2027년 2.1% 전망",
+        "장기 명목 중립금리 추정치 2.5%에서 2.8%로 상향(실질 r* 약 0.8% 내외)",
+        "실업률 전망 4.0%에서 4.2%로 소폭 상향 조정"
+      ],
+      "perspectives": {
+        "discount_rate_impact": "중장기 중립금리(r*)의 상향 조정은 구조적 저금리 시대로의 즉각적 복귀가 어려움을 시사하여 영구가치(Terminal Value) 할인율을 다소 높게 유지시키는 효과를 냅니다. 다만 연내 금리 인하 경로의 가시화로 밸류에이션은 중립(+0.5%) 수준을 유지합니다.",
+        "factor_style_impact": "인플레이션 안정화와 완만한 금리 인하 기조의 조합은 배당 성장주와 퀄리티 팩터에 가장 우호적인 환경을 제공합니다. 성장 잠재력과 탄탄한 ROE를 겸비한 하이브리드 대형주가 선호됩니다.",
+        "sector_industry_impact": "AI 하드웨어 및 데이터센터 인프라 관련 반도체 산업은 Capex 가시성이 높아 금리 경로와 무관하게 프리미엄을 유지하며, 통신 및 배당주가 방어적 완충 역할을 수행합니다.",
+        "fx_liquidity_flow_impact": "점도표 하향에 따른 글로벌 달러화 단기 조정으로 원/달러 환율이 1,350원선 부근에서 균형을 형성합니다. 외국인의 KOSPI 매매는 지수 전체 베팅보다는 실적 가시성이 뚜렷한 주도주 중심의 압축 매매로 전개됩니다."
+      },
+      "discount_rate_impact": "중장기 중립금리(r*)의 상향 조정은 구조적 저금리 시대로의 즉각적 복귀가 어려움을 시사하여 영구가치(Terminal Value) 할인율을 다소 높게 유지시키는 효과를 냅니다. 다만 연내 금리 인하 경로의 가시화로 밸류에이션은 중립(+0.5%) 수준을 유지합니다.",
+      "factor_style_impact": "인플레이션 안정화와 완만한 금리 인하 기조의 조합은 배당 성장주와 퀄리티 팩터에 가장 우호적인 환경을 제공합니다. 성장 잠재력과 탄탄한 ROE를 겸비한 하이브리드 대형주가 선호됩니다.",
+      "sector_industry_impact": "AI 하드웨어 및 데이터센터 인프라 관련 반도체 산업은 Capex 가시성이 높아 금리 경로와 무관하게 프리미엄을 유지하며, 통신 및 배당주가 방어적 완충 역할을 수행합니다.",
+      "fx_liquidity_flow_impact": "점도표 하향에 따른 글로벌 달러화 단기 조정으로 원/달러 환율이 1,350원선 부근에서 균형을 형성합니다. 외국인의 KOSPI 매매는 지수 전체 베팅보다는 실적 가시성이 뚜렷한 주도주 중심의 압축 매매로 전개됩니다.",
+      "sentiment": "NEUTRAL",
+      "sentiment_score": 0.05,
+      "pe_impact_pct_estimate": 0.5,
+      "favored_factor": "Quality Dividend Growth",
+      "unfavored_factor": "Deep Value Low Quality",
+      "overweight_sectors": [
+        "AI Semiconductor",
+        "Telecom",
+        "Consumer Discretionary"
+      ],
+      "underweight_sectors": [
+        "Cyclical Commodities",
+        "Commercial Real Estate"
+      ],
+      "created_at": "2026-06-12T18:00:00Z",
+      "updated_at": "2026-10-09T23:29:15.181788+09:00"
+    },
+    {
+      "id": 7,
+      "report_id": "628e5664a4f50569",
+      "source": "FOMC",
+      "category": "FOMC Minutes",
+      "title": "FOMC Minutes: Balance Sheet Reduction Runoff Pace and Inflation Persistence Debate",
+      "publish_date": "2026-05-22",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20260522.htm",
+      "summary": "FOMC 의사록을 통해 연준 위원들은 국채 감축 한도를 월 600억 달러에서 250억 달러로 축소(QT Tapering)한 결정의 배경과 은행 시스템 지준(Reserves)의 풍부성 평가 기준을 상세히 논의했습니다. 일부 위원은 서비스 물가의 하방 경직성에 대해 지속적인 우려를 표명했습니다.",
+      "key_takeaways": [
+        "국채 월 상환 한도 250억 달러로 감축하며 대차대조표 축소 속도 조절",
+        "역레포(ON RRP) 잔고 급감에 따른 단기자금시장 유동성 스트레스 선제 방지",
+        "서비스 및 주거비 인플레이션 하락 속도 지연에 대한 매파적 경계감",
+        "조기 금리 인하에 대한 신중론이 다수를 점함"
+      ],
+      "perspectives": {
+        "discount_rate_impact": "QT 감축(Tapering)은 미 재무부의 장기 국채 발행 부담을 덜어주어 기간 프리미엄(Term Premium) 급등을 억제하는 효과를 냅니다. 10년물 금리의 변동성이 통제되며 증시 할인율 급등 리스크를 차단(-1.0% 내외 방어적 유지).",
+        "factor_style_impact": "지준 유동성의 과도한 위축이 방지됨에 따라 시장 시스템 리스크가 완화되며, 저변동성(Low-Volatility) 및 대형 성장주 간 균형 잡힌 포트폴리오 접근이 요구됩니다.",
+        "sector_industry_impact": "단기 자금시장 유동성 경색 우려가 낮아지면서 단기 조달 의존도가 높은 증권/금융섹터에 안도감을 부여합니다. 인플레이션 점착성은 에너지 및 소재 섹터의 하방을 지지합니다.",
+        "fx_liquidity_flow_impact": "미 연준의 유동성 긴축 완화 시그널은 역외 달러 유동성 수축을 진정시켜 신흥국 및 한국 증시에서의 외국인 자금 이탈 압력을 상당 부분 완화합니다."
+      },
+      "discount_rate_impact": "QT 감축(Tapering)은 미 재무부의 장기 국채 발행 부담을 덜어주어 기간 프리미엄(Term Premium) 급등을 억제하는 효과를 냅니다. 10년물 금리의 변동성이 통제되며 증시 할인율 급등 리스크를 차단(-1.0% 내외 방어적 유지).",
+      "factor_style_impact": "지준 유동성의 과도한 위축이 방지됨에 따라 시장 시스템 리스크가 완화되며, 저변동성(Low-Volatility) 및 대형 성장주 간 균형 잡힌 포트폴리오 접근이 요구됩니다.",
+      "sector_industry_impact": "단기 자금시장 유동성 경색 우려가 낮아지면서 단기 조달 의존도가 높은 증권/금융섹터에 안도감을 부여합니다. 인플레이션 점착성은 에너지 및 소재 섹터의 하방을 지지합니다.",
+      "fx_liquidity_flow_impact": "미 연준의 유동성 긴축 완화 시그널은 역외 달러 유동성 수축을 진정시켜 신흥국 및 한국 증시에서의 외국인 자금 이탈 압력을 상당 부분 완화합니다.",
+      "sentiment": "NEUTRAL",
+      "sentiment_score": -0.1,
+      "pe_impact_pct_estimate": 1.2,
+      "favored_factor": "Core Quality Large-Cap & Low Beta",
+      "unfavored_factor": "Small-Cap Floating Debt",
+      "overweight_sectors": [
+        "Financials",
+        "Energy",
+        "AI Infrastructure"
+      ],
+      "underweight_sectors": [
+        "Commercial Real Estate",
+        "Consumer Durables"
+      ],
+      "created_at": "2026-05-22T18:00:00Z",
+      "updated_at": "2026-10-09T23:29:15.181788+09:00"
+    },
+    {
+      "id": 8,
+      "report_id": "aa963fcfbd823744",
+      "source": "NY Fed",
+      "category": "Liberty Street Economics",
+      "title": "Liberty Street Economics: Overnight RRP Depletion and Treasury General Account Dynamics",
+      "publish_date": "2026-04-18",
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/04/overnight-rrp-tga-liquidity.html",
+      "summary": "뉴욕 연은의 단기금융시장 분석 리포트로, 연준의 역레포(ON RRP) 잔고가 2조 달러 고점에서 1,500억 달러 미만으로 고갈됨에 따라 시중 순유동성(Net Liquidity) 완충 장치가 한계에 도달하고 있음을 진단했습니다. TGA 재무부 계좌 변동과 은행 지준 간의 직접적 상쇄 관계를 분석했습니다.",
+      "key_takeaways": [
+        "ON RRP 잔고 $150B 이하 하회 시 유동성 버퍼 소진 경보 발령",
+        "순유동성 산식: Fed Total Assets - TGA Balance - ON RRP Balance의 변동성 확대",
+        "국채 발행 확대에 따른 TGA 확충 시 은행 지급준비금의 직접적 감소 압력",
+        "SOFR 및 레포 금리의 일시적 스파이크 리스크 모니터링 강화"
+      ],
+      "perspectives": {
+        "discount_rate_impact": "역레포 버퍼 소진은 금융시장 잉여 유동성의 흡수를 의미하며, 단기 자금시장 유동성 축소로 인해 주식시장 전반의 밸류에이션 승수(Multiple) 확장이 제약받습니다(P/E 압축 -1.8%).",
+        "factor_style_impact": "유동성 프리미엄이 축소되므로 유동성이 풍부하고 거래대금이 높은 대형주가 선호되며, 거래량이 적고 환금성이 떨어지는 스몰캡 종목은 유동성 디스카운트가 가중됩니다.",
+        "sector_industry_impact": "단기 자금조달 금리 변동성에 취약한 비은행 금융기관 및 고레버리지 리츠(REITs)의 수익성이 둔화될 수 있습니다. 반면 자금력이 풍부한 대형 시중은행은 예금 경쟁 우위를 점합니다.",
+        "fx_liquidity_flow_impact": "미국 내 유동성 버퍼 고갈은 글로벌 달러화 유동성 경색을 촉발하여 DXY 상승 압력으로 작용하며, 신흥국 증시 및 KOSPI 시장에서의 외국인 단기 차익실현 및 수급 이탈을 초래할 수 있습니다."
+      },
+      "discount_rate_impact": "역레포 버퍼 소진은 금융시장 잉여 유동성의 흡수를 의미하며, 단기 자금시장 유동성 축소로 인해 주식시장 전반의 밸류에이션 승수(Multiple) 확장이 제약받습니다(P/E 압축 -1.8%).",
+      "factor_style_impact": "유동성 프리미엄이 축소되므로 유동성이 풍부하고 거래대금이 높은 대형주가 선호되며, 거래량이 적고 환금성이 떨어지는 스몰캡 종목은 유동성 디스카운트가 가중됩니다.",
+      "sector_industry_impact": "단기 자금조달 금리 변동성에 취약한 비은행 금융기관 및 고레버리지 리츠(REITs)의 수익성이 둔화될 수 있습니다. 반면 자금력이 풍부한 대형 시중은행은 예금 경쟁 우위를 점합니다.",
+      "fx_liquidity_flow_impact": "미국 내 유동성 버퍼 고갈은 글로벌 달러화 유동성 경색을 촉발하여 DXY 상승 압력으로 작용하며, 신흥국 증시 및 KOSPI 시장에서의 외국인 단기 차익실현 및 수급 이탈을 초래할 수 있습니다.",
+      "sentiment": "HAWKISH",
+      "sentiment_score": 0.4,
+      "pe_impact_pct_estimate": -1.8,
+      "favored_factor": "High Liquidity Mega-Cap",
+      "unfavored_factor": "Illiquid Small-Cap & Leveraged REITs",
+      "overweight_sectors": [
+        "Tier-1 Commercial Banks",
+        "Cash-Rich Tech"
+      ],
+      "underweight_sectors": [
+        "REITs",
+        "High-Yield Credit",
+        "Small-Cap"
+      ],
+      "created_at": "2026-04-18T18:00:00Z",
+      "updated_at": "2026-10-09T23:29:15.181788+09:00"
+    },
+    {
+      "id": 9,
+      "report_id": "5b9db5f80af46c7b",
+      "source": "NY Fed",
+      "category": "Liberty Street Economics",
+      "title": "Liberty Street Economics: Cross-Border US Dollar Liquidity and Asian Equity Capital Flows",
+      "publish_date": "2026-03-05",
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/03/cross-border-dollar-liquidity-asia.html",
+      "summary": "글로벌 달러 유동성 공급과 아시아 신흥국 주식시장 간의 교차 상관관계를 분석한 보고서입니다. 연준 통화 스왑 라인 및 역외 FX 스왑 베이시스 확장이 한국 KOSPI 및 대만 TAIEX의 외국인 순매수 강도에 미치는 비선형적 충격을 실증했습니다.",
+      "key_takeaways": [
+        "달러 인덱스(DXY) 1% 하락 시 KOSPI 외국인 순매수 월간 평균 +8,500억 원 유입 통계적 유의성",
+        "FX 스왑 베이시스 축소는 역외 기관의 원화 자산 헤지 비용 절감으로 작용",
+        "글로벌 유동성 공급 확장 국면에서 아시아 기술주(Tech Hardware) 섹터로의 자금 유입 최우선",
+        "원/달러 환율 1,300원 이하 안착 시 KOSPI 리레이팅 가속화"
+      ],
+      "perspectives": {
+        "discount_rate_impact": "역외 달러 유동성 확장은 신흥국 주식의 국가 위험 프리미엄(Country Risk Premium)을 낮추어 한국 증시의 할인율을 약 30bp 인하시키며, KOSPI 타깃 P/E를 +3.8% 견인합니다.",
+        "factor_style_impact": "외국인 패시브 자금의 폭발적 유입은 코스피 200 인덱스 대형주 및 모멘텀(Momentum) 팩터의 강세를 촉발합니다.",
+        "sector_industry_impact": "외국인 수급의 70% 이상이 집중되는 KOSPI 반도체(삼성전자, SK하이닉스)와 2차전지, 자동차 등 수출 주도 대형 제조업종이 직접적인 수혜를 누립니다.",
+        "fx_liquidity_flow_impact": "★ 핵심 수급 시사점: DXY 안정화 및 원화 강세 모멘텀은 외국인 순매수의 구조적 기폭제입니다. 원/달러 환율 하락에 따른 환차익 기대감이 글로벌 롱온리(Long-Only) 펀드의 한국 증시 비중 확대를 견인합니다."
+      },
+      "discount_rate_impact": "역외 달러 유동성 확장은 신흥국 주식의 국가 위험 프리미엄(Country Risk Premium)을 낮추어 한국 증시의 할인율을 약 30bp 인하시키며, KOSPI 타깃 P/E를 +3.8% 견인합니다.",
+      "factor_style_impact": "외국인 패시브 자금의 폭발적 유입은 코스피 200 인덱스 대형주 및 모멘텀(Momentum) 팩터의 강세를 촉발합니다.",
+      "sector_industry_impact": "외국인 수급의 70% 이상이 집중되는 KOSPI 반도체(삼성전자, SK하이닉스)와 2차전지, 자동차 등 수출 주도 대형 제조업종이 직접적인 수혜를 누립니다.",
+      "fx_liquidity_flow_impact": "★ 핵심 수급 시사점: DXY 안정화 및 원화 강세 모멘텀은 외국인 순매수의 구조적 기폭제입니다. 원/달러 환율 하락에 따른 환차익 기대감이 글로벌 롱온리(Long-Only) 펀드의 한국 증시 비중 확대를 견인합니다.",
+      "sentiment": "DOVISH",
+      "sentiment_score": -0.6,
+      "pe_impact_pct_estimate": 3.8,
+      "favored_factor": "Foreign Favorite Large-Cap Momentum",
+      "unfavored_factor": "Domestic Inward-Looking Small-Cap",
+      "overweight_sectors": [
+        "AI Semiconductor",
+        "Automotive",
+        "Rechargeable Battery"
+      ],
+      "underweight_sectors": [
+        "Domestic Retail",
+        "Construction"
+      ],
+      "created_at": "2026-03-05T18:00:00Z",
+      "updated_at": "2026-10-09T23:29:15.181788+09:00"
+    },
+    {
+      "id": 10,
+      "report_id": "28ab2d1861fdfb16",
+      "source": "St. Louis Fed",
+      "category": "FRED Insights",
+      "title": "FRED Insights: Corporate Debt Refinancing Cliff and Vulnerability to High Floating Rates",
+      "publish_date": "2026-02-14",
+      "url": "https://fredblog.stlouisfed.org/2026/02/corporate-debt-refinancing-cliff.html",
+      "summary": "FRED 데이터를 활용하여 미국 및 글로벌 기업 부채의 만기 도래(Maturity Wall)와 차환(Refinancing) 리스크를 조명했습니다. 2026~2027년 만기 도래 회사채의 평균 발행 금리가 3% 초반에서 5% 후반으로 재조정됨에 따라, 신용 등급 BBB 이하 기업들의 이자비용 부담이 40% 이상 급증할 것임을 경고했습니다.",
+      "key_takeaways": [
+        "2026~2027년 글로벌 기업 부채 차환 절벽(Refinancing Cliff) 도래",
+        "고정금리 저리 채권의 만기 도래로 순이자비용 급증 위험 현실화",
+        "현금 완충 능력이 취약한 중소형 기업의 부도율(Default Rate) 상승 위험",
+        "잉여현금흐름(FCF) 기반 자체 차입금 상환 능력이 기업 밸류에이션의 절대적 잣대로 부상"
+      ],
+      "perspectives": {
+        "discount_rate_impact": "기업 신용 스프레드 확대 압력은 하이일드 및 중소형주의 가중평균자본비용(WACC)을 상승시켜 밸류에이션 멀티플을 -3.5% 압축시킵니다.",
+        "factor_style_impact": "★ 명확한 팩터 양극화: 차입금 의존도가 낮고 자체 FCF로 설비투자와 배당을 충당하는 '현금 부자(Cash-Rich) 대형주'에 대한 프리미엄이 사상 최고치로 치솟습니다. 차환 리스크에 노출된 고부채 스몰캡은 철저히 기피해야 합니다.",
+        "sector_industry_impact": "풍부한 현금을 보유한 반도체 대형사(삼성전자, SK하이닉스 등) 및 글로벌 빅테크는 고금리 환경에서도 M&A와 투자를 독점합니다. 반면 고레버리지 유틸리티, 건설, 한계 유통업체는 이자비용 잠식으로 실적 쇼크가 예상됩니다.",
+        "fx_liquidity_flow_impact": "글로벌 신용 스프레드 확대 시 외국인 투자자는 안전자산으로 회귀하며, 신흥국 스몰캡 및 코스닥(KOSDAQ) 시장에서의 자금 이탈 속도가 빨라집니다. KOSPI 내에서도 최상위 10대 우량주로만 포트폴리오를 압축합니다."
+      },
+      "discount_rate_impact": "기업 신용 스프레드 확대 압력은 하이일드 및 중소형주의 가중평균자본비용(WACC)을 상승시켜 밸류에이션 멀티플을 -3.5% 압축시킵니다.",
+      "factor_style_impact": "★ 명확한 팩터 양극화: 차입금 의존도가 낮고 자체 FCF로 설비투자와 배당을 충당하는 '현금 부자(Cash-Rich) 대형주'에 대한 프리미엄이 사상 최고치로 치솟습니다. 차환 리스크에 노출된 고부채 스몰캡은 철저히 기피해야 합니다.",
+      "sector_industry_impact": "풍부한 현금을 보유한 반도체 대형사(삼성전자, SK하이닉스 등) 및 글로벌 빅테크는 고금리 환경에서도 M&A와 투자를 독점합니다. 반면 고레버리지 유틸리티, 건설, 한계 유통업체는 이자비용 잠식으로 실적 쇼크가 예상됩니다.",
+      "fx_liquidity_flow_impact": "글로벌 신용 스프레드 확대 시 외국인 투자자는 안전자산으로 회귀하며, 신흥국 스몰캡 및 코스닥(KOSDAQ) 시장에서의 자금 이탈 속도가 빨라집니다. KOSPI 내에서도 최상위 10대 우량주로만 포트폴리오를 압축합니다.",
+      "sentiment": "HAWKISH",
+      "sentiment_score": 0.55,
+      "pe_impact_pct_estimate": -3.5,
+      "favored_factor": "Zero-Debt Cash-Rich Large-Cap",
+      "unfavored_factor": "High Debt Refinancing Vulnerable Small-Cap",
+      "overweight_sectors": [
+        "AI Semiconductor",
+        "Quality Cash-Rich Tech",
+        "Defensive Healthcare"
+      ],
+      "underweight_sectors": [
+        "High-Leverage Utilities",
+        "Construction",
+        "Speculative Small-Cap"
+      ],
+      "created_at": "2026-02-14T18:00:00Z",
+      "updated_at": "2026-10-09T23:29:15.181788+09:00"
+    }
+  ]
+}
