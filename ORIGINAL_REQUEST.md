@@ -407,3 +407,49 @@ The user has explicitly added the following critical requirements for real-world
    - Ensure the optimized strategy is practically executable (realistic rebalance frequency, avoidance of extreme micro-turnover, clear rules for live trading going forward).
 
 Please immediately update PROJECT.md, the backtest engine contracts, the metrics pipeline, and the Streamlit dashboard requirements to incorporate these items into the current build and verification tracks.
+
+## 2026-10-12T20:33:38Z
+
+A quantitative portfolio optimization and visualization module determining the mathematically and empirically optimal fixed allocation weights among S&P 500 ETF (SPY), QQQ, and SOXX with periodic rebalancing from July 10, 2001 to present, maximizing CAGR across four distinct Annual MDD risk tolerance tiers (<=20%, <=30%, <=40%, and Unconstrained Calmar), integrated into the Streamlit dashboard and pushed to GitHub.
+
+Working directory: D:\Industry\quant_turnaround_strategy
+Integrity mode: development
+
+## Requirements
+
+### R1. Tri-Asset Historical Ingestion & Full Simplex Grid Evaluation
+- Ingest daily adjusted total return price series for SPY, QQQ, and SOXX from July 10, 2001 (SOXX inception) to the present, alongside daily USD/KRW exchange rates.
+- Model the complete 3-asset allocation simplex:
+  $$w_{\text{SPY}} + w_{\text{QQQ}} + w_{\text{SOXX}} = 1.0, \quad w_i \ge 0$$
+  evaluating all valid combinations (1% step resolution: 5,151 weight triplets) across periodic rebalancing frequencies (Quarterly, Annual, Monthly).
+- Incorporate realistic transaction friction (0.05% commission + 0.02% slippage per rebalance) and track performance in both USD and KRW.
+
+### R2. Calmar & Constrained-MDD Optimization Engine Across 4 Risk Tiers
+- Calculate institutional calendar year intra-year MDD for each year (2001-2026), CAGR, Sharpe Ratio, and Calmar Ratio ($\text{CAGR} / \max_Y |\text{Annual MDD}_Y|$).
+- Derive the mathematically optimal weights and Pareto-efficient allocation for four distinct risk tiers:
+  1. **Tier 1 (Conservative)**: Maximize CAGR subject to Worst Annual MDD $\le 20\%$.
+  2. **Tier 2 (Moderate Growth)**: Maximize CAGR subject to Worst Annual MDD $\le 30\%$.
+  3. **Tier 3 (Aggressive Compounder)**: Maximize CAGR subject to Worst Annual MDD $\le 40\%$.
+  4. **Tier 4 (Pure Max Calmar)**: Unconstrained global maximization of Calmar Ratio.
+- Provide a rigorous crisis resilience stress breakdown for each optimal weight tier across 2001-2003 (Dot-com), 2008 (GFC), 2020 (COVID), and 2022 (Tech Bear).
+
+### R3. Streamlit Dashboard Integration & Git Push
+- Add a dedicated 6th tab to `app.py`: **"🏆 3대 ETF 최적 비중 분석 (Tri-Asset Optimizer)"** featuring:
+  - Interactive ternary contour / risk-return frontier chart (CAGR vs. Worst Annual MDD).
+  - 4-Tier summary comparison cards and year-by-year performance matrix table.
+  - Interactive weight slider for custom user experimentation with instant metric updates.
+  - USD ↔ KRW currency toggle.
+- Create automated test verification script ensuring mathematical precision and 100% test pass rate.
+- Commit all changes cleanly to Git and push to GitHub repository `jjangdol0205/Industry` (`main` branch).
+
+## Acceptance Criteria
+
+### Quantitative Rigor & Accuracy
+- [ ] 100% of the 5,151 weight triplets are evaluated over the entire 2001-07-10 to present period.
+- [ ] Optimal weights, CAGR, Worst Annual MDD, Calmar Ratio, and Sharpe Ratio are precisely identified and documented for all 4 risk tiers.
+- [ ] Historical drawdowns during 2002, 2008, 2020, and 2022 are tabulated for each optimal tier.
+
+### Software Quality & Deployment
+- [ ] Tab 6 renders cleanly in Streamlit without syntax, layout, or runtime errors.
+- [ ] Automated verification script validates data integrity, non-negativity of weights, and Calmar formulas.
+- [ ] All code is committed and pushed to `https://github.com/jjangdol0205/Industry` (`main` branch).

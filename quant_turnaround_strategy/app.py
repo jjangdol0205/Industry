@@ -39,6 +39,7 @@ from src.ui.calendar_tab import render_calendar_tab
 from src.ui.allocation_tab import render_allocation_tab
 from src.ui.trade_log_tab import render_trade_log_tab
 from src.ui.simulation_tab import render_simulation_tab
+from src.ui.tri_asset_tab import render_tri_asset_tab
 
 
 # Page Configuration
@@ -191,13 +192,14 @@ def main():
     if "res_custom" in st.session_state:
         active_sim_data["res_custom"] = st.session_state["res_custom"]
 
-    # 5 Responsive Core Tabs
-    tab_overview, tab_calendar, tab_allocation, tab_trades, tab_simulation = st.tabs([
+    # 6 Responsive Core Tabs
+    tab_overview, tab_calendar, tab_allocation, tab_trades, tab_simulation, tab_tri_asset = st.tabs([
         "📈 Cumulative Performance & Overview",
         "📅 Calendar Year Breakdown (2001-2026)",
         "📊 Dynamic Asset Allocation & Heatmaps",
         "📜 Trade Log & Turnaround Decisions",
         "🧪 Live Simulation Lab & Tuning",
+        "🏆 3대 ETF 최적 비중 분석 (Tri-Asset Optimizer)",
     ])
 
     with tab_overview:
@@ -214,6 +216,13 @@ def main():
 
     with tab_simulation:
         render_simulation_tab(active_sim_data, currency=currency, tax_mode=tax_mode)
+
+    with tab_tri_asset:
+        render_tri_asset_tab(
+            prices_df=active_sim_data.get("prices"),
+            fx_df=active_sim_data.get("fx_series"),
+            currency=currency,
+        )
 
 
 if __name__ == "__main__":

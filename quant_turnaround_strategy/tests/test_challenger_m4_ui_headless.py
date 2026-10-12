@@ -71,11 +71,22 @@ class TestAppHeadlessExecutionAndCompilation:
         # Zero unhandled exceptions
         assert len(at.exception) == 0, f"AppTest raised exceptions: {[e.value for e in at.exception]}"
 
-        # 5 tabs rendered
-        assert len(at.tabs) == 5, f"Expected 5 tabs, got {len(at.tabs)}"
+        # 6 tabs rendered
+        assert len(at.tabs) == 6, f"Expected 6 tabs, got {len(at.tabs)}"
 
         # Sidebar configuration controls present
         assert len(at.sidebar.radio) >= 2, f"Expected at least 2 sidebar radio widgets, got {len(at.sidebar.radio)}"
+
+    def test_streamlit_apptest_tab6_tri_asset_optimizer_rendered(self):
+        """Expected: AppTest renders Tab 6 (Tri-Asset Optimizer) with 0 unhandled exceptions."""
+        from streamlit.testing.v1 import AppTest
+
+        at = AppTest.from_file(str(APP_FILE), default_timeout=60)
+        at.run()
+        assert len(at.exception) == 0, f"AppTest raised exceptions: {[e.value for e in at.exception]}"
+        assert len(at.tabs) == 6
+        tab_labels = [t.label for t in at.tabs]
+        assert any("3대 ETF" in lbl or "Tri-Asset" in lbl for lbl in tab_labels), f"Tab 6 not found in {tab_labels}"
 
     def test_streamlit_apptest_currency_toggle_interaction(self):
         """Expected: AppTest dynamically switches currency radio to 'KRW (₩)' without exceptions."""

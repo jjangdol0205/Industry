@@ -1,84 +1,74 @@
-# Project: Thought Leaders & Gurus Hub (인사이트 센터)
+# Project: Tri-Asset ETF Portfolio Optimization & Streamlit Tab 6 (Round 7)
 
 ## Architecture
-- **Data Flow & Pipeline**:
-  1. `sync_insights.py` ingests, structures, and manages official shareholder letters, investment memos, and key interviews for:
-     - 7 Investment Gurus: 하워드 막스 (Howard Marks), 워런 버핏 (Warren Buffett), 테리 스미스 (Terry Smith), 빌 애크먼 (Bill Ackman), 데이비드 아인혼 (David Einhorn), 세스 클라만 (Seth Klarman), 클리프 아스네스 (Cliff Asness).
-     - 7 AI & Tech Leaders: 샘 알트만 (Sam Altman), 일론 머스크 (Elon Musk), 젠슨 황 (Jensen Huang), 마크 저커버그 (Mark Zuckerberg), 리사 수 (Lisa Su), 곽노정 (Kwak Noh-jung), 다리오 아모데이 (Dario Amodei).
-  2. Applies SHA-256 deduplication and enforces strict reverse-chronological ordering (`publish_date DESC`).
-  3. Categorizes each entry under 3 Core Thesis Axes:
-     - ① 모델·안전성 (Models & Safety)
-     - ② 반도체·에너지 인프라 (Semiconductor & Energy Infrastructure)
-     - ③ 플랫폼 비즈니스 (Platform Business)
-  4. Provides 16 Institutional Deep Glossaries (8 Financial/Accounting + 8 Technology) with formal mathematical formulas and domain analysis.
-  5. Symmetrically executes the Bi-Directional Ticker Linkage Engine between the 14 thought leaders and the 9 universe stocks (`402340.KS`, `000660.KS`, `TSLA`, `UBER`, `CELH`, `ENPH`, `FLNC`, `MBLY`, `UPST`).
-  6. Persists records to SQLite DB (`investment_portal.db`) tables `guru_letters` (21 columns) and `tech_leader_interviews` (23 columns).
-  7. Atomically distributes `insights_data.json` across 4 canonical paths (Root, Backend, Frontend Public, Frontend Dist) using temporary files and `os.replace`.
-  8. FastAPI backend (`InvestmentPortal/backend/main.py`) exposes `/api/v1/insights/feed`, `/api/v1/insights/gurus`, `/api/v1/insights/tech-leaders`, `/api/v1/insights/ticker/{ticker}`, and `/api/v1/insights/refresh` with JSON file fallback resilience.
-  9. React frontend (`InvestmentPortal/frontend`) mounts `<InsightCenterView />` in `App.jsx` under `'insights'` view mode, rendering dual sub-tabs (`[투자 거장의 서한]`, `[AI & 테크 리더 레이더]`), term glossary modal, and embeds `<GuruTechInsightsWidget />` in stock detail views (`CompanyView`).
-  10. Automated comprehensive test suite in `tests/test_insights_module.py` verifies 100% of pipeline, DB, API, ticker linkage, frontend contracts, and offline fallback (21/21 passed).
+- **Host System**: `D:\Industry\quant_turnaround_strategy` in repository `https://github.com/jjangdol0205/Industry` (branch `main`).
+- **Core Technology Stack**: Python 3.14.2, Streamlit 1.65.0, Plotly 7.1.0, NumPy 2.5.0, Pandas 3.0.3, PyArrow 25.0.1, Pytest 9.1.1. (Pure vectorized NumPy/Pandas, zero dependency on SciPy).
+- **Subsystem Partitioning**:
+  1. `src/data/tri_asset_loader.py`: Ingestion & caching of SPY, QQQ, SOXX (with 2001-07-10 ^SOX bridge) and USDKRW FX rates from 2001-07-10 to present.
+  2. `src/optimizer/tri_asset_simplex.py`: Vectorized 5,151 weight triplet simplex evaluation ($w_{\text{SPY}} + w_{\text{QQQ}} + w_{\text{SOXX}} = 1.0, w_i \ge 0$), periodic rebalancing (Quarterly, Annual, Monthly), friction modeling (0.05% commission + 0.02% slippage = 0.07%), and dual-currency (USD/KRW) NAV generation.
+  3. `src/optimizer/tri_asset_optimizer.py`: Calendar year intra-year MDD (2001–2026), CAGR, Sharpe Ratio, Calmar Ratio ($\text{CAGR} / \max_Y |\text{Annual MDD}_Y|$), 4-Tier constrained-MDD optimization, and crisis stress testing (2001-2003, 2008, 2020, 2022).
+  4. `src/ui/tri_asset_tab.py`: Dedicated 6th tab implementation featuring Plotly ternary contour/risk-return frontier, 4-tier cards, calendar performance matrix, interactive slider, and USD/KRW toggle.
+  5. `app.py`: Integrated 6-tab Streamlit dashboard.
+  6. `tests/test_tri_asset_optimizer.py` & `verify_tri_asset.py`: Automated multi-tier verification test suite.
 
 ## Feature Inventory
 | # | Feature | Description | Milestone | Source |
 |---|---------|-------------|-----------|--------|
-| F1 | 7 Gurus Letters Data Modeling & Extraction | Complete dataset for Howard Marks, Warren Buffett, Terry Smith, Bill Ackman, David Einhorn, Seth Klarman, Cliff Asness with quotes, Korean summaries, and sources. | M1 | Survey (R1) |
-| F2 | 7 AI & Tech Leaders Data Modeling & Extraction | Complete dataset for Sam Altman, Elon Musk, Jensen Huang, Mark Zuckerberg, Lisa Su, Kwak Noh-jung, Dario Amodei with quotes, Korean summaries, YouTube/media links. | M1 | Survey (R1) |
-| F3 | 3 Core Thesis Axes Structuring | Categorization into ① 모델·안전성, ② 반도체·에너지 인프라, ③ 플랫폼 비즈니스. | M1 | Survey (R1) |
-| F4 | 16 Deep Financial & Technology Glossaries | 8 institutional financial/accounting concepts (ROCE, Owner Earnings, etc.) and 8 deep tech concepts (Advanced MR-MUF, CoWoS, etc.). | M1 | Survey (R1) |
-| F5 | Bi-Directional Ticker Linkage Engine | Symmetrical mapping between 14 thought leaders and 9 universe tickers (`402340.KS`, `000660.KS`, `TSLA`, `UBER`, etc.) with actionable implications. | M1 | Survey (R2) |
-| F6 | SQLite DB Schema & Atomic Persistence | Create `guru_letters` and `tech_leader_interviews` in `investment_portal.db` with SHA-256 deduplication and reverse-chronological ordering. | M1 | Survey (R1, R3) |
-| F7 | 4-Path Atomic JSON Distribution | Synchronize `insights_data.json` atomically across Root, Backend, Frontend Public, and Frontend Dist. | M1 | Survey (R1, R3) |
-| F8 | CLI Pipeline & Backend Mirror | CLI script `sync_insights.py` and dynamic mirror `InvestmentPortal/backend/sync_insights.py`. | M1 | Survey (R1, R3) |
-| F9 | FastAPI Endpoints & Fallback Resilience | Expose `/api/v1/insights/feed`, `/gurus`, `/tech-leaders`, `/ticker/{ticker}`, `/refresh` with dual route decorators and JSON fallback. | M2 | Survey (R3) |
-| F10 | Backend Models & Pydantic Schemas | SQLAlchemy models in `models.py` and Pydantic response schemas in `schemas.py`. | M2 | Survey (R3) |
-| F11 | React Navigation & Sub-Tabs Dashboard | Sidebar '인사이트 센터' tab in `App.jsx`, `<InsightCenterView />` with [투자 거장의 서한] and [AI & 테크 리더 레이더] sub-tabs. | M3 | Survey (R4) |
-| F12 | Glossary Modal & Interactive Filtering | Deep Term Glossary Modal (`GlossaryModal`), filter buttons, YouTube video external links, and supply chain tags. | M3 | Survey (R4) |
-| F13 | Universe Detail View Linkage Widget | Embed `<GuruTechInsightsWidget />` in `CompanyView` for stocks like SK Square, SK Hynix, Tesla, etc. | M3 | Survey (R2, R4) |
-| F14 | Comprehensive Test Suite & Runner Integration | Create `tests/test_insights_module.py` (Tiers 1-4) covering all acceptance criteria. | Test Track & M4 | Survey (R5) |
-| F15 | Adversarial Coverage Hardening & Integrity Audit | White-box test verification, adversarial coverage audit, and zero-tolerance forensic audit. | M4 | Survey (Final Milestone) |
+| F1 | Tri-Asset Historical Data Ingestion | SPY, QQQ, SOXX total return series from 2001-07-10 to present + USDKRW daily FX rates cached in parquet | M1 | R1 |
+| F2 | Simplex Grid Combinatorics | Exact 5,151 weight triplets ($w_{\text{SPY}} + w_{\text{QQQ}} + w_{\text{SOXX}} = 1.0, w_i \ge 0$) at 1% step | M1 | R1 |
+| F3 | Multi-Frequency Periodic Rebalancing | Quarterly, Annual, Monthly rebalancing with portfolio weight reset | M1 | R1 |
+| F4 | Real-World Transaction Friction | 0.05% brokerage commission + 0.02% slippage (7 bps total) applied on rebalance turnover | M1 | R1 |
+| F5 | Dual-Currency Performance Engine | USD base tracking and daily/rebalance KRW conversion with FX impact tracking | M1 | R1 |
+| F6 | Calendar Year Intra-Year MDD Matrix | Institutional calendar year MDD computation for each year 2001-2026 | M2 | R2 |
+| F7 | Institutional Performance Metrics | CAGR, Sharpe Ratio (annualized), and Calmar Ratio ($\text{CAGR} / \max_Y |\text{Annual MDD}_Y|$) | M2 | R2 |
+| F8 | 4-Tier Constrained-MDD Optimization | Tier 1 (<=20% MDD), Tier 2 (<=30% MDD), Tier 3 (<=40% MDD), Tier 4 (Unconstrained Max Calmar) | M2 | R2 |
+| F9 | Crisis Resilience Stress Breakdown | Empirical drawdowns and returns during 2001-2003 (Dot-com), 2008 (GFC), 2020 (COVID), 2022 (Tech Bear) | M2 | R2 |
+| F10 | Streamlit Tab 6 Registration | Add 6th tab "🏆 3대 ETF 최적 비중 분석 (Tri-Asset Optimizer)" to app.py | M3 | R3 |
+| F11 | Ternary & Pareto Frontier Visualizations | Interactive Plotly ternary contour and risk-return Pareto frontier (CAGR vs Worst Annual MDD) | M3 | R3 |
+| F12 | 4-Tier Summary Cards & Year Matrix Table | HTML/CSS KPI cards and calendar year returns/drawdown matrix table | M3 | R3 |
+| F13 | Interactive Weight Slider | Custom user experimentation slider with instant reactive metric updates | M3 | R3 |
+| F14 | Currency Toggle (USD ↔ KRW) | Dynamic currency switcher updating all metrics, tables, and charts | M3 | R3 |
+| F15 | Automated Verification Test Suite | Multi-tier test suite validating data integrity, math precision, and 100% test pass | M4 | R3 |
+| F16 | Streamlit Headless AppTest Verification | AppTest validating 6 tabs, Tab 6 widgets, and zero UI regressions | M4 | R3 |
+| F17 | Clean Git Commit & GitHub Push | Git add, commit, and push to https://github.com/jjangdol0205/Industry (main branch) | M5 | R3 |
 
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| M1 | Insights Core Pipeline, Linkage Engine & DB | F1, F2, F3, F4, F5, F6, F7, F8: `sync_insights.py`, SQLite tables, 14 profiles, 3 theses, 16 glossaries, ticker linkage, 4-path JSON distribution | none | DONE |
-| M2 | Backend API Endpoints & Models | F9, F10: `models.py`, `schemas.py`, `main.py` endpoints (`/feed`, `/gurus`, `/tech-leaders`, `/ticker/{ticker}`), dynamic mirror, JSON fallback | M1 | DONE |
-| M3 | Frontend React Dashboard & Widgets | F11, F12, F13: `InsightCenterView.jsx`, `App.jsx` tab integration, sub-tabs, glossary modal, `CompanyView` linkage widget, Vite build | M1, M2 | DONE |
-| M4 | Final Milestone: Test Pass & Adversarial Hardening | F14, F15: 100% E2E test pass (`tests/test_insights_module.py`), Tier 5 Challenger loop, forensic audit | M1, M2, M3 | DONE |
+| M1 | Data Ingestion & Simplex Grid Engine | F1, F2, F3, F4, F5 | none | DONE |
+| M2 | 4-Tier Optimization & Crisis Engine | F6, F7, F8, F9 | M1 | DONE |
+| M3 | Streamlit Tab 6 Interactive UI | F10, F11, F12, F13, F14 | M2 | DONE |
+| M4 | E2E Verification & Hardening | F15, F16 | M3 | DONE |
+| M5 | Git Commit & GitHub Deployment | F17 | M4 | DONE |
 
 ## Interface Contracts
 
-### M1 (Sync Engine) ↔ M2 (Backend API)
-- **Database Tables** in `InvestmentPortal/backend/investment_portal.db`:
-  - `guru_letters`: columns (`id`, `letter_id`, `guru_name`, `guru_name_en`, `firm`, `title`, `publish_date`, `url`, `summary`, `original_quote`, `original_quote_ko`, `core_thesis`, `thesis_pillar`, `deep_concept_guide`, `related_tickers`, `ticker_implications`, `sentiment`, `sentiment_score`, `source_type`, `created_at`, `updated_at`).
-  - `tech_leader_interviews`: columns (`id`, `interview_id`, `leader_name`, `leader_name_en`, `company`, `role`, `title`, `publish_date`, `media_source`, `url`, `summary`, `original_quote`, `original_quote_ko`, `core_thesis`, `thesis_pillar`, `tech_concept_guide`, `supply_chain_impact`, `related_tickers`, `ticker_implications`, `sentiment`, `sentiment_score`, `created_at`, `updated_at`).
-- **Python Module Functions**:
-  - `sync_insights.run_sync(db_path=None, force=False, silent=False) -> Dict[str, Any]`
-  - `sync_insights.get_all_insights_data(db_path=None) -> Dict[str, Any]`
-  - `sync_insights.get_insights_by_ticker(ticker: str, db_path=None) -> Dict[str, Any]`
+### `src/data/tri_asset_loader.py`
+- `load_tri_asset_data(cache_dir: str = "data/cache") -> Tuple[pd.DataFrame, pd.DataFrame]`
+  - Returns `(prices_df, fx_df)` where `prices_df` has columns `['SPY', 'QQQ', 'SOXX']` starting strictly from `2001-07-10` with 0 NaNs.
+  - `fx_df` has column `['USDKRW']` aligned on trading days.
 
-### M1 / M2 ↔ M3 (Frontend)
-- **JSON Distribution Paths**:
-  1. `d:\Industry\insights_data.json`
-  2. `d:\Industry\InvestmentPortal\backend\insights_data.json`
-  3. `d:\Industry\InvestmentPortal\frontend\public\insights_data.json`
-  4. `d:\Industry\InvestmentPortal\frontend\dist\insights_data.json`
-- **FastAPI Endpoints**:
-  - `GET /api/v1/insights/feed?pillar=&ticker=&sentiment=&limit=`: returns `{ "status": "success", "total": N, "items": [...] }`
-  - `GET /api/v1/insights/gurus?guru=&pillar=&limit=`: returns `{ "status": "success", "total": N, "gurus": [...], "letters": [...] }`
-  - `GET /api/v1/insights/tech-leaders?leader=&pillar=&limit=`: returns `{ "status": "success", "total": N, "leaders": [...], "interviews": [...] }`
-  - `GET /api/v1/insights/ticker/{ticker}`: returns `{ "status": "success", "ticker": ticker, "total": N, "guru_letters": [...], "tech_interviews": [...], "consolidated": [...] }`
-  - `POST /api/v1/insights/refresh`: returns `{ "status": "success", "message": "...", "data": {...} }`
+### `src/optimizer/tri_asset_simplex.py`
+- `generate_simplex_grid(step: float = 0.01) -> np.ndarray`
+  - Returns `(5151, 3)` matrix of weights summing to 1.0.
+- `simulate_simplex_grid(prices_df: pd.DataFrame, fx_df: pd.DataFrame, weights: np.ndarray, rebalance_freq: str = 'Q', commission_bps: float = 5.0, slippage_bps: float = 2.0, currency: str = 'USD') -> SimplexGridResult`
+  - Evaluates all 5,151 weights vectorized in $< 1.0$ second.
+
+### `src/optimizer/tri_asset_optimizer.py`
+- `optimize_risk_tiers(grid_result: SimplexGridResult) -> Dict[str, TierAllocationResult]`
+  - Returns results for `Tier 1 (<=20% MDD)`, `Tier 2 (<=30% MDD)`, `Tier 3 (<=40% MDD)`, and `Tier 4 (Unconstrained Max Calmar)`.
+- `calculate_crisis_stress(prices_df: pd.DataFrame, tier_weights: Dict[str, np.ndarray]) -> pd.DataFrame`
+  - Returns drawdown and return table for 2001-2003, 2008, 2020, and 2022.
+
+### `src/ui/tri_asset_tab.py`
+- `render_tri_asset_tab(prices_df: pd.DataFrame, fx_df: pd.DataFrame, currency: str = 'USD') -> None`
+  - Renders all Tab 6 visual components in Streamlit.
 
 ## Code Layout
-- Root sync script: `d:\Industry\sync_insights.py`
-- Backend sync mirror: `d:\Industry\InvestmentPortal\backend\sync_insights.py`
-- Backend models: `d:\Industry\InvestmentPortal\backend\models.py`
-- Backend schemas: `d:\Industry\InvestmentPortal\backend\schemas.py`
-- Backend endpoints: `d:\Industry\InvestmentPortal\backend\main.py`
-- Frontend view component: `d:\Industry\InvestmentPortal\frontend\src\InsightCenterView.jsx`
-- Frontend application entry: `d:\Industry\InvestmentPortal\frontend\src\App.jsx`
-- Frontend public data: `d:\Industry\InvestmentPortal\frontend\public\insights_data.json`
-- Frontend dist data: `d:\Industry\InvestmentPortal\frontend\dist\insights_data.json`
-- Test suite: `d:\Industry\tests\test_insights_module.py`
-- Test infrastructure docs: `d:\Industry\TEST_INFRA.md`
-- Test ready signal: `d:\Industry\TEST_READY.md`
+- `D:\Industry\quant_turnaround_strategy\src\data\tri_asset_loader.py`
+- `D:\Industry\quant_turnaround_strategy\src\optimizer\tri_asset_simplex.py`
+- `D:\Industry\quant_turnaround_strategy\src\optimizer\tri_asset_optimizer.py`
+- `D:\Industry\quant_turnaround_strategy\src\ui\tri_asset_tab.py`
+- `D:\Industry\quant_turnaround_strategy\app.py`
+- `D:\Industry\quant_turnaround_strategy\tests\test_tri_asset_optimizer.py`
+- `D:\Industry\quant_turnaround_strategy\verify_tri_asset.py`
