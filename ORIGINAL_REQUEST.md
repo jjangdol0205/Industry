@@ -342,3 +342,68 @@ Integrity mode: development
 
 ### 회귀 및 통합 테스트
 - [ ] 단위 및 통합 테스트 스위트(`pytest tests/test_insights_module.py`)가 작성되어 100% 통과함
+
+
+## 2026-10-12T12:49:12Z
+
+A quantitative research and production-ready algorithmic trading system that simulates and optimizes an investment strategy combining QQQ, SOXX, and opportunistic 52-week-low turnaround stocks from July 2001 to present, optimizing return relative to annual MDD, proposing an enhanced alternative strategy, and delivering an interactive deployed Streamlit dashboard.
+
+Working directory: D:\Industry\quant_turnaround_strategy
+Integrity mode: development
+
+## Requirements
+
+### R1. Data Pipeline & Turnaround Stock Screening
+- Ingest daily adjusted price data for QQQ and SOXX starting from the later inception date (SOXX launch: July 10, 2001) to the present.
+- Define a candidate stock universe (S&P 500 and NASDAQ 100 components) and identify stocks hitting 52-week lows at historical decision points.
+- Screen for 1~2 year forward revenue and operating profit turnaround potential using point-in-time financial/consensus indicators to strictly eliminate lookahead bias.
+- Support weekly candidate evaluation: select at most 1 optimal stock per week, maintaining a maximum portfolio capacity of 3 individual stocks, with discretionary inclusion/exclusion based on risk-reward (can hold 0 to 3 stocks).
+
+### R2. Trial-and-Error Optimization Engine (Return vs. Annual MDD)
+- Implement a modular backtesting simulator supporting dynamic rebalancing between QQQ, SOXX, selected individual turnaround stocks, and cash.
+- Conduct systematic trial-and-error optimization (parameter grid search / walk-forward analysis) over allocation ratios, entry/exit thresholds, and stop-loss / profit-taking rules.
+- Explicitly evaluate risk using annual Maximum Drawdown (calendar year MDD) and optimize the objective function: Maximize Return relative to Annual MDD (Calmar / MAR ratio).
+- Formulate a superior alternative strategy (e.g., trend-following regime filter, volatility-targeted allocation, or dynamic dual-momentum), provide rigorous comparative metrics, and detail the economic and empirical reasons for its outperformance.
+
+### R3. Interactive Streamlit Dashboard & Deployment
+- Build a Python Streamlit web dashboard featuring:
+  - Interactive cumulative return curves (Strategy vs. QQQ vs. SOXX vs. Enhanced Strategy).
+  - Year-by-year performance breakdown (Annual Return, Annual MDD, Return/MDD ratio).
+  - Historical trade log, dynamic asset allocation heatmaps, and weekly stock selection explanations.
+  - Live simulation view and parameter tuning interface for future operational use.
+- Initialize Git repository, commit clean versioned source code, and set up deployment configuration (GitHub repository push & deployment ready).
+
+## Acceptance Criteria
+
+### Simulation & Quantitative Rigor
+- [ ] Simulation timeline strictly begins on July 10, 2001 (SOXX inception) and runs to current date.
+- [ ] Backtest guarantees zero lookahead bias in 52-week low screening and financial forecast proxy metrics.
+- [ ] Trial-and-error parameter search produces an optimal configuration with full documentation of searched parameter spaces.
+- [ ] Annual MDD and annual return are tabulated for every calendar year from 2001 to present.
+- [ ] An enhanced alternative strategy is backtested alongside the base strategy with a written comparative justification.
+
+### Automated Verification
+- [ ] Programmatic verification script executes cleanly and validates data integrity, metric calculations, and strategy comparison results.
+- [ ] Streamlit web application launches without error and renders all charts, tables, and filters.
+- [ ] Git repository is initialized with meaningful commit history and ready for deployment.
+
+
+## 2026-10-12T13:28:11Z
+
+[CRITICAL USER REQUIREMENT UPDATE - REAL-WORLD EXECUTION & REPORTING]
+
+The user has explicitly added the following critical requirements for real-world production usability:
+
+1. Real-World Execution Costs & Frictions:
+   - Must model realistic transaction costs: Brokerage commissions (e.g., 0.05% ~ 0.1%) and bid-ask spread / market impact slippage (e.g., 0.05% ~ 0.1%) on every rebalance trade.
+   - Must model capital gains taxation: Korean overseas stock investment tax (해외주식 양도소득세 22% with annual 2.5 million KRW basic deduction, applied at calendar year-end on net realized gains). Provide toggle/comparison between Gross Returns and Net After-Tax/After-Cost Returns.
+
+2. Dual-Currency Returns (USD & KRW):
+   - Ingest daily USD/KRW exchange rates (e.g., USDKRW=X from Yahoo Finance) from July 10, 2001 to present.
+   - Calculate and display performance metrics (Cumulative Return, CAGR, Annual Return, Annual MDD, Calmar Ratio) in BOTH USD and KRW.
+   - The interactive Streamlit dashboard must feature a seamless toggle / side-by-side view for USD vs. KRW performance, including FX impact analysis on drawdown and returns.
+
+3. Practical Usability & Robustness:
+   - Ensure the optimized strategy is practically executable (realistic rebalance frequency, avoidance of extreme micro-turnover, clear rules for live trading going forward).
+
+Please immediately update PROJECT.md, the backtest engine contracts, the metrics pipeline, and the Streamlit dashboard requirements to incorporate these items into the current build and verification tracks.
