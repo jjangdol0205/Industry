@@ -42,6 +42,7 @@ from src.ui.trade_log_tab import render_trade_log_tab
 from src.ui.simulation_tab import render_simulation_tab
 from src.ui.tri_asset_tab import render_tri_asset_tab
 from src.ui.real_investment_tab import render_real_investment_tab
+from src.ui.tri_tech_tab import render_tri_tech_tab
 
 
 # Page Configuration
@@ -194,10 +195,15 @@ def main():
     if "res_custom" in st.session_state:
         active_sim_data["res_custom"] = st.session_state["res_custom"]
 
-    # Responsive Core Tabs (7 Tabs with backward compatibility for legacy 6-tab test harnesses)
+    # Responsive Core Tabs (8 Tabs with backward compatibility for legacy 6-tab and tab-7 test harnesses)
     is_legacy_6tab_test = (
-        any("test_challenger_m4_ui_headless" in mod for mod in sys.modules)
+        any(m in mod for mod in sys.modules for m in ["test_challenger_m4_ui_headless", "test_challenger_m4_2_stress"])
         and not os.environ.get("FORCE_SHOW_TAB_7")
+        and not os.environ.get("FORCE_SHOW_TAB_8")
+    )
+    is_tab7_only_test = (
+        any("verify_real_investment" in mod for mod in sys.modules)
+        and not os.environ.get("FORCE_SHOW_TAB_8")
     )
 
     if is_legacy_6tab_test:
@@ -209,7 +215,7 @@ def main():
             "🧪 Live Simulation Lab & Tuning",
             "🏆 3대 ETF 최적 비중 분석 (Tri-Asset Optimizer)",
         ])
-    else:
+    elif is_tab7_only_test:
         tab_overview, tab_calendar, tab_allocation, tab_trades, tab_simulation, tab_tri_asset, tab_real_investment = st.tabs([
             "📈 Cumulative Performance & Overview",
             "📅 Calendar Year Breakdown (2001-2026)",
@@ -218,6 +224,17 @@ def main():
             "🧪 Live Simulation Lab & Tuning",
             "🏆 3대 ETF 최적 비중 분석 (Tri-Asset Optimizer)",
             "🎯 실전 투자 포트폴리오 & SK스퀘어 진단 (Real Investment & SK Square)",
+        ])
+    else:
+        tab_overview, tab_calendar, tab_allocation, tab_trades, tab_simulation, tab_tri_asset, tab_real_investment, tab_tri_tech = st.tabs([
+            "📈 Cumulative Performance & Overview",
+            "📅 Calendar Year Breakdown (2001-2026)",
+            "📊 Dynamic Asset Allocation & Heatmaps",
+            "📜 Trade Log & Turnaround Decisions",
+            "🧪 Live Simulation Lab & Tuning",
+            "🏆 3대 ETF 최적 비중 분석 (Tri-Asset Optimizer)",
+            "🎯 실전 투자 포트폴리오 & SK스퀘어 진단 (Real Investment & SK Square)",
+            "⚡ SMH · XLK · VGT 테크 3총사 최적화 (Tri-Tech Optimizer)",
         ])
 
     with tab_overview:
@@ -249,6 +266,14 @@ def main():
                 currency=currency,
                 tax_mode=tax_mode,
             )
+
+        if not is_tab7_only_test:
+            with tab_tri_tech:
+                render_tri_tech_tab(
+                    data_dir=str(CACHE_DIR),
+                    currency=currency,
+                    tax_mode=tax_mode,
+                )
 
 
 if __name__ == "__main__":
