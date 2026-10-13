@@ -453,3 +453,142 @@ Integrity mode: development
 - [ ] Tab 6 renders cleanly in Streamlit without syntax, layout, or runtime errors.
 - [ ] Automated verification script validates data integrity, non-negativity of weights, and Calmar formulas.
 - [ ] All code is committed and pushed to `https://github.com/jjangdol0205/Industry` (`main` branch).
+
+## 2026-10-13T07:08:00Z
+
+A deep, real-world actionable quantitative analysis and execution tool determining: (1) the exact optimal annual-rebalancing weights between QQQ and SOXX from 2001 to present, (2) the optimal hybrid allocation combining QQQ, SOXX, and up to 2 individual 52-week-low turnaround stocks with strict -10% stop-loss, auto-replacement with next-best candidate, and +25% partial profit-taking, and (3) a rigorous valuation, NAV discount, and holding decision analysis for 76 shares of SK Square (402340.KS), integrated into the Streamlit dashboard and pushed to GitHub.
+
+Working directory: D:\Industry\quant_turnaround_strategy
+Integrity mode: development
+
+## Requirements
+
+### R1. QQQ vs. SOXX Annual Rebalancing Optimal Weights (2001–2026)
+- Model annual rebalancing on the first trading day of January across all 26 calendar years (2001-07-10 to present), factoring in 0.07% rebalance friction.
+- Conduct a 1D grid search from 0% QQQ / 100% SOXX to 100% QQQ / 0% SOXX in 1% increments (101 allocations).
+- Derive the exact mathematical peak for Calmar Ratio ($\text{CAGR} / \max_Y |\text{Annual MDD}_Y|$), Sharpe Ratio, and compound return across USD and KRW.
+- Provide a sensitivity table around the optimal peak and document year-by-year returns and drawdowns during historical crises (2002, 2008, 2020, 2022).
+
+### R2. Hybrid QQQ + SOXX + 2-Stock Turnaround Engine (-10% Stop & Auto-Replacement)
+- Implement a 4-asset backtesting engine: QQQ, SOXX, and up to 2 individual 52-week-low turnaround stocks screened point-in-time without lookahead bias.
+- Execution parameters:
+  - Max capacity: 2 individual stocks concurrently.
+  - Strict daily **-10% hard stop-loss**: immediately exit upon closing at or below -10% from entry, and automatically buy the next-in-line qualified candidate on the following trading day (or hold cash/ETF if no candidate passes gates).
+  - Profit-taking: +25% gain triggers 50% partial exit; remainder held until annual rebalancing or stop trigger.
+  - Annual rebalancing of core ETF weights on the first trading day of January.
+- Search the weight space ($w_{\text{QQQ}}, w_{\text{SOXX}}, w_{\text{Stocks}}$ where $w_{\text{Stocks}} \in [0\%, 30\%]$ split equally between 2 stocks) to determine the optimal allocation maximizing Return relative to Annual MDD.
+
+### R3. SK Square (402340.KS, 76 Shares) Valuation & Holding Decision
+- Perform a thorough fundamental valuation of SK Square:
+  - Net Asset Value (NAV) and current NAV discount calculation based on its 20.07% stake in SK Hynix (000660.KS) plus unlisted investment assets (Tmap Mobility, 11st, Content Wavve, SK Shieldus proceeds).
+  - Assessment of Corporate Value-up policies (share cancellations, dividend yields, capital return).
+  - Comparison of risk-return profile: Expected upside of holding SK Square vs. reallocating capital into the QQQ/SOXX quant portfolio.
+  - Clear, actionable recommendation for the user's 76-share position (Hold vs. Reallocate/Trim).
+
+### R4. Streamlit Dashboard Integration & Git Push
+- Add a dedicated view/tab in `app.py`: **"🎯 실전 투자 포트폴리오 & SK스퀘어 진단 (Real Investment & SK Square)"** displaying:
+  - Annual QQQ/SOXX optimal weight curve and sensitivity table.
+  - 2-Stock turnaround trade log with stop-loss and auto-replacement timestamps.
+  - SK Square NAV discount barometer and holding recommendation card.
+  - USD ↔ KRW toggle.
+- Verify through automated verification scripts.
+- Commit all code cleanly and push to GitHub repository `jjangdol0205/Industry` (`main` branch).
+
+## Acceptance Criteria
+
+### Quantitative Rigor & Accuracy
+- [ ] R1 annual rebalancing evaluates all 101 weight combinations with exact Calmar and annual MDD tabulated.
+- [ ] R2 backtester strictly enforces the -10% stop-loss and next-candidate auto-replacement logic with zero lookahead bias.
+- [ ] R3 provides exact mathematical NAV discount calculations and an objective recommendation on holding 76 shares of SK Square.
+
+### Verification & Delivery
+- [ ] Dedicated Streamlit UI components render cleanly with zero exceptions.
+- [ ] Automated verification script confirms mathematical precision and 100% test pass rate.
+- [ ] All code and documentation are committed and pushed to `https://github.com/jjangdol0205/Industry` on `main` branch.
+
+## 2026-10-13T07:08:47Z
+
+[CRITICAL USER REQUIREMENT UPDATE - YEAR-END VS. YEAR-BEGINNING AFTER-TAX REBALANCING STUDY]
+
+The user has added a crucial real-world requirement regarding taxation and rebalancing timing:
+"리밸런싱을 연말에 하는게 좋을지 연초에 하는게 좋을지도 알려줘 결국 세후 수익률이 가장 중요하자나"
+
+Please expand Requirement R1 and the tax engine to comprehensively compare:
+1. Year-End Rebalancing (연말 12월 하순 리밸런싱) vs. Year-Beginning Rebalancing (연초 1월 초순 리밸런싱).
+2. Korean overseas stock tax dynamics:
+   - Annual 2.5M KRW basic deduction utilization ("Use it or lose it" each calendar year).
+   - Tax-loss harvesting opportunities at year-end vs. Tax payment deferral advantage of year-beginning (delaying tax liability payment by up to 16 months, compounding capital).
+3. Exact quantitative comparison:
+   - Final Net After-Tax NAV (세후 순자산).
+   - Total taxes paid over the 2001-2026 period.
+   - After-Tax CAGR, After-Tax Annual MDD, and After-Tax Calmar ratio for Year-End vs. Year-Beginning.
+4. Deliver a definitive practical recommendation in the report and dashboard for maximizing after-tax returns.
+
+## 2026-10-13T07:09:37Z
+
+[CRITICAL USER REQUIREMENT UPDATE - HIGHER-YIELD ETF ALTERNATIVES STUDY]
+
+The user has explicitly requested:
+"그리고 qqq랑 soxx말고 더 같은 전략인데 더 수익률이 잘나올수 있는 etf로도 진행해줘"
+
+Please expand the project requirements to evaluate alternative high-yield ETF pairs using the exact same strategy:
+
+1. Unlevered High-Octane Tech/Semi Candidates:
+   - SMH (VanEck Semiconductor, higher Nvidia/TSMC concentration) vs. SOXX
+   - XLK (Tech SPDR) or VGT (Vanguard Info Tech, pure software+hardware without retail/telecom drag) vs. QQQ
+
+2. Leveraged Compounders with Rebalancing & Risk Control:
+   - 2x Leveraged pairs: QLD (2x Nasdaq) + USD (2x Semiconductor) or selective leverage overlays.
+   - 3x pairs: TQQQ + SOXL (evaluate whether annual rebalancing with risk control can tame the volatility decay).
+
+3. Quantitative Comparative Matrix:
+   - Evaluate CAGR, Worst Annual MDD, Sharpe, and Calmar ratio.
+   - Determine which ETF combination genuinely delivers the absolute highest return while respecting drawdown limits.
+   - Incorporate these findings and interactive comparisons into the dashboard and final report.
+
+## 2026-10-13T07:11:02Z
+
+[CRITICAL USER REQUIREMENT UPDATE - REAL-WORLD ACTIVE TRADING FRICTION & TAXATION REALISM]
+
+The user has explicitly mandated:
+"액티브 매매 같은경우엔 실전투자와 똑같이 해야해 그냥 기계적으로 말고 거래비용이랑 세금 등을 전부다 고려해서"
+
+For all active trades (the 52-week low turnaround stock selections, -10% stop-loss executions, automatic replacements, and +25% profit-taking):
+1. Realistic Execution & Slippage on Stops:
+   - Do NOT assume fills at exact round prices. Stop-loss executions must include market slippage (e.g., 10-15 bps or gap-down slippage).
+   - Brokerage commissions on both entry and exit (5-8 bps).
+   - Regulatory fees (SEC fee and FINRA TAF on sells).
+
+2. Trade-by-Trade Capital Gains Realization & Tax Modeling:
+   - Track realized gain/loss per closed trade lot (FIFO basis).
+   - Aggregate annual net realized capital gains from active trades + ETF rebalances.
+   - Deduct 2.5M KRW basic deduction, calculate 22% Korean overseas capital gains tax, and deduct it from portfolio cash at year-end.
+   - Account for settlement timing (T+1 cash availability).
+
+3. Friction Drag & Turnover Analysis:
+   - The report and dashboard MUST explicitly display:
+     * Annual Turnover Rate (%)
+     * Total Transaction Costs Paid ($ / KRW)
+     * Total Overseas Stock Taxes Paid ($ / KRW)
+     * Gross Strategy Return vs. Net After-Tax/After-Cost Return.
+   - Show whether active trading truly adds net alpha over passive ETF holding after all real-world frictions!
+
+## 2026-10-13T07:12:52Z
+
+[CRITICAL USER DIRECTIVE - ACTIONABLE TODAY PLAYBOOK MANDATE]
+
+The user has explicitly instructed:
+"지금 현재 상황에서 내가 할 가장 최적의 방안으로 진행해야 해"
+
+In addition to the historical simulation and mathematical proofs, the deliverables MUST include a concrete, definitive "Executive Action Playbook for Today":
+1. Immediate Decision on SK Square (76 Shares):
+   - Clear, unambiguous verdict: Sell & Reallocate NOW vs. Hold until X price/date vs. Partial trim.
+   - Specific rationale based on current market price, SK Hynix valuation, and opportunity cost.
+2. Exact Starting Portfolio Allocation for Day 1:
+   - Specific dollar / percentage weights to execute right now in the user's brokerage account (e.g. QQQ %, SOXX/SMH %, Cash/Turnaround slot %).
+3. Practical Step-by-Step Operating Manual:
+   - Weekly checklist: What to check every Friday (screening, stop-loss check).
+   - Annual checklist: Exact date to rebalance in December/January for maximum tax efficiency.
+   - Stop-loss execution checklist: What exact order type to place (Stop Limit vs. Market) upon triggering -10%.
+
+Ensure this practical playbook is prominently highlighted in the executive summary, README, and Streamlit dashboard.
